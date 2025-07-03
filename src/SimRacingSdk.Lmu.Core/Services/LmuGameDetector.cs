@@ -2,7 +2,7 @@
 using SimRacingSdk.Core.Services;
 using SimRacingSdk.Lmu.Core.Abstractions;
 
-namespace SimRacingSdk.Lmu.Core
+namespace SimRacingSdk.Lmu.Core.Services
 {
     public class LmuGameDetector : GameDetector, ILmuGameDetector
     {

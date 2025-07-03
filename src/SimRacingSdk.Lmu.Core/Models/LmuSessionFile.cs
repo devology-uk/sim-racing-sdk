@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace SimRacingSdk.Lmu.Core.Models;
 
@@ -58,11 +59,139 @@ public class LmuSessionFile
         {
             result.ConnectionType = new LmuConnectionType
             {
-                Upload = GetValue<int>(connectionTypeElement.Attribute("upload")
+                Upload = GetInt(connectionTypeElement.Attribute("upload")
                                                             ?.Value),
-                Download = GetValue<int>(connectionTypeElement.Attribute("download")
+                Download = GetInt(connectionTypeElement.Attribute("download")
                                                               ?.Value)
             };
+        }
+    }
+
+    private static void AddDriverControlAndAids(XElement driverElement, LmuDriver driver)
+    {
+        var controlAndAidsElement = driverElement.Element("ControlAndAids");
+        if(controlAndAidsElement != null)
+        {
+            driver.ControlAndAids = new LmuControlAndAids(GetInt(controlAndAidsElement
+                                                                        .Attribute("startLap")
+                                                                        ?.Value),
+                GetInt(controlAndAidsElement.Attribute("endLap")
+                                                   ?.Value),
+                controlAndAidsElement.Value);
+        }
+    }
+
+    private static void AddDriverLaps(XElement driverElement, LmuDriver driver)
+    {
+        var lapElements = driverElement.Elements("Lap").Where(l => !l.Value.Contains("-"));
+        foreach(var lapElement in lapElements)
+        {
+            var lap = new LmuDriverLap
+            {
+                Number = GetInt(lapElement.Attribute("num")
+                                                 ?.Value),
+                EventTiming = GetDouble(lapElement.Attribute("et")
+                                                         ?.Value),
+                Position = GetInt(lapElement.Attribute("p")
+                                                   ?.Value),
+                Sector1Time = GetDouble(lapElement.Attribute("s1")
+                                                         ?.Value),
+                Sector2Time = GetDouble(lapElement.Attribute("s2")
+                                                         ?.Value),
+                Sector3Time = GetDouble(lapElement.Attribute("s3")
+                                                         ?.Value),
+                TopSpeed = GetDouble(lapElement.Attribute("topspeed")
+                                                      ?.Value),
+                Fuel = GetDouble(lapElement.Attribute("fuel")
+                                                  ?.Value),
+                FuelUsed = GetDouble(lapElement.Attribute("fuelUsed")
+                                                      ?.Value),
+                VirtualEnergy = GetDouble(lapElement.Attribute("ve")
+                                                           ?.Value),
+                VirtualEnergyUsed = GetDouble(lapElement.Attribute("veUsed")
+                                                               ?.Value),
+                TyreWearFrontLeft = GetDouble(lapElement.Attribute("twfl")
+                                                               ?.Value),
+                TyreWearFrontRight = GetDouble(lapElement.Attribute("twfr")
+                                                                ?.Value),
+                TyreWearRearLeft = GetDouble(lapElement.Attribute("twrl")
+                                                              ?.Value),
+                TyreWearRearRight = GetDouble(lapElement.Attribute("twrr")
+                                                               ?.Value),
+                TyreFrontCompound = lapElement.Attribute("fcompound")
+                                              ?.Value,
+                TyreRearCompound = lapElement.Attribute("rcompound")
+                                             ?.Value,
+                TyreFrontLeftCompound = lapElement.Attribute("FL")
+                                                  ?.Value,
+                TyreFrontRightCompound = lapElement.Attribute("FR")
+                                                   ?.Value,
+                TyreRearLeftCompound = lapElement.Attribute("RL")
+                                                 ?.Value,
+                TyreRearRightCompound = lapElement.Attribute("RR")
+                                                  ?.Value,
+                LapTime = GetDouble(lapElement.Value)
+            };
+            driver.Laps.Add(lap);
+        }
+    }
+
+    private static void AddDrivers(XElement element, LmuDrivingSession session)
+    {
+        var driverElements = element.Elements("Driver");
+        foreach(var driverElement in driverElements)
+        {
+            var driver = new LmuDriver
+            {
+                Name = driverElement.Element("Name")
+                                    ?.Value,
+                Connected = GetInt(driverElement.Element("Connected")
+                                                       ?.Value),
+                VehicleFile = driverElement.Element("VehicleFile")
+                                           ?.Value,
+                UpgradeCode = driverElement.Element("UpgradeCode")
+                                           ?.Value,
+                VehicleName = driverElement.Element("VehicleName")
+                                           ?.Value,
+                Category = driverElement.Element("Category")
+                                        ?.Value,
+                CarType = driverElement.Element("CarType")
+                                       ?.Value,
+                CarClass = driverElement.Element("CarClass")
+                                        ?.Value,
+                CarNumber = GetInt(driverElement.Element("CarNumber")
+                                                       ?.Value),
+                TeamName = driverElement.Element("TeamName")
+                                        ?.Value,
+                IsPlayer = GetInt(driverElement.Element("isPlayer")
+                                                      ?.Value),
+                ServerScored = GetInt(driverElement.Element("ServerScored")
+                                                          ?.Value),
+                GridPosition = GetInt(driverElement.Element("GridPos")
+                                                          ?.Value),
+                Position = GetInt(driverElement.Element("Position")
+                                                      ?.Value),
+                ClassGridPosition = GetInt(driverElement.Element("ClassGridPos")
+                                                               ?.Value),
+                ClassPosition = GetInt(driverElement.Element("ClassPosition")
+                                                           ?.Value),
+                LapRankIncludingDiscos = GetInt(driverElement.Element("LapRankIncludingDiscos")
+                                                                    ?.Value),
+                BestLap = GetDouble(driverElement.Element("BestLapTime")
+                                                        ?.Value),
+                FinishTime = GetDouble(driverElement.Element("FinishTime")
+                                                           ?.Value),
+                LapCount = GetInt(driverElement.Element("Laps")
+                                                      ?.Value),
+                PitStops = GetInt(driverElement.Element("PitStops")
+                                                      ?.Value),
+                FinishStatus = driverElement.Element("FinishStatus")
+                                            ?.Value
+            };
+
+            AddDriverControlAndAids(driverElement, driver);
+            AddDriverLaps(driverElement, driver);
+            session.Drivers.Add(driver);
         }
     }
 
@@ -79,49 +208,51 @@ public class LmuSessionFile
             switch(eventElement.Name.LocalName)
             {
                 case "Incident":
-                    session.Stream.Add(new LmuIncidentStreamEvent(GetValue<double>(eventElement.Attribute("et")
+                    session.Stream.Add(new LmuIncidentStreamEvent(GetDouble(eventElement
+                            .Attribute("et")
                             ?.Value),
                         eventElement.Value));
                     break;
                 case "Score":
-                    session.Stream.Add(new LmuScoreStreamEvent(GetValue<double>(eventElement.Attribute("et")
+                    session.Stream.Add(new LmuScoreStreamEvent(GetDouble(eventElement.Attribute("et")
                             ?.Value),
                         eventElement.Value));
                     break;
                 case "Sector":
-                    session.Stream.Add(new LmuSectorStreamEvent(GetValue<double>(eventElement.Attribute("et")
+                    session.Stream.Add(new LmuSectorStreamEvent(GetDouble(eventElement.Attribute("et")
                             ?.Value),
                         eventElement.Value,
                         eventElement.Element("Driver")
                                     ?.Value ?? string.Empty,
-                        GetValue<int>(eventElement.Element("ID")
+                        GetInt(eventElement.Element("ID")
                                                   ?.Value),
-                        GetValue<int>(eventElement.Element("Sector")
+                        GetInt(eventElement.Element("Sector")
                                                   ?.Value),
                         eventElement.Element("Class")
                                     ?.Value ?? string.Empty));
                     break;
                 case "Sent":
-                    session.Stream.Add(new LmuSentStreamEvent(GetValue<double>(eventElement.Attribute("et")
+                    session.Stream.Add(new LmuSentStreamEvent(GetDouble(eventElement.Attribute("et")
                             ?.Value),
                         eventElement.Value));
                     break;
                 case "TrackLimits":
-                    session.Stream.Add(new LmuTrackLimitsStreamEvent(
-                        GetValue<double>(eventElement.Attribute("et")
+                    session.Stream.Add(new LmuTrackLimitsStreamEvent(GetDouble(eventElement
+                            .Attribute("et")
                             ?.Value),
                         eventElement.Value,
-                        eventElement.Element("Driver")?.Value ?? string.Empty,
-                        GetValue<int>(eventElement.Element("ID")
-                            ?.Value),
-                        GetValue<int>(eventElement.Element("Lap")
-                            ?.Value),
-                        GetValue<int>(eventElement.Element("WarningPoints")
-                            ?.Value),
-                        GetValue<int>(eventElement.Element("CurrentPoints")
-                            ?.Value),
-                        GetValue<int>(eventElement.Element("Resolution")
-                            ?.Value)));
+                        eventElement.Element("Driver")
+                                    ?.Value ?? string.Empty,
+                        GetInt(eventElement.Element("ID")
+                                                  ?.Value),
+                        GetInt(eventElement.Element("Lap")
+                                                  ?.Value),
+                        GetInt(eventElement.Element("WarningPoints")
+                                                  ?.Value),
+                        GetInt(eventElement.Element("CurrentPoints")
+                                                  ?.Value),
+                        GetInt(eventElement.Element("Resolution")
+                                                  ?.Value)));
                     break;
                 default:
                     break;
@@ -141,131 +272,72 @@ public class LmuSessionFile
         {
             SessionType = GetSessionType(sessionElement),
             SessionName = sessionElement.Name.LocalName,
-            DateTimeValue = GetValue<int>(sessionElement.Element("DateTime")
+            DateTimeValue = GetInt(sessionElement.Element("DateTime")
                                                         ?.Value),
             TimeString = sessionElement.Element("TimeString")
                                        ?.Value,
-            Laps = GetValue<int>(sessionElement.Element("Laps")
+            Laps = GetInt(sessionElement.Element("Laps")
                                                ?.Value),
-            Minutes = GetValue<int>(sessionElement.Element("Minutes")
+            Minutes = GetInt(sessionElement.Element("Minutes")
                                                   ?.Value),
-            FormationAndStart = GetValue<int>(sessionElement.Element("FormationAndStart")
+            FormationAndStart = GetInt(sessionElement.Element("FormationAndStart")
                                                             ?.Value),
-            MostLapsCompleted = GetValue<int>(sessionElement.Element("MostLapsCompleted")
+            MostLapsCompleted = GetInt(sessionElement.Element("MostLapsCompleted")
                                                             ?.Value)
         };
 
-        AddEventStream(element, session);
-        AddDrivers(element, session);
+        AddEventStream(sessionElement, session);
+        AddDrivers(sessionElement, session);
 
         result.Session = session;
     }
 
-    private static void AddDrivers(XElement element, LmuDrivingSession session)
+    private static double GetDouble(string? value, double defaultValue = 0.0)
     {
-        var driverElements = element.Elements("Driver");
-        foreach(var driverElement in driverElements)
+        if(string.IsNullOrEmpty(value))
         {
-            var driver = new LmuDriver
-            {
-                Name = driverElement.Element("Name")?.Value,
-                Connected = GetValue<int>(driverElement.Element("Connected")
-                                                        ?.Value),
-                VehicleFile = driverElement.Element("VehicleFile")
-                                                ?.Value,
-                UpgradeCode = driverElement.Element("UpgradeCode")
-                                                ?.Value,
-                VehicleName = driverElement.Element("VehicleName")
-                                                ?.Value,
-                Category = driverElement.Element("Category")
-                                                ?.Value,
-                CarType = driverElement.Element("CarType")
-                                                ?.Value,
-                CarClass = driverElement.Element("CarClass")
-                                                ?.Value,
-                CarNumber = GetValue<int>(driverElement.Element("CarNumber")
-                                                        ?.Value),
-                TeamName = driverElement.Element("TeamName")
-                                                ?.Value,
-                IsPlayer = GetValue<int>(driverElement.Element("IsPlayer")
-                                                            ?.Value),
-                ServerScored = GetValue<int>(driverElement.Element("ServerScored")
-                                                            ?.Value),
-                GridPosition = GetValue<int>(driverElement.Element("GridPos")
-                                                            ?.Value),
-                Position = GetValue<int>(driverElement.Element("Position")
-                                                            ?.Value),
-                ClassGridPosition = GetValue<int>(driverElement.Element("ClassGridPos")
-                                                            ?.Value),
-                ClassPosition = GetValue<int>(driverElement.Element("ClassPosition")
-                                                            ?.Value),
-                LapRankIncludingDiscos = GetValue<int>(driverElement.Element("LapRankIncludingDiscos")?.Value),
-                BestLap = GetValue<double>(driverElement.Element("BestLap")
-                                                            ?.Value),
-                FinishTime = GetValue<double>(driverElement.Element("FinishTime")
-                                                            ?.Value),
-                LapCount = GetValue<int>(driverElement.Element("Laps")
-                                                            ?.Value),
-                PitStops = GetValue<int>(driverElement.Element("PitStops")?.Value),
-                FinishStatus = driverElement.Element("FinishStatus")?.Value
-            };
-
-            AddDriverControlAndAids(driverElement, driver);
-            AddDriverLaps(driverElement, driver);
-            session.Drivers.Add(driver);
+            return defaultValue;
         }
+
+        if(double.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        Debug.WriteLine($"Failed to parse value '{value}' as double.");
+        return defaultValue;
     }
 
-    private static void AddDriverLaps(XElement driverElement, LmuDriver driver)
+    private static int GetInt(string? value, int defaultValue = 0)
     {
-        var lapElements = driverElement.Elements("Lap");
-        foreach(var lapElement in lapElements)
+        if(string.IsNullOrEmpty(value))
         {
-            var lap = new LmuDriverLap
-            {
-                Number = GetValue<int>(lapElement.Attribute("numb")
-                                                            ?.Value),
-                EventTiming = GetValue<double>(lapElement.Attribute("et")
-                                                            ?.Value),
-                Sector1Time = GetValue<double>(lapElement.Attribute("s1")?.Value),
-                Sector2Time = GetValue<double>(lapElement.Attribute("s2")?.Value),
-                Sector3Time = GetValue<double>(lapElement.Attribute("s3")?.Value),
-                TopSpeed = GetValue<double>(lapElement.Attribute("topspeed")?.Value),
-                Fuel = GetValue<double>(lapElement.Attribute("fuel")?.Value),
-                FuelUsed = GetValue<double>(lapElement.Attribute("fuelUsed")?.Value),
-                VirtualEnergy = GetValue<double>(lapElement.Attribute("ve")?.Value),
-                VirtualEnergyUsed = GetValue<double>(lapElement.Attribute("veUsed")?.Value),
-                TyreWearFrontLeft = GetValue<double>(lapElement.Attribute("twfl")?.Value),
-                TyreWearFrontRight = GetValue<double>(lapElement.Attribute("twfr")?.Value),
-                TyreWearRearLeft = GetValue<double>(lapElement.Attribute("twrl")?.Value),
-                TyreWearRearRight = GetValue<double>(lapElement.Attribute("twrr")?.Value),
-                TyreFrontCompound = lapElement.Attribute("fcompound")?.Value,
-                TyreRearCompound = lapElement.Attribute("rcompound")?.Value,
-                TyreFrontLeftCompound = lapElement.Attribute("FL")?.Value,
-                TyreFrontRightCompound = lapElement.Attribute("FR")
-                                                  ?.Value,
-                TyreRearLeftCompound = lapElement.Attribute("RL")?.Value,
-                TyreRearRightCompound = lapElement.Attribute("RR")
-                                                 ?.Value,
-                LapTime = GetValue<double>(lapElement.Value)
-
-            };
-            driver.Laps.Add(lap);
+            return defaultValue;
         }
+
+        if(int.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        Debug.WriteLine($"Failed to parse value '{value}' as int.");
+        return defaultValue;
     }
 
-    private static void AddDriverControlAndAids(XElement driverElement, LmuDriver driver)
+    private static long GetLong(string? value, long defaultValue = 0)
     {
-        var controlAndAidsElement = driverElement.Element("ControlAndAids");
-        if(controlAndAidsElement != null)
+        if(string.IsNullOrEmpty(value))
         {
-            driver.ControlAndAids = new LmuControlAndAids(
-                GetValue<int>(controlAndAidsElement.Attribute("startLap")
-                                                   ?.Value),
-                GetValue<int>(controlAndAidsElement.Attribute("endLap")
-                                                   ?.Value),
-                controlAndAidsElement.Value);
+            return defaultValue;
         }
+
+        if(long.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        Debug.WriteLine($"Failed to parse value '{value}' as long.");
+        return defaultValue;
     }
 
     private static XElement? GetSessionElement(XElement element)
@@ -276,7 +348,7 @@ public class LmuSessionFile
             return sessionElement;
         }
 
-        return element.Element("Qualifying") ?? element.Descendants()
+        return element.Element("Qualify") ?? element.Descendants()
                                                        .FirstOrDefault(
                                                            e => e.Name.LocalName.StartsWith("Practice"));
     }
@@ -288,25 +360,6 @@ public class LmuSessionFile
                    : sessionElement.Name.LocalName;
     }
 
-    private static T? GetValue<T>(string? value, T defaultValue = default(T))
-    {
-        if(string.IsNullOrEmpty(value))
-        {
-            return defaultValue;
-        }
-
-        try
-        {
-            return (T)Convert.ChangeType(value, typeof(T));
-        }
-        catch(Exception exception)
-        {
-            throw new InvalidOperationException(
-                $"Failed to convert value '{value}' to type {typeof(T).Name}.",
-                exception);
-        }
-    }
-
     private static LmuSessionFile InitialiseResult(XElement element)
     {
         return new LmuSessionFile
@@ -315,11 +368,11 @@ public class LmuSessionFile
                              ?.Value,
             ServerName = element.Element("ServerName")
                                 ?.Value,
-            ClientFuelVisible = GetValue<int>(element.Element("ClientFuelVisible")
+            ClientFuelVisible = GetInt(element.Element("ClientFuelVisible")
                                                      ?.Value),
             PlayerFile = element.Element("PlayerFile")
                                 ?.Value,
-            DateTimeValue = GetValue<long>(element.Element("DateTime")
+            DateTimeValue = GetLong(element.Element("DateTime")
                                                   ?.Value),
             TimeString = element.Element("TimeString")
                                 ?.Value,
@@ -331,42 +384,42 @@ public class LmuSessionFile
                                 ?.Value,
             TrackData = element.Element("TrackData")
                                ?.Value,
-            TrackLength = GetValue<double>(element.Element("TrackLength")
+            TrackLength = GetDouble(element.Element("TrackLength")
                                                   ?.Value),
             GameVersion = element.Element("GameVersion")
                                  ?.Value,
-            Dedicated = GetValue<int>(element.Element("Dedicated")
+            Dedicated = GetInt(element.Element("Dedicated")
                                              ?.Value),
-            RaceLaps = GetValue<int>(element.Element("RaceLaps")
+            RaceLaps = GetInt(element.Element("RaceLaps")
                                             ?.Value),
-            RaceTime = GetValue<int>(element.Element("RaceTime")
+            RaceTime = GetInt(element.Element("RaceTime")
                                             ?.Value),
-            MechanicalFailRate = GetValue<int>(element.Element("MechFailRate")
+            MechanicalFailRate = GetInt(element.Element("MechFailRate")
                                                       ?.Value,
                 1),
-            DamageMultiplier = GetValue<int>(element.Element("DamageMult")
+            DamageMultiplier = GetInt(element.Element("DamageMult")
                                                     ?.Value,
                 100),
-            FuelMultiplier = GetValue<int>(element.Element("FuelMult")
+            FuelMultiplier = GetInt(element.Element("FuelMult")
                                                   ?.Value,
                 1),
-            TireMultiplier = GetValue<int>(element.Element("TireMult")
+            TireMultiplier = GetInt(element.Element("TireMult")
                                                   ?.Value,
                 1),
             VehiclesAllowed = element.Element("VehiclesAllowed")
                                      ?.Value,
-            ParcFerme = GetValue<int>(element.Element("ParcFerme")
+            ParcFerme = GetInt(element.Element("ParcFerme")
                                              ?.Value),
-            FixedSetup = GetValue<int>(element.Element("FixedSetups")
+            FixedSetup = GetInt(element.Element("FixedSetups")
                                               ?.Value),
-            FreeSettings = GetValue<int>(element.Element("FreeSettings")
+            FreeSettings = GetInt(element.Element("FreeSettings")
                                                 ?.Value),
 
-            FixedUpgrades = GetValue<int>(element.Element("FixedUpgrades")
+            FixedUpgrades = GetInt(element.Element("FixedUpgrades")
                                                  ?.Value),
-            LimitedTyres = GetValue<int>(element.Element("LimitedTyres")
+            LimitedTyres = GetInt(element.Element("LimitedTyres")
                                                 ?.Value),
-            TireWarmers = GetValue<int>(element.Element("TireWarmers")
+            TireWarmers = GetInt(element.Element("TireWarmers")
                                                ?.Value)
         };
     }

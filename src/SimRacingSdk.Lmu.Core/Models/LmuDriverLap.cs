@@ -7,6 +7,7 @@ public record LmuDriverLap
     public double FuelUsed { get; set; }
     public double LapTime { get; set; }
     public int Number { get; set; }
+    public int Position { get; set; }
     public double Sector1Time { get; set; }
     public double Sector2Time { get; set; }
     public double Sector3Time { get; set; }

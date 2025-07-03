@@ -1,19 +1,17 @@
-﻿using System.Xml.Linq;
-using SimRacingSdk.Lmu.Core.Abstractions;
+﻿using SimRacingSdk.Lmu.Core.Abstractions;
 
 namespace SimRacingSdk.Lmu.Core.Models;
 
-public class LmuDrivingSession
+public record LmuDrivingSession
 {
-    public int DateTimeValue { get; set; }
-    public int FormationAndStart { get; set; }
-    public int Laps { get; set; }
-    public int Minutes { get; set; }
-    public int MostLapsCompleted { get; set; }
-    public string? SessionName { get; set; }
-    public string? SessionType { get; set; }
-    public string? TimeString { get; set; }
-
-    public IList<LmuStreamEvent> Stream { get; } = new List<LmuStreamEvent>();
     public IList<LmuDriver> Drivers { get; } = new List<LmuDriver>();
+    public IList<LmuStreamEvent> Stream { get; } = new List<LmuStreamEvent>();
+    public int DateTimeValue { get; init; }
+    public int FormationAndStart { get; init; }
+    public int Laps { get; init; }
+    public int Minutes { get; init; }
+    public int MostLapsCompleted { get; init; }
+    public string? SessionName { get; init; }
+    public string? SessionType { get; init; }
+    public string? TimeString { get; init; }
 }
