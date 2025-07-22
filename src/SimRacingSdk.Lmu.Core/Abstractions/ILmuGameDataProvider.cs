@@ -14,5 +14,6 @@ public interface ILmuGameDataProvider
     IReadOnlyCollection<LmuCarInfo> GetCarInfos();
     LmuSettings GetSettings();
     IReadOnlyCollection<LmuTrackInfo> GetTrackInfos();
+    LmuTrackInfo? GeTrackInfoByVenue(string venue);
     IList<string> ListResultFiles();
 }

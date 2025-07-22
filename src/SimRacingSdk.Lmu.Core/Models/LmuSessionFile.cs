@@ -151,7 +151,7 @@ public class LmuSessionFile
                                            ?.Value,
                 UpgradeCode = driverElement.Element("UpgradeCode")
                                            ?.Value,
-                VehicleName = driverElement.Element("VehicleName")
+                VehicleName = driverElement.Element("VehName")
                                            ?.Value,
                 Category = driverElement.Element("Category")
                                         ?.Value,
@@ -191,6 +191,13 @@ public class LmuSessionFile
 
             AddDriverControlAndAids(driverElement, driver);
             AddDriverLaps(driverElement, driver);
+            if(driver.Laps.Any())
+            {
+                driver.BestSector1 = driver.Laps.Min(l => l.Sector1Time);
+                driver.BestSector2 = driver.Laps.Min(l => l.Sector2Time);
+                driver.BestSector3 = driver.Laps.Min(l => l.Sector3Time);
+            }
+
             session.Drivers.Add(driver);
         }
     }

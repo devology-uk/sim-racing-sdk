@@ -94,14 +94,14 @@ namespace SimRacingSdk.Lmu.Core.Services
             {
                 Category = "LMH",
                 Class = "HYP",
-                DisplayName = "Glickenhouse SCG 007",
+                DisplayName = "Glickenhaus SCG 007",
                 Engine = "3.5L V8 Twin Turbo",
                 HeightMm = 1224,
                 LengthMm = 4991,
                 Manufacturer = "Glickenhaus",
                 PowerBhp = 670,
                 PowerKw = 520,
-                ResultCarType = "Glickenhouse SCG 007",
+                ResultCarType = "Glickenhaus SCG 007",
                 Transmission = "7 Speed Sequential",
                 WeightKg = 1030,
                 WidthMm = 2000
@@ -117,7 +117,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Manufacturer = "Isotta Fraschini",
                 PowerBhp = 670,
                 PowerKw = 520,
-                ResultCarType = "Isotta Fraschini Tipo 6",
+                ResultCarType = "Isotta Fraschini TIPO6",
                 Transmission = "7 Speed Sequential",
                 WeightKg = 1030,
                 WidthMm = 2000
@@ -197,7 +197,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Manufacturer = "Toyota",
                 PowerBhp = 670,
                 PowerKw = 500,
-                ResultCarType = "Toyota GR010-Hybrid",
+                ResultCarType = "Toyota GR010",
                 Transmission = "7 Speed Sequential",
                 WeightKg = 1062,
                 WidthMm = 2000
@@ -229,7 +229,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Manufacturer = "ORECA",
                 PowerBhp = 603,
                 PowerKw = 0,
-                ResultCarType = "ORECA 07 Gibson 2023",
+                ResultCarType = "ORECA 07",
                 Transmission = "6 Speed Sequential",
                 WeightKg = 930,
                 WidthMm = 1895
@@ -245,7 +245,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Manufacturer = "ORECA",
                 PowerBhp = 603,
                 PowerKw = 0,
-                ResultCarType = "ORECA 07 Gibson 2024",
+                ResultCarType = "ORECA 07",
                 Transmission = "6 Speed Sequential",
                 WeightKg = 930,
                 WidthMm = 1895
@@ -286,14 +286,14 @@ namespace SimRacingSdk.Lmu.Core.Services
             {
                 Category = "GTE",
                 Class = "GTE",
-                DisplayName = "Porsche 911 RSR-I9",
+                DisplayName = "Porsche 911 RSR-19",
                 Engine = "4.0L Flat Six",
                 HeightMm = 1250,
                 LengthMm = 4557,
                 Manufacturer = "Porsche",
                 PowerBhp = 510,
                 PowerKw = 0,
-                ResultCarType = "Porsche 911 RSR-I9",
+                ResultCarType = "Porsche 911 RSR-19",
                 Transmission = "6 Speed Sequential",
                 WeightKg = 1243,
                 WidthMm = 2042
@@ -309,7 +309,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Manufacturer = "Chevrolet",
                 PowerBhp = 500,
                 PowerKw = 0,
-                ResultCarType = "Chevrolet Corvette C8.R",
+                ResultCarType = "Corvette C8.R GTE",
                 Transmission = "6 Speed Sequential",
                 WeightKg = 1240,
                 WidthMm = 2053
@@ -350,14 +350,14 @@ namespace SimRacingSdk.Lmu.Core.Services
             {
                 Category = "LMGT3",
                 Class = "GT3",
-                DisplayName = "Corevette Z06 LMGT3.R",
+                DisplayName = "Corvette Z06 LMGT3.R",
                 Engine = "5.5L V8",
                 HeightMm = 1148,
                 LengthMm = 4630,
                 Manufacturer = "Corvette",
                 PowerBhp = 600,
                 PowerKw = 0,
-                ResultCarType = "Corevette Z06 LMGT3.R",
+                ResultCarType = "Chevrolet Corvette Z06 LMGT3.R",
                 Transmission = "6 Speed Sequential",
                 WeightKg = 1344,
                 WidthMm = 2050
@@ -482,7 +482,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             },
             new()
             {
-                Name = "Autodromo Enze E Dino Ferrari",
+                Name = "Autodromo Enzo E Dino Ferrari",
                 ShortName = "Imola",
                 Country = "Italy",
                 CountryCode = "ITA",
@@ -733,7 +733,7 @@ namespace SimRacingSdk.Lmu.Core.Services
         public LmuCarInfo? GetCarInfoByDisplayName(string displayName)
         {
             return this.cars.FirstOrDefault(
-                car => car.DisplayName.Equals(displayName, StringComparison.OrdinalIgnoreCase));
+                car => car.DisplayName.Equals(displayName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
@@ -742,12 +742,17 @@ namespace SimRacingSdk.Lmu.Core.Services
         public LmuCarInfo? GetCarInfoByResultCarType(string carType)
         {
             return this.cars.FirstOrDefault(
-                car => car.ResultCarType.Equals(carType, StringComparison.OrdinalIgnoreCase));
+                car => car.ResultCarType.Equals(carType, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public IReadOnlyCollection<LmuCarInfo> GetCarInfos()
         {
             return new ReadOnlyCollection<LmuCarInfo>(this.cars);
+        }
+
+        public LmuTrackInfo? GeTrackInfoByVenue(string venue)
+        {
+            return this.tracks.FirstOrDefault(t => t.Name.Equals(venue, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public LmuSettings GetSettings()
