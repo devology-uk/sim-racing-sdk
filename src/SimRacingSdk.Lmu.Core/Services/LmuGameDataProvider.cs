@@ -13,7 +13,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMDh",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Alpine A424",
                 Engine = "3.4L V6 Turbo",
                 HeightMm = 1055,
@@ -29,7 +29,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Aston Martin Valkyrie",
                 Engine = "6.5L Naturally Aspirated V12",
                 HeightMm = 1070,
@@ -45,7 +45,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMDh",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "BMW M Hybrid V8",
                 Engine = "4.0L V8 Twin Turbo",
                 HeightMm = 1200,
@@ -61,7 +61,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMDh",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Cadillac V-Series.R",
                 Engine = "5.5L V8",
                 HeightMm = 1168,
@@ -77,7 +77,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Ferrari 499P",
                 Engine = "3.0L V6 Twin Turbo",
                 HeightMm = 1055,
@@ -93,7 +93,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Glickenhaus SCG 007",
                 Engine = "3.5L V8 Twin Turbo",
                 HeightMm = 1224,
@@ -109,7 +109,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Isotta Fraschini Tipo 6",
                 Engine = "3.0L V6 Turbo",
                 HeightMm = 1260,
@@ -125,7 +125,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMDh",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Lamborghini SC63",
                 Engine = "3.8L V8 Twin Turbo",
                 HeightMm = 1170,
@@ -141,7 +141,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Peugeot 9X8",
                 Engine = "2.6L V6 Twin Turbo",
                 HeightMm = 1145,
@@ -157,7 +157,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Peugeot 9X8 2024",
                 Engine = "2.6L V6 Twin Turbo",
                 HeightMm = 1180,
@@ -173,7 +173,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Porsche 963",
                 Engine = "4.6L V8 Twin Turbo",
                 HeightMm = 1060,
@@ -189,7 +189,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Toyota GR010-Hybrid",
                 Engine = "3.5L V6 Twin Turbo",
                 HeightMm = 1150,
@@ -205,7 +205,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMH",
-                Class = "HYP",
+                Class = "HY",
                 DisplayName = "Vanwall Vandervell 680",
                 Engine = "4.5L V8",
                 HeightMm = 1168,
@@ -221,7 +221,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMP2",
-                Class = "LMP2",
+                Class = "P2",
                 DisplayName = "ORECA 07 Gibson 2023",
                 Engine = "4.2l V8",
                 HeightMm = 1045,
@@ -237,7 +237,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             new()
             {
                 Category = "LMP2",
-                Class = "LMP2",
+                Class = "P2",
                 DisplayName = "ORECA 07 Gibson 2024",
                 Engine = "4.2l V8",
                 HeightMm = 1045,
@@ -354,7 +354,7 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Engine = "5.5L V8",
                 HeightMm = 1148,
                 LengthMm = 4630,
-                Manufacturer = "Corvette",
+                Manufacturer = "Chevrolet",
                 PowerBhp = 600,
                 PowerKw = 0,
                 ResultCarType = "Chevrolet Corvette Z06 LMGT3.R",
@@ -457,6 +457,22 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Transmission = "6 Speed Sequential",
                 WeightKg = 1317,
                 WidthMm = 2050
+            },
+            new()
+            {
+                Category = "LMGT3",
+                Class = "GT3",
+                DisplayName = "Mercedes-AMG LMGT3",
+                Engine = "6.3-litre V8 Naturally Aspirated",
+                HeightMm = 1238,
+                LengthMm = 4746,
+                Manufacturer = "Mercedes",
+                PowerBhp = 560,
+                PowerKw = 0,
+                ResultCarType = "Mercedes-AMG LMGT3",
+                Transmission = "6 Speed Sequential",
+                WeightKg = 1360,
+                WidthMm = 2049
             }
         };
         private readonly ILmuPathProvider pathProvider;
@@ -676,7 +692,7 @@ namespace SimRacingSdk.Lmu.Core.Services
             {
                 Name = "Lusail International Circuit",
                 ShortName = "Lusail",
-                Country = "Quatar",
+                Country = "Qatar",
                 CountryCode = "QAT",
                 Latitude = 25.49,
                 Longitude = 51.454167,
