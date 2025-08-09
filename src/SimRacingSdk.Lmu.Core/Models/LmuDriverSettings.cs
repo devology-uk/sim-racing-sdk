@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿#nullable disable
+
+using System.Text.Json.Serialization;
 
 namespace SimRacingSdk.Lmu.Core.Models;
 
-#nullable disable
 public class LmuDriverSettings
 {
     [JsonPropertyName("Birth Date")]
@@ -20,7 +21,7 @@ public class LmuDriverSettings
 
     [JsonPropertyName("Player Name")]
     public string PlayerName { get; set; } = "Not Set";
-        
+
     [JsonPropertyName("Player Nick")]
     public string PlayerNickname { get; set; } = "Not Set";
 }

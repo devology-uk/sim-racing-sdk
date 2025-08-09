@@ -1,11 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿#nullable disable
 
-namespace SimRacingSdk.Lmu.Core.Models
+using System.Text.Json.Serialization;
+
+namespace SimRacingSdk.Lmu.Core.Models;
+
+public class LmuSettings
 {
-    #nullable disable
-    public class LmuSettings
-    {
-        [JsonPropertyName("DRIVER")]
-        public LmuDriverSettings DriverSettings { get; set; } = new();
-    }
+    [JsonPropertyName("DRIVER")]
+    public LmuDriverSettings DriverSettings { get; set; } = new();
 }
