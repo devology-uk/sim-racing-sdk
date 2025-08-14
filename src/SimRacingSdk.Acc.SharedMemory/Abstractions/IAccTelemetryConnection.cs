@@ -2,11 +2,8 @@
 
 namespace SimRacingSdk.Acc.SharedMemory.Abstractions;
 
-public interface IAccSharedMemoryConnection: IDisposable
+public interface IAccTelemetryConnection : IDisposable
 {
     IObservable<AccTelemetryFrame> Frames { get; }
-    IObservable<AccTelemetryEvent> NewEvent { get; }
-    IObservable<AccTelemetryLap> NewLap { get; }
-    void Dispose();
     void Start(double updateIntervalMs);
 }
