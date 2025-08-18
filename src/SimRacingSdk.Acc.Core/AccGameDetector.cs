@@ -8,9 +8,9 @@ namespace SimRacingSdk.Acc.Core
     {
         private const string ProcessName = "AC2-Win64-Shipping";
         
-        private AccGameDetector? singletonInstance;
+        private static AccGameDetector? singletonInstance;
 
-        public AccGameDetector Instance => this.singletonInstance ??= new AccGameDetector();
+        public static AccGameDetector Instance => singletonInstance ??= new AccGameDetector();
 
         protected override bool IsGameRunning()
         {
