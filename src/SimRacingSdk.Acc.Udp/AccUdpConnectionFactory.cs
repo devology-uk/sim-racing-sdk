@@ -13,7 +13,7 @@ public class AccUdpConnectionFactory : IAccUdpConnectionFactory
         string displayName,
         string connectionPassword,
         string commandPassword,
-        int updateInterval)
+        int updateInterval = 100)
     {
         return new AccUdpConnection(ipAddress,
             port,

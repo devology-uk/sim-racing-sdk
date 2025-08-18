@@ -7,5 +7,5 @@ public interface IAccUdpConnectionFactory
         string displayName,
         string connectionPassword,
         string commandPassword,
-        int updateInterval);
+        int updateInterval = 100);
 }

@@ -35,7 +35,7 @@ public class AccUdpConnection : IAccUdpConnection
         string displayName,
         string connectionPassword,
         string commandPassword,
-        int updateInterval)
+        int updateInterval = 100)
     {
         this.IpAddress = ipAddress;
         this.Port = port;
