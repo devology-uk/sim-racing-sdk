@@ -5,7 +5,7 @@ using SimRacingSdk.Acc.Core.Models.Config;
 
 namespace SimRacingSdk.Acc.Core;
 
-public class AccLocalConfigProvider: IAccLocationConfigProvider
+public class AccLocalConfigProvider: IAccLocalConfigProvider
 {
     private static AccLocalConfigProvider? singletonInstance;
     private readonly IAccPathProvider accPathProvider;
@@ -68,11 +68,4 @@ public class AccLocalConfigProvider: IAccLocationConfigProvider
     {
         return File.ReadAllText(filePath, encoding);
     }
-}
-
-public interface IAccLocationConfigProvider
-{
-    Account? GetAccount();
-    BroadcastingSettings? GetBroadcastingSettings();
-    void SaveBroadcastingSettings(BroadcastingSettings settings);
 }
