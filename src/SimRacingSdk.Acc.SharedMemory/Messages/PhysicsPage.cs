@@ -68,7 +68,7 @@ public class PhysicsPage
         try
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(PhysicsMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream();
+            using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
             var reader = new BinaryReader(stream);
             physicsPage = new PhysicsPage
             {

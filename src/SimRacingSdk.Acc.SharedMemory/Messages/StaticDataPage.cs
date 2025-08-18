@@ -39,7 +39,7 @@ public class StaticDataPage
         try
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(StaticMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream();
+            using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
             var reader = new BinaryReader(stream);
             staticDataPage = new StaticDataPage
             {
