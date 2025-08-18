@@ -5,14 +5,14 @@ namespace SimRacingSdk.Acc.Core;
 public class AccCompatibilityChecker : IAccCompatibilityChecker
 {
     private static AccCompatibilityChecker? singletonInstance;
-    private readonly IAccLocationConfigProvider accLocationConfigProvider;
+    private readonly IAccLocalConfigProvider accLocalConfigProvider;
     private readonly IAccPathProvider accPathProvider;
 
-    private AccCompatibilityChecker(IAccPathProvider accPathProvider,
-        IAccLocationConfigProvider accLocationConfigProvider)
+    public AccCompatibilityChecker(IAccPathProvider accPathProvider,
+        IAccLocalConfigProvider accLocalConfigProvider)
     {
         this.accPathProvider = accPathProvider;
-        this.accLocationConfigProvider = accLocationConfigProvider;
+        this.accLocalConfigProvider = accLocalConfigProvider;
     }
 
     public static AccCompatibilityChecker Instance =>
@@ -35,7 +35,7 @@ public class AccCompatibilityChecker : IAccCompatibilityChecker
                                         .Any();
     }
 
-    public bool HasDrivenAtLeastOneSession()
+    public bool HasDrivenAtLeastOneOfflineSession()
     {
         return this.IsAccInstalled() && Directory.GetFiles(this.accPathProvider.ResultFolderPath)
                                                  ?.Length > 0;
@@ -48,7 +48,7 @@ public class AccCompatibilityChecker : IAccCompatibilityChecker
 
     public bool HasValidBroadcastingSettings()
     {
-        var broadcastSettings = this.accLocationConfigProvider.GetBroadcastingSettings();
+        var broadcastSettings = this.accLocalConfigProvider.GetBroadcastingSettings();
         return broadcastSettings is
         {
             UdpListenerPort: > 1023

@@ -4,7 +4,7 @@ public interface IAccCompatibilityChecker
 {
     bool HasCustomCars();
     bool HasCustomLiveries();
-    bool HasDrivenAtLeastOneSession();
+    bool HasDrivenAtLeastOneOfflineSession();
     bool HasSavedSetup();
     bool HasValidBroadcastingSettings();
     bool IsAccInstalled();
