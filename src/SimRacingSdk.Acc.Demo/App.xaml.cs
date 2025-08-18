@@ -28,7 +28,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
-        this.logger.LogInformation("Sim Racing SDL Demo for ACC.");
+        this.logger.LogInformation("Sim Racing SDK Demo for ACC has shutdown.");
         LogManager.Shutdown();
         base.OnExit(e);
     }
@@ -37,7 +37,7 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        this.logger.LogInformation("Sim Racing SDL Demo for ACC is starting up.");
+        this.logger.LogInformation("Sim Racing SDK Demo for ACC has started.");
 
         this.MainWindow = new MainWindow
         {
