@@ -17,11 +17,11 @@ public class AccSharedMemoryProvider : IAccSharedMemoryProvider
 
     public PhysicsData? ReadPhysicsData()
     {
-        return PhysicsPage.TryRead(out var graphicsPage)? new PhysicsData(graphicsPage): null;
+        return PhysicsPage.TryRead(out var physicsPage)? new PhysicsData(physicsPage): null;
     }
 
     public StaticData? ReadStaticData()
     {
-        return StaticDataPage.TryRead(out var graphicsPage)? new StaticData(graphicsPage): null;
+        return StaticDataPage.TryRead(out var staticDataPage)? new StaticData(staticDataPage): null;
     }
 }
