@@ -7,6 +7,5 @@ public interface IAccSharedMemoryConnection: IDisposable
     IObservable<AccTelemetryFrame> Frames { get; }
     IObservable<AccTelemetryEvent> NewEvent { get; }
     IObservable<AccTelemetryLap> NewLap { get; }
-    void Dispose();
-    void Start(double updateIntervalMs);
+    void Start(double updateIntervalMs = 100);
 }
