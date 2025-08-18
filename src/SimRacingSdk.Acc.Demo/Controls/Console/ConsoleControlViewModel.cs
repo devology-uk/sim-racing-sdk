@@ -17,6 +17,14 @@ public partial class ConsoleControlViewModel : ObservableObject
     {
         this.logger = logger;
         this.entriesSubscription = consoleLog.Entries.Subscribe(this.HandleNewEntry);
+        consoleLog.Cleared += this.HandleConsoleLogCleared;
+    }
+
+    private void HandleConsoleLogCleared()
+    {
+        this.logger.LogDebug("Console log cleared.");
+        this.messages.Clear();
+        this.ConsoleContent = string.Empty;
     }
 
     private void HandleNewEntry(string entry)
