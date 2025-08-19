@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{5A261F3A-8D44-416B-8552-8B6D013772F6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Core", "SimRacingSdk.Core\SimRacingSdk.Core.csproj", "{01D63855-C7D6-46D0-9C21-5ED38A4E263F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Ams2.Core", "SimRacingSdk.Ams2.Core\SimRacingSdk.Ams2.Core.csproj", "{2811210A-F510-4D15-B9D0-E5DCF8DDB0DD}"
@@ -19,16 +17,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Lmu.Core", "Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Lmu.Rest", "SimRacingSdk.Lmu.Rest\SimRacingSdk.Lmu.Rest.csproj", "{E947EE26-825D-3DDB-DFE2-6B8CA75A1CF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Abstractions", "SimRacingSdk.Abstractions\SimRacingSdk.Abstractions.csproj", "{72E753B8-1605-331E-1F01-CB9E7ED04123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Acc.SharedMemory", "SimRacingSdk.Acc.SharedMemory\SimRacingSdk.Acc.SharedMemory.csproj", "{87BDE4AF-4ED4-813D-E390-7FAD21B778C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Acc.Demo", "SimRacingSdk.Acc.Demo\SimRacingSdk.Acc.Demo.csproj", "{2AF8144C-D729-4B7D-97E4-FB89C6379815}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A261F3A-8D44-416B-8552-8B6D013772F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A261F3A-8D44-416B-8552-8B6D013772F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A261F3A-8D44-416B-8552-8B6D013772F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A261F3A-8D44-416B-8552-8B6D013772F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01D63855-C7D6-46D0-9C21-5ED38A4E263F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01D63855-C7D6-46D0-9C21-5ED38A4E263F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D63855-C7D6-46D0-9C21-5ED38A4E263F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +57,18 @@ Global
 		{E947EE26-825D-3DDB-DFE2-6B8CA75A1CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E947EE26-825D-3DDB-DFE2-6B8CA75A1CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E947EE26-825D-3DDB-DFE2-6B8CA75A1CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E753B8-1605-331E-1F01-CB9E7ED04123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E753B8-1605-331E-1F01-CB9E7ED04123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E753B8-1605-331E-1F01-CB9E7ED04123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E753B8-1605-331E-1F01-CB9E7ED04123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87BDE4AF-4ED4-813D-E390-7FAD21B778C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87BDE4AF-4ED4-813D-E390-7FAD21B778C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87BDE4AF-4ED4-813D-E390-7FAD21B778C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87BDE4AF-4ED4-813D-E390-7FAD21B778C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF8144C-D729-4B7D-97E4-FB89C6379815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF8144C-D729-4B7D-97E4-FB89C6379815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF8144C-D729-4B7D-97E4-FB89C6379815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF8144C-D729-4B7D-97E4-FB89C6379815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
