@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿// ReSharper disable AsyncVoidMethod
+
+using System.Diagnostics;
 using System.IO;
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
@@ -7,10 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Demo.Abstractions;
-using SimRacingSdk.Acc.Udp.Abstractions;
-using SimRacingSdk.Acc.Udp.Messages;
-
-// ReSharper disable AsyncVoidMethod
 
 namespace SimRacingSdk.Acc.Demo;
 
@@ -18,30 +16,34 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
     private readonly IAccGameDetector accGameDetector;
-    private readonly IAccLocalConfigProvider accLocalConfigProvider;
-    private readonly IAccPathProvider accPathProvider;
-    private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<MainWindowViewModel> logger;
+    private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
-    private IAccUdpConnection accUdpConnection = null!;
+    private readonly ITelemetryOnlyDemo telemetryOnlyDemo;
+    private readonly IUdpDemo udpDemo;
+
     private bool isGameRunning;
+    private bool isDemoCancelled = false;
+
+    [ObservableProperty]
+    private bool isRunningDemo = false;
 
     public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
         IConsoleLog consoleLog,
         IAccCompatibilityChecker accCompatibilityChecker,
-        IAccLocalConfigProvider accLocalConfigProvider,
-        IAccPathProvider accPathProvider,
         IAccGameDetector accGameDetector,
-        IAccUdpConnectionFactory accUdpConnectionFactory)
+        IUdpDemo udpDemo,
+        ISharedMemoryDemo sharedMemoryDemo,
+        ITelemetryOnlyDemo telemetryOnlyDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.accCompatibilityChecker = accCompatibilityChecker;
-        this.accLocalConfigProvider = accLocalConfigProvider;
-        this.accPathProvider = accPathProvider;
         this.accGameDetector = accGameDetector;
-        this.accUdpConnectionFactory = accUdpConnectionFactory;
+        this.udpDemo = udpDemo;
+        this.sharedMemoryDemo = sharedMemoryDemo;
+        this.telemetryOnlyDemo = telemetryOnlyDemo;
     }
 
     [RelayCommand]
@@ -56,38 +58,70 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void StartBroadcastingDemo()
-    {
-        if(!this.accCompatibilityChecker.HasValidBroadcastingSettings())
-        {
-            this.Log(
-                $"ACC broadcasting has not been configured.  Please ensure at least the updListenerPort in {this.accPathProvider.BroadcastingSettingsFilePath} has been set to a value > 1023 and try again.");
-            return;
-        }
-
-        await this.WaitFormGame();
-
-        var broadcastSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
-        this.accUdpConnection = this.accUdpConnectionFactory.Create("127.0.0.1",
-            broadcastSettings.UdpListenerPort,
-            "Sim Racing SDK ACC UDP Demo",
-            broadcastSettings.ConnectionPassword,
-            broadcastSettings.CommandPassword);
-
-        this.PrepareBroadcastMessageHandling();
-        this.accUdpConnection.Connect();
-    }
-
-    [RelayCommand]
     private async void StartSharedMemoryDemo()
     {
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.sharedMemoryDemo.Validate())
+        {
+            return;
+        }
         await this.WaitFormGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+        this.sharedMemoryDemo.Start();
     }
 
     [RelayCommand]
     private async Task StartTelemetryOnlySharedDemo()
     {
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.telemetryOnlyDemo.Validate())
+        {
+            return;
+        }
+
         await this.WaitFormGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+        this.telemetryOnlyDemo.Start();
+    }
+
+    [RelayCommand]
+    private async void StartUdpDemo()
+    {
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.udpDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitFormGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.udpDemo.Start();
+    }
+
+    [RelayCommand]
+    private void StopDemo()
+    {
+        this.isDemoCancelled = true;
+        this.StopRunningDemos();
     }
 
     private bool CheckCompatibility()
@@ -132,60 +166,6 @@ public partial class MainWindowViewModel : ObservableObject
         this.consoleLog.Write(message);
     }
 
-    private void LogBroadcastingEvent(BroadcastingEvent broadcastingEvent)
-    {
-        this.Log(broadcastingEvent.ToString());
-    }
-
-    private void OnNexLogMessage(string message)
-    {
-        this.Log(message);
-    }
-
-    private void OnNextConnectionStateChange(ConnectionState connectionState)
-    {
-        this.Log(connectionState.ToString());
-    }
-
-    private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
-    {
-        this.Log(entryListUpdate.ToString());
-    }
-
-    private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
-    {
-        this.Log(realtimeCarUpdate.ToString());
-    }
-
-    private void OnNextRealtimeUpdate(RealtimeUpdate realtimeUpdate)
-    {
-        this.Log(realtimeUpdate.ToString());
-    }
-
-    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
-    {
-        this.Log(trackDataUpdate.ToString());
-    }
-
-    private void PrepareBroadcastMessageHandling()
-    {
-        this.subscriptionSink.Add(this.accUdpConnection.BestPersonalLap.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.BestSessionLap.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.GreenFlag.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.LapCompleted.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.PenaltyMessage.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.LogMessages.Subscribe(this.OnNexLogMessage));
-    }
-
     private void StartGameDetection()
     {
         this.Log("Starting ACC game detection...");
@@ -193,23 +173,33 @@ public partial class MainWindowViewModel : ObservableObject
                                       .Subscribe(this.HandleGameDetection));
     }
 
+    private void StopRunningDemos()
+    {
+        this.sharedMemoryDemo.Stop();
+        this.telemetryOnlyDemo.Stop();
+        this.udpDemo.Stop();
+        this.IsRunningDemo = false;
+    }
+
     private async Task WaitFormGame()
     {
-        if(!this.CheckCompatibility())
-        {
-            return;
-        }
-
+        this.isDemoCancelled = false;
+        this.consoleLog.Clear();
         this.StartGameDetection();
         while(!this.isGameRunning)
         {
             this.Log("Waiting for ACC...");
             await Task.Delay(5000);
+            if(this.isDemoCancelled)
+            {
+                return;
+            }
         }
     }
 
     ~MainWindowViewModel()
     {
+        this.StopRunningDemos();
         this.subscriptionSink.Dispose();
     }
 }

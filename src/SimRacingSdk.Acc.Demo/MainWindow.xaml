@@ -27,9 +27,10 @@
                     Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    Margin="10">
-            <Button Content="Broadcasting Demo"
-                    Command="{Binding StartBroadcastingDemoCommand}"
+                    Margin="10"
+                    Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
+            <Button Content="UDP Demo"
+                    Command="{Binding StartUdpDemoCommand}"
                     ToolTip="Start the demo of AccUdpConnection for connection to the ACC Broadcasting API" />
             <Button Content="Shared Memory Demo"
                     Command="{Binding StartSharedMemoryDemoCommand}"
@@ -41,6 +42,15 @@
                     Command="{Binding OpenFileLogCommand}"
                     ToolTip="Open the folder containing the current log file" />
         </StackPanel>
+
+        <Button Grid.Column="0"
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Content="Stop Demo"
+                Command="{Binding StopDemoCommand}"
+                ToolTip="Stop the running demo"
+                Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityConverter }}" />
         <console:ConsoleControl Grid.Column="0"
                                 Grid.Row="1" />
     </Grid>

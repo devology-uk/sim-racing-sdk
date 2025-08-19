@@ -146,7 +146,7 @@ public class AccUdpConnection : IAccUdpConnection
         {
             try
             {
-                this.Shutdown();
+                this.Stop();
             }
             catch(Exception exception)
             {
@@ -271,6 +271,11 @@ public class AccUdpConnection : IAccUdpConnection
         var isRegistered = false;
         while(!isRegistered)
         {
+            if(this.isStopped)
+            {
+                return;
+            }
+
             UdpClient client = null;
             try
             {

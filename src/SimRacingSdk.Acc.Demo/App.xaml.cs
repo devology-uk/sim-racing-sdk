@@ -6,6 +6,7 @@ using NLog.Extensions.Logging;
 using SimRacingSdk.Acc.Core;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Demo.Controls.Console;
+using SimRacingSdk.Acc.Demo.Demos;
 using SimRacingSdk.Acc.Demo.Services;
 using SimRacingSdk.Acc.SharedMemory;
 using SimRacingSdk.Acc.Udp;
@@ -50,6 +51,12 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
 
+        services.AddLogging(builder =>
+                            {
+                                builder.ClearProviders();
+                                builder.AddNLog();
+                            });
+
         services.UseAccSdk();
         services.UseAccUdp();
         services.UseAccSharedMemory();
@@ -57,12 +64,11 @@ public partial class App : Application
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
+        services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
+        services.AddTransient<ITelemetryOnlyDemo, TelemetryOnlyDemo>();
+        services.AddTransient<IUdpDemo, UdpDemo>();
 
-        services.AddLogging(builder =>
-                            {
-                                builder.ClearProviders();
-                                builder.AddNLog();
-                            });
+        
 
         return services.BuildServiceProvider();
     }

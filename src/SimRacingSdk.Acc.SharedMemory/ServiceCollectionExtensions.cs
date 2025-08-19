@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IAccSharedMemoryProvider, AccSharedMemoryProvider>();
         services.AddSingleton<IAccSharedMemoryConnectionFactory, AccSharedMemoryConnectionFactory>();
+        services.AddSingleton<IAccTelemetryConnectionFactory, AccTelemetryConnectionFactory>();
         return services;
     }
 }
