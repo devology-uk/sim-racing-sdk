@@ -1,12 +1,14 @@
 ﻿#nullable disable
 
 using System.IO.MemoryMappedFiles;
+using System.Text;
+using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Enums;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
 namespace SimRacingSdk.Acc.SharedMemory.Messages;
 
-public class GraphicsPage
+public class GraphicsPage: MessageBase
 {
     private const string GraphicsMap = "Local\\acpmf_graphics";
 
@@ -109,32 +111,32 @@ public class GraphicsPage
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(GraphicsMap, MemoryMappedFileRights.Read);
             using var stream = mappedFile.CreateViewStream(0,0, MemoryMappedFileAccess.Read);
-            var reader = new BinaryReader(stream);
+            var reader = new BinaryReader(stream, Encoding.Unicode);
 
             graphicsPage = new GraphicsPage
             {
-                PacketId = reader.ReadInt32(),
-                Status = (AccRtStatus)reader.ReadInt32(),
-                SessionType = (AccRtSessionType)reader.ReadInt32(),
-                CurrentTime = reader.ReadString(),
-                LastTime = reader.ReadString(),
-                BestTime = reader.ReadString(),
-                Split = reader.ReadString(),
-                CompletedLaps = reader.ReadInt32(),
-                Position = reader.ReadInt32(),
-                CurrentTimeMs = reader.ReadInt32(),
-                LastTimeMs = reader.ReadInt32(),
-                BestTimeMs = reader.ReadInt32(),
+                PacketId = (int)reader.ReadUInt32(),
+                Status = (AccRtStatus)(int)reader.ReadUInt32(),
+                SessionType = (AccRtSessionType)(int)reader.ReadUInt32(),
+                CurrentTime = ReadString(reader, 15),
+                LastTime = ReadString(reader, 15),
+                BestTime = ReadString(reader, 15),
+                Split = ReadString(reader, 15),
+                CompletedLaps = (int)reader.ReadUInt32(),
+                Position = (int)reader.ReadUInt32(),
+                CurrentTimeMs = (int)reader.ReadUInt32(),
+                LastTimeMs = (int)reader.ReadUInt32(),
+                BestTimeMs = (int)reader.ReadUInt32(),
                 SessionTimeLeft = reader.ReadSingle(),
                 DistanceTraveled = reader.ReadSingle(),
-                IsInPits = reader.ReadBoolean(),
-                CurrentSectorIndex = reader.ReadInt32(),
-                LastSectorTime = reader.ReadInt32(),
-                NumberOfLaps = reader.ReadInt32(),
-                TyreCompound = reader.ReadString(),
+                IsInPits = reader.ReadUInt32() > 0,
+                CurrentSectorIndex = (int)reader.ReadUInt32(),
+                LastSectorTime = (int)reader.ReadUInt32(),
+                NumberOfLaps = (int)reader.ReadUInt32(),
+                TyreCompound = ReadString(reader, 33),
                 ReplayTimeMultiplier = reader.ReadSingle(),
                 NormalizedCarPosition = reader.ReadSingle(),
-                ActiveCars = reader.ReadInt32(),
+                ActiveCars = (int)reader.ReadUInt32(),
                 CarCoordinates = new AccRtVector3d[60]
             };
 
@@ -151,72 +153,72 @@ public class GraphicsPage
             graphicsPage.CarIds = new int[60];
             for (var i = 0; i < graphicsPage.CarIds.Length; i++)
             {
-                graphicsPage.CarIds[i] = reader.ReadInt32();
+                graphicsPage.CarIds[i] = (int)reader.ReadUInt32();
             }
 
-            graphicsPage.PlayerCarID = reader.ReadInt32();
+            graphicsPage.PlayerCarID = (int)reader.ReadUInt32();
             graphicsPage.PenaltyTime = reader.ReadSingle();
-            graphicsPage.Flag = (AccRtFlagType)reader.ReadInt32();
-            graphicsPage.PenaltyType = (AccRtPenaltyShortcut)reader.ReadInt32();
-            graphicsPage.IdealLineOn = reader.ReadBoolean();
-            graphicsPage.IsInPitLane = reader.ReadBoolean();
+            graphicsPage.Flag = (AccRtFlagType)(int)reader.ReadUInt32();
+            graphicsPage.PenaltyType = (AccRtPenaltyShortcut)(int)reader.ReadUInt32();
+            graphicsPage.IdealLineOn = reader.ReadUInt32() > 0;
+            graphicsPage.IsInPitLane = reader.ReadUInt32() > 0;
             graphicsPage.SurfaceGrip = reader.ReadSingle();
-            graphicsPage.MandatoryPitDone = reader.ReadBoolean();
+            graphicsPage.MandatoryPitDone = reader.ReadUInt32() > 0;
             graphicsPage.WindSpeed = reader.ReadSingle();
             graphicsPage.WindDirection = reader.ReadSingle();
-            graphicsPage.IsSetupMenuVisible = reader.ReadBoolean();
-            graphicsPage.MainDisplayIndex = reader.ReadInt32();
-            graphicsPage.SecondaryDisplayIndex = reader.ReadInt32();
-            graphicsPage.TC = reader.ReadInt32();
-            graphicsPage.TCCut = reader.ReadInt32();
-            graphicsPage.EngineMap = reader.ReadInt32();
-            graphicsPage.ABS = reader.ReadInt32();
+            graphicsPage.IsSetupMenuVisible = reader.ReadUInt32() > 0;
+            graphicsPage.MainDisplayIndex = (int)reader.ReadUInt32();
+            graphicsPage.SecondaryDisplayIndex = (int)reader.ReadUInt32();
+            graphicsPage.TC = (int)reader.ReadUInt32();
+            graphicsPage.TCCut = (int)reader.ReadUInt32();
+            graphicsPage.EngineMap = (int)reader.ReadUInt32();
+            graphicsPage.ABS = (int)reader.ReadUInt32();
             graphicsPage.AverageFuelPerLap = reader.ReadSingle();
-            graphicsPage.RainLights = reader.ReadInt32();
-            graphicsPage.FlashingLights = reader.ReadInt32();
-            graphicsPage.LightsStage = reader.ReadInt32();
+            graphicsPage.RainLights = (int)reader.ReadUInt32();
+            graphicsPage.FlashingLights = (int)reader.ReadUInt32();
+            graphicsPage.LightsStage = (int)reader.ReadUInt32();
             graphicsPage.ExhaustTemperature = reader.ReadSingle();
-            graphicsPage.WiperLV = reader.ReadInt32();
-            graphicsPage.DriverStintTotalTimeLeft = reader.ReadInt32();
-            graphicsPage.DriverStintTimeLeft = reader.ReadInt32();
-            graphicsPage.RainTyres = reader.ReadInt32();
-            graphicsPage.SessionIndex = reader.ReadInt32();
+            graphicsPage.WiperLV = (int)reader.ReadUInt32();
+            graphicsPage.DriverStintTotalTimeLeft = (int)reader.ReadUInt32();
+            graphicsPage.DriverStintTimeLeft = (int)reader.ReadUInt32();
+            graphicsPage.RainTyres = (int)reader.ReadUInt32();
+            graphicsPage.SessionIndex = (int)reader.ReadUInt32();
             graphicsPage.UsedFuelSinceRefuel = reader.ReadSingle();
-            graphicsPage.DeltaLapTime = reader.ReadString();
-            graphicsPage.DeltaLapTimeMillis = reader.ReadInt32();
-            graphicsPage.EstimatedLapTime = reader.ReadString();
-            graphicsPage.EstimatedLapTimeMillis = reader.ReadInt32();
-            graphicsPage.IsDeltaPositive = reader.ReadBoolean();
-            graphicsPage.SplitTimeMillis = reader.ReadInt32();
-            graphicsPage.IsValidLap = reader.ReadBoolean();
+            graphicsPage.DeltaLapTime = ReadString(reader, 15);
+            graphicsPage.DeltaLapTimeMillis = (int)reader.ReadUInt32();
+            graphicsPage.EstimatedLapTime = ReadString(reader, 15);
+            graphicsPage.EstimatedLapTimeMillis = (int)reader.ReadUInt32();
+            graphicsPage.IsDeltaPositive = reader.ReadUInt32() > 0;
+            graphicsPage.SplitTimeMillis = (int)reader.ReadUInt32();
+            graphicsPage.IsValidLap = reader.ReadUInt32() > 0;
             graphicsPage.FuelEstimatedLaps = reader.ReadSingle();
-            graphicsPage.TrackStatus = reader.ReadString();
-            graphicsPage.MandatoryPitStopsLeft = reader.ReadInt32();
+            graphicsPage.TrackStatus = ReadString(reader, 33);
+            graphicsPage.MandatoryPitStopsLeft = (int)reader.ReadUInt32();
             graphicsPage.ClockTimeOfDaySeconds = reader.ReadSingle();
-            graphicsPage.IndicatorLeftOn = reader.ReadBoolean();
-            graphicsPage.IndicatorRightOn = reader.ReadBoolean();
-            graphicsPage.GlobalYellow = reader.ReadBoolean();
-            graphicsPage.GlobalYellowSector1 = reader.ReadBoolean();
-            graphicsPage.GlobalYellowSector2 = reader.ReadBoolean();
-            graphicsPage.GlobalYellowSector3 = reader.ReadBoolean();
-            graphicsPage.GlobalWhite = reader.ReadBoolean();
-            graphicsPage.GreenFlag = reader.ReadBoolean();
-            graphicsPage.GlobalChequered = reader.ReadBoolean();
-            graphicsPage.GlobalRed = reader.ReadBoolean();
-            graphicsPage.MfdTyreSet = reader.ReadInt32();
+            graphicsPage.IndicatorLeftOn = reader.ReadUInt32() > 0;
+            graphicsPage.IndicatorRightOn = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalYellow = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalYellowSector1 = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalYellowSector2 = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalYellowSector3 = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalWhite = reader.ReadUInt32() > 0;
+            graphicsPage.GreenFlag = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalChequered = reader.ReadUInt32() > 0;
+            graphicsPage.GlobalRed = reader.ReadUInt32() > 0;
+            graphicsPage.MfdTyreSet = (int)reader.ReadUInt32();
             graphicsPage.MfdFuelToAdd = reader.ReadSingle();
             graphicsPage.MfdTyrePressureLF = reader.ReadSingle();
             graphicsPage.MfdTyrePressureRF = reader.ReadSingle();
             graphicsPage.MfdTyrePressureLR = reader.ReadSingle();
             graphicsPage.MfdTyrePressureRR = reader.ReadSingle();
-            graphicsPage.TrackGripStatus = (AccRtTrackGripStatus)reader.ReadInt32();
-            graphicsPage.RainIntensity = (AccRtRainIntensity)reader.ReadInt32();
-            graphicsPage.RainIntensityIn10min = (AccRtRainIntensity)reader.ReadInt32();
-            graphicsPage.RainIntensityIn30min = (AccRtRainIntensity)reader.ReadInt32();
-            graphicsPage.CurrentTyreSet = reader.ReadInt32();
-            graphicsPage.StrategyTyreSet = reader.ReadInt32();
-            graphicsPage.GapAheadMillis = reader.ReadInt32();
-            graphicsPage.GapBehindMillis = reader.ReadInt32();
+            graphicsPage.TrackGripStatus = (AccRtTrackGripStatus)(int)reader.ReadUInt32();
+            graphicsPage.RainIntensity = (AccRtRainIntensity)(int)reader.ReadUInt32();
+            graphicsPage.RainIntensityIn10min = (AccRtRainIntensity)(int)reader.ReadUInt32();
+            graphicsPage.RainIntensityIn30min = (AccRtRainIntensity)(int)reader.ReadUInt32();
+            graphicsPage.CurrentTyreSet = (int)reader.ReadUInt32();
+            graphicsPage.StrategyTyreSet = (int)reader.ReadUInt32();
+            graphicsPage.GapAheadMillis = (int)reader.ReadUInt32();
+            graphicsPage.GapBehindMillis = (int)reader.ReadUInt32();
 
             return true;
 

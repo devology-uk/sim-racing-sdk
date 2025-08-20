@@ -1,11 +1,13 @@
 ﻿#nullable disable
 
 using System.IO.MemoryMappedFiles;
+using System.Text;
+using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
 namespace SimRacingSdk.Acc.SharedMemory.Messages;
 
-public class PhysicsPage
+public class PhysicsPage: MessageBase
 {
     private const string PhysicsMap = "Local\\acpmf_physics";
 
@@ -69,15 +71,15 @@ public class PhysicsPage
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(PhysicsMap, MemoryMappedFileRights.Read);
             using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
-            var reader = new BinaryReader(stream);
+            var reader = new BinaryReader(stream, Encoding.Unicode);
             physicsPage = new PhysicsPage
             {
-                PacketId = reader.ReadInt32(),
+                PacketId = (int)reader.ReadUInt32(),
                 Gas = reader.ReadSingle(),
                 Brake = reader.ReadSingle(),
                 Fuel = reader.ReadSingle(),
-                Gear = reader.ReadInt32(),
-                Rpm = reader.ReadInt32(),
+                Gear = (int)reader.ReadUInt32(),
+                Rpm = (int)reader.ReadUInt32(),
                 SteerAngle = reader.ReadSingle(),
                 SpeedKmh = reader.ReadSingle(),
                 Velocity =
@@ -169,12 +171,12 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                NumberOfTyresOut = reader.ReadInt32(),
-                PitLimiterOn = reader.ReadBoolean(),
+                NumberOfTyresOut = (int)reader.ReadUInt32(),
+                PitLimiterOn = reader.ReadUInt32() > 0,
                 Abs = reader.ReadSingle(),
                 KersCharge = reader.ReadSingle(),
                 KersInput = reader.ReadSingle(),
-                AutoShifterOn = reader.ReadBoolean(),
+                AutoShifterOn = reader.ReadUInt32() > 0,
                 RideHeight =
                 [
                     reader.ReadSingle(),
@@ -193,14 +195,14 @@ public class PhysicsPage
                 ],
                 FinalFF = reader.ReadSingle(),
                 PerformanceMeter = reader.ReadSingle(),
-                EngineBrake = reader.ReadInt32(),
-                ErsRecoveryLevel = reader.ReadInt32(),
-                ErsPowerLevel = reader.ReadInt32(),
-                ErsHeatCharging = reader.ReadInt32(),
-                ErsIsCharging = reader.ReadInt32(),
+                EngineBrake = (int)reader.ReadUInt32(),
+                ErsRecoveryLevel = (int)reader.ReadUInt32(),
+                ErsPowerLevel = (int)reader.ReadUInt32(),
+                ErsHeatCharging = (int)reader.ReadUInt32(),
+                ErsIsCharging = (int)reader.ReadUInt32(),
                 KersCurrentKJ = reader.ReadSingle(),
-                DrsAvailable = reader.ReadBoolean(),
-                DrsEnabled = reader.ReadBoolean(),
+                DrsAvailable = reader.ReadUInt32() > 0,
+                DrsEnabled = reader.ReadUInt32() > 0,
                 BrakeTemperature =
                 [
                     reader.ReadSingle(),
@@ -230,7 +232,7 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                IsAiControlled = reader.ReadBoolean(),
+                IsAiControlled = reader.ReadUInt32() > 0,
                 TyreContactPoint =
                 [
                     new AccRtVector3d
@@ -320,9 +322,9 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                P2PActivations = reader.ReadInt32(),
-                P2PStatus = reader.ReadInt32(),
-                CurrentMaxRpm = reader.ReadInt32(),
+                P2PActivations = (int)reader.ReadUInt32(),
+                P2PStatus = (int)reader.ReadUInt32(),
+                CurrentMaxRpm = (int)reader.ReadUInt32(),
                 Mz =
                 [
                     reader.ReadSingle(),
@@ -358,8 +360,8 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                TcInAction = reader.ReadInt32(),
-                AbsInAction = reader.ReadInt32(),
+                TcInAction = (int)reader.ReadUInt32(),
+                AbsInAction = (int)reader.ReadUInt32(),
                 SuspensionDamage =
                 [
                     reader.ReadSingle(),
@@ -382,8 +384,8 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                FrontBrakeCompound = reader.ReadInt32(),
-                RearBrakeCompound = reader.ReadInt32(),
+                FrontBrakeCompound = (int)reader.ReadUInt32(),
+                RearBrakeCompound = (int)reader.ReadUInt32(),
                 PadLife =
                 [
                     reader.ReadSingle(),
@@ -398,9 +400,9 @@ public class PhysicsPage
                     reader.ReadSingle(),
                     reader.ReadSingle()
                 ],
-                IgnitionOn = reader.ReadBoolean(),
-                StarterEngineOn = reader.ReadBoolean(),
-                IsEngineRunning = reader.ReadBoolean(),
+                IgnitionOn = reader.ReadUInt32() > 0,
+                StarterEngineOn = reader.ReadUInt32() > 0,
+                IsEngineRunning = reader.ReadUInt32() > 0,
                 KerbVibration = reader.ReadSingle(),
                 SlipVibrations = reader.ReadSingle(),
                 GVibrations = reader.ReadSingle(),
