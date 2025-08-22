@@ -18,11 +18,11 @@ public class PhysicsData(PhysicsPage physicsPage)
     public float[] CarDamage { get; set; } = physicsPage.CarDamage;
     public float Clutch { get; set; } = physicsPage.Clutch;
     public float[] DiscLife { get; set; } = physicsPage.DiscLife;
-    public float FinalFf { get; set; } = physicsPage.FinalFF;
+    public float FinalFf { get; set; } = physicsPage.ForceFeedbackSignal;
     public int FrontBrakeCompound { get; set; } = physicsPage.FrontBrakeCompound;
     public float Fuel { get; set; } = physicsPage.Fuel;
     public int Gear { get; set; } = physicsPage.Gear;
-    public float GearVibrations { get; set; } = physicsPage.GVibrations;
+    public float GearVibrations { get; set; } = physicsPage.GearVibrations;
     public float Heading { get; set; } = physicsPage.Heading;
     public bool IgnitionOn { get; set; } = physicsPage.IgnitionOn;
     public bool IsAiControlled { get; set; } = physicsPage.IsAiControlled;

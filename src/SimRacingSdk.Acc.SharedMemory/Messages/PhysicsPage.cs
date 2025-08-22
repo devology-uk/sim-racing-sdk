@@ -140,7 +140,7 @@ public class PhysicsPage
     public bool IsEngineRunning;
     public float KerbVibrations;
     public float SlipVibrations;
-    public float GroundVibrations;
+    public float GearVibrations;
     public float AbsVibrations;
    
 
