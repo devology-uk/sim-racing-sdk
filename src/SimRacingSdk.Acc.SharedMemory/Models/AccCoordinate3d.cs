@@ -1,6 +1,6 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Models;
 
-public struct AccRtVector3d
+public struct AccCoordinate3d
 {
     public float X;
     public float Y;

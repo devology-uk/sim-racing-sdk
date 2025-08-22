@@ -13,7 +13,7 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public int BestTimeMs { get; } = graphicsPage.BestTimeMs;
 
-    public AccRtVector3d[] CarCoordinates { get; } = graphicsPage.CarCoordinates;
+    public AccCoordinate3d[] CarCoordinates { get; } = graphicsPage.CarCoordinates;
 
     public int[] CarIds { get; } = graphicsPage.CarIds;
 
@@ -41,11 +41,11 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public string EstimatedLapTime { get; } = graphicsPage.EstimatedLapTime;
 
-    public int EstimatedLapTimeMs { get; } = graphicsPage.EstimatedLapTimeMillis;
+    public int EstimatedLapTimeMs { get; } = graphicsPage.EstimatedLapTimeMs;
 
     public float ExhaustTemperature { get; } = graphicsPage.ExhaustTemperature;
 
-    public AccRtFlagType Flag { get; } = graphicsPage.Flag;
+    public AccFlagType Flag { get; } = graphicsPage.Flag;
 
     public int FlashingLights { get; } = graphicsPage.FlashingLights;
 
@@ -53,21 +53,21 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public float FuelPerLap { get; } = graphicsPage.AverageFuelPerLap;
 
-    public int GapAheadMs { get; } = graphicsPage.GapAheadMillis;
+    public int GapAheadMs { get; } = graphicsPage.GapAheadMs;
 
-    public int GapBehindMs { get; } = graphicsPage.GapBehindMillis;
+    public int GapBehindMs { get; } = graphicsPage.GapBehindMs;
 
-    public bool GlobalWhite { get; } = graphicsPage.GlobalWhite;
+    public bool GlobalWhite { get; } = graphicsPage.IsWhiteFlagActive;
 
-    public bool GlobalYellow { get; } = graphicsPage.GlobalYellow;
+    public bool GlobalYellow { get; } = graphicsPage.IsYellowFlagActive;
 
-    public bool GlobalYellowSector1 { get; } = graphicsPage.GlobalYellowSector1;
+    public bool GlobalYellowSector1 { get; } = graphicsPage.IsYellowFlagActiveInSector1;
 
-    public bool GlobalYellowSector2 { get; } = graphicsPage.GlobalYellowSector2;
+    public bool GlobalYellowSector2 { get; } = graphicsPage.IsYellowFlagActiveInSector2;
 
-    public bool GlobalYellowSector3 { get; } = graphicsPage.GlobalYellowSector3;
+    public bool GlobalYellowSector3 { get; } = graphicsPage.IsYellowActiveInSector3;
 
-    public bool IdealLineOn { get; } = graphicsPage.IdealLineOn;
+    public bool IdealLineOn { get; } = graphicsPage.IsIdealLineOn;
 
     public bool IsDeltaPositive { get; } = graphicsPage.IsDeltaPositive;
 
@@ -75,9 +75,9 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public bool IsInPits { get; } = graphicsPage.IsInPits;
 
-    public bool IsLeftIndicatorOn { get; } = graphicsPage.IndicatorLeftOn;
+    public bool IsLeftIndicatorOn { get; } = graphicsPage.IsLeftIndicatorOn;
 
-    public bool IsRightIndicatorOn { get; } = graphicsPage.IndicatorRightOn;
+    public bool IsRightIndicatorOn { get; } = graphicsPage.IsRightIndicatorOn;
 
     public bool IsSetupMenuVisible { get; } = graphicsPage.IsSetupMenuVisible;
 
@@ -93,7 +93,7 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public int MainDisplayIndex { get; } = graphicsPage.MainDisplayIndex;
 
-    public bool MandatoryPitDone { get; } = graphicsPage.MandatoryPitDone;
+    public bool MandatoryPitDone { get; } = graphicsPage.IsMandatoryPitStopComplete;
 
     public int MandatoryPitStopsLeft { get; } = graphicsPage.MandatoryPitStopsLeft;
 
@@ -117,17 +117,17 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public float PenaltyTime { get; } = graphicsPage.PenaltyTime;
 
-    public AccRtPenaltyShortcut PenaltyType { get; } = graphicsPage.PenaltyType;
+    public AccPenaltyType PenaltyType { get; } = graphicsPage.PenaltyType;
 
     public int PlayerCarId { get; } = graphicsPage.PlayerCarID;
 
     public int Position { get; } = graphicsPage.Position;
 
-    public AccRtRainIntensity RainIntensity { get; } = graphicsPage.RainIntensity;
+    public AccRainIntensity RainIntensity { get; } = graphicsPage.RainIntensity;
 
-    public AccRtRainIntensity RainIntensityIn10Min { get; } = graphicsPage.RainIntensityIn10min;
+    public AccRainIntensity RainIntensityIn10Min { get; } = graphicsPage.RainIntensityIn10Minutes;
 
-    public AccRtRainIntensity RainIntensityIn30Min { get; } = graphicsPage.RainIntensityIn30min;
+    public AccRainIntensity RainIntensityIn30Min { get; } = graphicsPage.RainIntensityIn30Minutes;
 
     public int RainLights { get; } = graphicsPage.RainLights;
 
@@ -139,13 +139,13 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public float SessionTimeLeft { get; } = graphicsPage.SessionTimeLeft;
 
-    public AccRtSessionType SessionType { get; } = graphicsPage.SessionType;
+    public AccSessionType SessionType { get; } = graphicsPage.SessionType;
 
     public string Split { get; } = graphicsPage.Split;
 
     public int SplitTimeMs { get; } = graphicsPage.SplitTimeMillis;
 
-    public AccRtStatus Status { get; } = graphicsPage.Status;
+    public AccAppStatus Status { get; } = graphicsPage.Status;
 
     public int StrategyTyreSet { get; } = graphicsPage.StrategyTyreSet;
 
@@ -153,7 +153,7 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public DateTime TimeStamp { get; } = DateTime.UtcNow;
 
-    public AccRtTrackGripStatus TrackGripStatus { get; } = graphicsPage.TrackGripStatus;
+    public AccTrackGripStatus TrackGripStatus { get; } = graphicsPage.TrackGripStatus;
 
     public string TrackStatus { get; } = graphicsPage.TrackStatus;
 
@@ -163,13 +163,13 @@ public class GraphicsData(GraphicsPage graphicsPage)
 
     public string TyreCompound { get; } = graphicsPage.TyreCompound;
 
-    public float UsedFuelSinceRefuel { get; } = graphicsPage.UsedFuelSinceRefuel;
+    public float UsedFuelSinceRefuel { get; } = graphicsPage.FuelUsedSinceRefuel;
 
     public float WindDirection { get; } = graphicsPage.WindDirection;
 
     public float WindSpeed { get; } = graphicsPage.WindSpeed;
 
-    public int WiperLevel { get; } = graphicsPage.WiperLV;
+    public int WiperLevel { get; } = graphicsPage.WiperStage;
 
     public override string ToString()
     {

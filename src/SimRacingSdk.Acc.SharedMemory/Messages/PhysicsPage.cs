@@ -1,69 +1,148 @@
 ﻿#nullable disable
 
 using System.IO.MemoryMappedFiles;
+using System.Runtime.InteropServices;
 using System.Text;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
 namespace SimRacingSdk.Acc.SharedMemory.Messages;
 
-public class PhysicsPage: MessageBase
+[Serializable]
+[StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
+public class PhysicsPage
 {
     private const string PhysicsMap = "Local\\acpmf_physics";
 
-    public float Abs;
-    public float AbsVibrations;
-    public float[] AccG;
-    public float AirTemp;
-    public bool AutoShifterOn;
-    public float Brake;
-    public float BrakeBias;
-    public float[] BrakePressure;
-    public float[] BrakeTemperature;
-    public float[] CarDamage;
-    public float Clutch;
-    public float[] DiscLife;
-    public float FinalFF;
-    public int FrontBrakeCompound;
-    public float Fuel;
-    public float Gas;
-    public int Gear;
-    public float GVibrations;
-    public float Heading;
-    public bool IgnitionOn;
-    public bool IsAiControlled;
-    public bool IsEngineRunning;
-    public float KerbVibration;
-    public float[] LocalAngularVelocity;
-    public float[] LocalVelocity;
+    private static readonly int size = Marshal.SizeOf<PhysicsPage>();
+    private static readonly byte[] buffer = new byte[size];
+
     public int PacketId;
-    public float[] PadLife;
-    public float Pitch;
-    public bool PitLimiterOn;
-    public int RearBrakeCompound;
-    public float RoadTemp;
-    public float Roll;
+    public float Gas;
+    public float Brake;
+    public float Fuel;
+    public int Gear;
     public int Rpm;
-    public float[] SlipAngle;
-    public float[] SlipRatio;
-    public float SlipVibrations;
-    public float SpeedKmh;
-    public bool StarterEngineOn;
     public float SteerAngle;
-    public float[] SuspensionDamage;
-    public float[] SuspensionTravel;
-    public float TC;
-    public float TurboBoost;
-    public AccRtVector3d[] TyreContactHeading;
-    public AccRtVector3d[] TyreContactNormal;
-    public AccRtVector3d[] TyreContactPoint;
-    public float[] TyreCoreTemperature;
-    public float[] TyreTemp;
+    public float SpeedKmh;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     public float[] Velocity;
-    public float WaterTemp;
-    public float[] WheelAngularSpeed;
-    public float[] WheelPressure;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+    public float[] AccelerationVector;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
     public float[] WheelSlip;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] WheelLoad;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] WheelPressure;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] WheelAngularSpeed;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreWear;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreDirtyLevel;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreCoreTemperature;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] CamberRad;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] SuspensionTravel;
+    public float Drs;
+    public float TC;
+    public float Heading;
+    public float Pitch;
+    public float Roll;
+    public float CentreOfGravityHeight;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 5)]
+    public float[] CarDamage;
+    public int NumberOfTyresOut;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool PitLimiterOn;
+    public float Abs;
+    public float KersCharge;
+    public float KersInput;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool AutoShifterOn;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+    public float[] RideHeight;
+    public float TurboBoost;
+    public float Ballast;
+    public float AirDensity;
+    public float AirTemp;
+    public float RoadTemp;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+    public float[] LocalAngularVelocity;
+    public float ForceFeedbackSignal;
+    public float PerformanceMeter;
+    public int EngineBrake;
+    public int ErsRecoveryLevel;
+    public int ErsPowerLevel;
+    public int ErsHeatCharging;
+    public int ErsIsCharging;
+    public float KersCurrentKiloJoules;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool DrsAvailable;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool DrsEnabled;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] BrakeTemperature;
+    public float Clutch;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreTempI;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreTempM;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreTempO;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool IsAiControlled;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public AccCoordinate3d[] TyreContactPoints;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public AccCoordinate3d[] TyreContactNormals;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public AccCoordinate3d[] TyreContactHeadings;
+    public float BrakeBias;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+    public float[] LocalVelocity;
+    public int P2PActivation;
+    public int P2PStatus;
+    public int CurrentMaxRpm;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] Mz;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] Fx;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] Fy;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] SlipRatio;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] SlipAngle;
+    public int TcInAction;
+    public int AbsInAction;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] SuspensionDamage;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] TyreTemp;
+    public float WaterTemp;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] BrakePressure;
+    public int FrontBrakeCompound;
+    public int RearBrakeCompound;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] PadLife;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+    public float[] DiscLife;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool IgnitionOn;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool StarterEngineOn;
+    [MarshalAs(UnmanagedType.Bool)]
+    public bool IsEngineRunning;
+    public float KerbVibrations;
+    public float SlipVibrations;
+    public float GroundVibrations;
+    public float AbsVibrations;
+   
 
     public static bool TryRead(out PhysicsPage physicsPage)
     {
@@ -71,345 +150,13 @@ public class PhysicsPage: MessageBase
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(PhysicsMap, MemoryMappedFileRights.Read);
             using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
-            var reader = new BinaryReader(stream, Encoding.Unicode);
-            physicsPage = new PhysicsPage
-            {
-                PacketId = (int)reader.ReadUInt32(),
-                Gas = reader.ReadSingle(),
-                Brake = reader.ReadSingle(),
-                Fuel = reader.ReadSingle(),
-                Gear = (int)reader.ReadUInt32(),
-                Rpm = (int)reader.ReadUInt32(),
-                SteerAngle = reader.ReadSingle(),
-                SpeedKmh = reader.ReadSingle(),
-                Velocity =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                AccG =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                WheelSlip =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                WheelLoad =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                WheelPressure =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                WheelAngularSpeed =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreWear =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreDirtyLevel =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreCoreTemperature =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                CamberRad =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                SuspensionTravel =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                Drs = reader.ReadSingle(),
-                TC = reader.ReadSingle(),
-                Heading = reader.ReadSingle(),
-                Pitch = reader.ReadSingle(),
-                Roll = reader.ReadSingle(),
-                CgHeight = reader.ReadSingle(),
-                CarDamage =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                NumberOfTyresOut = (int)reader.ReadUInt32(),
-                PitLimiterOn = reader.ReadUInt32() > 0,
-                Abs = reader.ReadSingle(),
-                KersCharge = reader.ReadSingle(),
-                KersInput = reader.ReadSingle(),
-                AutoShifterOn = reader.ReadUInt32() > 0,
-                RideHeight =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TurboBoost = reader.ReadSingle(),
-                Ballast = reader.ReadSingle(),
-                AirDensity = reader.ReadSingle(),
-                AirTemp = reader.ReadSingle(),
-                RoadTemp = reader.ReadSingle(),
-                LocalAngularVelocity =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                FinalFF = reader.ReadSingle(),
-                PerformanceMeter = reader.ReadSingle(),
-                EngineBrake = (int)reader.ReadUInt32(),
-                ErsRecoveryLevel = (int)reader.ReadUInt32(),
-                ErsPowerLevel = (int)reader.ReadUInt32(),
-                ErsHeatCharging = (int)reader.ReadUInt32(),
-                ErsIsCharging = (int)reader.ReadUInt32(),
-                KersCurrentKJ = reader.ReadSingle(),
-                DrsAvailable = reader.ReadUInt32() > 0,
-                DrsEnabled = reader.ReadUInt32() > 0,
-                BrakeTemperature =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                Clutch = reader.ReadSingle(),
-                TyreTempI =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreTempM =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreTempO =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                IsAiControlled = reader.ReadUInt32() > 0,
-                TyreContactPoint =
-                [
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    }
-                ],
-                TyreContactNormal =
-                [
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    }
-                ],
-                TyreContactHeading =
-                [
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    },
-                    new AccRtVector3d
-                    {
-                        X = reader.ReadSingle(),
-                        Y = reader.ReadSingle(),
-                        Z = reader.ReadSingle()
-                    }
-                ],
-                BrakeBias = reader.ReadSingle(),
-                LocalVelocity =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                P2PActivations = (int)reader.ReadUInt32(),
-                P2PStatus = (int)reader.ReadUInt32(),
-                CurrentMaxRpm = (int)reader.ReadUInt32(),
-                Mz =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                Fx =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                Fy =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                SlipRatio =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                SlipAngle =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TcInAction = (int)reader.ReadUInt32(),
-                AbsInAction = (int)reader.ReadUInt32(),
-                SuspensionDamage =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                TyreTemp =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                WaterTemp = reader.ReadSingle(),
-                BrakePressure =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                FrontBrakeCompound = (int)reader.ReadUInt32(),
-                RearBrakeCompound = (int)reader.ReadUInt32(),
-                PadLife =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                DiscLife =
-                [
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle(),
-                    reader.ReadSingle()
-                ],
-                IgnitionOn = reader.ReadUInt32() > 0,
-                StarterEngineOn = reader.ReadUInt32() > 0,
-                IsEngineRunning = reader.ReadUInt32() > 0,
-                KerbVibration = reader.ReadSingle(),
-                SlipVibrations = reader.ReadSingle(),
-                GVibrations = reader.ReadSingle(),
-                AbsVibrations = reader.ReadSingle()
-            };
 
+            stream.ReadExactly(buffer, 0, buffer.Length);
+            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            physicsPage = Marshal.PtrToStructure<PhysicsPage>(handle.AddrOfPinnedObject());
+            handle.Free();
             return true;
+
         }
         catch(FileNotFoundException)
         {
@@ -417,41 +164,4 @@ public class PhysicsPage: MessageBase
             return false;
         }
     }
-
-    #region Not populated by ACC
-
-    public float[] WheelLoad;
-    public float[] TyreWear;
-    public float[] TyreDirtyLevel;
-    public float[] CamberRad;
-    public float Drs;
-    public float CgHeight;
-    public int NumberOfTyresOut;
-    public float KersCharge;
-    public float KersInput;
-    public float[] RideHeight;
-    public float Ballast;
-    public float AirDensity;
-    public float PerformanceMeter;
-    public int EngineBrake;
-    public int ErsRecoveryLevel;
-    public int ErsPowerLevel;
-    public int ErsHeatCharging;
-    public int ErsIsCharging;
-    public float KersCurrentKJ;
-    public bool DrsAvailable;
-    public bool DrsEnabled;
-    public float[] TyreTempI;
-    public float[] TyreTempM;
-    public float[] TyreTempO;
-    public int P2PActivations;
-    public int P2PStatus;
-    public int CurrentMaxRpm;
-    public float[] Mz;
-    public float[] Fx;
-    public float[] Fy;
-    public int TcInAction;
-    public int AbsInAction;
-
-    #endregion
 }

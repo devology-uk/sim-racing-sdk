@@ -4,24 +4,24 @@ namespace SimRacingSdk.Acc.SharedMemory;
 
 public static class AccSharedMemoryExtensions
 {
-    public static string ToFriendlyName(this AccRtFlagType flagType)
+    public static string ToFriendlyName(this AccFlagType flagType)
     {
         return flagType switch
         {
-            AccRtFlagType.NoFlag => "Green", AccRtFlagType.BlueFlag => "Blue",
-            AccRtFlagType.YellowFlag => "Yellow", AccRtFlagType.BlackFlag => "Black",
-            AccRtFlagType.WhiteFlag => "White", AccRtFlagType.ChequeredFlag => "Chequered",
-            AccRtFlagType.PenaltyFlag => "Penalty", AccRtFlagType.GreenFlag => "Green",
-            AccRtFlagType.BlackFlagWithOrangeCircle => "Orange", _ => flagType.ToString()
+            AccFlagType.NoFlag => "Green", AccFlagType.Blue => "Blue",
+            AccFlagType.Yellow => "Yellow", AccFlagType.Black => "Black",
+            AccFlagType.White => "White", AccFlagType.Chequered => "Chequered",
+            AccFlagType.Penalty => "Penalty", AccFlagType.Green => "Green",
+            AccFlagType.UnsafeVehicle => "Orange", _ => flagType.ToString()
         };
     }
 
-    public static string ToFriendlyName(this AccRtSessionType sessionType)
+    public static string ToFriendlyName(this AccSessionType sessionType)
     {
         return sessionType switch
         {
-            AccRtSessionType.HotlapSuperpole => "Hotlap Superpole",
-            AccRtSessionType.TimeAttack => "Time Attack", _ => sessionType.ToString()
+            AccSessionType.HotlapSuperpole => "Hotlap Superpole",
+            AccSessionType.TimeAttack => "Time Attack", _ => sessionType.ToString()
         };
     }
 }

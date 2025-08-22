@@ -1,11 +1,11 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Enums;
 
-public enum AccRtRainIntensity : int
+public enum AccRainIntensity : int
 {
     NoRain,
     Drizzle,
-    LightRain,
-    MediumRain,
-    HeavyRain,
+    Light,
+    Medium,
+    Heavy,
     Thunderstorm
 }

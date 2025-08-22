@@ -8,7 +8,7 @@ public class PhysicsData(PhysicsPage physicsPage)
     public float Abs { get; set; } = physicsPage.Abs;
     public float AbsVibrations { get; set; } = physicsPage.AbsVibrations;
     public float Accelerator { get; set; } = physicsPage.Gas;
-    public float[] AccG { get; set; } = physicsPage.AccG;
+    public float[] AccG { get; set; } = physicsPage.AccelerationVector;
     public float AirTemp { get; set; } = physicsPage.AirTemp;
     public bool AutoShiftOn { get; set; } = physicsPage.AutoShifterOn;
     public float Brake { get; set; } = physicsPage.Brake;
@@ -27,7 +27,7 @@ public class PhysicsData(PhysicsPage physicsPage)
     public bool IgnitionOn { get; set; } = physicsPage.IgnitionOn;
     public bool IsAiControlled { get; set; } = physicsPage.IsAiControlled;
     public bool IsEngineRunning { get; set; } = physicsPage.IsEngineRunning;
-    public float KerbVibration { get; set; } = physicsPage.KerbVibration;
+    public float KerbVibration { get; set; } = physicsPage.KerbVibrations;
     public float[] LocalAngularVelocity { get; set; } = physicsPage.LocalAngularVelocity;
     public float[] LocalVelocity { get; set; } = physicsPage.LocalVelocity;
     public int PacketId { get; set; } = physicsPage.PacketId;
@@ -48,9 +48,9 @@ public class PhysicsData(PhysicsPage physicsPage)
     public float TrackTemp { get; set; } = physicsPage.RoadTemp;
     public float TractionControl { get; set; } = physicsPage.TC;
     public float TurboBoost { get; set; } = physicsPage.TurboBoost;
-    public AccRtVector3d[] TyreContactHeading { get; set; } = physicsPage.TyreContactHeading;
-    public AccRtVector3d[] TyreContactNormal { get; set; } = physicsPage.TyreContactNormal;
-    public AccRtVector3d[] TyreContactPoint { get; set; } = physicsPage.TyreContactPoint;
+    public AccCoordinate3d[] TyreContactHeading { get; set; } = physicsPage.TyreContactHeadings;
+    public AccCoordinate3d[] TyreContactNormal { get; set; } = physicsPage.TyreContactNormals;
+    public AccCoordinate3d[] TyreContactPoint { get; set; } = physicsPage.TyreContactPoints;
     public float[] TyreCoreTemperature { get; set; } = physicsPage.TyreCoreTemperature;
     public float[] TyreTemp { get; set; } = physicsPage.TyreTemp;
     public float[] Velocity { get; set; } = physicsPage.Velocity;

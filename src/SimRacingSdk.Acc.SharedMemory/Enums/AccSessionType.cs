@@ -1,6 +1,6 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Enums;
 
-public enum AccRtSessionType
+public enum AccSessionType
 {
     Unknown = -1,
     Practice = 0,

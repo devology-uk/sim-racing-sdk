@@ -1,6 +1,6 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Enums;
 
-public enum AccRtTrackGripStatus : int
+public enum AccTrackGripStatus
 {
     Green,
     Fast,
