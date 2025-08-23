@@ -54,25 +54,25 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.consoleLog.Write(message);
     }
 
-    private void OnNexFrame(AccTelemetryFrame accSharedMemoryFrame)
+    private void OnNextFrame(AccTelemetryFrame accSharedMemoryFrame)
     {
         this.Log(accSharedMemoryFrame.ToString());
     }
 
-    private void OnNexNewEvent(AccTelemetryEvent accSharedMemoryEvent)
+    private void OnNextNewEvent(AccTelemetryEvent accSharedMemoryEvent)
     {
         this.Log(accSharedMemoryEvent.ToString());
     }
 
-    private void OnNexNewLap(AccTelemetryLap accSharedMemoryLap)
+    private void OnNextNewLap(AccTelemetryLap accSharedMemoryLap)
     {
         this.Log(accSharedMemoryLap.ToString());
     }
 
     private void PrepareSharedMemoryMessageProcessing()
     {
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNexNewEvent));
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNexNewLap));
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.Frames.Subscribe(this.OnNexFrame));
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNextNewEvent));
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNextNewLap));
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.Frames.Subscribe(this.OnNextFrame));
     }
 }
