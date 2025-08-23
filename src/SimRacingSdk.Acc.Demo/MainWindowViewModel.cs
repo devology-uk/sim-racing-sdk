@@ -47,7 +47,7 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OpenFileLog()
+    private void OpenLogFolder()
     {
         var currentLogPath =
             $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\{DateTime.Now.Date:yyyy-MM-dd}\";
@@ -60,6 +60,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private async void StartSharedMemoryDemo()
     {
+        this.consoleLog.Clear();
         this.StopRunningDemos();
         this.IsRunningDemo = true;
         this.CheckCompatibility();
@@ -79,6 +80,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private async Task StartTelemetryOnlySharedDemo()
     {
+        this.consoleLog.Clear();
         this.StopRunningDemos();
         this.IsRunningDemo = true;
         this.CheckCompatibility();
@@ -99,6 +101,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private async void StartUdpDemo()
     {
+        this.consoleLog.Clear();
         this.StopRunningDemos();
         this.IsRunningDemo = true;
         this.CheckCompatibility();
@@ -184,7 +187,6 @@ public partial class MainWindowViewModel : ObservableObject
     private async Task WaitFormGame()
     {
         this.isDemoCancelled = false;
-        this.consoleLog.Clear();
         this.StartGameDetection();
         while(!this.isGameRunning)
         {
