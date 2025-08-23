@@ -11,8 +11,8 @@ public class TelemetryOnlyDemo : ITelemetryOnlyDemo
     private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<TelemetryOnlyDemo> logger;
-    private IAccTelemetryConnection accTelemetryConnection = null!;
-    private CompositeDisposable subscriptionSink = null!;
+    private IAccTelemetryConnection? accTelemetryConnection;
+    private CompositeDisposable? subscriptionSink;
 
     public TelemetryOnlyDemo(ILogger<TelemetryOnlyDemo> logger,
         IConsoleLog consoleLog,
@@ -28,14 +28,21 @@ public class TelemetryOnlyDemo : ITelemetryOnlyDemo
         this.Stop();
 
         this.Log("Starting Telemetry Only Demo...");
-        this.subscriptionSink = new CompositeDisposable();
         this.accTelemetryConnection = this.accTelemetryConnectionFactory.Create();
-        this.PrepareTelemetryMessageProcessing();
+        this.subscriptionSink = new CompositeDisposable
+        {
+            this.accTelemetryConnection.Frames.Subscribe(this.OnNexFrame)
+        };
         this.accTelemetryConnection.Start();
     }
 
     public void Stop()
     {
+        if(this.accTelemetryConnection == null)
+        {
+            return;
+        }
+
         this.Log("Stopping Telemetry Only Demo...");
         this.subscriptionSink?.Dispose();
         this.accTelemetryConnection?.Dispose();
@@ -57,10 +64,5 @@ public class TelemetryOnlyDemo : ITelemetryOnlyDemo
     private void OnNexFrame(AccTelemetryFrame accSharedMemoryFrame)
     {
         this.Log(accSharedMemoryFrame.ToString());
-    }
-
-    private void PrepareTelemetryMessageProcessing()
-    {
-        this.subscriptionSink.Add(this.accTelemetryConnection.Frames.Subscribe(this.OnNexFrame));
     }
 }
