@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SimRacingSdk.Acc.Core\SimRacingSdk.Acc.Core.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.Acc.Monitor\SimRacingSdk.Acc.Monitor.csproj" />
     <ProjectReference Include="..\SimRacingSdk.Acc.SharedMemory\SimRacingSdk.Acc.SharedMemory.csproj" />
     <ProjectReference Include="..\SimRacingSdk.Acc.Udp\SimRacingSdk.Acc.Udp.csproj" />
   </ItemGroup>

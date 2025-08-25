@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
-using SimRacingSdk.Acc.Core;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Demo.Controls.Console;
 using SimRacingSdk.Acc.Demo.Demos;
 using SimRacingSdk.Acc.Demo.Services;
+using SimRacingSdk.Acc.Monitor;
 using SimRacingSdk.Acc.SharedMemory;
 using SimRacingSdk.Acc.Udp;
 
@@ -57,9 +57,9 @@ public partial class App : Application
                                 builder.AddNLog();
                             });
 
-        services.UseAccSdk();
         services.UseAccUdp();
         services.UseAccSharedMemory();
+        services.UseAccMonitor();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -67,8 +67,7 @@ public partial class App : Application
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ITelemetryOnlyDemo, TelemetryOnlyDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
-
-        
+        services.AddTransient<IMonitorDemo, MonitorDemo>();
 
         return services.BuildServiceProvider();
     }
