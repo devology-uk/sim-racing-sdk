@@ -1,4 +1,9 @@
-﻿using System.Reactive.Disposables;
+﻿/*
+ * This demo shows how to use the AccUdpConnection to receive and process messages
+ * from the UDP Broadcasting interface provided by ACC.
+ */
+
+using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Demo.Abstractions;

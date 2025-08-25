@@ -1,4 +1,8 @@
-﻿using System.Reactive.Disposables;
+﻿/*
+ * This demo shows how to use the AccTelemetryConnection to receive and process telemetry frames
+ * via the shared memory interface provided by ACC.
+ */
+using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
