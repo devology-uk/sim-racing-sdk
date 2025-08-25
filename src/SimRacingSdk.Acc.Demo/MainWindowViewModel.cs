@@ -58,7 +58,7 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void StartSharedMemoryDemo()
+    private async Task StartSharedMemoryDemo()
     {
         this.consoleLog.Clear();
         this.StopRunningDemos();
@@ -99,7 +99,7 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void StartUdpDemo()
+    private async Task StartUdpDemo()
     {
         this.consoleLog.Clear();
         this.StopRunningDemos();

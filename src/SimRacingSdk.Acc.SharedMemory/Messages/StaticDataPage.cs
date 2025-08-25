@@ -96,7 +96,7 @@ public class StaticDataPage
         try
         {
             using var mappedFile = MemoryMappedFile.OpenExisting(StaticMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream();
+            using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
             stream.ReadExactly(buffer, 0, buffer.Length);
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             cachedPage = Marshal.PtrToStructure<StaticDataPage>(handle.AddrOfPinnedObject());

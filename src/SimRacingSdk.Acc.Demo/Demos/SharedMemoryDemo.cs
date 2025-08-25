@@ -16,8 +16,8 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<SharedMemoryDemo> logger;
-    private IAccSharedMemoryConnection accSharedMemoryConnection = null!;
-    private CompositeDisposable subscriptionSink = null!;
+    private IAccSharedMemoryConnection? accSharedMemoryConnection;
+    private CompositeDisposable? subscriptionSink;
 
     public SharedMemoryDemo(ILogger<SharedMemoryDemo> logger,
         IConsoleLog consoleLog,
@@ -35,7 +35,9 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.Log("Starting Shared Memory Demo...");
         this.subscriptionSink = new CompositeDisposable();
         this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
-        this.PrepareSharedMemoryMessageProcessing();
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNextNewEvent));
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNextNewLap));
+        this.subscriptionSink.Add(this.accSharedMemoryConnection.Frames.Subscribe(this.OnNextFrame));
         this.accSharedMemoryConnection.Start();
     }
 
@@ -59,25 +61,18 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.consoleLog.Write(message);
     }
 
-    private void OnNexFrame(AccTelemetryFrame accSharedMemoryFrame)
+    private void OnNextFrame(AccTelemetryFrame accSharedMemoryFrame)
     {
         this.Log(accSharedMemoryFrame.ToString());
     }
 
-    private void OnNexNewEvent(AccTelemetryEvent accSharedMemoryEvent)
+    private void OnNextNewEvent(AccTelemetryEvent accSharedMemoryEvent)
     {
         this.Log(accSharedMemoryEvent.ToString());
     }
 
-    private void OnNexNewLap(AccTelemetryLap accSharedMemoryLap)
+    private void OnNextNewLap(AccTelemetryLap accSharedMemoryLap)
     {
         this.Log(accSharedMemoryLap.ToString());
-    }
-
-    private void PrepareSharedMemoryMessageProcessing()
-    {
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNexNewEvent));
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNexNewLap));
-        this.subscriptionSink.Add(this.accSharedMemoryConnection.Frames.Subscribe(this.OnNexFrame));
     }
 }
