@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using SimRacingSdk.Acc.Core.Enums;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -63,7 +65,7 @@ public class AccUdpConnection : IAccUdpConnection
     public IObservable<BroadcastingEvent> GreenFlag => this.greenFlagSubject.AsObservable();
     public string IpAddress { get; }
     public IObservable<BroadcastingEvent> LapCompleted => this.lapCompletedSubject.AsObservable();
-    public IObservable<string> LogMessages => this.broadcastingMessageHandler.LogMessages;
+    public IObservable<LogMessage> LogMessages => this.broadcastingMessageHandler.LogMessages;
     public IObservable<BroadcastingEvent> PenaltyMessage => this.penaltyMessageSubject.AsObservable();
     public int Port { get; }
     public IObservable<RealtimeCarUpdate> RealTimeCarUpdates =>
@@ -94,7 +96,7 @@ public class AccUdpConnection : IAccUdpConnection
         }
         catch(Exception exception)
         {
-            this.LogMessage(exception.Message);
+            this.LogMessage(LoggingLevel.Error, exception.Message);
             Debug.WriteLine(exception.Message);
             throw;
         }
@@ -150,7 +152,7 @@ public class AccUdpConnection : IAccUdpConnection
             }
             catch(Exception exception)
             {
-                this.LogMessage(exception.Message);
+                this.LogMessage(LoggingLevel.Error, exception.Message);
                 Debug.WriteLine(exception);
             }
         }
@@ -168,7 +170,7 @@ public class AccUdpConnection : IAccUdpConnection
 
     private async Task HandleMessages()
     {
-        this.LogMessage("Processing messages from ACC...");
+        this.LogMessage(LoggingLevel.Information, "Processing messages from ACC...");
 
         while(!this.isStopped)
         {
@@ -176,9 +178,9 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void LogMessage(string message)
+    private void LogMessage(LoggingLevel level,  string message, object? data = null)
     {
-        this.broadcastingMessageHandler.LogMessage(message);
+        this.broadcastingMessageHandler.LogMessage(level, message, data);
     }
 
     private void OnNextBroadcastingEvent(BroadcastingEvent broadcastingEvent)
@@ -188,7 +190,7 @@ public class AccUdpConnection : IAccUdpConnection
             return;
         }
 
-        this.LogMessage(
+        this.LogMessage(LoggingLevel.Information,
             $"Broadcasting Event: {broadcastingEvent.BroadcastingEventType} - {broadcastingEvent.Message}");
 
         switch(broadcastingEvent.BroadcastingEventType)
@@ -222,7 +224,7 @@ public class AccUdpConnection : IAccUdpConnection
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
         this.isConnected = connectionState.IsConnected;
-        this.LogMessage($"Connection State Changed: {connectionState}");
+        this.LogMessage(LoggingLevel.Information, $"Connection State Changed: {connectionState}");
     }
 
     private void OnNextDispatchedMessage(byte[] message)
@@ -233,7 +235,7 @@ public class AccUdpConnection : IAccUdpConnection
         }
         catch(Exception exception)
         {
-            this.LogMessage(exception.Message);
+            this.LogMessage(LoggingLevel.Error, exception.Message);
             Debug.WriteLine(exception);
         }
     }
@@ -249,14 +251,14 @@ public class AccUdpConnection : IAccUdpConnection
         }
         catch(Exception exception)
         {
-            this.LogMessage($"Unexpected Error Processing Message: {exception.Message}");
+            this.LogMessage(LoggingLevel.Error, $"Unexpected Error Processing Message: {exception.Message}");
             this.Shutdown();
         }
     }
 
     private void Shutdown()
     {
-        this.LogMessage("Disconnecting from ACC Broadcasting API...");
+        this.LogMessage(LoggingLevel.Information, "Disconnecting from ACC Broadcasting API...");
         this.isStopped = true;
         this.broadcastingMessageHandler.Disconnect();
         this.subscriptionSink?.Dispose();
@@ -267,7 +269,7 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void WaitUntilRegistered()
     {
-        this.LogMessage("Waiting for ACC registration...");
+        this.LogMessage(LoggingLevel.Information, "Waiting for ACC registration...");
         var isRegistered = false;
         while(!isRegistered)
         {

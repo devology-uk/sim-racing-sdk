@@ -23,6 +23,7 @@ public class UdpDemo : IUdpDemo
 
     private IAccUdpConnection accUdpConnection = null!;
     private CompositeDisposable subscriptionSink = null!;
+    private bool isRunning = false;
 
     public UdpDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
@@ -55,14 +56,21 @@ public class UdpDemo : IUdpDemo
 
         this.PrepareBroadcastMessageHandling();
         this.accUdpConnection.Connect();
+        this.isRunning = true;
     }
 
     public void Stop()
     {
+        if(!this.isRunning)
+        {
+            return;
+        }
+
         this.Log("Stopping UDP Demo...");
         this.subscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null!;
+        this.isRunning = false;
     }
 
     public bool Validate()

@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using SimRacingSdk.Acc.Core.Enums;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Extensions;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -16,7 +18,7 @@ internal class AccUdpMessageHandler
     private readonly Subject<byte[]> dispatchedMessagesSubject = new();
     private readonly IList<CarInfo> entryList = new List<CarInfo>();
     private readonly Subject<EntryListUpdate> entryListUpdateSubject = new();
-    private readonly Subject<string> logMessagesSubject = new();
+    private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly Subject<RealtimeCarUpdate> realTimeCarUpdateSubject = new();
     private readonly Subject<RealtimeUpdate> realTimeUpdateSubject = new();
     private readonly Subject<TrackDataUpdate> trackDataUpdateSubject = new();
@@ -28,7 +30,7 @@ internal class AccUdpMessageHandler
         if(string.IsNullOrEmpty(connectionIdentifier))
         {
             throw new ArgumentException(
-                "No connection identifier provided.  A unique identifier is required for managing connections. IP Address and Port is a good identifier");
+                "No connection identifier provided.  A unique identifier is required for managing connections. IP Address and Port is a good identifier e.g. 127.0.0.1:9000");
         }
 
         this.ConnectionIdentifier = connectionIdentifier;
@@ -41,7 +43,7 @@ internal class AccUdpMessageHandler
         this.connectionStateChangeSubject.AsObservable();
     internal IObservable<byte[]> DispatchedMessages => this.dispatchedMessagesSubject.AsObservable();
     internal IObservable<EntryListUpdate> EntryListUpdates => this.entryListUpdateSubject.AsObservable();
-    internal IObservable<string> LogMessages => this.logMessagesSubject.AsObservable();
+    internal IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     internal IObservable<RealtimeCarUpdate> RealTimeCarUpdates =>
         this.realTimeCarUpdateSubject.AsObservable();
     internal IObservable<RealtimeUpdate> RealTimeUpdates => this.realTimeUpdateSubject.AsObservable();
@@ -88,9 +90,9 @@ internal class AccUdpMessageHandler
         this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
     }
 
-    internal void LogMessage(string message)
+    internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
     {
-        this.logMessagesSubject.OnNext(message);
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
     }
 
     internal void ProcessMessage(BinaryReader reader)
@@ -120,7 +122,7 @@ internal class AccUdpMessageHandler
                 this.ProcessTrackDataMessage(reader);
                 break;
             default:
-                this.LogMessage("Unknown message type");
+                this.LogMessage(LoggingLevel.Warning, "Unknown message type");
                 break;
         }
     }

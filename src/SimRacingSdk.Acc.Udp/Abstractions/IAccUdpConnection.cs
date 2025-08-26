@@ -1,4 +1,5 @@
-﻿using SimRacingSdk.Acc.Udp.Messages;
+﻿using SimRacingSdk.Acc.Core.Messages;
+using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Udp.Abstractions;
 
@@ -16,7 +17,7 @@ public interface IAccUdpConnection
     IObservable<BroadcastingEvent> GreenFlag { get; }
     string IpAddress { get; }
     IObservable<BroadcastingEvent> LapCompleted { get; }
-    IObservable<string> LogMessages { get; }
+    IObservable<LogMessage> LogMessages { get; }
     IObservable<BroadcastingEvent> PenaltyMessage { get; }
     int Port { get; }
     IObservable<RealtimeCarUpdate> RealTimeCarUpdates { get; }
