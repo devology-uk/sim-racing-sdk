@@ -27,6 +27,8 @@ public class AccTelemetryFrame
         this.DiscLifeFr = physicsData.DiscLife[1];
         this.DiscLifeRl = physicsData.DiscLife[2];
         this.DiscLifeRr = physicsData.DiscLife[3];
+        this.DriverFirstName = staticData.PlayerName;
+        this.DriverLastName = staticData.PlayerSurname;
         this.DriverDisplayName = $"{staticData.PlayerName[..1]}. {staticData.PlayerSurname}";
         this.DriverFullName = $"{staticData.PlayerName} {staticData.PlayerSurname}";
         this.FrontBrakeCompound = physicsData.FrontBrakeCompound;
@@ -102,6 +104,8 @@ public class AccTelemetryFrame
     public float DiscLifeFr { get; }
     public float DiscLifeRl { get; }
     public float DiscLifeRr { get; }
+    public string DriverFirstName { get; }
+    public string DriverLastName { get; }
     public string DriverDisplayName { get; }
     public string DriverFullName { get; }
     public int FrontBrakeCompound { get; }
