@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 namespace SimRacingSdk.Acc.Udp.Messages;
 
 public class TrackDataUpdate

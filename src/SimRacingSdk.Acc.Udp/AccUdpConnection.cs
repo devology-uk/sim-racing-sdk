@@ -82,6 +82,7 @@ public class AccUdpConnection : IAccUdpConnection
                 .Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
             this.broadcastingMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
+        this.subscriptionSink.Add(this.broadcastingMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
 
         try
         {
@@ -92,7 +93,6 @@ public class AccUdpConnection : IAccUdpConnection
 
             this.listenerTask = this.HandleMessages();
             this.broadcastingMessageHandler.RequestTrackData();
-            this.broadcastingMessageHandler.RequestEntryList();
         }
         catch(Exception exception)
         {
@@ -100,6 +100,12 @@ public class AccUdpConnection : IAccUdpConnection
             Debug.WriteLine(exception.Message);
             throw;
         }
+    }
+
+    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
+    {
+        this.LogMessage(LoggingLevel.Information, $"Track Data Update. {trackDataUpdate}");
+        this.broadcastingMessageHandler.RequestEntryList();
     }
 
     public void Dispose()
