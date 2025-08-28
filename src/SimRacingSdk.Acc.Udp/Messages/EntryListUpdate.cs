@@ -1,12 +1,12 @@
 ﻿namespace SimRacingSdk.Acc.Udp.Messages;
 
-public class EntryListUpdate(string sender, CarInfo carInfo)
+public class EntryListUpdate(string connectionIdentifier, CarInfo carInfo)
 {
     public CarInfo CarInfo { get; } = carInfo;
-    public string Sender { get; } = sender;
+    public string ConnectionIdentifier { get; } = connectionIdentifier;
 
     public override string ToString()
     {
-        return $"Entry List Update: Sender: {this.Sender}, Car Data: {this.CarInfo}";
+        return $"Entry List Update: Connection: {this.ConnectionIdentifier}, Car Data: {this.CarInfo}";
     }
 }
