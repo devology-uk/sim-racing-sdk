@@ -18,7 +18,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IAccTelemetryConnectionFactory, AccTelemetryConnectionFactory>();
         services.TryAddSingleton<IAccUdpConnectionFactory, AccUdpConnectionFactory>();
 
-        services.AddSingleton<IAccMonitor, AccMonitor>();
+        services.AddSingleton<IAccMonitorFactory, AccMonitorFactory>();
         return services;
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace SimRacingSdk.Acc.Monitor.Abstractions;
+﻿using SimRacingSdk.Acc.Core.Messages;
+
+namespace SimRacingSdk.Acc.Monitor.Abstractions;
 
 public interface IAccMonitor: IDisposable
 {
-    void Start();
+    void Start(string? connectionIdentifier = null);
     void Stop();
+    IObservable<LogMessage> LogMessages { get; }
 }

@@ -104,7 +104,7 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, $"Track Data Update. {trackDataUpdate}");
+        this.LogMessage(LoggingLevel.Information, "Requesting entry list...");
         this.broadcastingMessageHandler.RequestEntryList();
     }
 

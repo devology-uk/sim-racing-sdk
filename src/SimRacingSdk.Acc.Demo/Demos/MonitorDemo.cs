@@ -13,43 +13,74 @@
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Abstractions;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
+using SimRacingSdk.Acc.Monitor.Abstractions;
+using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.Udp.Abstractions;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
 
 public class MonitorDemo : IMonitorDemo
 {
-    private readonly IAccCompatibilityChecker accCompatibilityChecker;
-    private readonly IAccLocalConfigProvider accLocalConfigProvider;
-    private readonly IAccPathProvider accPathProvider;
-    private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<UdpDemo> logger;
 
-    private IAccUdpConnection accUdpConnection = null!;
-    private CompositeDisposable subscriptionSink = null!;
+    private CompositeDisposable? subscriptionSink;
+    private bool isRunning;
+    private readonly IAccMonitorFactory accMonitorFactory;
+    private IAccMonitor? accMonitor;
 
     public MonitorDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
-        IAccCompatibilityChecker accCompatibilityChecker,
-        IAccLocalConfigProvider accLocalConfigProvider,
-        IAccPathProvider accPathProvider,
-        IAccUdpConnectionFactory accUdpConnectionFactory)
+        IAccMonitorFactory accMonitorFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
-        this.accCompatibilityChecker = accCompatibilityChecker;
-        this.accLocalConfigProvider = accLocalConfigProvider;
-
-        this.accPathProvider = accPathProvider;
-        this.accUdpConnectionFactory = accUdpConnectionFactory;
+        this.accMonitorFactory = accMonitorFactory;
     }
-    public void Start() { }
-    public void Stop() { }
+
+    public void Start()
+    {
+        this.Stop();
+        this.Log("Starting ACC Monitor Demo...");
+        this.accMonitor = this.accMonitorFactory.Create("ACC Monitor Demo");
+        
+        this.subscriptionSink = new CompositeDisposable
+        {
+            this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage)
+        };
+
+        this.accMonitor.Start("ACC Monitor Demo");
+        this.isRunning = true;
+    }
+
+    public void Stop()
+    {
+        if(!this.isRunning)
+        {
+            return;
+        }
+
+        this.Log("Stopping ACC Monitor Demo...");
+        this.subscriptionSink?.Dispose();
+        this.accMonitor?.Stop();
+        this.isRunning = false;
+    }
 
     public bool Validate()
     {
         return false;
+    }
+
+    private void OnNextLogMessage(LogMessage logMessage)
+    {
+        this.Log(logMessage.ToString());
+    }
+     
+    private void Log(string message)
+    {
+        this.logger.LogInformation(message);
+        this.consoleLog.Write(message);
     }
 }
