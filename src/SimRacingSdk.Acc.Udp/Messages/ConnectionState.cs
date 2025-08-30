@@ -1,6 +1,8 @@
-﻿namespace SimRacingSdk.Acc.Udp.Messages;
+﻿#nullable disable
 
-public class ConnectionState
+namespace SimRacingSdk.Acc.Udp.Messages;
+
+public record ConnectionState
 {
     public ConnectionState(int connectionId, bool isConnected, bool isReadOnly, string error = null)
     {
@@ -10,15 +12,8 @@ public class ConnectionState
         this.Error = error;
     }
 
-    public int ConnectionId { get; }
-    public string Error { get; }
-    public bool IsConnected { get; }
-    public bool IsReadOnly { get; }
-
-    public override string ToString()
-    {
-        return string.IsNullOrWhiteSpace(this.Error)
-            ? $"Connection State: ID: {this.ConnectionId} Connected: {this.IsConnected} Read Only: {this.IsReadOnly}"
-            : $"Connection State: ID: {this.ConnectionId} ERROR: {this.Error}";
-    }
+    public int ConnectionId { get; init; }
+    public string Error { get; init; }
+    public bool IsConnected { get; init; }
+    public bool IsReadOnly { get; init; }
 }

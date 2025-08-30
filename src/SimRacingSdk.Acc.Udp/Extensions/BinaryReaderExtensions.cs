@@ -20,8 +20,57 @@ internal static class BinaryReaderExtensions
 
     internal static LapInfo ReadLap(this BinaryReader binaryReader)
     {
-        var lap = new LapInfo();
-        lap.UpdateFromReader(binaryReader);
+        var lap = new LapInfo
+        {
+            LapTimeMs = binaryReader.ReadInt32(),
+            CarIndex = binaryReader.ReadUInt16(),
+            DriverIndex = binaryReader.ReadUInt16(),
+            SplitCount = binaryReader.ReadByte()
+        };
+
+        var splits = new List<int?>();
+        for(var i = 0; i < lap.SplitCount; i++)
+        {
+            splits.Add(binaryReader.ReadInt32());
+        }
+        lap.Splits = splits;
+
+        lap.IsInvalid = binaryReader.ReadByte() > 0;
+        lap.IsValidForBest = binaryReader.ReadByte() > 0;
+
+        var isOutLap = binaryReader.ReadByte() > 0;
+        var isInLap = binaryReader.ReadByte() > 0;
+
+        if(isOutLap)
+        {
+            lap.LapType = LapType.Outlap;
+        }
+        else if(isInLap)
+        {
+            lap.LapType = LapType.Inlap;
+        }
+        else
+        {
+            lap.LapType = LapType.Regular;
+        }
+
+        while(lap.Splits.Count < 3)
+        {
+            lap.Splits.Add(null);
+        }
+
+        for(var i = 0; i < lap.Splits.Count; i++)
+        {
+            if(lap.Splits[i] == int.MaxValue)
+            {
+                lap.Splits[i] = 0;
+            }
+        }
+
+        if(lap.LapTimeMs == int.MaxValue)
+        {
+            lap.LapTimeMs = 0;
+        }
         return lap;
     }
 
@@ -136,7 +185,7 @@ internal static class BinaryReaderExtensions
         for(var camSet = 0; camSet < cameraSetCount; camSet++)
         {
             var camSetName = reader.ReadStr();
-            update.CameraSets.Add(camSetName, new List<string>());
+            update.CameraSets.Add(camSetName, []);
 
             var cameraCount = reader.ReadByte();
             for(var cam = 0; cam < cameraCount; cam++)

@@ -1,19 +1,14 @@
-﻿using SimRacingSdk.Acc.Udp.Enums;
-using SimRacingSdk.Core;
+﻿#nullable disable
+
+using SimRacingSdk.Acc.Udp.Enums;
 
 namespace SimRacingSdk.Acc.Udp.Messages;
 
-public class BroadcastingEvent
+public record BroadcastingEvent
 {
-    public BroadcastingEventType BroadcastingEventType { get; internal set; }
-    public CarInfo CarData { get; internal set; } = null!;
-    public int CarId { get; internal set; }
-    public string Message { get; internal set; } = null!;
-    public int TimeMs { get; internal set; }
-
-    public override string ToString()
-    {
-        return
-            $"Broadcasting Event: Type: {this.BroadcastingEventType} Time: {this.TimeMs.ToTimingStringFromMilliseconds()} Message: {this.Message} Car Data: {this.CarData}";
-    }
+    public BroadcastingEventType BroadcastingEventType { get; init; }
+    public CarInfo CarData { get; init; }
+    public int CarId { get; init; }
+    public string Message { get; init; }
+    public int TimeMs { get; init; }
 }
