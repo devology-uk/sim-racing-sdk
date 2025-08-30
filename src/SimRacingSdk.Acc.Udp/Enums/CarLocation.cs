@@ -1,4 +1,4 @@
-﻿namespace SimRacingSdk.Acc.Udp.Messages;
+﻿namespace SimRacingSdk.Acc.Udp.Enums;
 
 public enum CarLocation
 {
