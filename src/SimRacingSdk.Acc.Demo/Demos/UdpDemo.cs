@@ -22,9 +22,8 @@ public class UdpDemo : IUdpDemo
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<UdpDemo> logger;
 
-    private IAccUdpConnection accUdpConnection = null!;
+    private IAccUdpConnection? accUdpConnection;
     private CompositeDisposable subscriptionSink = null!;
-    private bool isRunning = false;
 
     public UdpDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
@@ -46,7 +45,6 @@ public class UdpDemo : IUdpDemo
     {
         this.Stop();
         this.Log("Starting UDP Demo...");
-        this.subscriptionSink = new CompositeDisposable();
 
         var broadcastSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
         this.accUdpConnection = this.accUdpConnectionFactory.Create("127.0.0.1",
@@ -57,12 +55,11 @@ public class UdpDemo : IUdpDemo
 
         this.PrepareBroadcastMessageHandling();
         this.accUdpConnection.Connect();
-        this.isRunning = true;
     }
 
     public void Stop()
     {
-        if(!this.isRunning)
+        if(this.accUdpConnection == null)
         {
             return;
         }
@@ -71,7 +68,6 @@ public class UdpDemo : IUdpDemo
         this.subscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null!;
-        this.isRunning = false;
     }
 
     public bool Validate()
@@ -130,16 +126,24 @@ public class UdpDemo : IUdpDemo
 
     private void PrepareBroadcastMessageHandling()
     {
-        this.subscriptionSink.Add(this.accUdpConnection.BroadcastingEvents.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate));
-        this.subscriptionSink.Add(
-            this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.LogMessages.Subscribe(this.OnNexLogMessage));
+        if(this.accUdpConnection == null)
+        {
+            return;
+        }
+
+        this.subscriptionSink = new CompositeDisposable()
+        {
+            this.accUdpConnection.BestPersonalLap.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.BestSessionLap.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
+            this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
+            this.accUdpConnection.GreenFlag.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.LapCompleted.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.PenaltyMessage.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
+            this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate),
+            this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate),
+            this.accUdpConnection.LogMessages.Subscribe(this.OnNexLogMessage)
+        };
     }
 }

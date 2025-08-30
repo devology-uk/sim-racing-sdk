@@ -43,6 +43,11 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     public void Stop()
     {
+        if(this.accSharedMemoryConnection == null)
+        {
+            return;
+        }
+
         this.Log("Stopping Shared Memory Demo...");
         this.subscriptionSink?.Dispose();
         this.accSharedMemoryConnection?.Dispose();
