@@ -56,7 +56,7 @@ public class AccUdpConnection : IAccUdpConnection
     public IObservable<LogMessage> LogMessages => this.broadcastingMessageHandler.LogMessages;
     public int Port { get; }
     public IObservable<RealtimeCarUpdate> RealTimeCarUpdates => this.broadcastingMessageHandler.RealTimeCarUpdates;
-    public IObservable<RealtimeUpdate> RealTimeUpdates => this.realTimeUpdatesSubject.AsObservable();
+    public IObservable<RealtimeUpdate> RealTimeUpdates => this.broadcastingMessageHandler.RealTimeUpdates;
     public IObservable<TrackDataUpdate> TrackDataUpdates => this.broadcastingMessageHandler.TrackDataUpdates;
     public int UpdateInterval { get; }
 
@@ -67,10 +67,6 @@ public class AccUdpConnection : IAccUdpConnection
                 .Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
             this.broadcastingMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
-        this.subscriptionSink.Add(
-            this.broadcastingMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
-        this.subscriptionSink.Add(
-            this.broadcastingMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
 
         try
         {
@@ -90,20 +86,21 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
-    {
-        if(!this.isConnected)
-        {
-            return;
-        }
-
-        this.realTimeUpdatesSubject.OnNext(realtimeUpdate);
-    }
 
     public void Dispose()
     {
         GC.SuppressFinalize(this);
         this.Dispose(true);
+    }
+
+    public void RequestTrackData()
+    {
+        this.broadcastingMessageHandler.RequestTrackData();
+    }
+
+    public void RequestEntryList()
+    {
+        this.broadcastingMessageHandler.RequestEntryList();
     }
 
     public void SetActiveCamera(string cameraSetName, string cameraName)
@@ -185,7 +182,7 @@ public class AccUdpConnection : IAccUdpConnection
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
         this.isConnected = connectionState.IsConnected;
-        this.LogMessage(LoggingLevel.Information, $"Connection State Changed: {connectionState}");
+        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
     }
 
     private void OnNextDispatchedMessage(byte[] message)
@@ -199,12 +196,6 @@ public class AccUdpConnection : IAccUdpConnection
             this.LogMessage(LoggingLevel.Error, exception.Message);
             Debug.WriteLine(exception);
         }
-    }
-
-    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
-    {
-        this.LogMessage(LoggingLevel.Information, "Requesting entry list...");
-        this.broadcastingMessageHandler.RequestEntryList();
     }
 
     private async Task ProcessNextMessage()
