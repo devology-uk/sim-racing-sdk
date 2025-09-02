@@ -133,13 +133,9 @@ public class UdpDemo : IUdpDemo
 
         this.subscriptionSink = new CompositeDisposable()
         {
-            this.accUdpConnection.BestPersonalLap.Subscribe(this.LogBroadcastingEvent),
-            this.accUdpConnection.BestSessionLap.Subscribe(this.LogBroadcastingEvent),
+            this.accUdpConnection.BroadcastingEvents.Subscribe(this.LogBroadcastingEvent),
             this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
-            this.accUdpConnection.GreenFlag.Subscribe(this.LogBroadcastingEvent),
-            this.accUdpConnection.LapCompleted.Subscribe(this.LogBroadcastingEvent),
-            this.accUdpConnection.PenaltyMessage.Subscribe(this.LogBroadcastingEvent),
             this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
             this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate),
             this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate),
