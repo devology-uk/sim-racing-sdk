@@ -21,6 +21,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
     private readonly ITelemetryOnlyDemo telemetryOnlyDemo;
+    private readonly IMonitorDemo monitorDemo;
     private readonly IUdpDemo udpDemo;
 
     private bool isGameRunning;
@@ -35,7 +36,8 @@ public partial class MainWindowViewModel : ObservableObject
         IAccGameDetector accGameDetector,
         IUdpDemo udpDemo,
         ISharedMemoryDemo sharedMemoryDemo,
-        ITelemetryOnlyDemo telemetryOnlyDemo)
+        ITelemetryOnlyDemo telemetryOnlyDemo,
+        IMonitorDemo monitorDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
@@ -44,6 +46,7 @@ public partial class MainWindowViewModel : ObservableObject
         this.udpDemo = udpDemo;
         this.sharedMemoryDemo = sharedMemoryDemo;
         this.telemetryOnlyDemo = telemetryOnlyDemo;
+        this.monitorDemo = monitorDemo;
     }
 
     [RelayCommand]
@@ -55,6 +58,28 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Process.Start("explorer.exe", currentLogPath);
         }
+    }
+
+    [RelayCommand]
+    private async Task StartMonitorDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.monitorDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitFormGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.monitorDemo.Start();
     }
 
     [RelayCommand]

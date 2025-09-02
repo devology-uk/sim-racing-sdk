@@ -78,7 +78,7 @@ public class AccMonitor : IAccMonitor
             broadcastingSettings.ConnectionPassword,
             broadcastingSettings.CommandPassword);
 
-        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC Shared Memory interface.");
+        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC Shared Memory interface for telemetry.");
         this.accTelemetryConnection = this.accTelemetryConnectionFactory.Create();
 
         this.PrepareMessageProcessing();
@@ -118,11 +118,22 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, $"Received Track Data Update: {trackDataUpdate}");
+        this.LogMessage(LoggingLevel.Information, trackDataUpdate.ToString());
         this.currentEvent = new AccEvent(trackDataUpdate.TrackId,
             trackDataUpdate.TrackName,
             trackDataUpdate.TrackMeters);
         this.currentEventSubject.OnNext(this.currentEvent);
+    }
+
+    private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
+    {
+
+    }
+
+    private void OnNextConnectionStateChange(ConnectionState connectionState)
+    {
+        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
+        this.connectionStateChangesSubject.OnNext(connectionState);
     }
 
     private void PrepareMessageProcessing()
@@ -130,17 +141,17 @@ public class AccMonitor : IAccMonitor
         this.subscriptionSink = new CompositeDisposable
         {
             this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
-            this.accUdpConnection!.ConnectionStateChanges.Subscribe(
-                m => this.connectionStateChangesSubject.OnNext(m)),
+            this.accUdpConnection!.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
             this.accUdpConnection!.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),
+            this.accUdpConnection!.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
             this.accUdpConnection!.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
         };
     }
     private  void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, $"Received Entry List Update: {entryListUpdate}");
-        var accEventEntry = new AccEventEntry
+        this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
+        var eventEntry = new AccEventEntry
         {
             Car = entryListUpdate.CarInfo,
 
