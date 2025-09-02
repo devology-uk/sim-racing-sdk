@@ -4,7 +4,7 @@ using SimRacingSdk.Acc.Core.Enums;
 
 namespace SimRacingSdk.Acc.Udp.Messages;
 
-public class RealtimeUpdate
+public record RealtimeUpdate
 {
     public TimeSpan ActualRemainingTime =>
         this.RemainingTime.TotalMilliseconds > 0? this.RemainingTime: this.SessionRemainingTime;
