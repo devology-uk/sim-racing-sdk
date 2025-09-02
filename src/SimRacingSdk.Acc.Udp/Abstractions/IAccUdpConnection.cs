@@ -5,24 +5,18 @@ namespace SimRacingSdk.Acc.Udp.Abstractions;
 
 public interface IAccUdpConnection
 {
-    IObservable<BroadcastingEvent> Accident { get; }
-    IObservable<BroadcastingEvent> BestPersonalLap { get; }
-    IObservable<BroadcastingEvent> BestSessionLap { get; }
+    IObservable<BroadcastingEvent> BroadcastingEvents { get; }
     string CommandPassword { get; }
     string ConnectionIdentifier { get; }
     string ConnectionPassword { get; }
     IObservable<ConnectionState> ConnectionStateChanges { get; }
     string DisplayName { get; }
     IObservable<EntryListUpdate> EntryListUpdates { get; }
-    IObservable<BroadcastingEvent> GreenFlag { get; }
     string IpAddress { get; }
-    IObservable<BroadcastingEvent> LapCompleted { get; }
     IObservable<LogMessage> LogMessages { get; }
-    IObservable<BroadcastingEvent> PenaltyMessage { get; }
     int Port { get; }
     IObservable<RealtimeCarUpdate> RealTimeCarUpdates { get; }
     IObservable<RealtimeUpdate> RealTimeUpdates { get; }
-    IObservable<BroadcastingEvent> SessionOver { get; }
     IObservable<TrackDataUpdate> TrackDataUpdates { get; }
     int UpdateInterval { get; }
     void Connect(bool autoDetect = true);

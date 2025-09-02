@@ -16,15 +16,9 @@ namespace SimRacingSdk.Acc.Udp;
 
 public class AccUdpConnection : IAccUdpConnection
 {
-    private readonly Subject<BroadcastingEvent> accidentSubject = new();
-    private readonly Subject<BroadcastingEvent> bestPersonalLapSubject = new();
-    private readonly Subject<BroadcastingEvent> bestSessionLapSubject = new();
     private readonly AccUdpMessageHandler broadcastingMessageHandler;
-    private readonly Subject<BroadcastingEvent> greenFlagSubject = new();
+    private readonly Subject<RealtimeUpdate> realTimeUpdatesSubject = new();
     private readonly IPEndPoint ipEndPoint;
-    private readonly Subject<BroadcastingEvent> lapCompletedSubject = new();
-    private readonly Subject<BroadcastingEvent> penaltyMessageSubject = new();
-    private readonly Subject<BroadcastingEvent> sessionOverSubject = new();
     private readonly CompositeDisposable subscriptionSink = new();
     private bool isConnected;
     private bool isDisposed;
@@ -49,29 +43,20 @@ public class AccUdpConnection : IAccUdpConnection
         this.ipEndPoint = IPEndPoint.Parse(this.ConnectionIdentifier);
 
         this.broadcastingMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
-        this.subscriptionSink.Add(this.broadcastingMessageHandler.BroadcastingEvents.Subscribe(this.OnNextBroadcastingEvent));
     }
 
-    public IObservable<BroadcastingEvent> Accident => this.accidentSubject.AsObservable();
-    public IObservable<BroadcastingEvent> BestPersonalLap => this.bestPersonalLapSubject.AsObservable();
-    public IObservable<BroadcastingEvent> BestSessionLap => this.bestSessionLapSubject.AsObservable();
+    public IObservable<BroadcastingEvent> BroadcastingEvents => this.broadcastingMessageHandler.BroadcastingEvents.AsObservable();
     public string CommandPassword { get; }
     public string ConnectionIdentifier { get; }
     public string ConnectionPassword { get; }
-    public IObservable<ConnectionState> ConnectionStateChanges =>
-        this.broadcastingMessageHandler.ConnectionStateChanges;
+    public IObservable<ConnectionState> ConnectionStateChanges => this.broadcastingMessageHandler.ConnectionStateChanges;
     public string DisplayName { get; }
     public IObservable<EntryListUpdate> EntryListUpdates => this.broadcastingMessageHandler.EntryListUpdates;
-    public IObservable<BroadcastingEvent> GreenFlag => this.greenFlagSubject.AsObservable();
     public string IpAddress { get; }
-    public IObservable<BroadcastingEvent> LapCompleted => this.lapCompletedSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.broadcastingMessageHandler.LogMessages;
-    public IObservable<BroadcastingEvent> PenaltyMessage => this.penaltyMessageSubject.AsObservable();
     public int Port { get; }
-    public IObservable<RealtimeCarUpdate> RealTimeCarUpdates =>
-        this.broadcastingMessageHandler.RealTimeCarUpdates;
-    public IObservable<RealtimeUpdate> RealTimeUpdates => this.broadcastingMessageHandler.RealTimeUpdates;
-    public IObservable<BroadcastingEvent> SessionOver => this.sessionOverSubject.AsObservable();
+    public IObservable<RealtimeCarUpdate> RealTimeCarUpdates => this.broadcastingMessageHandler.RealTimeCarUpdates;
+    public IObservable<RealtimeUpdate> RealTimeUpdates => this.realTimeUpdatesSubject.AsObservable();
     public IObservable<TrackDataUpdate> TrackDataUpdates => this.broadcastingMessageHandler.TrackDataUpdates;
     public int UpdateInterval { get; }
 
@@ -82,7 +67,10 @@ public class AccUdpConnection : IAccUdpConnection
                 .Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
             this.broadcastingMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
-        this.subscriptionSink.Add(this.broadcastingMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
+        this.subscriptionSink.Add(
+            this.broadcastingMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
+        this.subscriptionSink.Add(
+            this.broadcastingMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
 
         try
         {
@@ -102,10 +90,14 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
+    private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, "Requesting entry list...");
-        this.broadcastingMessageHandler.RequestEntryList();
+        if(!this.isConnected)
+        {
+            return;
+        }
+
+        this.realTimeUpdatesSubject.OnNext(realtimeUpdate);
     }
 
     public void Dispose()
@@ -184,48 +176,11 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void LogMessage(LoggingLevel level,  string message, object? data = null)
+    private void LogMessage(LoggingLevel level, string message, object? data = null)
     {
         this.broadcastingMessageHandler.LogMessage(level, message, data);
     }
-
-    private void OnNextBroadcastingEvent(BroadcastingEvent broadcastingEvent)
-    {
-        if(broadcastingEvent == null)
-        {
-            return;
-        }
-
-        this.LogMessage(LoggingLevel.Information,
-            $"Broadcasting Event: {broadcastingEvent.BroadcastingEventType} - {broadcastingEvent.Message}");
-
-        switch(broadcastingEvent.BroadcastingEventType)
-        {
-            case BroadcastingEventType.GreenFlag:
-                this.greenFlagSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.SessionOver:
-                this.sessionOverSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.PenaltyCommMsg:
-                this.penaltyMessageSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.Accident:
-                this.accidentSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.LapCompleted:
-                this.lapCompletedSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.BestSessionLap:
-                this.bestSessionLapSubject.OnNext(broadcastingEvent);
-                break;
-            case BroadcastingEventType.BestPersonalLap:
-                this.bestPersonalLapSubject.OnNext(broadcastingEvent);
-                break;
-            default:
-                break;
-        }
-    }
+    
 
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
@@ -244,6 +199,12 @@ public class AccUdpConnection : IAccUdpConnection
             this.LogMessage(LoggingLevel.Error, exception.Message);
             Debug.WriteLine(exception);
         }
+    }
+
+    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
+    {
+        this.LogMessage(LoggingLevel.Information, "Requesting entry list...");
+        this.broadcastingMessageHandler.RequestEntryList();
     }
 
     private async Task ProcessNextMessage()

@@ -6,6 +6,7 @@
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Abstractions;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -97,9 +98,9 @@ public class UdpDemo : IUdpDemo
         this.Log(broadcastingEvent.ToString());
     }
 
-    private void OnNexLogMessage(string message)
+    private void OnNexLogMessage(LogMessage logMessage)
     {
-        this.Log(message);
+        this.Log(logMessage.ToString());
     }
 
     private void OnNextConnectionStateChange(ConnectionState connectionState)
@@ -129,15 +130,11 @@ public class UdpDemo : IUdpDemo
 
     private void PrepareBroadcastMessageHandling()
     {
-        this.subscriptionSink.Add(this.accUdpConnection.BestPersonalLap.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.BestSessionLap.Subscribe(this.LogBroadcastingEvent));
+        this.subscriptionSink.Add(this.accUdpConnection.BroadcastingEvents.Subscribe(this.LogBroadcastingEvent));
         this.subscriptionSink.Add(
             this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate));
-        this.subscriptionSink.Add(this.accUdpConnection.GreenFlag.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.LapCompleted.Subscribe(this.LogBroadcastingEvent));
-        this.subscriptionSink.Add(this.accUdpConnection.PenaltyMessage.Subscribe(this.LogBroadcastingEvent));
         this.subscriptionSink.Add(
             this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate));
         this.subscriptionSink.Add(this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate));
