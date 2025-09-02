@@ -37,7 +37,7 @@ public class AccMonitorFactory : IAccMonitorFactory
             AccLocalConfigProvider.Instance,
             AccCarInfoProvider.Instance);
 
-    public IAccMonitor Create(string? connectionIdentifier = null)
+    public IAccMonitor Create()
     {
         return new AccMonitor(this.accUdpConnectionFactory,
             this.accTelemetryConnectionFactory,

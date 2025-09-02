@@ -2,5 +2,5 @@
 
 public interface IAccMonitorFactory
 {
-    IAccMonitor Create(string? connectionIdentifier = null);
+    IAccMonitor Create();
 }
