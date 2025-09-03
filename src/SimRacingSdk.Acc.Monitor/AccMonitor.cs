@@ -10,6 +10,7 @@ using SimRacingSdk.Acc.Monitor.Exceptions;
 using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.Udp.Abstractions;
+using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Monitor;
@@ -17,40 +18,49 @@ namespace SimRacingSdk.Acc.Monitor;
 public class AccMonitor : IAccMonitor
 {
     private const string LocalhostIpAddress = "127.0.0.1";
-
+    private readonly IAccCarInfoProvider accCarInfoProvider;
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
-    private readonly IAccCarInfoProvider accCarInfoProvider;
+    private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly Subject<ConnectionState> connectionStateChangesSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly ReplaySubject<AccEvent> currentEventSubject = new();
+    private readonly List<AccEventEntry> entryList = [];
+    private readonly Subject<IList<AccEventEntry>> entryListSubject = new();
+    private readonly Subject<AccEvent> eventEndedSubject = new();
+    private readonly Subject<AccEventEntry> eventEntriesSubject = new();
+    private readonly Subject<LogMessage> logMessagesSubject = new();
+
+    private readonly Subject<AccSession> sessionUpdatesSubject = new();
 
     private IAccTelemetryConnection? accTelemetryConnection;
     private IAccUdpConnection? accUdpConnection;
-    private CompositeDisposable? subscriptionSink;
     private AccEvent? currentEvent;
+    private AccSession? currentSession;
+    private CompositeDisposable? subscriptionSink;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
-        IAccCarInfoProvider accCarInfoProvider)
+        IAccCarInfoProvider accCarInfoProvider,
+        IAccNationalityInfoProvider accNationalityInfoProvider)
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
         this.accTelemetryConnectionFactory = accTelemetryConnectionFactory;
         this.accCompatibilityChecker = accCompatibilityChecker;
         this.accLocalConfigProvider = accLocalConfigProvider;
         this.accCarInfoProvider = accCarInfoProvider;
+        this.accNationalityInfoProvider = accNationalityInfoProvider;
     }
 
-    public IObservable<ConnectionState> ConnectionStateChanges =>
-        this.connectionStateChangesSubject.AsObservable();
-
-    public IObservable<AccEvent> CurrentEvent => this.currentEventSubject.AsObservable();
-
+    public IObservable<IList<AccEventEntry>> EntryList => this.entryListSubject.AsObservable();
+    public IObservable<AccEvent> EventEnded => this.eventEndedSubject.AsObservable();
+    public IObservable<AccEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
+    public IObservable<AccEvent> EventStarted => this.currentEventSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<AccSession> SessionUpdates => this.sessionUpdatesSubject.AsObservable();
 
     public void Dispose()
     {
@@ -78,7 +88,8 @@ public class AccMonitor : IAccMonitor
             broadcastingSettings.ConnectionPassword,
             broadcastingSettings.CommandPassword);
 
-        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC Shared Memory interface for telemetry.");
+        this.LogMessage(LoggingLevel.Information,
+            "Preparing connection to ACC Shared Memory interface for telemetry.");
         this.accTelemetryConnection = this.accTelemetryConnectionFactory.Create();
 
         this.PrepareMessageProcessing();
@@ -110,10 +121,75 @@ public class AccMonitor : IAccMonitor
         this.logMessagesSubject.OnNext(new LogMessage(level, message, data));
     }
 
+    private void OnNextConnectionStateChange(ConnectionState connectionState)
+    {
+        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
+        if(connectionState.IsConnected)
+        {
+            this.accUdpConnection?.RequestTrackData();
+        }
+        else if(this.currentEvent != null)
+        {
+            this.eventEndedSubject.OnNext(this.currentEvent);
+        }
+    }
+
+    private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
+    {
+        this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
+        var carInfo = entryListUpdate.CarInfo;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriverEntry(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+        var eventEntry = new AccEventEntry
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            Drivers = drivers,
+            EventId = this.currentEvent!.Id,
+            Index = carInfo.CarIndex,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.entryList.Add(eventEntry);
+        this.eventEntriesSubject.OnNext(eventEntry);
+        this.entryListSubject.OnNext(this.entryList);
+    }
+
+    private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate) { }
+
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
         var sessionPhase = realtimeUpdate.Phase.ToFriendlyName();
+
+        if(this.currentSession?.SessionType != sessionType)
+        {
+            this.currentSession = new AccSession(this.currentEvent?.Id, sessionType)
+            {
+                Phase = sessionPhase
+            };
+            this.sessionUpdatesSubject.OnNext(this.currentSession);
+            return;
+        }
+
+        if(this.currentSession?.Phase == sessionPhase)
+        {
+            return;
+        }
+
+        this.currentSession!.Phase = sessionPhase;
+        this.sessionUpdatesSubject.OnNext(this.currentSession);
     }
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
@@ -123,17 +199,9 @@ public class AccMonitor : IAccMonitor
             trackDataUpdate.TrackName,
             trackDataUpdate.TrackMeters);
         this.currentEventSubject.OnNext(this.currentEvent);
-    }
-
-    private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
-    {
-
-    }
-
-    private void OnNextConnectionStateChange(ConnectionState connectionState)
-    {
-        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
-        this.connectionStateChangesSubject.OnNext(connectionState);
+        this.entryList.Clear();
+        this.entryListSubject.OnNext(this.entryList);
+        this.accUdpConnection?.RequestEntryList();
     }
 
     private void PrepareMessageProcessing()
@@ -147,15 +215,5 @@ public class AccMonitor : IAccMonitor
             this.accUdpConnection!.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
             this.accUdpConnection!.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
         };
-    }
-    private  void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
-    {
-        this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
-        var eventEntry = new AccEventEntry
-        {
-            Car = entryListUpdate.CarInfo,
-
-        };
-
     }
 }

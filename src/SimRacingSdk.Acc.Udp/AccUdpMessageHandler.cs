@@ -81,10 +81,17 @@ internal class AccUdpMessageHandler
     {
         if(sendUnregister)
         {
-            using var stream = new MemoryStream();
-            using var writer = new BinaryWriter(stream);
-            writer.Write((byte)OutboundMessageTypes.UnregisterCommandApplication);
-            this.DispatchMessage(stream.ToArray());
+            try
+            {
+                using var stream = new MemoryStream();
+                using var writer = new BinaryWriter(stream);
+                writer.Write((byte)OutboundMessageTypes.UnregisterCommandApplication);
+                this.DispatchMessage(stream.ToArray());
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));

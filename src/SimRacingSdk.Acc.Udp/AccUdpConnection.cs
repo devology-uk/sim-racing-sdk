@@ -16,6 +16,7 @@ namespace SimRacingSdk.Acc.Udp;
 
 public class AccUdpConnection : IAccUdpConnection
 {
+    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
     private readonly AccUdpMessageHandler broadcastingMessageHandler;
     private readonly Subject<RealtimeUpdate> realTimeUpdatesSubject = new();
     private readonly IPEndPoint ipEndPoint;
@@ -201,10 +202,22 @@ public class AccUdpConnection : IAccUdpConnection
     {
         try
         {
-            var udpReceiveResult = await this.udpClient.ReceiveAsync()!;
-            await using var stream = new MemoryStream(udpReceiveResult.Buffer);
-            using var reader = new BinaryReader(stream);
-            this.broadcastingMessageHandler.ProcessMessage(reader);
+            var asyncResult = this.udpClient.BeginReceive(null, null);
+            asyncResult.AsyncWaitHandle.WaitOne(this.messageTimeout);
+            if(asyncResult.IsCompleted)
+            {
+                IPEndPoint remoteEP = null;
+                var receivedData = this.udpClient.EndReceive(asyncResult, ref remoteEP);
+                await using var stream = new MemoryStream(receivedData);
+                using var reader = new BinaryReader(stream);
+                this.broadcastingMessageHandler.ProcessMessage(reader);
+            }
+            else
+            {
+                this.LogMessage(LoggingLevel.Information, "ACC has stopped sending messages, the user has probably quit the session.");
+                this.Shutdown();
+            }
+           
         }
         catch(Exception exception)
         {

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Monitor.Abstractions;
+using SimRacingSdk.Acc.Monitor.Messages;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
 
@@ -42,7 +43,15 @@ public class MonitorDemo : IMonitorDemo
 
         this.subscriptionSink = new CompositeDisposable
         {
-            this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage)
+            this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
+            this.accMonitor.EventEnded.Subscribe(this.OnNextEventEnded),
+
+            // usually you would only subscribe to one of the next two, but both are shown here for demonstration purposes
+            this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
+            this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
+
+            this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.accMonitor.SessionUpdates.Subscribe(this.OnNextSessionUpdate)
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
@@ -63,7 +72,7 @@ public class MonitorDemo : IMonitorDemo
 
     public bool Validate()
     {
-        return false;
+        return true;
     }
 
     private void Log(string message)
@@ -72,8 +81,37 @@ public class MonitorDemo : IMonitorDemo
         this.consoleLog.Write(message);
     }
 
+    private void OnNextEntryList(IList<AccEventEntry> entryList)
+    {
+        this.Log("Entry List Updated:");
+        foreach(var entry in entryList)
+        {
+            this.Log(entry.ToString());
+        }
+    }
+
+    private void OnNextEventEnded(AccEvent accEvent)
+    {
+        this.Log($"Event Ended: {accEvent}");
+    }
+
+    private void OnNextEventEntry(AccEventEntry accEventEntry)
+    {
+        this.Log(accEventEntry.ToString());
+    }
+
+    private void OnNextEventStarted(AccEvent accEvent)
+    {
+        this.Log($"Event Started: {accEvent}");
+    }
+
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.Log(logMessage.ToString());
+    }
+
+    private void OnNextSessionUpdate(AccSession accSession)
+    {
+        this.Log(accSession.ToString());
     }
 }
