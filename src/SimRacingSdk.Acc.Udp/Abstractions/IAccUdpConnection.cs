@@ -26,4 +26,6 @@ public interface IAccUdpConnection
     void SetFocus(int carIndex);
     void SetHudPage(string hudPage);
     void Stop();
+    void RequestTrackData();
+    void RequestEntryList();
 }

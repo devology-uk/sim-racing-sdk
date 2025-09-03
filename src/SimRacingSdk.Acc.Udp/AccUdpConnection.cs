@@ -76,7 +76,6 @@ public class AccUdpConnection : IAccUdpConnection
             }
 
             this.listenerTask = this.HandleMessages();
-            this.broadcastingMessageHandler.RequestTrackData();
         }
         catch(Exception exception)
         {
