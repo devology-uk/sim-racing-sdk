@@ -6,6 +6,5 @@ public record AccSession(string EventId, string SessionType)
 {
     public string Id { get; } = Guid.NewGuid()
                                     .ToString();
-    public string Phase { get; internal set; }
 
 }

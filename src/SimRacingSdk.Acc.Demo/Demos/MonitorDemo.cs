@@ -51,7 +51,10 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
 
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
-            this.accMonitor.SessionUpdates.Subscribe(this.OnNextSessionUpdate)
+            this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
+            this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
+            this.accMonitor.PhaseStarted.Subscribe(this.OnNextPhaseStarted),
+            this.accMonitor.PhaseEnded.Subscribe(this.OnNextPhaseEnded)
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
@@ -110,8 +113,23 @@ public class MonitorDemo : IMonitorDemo
         this.Log(logMessage.ToString());
     }
 
-    private void OnNextSessionUpdate(AccSession accSession)
+    private void OnNextSessionStarted(AccSession accSession)
     {
         this.Log(accSession.ToString());
+    }
+
+    private void OnNextSessionEnded(AccSession accSession)
+    {
+        this.Log(accSession.ToString());
+    }
+
+    private void OnNextPhaseStarted(AccSessionPhase accSessionPhase)
+    {
+        this.Log(accSessionPhase.ToString());
+    }
+
+    private void OnNextPhaseEnded(AccSessionPhase accSessionPhase)
+    {
+        this.Log(accSessionPhase.ToString());
     }
 }

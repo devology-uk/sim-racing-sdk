@@ -24,21 +24,23 @@ public class AccMonitor : IAccMonitor
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
-    private readonly Subject<ConnectionState> connectionStateChangesSubject = new();
-    private readonly ReplaySubject<AccEvent> currentEventSubject = new();
+    private readonly ReplaySubject<AccEvent> eventStartedSubject = new();
     private readonly List<AccEventEntry> entryList = [];
-    private readonly Subject<IList<AccEventEntry>> entryListSubject = new();
-    private readonly Subject<AccEvent> eventEndedSubject = new();
-    private readonly Subject<AccEventEntry> eventEntriesSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
-
-    private readonly Subject<AccSession> sessionUpdatesSubject = new();
+    private readonly ReplaySubject<IList<AccEventEntry>> entryListSubject = new();
+    private readonly ReplaySubject<AccEvent> eventEndedSubject = new();
+    private readonly ReplaySubject<AccEventEntry> eventEntriesSubject = new();
+    private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
+    private readonly ReplaySubject<AccSession> sessionStartedSubject = new();
+    private readonly ReplaySubject<AccSession> sessionEndedSubject = new();
+    private readonly ReplaySubject<AccSessionPhase> phaseStartedSubject = new();
+    private readonly ReplaySubject<AccSessionPhase> phaseEndedSubject = new();
 
     private IAccTelemetryConnection? accTelemetryConnection;
     private IAccUdpConnection? accUdpConnection;
     private AccEvent? currentEvent;
     private AccSession? currentSession;
     private CompositeDisposable? subscriptionSink;
+    private AccSessionPhase? currentPhase;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
@@ -58,9 +60,12 @@ public class AccMonitor : IAccMonitor
     public IObservable<IList<AccEventEntry>> EntryList => this.entryListSubject.AsObservable();
     public IObservable<AccEvent> EventEnded => this.eventEndedSubject.AsObservable();
     public IObservable<AccEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
-    public IObservable<AccEvent> EventStarted => this.currentEventSubject.AsObservable();
+    public IObservable<AccEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
-    public IObservable<AccSession> SessionUpdates => this.sessionUpdatesSubject.AsObservable();
+    public IObservable<AccSession> SessionStarted => this.sessionStartedSubject.AsObservable();
+    public IObservable<AccSession> SessionEnded => this.sessionEndedSubject.AsObservable();
+    public IObservable<AccSessionPhase> PhaseStarted => this.phaseStartedSubject.AsObservable();
+    public IObservable<AccSessionPhase> PhaseEnded => this.phaseEndedSubject.AsObservable();
 
     public void Dispose()
     {
@@ -71,7 +76,7 @@ public class AccMonitor : IAccMonitor
     public void Start(string? connectionIdentifier = null)
     {
         this.LogMessage(LoggingLevel.Information,
-            $"Starting ACC Monitor connection wit ID: {connectionIdentifier}");
+            $"Starting ACC Monitor connection with ID: {connectionIdentifier}");
 
         if(!this.accCompatibilityChecker.HasValidBroadcastingSettings())
         {
@@ -170,26 +175,39 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
+        this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
+
+        if(this.currentEvent == null)
+        {
+            return;
+        }
+
         var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
         var sessionPhase = realtimeUpdate.Phase.ToFriendlyName();
 
         if(this.currentSession?.SessionType != sessionType)
         {
-            this.currentSession = new AccSession(this.currentEvent?.Id, sessionType)
+            if(this.currentSession != null)
             {
-                Phase = sessionPhase
-            };
-            this.sessionUpdatesSubject.OnNext(this.currentSession);
-            return;
+                this.sessionEndedSubject.OnNext(this.currentSession);
+            }
+            this.currentSession = new AccSession(this.currentEvent.Id, sessionType);
+            this.sessionStartedSubject.OnNext(this.currentSession);
         }
 
-        if(this.currentSession?.Phase == sessionPhase)
+        if(this.currentSession == null || this.currentPhase?.Phase == sessionPhase)
         {
             return;
         }
 
-        this.currentSession!.Phase = sessionPhase;
-        this.sessionUpdatesSubject.OnNext(this.currentSession);
+        if(this.currentPhase != null)
+        {
+            this.phaseEndedSubject.OnNext(this.currentPhase);
+        }
+
+        this.currentPhase =
+            new AccSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
+        this.phaseStartedSubject.OnNext(this.currentPhase);
     }
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
@@ -198,7 +216,7 @@ public class AccMonitor : IAccMonitor
         this.currentEvent = new AccEvent(trackDataUpdate.TrackId,
             trackDataUpdate.TrackName,
             trackDataUpdate.TrackMeters);
-        this.currentEventSubject.OnNext(this.currentEvent);
+        this.eventStartedSubject.OnNext(this.currentEvent);
         this.entryList.Clear();
         this.entryListSubject.OnNext(this.entryList);
         this.accUdpConnection?.RequestEntryList();
