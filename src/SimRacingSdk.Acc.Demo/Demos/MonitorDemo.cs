@@ -16,6 +16,7 @@ using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Messages;
+using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
 
@@ -43,18 +44,26 @@ public class MonitorDemo : IMonitorDemo
 
         this.subscriptionSink = new CompositeDisposable
         {
-            this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
-            this.accMonitor.EventEnded.Subscribe(this.OnNextEventEnded),
+            this.accMonitor.Accidents.Subscribe(this.OnNextAccident),
+            this.accMonitor.CompletedLaps.Subscribe(this.OnNextCompletedLap),
 
             // usually you would only subscribe to one of the next two, but both are shown here for demonstration purposes
-            this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
+            this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
 
+            this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
+            this.accMonitor.EventEnded.Subscribe(this.OnNextEventEnded),
+            this.accMonitor.GreenFlag.Subscribe(this.OnNextGreenFlag),
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
-            this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
-            this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
+            this.accMonitor.Penalties.Subscribe(this.OnNextPenalty),
+            this.accMonitor.PersonalBestLap.Subscribe(this.OnNextPersonalBestLap),
             this.accMonitor.PhaseStarted.Subscribe(this.OnNextPhaseStarted),
-            this.accMonitor.PhaseEnded.Subscribe(this.OnNextPhaseEnded)
+            this.accMonitor.PhaseEnded.Subscribe(this.OnNextPhaseEnded),
+            this.accMonitor.RealtimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
+            this.accMonitor.SessionBestLap.Subscribe(this.OnNextSessionBestLap),
+            this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
+            this.accMonitor.SessionOver.Subscribe(this.OnNextSessionOver),
+            this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted)
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
@@ -84,6 +93,16 @@ public class MonitorDemo : IMonitorDemo
         this.consoleLog.Write(message);
     }
 
+    private void OnNextAccident(AccAccident accident)
+    {
+        this.Log(accident.ToString());
+    }
+
+    private void OnNextCompletedLap(AccLap accLap)
+    {
+        this.Log(accLap.ToString());
+    }
+
     private void OnNextEntryList(IList<AccEventEntry> entryList)
     {
         this.Log("Entry List Updated:");
@@ -108,19 +127,29 @@ public class MonitorDemo : IMonitorDemo
         this.Log($"Event Started: {accEvent}");
     }
 
+    private void OnNextGreenFlag(AccGreenFlag accGreenFlag)
+    {
+        this.Log(accGreenFlag.ToString());
+    }
+
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.Log(logMessage.ToString());
     }
 
-    private void OnNextSessionStarted(AccSession accSession)
+    private void OnNextPenalty(AccPenalty accPenalty)
     {
-        this.Log(accSession.ToString());
+        this.Log(accPenalty.ToString());
     }
 
-    private void OnNextSessionEnded(AccSession accSession)
+    private void OnNextPersonalBestLap(AccLap accLap)
     {
-        this.Log(accSession.ToString());
+        this.Log($"Best Session Lap: {accLap}");
+    }
+
+    private void OnNextPhaseEnded(AccSessionPhase accSessionPhase)
+    {
+        this.Log(accSessionPhase.ToString());
     }
 
     private void OnNextPhaseStarted(AccSessionPhase accSessionPhase)
@@ -128,8 +157,30 @@ public class MonitorDemo : IMonitorDemo
         this.Log(accSessionPhase.ToString());
     }
 
-    private void OnNextPhaseEnded(AccSessionPhase accSessionPhase)
+    private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
     {
-        this.Log(accSessionPhase.ToString());
+        this.Log(realtimeCarUpdate.ToString());
+    }
+
+    private void OnNextSessionBestLap(AccLap accLap)
+    {
+        this.Log($"Best Personal Lap: {accLap}");
+    }
+
+    private void OnNextSessionEnded(AccSession accSession)
+    {
+        // Session Ended is produced by ACC monitor when it detects a change in session type
+        this.Log($"Session Ended: {accSession}");
+    }
+
+    private void OnNextSessionOver(AccSession accSession)
+    {
+        // Session Over is produced by a broadcast even from ACC
+        this.Log($"Session Over: {accSession}");
+    }
+
+    private void OnNextSessionStarted(AccSession accSession)
+    {
+        this.Log($"Session Started: {accSession}");
     }
 }

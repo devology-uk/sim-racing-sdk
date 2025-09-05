@@ -12,6 +12,7 @@ public class AccMonitorFactory : IAccMonitorFactory
 {
     private static IAccMonitorFactory? singletonInstance;
     private readonly IAccCarInfoProvider accCarInfoProvider;
+    private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
     private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
@@ -21,13 +22,15 @@ public class AccMonitorFactory : IAccMonitorFactory
         IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
-        IAccCarInfoProvider accCarInfoProvider)
+        IAccCarInfoProvider accCarInfoProvider,
+        IAccNationalityInfoProvider accNationalityInfoProvider)
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
         this.accTelemetryConnectionFactory = accTelemetryConnectionFactory;
         this.accCompatibilityChecker = accCompatibilityChecker;
         this.accLocalConfigProvider = accLocalConfigProvider;
         this.accCarInfoProvider = accCarInfoProvider;
+        this.accNationalityInfoProvider = accNationalityInfoProvider;
     }
 
     public static IAccMonitorFactory Instance =>
@@ -35,7 +38,8 @@ public class AccMonitorFactory : IAccMonitorFactory
             AccTelemetryConnectionFactory.Instance,
             AccCompatibilityChecker.Instance,
             AccLocalConfigProvider.Instance,
-            AccCarInfoProvider.Instance);
+            AccCarInfoProvider.Instance,
+            AccNationalityInfoProvider.Instance);
 
     public IAccMonitor Create()
     {
@@ -43,6 +47,7 @@ public class AccMonitorFactory : IAccMonitorFactory
             this.accTelemetryConnectionFactory,
             this.accCompatibilityChecker,
             this.accLocalConfigProvider,
-            this.accCarInfoProvider);
+            this.accCarInfoProvider,
+            this.accNationalityInfoProvider);
     }
 }

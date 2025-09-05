@@ -79,6 +79,8 @@ internal class AccUdpMessageHandler
 
     internal void Disconnect(bool sendUnregister = true)
     {
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
+     
         if(sendUnregister)
         {
             try
@@ -94,7 +96,6 @@ internal class AccUdpMessageHandler
             }
         }
 
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
     }
 
     internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)

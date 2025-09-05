@@ -1,4 +1,5 @@
-﻿using System.Reactive.Disposables;
+﻿using System.Diagnostics;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core;
@@ -18,29 +19,38 @@ namespace SimRacingSdk.Acc.Monitor;
 public class AccMonitor : IAccMonitor
 {
     private const string LocalhostIpAddress = "127.0.0.1";
+
     private readonly IAccCarInfoProvider accCarInfoProvider;
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
+    private readonly Subject<AccAccident> accidentsSubject = new();
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
-    private readonly ReplaySubject<AccEvent> eventStartedSubject = new();
+    private readonly Subject<AccLap> completedLapsSubject = new();
     private readonly List<AccEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccEventEntry>> entryListSubject = new();
     private readonly ReplaySubject<AccEvent> eventEndedSubject = new();
     private readonly ReplaySubject<AccEventEntry> eventEntriesSubject = new();
+    private readonly ReplaySubject<AccEvent> eventStartedSubject = new();
+    private readonly Subject<AccGreenFlag> greenFlagSubject = new();
     private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
-    private readonly ReplaySubject<AccSession> sessionStartedSubject = new();
-    private readonly ReplaySubject<AccSession> sessionEndedSubject = new();
-    private readonly ReplaySubject<AccSessionPhase> phaseStartedSubject = new();
+    private readonly Subject<AccPenalty> penaltiesSubject = new();
+    private readonly Subject<AccLap> personalBestLapSubject = new();
     private readonly ReplaySubject<AccSessionPhase> phaseEndedSubject = new();
+    private readonly ReplaySubject<AccSessionPhase> phaseStartedSubject = new();
+    private readonly Subject<RealtimeCarUpdate> realtimeCarUpdatesSubject = new();
+    private readonly Subject<AccLap> sessionBestLapSubject = new();
+    private readonly ReplaySubject<AccSession> sessionEndedSubject = new();
+    private readonly Subject<AccSession> sessionOverSubject = new();
+    private readonly ReplaySubject<AccSession> sessionStartedSubject = new();
 
     private IAccTelemetryConnection? accTelemetryConnection;
     private IAccUdpConnection? accUdpConnection;
     private AccEvent? currentEvent;
+    private AccSessionPhase? currentPhase;
     private AccSession? currentSession;
     private CompositeDisposable? subscriptionSink;
-    private AccSessionPhase? currentPhase;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
@@ -57,15 +67,24 @@ public class AccMonitor : IAccMonitor
         this.accNationalityInfoProvider = accNationalityInfoProvider;
     }
 
+    public IObservable<AccAccident> Accidents => this.accidentsSubject.AsObservable();
+    public IObservable<AccLap> CompletedLaps => this.completedLapsSubject.AsObservable();
     public IObservable<IList<AccEventEntry>> EntryList => this.entryListSubject.AsObservable();
     public IObservable<AccEvent> EventEnded => this.eventEndedSubject.AsObservable();
     public IObservable<AccEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
     public IObservable<AccEvent> EventStarted => this.eventStartedSubject.AsObservable();
+    public IObservable<AccGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
-    public IObservable<AccSession> SessionStarted => this.sessionStartedSubject.AsObservable();
-    public IObservable<AccSession> SessionEnded => this.sessionEndedSubject.AsObservable();
-    public IObservable<AccSessionPhase> PhaseStarted => this.phaseStartedSubject.AsObservable();
+    public IObservable<AccPenalty> Penalties => this.penaltiesSubject.AsObservable();
+    public IObservable<AccLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
     public IObservable<AccSessionPhase> PhaseEnded => this.phaseEndedSubject.AsObservable();
+    public IObservable<AccSessionPhase> PhaseStarted => this.phaseStartedSubject.AsObservable();
+    public IObservable<RealtimeCarUpdate> RealtimeCarUpdates =>
+        this.realtimeCarUpdatesSubject.AsObservable();
+    public IObservable<AccLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
+    public IObservable<AccSession> SessionEnded => this.sessionEndedSubject.AsObservable();
+    public IObservable<AccSession> SessionOver => this.sessionOverSubject.AsObservable();
+    public IObservable<AccSession> SessionStarted => this.sessionStartedSubject.AsObservable();
 
     public void Dispose()
     {
@@ -126,14 +145,43 @@ public class AccMonitor : IAccMonitor
         this.logMessagesSubject.OnNext(new LogMessage(level, message, data));
     }
 
+    private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)
+    {
+        this.LogMessage(LoggingLevel.Information, broadcastingEvent.ToString());
+        switch(broadcastingEvent.BroadcastingEventType)
+        {
+            case BroadcastingEventType.GreenFlag:
+                this.ProcessGreenFlagEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.SessionOver:
+                this.ProcessSessionOverEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.PenaltyCommMsg:
+                this.ProcessPenaltyComMsgEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.Accident:
+                this.ProcessAccidentEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.LapCompleted:
+                this.ProcessLapCompletedEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.BestSessionLap:
+                this.ProcessBestSessionLapEvent(broadcastingEvent);
+                break;
+            case BroadcastingEventType.BestPersonalLap:
+                this.ProcessBestPersonalLap(broadcastingEvent);
+                break;
+            case BroadcastingEventType.None:
+            default:
+                Debug.WriteLine("Unknown broadcast event type received.");
+                break;
+        }
+    }
+
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
         this.LogMessage(LoggingLevel.Information, connectionState.ToString());
-        if(connectionState.IsConnected)
-        {
-            this.accUdpConnection?.RequestTrackData();
-        }
-        else if(this.currentEvent != null)
+        if(!connectionState.IsConnected && this.currentEvent != null)
         {
             this.eventEndedSubject.OnNext(this.currentEvent);
         }
@@ -144,7 +192,7 @@ public class AccMonitor : IAccMonitor
         this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
         var carInfo = entryListUpdate.CarInfo;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
-        var drivers = carInfo.Drivers.Select(d => new AccDriverEntry(d.FirstName,
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
                                                  d.LastName,
                                                  d.ShortName,
                                                  d.Category.ToString(),
@@ -161,7 +209,7 @@ public class AccMonitor : IAccMonitor
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             Drivers = drivers,
             EventId = this.currentEvent!.Id,
-            Index = carInfo.CarIndex,
+            CarIndex = carInfo.CarIndex,
             RaceNumber = carInfo.RaceNumber,
             TeamName = carInfo.TeamName
         };
@@ -171,7 +219,10 @@ public class AccMonitor : IAccMonitor
         this.entryListSubject.OnNext(this.entryList);
     }
 
-    private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate) { }
+    private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
+    {
+        this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
+    }
 
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
@@ -185,12 +236,19 @@ public class AccMonitor : IAccMonitor
         var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
         var sessionPhase = realtimeUpdate.Phase.ToFriendlyName();
 
+        if(this.currentPhase != null && this.currentPhase.Phase != sessionPhase)
+        {
+            this.phaseEndedSubject.OnNext(this.currentPhase!);
+            this.currentPhase = null;
+        }
+
         if(this.currentSession?.SessionType != sessionType)
         {
             if(this.currentSession != null)
             {
                 this.sessionEndedSubject.OnNext(this.currentSession);
             }
+
             this.currentSession = new AccSession(this.currentEvent.Id, sessionType);
             this.sessionStartedSubject.OnNext(this.currentSession);
         }
@@ -200,13 +258,7 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        if(this.currentPhase != null)
-        {
-            this.phaseEndedSubject.OnNext(this.currentPhase);
-        }
-
-        this.currentPhase =
-            new AccSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
+        this.currentPhase = new AccSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
         this.phaseStartedSubject.OnNext(this.currentPhase);
     }
 
@@ -219,7 +271,6 @@ public class AccMonitor : IAccMonitor
         this.eventStartedSubject.OnNext(this.currentEvent);
         this.entryList.Clear();
         this.entryListSubject.OnNext(this.entryList);
-        this.accUdpConnection?.RequestEntryList();
     }
 
     private void PrepareMessageProcessing()
@@ -227,11 +278,171 @@ public class AccMonitor : IAccMonitor
         this.subscriptionSink = new CompositeDisposable
         {
             this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
+            this.accUdpConnection!.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
             this.accUdpConnection!.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
             this.accUdpConnection!.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),
             this.accUdpConnection!.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
             this.accUdpConnection!.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
         };
+    }
+
+    private void ProcessAccidentEvent(BroadcastingEvent broadcastingEvent)
+    {
+        var carInfo = broadcastingEvent.CarData;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+
+        var accAccident = new AccAccident()
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            EventId = this.currentEvent!.Id,
+            CarIndex = carInfo.CarIndex,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.accidentsSubject.OnNext(accAccident);
+    }
+
+    private void ProcessBestPersonalLap(BroadcastingEvent broadcastingEvent)
+    {
+        var carInfo = broadcastingEvent.CarData;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+
+        var accLap = new AccLap()
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            EventId = this.currentEvent!.Id,
+            CarIndex = carInfo.CarIndex,
+            LapTime = broadcastingEvent.Message,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.personalBestLapSubject.OnNext(accLap);
+    }
+
+    private void ProcessBestSessionLapEvent(BroadcastingEvent broadcastingEvent)
+    {
+        var carInfo = broadcastingEvent.CarData;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+
+        var accLap = new AccLap()
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            EventId = this.currentEvent!.Id,
+            CarIndex = carInfo.CarIndex,
+            LapTime = broadcastingEvent.Message,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.sessionBestLapSubject.OnNext(accLap);
+    }
+
+    private void ProcessGreenFlagEvent(BroadcastingEvent broadcastingEvent)
+    {
+        this.greenFlagSubject.OnNext(new AccGreenFlag(this.currentSession?.Id));
+    }
+
+    private void ProcessLapCompletedEvent(BroadcastingEvent broadcastingEvent)
+    {
+        var carInfo = broadcastingEvent.CarData;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+
+        var accLap = new AccLap()
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            EventId = this.currentEvent!.Id,
+            CarIndex = carInfo.CarIndex,
+            LapTime = broadcastingEvent.Message,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.completedLapsSubject.OnNext(accLap);
+    }
+
+    private void ProcessPenaltyComMsgEvent(BroadcastingEvent broadcastingEvent)
+    {
+        var carInfo = broadcastingEvent.CarData;
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+
+        var accPenalty = new AccPenalty()
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            EventId = this.currentEvent!.Id,
+            Index = carInfo.CarIndex,
+            Penalty = broadcastingEvent.Message,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.penaltiesSubject.OnNext(accPenalty);
+    }
+
+    private void ProcessSessionOverEvent(BroadcastingEvent broadcastingEvent)
+    {
+        this.sessionOverSubject.OnNext(this.currentSession!);
     }
 }

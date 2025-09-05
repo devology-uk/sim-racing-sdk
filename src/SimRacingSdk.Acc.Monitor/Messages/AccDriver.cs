@@ -2,7 +2,7 @@
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccDriverEntry(
+public record AccDriver(
     string FirstName,
     string LastName,
     string ShortName,

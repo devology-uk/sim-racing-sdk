@@ -102,7 +102,6 @@ public class UdpDemo : IUdpDemo
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
         this.Log(connectionState.ToString());
-        this.accUdpConnection?.RequestTrackData();
     }
 
     private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
@@ -123,7 +122,6 @@ public class UdpDemo : IUdpDemo
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
         this.Log(trackDataUpdate.ToString());
-        this.accUdpConnection?.RequestEntryList();
     }
 
     private void PrepareBroadcastMessageHandling()

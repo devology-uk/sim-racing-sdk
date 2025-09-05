@@ -5,7 +5,7 @@ using SimRacingSdk.Acc.Udp.Enums;
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccEventEntry : AccMonitorMessageBase
+public record AccAccident : AccMonitorMessageBase
 {
     public byte AccCarModelId { get; init; }
     public CupCategory CarCupCategory { get; set; }
@@ -14,8 +14,8 @@ public record AccEventEntry : AccMonitorMessageBase
     public string CarModelName { get; init; }
     public AccDriver CurrentDriver { get; init; }
     public int CurrentDriverIndex { get; init; }
-    public List<AccDriver> Drivers { get; init; }
     public string EventId { get; init; }
     public int RaceNumber { get; init; }
+    public string SessionId { get; init; }
     public string TeamName { get; init; }
 }

@@ -5,25 +5,25 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Abstractions;
-using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
+using Timer = System.Timers.Timer;
 
 namespace SimRacingSdk.Acc.Udp;
 
 public class AccUdpConnection : IAccUdpConnection
 {
-    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
-    private readonly AccUdpMessageHandler broadcastingMessageHandler;
-    private readonly Subject<RealtimeUpdate> realTimeUpdatesSubject = new();
+    private readonly AccUdpMessageHandler accUdpMessageHandler;
     private readonly IPEndPoint ipEndPoint;
+    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
     private readonly CompositeDisposable subscriptionSink = new();
+    private Timer disconnectTimer;
     private bool isConnected;
     private bool isDisposed;
     private bool isStopped;
+    private DateTime lastRealTimeUpdate;
     private Task listenerTask;
     private UdpClient udpClient;
 
@@ -43,31 +43,36 @@ public class AccUdpConnection : IAccUdpConnection
         this.ConnectionIdentifier = $"{this.IpAddress}:{this.Port}";
         this.ipEndPoint = IPEndPoint.Parse(this.ConnectionIdentifier);
 
-        this.broadcastingMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
+        this.accUdpMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
     }
 
-    public IObservable<BroadcastingEvent> BroadcastingEvents => this.broadcastingMessageHandler.BroadcastingEvents.AsObservable();
+    public IObservable<BroadcastingEvent> BroadcastingEvents =>
+        this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
     public string CommandPassword { get; }
     public string ConnectionIdentifier { get; }
     public string ConnectionPassword { get; }
-    public IObservable<ConnectionState> ConnectionStateChanges => this.broadcastingMessageHandler.ConnectionStateChanges;
+    public IObservable<ConnectionState> ConnectionStateChanges =>
+        this.accUdpMessageHandler.ConnectionStateChanges;
     public string DisplayName { get; }
-    public IObservable<EntryListUpdate> EntryListUpdates => this.broadcastingMessageHandler.EntryListUpdates;
+    public IObservable<EntryListUpdate> EntryListUpdates => this.accUdpMessageHandler.EntryListUpdates;
     public string IpAddress { get; }
-    public IObservable<LogMessage> LogMessages => this.broadcastingMessageHandler.LogMessages;
+    public IObservable<LogMessage> LogMessages => this.accUdpMessageHandler.LogMessages;
     public int Port { get; }
-    public IObservable<RealtimeCarUpdate> RealTimeCarUpdates => this.broadcastingMessageHandler.RealTimeCarUpdates;
-    public IObservable<RealtimeUpdate> RealTimeUpdates => this.broadcastingMessageHandler.RealTimeUpdates;
-    public IObservable<TrackDataUpdate> TrackDataUpdates => this.broadcastingMessageHandler.TrackDataUpdates;
+    public IObservable<RealtimeCarUpdate> RealTimeCarUpdates => this.accUdpMessageHandler.RealTimeCarUpdates;
+    public IObservable<RealtimeUpdate> RealTimeUpdates => this.accUdpMessageHandler.RealTimeUpdates;
+    public IObservable<TrackDataUpdate> TrackDataUpdates => this.accUdpMessageHandler.TrackDataUpdates;
     public int UpdateInterval { get; }
 
     public void Connect(bool autoDetect = true)
     {
         this.subscriptionSink.Add(
-            this.broadcastingMessageHandler.ConnectionStateChanges
-                .Subscribe(this.OnNextConnectionStateChange));
+            this.accUdpMessageHandler.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
-            this.broadcastingMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
+            this.accUdpMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
+        this.subscriptionSink.Add(
+            this.accUdpMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
+        this.subscriptionSink.Add(
+            this.accUdpMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
 
         try
         {
@@ -77,6 +82,8 @@ public class AccUdpConnection : IAccUdpConnection
             }
 
             this.listenerTask = this.HandleMessages();
+            this.accUdpMessageHandler.RequestTrackData();
+            this.StartDisconnectedTimer();
         }
         catch(Exception exception)
         {
@@ -86,41 +93,30 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-
     public void Dispose()
     {
         GC.SuppressFinalize(this);
         this.Dispose(true);
     }
 
-    public void RequestTrackData()
-    {
-        this.broadcastingMessageHandler.RequestTrackData();
-    }
-
-    public void RequestEntryList()
-    {
-        this.broadcastingMessageHandler.RequestEntryList();
-    }
-
     public void SetActiveCamera(string cameraSetName, string cameraName)
     {
-        this.broadcastingMessageHandler.SetCamera(cameraSetName, cameraName);
+        this.accUdpMessageHandler.SetCamera(cameraSetName, cameraName);
     }
 
     public void SetActiveCamera(string cameraSetName, string cameraName, int carIndex)
     {
-        this.broadcastingMessageHandler.SetFocus((ushort)carIndex, cameraSetName, cameraName);
+        this.accUdpMessageHandler.SetFocus((ushort)carIndex, cameraSetName, cameraName);
     }
 
     public void SetFocus(int carIndex)
     {
-        this.broadcastingMessageHandler.SetFocus((ushort)carIndex);
+        this.accUdpMessageHandler.SetFocus((ushort)carIndex);
     }
 
     public void SetHudPage(string hudPage)
     {
-        this.broadcastingMessageHandler.RequestHUDPage(hudPage);
+        this.accUdpMessageHandler.RequestHUDPage(hudPage);
     }
 
     public void Stop()
@@ -175,9 +171,8 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void LogMessage(LoggingLevel level, string message, object? data = null)
     {
-        this.broadcastingMessageHandler.LogMessage(level, message, data);
+        this.accUdpMessageHandler.LogMessage(level, message, data);
     }
-    
 
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
@@ -198,26 +193,24 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
+    private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
+    {
+        this.lastRealTimeUpdate = DateTime.Now;
+    }
+
+    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
+    {
+        this.accUdpMessageHandler.RequestEntryList();
+    }
+
     private async Task ProcessNextMessage()
     {
         try
         {
-            var asyncResult = this.udpClient.BeginReceive(null, null);
-            asyncResult.AsyncWaitHandle.WaitOne(this.messageTimeout);
-            if(asyncResult.IsCompleted)
-            {
-                IPEndPoint remoteEP = null;
-                var receivedData = this.udpClient.EndReceive(asyncResult, ref remoteEP);
-                await using var stream = new MemoryStream(receivedData);
-                using var reader = new BinaryReader(stream);
-                this.broadcastingMessageHandler.ProcessMessage(reader);
-            }
-            else
-            {
-                this.LogMessage(LoggingLevel.Information, "ACC has stopped sending messages, the user has probably quit the session.");
-                this.Shutdown();
-            }
-           
+            var udpReceiveResult = await this.udpClient.ReceiveAsync()!;
+            await using var stream = new MemoryStream(udpReceiveResult.Buffer);
+            using var reader = new BinaryReader(stream);
+            this.accUdpMessageHandler.ProcessMessage(reader);
         }
         catch(Exception exception)
         {
@@ -230,11 +223,32 @@ public class AccUdpConnection : IAccUdpConnection
     {
         this.LogMessage(LoggingLevel.Information, "Disconnecting from ACC Broadcasting API...");
         this.isStopped = true;
-        this.broadcastingMessageHandler.Disconnect();
+        this.accUdpMessageHandler.Disconnect();
         this.subscriptionSink?.Dispose();
         this.udpClient?.Close();
         this.udpClient?.Dispose();
         this.udpClient = null;
+        this.disconnectTimer.Stop();
+        this.disconnectTimer.Dispose();
+    }
+
+    private void StartDisconnectedTimer()
+    {
+        this.disconnectTimer = new Timer(TimeSpan.FromSeconds(1));
+        this.disconnectTimer.Elapsed += (sender, args) =>
+                                        {
+                                            var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
+                                            if(!this.isConnected
+                                               || timeSinceLastUpdate <= TimeSpan.FromSeconds(2))
+                                            {
+                                                return;
+                                            }
+
+                                            
+                                            this.LogMessage(LoggingLevel.Information,
+                                                "ACC has stopped sending messages, the user has probably quit the session.");
+                                            this.Shutdown();
+                                        };
     }
 
     private void WaitUntilRegistered()
@@ -252,7 +266,7 @@ public class AccUdpConnection : IAccUdpConnection
             try
             {
                 var endPoint = IPEndPoint.Parse(this.ConnectionIdentifier);
-                var message = this.broadcastingMessageHandler.CreateRegisterCommandApplicationMessage(
+                var message = this.accUdpMessageHandler.CreateRegisterCommandApplicationMessage(
                     this.DisplayName,
                     this.ConnectionPassword,
                     this.UpdateInterval,
@@ -264,7 +278,7 @@ public class AccUdpConnection : IAccUdpConnection
                 using var stream = new MemoryStream(receiveBytes);
                 using var reader = new BinaryReader(stream);
                 isRegistered = true;
-                this.broadcastingMessageHandler.ProcessMessage(reader);
+                this.accUdpMessageHandler.ProcessMessage(reader);
                 this.udpClient = client;
                 return;
             }
