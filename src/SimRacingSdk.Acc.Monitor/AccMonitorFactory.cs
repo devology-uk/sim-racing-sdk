@@ -15,18 +15,18 @@ public class AccMonitorFactory : IAccMonitorFactory
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
-    private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
+    private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
 
     public AccMonitorFactory(IAccUdpConnectionFactory accUdpConnectionFactory,
-        IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
+        IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
         IAccCarInfoProvider accCarInfoProvider,
         IAccNationalityInfoProvider accNationalityInfoProvider)
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
-        this.accTelemetryConnectionFactory = accTelemetryConnectionFactory;
+        this.accSharedMemoryConnectionFactory = accSharedMemoryConnectionFactory;
         this.accCompatibilityChecker = accCompatibilityChecker;
         this.accLocalConfigProvider = accLocalConfigProvider;
         this.accCarInfoProvider = accCarInfoProvider;
@@ -35,7 +35,7 @@ public class AccMonitorFactory : IAccMonitorFactory
 
     public static IAccMonitorFactory Instance =>
         singletonInstance ??= new AccMonitorFactory(AccUdpConnectionFactory.Instance,
-            AccTelemetryConnectionFactory.Instance,
+            AccSharedMemoryConnectionFactory.Instance,
             AccCompatibilityChecker.Instance,
             AccLocalConfigProvider.Instance,
             AccCarInfoProvider.Instance,
@@ -44,7 +44,7 @@ public class AccMonitorFactory : IAccMonitorFactory
     public IAccMonitor Create()
     {
         return new AccMonitor(this.accUdpConnectionFactory,
-            this.accTelemetryConnectionFactory,
+            this.accSharedMemoryConnectionFactory,
             this.accCompatibilityChecker,
             this.accLocalConfigProvider,
             this.accCarInfoProvider,

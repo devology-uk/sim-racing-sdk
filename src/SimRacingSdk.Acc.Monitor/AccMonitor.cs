@@ -25,8 +25,8 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccAccident> accidentsSubject = new();
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
-    private readonly IAccTelemetryConnectionFactory accTelemetryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
+    private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly Subject<AccLap> completedLapsSubject = new();
     private readonly List<AccEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccEventEntry>> entryListSubject = new();
@@ -45,22 +45,22 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccSession> sessionOverSubject = new();
     private readonly ReplaySubject<AccSession> sessionStartedSubject = new();
 
-    private IAccTelemetryConnection? accTelemetryConnection;
     private IAccUdpConnection? accUdpConnection;
     private AccEvent? currentEvent;
     private AccSessionPhase? currentPhase;
     private AccSession? currentSession;
     private CompositeDisposable? subscriptionSink;
+    private IAccSharedMemoryConnection? accSharedMemoryConnection;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
-        IAccTelemetryConnectionFactory accTelemetryConnectionFactory,
+        IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
         IAccCarInfoProvider accCarInfoProvider,
         IAccNationalityInfoProvider accNationalityInfoProvider)
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
-        this.accTelemetryConnectionFactory = accTelemetryConnectionFactory;
+        this.accSharedMemoryConnectionFactory = accSharedMemoryConnectionFactory;
         this.accCompatibilityChecker = accCompatibilityChecker;
         this.accLocalConfigProvider = accLocalConfigProvider;
         this.accCarInfoProvider = accCarInfoProvider;
@@ -114,7 +114,7 @@ public class AccMonitor : IAccMonitor
 
         this.LogMessage(LoggingLevel.Information,
             "Preparing connection to ACC Shared Memory interface for telemetry.");
-        this.accTelemetryConnection = this.accTelemetryConnectionFactory.Create();
+        this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
 
         this.PrepareMessageProcessing();
 
@@ -126,8 +126,8 @@ public class AccMonitor : IAccMonitor
         this.subscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null;
-        this.accTelemetryConnection?.Dispose();
-        this.accTelemetryConnection = null;
+        this.accSharedMemoryConnection?.Dispose();
+        this.accSharedMemoryConnection = null;
     }
 
     protected virtual void Dispose(bool disposing)
@@ -221,6 +221,7 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
     {
+        this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
     }
 
@@ -278,12 +279,12 @@ public class AccMonitor : IAccMonitor
         this.subscriptionSink = new CompositeDisposable
         {
             this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
-            this.accUdpConnection!.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
-            this.accUdpConnection!.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
+            this.accUdpConnection.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
+            this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
-            this.accUdpConnection!.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),
-            this.accUdpConnection!.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
-            this.accUdpConnection!.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
+            this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),
+            this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
+            this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
         };
     }
 
