@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
     {
         services.UseAccSdk();
 
-        services.TryAddSingleton<IAccTelemetryConnectionFactory, AccTelemetryConnectionFactory>();
+        services.TryAddSingleton<IAccSharedMemoryConnectionFactory, AccSharedMemoryConnectionFactory>();
         services.TryAddSingleton<IAccUdpConnectionFactory, AccUdpConnectionFactory>();
 
         services.AddSingleton<IAccMonitorFactory, AccMonitorFactory>();

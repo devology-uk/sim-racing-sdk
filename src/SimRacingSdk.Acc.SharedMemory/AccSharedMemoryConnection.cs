@@ -126,7 +126,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             graphicsData.IsYellowFlagActiveInSector3);
 
         this.flagStateSubject.OnNext(flagState);
-        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, flagState.ToString()));
 
         if(this.lastGraphicsData == null)
         {
@@ -138,11 +137,12 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             this.sessionStartedSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
         }
 
-        this.lastGraphicsData = graphicsData;
 
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
         this.actualSectorIndex = graphicsData.CurrentSectorIndex;
+
+        this.lastGraphicsData = graphicsData;
 
         if(hasStartedOutLap || hasStartedPaceLap)
         {
