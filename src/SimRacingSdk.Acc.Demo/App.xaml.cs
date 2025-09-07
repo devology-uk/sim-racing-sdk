@@ -68,6 +68,8 @@ public partial class App : Application
         services.AddTransient<ITelemetryOnlyDemo, TelemetryOnlyDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IMonitorDemo, MonitorDemo>();
+        services.AddTransient<IUdpLog, UdpLog>();
+        services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
 
         return services.BuildServiceProvider();
     }

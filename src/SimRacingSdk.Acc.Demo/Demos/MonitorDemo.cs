@@ -24,15 +24,24 @@ public class MonitorDemo : IMonitorDemo
 {
     private readonly IAccMonitorFactory accMonitorFactory;
     private readonly IConsoleLog consoleLog;
-    private readonly ILogger<UdpDemo> logger;
+    private readonly IUdpLog udpLog;
+    private readonly ISharedMemoryLog sharedMemoryLog;
+    private readonly ILogger<MonitorDemo> logger;
     private IAccMonitor? accMonitor;
 
     private CompositeDisposable? subscriptionSink;
+    private AccSessionPhase? currentPhase;
 
-    public MonitorDemo(ILogger<UdpDemo> logger, IConsoleLog consoleLog, IAccMonitorFactory accMonitorFactory)
+    public MonitorDemo(ILogger<MonitorDemo> logger,
+        IConsoleLog consoleLog,
+        IUdpLog udpLog,
+        ISharedMemoryLog sharedMemoryLog,
+        IAccMonitorFactory accMonitorFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.udpLog = udpLog;
+        this.sharedMemoryLog = sharedMemoryLog;
         this.accMonitorFactory = accMonitorFactory;
     }
 
@@ -134,7 +143,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.Log(logMessage.ToString());
+        this.udpLog.Log(logMessage.ToString());
     }
 
     private void OnNextPenalty(AccPenalty accPenalty)
@@ -149,16 +158,23 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextPhaseEnded(AccSessionPhase accSessionPhase)
     {
-        this.Log(accSessionPhase.ToString());
+        this.Log($"Phase Ended: {accSessionPhase}");
     }
 
     private void OnNextPhaseStarted(AccSessionPhase accSessionPhase)
     {
-        this.Log(accSessionPhase.ToString());
+        this.currentPhase = accSessionPhase;
+        this.Log($"Phase Started: {accSessionPhase}");
     }
 
     private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
     {
+        if(this.currentPhase != null && this.currentPhase.Phase != "Session")
+        {
+            // filter out updates where the car is not actually on a meaningful lap
+            return;
+        }
+
         this.Log(realtimeCarUpdate.ToString());
     }
 
