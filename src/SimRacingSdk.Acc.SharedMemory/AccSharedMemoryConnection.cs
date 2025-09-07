@@ -13,6 +13,8 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly ReplaySubject<AccSharedMemoryEvent> newEventSubject = new();
     private readonly ReplaySubject<AccSharedMemoryLap> newLapSubject = new();
+    private readonly Subject<string> sessionEndedSubject = new();
+    private readonly Subject<string> sessionStartedSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
     private readonly ReplaySubject<AccTelemetryFrame> telemetrySubject = new();
     private int actualSectorIndex;
@@ -31,6 +33,8 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
     public IObservable<AccSharedMemoryLap> NewLap => this.newLapSubject.AsObservable();
+    public IObservable<string> SessionEnded => this.sessionEndedSubject.AsObservable();
+    public IObservable<string> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
@@ -124,6 +128,18 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.flagStateSubject.OnNext(flagState);
         this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, flagState.ToString()));
 
+        if(this.lastGraphicsData == null)
+        {
+            this.sessionStartedSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+        }
+        else if(this.lastGraphicsData.SessionType != graphicsData.SessionType)
+        {
+            this.sessionEndedSubject.OnNext(this.lastGraphicsData.SessionType.ToFriendlyName());
+            this.sessionStartedSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+        }
+
+        this.lastGraphicsData = graphicsData;
+
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
         this.actualSectorIndex = graphicsData.CurrentSectorIndex;
@@ -155,7 +171,5 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
                 this.actualSectorIndex));
             this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, physicsData.ToString()));
         }
-
-        this.lastGraphicsData = graphicsData;
     }
 }
