@@ -1,5 +1,6 @@
 ﻿#nullable disable
 
+using System.Diagnostics;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 
@@ -13,8 +14,7 @@ public class StaticDataPage
 
     private static readonly int size = Marshal.SizeOf<StaticDataPage>();
     private static readonly byte[] buffer = new byte[size];
-    
-    private static StaticDataPage cachedPage;
+  
 
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
     public string SharedMemoryVersion;
@@ -85,29 +85,15 @@ public class StaticDataPage
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 33)]
     public string WetTyresName;
 
-    public static bool TryRead(out StaticDataPage staticDataPage)
+    public static StaticDataPage Read()
     {
-        if (cachedPage != null)
-        {
-            staticDataPage = cachedPage;
-            return true;
-        }
+        using var mappedFile = MemoryMappedFile.OpenExisting(StaticMap, MemoryMappedFileRights.Read);
+        using var stream = mappedFile.CreateViewStream(0, 0, MemoryMappedFileAccess.Read);
 
-        try
-        {
-            using var mappedFile = MemoryMappedFile.OpenExisting(StaticMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
-            stream.ReadExactly(buffer, 0, buffer.Length);
-            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            cachedPage = Marshal.PtrToStructure<StaticDataPage>(handle.AddrOfPinnedObject());
-            handle.Free();
-            staticDataPage = cachedPage;
-            return true;
-        }
-        catch(FileNotFoundException)
-        {
-            staticDataPage = null;
-            return false;
-        }
+        stream.ReadExactly(buffer, 0, buffer.Length);
+        var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+        var staticDataPage = Marshal.PtrToStructure<StaticDataPage>(handle.AddrOfPinnedObject());
+        handle.Free();
+        return staticDataPage;
     }
 }

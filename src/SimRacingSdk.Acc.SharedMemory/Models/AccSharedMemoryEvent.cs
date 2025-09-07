@@ -1,8 +1,8 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Models;
 
-public class AccTelemetryEvent
+public record AccSharedMemoryEvent
 {
-    public AccTelemetryEvent(StaticData staticData)
+    public AccSharedMemoryEvent(StaticData staticData)
     {
         this.AccVersion = staticData.AccVersion;
         this.CarId = staticData.CarModel;
@@ -16,26 +16,12 @@ public class AccTelemetryEvent
     }
 
     public string AccVersion { get; }
-
     public string CarId { get; }
-
     public bool IsOnline { get; }
-
     public int MaxRpm { get; }
-
     public string PlayerName { get; }
-
     public string PlayerNickname { get; }
-
     public string PlayerSurname { get; }
-
     public string SharedMemoryVersion { get; }
-
     public string TrackId { get; }
-
-    public override string ToString()
-    {
-        return
-            $"ACC Telemetry Event: ACC Version: {this.AccVersion} Shared Memory Version: {this.SharedMemoryVersion} Track: {this.TrackId} Car: {this.CarId} Player: {this.PlayerName[..1]}. {this.PlayerSurname} Is Online: {this.IsOnline}";
-    }
 }

@@ -1,4 +1,5 @@
-﻿using SimRacingSdk.Acc.SharedMemory.Abstractions;
+﻿using System.Diagnostics;
+using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Messages;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
@@ -10,18 +11,45 @@ public class AccSharedMemoryProvider : IAccSharedMemoryProvider
 
     public static AccSharedMemoryProvider Instance => singletonInstance ??= new AccSharedMemoryProvider();
 
-    public GraphicsData? ReadGraphicsData()
+    public GraphicsData ReadGraphicsData()
     {
-        return GraphicsPage.TryRead(out var graphicsPage)? new GraphicsData(graphicsPage): null;
+        try
+        {
+            var page = GraphicsPage.Read();
+            return page == null? new GraphicsData(): new GraphicsData(page);
+        }
+        catch(Exception exception)
+        {
+            Debug.WriteLine(exception);
+            return new GraphicsData();
+        }
     }
 
-    public PhysicsData? ReadPhysicsData()
+    public PhysicsData ReadPhysicsData()
     {
-        return PhysicsPage.TryRead(out var physicsPage)? new PhysicsData(physicsPage): null;
+        try
+        {
+            var page = PhysicsPage.Read();
+            return page == null? new PhysicsData(): new PhysicsData(page);
+        }
+        catch(Exception exception)
+        {
+            Debug.WriteLine(exception);
+            return new PhysicsData();
+        }
     }
 
-    public StaticData? ReadStaticData()
+    public StaticData ReadStaticData()
     {
-        return StaticDataPage.TryRead(out var staticDataPage)? new StaticData(staticDataPage): null;
+        try
+        {
+            var page = StaticDataPage.Read();
+            return page == null? new StaticData(): new StaticData(page);
+        }
+        catch(Exception exception)
+        {
+            Debug.WriteLine(exception);
+            return new StaticData();
+        }
     }
 }

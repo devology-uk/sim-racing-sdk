@@ -2,7 +2,7 @@
 
 namespace SimRacingSdk.Acc.SharedMemory.Models;
 
-public class AccTelemetryFrame
+public record AccTelemetryFrame
 {
     public AccTelemetryFrame(StaticData staticData,
         GraphicsData graphicsData,
@@ -161,10 +161,4 @@ public class AccTelemetryFrame
     public float WheelSlipFr { get; }
     public float WheelSlipRl { get; }
     public float WheelSlipRr { get; }
-
-    public override string ToString()
-    {
-        return
-            $"ACC Telemetry Frame: Accelerator: {this.Accelerator} Brake: {this.Brake} RPM: {this.Rpm} Speed KMH: {this.SpeedKmh} Lap Time: {this.LapTimeMs.ToTimingStringFromMilliseconds()} Sector Time: {this.SplitTimeMs.ToTimingStringFromMilliseconds()}";
-    }
 }

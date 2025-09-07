@@ -1,5 +1,7 @@
 ﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using SimRacingSdk.Acc.Core.Enums;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
@@ -7,13 +9,15 @@ namespace SimRacingSdk.Acc.SharedMemory;
 
 public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
-    private readonly ReplaySubject<AccTelemetryFrame> framesSubject = new();
-    private readonly ReplaySubject<AccTelemetryEvent> newEventSubject = new();
-    private readonly ReplaySubject<AccTelemetryLap> newLapSubject = new();
+    private readonly Subject<AccFlagState> flagStateSubject = new();
+    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly ReplaySubject<AccSharedMemoryEvent> newEventSubject = new();
+    private readonly ReplaySubject<AccSharedMemoryLap> newLapSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
+    private readonly ReplaySubject<AccTelemetryFrame> telemetrySubject = new();
     private int actualSectorIndex;
 
-    private StaticData? currentEventData;
+    private StaticData? currentStaticData;
     private bool isOnActiveLap;
     private GraphicsData? lastGraphicsData;
     private IDisposable? updateSubscription;
@@ -23,11 +27,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.sharedMemoryProvider = sharedMemoryProvider;
     }
 
-    public IObservable<AccTelemetryFrame> Frames => this.framesSubject.AsObservable();
-
-    public IObservable<AccTelemetryEvent> NewEvent => this.newEventSubject.AsObservable();
-
-    public IObservable<AccTelemetryLap> NewLap => this.newLapSubject.AsObservable();
+    public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
+    public IObservable<AccSharedMemoryLap> NewLap => this.newLapSubject.AsObservable();
+    public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
     {
@@ -39,8 +43,8 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     {
         this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
                                             .Subscribe(this.OnNextUpdate,
-                                                e => this.framesSubject.OnError(e),
-                                                () => this.framesSubject.OnCompleted());
+                                                e => this.telemetrySubject.OnError(e),
+                                                () => this.telemetrySubject.OnCompleted());
     }
 
     protected virtual void Dispose(bool disposing)
@@ -50,7 +54,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             return;
         }
 
-        this.framesSubject.Dispose();
+        this.telemetrySubject.Dispose();
         this.updateSubscription?.Dispose();
     }
 
@@ -64,52 +68,61 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private bool HasStartedPaceLap(GraphicsData graphicsData)
     {
-        return this.lastGraphicsData != null && this.currentEventData != null
-               && this.lastGraphicsData.CurrentSectorIndex == this.currentEventData.SectorCount - 1
-               && graphicsData.CurrentSectorIndex == 0;
+        return this.lastGraphicsData != null && this.currentStaticData != null
+                                             && this.lastGraphicsData.CurrentSectorIndex
+                                             == this.currentStaticData.SectorCount - 1
+                                             && graphicsData.CurrentSectorIndex == 0;
     }
 
     private bool IsNewEvent(StaticData staticData)
     {
-        if(this.currentEventData == null)
+        if(this.currentStaticData == null)
         {
             return true;
         }
 
         return !string.IsNullOrWhiteSpace(staticData.Track) && !string.IsNullOrWhiteSpace(staticData.CarModel)
-                                                            && (this.currentEventData.Track
+                                                            && (this.currentStaticData.Track
                                                                 != staticData.Track
-                                                                || this.currentEventData.CarModel
+                                                                || this.currentStaticData.CarModel
                                                                 != staticData.CarModel
-                                                                || this.currentEventData.NumberOfSessions
+                                                                || this.currentStaticData.NumberOfSessions
                                                                 != staticData.NumberOfSessions
-                                                                || this.currentEventData.NumberOfCars
+                                                                || this.currentStaticData.NumberOfCars
                                                                 != staticData.NumberOfCars
-                                                                || this.currentEventData.PlayerName
+                                                                || this.currentStaticData.PlayerName
                                                                 != staticData.PlayerName
-                                                                || this.currentEventData.IsOnline
+                                                                || this.currentStaticData.IsOnline
                                                                 != staticData.IsOnline);
     }
 
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
-        if(staticData == null || !staticData.IsActualEvent())
+        if(!staticData.IsActualEvent())
         {
             return;
         }
+
+        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, staticData.ToString()));
 
         if(this.IsNewEvent(staticData!))
         {
-            this.newEventSubject.OnNext(new AccTelemetryEvent(staticData));
-            this.currentEventData = staticData!;
+            this.newEventSubject.OnNext(new AccSharedMemoryEvent(staticData));
+            this.currentStaticData = staticData!;
         }
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
-        if(graphicsData == null)
-        {
-            return;
-        }
+        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, graphicsData.ToString()));
+
+        var flagState = new AccFlagState(graphicsData.IsWhiteFlagActive,
+            graphicsData.IsYellowFlagActive,
+            graphicsData.IsYellowFlagActiveInSector1,
+            graphicsData.IsYellowFlagActiveInSector2,
+            graphicsData.IsYellowFlagActiveInSector3);
+
+        this.flagStateSubject.OnNext(flagState);
+        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, flagState.ToString()));
 
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
@@ -118,7 +131,9 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         if(hasStartedOutLap || hasStartedPaceLap)
         {
             this.actualSectorIndex = 0;
-            this.newLapSubject.OnNext(new AccTelemetryLap(staticData, graphicsData));
+            var accSharedMemoryLap = new AccSharedMemoryLap(staticData, graphicsData);
+            this.newLapSubject.OnNext(accSharedMemoryLap);
+            this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, accSharedMemoryLap.ToString()));
         }
 
         if(!this.isOnActiveLap)
@@ -134,13 +149,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         if(this.isOnActiveLap)
         {
             var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
-            if(physicsData != null)
-            {
-                this.framesSubject.OnNext(new AccTelemetryFrame(staticData,
-                    graphicsData,
-                    physicsData,
-                    this.actualSectorIndex));
-            }
+            this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
+                graphicsData,
+                physicsData,
+                this.actualSectorIndex));
+            this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, physicsData.ToString()));
         }
 
         this.lastGraphicsData = graphicsData;

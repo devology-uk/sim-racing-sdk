@@ -1,67 +1,122 @@
-﻿using SimRacingSdk.Acc.SharedMemory.Messages;
+﻿#nullable disable
+
+using SimRacingSdk.Acc.SharedMemory.Messages;
 
 namespace SimRacingSdk.Acc.SharedMemory.Models;
 
-public class PhysicsData(PhysicsPage physicsPage)
+public record PhysicsData
 {
-    public DateTime TimeStamp { get; } = DateTime.UtcNow;
-    public float Abs { get; set; } = physicsPage.Abs;
-    public float AbsVibrations { get; set; } = physicsPage.AbsVibrations;
-    public float Accelerator { get; set; } = physicsPage.Gas;
-    public float[] AccG { get; set; } = physicsPage.AccelerationVector;
-    public float AirTemp { get; set; } = physicsPage.AirTemp;
-    public bool AutoShiftOn { get; set; } = physicsPage.AutoShifterOn;
-    public float Brake { get; set; } = physicsPage.Brake;
-    public float BrakeBias { get; set; } = physicsPage.BrakeBias;
-    public float[] BrakePressure { get; set; } = physicsPage.BrakePressure;
-    public float[] BrakeTemperature { get; set; } = physicsPage.BrakeTemperature;
-    public float[] CarDamage { get; set; } = physicsPage.CarDamage;
-    public float Clutch { get; set; } = physicsPage.Clutch;
-    public float[] DiscLife { get; set; } = physicsPage.DiscLife;
-    public float FinalFf { get; set; } = physicsPage.ForceFeedbackSignal;
-    public int FrontBrakeCompound { get; set; } = physicsPage.FrontBrakeCompound;
-    public float Fuel { get; set; } = physicsPage.Fuel;
-    public int Gear { get; set; } = physicsPage.Gear;
-    public float GearVibrations { get; set; } = physicsPage.GearVibrations;
-    public float Heading { get; set; } = physicsPage.Heading;
-    public bool IgnitionOn { get; set; } = physicsPage.IgnitionOn;
-    public bool IsAiControlled { get; set; } = physicsPage.IsAiControlled;
-    public bool IsEngineRunning { get; set; } = physicsPage.IsEngineRunning;
-    public float KerbVibration { get; set; } = physicsPage.KerbVibrations;
-    public float[] LocalAngularVelocity { get; set; } = physicsPage.LocalAngularVelocity;
-    public float[] LocalVelocity { get; set; } = physicsPage.LocalVelocity;
-    public int PacketId { get; set; } = physicsPage.PacketId;
-    public float[] PadLife { get; set; } = physicsPage.PadLife;
-    public float Pitch { get; set; } = physicsPage.Pitch;
-    public bool PitLimiterOn { get; set; } = physicsPage.PitLimiterOn;
-    public int RearBrakeCompound { get; set; } = physicsPage.RearBrakeCompound;
-    public float Roll { get; set; } = physicsPage.Roll;
-    public int Rpm { get; set; } = physicsPage.Rpm;
-    public float[] SlipAngle { get; set; } = physicsPage.SlipAngle;
-    public float[] SlipRatio { get; set; } = physicsPage.SlipRatio;
-    public float SlipVibrations { get; set; } = physicsPage.SlipVibrations;
-    public float SpeedKmh { get; set; } = physicsPage.SpeedKmh;
-    public bool StarterEngineOn { get; set; } = physicsPage.StarterEngineOn;
-    public float SteerAngle { get; set; } = physicsPage.SteerAngle;
-    public float[] SuspensionDamage { get; set; } = physicsPage.SuspensionDamage;
-    public float[] SuspensionTravel { get; set; } = physicsPage.SuspensionTravel;
-    public float TrackTemp { get; set; } = physicsPage.RoadTemp;
-    public float TractionControl { get; set; } = physicsPage.TC;
-    public float TurboBoost { get; set; } = physicsPage.TurboBoost;
-    public AccCoordinate3d[] TyreContactHeading { get; set; } = physicsPage.TyreContactHeadings;
-    public AccCoordinate3d[] TyreContactNormal { get; set; } = physicsPage.TyreContactNormals;
-    public AccCoordinate3d[] TyreContactPoint { get; set; } = physicsPage.TyreContactPoints;
-    public float[] TyreCoreTemperature { get; set; } = physicsPage.TyreCoreTemperature;
-    public float[] TyreTemp { get; set; } = physicsPage.TyreTemp;
-    public float[] Velocity { get; set; } = physicsPage.Velocity;
-    public float WaterTemp { get; set; } = physicsPage.WaterTemp;
-    public float[] WheelAngularSpeed { get; set; } = physicsPage.WheelAngularSpeed;
-    public float[] WheelPressure { get; set; } = physicsPage.WheelPressure;
-    public float[] WheelSlip { get; set; } = physicsPage.WheelSlip;
+    internal PhysicsData() { }
 
-    public override string ToString()
+    internal PhysicsData(PhysicsPage physicsPage)
     {
-        return
-            $"Physics Data Update: Time Stamp: {this.TimeStamp:hh:mm:ss.ffff}, Accelerator: {this.Accelerator}, Brake: {this.Brake}, Fuel: {this.Fuel}, Gear: {this.Gear}, RPM: {this.Rpm}, Steering Angle: {this.SteerAngle}, Speed KMH: {this.SpeedKmh}, X: {this.TyreContactPoint[0].X}, Y: {this.TyreContactPoint[0].Z}";
+        this.Abs = physicsPage.Abs;
+        this.AbsVibrations = physicsPage.AbsVibrations;
+        this.Accelerator = physicsPage.Gas;
+        this.AccG = physicsPage.AccelerationVector;
+        this.AirTemp = physicsPage.AirTemp;
+        this.AutoShiftOn = physicsPage.AutoShifterOn;
+        this.Brake = physicsPage.Brake;
+        this.BrakeBias = physicsPage.BrakeBias;
+        this.BrakePressure = physicsPage.BrakePressure;
+        this.BrakeTemperature = physicsPage.BrakeTemperature;
+        this.CarDamage = physicsPage.CarDamage;
+        this.Clutch = physicsPage.Clutch;
+        this.DiscLife = physicsPage.DiscLife;
+        this.FinalFf = physicsPage.ForceFeedbackSignal;
+        this.FrontBrakeCompound = physicsPage.FrontBrakeCompound;
+        this.Fuel = physicsPage.Fuel;
+        this.Gear = physicsPage.Gear;
+        this.GearVibrations = physicsPage.GearVibrations;
+        this.Heading = physicsPage.Heading;
+        this.IgnitionOn = physicsPage.IgnitionOn;
+        this.IsAiControlled = physicsPage.IsAiControlled;
+        this.IsEngineRunning = physicsPage.IsEngineRunning;
+        this.KerbVibration = physicsPage.KerbVibrations;
+        this.LocalAngularVelocity = physicsPage.LocalAngularVelocity;
+        this.LocalVelocity = physicsPage.LocalVelocity;
+        this.PacketId = physicsPage.PacketId;
+        this.PadLife = physicsPage.PadLife;
+        this.Pitch = physicsPage.Pitch;
+        this.PitLimiterOn = physicsPage.PitLimiterOn;
+        this.RearBrakeCompound = physicsPage.RearBrakeCompound;
+        this.Roll = physicsPage.Roll;
+        this.Rpm = physicsPage.Rpm;
+        this.SlipAngle = physicsPage.SlipAngle;
+        this.SlipRatio = physicsPage.SlipRatio;
+        this.SlipVibrations = physicsPage.SlipVibrations;
+        this.SpeedKmh = physicsPage.SpeedKmh;
+        this.StarterEngineOn = physicsPage.StarterEngineOn;
+        this.SteerAngle = physicsPage.SteerAngle;
+        this.SuspensionDamage = physicsPage.SuspensionDamage;
+        this.SuspensionTravel = physicsPage.SuspensionTravel;
+        this.TrackTemp = physicsPage.RoadTemp;
+        this.TractionControl = physicsPage.TC;
+        this.TurboBoost = physicsPage.TurboBoost;
+        this.TyreContactHeading = physicsPage.TyreContactHeadings;
+        this.TyreContactNormal = physicsPage.TyreContactNormals;
+        this.TyreContactPoint = physicsPage.TyreContactPoints;
+        this.TyreCoreTemperature = physicsPage.TyreCoreTemperature;
+        this.TyreTemp = physicsPage.TyreTemp;
+        this.Velocity = physicsPage.Velocity;
+        this.WaterTemp = physicsPage.WaterTemp;
+        this.WheelAngularSpeed = physicsPage.WheelAngularSpeed;
+        this.WheelPressure = physicsPage.WheelPressure;
+        this.WheelSlip = physicsPage.WheelSlip;
     }
+
+    public float Abs { get; }
+    public float AbsVibrations { get; }
+    public float Accelerator { get; }
+    public float[] AccG { get; }
+    public float AirTemp { get; }
+    public bool AutoShiftOn { get; }
+    public float Brake { get; }
+    public float BrakeBias { get; }
+    public float[] BrakePressure { get; }
+    public float[] BrakeTemperature { get; }
+    public float[] CarDamage { get; }
+    public float Clutch { get; }
+    public float[] DiscLife { get; }
+    public float FinalFf { get; }
+    public int FrontBrakeCompound { get; }
+    public float Fuel { get; }
+    public int Gear { get; }
+    public float GearVibrations { get; }
+    public float Heading { get; }
+    public bool IgnitionOn { get; }
+    public bool IsAiControlled { get; }
+    public bool IsEngineRunning { get; }
+    public float KerbVibration { get; }
+    public float[] LocalAngularVelocity { get; }
+    public float[] LocalVelocity { get; }
+    public int PacketId { get; }
+    public float[] PadLife { get; }
+    public float Pitch { get; }
+    public bool PitLimiterOn { get; }
+    public int RearBrakeCompound { get; }
+    public float Roll { get; }
+    public int Rpm { get; }
+    public float[] SlipAngle { get; }
+    public float[] SlipRatio { get; }
+    public float SlipVibrations { get; }
+    public float SpeedKmh { get; }
+    public bool StarterEngineOn { get; }
+    public float SteerAngle { get; }
+    public float[] SuspensionDamage { get; }
+    public float[] SuspensionTravel { get; }
+    public DateTime TimeStamp { get; } = DateTime.UtcNow;
+    public float TrackTemp { get; }
+    public float TractionControl { get; }
+    public float TurboBoost { get; }
+    public AccCoordinate3d[] TyreContactHeading { get; }
+    public AccCoordinate3d[] TyreContactNormal { get; }
+    public AccCoordinate3d[] TyreContactPoint { get; }
+    public float[] TyreCoreTemperature { get; }
+    public float[] TyreTemp { get; }
+    public float[] Velocity { get; }
+    public float WaterTemp { get; }
+    public float[] WheelAngularSpeed { get; }
+    public float[] WheelPressure { get; }
+    public float[] WheelSlip { get; }
 }

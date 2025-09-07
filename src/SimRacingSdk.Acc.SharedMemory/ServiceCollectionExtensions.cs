@@ -13,7 +13,6 @@ public static class ServiceCollectionExtensions
 
         services.TryAddSingleton<IAccSharedMemoryProvider, AccSharedMemoryProvider>();
         services.TryAddSingleton<IAccSharedMemoryConnectionFactory, AccSharedMemoryConnectionFactory>();
-        services.TryAddSingleton<IAccTelemetryConnectionFactory, AccTelemetryConnectionFactory>();
         return services;
     }
 }

@@ -2,8 +2,6 @@
 
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
-using System.Text;
-using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Models;
 
 namespace SimRacingSdk.Acc.SharedMemory.Messages;
@@ -144,24 +142,15 @@ public class PhysicsPage
     public float AbsVibrations;
    
 
-    public static bool TryRead(out PhysicsPage physicsPage)
+    public static PhysicsPage Read()
     {
-        try
-        {
-            using var mappedFile = MemoryMappedFile.OpenExisting(PhysicsMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream(0,0,MemoryMappedFileAccess.Read);
+        using var mappedFile = MemoryMappedFile.OpenExisting(PhysicsMap, MemoryMappedFileRights.Read);
+        using var stream = mappedFile.CreateViewStream(0, 0, MemoryMappedFileAccess.Read);
 
-            stream.ReadExactly(buffer, 0, buffer.Length);
-            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            physicsPage = Marshal.PtrToStructure<PhysicsPage>(handle.AddrOfPinnedObject());
-            handle.Free();
-            return true;
-
-        }
-        catch(FileNotFoundException)
-        {
-            physicsPage = null;
-            return false;
-        }
+        stream.ReadExactly(buffer, 0, buffer.Length);
+        var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+        var physicsPage = Marshal.PtrToStructure<PhysicsPage>(handle.AddrOfPinnedObject());
+        handle.Free();
+        return physicsPage;
     }
 }

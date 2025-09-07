@@ -131,24 +131,15 @@ public class GraphicsPage
     public int GapAheadMs;
     public int GapBehindMs;
 
-    public static bool TryRead(out GraphicsPage graphicsPage)
+    public static GraphicsPage Read()
     {
-        try
-        {
-            using var mappedFile = MemoryMappedFile.OpenExisting(GraphicsMap, MemoryMappedFileRights.Read);
-            using var stream = mappedFile.CreateViewStream(0,0, MemoryMappedFileAccess.Read);
+        using var mappedFile = MemoryMappedFile.OpenExisting(GraphicsMap, MemoryMappedFileRights.Read);
+        using var stream = mappedFile.CreateViewStream(0, 0, MemoryMappedFileAccess.Read);
 
-            stream.ReadExactly(buffer, 0, buffer.Length);
-            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            graphicsPage = Marshal.PtrToStructure<GraphicsPage>(handle.AddrOfPinnedObject());
-            handle.Free();
-            return true;
-
-        }
-        catch(FileNotFoundException)
-        {
-            graphicsPage = null;
-            return false;
-        }
+        stream.ReadExactly(buffer, 0, buffer.Length);
+        var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+        var graphicsPage = Marshal.PtrToStructure<GraphicsPage>(handle.AddrOfPinnedObject());
+        handle.Free();
+        return graphicsPage;
     }
 }
