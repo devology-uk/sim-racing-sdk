@@ -9,7 +9,6 @@ using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Messages;
-using Timer = System.Timers.Timer;
 
 namespace SimRacingSdk.Acc.Udp;
 
@@ -17,15 +16,15 @@ public class AccUdpConnection : IAccUdpConnection
 {
     private readonly AccUdpMessageHandler accUdpMessageHandler;
     private readonly IPEndPoint ipEndPoint;
-    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
+    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(10);
     private readonly CompositeDisposable subscriptionSink = new();
-    private Timer disconnectTimer;
     private bool isConnected;
     private bool isDisposed;
     private bool isStopped;
     private DateTime lastRealTimeUpdate;
     private Task listenerTask;
     private UdpClient udpClient;
+    private SessionPhase currentPhase;
 
     public AccUdpConnection(string ipAddress,
         int port,
@@ -83,7 +82,7 @@ public class AccUdpConnection : IAccUdpConnection
 
             this.listenerTask = this.HandleMessages();
             this.accUdpMessageHandler.RequestTrackData();
-            this.StartDisconnectedTimer();
+            this.StartDisconnectedWatcher();
         }
         catch(Exception exception)
         {
@@ -196,6 +195,7 @@ public class AccUdpConnection : IAccUdpConnection
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.lastRealTimeUpdate = DateTime.Now;
+        this.currentPhase = realtimeUpdate.Phase;
     }
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
@@ -221,6 +221,11 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void Shutdown()
     {
+        if(this.isStopped)
+        {
+            return;
+        }
+
         this.LogMessage(LoggingLevel.Information, "Disconnecting from ACC Broadcasting API...");
         this.isStopped = true;
         this.accUdpMessageHandler.Disconnect();
@@ -228,27 +233,24 @@ public class AccUdpConnection : IAccUdpConnection
         this.udpClient?.Close();
         this.udpClient?.Dispose();
         this.udpClient = null;
-        this.disconnectTimer.Stop();
-        this.disconnectTimer.Dispose();
     }
 
-    private void StartDisconnectedTimer()
+    private void StartDisconnectedWatcher()
     {
-        this.disconnectTimer = new Timer(TimeSpan.FromSeconds(1));
-        this.disconnectTimer.Elapsed += (sender, args) =>
-                                        {
-                                            var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
-                                            if(!this.isConnected
-                                               || timeSinceLastUpdate <= TimeSpan.FromSeconds(2))
-                                            {
-                                                return;
-                                            }
+        var subscription = Observable.Interval(this.messageTimeout).Subscribe(n =>
+            {
+                var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
+                if(!this.isConnected || timeSinceLastUpdate <= this.messageTimeout)
+                {
+                    return;
+                }
 
-                                            
-                                            this.LogMessage(LoggingLevel.Information,
-                                                "ACC has stopped sending messages, the user has probably quit the session.");
-                                            this.Shutdown();
-                                        };
+
+                this.LogMessage(LoggingLevel.Information,
+                    "ACC has stopped sending messages, the user has probably quit the session.");
+                this.Shutdown();
+            });
+        this.subscriptionSink.Add(subscription);
     }
 
     private void WaitUntilRegistered()
