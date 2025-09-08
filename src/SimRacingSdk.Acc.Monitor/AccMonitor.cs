@@ -10,6 +10,7 @@ using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Exceptions;
 using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
+using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -25,8 +26,8 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccAccident> accidentsSubject = new();
     private readonly IAccLocalConfigProvider accLocalConfigProvider;
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
-    private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
+    private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly Subject<AccLap> completedLapsSubject = new();
     private readonly List<AccEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccEventEntry>> entryListSubject = new();
@@ -34,6 +35,8 @@ public class AccMonitor : IAccMonitor
     private readonly ReplaySubject<AccEventEntry> eventEntriesSubject = new();
     private readonly ReplaySubject<AccEvent> eventStartedSubject = new();
     private readonly Subject<AccGreenFlag> greenFlagSubject = new();
+    private readonly Subject<bool> isWhiteFlagActiveSubject = new();
+    private readonly Subject<bool> isYellowFlagActiveSubject = new();
     private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccPenalty> penaltiesSubject = new();
     private readonly Subject<AccLap> personalBestLapSubject = new();
@@ -44,13 +47,17 @@ public class AccMonitor : IAccMonitor
     private readonly ReplaySubject<AccSession> sessionEndedSubject = new();
     private readonly Subject<AccSession> sessionOverSubject = new();
     private readonly ReplaySubject<AccSession> sessionStartedSubject = new();
+    private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
+    private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private IAccUdpConnection? accUdpConnection;
     private AccEvent? currentEvent;
     private AccSessionPhase? currentPhase;
     private AccSession? currentSession;
-    private CompositeDisposable? subscriptionSink;
-    private IAccSharedMemoryConnection? accSharedMemoryConnection;
+    private bool isWhiteFlagActive;
+    private bool isYellowFlagActive;
+    private CompositeDisposable? sharedMemorySubscriptionSink;
+    private CompositeDisposable? udpSubscriptionSink;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -74,17 +81,19 @@ public class AccMonitor : IAccMonitor
     public IObservable<AccEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
     public IObservable<AccEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
+    public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
+    public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
     public IObservable<AccSessionPhase> PhaseEnded => this.phaseEndedSubject.AsObservable();
     public IObservable<AccSessionPhase> PhaseStarted => this.phaseStartedSubject.AsObservable();
-    public IObservable<RealtimeCarUpdate> RealtimeCarUpdates =>
-        this.realtimeCarUpdatesSubject.AsObservable();
+    public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
     public IObservable<AccSession> SessionEnded => this.sessionEndedSubject.AsObservable();
     public IObservable<AccSession> SessionOver => this.sessionOverSubject.AsObservable();
     public IObservable<AccSession> SessionStarted => this.sessionStartedSubject.AsObservable();
+    public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
     {
@@ -112,18 +121,15 @@ public class AccMonitor : IAccMonitor
             broadcastingSettings.ConnectionPassword,
             broadcastingSettings.CommandPassword);
 
-        this.LogMessage(LoggingLevel.Information,
-            "Preparing connection to ACC Shared Memory interface for telemetry.");
-        this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
-
-        this.PrepareMessageProcessing();
+        this.PrepareUdpMessageProcessing();
 
         this.accUdpConnection.Connect();
     }
 
     public void Stop()
     {
-        this.subscriptionSink?.Dispose();
+        this.udpSubscriptionSink?.Dispose();
+        this.sharedMemorySubscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null;
         this.accSharedMemoryConnection?.Dispose();
@@ -181,10 +187,14 @@ public class AccMonitor : IAccMonitor
     private void OnNextConnectionStateChange(ConnectionState connectionState)
     {
         this.LogMessage(LoggingLevel.Information, connectionState.ToString());
-        if(!connectionState.IsConnected && this.currentEvent != null)
+        if(connectionState.IsConnected || this.currentEvent == null)
         {
-            this.eventEndedSubject.OnNext(this.currentEvent);
+            return;
         }
+
+        this.eventEndedSubject.OnNext(this.currentEvent);
+        this.currentEvent = null;
+        this.accSharedMemoryConnection?.Dispose();
     }
 
     private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
@@ -217,6 +227,13 @@ public class AccMonitor : IAccMonitor
         this.entryList.Add(eventEntry);
         this.eventEntriesSubject.OnNext(eventEntry);
         this.entryListSubject.OnNext(this.entryList);
+    }
+
+    private void OnNextFlagState(AccFlagState accFlagState)
+    {
+        this.LogMessage(LoggingLevel.Information, accFlagState.ToString());
+        this.ProcessYellowFlagState(accFlagState);
+        this.ProcessWhiteFlagState(accFlagState);
     }
 
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
@@ -263,6 +280,13 @@ public class AccMonitor : IAccMonitor
         this.phaseStartedSubject.OnNext(this.currentPhase);
     }
 
+    private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
+    {
+        this.LogMessage(LoggingLevel.Information, telemetryFrame.ToString());
+
+        this.telemetrySubject.OnNext(telemetryFrame);
+    }
+
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
         this.LogMessage(LoggingLevel.Information, trackDataUpdate.ToString());
@@ -272,11 +296,28 @@ public class AccMonitor : IAccMonitor
         this.eventStartedSubject.OnNext(this.currentEvent);
         this.entryList.Clear();
         this.entryListSubject.OnNext(this.entryList);
+
+        this.PrepareSharedMemoryConnection();
     }
 
-    private void PrepareMessageProcessing()
+    private void PrepareSharedMemoryConnection()
     {
-        this.subscriptionSink = new CompositeDisposable
+        this.LogMessage(LoggingLevel.Information,
+            "Preparing connection to ACC Shared Memory interface for telemetry.");
+        this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
+
+        this.sharedMemorySubscriptionSink = new CompositeDisposable
+        {
+            this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
+            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
+        };
+
+        this.accSharedMemoryConnection.Start();
+    }
+
+    private void PrepareUdpMessageProcessing()
+    {
+        this.udpSubscriptionSink = new CompositeDisposable
         {
             this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
             this.accUdpConnection.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
@@ -445,5 +486,27 @@ public class AccMonitor : IAccMonitor
     private void ProcessSessionOverEvent(BroadcastingEvent broadcastingEvent)
     {
         this.sessionOverSubject.OnNext(this.currentSession!);
+    }
+
+    private void ProcessWhiteFlagState(AccFlagState accFlagState)
+    {
+        if(this.isWhiteFlagActive == accFlagState.IsWhiteFlagActive)
+        {
+            return;
+        }
+
+        this.isWhiteFlagActive = accFlagState.IsWhiteFlagActive;
+        this.isWhiteFlagActiveSubject.OnNext(this.isWhiteFlagActive);
+    }
+
+    private void ProcessYellowFlagState(AccFlagState accFlagState)
+    {
+        if(this.isYellowFlagActive == accFlagState.IsYellowFlagActive)
+        {
+            return;
+        }
+
+        this.isYellowFlagActive = accFlagState.IsYellowFlagActive;
+        this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
 }

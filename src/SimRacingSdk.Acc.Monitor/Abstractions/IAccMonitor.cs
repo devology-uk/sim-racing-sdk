@@ -1,5 +1,6 @@
 ﻿using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Monitor.Messages;
+using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Monitor.Abstractions;
@@ -13,6 +14,8 @@ public interface IAccMonitor : IDisposable
     IObservable<AccEventEntry> EventEntries { get; }
     IObservable<AccEvent> EventStarted { get; }
     IObservable<AccGreenFlag> GreenFlag { get; }
+    IObservable<bool> IsWhiteFlagActive { get; }
+    IObservable<bool> IsYellowFlagActive { get; }
     IObservable<LogMessage> LogMessages { get; }
     IObservable<AccPenalty> Penalties { get; }
     IObservable<AccLap> PersonalBestLap { get; }
@@ -23,6 +26,7 @@ public interface IAccMonitor : IDisposable
     IObservable<AccSession> SessionEnded { get; }
     IObservable<AccSession> SessionOver { get; }
     IObservable<AccSession> SessionStarted { get; }
+    IObservable<AccTelemetryFrame> Telemetry { get; }
     void Start(string? connectionIdentifier = null);
     void Stop();
 }
