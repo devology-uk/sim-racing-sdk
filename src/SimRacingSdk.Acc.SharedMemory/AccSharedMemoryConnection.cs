@@ -52,6 +52,12 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
                                                 () => this.telemetrySubject.OnCompleted());
     }
 
+    public void Stop()
+    {
+        this.updateSubscription?.Dispose();
+        this.updateSubscription = null;
+    }
+
     protected virtual void Dispose(bool disposing)
     {
         if(!disposing)
@@ -59,7 +65,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             return;
         }
 
-        this.telemetrySubject.Dispose();
         this.updateSubscription?.Dispose();
     }
 

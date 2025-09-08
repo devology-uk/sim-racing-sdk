@@ -13,4 +13,5 @@ public interface IAccSharedMemoryConnection : IDisposable
     IObservable<AccTelemetryFrame> Telemetry { get; }
     IObservable<bool> ConnectedState { get; }
     void Start(double updateIntervalMs = 100);
+    void Stop();
 }
