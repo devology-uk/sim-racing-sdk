@@ -13,8 +13,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly ReplaySubject<AccSharedMemoryEvent> newEventSubject = new();
     private readonly ReplaySubject<AccSharedMemoryLap> newLapSubject = new();
-    private readonly Subject<string> sessionEndedSubject = new();
-    private readonly Subject<string> sessionStartedSubject = new();
+    private readonly Subject<string> newSessionSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
     private readonly ReplaySubject<AccTelemetryFrame> telemetrySubject = new();
     private int actualSectorIndex;
@@ -33,8 +32,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
     public IObservable<AccSharedMemoryLap> NewLap => this.newLapSubject.AsObservable();
-    public IObservable<string> SessionEnded => this.sessionEndedSubject.AsObservable();
-    public IObservable<string> SessionStarted => this.sessionStartedSubject.AsObservable();
+    public IObservable<string> NewSession => this.newSessionSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
@@ -130,12 +128,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
         if(this.lastGraphicsData == null)
         {
-            this.sessionStartedSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+            this.newSessionSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
         }
         else if(this.lastGraphicsData.SessionType != graphicsData.SessionType)
         {
-            this.sessionEndedSubject.OnNext(this.lastGraphicsData.SessionType.ToFriendlyName());
-            this.sessionStartedSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+            this.newSessionSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
         }
 
         this.lastGraphicsData = graphicsData;
@@ -162,14 +159,16 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             this.isOnActiveLap = false;
         }
 
-        if(this.isOnActiveLap)
+        if(!this.isOnActiveLap)
         {
-            var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
-            this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
-                graphicsData,
-                physicsData,
-                this.actualSectorIndex));
-            this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, physicsData.ToString()));
+            return;
         }
+
+        var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
+        this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
+            graphicsData,
+            physicsData,
+            this.actualSectorIndex));
+        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, physicsData.ToString()));
     }
 }
