@@ -65,7 +65,6 @@ public partial class App : Application
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
-        services.AddTransient<ITelemetryOnlyDemo, TelemetryOnlyDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IMonitorDemo, MonitorDemo>();
         services.AddTransient<IUdpLog, UdpLog>();

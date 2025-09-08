@@ -20,7 +20,6 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly ILogger<MainWindowViewModel> logger;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
-    private readonly ITelemetryOnlyDemo telemetryOnlyDemo;
     private readonly IMonitorDemo monitorDemo;
     private readonly IUdpDemo udpDemo;
 
@@ -36,7 +35,6 @@ public partial class MainWindowViewModel : ObservableObject
         IAccGameDetector accGameDetector,
         IUdpDemo udpDemo,
         ISharedMemoryDemo sharedMemoryDemo,
-        ITelemetryOnlyDemo telemetryOnlyDemo,
         IMonitorDemo monitorDemo)
     {
         this.logger = logger;
@@ -45,7 +43,6 @@ public partial class MainWindowViewModel : ObservableObject
         this.accGameDetector = accGameDetector;
         this.udpDemo = udpDemo;
         this.sharedMemoryDemo = sharedMemoryDemo;
-        this.telemetryOnlyDemo = telemetryOnlyDemo;
         this.monitorDemo = monitorDemo;
     }
 
@@ -100,27 +97,6 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
         this.sharedMemoryDemo.Start();
-    }
-
-    [RelayCommand]
-    private async Task StartTelemetryOnlySharedDemo()
-    {
-        this.consoleLog.Clear();
-        this.StopRunningDemos();
-        this.IsRunningDemo = true;
-        this.CheckCompatibility();
-
-        if(!this.telemetryOnlyDemo.Validate())
-        {
-            return;
-        }
-
-        await this.WaitFormGame();
-        if(!this.isGameRunning)
-        {
-            return;
-        }
-        this.telemetryOnlyDemo.Start();
     }
 
     [RelayCommand]
@@ -204,8 +180,8 @@ public partial class MainWindowViewModel : ObservableObject
     private void StopRunningDemos()
     {
         this.sharedMemoryDemo.Stop();
-        this.telemetryOnlyDemo.Stop();
         this.udpDemo.Stop();
+        this.monitorDemo.Stop();
         this.IsRunningDemo = false;
     }
 

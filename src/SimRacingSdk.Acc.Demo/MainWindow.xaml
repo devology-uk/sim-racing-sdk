@@ -35,9 +35,6 @@
             <Button Content="Shared Memory Demo"
                     Command="{Binding StartSharedMemoryDemoCommand}"
                     ToolTip="Start the demo of AccSharedMemoryConnection for connecting to the ACC Shared Memory channels" />
-            <Button Content="Telemetry Only Demo"
-                    Command="{Binding StartTelemetryOnlySharedDemoCommand}"
-                    ToolTip="Start the demo of AccTelemetryConnection for getting only telemetry data from the ACC Shared Memory channels" />
             <Button Content="Monitor Demo"
                     Command="{Binding StartMonitorDemoCommand}"
                     ToolTip="Start the demo of AccMonitor, which combines AccUdpConnection and AccTelemetryOnlyConnection to provide state and data an application can use." />
