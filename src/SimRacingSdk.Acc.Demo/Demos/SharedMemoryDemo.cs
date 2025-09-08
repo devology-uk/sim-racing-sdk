@@ -20,6 +20,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private readonly ISharedMemoryLog sharedMemoryLog;
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private CompositeDisposable? subscriptionSink;
+    private int telemetryFrameCount;
 
     public SharedMemoryDemo(ILogger<SharedMemoryDemo> logger,
         IConsoleLog consoleLog,
@@ -41,9 +42,12 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.subscriptionSink = new CompositeDisposable
         {
             this.accSharedMemoryConnection.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.accSharedMemoryConnection.ConnectedState.Subscribe(this.OnNextConnectedState),
+            this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
             this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNextNewEvent),
             this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNextNewLap),
-            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextFrame)
+            this.accSharedMemoryConnection.NewSession.Subscribe(this.OnNextNewSession),
+            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };
         this.accSharedMemoryConnection.Start();
     }
@@ -56,6 +60,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         }
 
         this.Log("Stopping Shared Memory Demo...");
+        this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
         this.subscriptionSink?.Dispose();
         this.accSharedMemoryConnection?.Dispose();
         this.accSharedMemoryConnection = null!;
@@ -73,9 +78,27 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.consoleLog.Write(message);
     }
 
-    private void OnNextFrame(AccTelemetryFrame accSharedMemoryFrame)
+    private void OnNextConnectedState(bool isConnected)
     {
-        this.Log(accSharedMemoryFrame.ToString());
+        if(isConnected)
+        {
+            this.Log("Connected to ACC Shared Memory interface...");
+            return;
+        }
+
+        this.Log("Disconnected from ACC Shared Memory interface...", LogLevel.Warning);
+    }
+
+    private void OnNextFlagState(AccFlagState accFlagState)
+    {
+        this.Log(accFlagState.ToString());
+    }
+
+    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
+    {
+        // too much information to log telemetry frames, which are logged via log messages
+        // just maintaining a count to report at the end
+        this.telemetryFrameCount++;
     }
 
     private void OnNextLogMessage(LogMessage logMessage)
@@ -91,5 +114,10 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private void OnNextNewLap(AccSharedMemoryLap accSharedMemoryLap)
     {
         this.Log(accSharedMemoryLap.ToString());
+    }
+
+    private void OnNextNewSession(string sessionType)
+    {
+        this.Log($"New Session: {sessionType}");
     }
 }
