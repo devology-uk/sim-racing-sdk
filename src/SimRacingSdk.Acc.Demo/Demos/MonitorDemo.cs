@@ -8,6 +8,15 @@
  * Bear in mind that the UDP Broadcasting interface provides data for all drivers on track, while the Shared Memory interface only
  * provides data for the player car.  Therefore, telemetry can only be captured for laps completed by the current player on the computer running
  * an application that uses this monitoring component.
+ *
+ * Also bear in mind that neither of the interfaces provides a unique identifier for a driver, the only properties we can use to match laps from
+ * the UDP interface with telemetry frames from the Shared Memory interface are the driver first name and last name, which may not be unique.
+ *
+ * Whilst driver names can be used to match laps with telemetry frames, this does not guarantee they can be mapped to a user profile in ACC.
+ * The Account object provided by this SDK will give you the First and Last name the user has configured in ACC, but there is no guarantee that these names match
+ * what is in the data because they can be overridden by Entry Lists when hosting events using ACC Server.
+ *
+ * In our own applications where we use this SDK we have implemented a user interface that allows users to map driver names to their user profile.
  */
 
 using System.Reactive.Disposables;
@@ -16,6 +25,7 @@ using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Messages;
+using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
@@ -24,24 +34,22 @@ public class MonitorDemo : IMonitorDemo
 {
     private readonly IAccMonitorFactory accMonitorFactory;
     private readonly IConsoleLog consoleLog;
-    private readonly IUdpLog udpLog;
-    private readonly ISharedMemoryLog sharedMemoryLog;
+    private readonly IMonitorLog monitorLog;
     private readonly ILogger<MonitorDemo> logger;
     private IAccMonitor? accMonitor;
 
     private CompositeDisposable? subscriptionSink;
     private AccSessionPhase? currentPhase;
+    private int telemetryFrameCount;
 
     public MonitorDemo(ILogger<MonitorDemo> logger,
         IConsoleLog consoleLog,
-        IUdpLog udpLog,
-        ISharedMemoryLog sharedMemoryLog,
+        IMonitorLog monitorLog,
         IAccMonitorFactory accMonitorFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
-        this.udpLog = udpLog;
-        this.sharedMemoryLog = sharedMemoryLog;
+        this.monitorLog = monitorLog;
         this.accMonitorFactory = accMonitorFactory;
     }
 
@@ -72,10 +80,32 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.SessionBestLap.Subscribe(this.OnNextSessionBestLap),
             this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
             this.accMonitor.SessionOver.Subscribe(this.OnNextSessionOver),
-            this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted)
+            this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
+
+            this.accMonitor.IsWhiteFlagActive.Subscribe(this.OnNextIsWhiteFlagActive),
+            this.accMonitor.IsYellowFlagActive.Subscribe(this.OnNextIsYellowFlagActive),
+            this.accMonitor.Telemetry.Subscribe(this.OnNextTelemetryFrame),
+            
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
+    }
+
+    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
+    {
+        // too much information to log telemetry frames, which are logged via log messages
+        // just maintaining a count to report at the end
+        this.telemetryFrameCount++;
+    }
+
+    private void OnNextIsWhiteFlagActive(bool isWhiteFlagActive)
+    {
+        this.Log($"White Flag Is Active: {isWhiteFlagActive}");
+    }
+
+    private void OnNextIsYellowFlagActive(bool isYellowFlagActive)
+    {
+        this.Log($"Yellow Flag Is Active: {isYellowFlagActive}");
     }
 
     public void Stop()
@@ -86,8 +116,9 @@ public class MonitorDemo : IMonitorDemo
         }
 
         this.Log("Stopping ACC Monitor Demo...");
+        this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
         this.subscriptionSink?.Dispose();
-        this.accMonitor?.Stop();
+        this.accMonitor?.Dispose();
         this.accMonitor = null;
     }
 
@@ -143,7 +174,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.udpLog.Log(logMessage.ToString());
+        this.monitorLog.Log(logMessage.ToString());
     }
 
     private void OnNextPenalty(AccPenalty accPenalty)
@@ -191,7 +222,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextSessionOver(AccSession accSession)
     {
-        // Session Over is produced by a broadcast even from ACC
+        // Session Over is produced by a broadcast event from ACC
         this.Log($"Session Over: {accSession}");
     }
 

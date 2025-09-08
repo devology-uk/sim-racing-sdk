@@ -69,6 +69,7 @@ public partial class App : Application
         services.AddTransient<IMonitorDemo, MonitorDemo>();
         services.AddTransient<IUdpLog, UdpLog>();
         services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
+        services.AddTransient<IMonitorLog, MonitorLog>();
 
         return services.BuildServiceProvider();
     }
