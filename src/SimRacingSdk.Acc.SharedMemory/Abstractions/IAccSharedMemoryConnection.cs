@@ -3,11 +3,14 @@ using SimRacingSdk.Acc.SharedMemory.Models;
 
 namespace SimRacingSdk.Acc.SharedMemory.Abstractions;
 
-public interface IAccSharedMemoryConnection: IDisposable
+public interface IAccSharedMemoryConnection : IDisposable
 {
-    IObservable<AccTelemetryFrame> Telemetry { get; }
+    IObservable<AccFlagState> FlagState { get; }
+    IObservable<LogMessage> LogMessages { get; }
     IObservable<AccSharedMemoryEvent> NewEvent { get; }
     IObservable<AccSharedMemoryLap> NewLap { get; }
-    IObservable<LogMessage> LogMessages { get; }
+    IObservable<string> NewSession { get; }
+    IObservable<AccTelemetryFrame> Telemetry { get; }
+    IObservable<bool> ConnectedState { get; }
     void Start(double updateIntervalMs = 100);
 }

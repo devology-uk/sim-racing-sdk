@@ -9,6 +9,7 @@ namespace SimRacingSdk.Acc.SharedMemory;
 
 public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
+    private readonly Subject<bool> connectedStateSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly ReplaySubject<AccSharedMemoryEvent> newEventSubject = new();
@@ -16,18 +17,20 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<string> newSessionSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
     private readonly ReplaySubject<AccTelemetryFrame> telemetrySubject = new();
+    
     private int actualSectorIndex;
-
     private StaticData? currentStaticData;
     private bool isOnActiveLap;
     private GraphicsData? lastGraphicsData;
     private IDisposable? updateSubscription;
+    private bool isConnected;
 
     public AccSharedMemoryConnection(IAccSharedMemoryProvider sharedMemoryProvider)
     {
         this.sharedMemoryProvider = sharedMemoryProvider;
     }
 
+    public IObservable<bool> ConnectedState => this.connectedStateSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
@@ -101,12 +104,22 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
+
         if(!staticData.IsActualEvent())
         {
+            if(this.isConnected)
+            {
+                this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Information, "Shared Memory data is no longer available, the user has probably quit the event."));
+                this.connectedStateSubject.OnNext(false);
+            }
+            this.isConnected = false;
             return;
         }
 
         this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, staticData.ToString()));
+
+        this.isConnected = true;
+        this.connectedStateSubject.OnNext(true);
 
         if(this.IsNewEvent(staticData!))
         {
@@ -133,7 +146,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         {
             this.newSessionSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
         }
-
 
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
