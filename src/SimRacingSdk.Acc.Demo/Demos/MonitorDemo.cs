@@ -39,7 +39,7 @@ public class MonitorDemo : IMonitorDemo
     private IAccMonitor? accMonitor;
 
     private CompositeDisposable? subscriptionSink;
-    private AccSessionPhase? currentPhase;
+    private AccMonitorSessionPhase? currentPhase;
     private int telemetryFrameCount;
 
     public MonitorDemo(ILogger<MonitorDemo> logger,
@@ -133,17 +133,17 @@ public class MonitorDemo : IMonitorDemo
         this.consoleLog.Write(message);
     }
 
-    private void OnNextAccident(AccAccident accident)
+    private void OnNextAccident(AccMonitorAccident monitorAccident)
     {
-        this.Log(accident.ToString());
+        this.Log(monitorAccident.ToString());
     }
 
-    private void OnNextCompletedLap(AccLap accLap)
+    private void OnNextCompletedLap(AccMonitorLap accMonitorLap)
     {
-        this.Log(accLap.ToString());
+        this.Log(accMonitorLap.ToString());
     }
 
-    private void OnNextEntryList(IList<AccEventEntry> entryList)
+    private void OnNextEntryList(IList<AccMonitorEventEntry> entryList)
     {
         this.Log("Entry List Updated:");
         foreach(var entry in entryList)
@@ -152,24 +152,24 @@ public class MonitorDemo : IMonitorDemo
         }
     }
 
-    private void OnNextEventEnded(AccEvent accEvent)
+    private void OnNextEventEnded(AccMonitorEvent accMonitorEvent)
     {
-        this.Log($"Event Ended: {accEvent}");
+        this.Log($"Event Ended: {accMonitorEvent}");
     }
 
-    private void OnNextEventEntry(AccEventEntry accEventEntry)
+    private void OnNextEventEntry(AccMonitorEventEntry accMonitorEventEntry)
     {
-        this.Log(accEventEntry.ToString());
+        this.Log(accMonitorEventEntry.ToString());
     }
 
-    private void OnNextEventStarted(AccEvent accEvent)
+    private void OnNextEventStarted(AccMonitorEvent accMonitorEvent)
     {
-        this.Log($"Event Started: {accEvent}");
+        this.Log($"Event Started: {accMonitorEvent}");
     }
 
-    private void OnNextGreenFlag(AccGreenFlag accGreenFlag)
+    private void OnNextGreenFlag(AccMonitorGreenFlag accMonitorGreenFlag)
     {
-        this.Log(accGreenFlag.ToString());
+        this.Log(accMonitorGreenFlag.ToString());
     }
 
     private void OnNextLogMessage(LogMessage logMessage)
@@ -177,25 +177,25 @@ public class MonitorDemo : IMonitorDemo
         this.monitorLog.Log(logMessage.ToString());
     }
 
-    private void OnNextPenalty(AccPenalty accPenalty)
+    private void OnNextPenalty(AccMonitorPenalty accMonitorPenalty)
     {
-        this.Log(accPenalty.ToString());
+        this.Log(accMonitorPenalty.ToString());
     }
 
-    private void OnNextPersonalBestLap(AccLap accLap)
+    private void OnNextPersonalBestLap(AccMonitorLap accMonitorLap)
     {
-        this.Log($"Best Session Lap: {accLap}");
+        this.Log($"Best Session Lap: {accMonitorLap}");
     }
 
-    private void OnNextPhaseEnded(AccSessionPhase accSessionPhase)
+    private void OnNextPhaseEnded(AccMonitorSessionPhase accMonitorSessionPhase)
     {
-        this.Log($"Phase Ended: {accSessionPhase}");
+        this.Log($"Phase Ended: {accMonitorSessionPhase}");
     }
 
-    private void OnNextPhaseStarted(AccSessionPhase accSessionPhase)
+    private void OnNextPhaseStarted(AccMonitorSessionPhase accMonitorSessionPhase)
     {
-        this.currentPhase = accSessionPhase;
-        this.Log($"Phase Started: {accSessionPhase}");
+        this.currentPhase = accMonitorSessionPhase;
+        this.Log($"Phase Started: {accMonitorSessionPhase}");
     }
 
     private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
@@ -209,25 +209,25 @@ public class MonitorDemo : IMonitorDemo
         this.Log(realtimeCarUpdate.ToString());
     }
 
-    private void OnNextSessionBestLap(AccLap accLap)
+    private void OnNextSessionBestLap(AccMonitorLap accMonitorLap)
     {
-        this.Log($"Best Personal Lap: {accLap}");
+        this.Log($"Best Personal Lap: {accMonitorLap}");
     }
 
-    private void OnNextSessionEnded(AccSession accSession)
+    private void OnNextSessionEnded(AccMonitorSession accMonitorSession)
     {
         // Session Ended is produced by ACC monitor when it detects a change in session type
-        this.Log($"Session Ended: {accSession}");
+        this.Log($"Session Ended: {accMonitorSession}");
     }
 
-    private void OnNextSessionOver(AccSession accSession)
+    private void OnNextSessionOver(AccMonitorSession accMonitorSession)
     {
         // Session Over is produced by a broadcast event from ACC
-        this.Log($"Session Over: {accSession}");
+        this.Log($"Session Over: {accMonitorSession}");
     }
 
-    private void OnNextSessionStarted(AccSession accSession)
+    private void OnNextSessionStarted(AccMonitorSession accMonitorSession)
     {
-        this.Log($"Session Started: {accSession}");
+        this.Log($"Session Started: {accMonitorSession}");
     }
 }

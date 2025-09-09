@@ -7,25 +7,25 @@ namespace SimRacingSdk.Acc.Monitor.Abstractions;
 
 public interface IAccMonitor : IDisposable
 {
-    IObservable<AccAccident> Accidents { get; }
-    IObservable<AccLap> CompletedLaps { get; }
-    IObservable<IList<AccEventEntry>> EntryList { get; }
-    IObservable<AccEvent> EventEnded { get; }
-    IObservable<AccEventEntry> EventEntries { get; }
-    IObservable<AccEvent> EventStarted { get; }
-    IObservable<AccGreenFlag> GreenFlag { get; }
+    IObservable<AccMonitorAccident> Accidents { get; }
+    IObservable<AccMonitorLap> CompletedLaps { get; }
+    IObservable<IList<AccMonitorEventEntry>> EntryList { get; }
+    IObservable<AccMonitorEvent> EventEnded { get; }
+    IObservable<AccMonitorEventEntry> EventEntries { get; }
+    IObservable<AccMonitorEvent> EventStarted { get; }
+    IObservable<AccMonitorGreenFlag> GreenFlag { get; }
     IObservable<bool> IsWhiteFlagActive { get; }
     IObservable<bool> IsYellowFlagActive { get; }
     IObservable<LogMessage> LogMessages { get; }
-    IObservable<AccPenalty> Penalties { get; }
-    IObservable<AccLap> PersonalBestLap { get; }
-    IObservable<AccSessionPhase> PhaseEnded { get; }
-    IObservable<AccSessionPhase> PhaseStarted { get; }
+    IObservable<AccMonitorPenalty> Penalties { get; }
+    IObservable<AccMonitorLap> PersonalBestLap { get; }
+    IObservable<AccMonitorSessionPhase> PhaseEnded { get; }
+    IObservable<AccMonitorSessionPhase> PhaseStarted { get; }
     IObservable<RealtimeCarUpdate> RealtimeCarUpdates { get; }
-    IObservable<AccLap> SessionBestLap { get; }
-    IObservable<AccSession> SessionEnded { get; }
-    IObservable<AccSession> SessionOver { get; }
-    IObservable<AccSession> SessionStarted { get; }
+    IObservable<AccMonitorLap> SessionBestLap { get; }
+    IObservable<AccMonitorSession> SessionEnded { get; }
+    IObservable<AccMonitorSession> SessionOver { get; }
+    IObservable<AccMonitorSession> SessionStarted { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }
     void Start(string? connectionIdentifier = null);
     void Stop();

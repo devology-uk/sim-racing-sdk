@@ -4,4 +4,4 @@ using SimRacingSdk.Acc.Monitor.Abstractions;
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccSession(string EventId, string SessionType) : AccMonitorMessageBase { }
+public record AccMonitorSession(string EventId, string SessionType) : AccMonitorMessageBase { }

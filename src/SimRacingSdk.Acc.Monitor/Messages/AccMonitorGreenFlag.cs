@@ -2,4 +2,4 @@
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccGreenFlag(string? SessionId) : AccMonitorMessageBase { }
+public record AccMonitorGreenFlag(string? SessionId) : AccMonitorMessageBase { }
