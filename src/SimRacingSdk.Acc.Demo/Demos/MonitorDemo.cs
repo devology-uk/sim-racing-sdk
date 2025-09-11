@@ -62,7 +62,7 @@ public class MonitorDemo : IMonitorDemo
         this.subscriptionSink = new CompositeDisposable
         {
             this.accMonitor.Accidents.Subscribe(this.OnNextAccident),
-            this.accMonitor.CompletedLaps.Subscribe(this.OnNextCompletedLap),
+            this.accMonitor.LapCompleted.Subscribe(this.OnNextCompletedLap),
 
             // usually you would only subscribe to one of the next two, but both are shown here for demonstration purposes
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),

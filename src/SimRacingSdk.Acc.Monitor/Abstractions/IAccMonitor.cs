@@ -8,7 +8,7 @@ namespace SimRacingSdk.Acc.Monitor.Abstractions;
 public interface IAccMonitor : IDisposable
 {
     IObservable<AccMonitorAccident> Accidents { get; }
-    IObservable<AccMonitorLap> CompletedLaps { get; }
+    IObservable<AccMonitorLap> LapCompleted { get; }
     IObservable<IList<AccMonitorEventEntry>> EntryList { get; }
     IObservable<AccMonitorEvent> EventEnded { get; }
     IObservable<AccMonitorEventEntry> EventEntries { get; }

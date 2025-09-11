@@ -28,7 +28,6 @@ public class AccMonitor : IAccMonitor
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
-    private readonly Subject<AccMonitorLap> completedLapsSubject = new();
     private readonly List<AccMonitorEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEventEntry>> entryListSubject = new();
     private readonly ReplaySubject<AccMonitorEvent> eventEndedSubject = new();
@@ -37,6 +36,7 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccMonitorGreenFlag> greenFlagSubject = new();
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
+    private readonly Subject<AccMonitorLap> lapCompletedSubject = new();
     private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccMonitorPenalty> penaltiesSubject = new();
     private readonly Subject<AccMonitorLap> personalBestLapSubject = new();
@@ -75,7 +75,6 @@ public class AccMonitor : IAccMonitor
     }
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
-    public IObservable<AccMonitorLap> CompletedLaps => this.completedLapsSubject.AsObservable();
     public IObservable<IList<AccMonitorEventEntry>> EntryList => this.entryListSubject.AsObservable();
     public IObservable<AccMonitorEvent> EventEnded => this.eventEndedSubject.AsObservable();
     public IObservable<AccMonitorEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
@@ -83,6 +82,7 @@ public class AccMonitor : IAccMonitor
     public IObservable<AccMonitorGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
+    public IObservable<AccMonitorLap> LapCompleted => this.lapCompletedSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccMonitorPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccMonitorLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
@@ -276,7 +276,8 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        this.currentPhase = new AccMonitorSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
+        this.currentPhase =
+            new AccMonitorSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
         this.phaseStartedSubject.OnNext(this.currentPhase);
     }
 
@@ -376,7 +377,7 @@ public class AccMonitor : IAccMonitor
             CarManufacturer = car!.ManufacturerTag,
             CarModelName = car.DisplayName,
             CarCupCategory = (CupCategory)carInfo.CupCategory,
-            CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             EventId = this.currentEvent!.Id,
             CarIndex = carInfo.CarIndex,
@@ -406,7 +407,7 @@ public class AccMonitor : IAccMonitor
             CarManufacturer = car!.ManufacturerTag,
             CarModelName = car.DisplayName,
             CarCupCategory = (CupCategory)carInfo.CupCategory,
-            CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             EventId = this.currentEvent!.Id,
             CarIndex = carInfo.CarIndex,
@@ -441,7 +442,7 @@ public class AccMonitor : IAccMonitor
             CarManufacturer = car!.ManufacturerTag,
             CarModelName = car.DisplayName,
             CarCupCategory = (CupCategory)carInfo.CupCategory,
-            CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             EventId = this.currentEvent!.Id,
             CarIndex = carInfo.CarIndex,
@@ -450,7 +451,7 @@ public class AccMonitor : IAccMonitor
             TeamName = carInfo.TeamName
         };
 
-        this.completedLapsSubject.OnNext(accLap);
+        this.lapCompletedSubject.OnNext(accLap);
     }
 
     private void ProcessPenaltyComMsgEvent(BroadcastingEvent broadcastingEvent)
