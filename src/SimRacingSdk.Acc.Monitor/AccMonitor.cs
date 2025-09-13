@@ -58,6 +58,8 @@ public class AccMonitor : IAccMonitor
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private CompositeDisposable? udpSubscriptionSink;
+    private AccSharedMemorySession? accSharedMemorySession;
+    private AccSharedMemoryEvent? accSharedMemoryEvent;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -264,6 +266,19 @@ public class AccMonitor : IAccMonitor
         {
             if(this.currentSession != null)
             {
+                if(this.accSharedMemorySession != null
+                   && this.accSharedMemorySession.SessionType == this.currentSession.SessionType)
+                {
+                    this.currentSession.Duration =
+                        TimeSpan.FromMilliseconds(this.accSharedMemorySession.DurationMs);
+                }
+
+                if(this.accSharedMemoryEvent != null)
+                {
+                    this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+                    this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
+                }
+
                 this.sessionEndedSubject.OnNext(this.currentSession);
             }
 
@@ -310,12 +325,26 @@ public class AccMonitor : IAccMonitor
         this.sharedMemorySubscriptionSink = new CompositeDisposable
         {
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
+            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame),
+            this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNextNewEvent),
+            this.accSharedMemoryConnection.NewSession.Subscribe(this.OnNextNewSharedMemorySession)
         };
 
         this.accSharedMemoryConnection.Start();
     }
 
+    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
+        this.accSharedMemoryEvent = accSharedMemoryEvent;
+    }
+
+    private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
+        this.accSharedMemorySession = accSharedMemorySession;
+
+    }
     private void PrepareUdpMessageProcessing()
     {
         this.udpSubscriptionSink = new CompositeDisposable

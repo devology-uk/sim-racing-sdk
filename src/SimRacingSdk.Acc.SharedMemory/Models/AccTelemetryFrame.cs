@@ -27,10 +27,10 @@ public record AccTelemetryFrame
         this.DiscLifeFr = physicsData.DiscLife[1];
         this.DiscLifeRl = physicsData.DiscLife[2];
         this.DiscLifeRr = physicsData.DiscLife[3];
-        this.DriverFirstName = staticData.PlayerName;
-        this.DriverLastName = staticData.PlayerSurname;
-        this.DriverDisplayName = $"{staticData.PlayerName[..1]}. {staticData.PlayerSurname}";
-        this.DriverFullName = $"{staticData.PlayerName} {staticData.PlayerSurname}";
+        this.DriverFirstName = staticData.PlayerFirstName;
+        this.DriverLastName = staticData.PlayerLastName;
+        this.DriverDisplayName = $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
+        this.DriverFullName = $"{staticData.PlayerFirstName} {staticData.PlayerLastName}";
         this.FrontBrakeCompound = physicsData.FrontBrakeCompound;
         this.Fuel = physicsData.Fuel;
         this.Gear = physicsData.Gear;

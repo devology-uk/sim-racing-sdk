@@ -4,7 +4,7 @@ public record AccSharedMemoryLap(StaticData staticData, GraphicsData graphicsDat
 {
     public string CarId { get; } = staticData.CarModel;
     public int CompletedLaps { get; } = graphicsData.CompletedLaps;
-    public string DriverName { get; } = $"{staticData.PlayerName[..1]}. {staticData.PlayerSurname}";
+    public string DriverName { get; } = $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
     public float FuelPerLap { get; } = graphicsData.FuelPerLap;
     public bool IsOnline { get; } = staticData.IsOnline;
     public float SessionTimeLeft { get; } = graphicsData.SessionTimeLeft;

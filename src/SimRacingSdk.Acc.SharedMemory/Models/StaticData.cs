@@ -28,9 +28,9 @@ public record StaticData
         this.PenaltiesEnabled = staticDataPage.PenaltiesEnabled;
         this.PitWindowEnd = staticDataPage.PitWindowEnd;
         this.PitWindowStart = staticDataPage.PitWindowStart;
-        this.PlayerName = staticDataPage.PlayerFirstName;
+        this.PlayerFirstName = staticDataPage.PlayerFirstName;
+        this.PlayerLastName = staticDataPage.PlayerSurname;
         this.PlayerNickname = staticDataPage.PlayerNickname;
-        this.PlayerSurname = staticDataPage.PlayerSurname;
         this.SectorCount = staticDataPage.SectorCount;
         this.SharedMemoryVersion = staticDataPage.SharedMemoryVersion;
         this.Track = staticDataPage.TrackName;
@@ -55,9 +55,9 @@ public record StaticData
     public bool PenaltiesEnabled { get; }
     public int PitWindowEnd { get; }
     public int PitWindowStart { get; }
-    public string PlayerName { get; }
+    public string PlayerFirstName { get; }
+    public string PlayerLastName { get; }
     public string PlayerNickname { get; }
-    public string PlayerSurname { get; }
     public int SectorCount { get; }
     public string SharedMemoryVersion { get; }
     public string Track { get; }
@@ -65,9 +65,9 @@ public record StaticData
 
     public string PlayerDisplayName()
     {
-        if(!string.IsNullOrEmpty(this.PlayerName))
+        if(!string.IsNullOrEmpty(this.PlayerFirstName))
         {
-            return $"{this.PlayerName[..1]}. {this.PlayerSurname}";
+            return $"{this.PlayerFirstName[..1]}. {this.PlayerLastName}";
         }
 
         if(!string.IsNullOrEmpty(this.PlayerNickname))

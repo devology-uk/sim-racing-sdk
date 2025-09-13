@@ -116,8 +116,8 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.Log(accSharedMemoryLap.ToString());
     }
 
-    private void OnNextNewSession(string sessionType)
+    private void OnNextNewSession(AccSharedMemorySession sharedMemorySession)
     {
-        this.Log($"New Session: {sessionType}");
+        this.Log(sharedMemorySession.ToString());
     }
 }

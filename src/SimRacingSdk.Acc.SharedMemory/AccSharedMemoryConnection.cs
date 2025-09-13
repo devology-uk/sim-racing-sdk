@@ -12,11 +12,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<bool> connectedStateSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
-    private readonly ReplaySubject<AccSharedMemoryEvent> newEventSubject = new();
-    private readonly ReplaySubject<AccSharedMemoryLap> newLapSubject = new();
-    private readonly Subject<string> newSessionSubject = new();
+    private readonly Subject<AccSharedMemoryEvent> newEventSubject = new();
+    private readonly Subject<AccSharedMemoryLap> newLapSubject = new();
+    private readonly Subject<AccSharedMemorySession> newSessionSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
-    private readonly ReplaySubject<AccTelemetryFrame> telemetrySubject = new();
+    private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
     
     private int actualSectorIndex;
     private StaticData? currentStaticData;
@@ -35,7 +35,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
     public IObservable<AccSharedMemoryLap> NewLap => this.newLapSubject.AsObservable();
-    public IObservable<string> NewSession => this.newSessionSubject.AsObservable();
+    public IObservable<AccSharedMemorySession> NewSession => this.newSessionSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
@@ -100,8 +100,8 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
                                                                 != staticData.NumberOfSessions
                                                                 || this.currentStaticData.NumberOfCars
                                                                 != staticData.NumberOfCars
-                                                                || this.currentStaticData.PlayerName
-                                                                != staticData.PlayerName
+                                                                || this.currentStaticData.PlayerFirstName
+                                                                != staticData.PlayerFirstName
                                                                 || this.currentStaticData.IsOnline
                                                                 != staticData.IsOnline);
     }
@@ -145,11 +145,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
         if(this.lastGraphicsData == null)
         {
-            this.newSessionSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+            this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
         }
         else if(this.lastGraphicsData.SessionType != graphicsData.SessionType)
         {
-            this.newSessionSubject.OnNext(graphicsData.SessionType.ToFriendlyName());
+            this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
         }
 
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);

@@ -9,7 +9,7 @@ public interface IAccSharedMemoryConnection : IDisposable
     IObservable<LogMessage> LogMessages { get; }
     IObservable<AccSharedMemoryEvent> NewEvent { get; }
     IObservable<AccSharedMemoryLap> NewLap { get; }
-    IObservable<string> NewSession { get; }
+    IObservable<AccSharedMemorySession> NewSession { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }
     IObservable<bool> ConnectedState { get; }
     void Start(double updateIntervalMs = 100);
