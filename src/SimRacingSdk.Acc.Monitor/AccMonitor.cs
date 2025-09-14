@@ -281,9 +281,10 @@ public class AccMonitor : IAccMonitor
 
                 this.sessionEndedSubject.OnNext(this.currentSession);
             }
-
+            this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
             this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType);
             this.sessionStartedSubject.OnNext(this.currentSession);
+            this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
         }
 
         if(this.currentSession == null || this.currentPhase?.Phase == sessionPhase)
@@ -294,6 +295,7 @@ public class AccMonitor : IAccMonitor
         this.currentPhase =
             new AccMonitorSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
         this.phaseStartedSubject.OnNext(this.currentPhase);
+        this.LogMessage(LoggingLevel.Information, $"Phase Started: {this.currentPhase}");
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
