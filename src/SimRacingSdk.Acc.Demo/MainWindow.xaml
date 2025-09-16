@@ -38,9 +38,12 @@
             <Button Content="Monitor Demo"
                     Command="{Binding StartMonitorDemoCommand}"
                     ToolTip="Start the demo of AccMonitor, which combines AccUdpConnection and AccTelemetryOnlyConnection to provide state and data an application can use." />
+            <Button Content="Open Log Viewer"
+                    Command="{Binding OpenLogViewerCommand}"
+                    ToolTip="Open a window for analysing log files" />
             <Button Content="Open Log Folder"
                     Command="{Binding OpenLogFolderCommand}"
-                    ToolTip="Open the folder containing the current log file" />
+                    ToolTip="Open the folder containing the current log files" />
         </StackPanel>
 
         <Button Grid.Column="0"

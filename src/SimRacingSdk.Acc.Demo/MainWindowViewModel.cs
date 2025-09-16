@@ -7,8 +7,10 @@ using Microsoft.Extensions.Logging;
 using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Demo.Abstractions;
+using SimRacingSdk.Acc.Demo.LogViewer;
 
 namespace SimRacingSdk.Acc.Demo;
 
@@ -55,6 +57,19 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Process.Start("explorer.exe", currentLogPath);
         }
+    }
+
+    [RelayCommand]
+    private void OpenLogViewer()
+    {
+        var logViewerViewModel = App.Current.Services.GetRequiredService<LogViewerViewModel>();
+        var logViewer = new LogViewerWindow
+        {
+            DataContext = logViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        logViewer.Show();
+        logViewerViewModel.Init();
     }
 
     [RelayCommand]

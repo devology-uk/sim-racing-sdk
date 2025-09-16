@@ -6,6 +6,7 @@ using NLog.Extensions.Logging;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Demo.Controls.Console;
 using SimRacingSdk.Acc.Demo.Demos;
+using SimRacingSdk.Acc.Demo.LogViewer;
 using SimRacingSdk.Acc.Demo.Services;
 using SimRacingSdk.Acc.Monitor;
 using SimRacingSdk.Acc.SharedMemory;
@@ -64,6 +65,7 @@ public partial class App : Application
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
+        services.AddTransient<LogViewerViewModel>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IMonitorDemo, MonitorDemo>();

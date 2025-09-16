@@ -1,0 +1,310 @@
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
+using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+namespace SimRacingSdk.Acc.Demo.LogViewer;
+
+public partial class LogViewerViewModel : ObservableObject
+{
+    private readonly List<LogFileEntry> allLogEntries = [];
+    [ObservableProperty]
+    private int currentPage = 1;
+    [ObservableProperty]
+    private bool enableNextPage = true;
+    [ObservableProperty]
+    private bool enablePreviousPage = false;
+    [ObservableProperty]
+    private bool isBusy = false;
+    [ObservableProperty]
+    private int pageCount;
+    [ObservableProperty]
+    private int pageSize = 50;
+    [ObservableProperty]
+    private LogFileItem? selectedLog;
+    [ObservableProperty]
+    private LogFileEntry? selectedLogEntry;
+    [ObservableProperty]
+    private LogFolderItem? selectedLogFolder;
+
+    public ObservableCollection<LogFileEntry> LogEntries { get; } = [];
+    public ObservableCollection<LogEntryProperty> LogEntryProperties { get; } = [];
+    public ObservableCollection<LogFileItem> LogFiles { get; } = [];
+    public ObservableCollection<LogFolderItem> LogFolders { get; } = [];
+
+    [RelayCommand]
+    private void DeleteSelectedLogFolder()
+    {
+        if(this.SelectedLogFolder == null)
+        {
+            return;
+        }
+
+        try
+        {
+            Directory.Delete(this.SelectedLogFolder.Path, true);
+            this.LogFolders.Remove(this.SelectedLogFolder);
+            this.SelectedLogFolder = this.LogFolders.Count > 0? this.LogFolders[0]: null;
+        }
+        catch(Exception exception)
+        {
+            MessageBox.Show(
+                $"An unexpected error occured trying to delete the log folder: {Environment.NewLine}{exception.Message}",
+                "Error Deleting Folder",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+    }
+
+    [RelayCommand]
+    private void FirstPage()
+    {
+        this.CurrentPage = 1;
+        this.EnablePreviousPage = false;
+        this.EnableNextPage = this.CurrentPage < this.PageCount;
+        this.ShowCurrentPage();
+    }
+
+    [RelayCommand]
+    private void LastPage()
+    {
+        this.CurrentPage = this.PageCount;
+        this.EnablePreviousPage = this.CurrentPage > 1;
+        this.EnableNextPage = false;
+        this.ShowCurrentPage();
+    }
+
+    [RelayCommand]
+    private void NextPage()
+    {
+        var nextPage = this.CurrentPage + 1;
+        this.EnableNextPage = nextPage < this.PageCount;
+        if(!this.EnableNextPage)
+        {
+            return;
+        }
+
+        this.CurrentPage = nextPage;
+        this.EnablePreviousPage = this.CurrentPage > 1;
+        this.ShowCurrentPage();
+    }
+
+    [RelayCommand]
+    private void PreviousPage()
+    {
+        var previousPage = this.CurrentPage - 1;
+        this.EnablePreviousPage = previousPage > 1;
+        if(!this.EnablePreviousPage)
+        {
+            return;
+        }
+
+        this.CurrentPage = previousPage;
+        this.EnableNextPage = this.CurrentPage < this.PageCount;
+        this.ShowCurrentPage();
+    }
+
+    public void Init()
+    {
+        this.LoadLogs();
+    }
+
+    private void LoadLogs()
+    {
+        this.IsBusy = true;
+        var logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs";
+        if(!Directory.Exists(logFolderPath))
+        {
+            return;
+        }
+
+        var logFolders = Directory.GetDirectories(logFolderPath);
+        foreach(var logFolder in logFolders)
+        {
+            var logFolderItem = new LogFolderItem(Path.GetFileNameWithoutExtension(logFolder), logFolder);
+
+            var logFiles = Directory.GetFiles(logFolder, "*.log");
+            foreach(var logFile in logFiles)
+            {
+                var logFileItem = new LogFileItem(Path.GetFileName(logFile), logFile);
+                logFolderItem.LogFiles.Add(logFileItem);
+            }
+
+            this.LogFolders.Add(logFolderItem);
+        }
+
+        if(this.LogFolders.Count > 0)
+        {
+            this.SelectedLogFolder = this.LogFolders[0];
+        }
+
+        this.IsBusy = false;
+    }
+
+    partial void OnCurrentPageChanged(int value)
+    {
+        this.ShowCurrentPage();
+    }
+
+    partial void OnPageSizeChanged(int value)
+    {
+        this.PageCount = (int)Math.Ceiling((double)this.allLogEntries.Count / this.PageSize);
+        if(this.CurrentPage > this.PageCount)
+        {
+            this.CurrentPage = this.PageCount;
+        }
+
+        this.ShowCurrentPage();
+    }
+
+    partial void OnSelectedLogChanged(LogFileItem? value)
+    {
+        this.IsBusy = true;
+        this.LogEntries.Clear();
+        this.allLogEntries.Clear();
+        this.SelectedLogEntry = null;
+
+        if(value == null || !File.Exists(value.FilePath))
+        {
+            return;
+        }
+
+        try
+        {
+            using var fileStream =
+                new FileStream(value.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var streamReader = new StreamReader(fileStream);
+            while(streamReader.ReadLine() is { } line)
+            {
+                var logFileEntry = this.ParseLogFileEntry(line);
+
+                this.allLogEntries.Add(logFileEntry);
+            }
+
+            this.CurrentPage = 1;
+            this.PageCount = (int)Math.Ceiling((double)this.allLogEntries.Count / this.PageSize);
+            this.ShowCurrentPage();
+        }
+        catch(Exception exception)
+        {
+            MessageBox.Show(
+                $"An unexpected error occured trying to open the log file: {Environment.NewLine}{exception.Message}",
+                "Error Opening File",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+
+        if(this.LogEntries.Count > 0)
+        {
+            this.SelectedLogEntry = this.LogEntries[0];
+        }
+
+        this.IsBusy = false;
+    }
+
+    partial void OnSelectedLogEntryChanged(LogFileEntry? value)
+    {
+        this.LogEntryProperties.Clear();
+
+        if(value == null)
+        {
+            return;
+        }
+
+        this.LogEntryProperties.Add(new LogEntryProperty("Logged At", value.TimeStamp));
+        this.LogEntryProperties.Add(new LogEntryProperty("Level", value.Level));
+        this.LogEntryProperties.Add(new LogEntryProperty("Content Type", value.ContentType));
+
+        if(value.ContentType == "Text")
+        {
+            this.LogEntryProperties.Add(new LogEntryProperty("Content", value.Content));
+            return;
+        }
+
+        var properties = this.ParseContent(value.Content);
+        foreach(var property in properties)
+        {
+            this.LogEntryProperties.Add(new LogEntryProperty(property.Key, property.Value));
+        }
+    }
+
+    partial void OnSelectedLogFolderChanged(LogFolderItem? value)
+    {
+        this.IsBusy = true;
+        this.LogFiles.Clear();
+        if(value == null)
+        {
+            this.SelectedLog = null;
+            return;
+        }
+
+        foreach(var logFile in value.LogFiles)
+        {
+            this.LogFiles.Add(logFile);
+        }
+
+        if(this.LogFiles.Count > 0)
+        {
+            this.SelectedLog = this.LogFiles[0];
+        }
+
+        this.IsBusy = false;
+    }
+
+    private Dictionary<string, string> ParseContent(string content)
+    {
+        var contentStartIndex = content.IndexOf('{');
+        var contentEndIndex = content.LastIndexOf('}');
+        var propertyContent = content[(contentStartIndex + 1)..contentEndIndex]
+            .Trim();
+        var properties = propertyContent.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        var result = new Dictionary<string, string>();
+        foreach(var property in properties)
+        {
+            var propertyElements = property.Split('=', StringSplitOptions.TrimEntries);
+            if(!result.ContainsKey(propertyElements[0]))
+            {
+                result.Add(propertyElements[0],
+                    propertyElements.Length == 2? propertyElements[1]: string.Empty);
+            }
+        }
+
+        return result;
+    }
+
+    private string ParseContentType(string content)
+    {
+        var contentStartIndex = content.IndexOf('{');
+        var contentEndIndex = content.LastIndexOf('}');
+
+        if(contentStartIndex == -1 && contentEndIndex == -1)
+        {
+            return "Text";
+        }
+
+        return content[..contentStartIndex]
+            .Trim();
+    }
+
+    private LogFileEntry ParseLogFileEntry(string line)
+    {
+        var lineElements = line.Split('|', StringSplitOptions.RemoveEmptyEntries);
+        var contentType = this.ParseContentType(lineElements[2]);
+
+        return new LogFileEntry(lineElements[0], lineElements[1], line, contentType);
+    }
+
+    private void ShowCurrentPage()
+    {
+        var pageEntries = this.allLogEntries.Skip(this.PageSize * (this.CurrentPage - 1))
+                              .Take(this.PageSize);
+        this.LogEntries.Clear();
+        foreach(var entry in pageEntries)
+        {
+            this.LogEntries.Add(entry);
+        }
+    }
+}
