@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="Sim Racing SDK - Log Viewer"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
-        d:DataContext="{d:DesignInstance local:LogViewerViewModel}">
+        d:DataContext="{d:DesignInstance local:LogViewerViewModel}"
+        PreviewKeyDown="HandlePreviewKeyDown">
+    <Window.InputBindings>
+        <KeyBinding Key="Right"
+                    Modifiers="Alt"
+                    Command="{Binding NextPageCommand}" />
+        <KeyBinding Key="Left"
+                    Modifiers="Alt"
+                    Command="{Binding PreviousPageCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -33,6 +41,16 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+
+        <Label Grid.Column="0"
+               Grid.Row="1"
+               Content="Search" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="1"
+                 Grid.ColumnSpan="2"
+                 HorizontalAlignment="Left"
+                 Width="300"
+                 Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Column="0"
                Grid.Row="2"
@@ -100,13 +118,11 @@
                          VerticalContentAlignment="Center"
                          Margin="5 0 10 0" />
 
-                <Button Command="{Binding FirstPageCommand}"
-                        IsEnabled="{Binding EnablePreviousPage}">
+                <Button Command="{Binding FirstPageCommand}">
                     <Image Source="/Images/button_blue_goto_first.png" />
                 </Button>
 
-                <Button Command="{Binding PreviousPageCommand}"
-                        IsEnabled="{Binding EnablePreviousPage}">
+                <Button Command="{Binding PreviousPageCommand}">
                     <Image Source="/Images/button_blue_goto_previous.png" />
                 </Button>
                 <Label Content="Page"
@@ -119,12 +135,10 @@
                        VerticalAlignment="Center" />
                 <Label Content="{Binding PageCount}"
                        VerticalAlignment="Center" />
-                <Button Command="{Binding NextPageCommand}"
-                        IsEnabled="{Binding EnableNextPage}">
+                <Button Command="{Binding NextPageCommand}">
                     <Image Source="/Images/button_blue_goto_next.png" />
                 </Button>
-                <Button Command="{Binding LastPageCommand}"
-                        IsEnabled="{Binding EnableNextPage}">
+                <Button Command="{Binding LastPageCommand}">
                     <Image Source="/Images/button_blue_goto_last.png" />
                 </Button>
             </StackPanel>

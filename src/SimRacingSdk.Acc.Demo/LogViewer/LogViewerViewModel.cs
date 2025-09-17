@@ -13,9 +13,7 @@ public partial class LogViewerViewModel : ObservableObject
     [ObservableProperty]
     private int currentPage = 1;
     [ObservableProperty]
-    private bool enableNextPage = true;
-    [ObservableProperty]
-    private bool enablePreviousPage = false;
+    private string filter = string.Empty;
     [ObservableProperty]
     private bool isBusy = false;
     [ObservableProperty]
@@ -33,7 +31,7 @@ public partial class LogViewerViewModel : ObservableObject
     public ObservableCollection<LogEntryProperty> LogEntryProperties { get; } = [];
     public ObservableCollection<LogFileItem> LogFiles { get; } = [];
     public ObservableCollection<LogFolderItem> LogFolders { get; } = [];
-
+    
     [RelayCommand]
     private void DeleteSelectedLogFolder()
     {
@@ -58,51 +56,53 @@ public partial class LogViewerViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
+    private bool CanExecutePreviousPage()
+    {
+        return this.CurrentPage > 1;
+    }
+
+    private bool CanExecuteNextPage()
+    {
+        return this.CurrentPage < this.PageCount;
+    }
+
+    [RelayCommand(CanExecute = nameof(CanExecutePreviousPage))]
     private void FirstPage()
     {
         this.CurrentPage = 1;
-        this.EnablePreviousPage = false;
-        this.EnableNextPage = this.CurrentPage < this.PageCount;
         this.ShowCurrentPage();
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanExecuteNextPage))]
     private void LastPage()
     {
         this.CurrentPage = this.PageCount;
-        this.EnablePreviousPage = this.CurrentPage > 1;
-        this.EnableNextPage = false;
         this.ShowCurrentPage();
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanExecuteNextPage))]
     private void NextPage()
     {
         var nextPage = this.CurrentPage + 1;
-        this.EnableNextPage = nextPage < this.PageCount;
-        if(!this.EnableNextPage)
+        if(nextPage < 1)
         {
             return;
         }
 
         this.CurrentPage = nextPage;
-        this.EnablePreviousPage = this.CurrentPage > 1;
         this.ShowCurrentPage();
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanExecutePreviousPage))]
     private void PreviousPage()
     {
         var previousPage = this.CurrentPage - 1;
-        this.EnablePreviousPage = previousPage > 1;
-        if(!this.EnablePreviousPage)
+        if(previousPage < 1)
         {
             return;
         }
 
         this.CurrentPage = previousPage;
-        this.EnableNextPage = this.CurrentPage < this.PageCount;
         this.ShowCurrentPage();
     }
 
@@ -253,6 +253,16 @@ public partial class LogViewerViewModel : ObservableObject
         this.IsBusy = false;
     }
 
+    partial void OnFilterChanged(string? value)
+    {
+        if(value?.Length < 3)
+        {
+            return;
+        }
+
+        this.ShowCurrentPage();
+    }
+
     private Dictionary<string, string> ParseContent(string content)
     {
         var contentStartIndex = content.IndexOf('{');
@@ -299,12 +309,31 @@ public partial class LogViewerViewModel : ObservableObject
 
     private void ShowCurrentPage()
     {
-        var pageEntries = this.allLogEntries.Skip(this.PageSize * (this.CurrentPage - 1))
+        var filteredEntries = this.allLogEntries;
+
+        if(!string.IsNullOrWhiteSpace(this.Filter) && this.Filter.Length >= 3)
+        {
+            filteredEntries = filteredEntries
+                .Where(entry => entry.Content.Contains(this.Filter, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        var pageEntries = filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1))
                               .Take(this.PageSize);
+        this.PageCount = (int)Math.Ceiling((double)filteredEntries.Count / this.PageSize);
         this.LogEntries.Clear();
         foreach(var entry in pageEntries)
         {
             this.LogEntries.Add(entry);
         }
+
+        if(this.LogEntries.Count > 0)
+        {
+            this.SelectedLogEntry = this.LogEntries[0];
+        }
+
+        this.NextPageCommand.NotifyCanExecuteChanged();
+        this.PreviousPageCommand.NotifyCanExecuteChanged();
+        this.FirstPageCommand.NotifyCanExecuteChanged();
+        this.LastPageCommand.NotifyCanExecuteChanged();
     }
 }
