@@ -28,7 +28,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -37,61 +36,49 @@
                      Grid.ColumnSpan="4">
             <ToolBar>
                 <Button Command="{Binding DeleteSelectedLogFolderCommand}">
-                    <Image Source="/Images/trash.png" />
+                    <Image Source="/Images/bin.png" />
                 </Button>
+                <Label Content="Search" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left">
+                    <TextBox HorizontalAlignment="Left"
+                             Width="300"
+                             Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Command="{Binding ClearFilterCommand}">
+                        <Image Source="/Images/delete.png" />
+                    </Button>
+                </StackPanel>
             </ToolBar>
         </ToolBarTray>
 
         <Label Grid.Column="0"
                Grid.Row="1"
-               Content="Search" />
-        <TextBox Grid.Column="1"
-                 Grid.Row="1"
-                 Grid.ColumnSpan="2"
-                 HorizontalAlignment="Left"
-                 Width="300"
-                 Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-        <Label Grid.Column="0"
-               Grid.Row="2"
                Content="Log Folders"
                HorizontalAlignment="Center" />
         <ListBox Grid.Column="0"
-                 Grid.Row="3"
+                 Grid.Row="2"
                  DisplayMemberPath="Name"
                  ItemsSource="{Binding LogFolders}"
                  SelectedItem="{Binding SelectedLogFolder, Mode=TwoWay}"
-                 VerticalAlignment="Stretch">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+                 VerticalAlignment="Stretch" />
 
         <Label Grid.Column="1"
-               Grid.Row="2"
+               Grid.Row="1"
                Content="Logs"
                HorizontalAlignment="Center" />
         <ListBox Grid.Column="1"
-                 Grid.Row="3"
+                 Grid.Row="2"
                  DisplayMemberPath="FileName"
                  ItemsSource="{Binding LogFiles}"
                  SelectedItem="{Binding SelectedLog, Mode=TwoWay}"
-                 VerticalAlignment="Stretch">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+                 VerticalAlignment="Stretch" />
 
         <Label Grid.Column="2"
-               Grid.Row="2"
+               Grid.Row="1"
                Content="Log Entries"
                HorizontalAlignment="Center" />
         <Grid Grid.Column="2"
-              Grid.Row="3">
+              Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -146,11 +133,11 @@
         </Grid>
 
         <Label Grid.Column="3"
-               Grid.Row="2"
+               Grid.Row="1"
                Content="Details"
                HorizontalAlignment="Center" />
         <DataGrid Grid.Column="3"
-                  Grid.Row="3"
+                  Grid.Row="2"
                   ItemsSource="{Binding LogEntryProperties}"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Center"

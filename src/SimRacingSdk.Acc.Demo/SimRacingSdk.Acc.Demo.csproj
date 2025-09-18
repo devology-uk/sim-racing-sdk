@@ -9,10 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\bin.png" />
     <None Remove="Images\button_blue_goto_first.png" />
     <None Remove="Images\button_blue_goto_last.png" />
     <None Remove="Images\button_blue_goto_next.png" />
     <None Remove="Images\button_blue_goto_previous.png" />
+    <None Remove="Images\delete.png" />
     <None Remove="Images\trash.png" />
   </ItemGroup>
 
@@ -33,10 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\bin.png" />
     <Resource Include="Images\button_blue_goto_first.png" />
     <Resource Include="Images\button_blue_goto_last.png" />
     <Resource Include="Images\button_blue_goto_next.png" />
     <Resource Include="Images\button_blue_goto_previous.png" />
+    <Resource Include="Images\delete.png" />
     <Resource Include="Images\trash.png" />
   </ItemGroup>
 

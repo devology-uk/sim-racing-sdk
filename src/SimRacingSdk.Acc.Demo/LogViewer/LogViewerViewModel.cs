@@ -106,6 +106,12 @@ public partial class LogViewerViewModel : ObservableObject
         this.ShowCurrentPage();
     }
 
+    [RelayCommand]
+    private void ClearFilter()
+    {
+        this.Filter = string.Empty;
+    }
+
     public void Init()
     {
         this.LoadLogs();
@@ -255,11 +261,6 @@ public partial class LogViewerViewModel : ObservableObject
 
     partial void OnFilterChanged(string? value)
     {
-        if(value?.Length < 3)
-        {
-            return;
-        }
-
         this.ShowCurrentPage();
     }
 
@@ -320,10 +321,16 @@ public partial class LogViewerViewModel : ObservableObject
         var pageEntries = filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1))
                               .Take(this.PageSize);
         this.PageCount = (int)Math.Ceiling((double)filteredEntries.Count / this.PageSize);
+
         this.LogEntries.Clear();
         foreach(var entry in pageEntries)
         {
             this.LogEntries.Add(entry);
+        }
+
+        if(this.PageCount < this.CurrentPage)
+        {
+            this.CurrentPage = this.PageCount;
         }
 
         if(this.LogEntries.Count > 0)
