@@ -50,6 +50,8 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
+    private AccSharedMemoryEvent? accSharedMemoryEvent;
+    private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
     private AccMonitorEvent? currentEvent;
     private AccMonitorSessionPhase? currentPhase;
@@ -58,8 +60,6 @@ public class AccMonitor : IAccMonitor
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private CompositeDisposable? udpSubscriptionSink;
-    private AccSharedMemorySession? accSharedMemorySession;
-    private AccSharedMemoryEvent? accSharedMemoryEvent;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -238,6 +238,18 @@ public class AccMonitor : IAccMonitor
         this.ProcessWhiteFlagState(accFlagState);
     }
 
+    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
+        this.accSharedMemoryEvent = accSharedMemoryEvent;
+    }
+
+    private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
+        this.accSharedMemorySession = accSharedMemorySession;
+    }
+
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
@@ -266,13 +278,6 @@ public class AccMonitor : IAccMonitor
         {
             if(this.currentSession != null)
             {
-                if(this.accSharedMemorySession != null
-                   && this.accSharedMemorySession.SessionType == this.currentSession.SessionType)
-                {
-                    this.currentSession.Duration =
-                        TimeSpan.FromMilliseconds(this.accSharedMemorySession.DurationMs);
-                }
-
                 if(this.accSharedMemoryEvent != null)
                 {
                     this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
@@ -281,8 +286,9 @@ public class AccMonitor : IAccMonitor
 
                 this.sessionEndedSubject.OnNext(this.currentSession);
             }
+
             this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
-            this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType);
+            this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType, realtimeUpdate.SessionEndTime);
             this.sessionStartedSubject.OnNext(this.currentSession);
             this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
         }
@@ -335,18 +341,6 @@ public class AccMonitor : IAccMonitor
         this.accSharedMemoryConnection.Start();
     }
 
-    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = accSharedMemoryEvent;
-    }
-
-    private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
-        this.accSharedMemorySession = accSharedMemorySession;
-
-    }
     private void PrepareUdpMessageProcessing()
     {
         this.udpSubscriptionSink = new CompositeDisposable
