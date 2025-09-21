@@ -21,6 +21,7 @@
 
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
+using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Monitor.Abstractions;
@@ -34,12 +35,11 @@ public class MonitorDemo : IMonitorDemo
 {
     private readonly IAccMonitorFactory accMonitorFactory;
     private readonly IConsoleLog consoleLog;
-    private readonly IMonitorLog monitorLog;
     private readonly ILogger<MonitorDemo> logger;
+    private readonly IMonitorLog monitorLog;
     private IAccMonitor? accMonitor;
-
+    private SessionPhase currentPhase;
     private CompositeDisposable? subscriptionSink;
-    private AccMonitorSessionPhase? currentPhase;
     private int telemetryFrameCount;
 
     public MonitorDemo(ILogger<MonitorDemo> logger,
@@ -74,8 +74,7 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
             this.accMonitor.Penalties.Subscribe(this.OnNextPenalty),
             this.accMonitor.PersonalBestLap.Subscribe(this.OnNextPersonalBestLap),
-            this.accMonitor.PhaseStarted.Subscribe(this.OnNextPhaseStarted),
-            this.accMonitor.PhaseEnded.Subscribe(this.OnNextPhaseEnded),
+            this.accMonitor.CurrentPhase.Subscribe(this.OnNextPhaseChanged),
             this.accMonitor.RealtimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
             this.accMonitor.SessionBestLap.Subscribe(this.OnNextSessionBestLap),
             this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
@@ -84,28 +83,10 @@ public class MonitorDemo : IMonitorDemo
 
             this.accMonitor.IsWhiteFlagActive.Subscribe(this.OnNextIsWhiteFlagActive),
             this.accMonitor.IsYellowFlagActive.Subscribe(this.OnNextIsYellowFlagActive),
-            this.accMonitor.Telemetry.Subscribe(this.OnNextTelemetryFrame),
-            
+            this.accMonitor.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
-    }
-
-    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
-    {
-        // too much information to log telemetry frames, which are logged via log messages
-        // just maintaining a count to report at the end
-        this.telemetryFrameCount++;
-    }
-
-    private void OnNextIsWhiteFlagActive(bool isWhiteFlagActive)
-    {
-        this.Log($"White Flag Is Active: {isWhiteFlagActive}");
-    }
-
-    private void OnNextIsYellowFlagActive(bool isYellowFlagActive)
-    {
-        this.Log($"Yellow Flag Is Active: {isYellowFlagActive}");
     }
 
     public void Stop()
@@ -172,6 +153,16 @@ public class MonitorDemo : IMonitorDemo
         this.Log(accMonitorGreenFlag.ToString());
     }
 
+    private void OnNextIsWhiteFlagActive(bool isWhiteFlagActive)
+    {
+        this.Log($"White Flag Is Active: {isWhiteFlagActive}");
+    }
+
+    private void OnNextIsYellowFlagActive(bool isYellowFlagActive)
+    {
+        this.Log($"Yellow Flag Is Active: {isYellowFlagActive}");
+    }
+
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.monitorLog.Log(logMessage.ToString());
@@ -187,22 +178,18 @@ public class MonitorDemo : IMonitorDemo
         this.Log($"Best Session Lap: {accMonitorLap}");
     }
 
-    private void OnNextPhaseEnded(AccMonitorSessionPhase accMonitorSessionPhase)
+    private void OnNextPhaseChanged(SessionPhase sessionPhase)
     {
-        this.Log($"Phase Ended: {accMonitorSessionPhase}");
-    }
-
-    private void OnNextPhaseStarted(AccMonitorSessionPhase accMonitorSessionPhase)
-    {
-        this.currentPhase = accMonitorSessionPhase;
-        this.Log($"Phase Started: {accMonitorSessionPhase}");
+        this.Log($"Phase Changed from {this.currentPhase} to {sessionPhase}");
+        this.currentPhase = sessionPhase;
     }
 
     private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
     {
-        if(this.currentPhase != null && this.currentPhase.Phase != "Session")
+        if(this.currentPhase != SessionPhase.Session && this.currentPhase != SessionPhase.SessionOver)
         {
             // filter out updates where the car is not actually on a meaningful lap
+            // SessionOver is the phase where the game is waiting for all players to complete the last lap
             return;
         }
 
@@ -229,5 +216,12 @@ public class MonitorDemo : IMonitorDemo
     private void OnNextSessionStarted(AccMonitorSession accMonitorSession)
     {
         this.Log($"Session Started: {accMonitorSession}");
+    }
+
+    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
+    {
+        // too much information to log telemetry frames, which are logged via log messages
+        // just maintaining a count to report at the end
+        this.telemetryFrameCount++;
     }
 }

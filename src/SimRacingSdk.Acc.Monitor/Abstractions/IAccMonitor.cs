@@ -1,4 +1,5 @@
-﻿using SimRacingSdk.Acc.Core.Messages;
+﻿using SimRacingSdk.Acc.Core.Enums;
+using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -19,8 +20,7 @@ public interface IAccMonitor : IDisposable
     IObservable<LogMessage> LogMessages { get; }
     IObservable<AccMonitorPenalty> Penalties { get; }
     IObservable<AccMonitorLap> PersonalBestLap { get; }
-    IObservable<AccMonitorSessionPhase> PhaseEnded { get; }
-    IObservable<AccMonitorSessionPhase> PhaseStarted { get; }
+    IObservable<SessionPhase> CurrentPhase { get; }
     IObservable<RealtimeCarUpdate> RealtimeCarUpdates { get; }
     IObservable<AccMonitorLap> SessionBestLap { get; }
     IObservable<AccMonitorSession> SessionEnded { get; }

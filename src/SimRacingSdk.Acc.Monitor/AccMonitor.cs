@@ -40,8 +40,7 @@ public class AccMonitor : IAccMonitor
     private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccMonitorPenalty> penaltiesSubject = new();
     private readonly Subject<AccMonitorLap> personalBestLapSubject = new();
-    private readonly ReplaySubject<AccMonitorSessionPhase> phaseEndedSubject = new();
-    private readonly ReplaySubject<AccMonitorSessionPhase> phaseStartedSubject = new();
+    private readonly ReplaySubject<SessionPhase> currentPhaseSubject = new();
     private readonly Subject<RealtimeCarUpdate> realtimeCarUpdatesSubject = new();
     private readonly Subject<AccMonitorLap> sessionBestLapSubject = new();
     private readonly ReplaySubject<AccMonitorSession> sessionEndedSubject = new();
@@ -54,7 +53,7 @@ public class AccMonitor : IAccMonitor
     private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
     private AccMonitorEvent? currentEvent;
-    private AccMonitorSessionPhase? currentPhase;
+    private SessionPhase currentPhase;
     private AccMonitorSession? currentSession;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
@@ -88,8 +87,7 @@ public class AccMonitor : IAccMonitor
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccMonitorPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccMonitorLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
-    public IObservable<AccMonitorSessionPhase> PhaseEnded => this.phaseEndedSubject.AsObservable();
-    public IObservable<AccMonitorSessionPhase> PhaseStarted => this.phaseStartedSubject.AsObservable();
+    public IObservable<SessionPhase> CurrentPhase => this.currentPhaseSubject.AsObservable();
     public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccMonitorLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionEnded => this.sessionEndedSubject.AsObservable();
@@ -260,48 +258,45 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
-        if(this.currentEvent == null)
+        if(this.currentEvent == null || !this.entryList.Any())
         {
+            // ACC sends a couple of real time updates before the session actually starts
+            // need to ignore these because we have no entry list to work with
             return;
         }
 
         var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
-        var sessionPhase = realtimeUpdate.Phase.ToFriendlyName();
+        var sessionPhase = realtimeUpdate.Phase;
+        var endSession = false;
 
-        if(this.currentPhase != null && this.currentPhase.Phase != sessionPhase)
+        if(this.currentPhase != sessionPhase)
         {
-            this.phaseEndedSubject.OnNext(this.currentPhase!);
-            this.currentPhase = null;
+            this.currentPhase = sessionPhase;
+            endSession = sessionPhase == SessionPhase.PostSession;
+            this.currentPhaseSubject.OnNext(this.currentPhase);
+            this.LogMessage(LoggingLevel.Information, $"Phase Changed: {this.currentPhase.ToFriendlyName()}");
         }
 
-        if(this.currentSession?.SessionType != sessionType)
-        {
-            if(this.currentSession != null)
-            {
-                if(this.accSharedMemoryEvent != null)
-                {
-                    this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
-                    this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
-                }
-
-                this.sessionEndedSubject.OnNext(this.currentSession);
-            }
-
-            this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
-            this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType, realtimeUpdate.SessionEndTime);
-            this.sessionStartedSubject.OnNext(this.currentSession);
-            this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
-        }
-
-        if(this.currentSession == null || this.currentPhase?.Phase == sessionPhase)
+        if(this.currentSession?.SessionType == sessionType && !endSession)
         {
             return;
         }
 
-        this.currentPhase =
-            new AccMonitorSessionPhase(this.currentEvent.Id, this.currentSession.Id, sessionPhase);
-        this.phaseStartedSubject.OnNext(this.currentPhase);
-        this.LogMessage(LoggingLevel.Information, $"Phase Started: {this.currentPhase}");
+        if(this.currentSession != null)
+        {
+            if(this.accSharedMemoryEvent != null)
+            {
+                this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+                this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
+            }
+
+            this.sessionEndedSubject.OnNext(this.currentSession);
+            this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
+        }
+
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+        this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType, realtimeUpdate.SessionEndTime);
+        this.sessionStartedSubject.OnNext(this.currentSession);
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
