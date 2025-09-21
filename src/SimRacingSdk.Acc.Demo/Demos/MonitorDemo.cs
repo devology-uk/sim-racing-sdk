@@ -209,7 +209,8 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextSessionOver(AccMonitorSession accMonitorSession)
     {
-        // Session Over is produced by a broadcast event from ACC
+        // Session Over is produced by a broadcast event from ACC but
+        // Not always dispatched so can't rely on it
         this.Log($"Session Over: {accMonitorSession}");
     }
 
