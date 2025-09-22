@@ -28,6 +28,7 @@ public class AccMonitor : IAccMonitor
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
+    private readonly ReplaySubject<SessionPhase> currentPhaseSubject = new();
     private readonly List<AccMonitorEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEventEntry>> entryListSubject = new();
     private readonly ReplaySubject<AccMonitorEvent> eventEndedSubject = new();
@@ -40,7 +41,6 @@ public class AccMonitor : IAccMonitor
     private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccMonitorPenalty> penaltiesSubject = new();
     private readonly Subject<AccMonitorLap> personalBestLapSubject = new();
-    private readonly ReplaySubject<SessionPhase> currentPhaseSubject = new();
     private readonly Subject<RealtimeCarUpdate> realtimeCarUpdatesSubject = new();
     private readonly Subject<AccMonitorLap> sessionBestLapSubject = new();
     private readonly ReplaySubject<AccMonitorSession> sessionEndedSubject = new();
@@ -50,7 +50,6 @@ public class AccMonitor : IAccMonitor
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private AccSharedMemoryEvent? accSharedMemoryEvent;
-    private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
     private AccMonitorEvent? currentEvent;
     private SessionPhase currentPhase;
@@ -76,6 +75,7 @@ public class AccMonitor : IAccMonitor
     }
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
+    public IObservable<SessionPhase> CurrentPhase => this.currentPhaseSubject.AsObservable();
     public IObservable<IList<AccMonitorEventEntry>> EntryList => this.entryListSubject.AsObservable();
     public IObservable<AccMonitorEvent> EventEnded => this.eventEndedSubject.AsObservable();
     public IObservable<AccMonitorEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
@@ -87,7 +87,6 @@ public class AccMonitor : IAccMonitor
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccMonitorPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccMonitorLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
-    public IObservable<SessionPhase> CurrentPhase => this.currentPhaseSubject.AsObservable();
     public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccMonitorLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionEnded => this.sessionEndedSubject.AsObservable();
@@ -144,6 +143,11 @@ public class AccMonitor : IAccMonitor
         }
 
         this.Stop();
+    }
+
+    private bool AllCarsAreFinished()
+    {
+        return this.entryList.All(e => e.CarLocation != CarLocation.Track);
     }
 
     private void LogMessage(LoggingLevel level, string message, object? data = null)
@@ -215,6 +219,7 @@ public class AccMonitor : IAccMonitor
             CarManufacturer = car!.ManufacturerTag,
             CarModelName = car.DisplayName,
             CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CarLocation = CarLocation.Pitlane,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             Drivers = drivers,
@@ -245,13 +250,17 @@ public class AccMonitor : IAccMonitor
     private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
     {
         this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
-        this.accSharedMemorySession = accSharedMemorySession;
     }
 
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
+        var eventEntry = this.entryList.FirstOrDefault(e => e.CarIndex == realTimeCarUpdate.CarIndex);
+        if(eventEntry != null)
+        {
+            eventEntry.CarLocation = realTimeCarUpdate.CarLocation;
+        }
     }
 
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
@@ -267,36 +276,39 @@ public class AccMonitor : IAccMonitor
 
         var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
         var sessionPhase = realtimeUpdate.Phase;
-        var endSession = false;
 
         if(this.currentPhase != sessionPhase)
         {
             this.currentPhase = sessionPhase;
-            endSession = sessionPhase == SessionPhase.PostSession;
             this.currentPhaseSubject.OnNext(this.currentPhase);
             this.LogMessage(LoggingLevel.Information, $"Phase Changed: {this.currentPhase.ToFriendlyName()}");
+
+            if(this.currentPhase == SessionPhase.PreFormation)
+            {
+                this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+                this.currentSession = new AccMonitorSession(this.currentEvent.Id,
+                    sessionType,
+                    realtimeUpdate.SessionEndTime);
+                this.sessionStartedSubject.OnNext(this.currentSession);
+                return;
+            }
         }
 
-        if(this.currentSession?.SessionType == sessionType && !endSession)
+        if(this.currentSession == null || this.currentPhase != SessionPhase.PostSession
+                                       || !this.AllCarsAreFinished())
         {
             return;
         }
 
-        if(this.currentSession != null)
+        if(this.accSharedMemoryEvent != null)
         {
-            if(this.accSharedMemoryEvent != null)
-            {
-                this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
-                this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
-            }
-
-            this.sessionEndedSubject.OnNext(this.currentSession);
-            this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
+            this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+            this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
         }
 
-        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
-        this.currentSession = new AccMonitorSession(this.currentEvent.Id, sessionType, realtimeUpdate.SessionEndTime);
-        this.sessionStartedSubject.OnNext(this.currentSession);
+        this.sessionEndedSubject.OnNext(this.currentSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
+
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
