@@ -308,7 +308,7 @@ public class AccMonitor : IAccMonitor
 
         this.sessionEndedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
-
+        this.currentSession = null;
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
