@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text.Json;
 using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Core.Models;
@@ -473,6 +474,22 @@ namespace SimRacingSdk.Lmu.Core.Services
                 Transmission = "6 Speed Sequential",
                 WeightKg = 1360,
                 WidthMm = 2049
+            },
+            new ()
+            {
+                Category = "LMP3",
+                Class = "P3",
+                DisplayName = "Ligier JS P325",
+                Engine = "3.5L Twin Turbo V6",
+                HeightMm = 1180,
+                LengthMm = 4605,
+                Manufacturer = "Ligier",
+                PowerBhp = 470,
+                PowerKw = 0,
+                ResultCarType = "Ligier JS P325",
+                Transmission = "6 Speed Sequential",
+                WeightKg = 950,
+                WidthMm = 1900
             }
         };
         private readonly ILmuPathProvider pathProvider;
@@ -733,6 +750,24 @@ namespace SimRacingSdk.Lmu.Core.Services
                         Name = "School Circuit",
                         LengthM = 3219,
                         Corners = 7
+                    }
+                }
+            },
+            new()
+            {
+                Name = "Silverstone International",
+                ShortName = "Silverstone",
+                Country = "England",
+                CountryCode = "GBR-ENG",
+                Latitude = 52.0680505,
+                Longitude = -1.0292908,
+                Layouts = new List<LmuTrackLayoutInfo>()
+                {
+                    new()
+                    {
+                        Name = "Default",
+                        LengthM = 5891,
+                        Corners = 18
                     }
                 }
             }
