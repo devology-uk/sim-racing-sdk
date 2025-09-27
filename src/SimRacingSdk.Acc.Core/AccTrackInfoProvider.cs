@@ -1,8 +1,9 @@
-﻿using SimRacingSdk.Acc.Core.Models;
+﻿using SimRacingSdk.Acc.Core.Abstractions;
+using SimRacingSdk.Acc.Core.Models;
 
 namespace SimRacingSdk.Acc.Core;
 
-public class AccTrackInfoProvider
+public class AccTrackInfoProvider: IAccTrackInfoProvider
 {
     private static AccTrackInfoProvider? singletonInstance;
     public static AccTrackInfoProvider Instance => singletonInstance ??= new AccTrackInfoProvider();

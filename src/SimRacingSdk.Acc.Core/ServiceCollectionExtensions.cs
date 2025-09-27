@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection UseAccSdk(this IServiceCollection services)
     {
         services.TryAddSingleton<IAccCarInfoProvider, AccCarInfoProvider>();
+        services.TryAddSingleton<IAccTrackInfoProvider, AccTrackInfoProvider>();
         services.TryAddSingleton<IAccCompatibilityChecker, AccCompatibilityChecker>();
         services.TryAddSingleton<IAccGameDetector, AccGameDetector>();
         services.TryAddSingleton<IAccLocalConfigProvider, AccLocalConfigProvider>();
