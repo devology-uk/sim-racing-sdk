@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Reactive" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SimRacingSdk.Acc.Core\SimRacingSdk.Acc.Core.csproj" />
+	  <ProjectReference Include="..\SimRacingSdk.Ams2.Core\SimRacingSdk.Ams2.Core.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -53,7 +53,7 @@ public class UdpDemo : IUdpDemo
             broadcastSettings.ConnectionPassword,
             broadcastSettings.CommandPassword);
 
-        this.PrepareBroadcastMessageHandling();
+        this.PrepareUdpMessageHandling();
         this.accUdpConnection.Connect();
     }
 
@@ -124,7 +124,7 @@ public class UdpDemo : IUdpDemo
         this.Log(trackDataUpdate.ToString());
     }
 
-    private void PrepareBroadcastMessageHandling()
+    private void PrepareUdpMessageHandling()
     {
         if(this.accUdpConnection == null)
         {

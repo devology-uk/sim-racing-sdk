@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
+		<PackageReference Include="System.Reactive" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SimRacingSdk.Ams2.Core\SimRacingSdk.Ams2.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.Ams2.Udp\SimRacingSdk.Ams2.Udp.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="nlog.config">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Images\bin.png" />
+	  <Resource Include="Images\button_blue_goto_first.png" />
+	  <Resource Include="Images\button_blue_goto_last.png" />
+	  <Resource Include="Images\button_blue_goto_next.png" />
+	  <Resource Include="Images\button_blue_goto_previous.png" />
+	  <Resource Include="Images\delete.png" />
+	  <Resource Include="Images\trash.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="LogViewer\LogViewerWindow.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
+</Project>
