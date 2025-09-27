@@ -540,6 +540,6 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
 
     public IReadOnlyCollection<LmuCarInfo> GetCarInfos()
     {
-        return new ReadOnlyCollection<LmuCarInfo>(this.cars);
+        return this.cars.AsReadOnly();
     }
 }

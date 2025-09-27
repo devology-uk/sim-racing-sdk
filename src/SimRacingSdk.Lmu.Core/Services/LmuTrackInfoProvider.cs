@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using SimRacingSdk.Lmu.Core.Abstractions;
+﻿using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Core.Models;
 
 namespace SimRacingSdk.Lmu.Core.Services;
@@ -298,6 +297,6 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
 
     public IReadOnlyCollection<LmuTrackInfo> GetTrackInfos()
     {
-        return new ReadOnlyCollection<LmuTrackInfo>(this.tracks);
+        return this.tracks.AsReadOnly();
     }
 }
