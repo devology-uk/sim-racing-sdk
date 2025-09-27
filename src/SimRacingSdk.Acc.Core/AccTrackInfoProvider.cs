@@ -3,12 +3,11 @@ using SimRacingSdk.Acc.Core.Models;
 
 namespace SimRacingSdk.Acc.Core;
 
-public class AccTrackInfoProvider: IAccTrackInfoProvider
+public class AccTrackInfoProvider : IAccTrackInfoProvider
 {
     private static AccTrackInfoProvider? singletonInstance;
-    public static AccTrackInfoProvider Instance => singletonInstance ??= new AccTrackInfoProvider();
 
-    public static List<AccTrackInfo> Tracks { get; } =
+    private readonly List<AccTrackInfo> tracks =
     [
         new()
         {
@@ -261,20 +260,27 @@ public class AccTrackInfoProvider: IAccTrackInfoProvider
             TrackId = "nurburgring_24h"
         }
     ];
+    public static AccTrackInfoProvider Instance => singletonInstance ??= new AccTrackInfoProvider();
 
-    public static AccTrackInfo? FindByFullName(string fullName)
+    public AccTrackInfo? FindByFullName(string fullName)
     {
-        return Tracks.FirstOrDefault(t => t.FullName.Equals(fullName, StringComparison.OrdinalIgnoreCase));
+        return this.tracks.FirstOrDefault(
+            t => t.FullName.Equals(fullName, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static AccTrackInfo? FindByTrackId(string trackId)
+    public AccTrackInfo? FindByTrackId(string trackId)
     {
-        return Tracks.FirstOrDefault(t => t.TrackId == trackId);
+        return this.tracks.FirstOrDefault(t => t.TrackId == trackId);
     }
 
-    public static string GetNameByTrackId(string trackId)
+    public string GetNameByTrackId(string trackId)
     {
-        var track = FindByTrackId(trackId);
+        var track = this.FindByTrackId(trackId);
         return track?.ShortName ?? string.Empty;
+    }
+
+    public IReadOnlyCollection<AccTrackInfo> GetTrackInfos()
+    {
+        return this.tracks.AsReadOnly();
     }
 }

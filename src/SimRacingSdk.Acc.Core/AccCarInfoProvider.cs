@@ -7,7 +7,7 @@ public class AccCarInfoProvider : IAccCarInfoProvider
 {
     private static AccCarInfoProvider? singletonInstance;
 
-    public List<AccCarInfo> Cars { get; } =
+    private readonly List<AccCarInfo> cars =
     [
         new()
         {
@@ -608,7 +608,7 @@ public class AccCarInfoProvider : IAccCarInfoProvider
 
     public AccCarInfo? FindByModelId(int modelId)
     {
-        return this.Cars.FirstOrDefault(c => c.ModelId == modelId);
+        return this.cars.FirstOrDefault(c => c.ModelId == modelId);
     }
 
     public string GetCarDisplayNameWithYear(int modelId)
@@ -616,5 +616,10 @@ public class AccCarInfoProvider : IAccCarInfoProvider
         var car = this.FindByModelId(modelId);
 
         return car == null? string.Empty: $"{car.DisplayName} ({car.Year})";
+    }
+
+    public IReadOnlyCollection<AccCarInfo> GetCarInfos()
+    {
+        return this.cars.AsReadOnly();
     }
 }

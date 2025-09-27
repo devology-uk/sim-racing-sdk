@@ -1,3 +1,11 @@
-﻿namespace SimRacingSdk.Acc.Core.Abstractions;
+﻿using SimRacingSdk.Acc.Core.Models;
 
-public interface IAccTrackInfoProvider { }
+namespace SimRacingSdk.Acc.Core.Abstractions;
+
+public interface IAccTrackInfoProvider
+{
+    AccTrackInfo? FindByFullName(string fullName);
+    AccTrackInfo? FindByTrackId(string trackId);
+    string GetNameByTrackId(string trackId);
+    IReadOnlyCollection<AccTrackInfo> GetTrackInfos();
+}
