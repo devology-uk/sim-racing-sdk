@@ -5,6 +5,8 @@ using System.Reactive.Disposables;
 using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Udp.Abstractions;
+using SimRacingSdk.Ams2.Udp.Enums;
+using SimRacingSdk.Ams2.Udp.Messages;
 
 namespace SimRacingSdk.Ams2.Udp;
 
@@ -33,6 +35,7 @@ public class Ams2UdpConnection : IAms2UdpConnection
     public string IpAddress { get; }
     public int Port { get; }
     public IObservable<LogMessage> LogMessages => this.ams2UdpMessageHandler.LogMessages;
+    public IObservable<GameStateUpdate> GameStateUpdates => this.ams2UdpMessageHandler.GameStateUpdates;
 
     public void Connect(bool autoDetect = true)
     {

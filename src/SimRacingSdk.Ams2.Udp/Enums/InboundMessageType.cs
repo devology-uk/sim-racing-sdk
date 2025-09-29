@@ -1,4 +1,4 @@
-﻿namespace SimRacingSdk.Ams2.Udp;
+﻿namespace SimRacingSdk.Ams2.Udp.Enums;
 
 public enum InboundMessageType: byte
 {
