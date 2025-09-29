@@ -196,6 +196,11 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
+        if(this.currentSession != null)
+        {
+            this.sessionEndedSubject.OnNext(this.currentSession);
+        }
+
         this.eventEndedSubject.OnNext(this.currentEvent);
         this.currentEvent = null;
         this.accSharedMemoryConnection?.Dispose();

@@ -80,7 +80,7 @@ internal class AccUdpMessageHandler
     internal void Disconnect(bool sendUnregister = true)
     {
         this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
-     
+
         if(sendUnregister)
         {
             try
@@ -95,7 +95,6 @@ internal class AccUdpMessageHandler
                 Console.WriteLine(exception);
             }
         }
-
     }
 
     internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
@@ -198,6 +197,11 @@ internal class AccUdpMessageHandler
         writer.Write(this.ConnectionId);
 
         this.DispatchMessage(stream.ToArray());
+    }
+
+    internal void SessionTerminated()
+    {
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
     }
 
     internal void SetCamera(string cameraSet, string camera)

@@ -245,7 +245,7 @@ public class AccUdpConnection : IAccUdpConnection
                     return;
                 }
 
-
+                this.accUdpMessageHandler.SessionTerminated();
                 this.LogMessage(LoggingLevel.Information,
                     "ACC has stopped sending messages, the user has probably quit the session.");
                 this.Shutdown();
