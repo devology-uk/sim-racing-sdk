@@ -269,7 +269,7 @@ public class AccMonitor : IAccMonitor
 
         if(this.currentEvent == null || !this.entryList.Any())
         {
-            // ACC sends a couple of real time updates before the session actually starts
+            // ACC sends a couple of real time updates before the event actually starts
             // need to ignore these because we have no entry list to work with
             return;
         }
@@ -283,13 +283,14 @@ public class AccMonitor : IAccMonitor
             this.currentPhaseSubject.OnNext(this.currentPhase);
             this.LogMessage(LoggingLevel.Information, $"Phase Changed: {this.currentPhase.ToFriendlyName()}");
 
-            if(this.currentPhase == SessionPhase.PreFormation)
+            if(this.currentPhase == SessionPhase.Session)
             {
-                this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
                 this.currentSession = new AccMonitorSession(this.currentEvent.Id,
                     sessionType,
                     realtimeUpdate.SessionEndTime);
+                this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
                 this.sessionStartedSubject.OnNext(this.currentSession);
+
                 return;
             }
         }
@@ -306,8 +307,8 @@ public class AccMonitor : IAccMonitor
             this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
         }
 
-        this.sessionEndedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
+        this.sessionEndedSubject.OnNext(this.currentSession);
         this.currentSession = null;
     }
 
