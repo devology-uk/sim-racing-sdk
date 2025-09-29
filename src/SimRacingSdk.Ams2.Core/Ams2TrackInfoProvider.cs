@@ -5,7 +5,6 @@ namespace SimRacingSdk.Ams2.Core;
 
 public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
 {
-    private static Ams2TrackInfoProvider? singletonInstance;
     private const string Grade3 = "Grade 3";
     private const string GradeHistoric = "Historic";
     private const string GradeOffRoad = "Off-road";
@@ -17,10 +16,14 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
     private const string GradeKart = "Kart";
     private const string TrackTypeKart = "Kart";
     private const string GradeTemporary = "Temporary";
+    private const string GradeOval = "Oval";
+    private const string TrackTypeOval = "Oval";
+    private const string Grade4 = "Grade 4";
 
-    public static Ams2TrackInfoProvider Instance => singletonInstance ??= new Ams2TrackInfoProvider();
+    private static Ams2TrackInfoProvider? singletonInstance;
 
-    private readonly List<Ams2TrackInfo> tracks = [
+    private readonly List<Ams2TrackInfo> tracks =
+    [
         new()
         {
             AltitudeM = 52,
@@ -30,10 +33,10 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
             Latitude = -34.7072786,
             Longitude = 138.3438002,
             ShortName = "Adelaide",
-            Layouts = [
+            Layouts =
+            [
                 new Ams2TrackLayoutInfo
                 {
-                    
                     Corners = 14,
                     Grade = Grade3,
                     LengthM = 3210,
@@ -58,8 +61,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 20,
                     Name = "Adelaide STT",
                     TrackType = TrackTypeCircuit
-                },
-
+                }
             ]
         },
         new()
@@ -71,7 +73,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
             Latitude = -26.9372386,
             Longitude = -49.3903302,
             ShortName = "Ascurra",
-            Layouts = [
+            Layouts =
+            [
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 8,
@@ -169,7 +172,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 48,
                     Name = "Circuit de Barcelona-Catalunya National",
                     TrackType = TrackTypeCircuit
-                },
+                }
             ]
         },
         new()
@@ -338,7 +341,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.15",
                     TrackType = TrackTypeCircuit
-                },
+                }
             ]
         },
         new Ams2TrackInfo
@@ -350,7 +353,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
             Latitude = 60.2446211,
             Longitude = 7.7015854,
             ShortName = "Buskerud",
-            Layouts = [
+            Layouts =
+            [
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 22,
@@ -507,6 +511,385 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     TrackType = TrackTypeCircuit
                 }
             ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 881,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional de Curitiba",
+            Latitude = -25.444722,
+            Longitude = -49.196944,
+            ShortName = "Curitiba",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade3,
+                    LengthM = 3690,
+                    MaxGridSize = 30,
+                    Name = "Curitiba",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = Grade3,
+                    LengthM = 2600,
+                    MaxGridSize = 30,
+                    Name = "Curitiba Outer",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 672,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Curvelo",
+            Latitude = -18.9011312,
+            Longitude = -44.557409,
+            ShortName = "Curvelo",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade2,
+                    LengthM = 4420,
+                    MaxGridSize = 48,
+                    Name = "Curvelo Long",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade3,
+                    LengthM = 3330,
+                    MaxGridSize = 48,
+                    Name = "Curvelo Short",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 586,
+            Country = "Argentina",
+            CountryCode = "ARG",
+            FullName = "Autódromo Oscar Cabalén",
+            Latitude = -31.5777004,
+            Longitude = -64.3674171,
+            ShortName = "Córdoba",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade3,
+                    LengthM = 4060,
+                    MaxGridSize = 26,
+                    Name = "Córdoba No.4",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade3,
+                    LengthM = 3650,
+                    MaxGridSize = 26,
+                    Name = "Córdoba TC",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 2060,
+                    MaxGridSize = 26,
+                    Name = "Córdoba No.2",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 9,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Daytona International Speedway",
+            Latitude = 17.3011292,
+            Longitude = -69.8407186,
+            ShortName = "Daytona",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade3,
+                    LengthM = 5720,
+                    MaxGridSize = 48,
+                    Name = "Daytona Sports Car Course",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade3,
+                    LengthM = 5720,
+                    MaxGridSize = 48,
+                    Name = "Daytona Nascar Road Course",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 3,
+                    Grade = GradeOval,
+                    LengthM = 4020,
+                    MaxGridSize = 48,
+                    Name = "Daytona Nascar Tri-Oval",
+                    TrackType = TrackTypeOval
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 96,
+            Country = "England",
+            CountryCode = "GBR-ENG",
+            FullName = "Donington Park",
+            Latitude = 52.8304,
+            Longitude = -1.3749,
+            ShortName = "Donington",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade2,
+                    LengthM = 4020,
+                    MaxGridSize = 38,
+                    Name = "Donington GP",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade3,
+                    LengthM = 3180,
+                    MaxGridSize = 38,
+                    Name = "Donington National",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 377,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Auto Club Speedway",
+            Latitude = 34.0867452,
+            Longitude = -117.4953334,
+            ShortName = "Fontana",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 3210,
+                    MaxGridSize = 32,
+                    Name = "Auto Club Speedway Oval",
+                    TrackType = TrackTypeOval
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = Grade2,
+                    LengthM = 4500,
+                    MaxGridSize = 30,
+                    Name = "Auto Club Speedway Sports Car Course",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 164,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Foz do Iguaçu",
+            Latitude = -25.5182827,
+            Longitude = -54.5879,
+            ShortName = "Foz",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 8,
+                    Grade = GradeRallycross,
+                    LengthM = 910,
+                    MaxGridSize = 8,
+                    Name = "Foz",
+                    TrackType = TrackTypeRallycross
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 10,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Galeao Airport",
+            Latitude = -22.802723,
+            Longitude = -43.2501475,
+            ShortName = "Galeao Airport",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 5,
+                    Grade = GradeTemporary,
+                    LengthM = 3200,
+                    MaxGridSize = 32,
+                    Name = "Galeao Airport",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 377,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "World Wide Technology Raceway",
+            Latitude = 38.6507585,
+            Longitude = -90.1379298,
+            ShortName = "Gateway",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 2010,
+                    MaxGridSize = 32,
+                    Name = "WWT Raceway Oval",
+                    TrackType = TrackTypeOval
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade2,
+                    LengthM = 2570,
+                    MaxGridSize = 32,
+                    Name = "WWT Raceway Road Course (Short)",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 3210,
+                    MaxGridSize = 32,
+                    Name = "WWT Raceway Road Course (Long)",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 757,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional Ayrton Senna",
+            Latitude = -16.7191167,
+            Longitude = -49.1946293,
+            ShortName = "Goiânia",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade4,
+                    LengthM = 3820,
+                    MaxGridSize = 48,
+                    Name = "Goiânia",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade3,
+                    LengthM = 1910,
+                    MaxGridSize = 36,
+                    Name = "Goiânia Short",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 5,
+                    Grade = Grade3,
+                    LengthM = 2590,
+                    MaxGridSize = 48,
+                    Name = "Goiânia External",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 828,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Kartódromo Internacional da Granja Viana",
+            Latitude = -23.6051739,
+            Longitude = -46.8386573,
+            ShortName = "Granja Viana",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = GradeKart,
+                    LengthM = 980,
+                    MaxGridSize = 28,
+                    Name = "Copa São Paulo Kart Stage 2",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = GradeKart,
+                    LengthM = 1010,
+                    MaxGridSize = 28,
+                    Name = "Granja Viana Kart 101",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeKart,
+                    LengthM = 990,
+                    MaxGridSize = 28,
+                    Name = "Granja Viana Kart 102",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = GradeKart,
+                    LengthM = 800,
+                    MaxGridSize = 28,
+                    Name = "Granja Viana Kart 121",
+                    TrackType = TrackTypeKart
+                }
+            ]
         }
     ];
+
+    public static Ams2TrackInfoProvider Instance => singletonInstance ??= new Ams2TrackInfoProvider();
 }
