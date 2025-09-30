@@ -250,6 +250,13 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
         this.accSharedMemoryEvent = accSharedMemoryEvent;
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
+        this.currentSession.IsOnline = accSharedMemoryEvent.IsOnline;
+        this.currentSession.NumberOfCars = accSharedMemoryEvent.NumberOfCars;
     }
 
     private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
