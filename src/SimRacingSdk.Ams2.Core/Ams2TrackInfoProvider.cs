@@ -888,6 +888,589 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     TrackType = TrackTypeKart
                 }
             ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 474,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional de Guaporé",
+            Latitude = -28.8444262,
+            Longitude = -51.8542861,
+            ShortName = "Guaporé",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade3,
+                    LengthM = 3080,
+                    MaxGridSize = 40,
+                    Name = "Guaporé",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade3,
+                    LengthM = 3080,
+                    MaxGridSize = 20,
+                    Name = "Guaporé STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 102,
+            Country = "Germany",
+            CountryCode = "DEU",
+            FullName = "Hockenheimring Baden-Württemberg",
+            Latitude = 49.3271529,
+            Longitude = 8.562912,
+            ShortName = "Hockenheimring",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = Grade1,
+                    LengthM = 4570,
+                    MaxGridSize = 48,
+                    Name = "Hockenheim",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeRallycross,
+                    LengthM = 1120,
+                    MaxGridSize = 8,
+                    Name = "Hockenheim Rallycross",
+                    TrackType = TrackTypeRallycross
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = Grade2,
+                    LengthM = 3690,
+                    MaxGridSize = 30,
+                    Name = "Hockenheim National",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 2630,
+                    MaxGridSize = 30,
+                    Name = "Hockenheim Short A",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade3,
+                    LengthM = 2600,
+                    MaxGridSize = 30,
+                    Name = "Hockenheim Short B",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 6820,
+                    MaxGridSize = 30,
+                    Name = "Hockenheim Historic 2001",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 2630,
+                    MaxGridSize = 20,
+                    Name = "Hockenheim STT",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = GradeHistoric,
+                    LengthM = 6790,
+                    MaxGridSize = 36,
+                    Name = "Hockenheim Historic 1988",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeHistoric,
+                    LengthM = 2630,
+                    MaxGridSize = 36,
+                    Name = "Hockenheim Historic 1988 Short",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeHistoric,
+                    LengthM = 6780,
+                    MaxGridSize = 36,
+                    Name = "Hockenheim Historic 1977",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 2190,
+            Country = "Ecuador",
+            CountryCode = "ECU",
+            FullName = "Autódromo Internacional José Tobar",
+            Latitude = 0.3802654,
+            Longitude = -78.1035038,
+            ShortName = "Ibarra",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade4,
+                    LengthM = 4300,
+                    MaxGridSize = 30,
+                    Name = "Autódromo Yahuarcocha",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade4,
+                    LengthM = 4300,
+                    MaxGridSize = 30,
+                    Name = "Autódromo Yahuarcocha Reverse",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade4,
+                    LengthM = 4300,
+                    MaxGridSize = 20,
+                    Name = "Autódromo Yahuarcocha STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 47,
+            Country = "Italy",
+            CountryCode = "ITA",
+            FullName = "Autodromo Enzo e Dino Ferrari",
+            Latitude = 44.3443939,
+            Longitude = 11.7130472,
+            ShortName = "Imola",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 19,
+                    Grade = Grade1,
+                    LengthM = 4900,
+                    MaxGridSize = 48,
+                    Name = "Imola",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 21,
+                    Grade = GradeHistoric,
+                    LengthM = 4930,
+                    MaxGridSize = 26,
+                    Name = "Imola Historic 2001",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 21,
+                    Grade = GradeHistoric,
+                    LengthM = 5040,
+                    MaxGridSize = 26,
+                    Name = "Imola Historic 1988",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = GradeHistoric,
+                    LengthM = 5010,
+                    MaxGridSize = 26,
+                    Name = "Imola Historic 1972",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 750,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo José Carlos Pace",
+            Latitude = -23.7045832,
+            Longitude = -46.7018401,
+            ShortName = "Interlagos",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade1,
+                    LengthM = 4290,
+                    MaxGridSize = 48,
+                    Name = "Interlagos GP",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade2,
+                    LengthM = 4290,
+                    MaxGridSize = 48,
+                    Name = "Interlagos Stock Car Brasil",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeHistoric,
+                    LengthM = 4320,
+                    MaxGridSize = 32,
+                    Name = "Interlagos Historic 1993",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeHistoric,
+                    LengthM = 4320,
+                    MaxGridSize = 32,
+                    Name = "Interlagos Historic 1991",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 30,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional Nelson Piquet",
+            Latitude = -22.975556,
+            Longitude = -43.395,
+            ShortName = "Jacarepaguá",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeHistoric,
+                    LengthM = 4900,
+                    MaxGridSize = 40,
+                    Name = "Jacarepaguá Historic 2005",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = GradeHistoric,
+                    LengthM = 5000,
+                    MaxGridSize = 40,
+                    Name = "Jacarepaguá Historic 1988",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 3000,
+                    MaxGridSize = 32,
+                    Name = "Jacarepaguá Historic 2005 Oval",
+                    TrackType = TrackTypeOval
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 8,
+                    Grade = GradeHistoric,
+                    LengthM = 3300,
+                    MaxGridSize = 40,
+                    Name = "Jacarepaguá Historic 2012 SCB",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = GradeHistoric,
+                    LengthM = 3040,
+                    MaxGridSize = 40,
+                    Name = "Jacarepaguá Historic 2012 Short",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 38,
+            Country = "Spain",
+            CountryCode = "ESP",
+            FullName = "Circuito de Jerez – Ángel Nieto",
+            Latitude = 36.708333,
+            Longitude = -6.034167,
+            ShortName = "Jerez",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade3,
+                    LengthM = 4410,
+                    MaxGridSize = 42,
+                    Name = "Jerez Moto",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade1,
+                    LengthM = 4420,
+                    MaxGridSize = 40,
+                    Name = "Jerez Chicane",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 4210,
+                    MaxGridSize = 32,
+                    Name = "Jerez Historic 1988",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 47,
+            Country = "Japan",
+            CountryCode = "JAP",
+            FullName = "Suzuka International Racing Course Simulation",
+            Latitude = 34.8417,
+            Longitude = 136.5389,
+            ShortName = "Kansai",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 19,
+                    Grade = Grade1,
+                    LengthM = 5810,
+                    MaxGridSize = 48,
+                    Name = "Kansai GP",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3460,
+                    MaxGridSize = 26,
+                    Name = "Kansai West",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade3,
+                    LengthM = 2240,
+                    MaxGridSize = 48,
+                    Name = "Kansai East",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 19,
+                    Grade = Grade2,
+                    LengthM = 5820,
+                    MaxGridSize = 48,
+                    Name = "Kansai Classic",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 1532,
+            Country = "South Africa",
+            CountryCode = "ZAF",
+            FullName = "Kyalami Grand Prix Circuit",
+            Latitude = -25.998056,
+            Longitude = 28.068889,
+            ShortName = "Kyalami",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade2,
+                    LengthM = 4520,
+                    MaxGridSize = 48,
+                    Name = "Kyalami",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = GradeHistoric,
+                    LengthM = 4040,
+                    MaxGridSize = 26,
+                    Name = "Kyalami Historic 1976",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 220,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "WeatherTech Raceway Laguna Seca",
+            Latitude = 36.584167,
+            Longitude = -121.753611,
+            ShortName = "Laguna Seca",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade2,
+                    LengthM = 3600,
+                    MaxGridSize = 48,
+                    Name = "Laguna Seca 2020",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 52,
+            Country = "France",
+            CountryCode = "FRA",
+            FullName = "Circuit de la Sarthe",
+            Latitude = 47.933333,
+            Longitude = 0.233333,
+            ShortName = "Le Mans",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 38,
+                    Grade = Grade2,
+                    LengthM = 13620,
+                    MaxGridSize = 60,
+                    Name = "Circuit des 24 Heures du Mans",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 4180,
+                    MaxGridSize = 32,
+                    Name = "Le Mans Circuit Bugatti",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 566,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional Ayrton Senna",
+            Latitude = -23.282222,
+            Longitude = -51.167222,
+            ShortName = "Londrina",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade3,
+                    LengthM = 3020,
+                    MaxGridSize = 48,
+                    Name = "Londrina Short",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade3,
+                    LengthM = 3140,
+                    MaxGridSize = 48,
+                    Name = "Londrina Long",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = GradeKart,
+                    LengthM = 1000,
+                    MaxGridSize = 28,
+                    Name = "Londrina Kart One",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = GradeKart,
+                    LengthM = 860,
+                    MaxGridSize = 28,
+                    Name = "Londrina Kart Two",
+                    TrackType = TrackTypeKart
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 2,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Long Beach",
+            Latitude = 33.766389,
+            Longitude = -118.192778,
+            ShortName = "Long Beach",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3160,
+                    MaxGridSize = 48,
+                    Name = "Long Beach",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3160,
+                    MaxGridSize = 20,
+                    Name = "Long Beach STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
         }
     ];
 
