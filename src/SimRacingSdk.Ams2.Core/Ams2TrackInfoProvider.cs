@@ -1471,6 +1471,1142 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     TrackType = TrackTypeCircuit
                 }
             ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 13,
+            Country = "Canada",
+            CountryCode = "CAN",
+            FullName = "Circuit Gilles Villeneuve",
+            Latitude = 45.500556,
+            Longitude = -73.5225,
+            ShortName = "Montreal",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade1,
+                    LengthM = 4360,
+                    MaxGridSize = 40,
+                    Name = "Montreal",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 4430,
+                    MaxGridSize = 40,
+                    Name = "Montreal Historic 1991",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 4430,
+                    MaxGridSize = 40,
+                    Name = "Montreal Historic 1988",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 180,
+            Country = "Italy",
+            CountryCode = "ITA",
+            FullName = "Autodromo Nazionale Monza",
+            Latitude = 45.620556,
+            Longitude = 9.289444,
+            ShortName = "Monza",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade1,
+                    LengthM = 5790,
+                    MaxGridSize = 48,
+                    Name = "Monza",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = Grade3,
+                    LengthM = 2400,
+                    MaxGridSize = 32,
+                    Name = "Monza Junior",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = GradeHistoric,
+                    LengthM = 5800,
+                    MaxGridSize = 32,
+                    Name = "Monza Historic 1991",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = GradeHistoric,
+                    LengthM = 5750,
+                    MaxGridSize = 26,
+                    Name = "Monza Historic 1971",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeHistoric,
+                    LengthM = 2400,
+                    MaxGridSize = 26,
+                    Name = "Monza Historic 1971 Junior",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 10100,
+                    MaxGridSize = 26,
+                    Name = "Monza Historic 1971 10K",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = GradeHistoric,
+                    LengthM = 10000,
+                    MaxGridSize = 26,
+                    Name = "Monza Historic 1971 10K (no chicane)",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = Grade3,
+                    LengthM = 2040,
+                    MaxGridSize = 20,
+                    Name = "Monza STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 300,
+            Country = "Canada",
+            CountryCode = "CAN",
+            FullName = "Canadian Tire Motorsport Park",
+            Latitude = 44.0512778,
+            Longitude = -78.6797009,
+            ShortName = "Mosport",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade2,
+                    LengthM = 3950,
+                    MaxGridSize = 48,
+                    Name = "Mosport",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 397,
+            Country = "Germany",
+            CountryCode = "DEU",
+            FullName = "Nürburgring",
+            Latitude = 50.335556,
+            Longitude = 6.9475,
+            ShortName = "Nürburgring",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 73,
+                    Grade = Grade3,
+                    LengthM = 20830,
+                    MaxGridSize = 28,
+                    Name = "Nordschleife 2025",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 73,
+                    Grade = Grade3,
+                    LengthM = 20830,
+                    MaxGridSize = 28,
+                    Name = "Nordschleife 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = GradeHistoric,
+                    LengthM = 2390,
+                    MaxGridSize = 32,
+                    Name = "Betonschleife Historic 1971",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 88,
+                    Grade = Grade3,
+                    LengthM = 25370,
+                    MaxGridSize = 48,
+                    Name = "Nordschleife 24 Hour 2025",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 88,
+                    Grade = Grade3,
+                    LengthM = 25370,
+                    MaxGridSize = 48,
+                    Name = "Nordschleife 24 Hour 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = GradeRallycross,
+                    LengthM = 1020,
+                    MaxGridSize = 8,
+                    Name = "Nürburgring RX",
+                    TrackType = TrackTypeRallycross
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade1,
+                    LengthM = 5140,
+                    MaxGridSize = 48,
+                    Name = "Nürburgring GP 2025",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade1,
+                    LengthM = 5140,
+                    MaxGridSize = 48,
+                    Name = "Nürburgring GP 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade1,
+                    LengthM = 5130,
+                    MaxGridSize = 48,
+                    Name = "Nürburgring Veedol 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3620,
+                    MaxGridSize = 48,
+                    Name = "Nürburgring Sprint 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3050,
+                    MaxGridSize = 30,
+                    Name = "Nürburgring Sprint S 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 187,
+                    Grade = GradeHistoric,
+                    LengthM = 28260,
+                    MaxGridSize = 32,
+                    Name = "Gesamtstrecke Historic 1971",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 160,
+                    Grade = GradeHistoric,
+                    LengthM = 22830,
+                    MaxGridSize = 32,
+                    Name = "Nordschleife Historic 1971",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 27,
+                    Grade = GradeHistoric,
+                    LengthM = 7740,
+                    MaxGridSize = 32,
+                    Name = "Südschleife Historic 1971",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 137,
+            Country = "Italy",
+            CountryCode = "ITA",
+            FullName = "Circuito Internazionale d'Abruzzo",
+            Latitude = 42.3056608,
+            Longitude = 14.3778113,
+            ShortName = "Ortona",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeKart,
+                    LengthM = 1500,
+                    MaxGridSize = 30,
+                    Name = "Ortona Kart One",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 20,
+                    Grade = GradeKart,
+                    LengthM = 1550,
+                    MaxGridSize = 30,
+                    Name = "Ortona Kart TWo",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeKart,
+                    LengthM = 1330,
+                    MaxGridSize = 30,
+                    Name = "Ortona Kart Three",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeKart,
+                    LengthM = 960,
+                    MaxGridSize = 30,
+                    Name = "Ortona Kart Four",
+                    TrackType = TrackTypeKart
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 65,
+            Country = "England",
+            CountryCode = "GBR-ENG",
+            FullName = "Oulton Park",
+            Latitude = 53.1768,
+            Longitude = -2.6168,
+            ShortName = "Oulton Park",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = Grade3,
+                    LengthM = 4330,
+                    MaxGridSize = 28,
+                    Name = "Oulton Park International",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade4,
+                    LengthM = 3630,
+                    MaxGridSize = 28,
+                    Name = "Oulton Park Island",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade4,
+                    LengthM = 2660,
+                    MaxGridSize = 28,
+                    Name = "Oulton Park Fosters",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade3,
+                    LengthM = 4290,
+                    MaxGridSize = 28,
+                    Name = "Oulton Park Classic",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 300,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Rod America",
+            Latitude = 43.7975,
+            Longitude = -87.993889,
+            ShortName = "Road America",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 6510,
+                    MaxGridSize = 48,
+                    Name = "Road America",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 6510,
+                    MaxGridSize = 48,
+                    Name = "Road America (Bend)",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 6510,
+                    MaxGridSize = 20,
+                    Name = "Road America STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 277,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Michelin Raceway Road Atlanta",
+            Latitude = 34.146667,
+            Longitude = -83.817778,
+            ShortName = "Road Atlanta",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade2,
+                    LengthM = 4080,
+                    MaxGridSize = 48,
+                    Name = "Road Atlanta",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade2,
+                    LengthM = 4100,
+                    MaxGridSize = 32,
+                    Name = "Road Atlanta Moto",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 68,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Circuito Ayrton Senna",
+            Latitude = -12.9475,
+            Longitude = -38.428056,
+            ShortName = "Salvador",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = GradeTemporary,
+                    LengthM = 2720,
+                    MaxGridSize = 34,
+                    Name = "Salvador Street Circuit",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 120,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional de Santa Cruz do Sul",
+            Latitude = -29.8,
+            Longitude = -52.436667,
+            ShortName = "Santa Cruz",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade4,
+                    LengthM = 3320,
+                    MaxGridSize = 48,
+                    Name = "Santa Cruz do Sul",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 18,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Sebring International Raceway",
+            Latitude = 27.455,
+            Longitude = -81.35,
+            ShortName = "Sebring",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = Grade2,
+                    LengthM = 5850,
+                    MaxGridSize = 48,
+                    Name = "Sebring",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade2,
+                    LengthM = 3210,
+                    MaxGridSize = 32,
+                    Name = "Sebring School",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade2,
+                    LengthM = 2730,
+                    MaxGridSize = 32,
+                    Name = "Sebring Club",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade2,
+                    LengthM = 3210,
+                    MaxGridSize = 20,
+                    Name = "Sebring STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 154,
+            Country = "England",
+            CountryCode = "GBR-ENG",
+            FullName = "Silverstone Circuit",
+            Latitude = 52.071,
+            Longitude = -1.0147,
+            ShortName = "Silverstone",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade1,
+                    LengthM = 5890,
+                    MaxGridSize = 48,
+                    Name = "Silverstone",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade2,
+                    LengthM = 2970,
+                    MaxGridSize = 32,
+                    Name = "Silverstone International",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 5,
+                    Grade = Grade3,
+                    LengthM = 2630,
+                    MaxGridSize = 36,
+                    Name = "Silverstone National",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = GradeHistoric,
+                    LengthM = 5140,
+                    MaxGridSize = 36,
+                    Name = "Silverstone Historic 2001",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = GradeHistoric,
+                    LengthM = 3610,
+                    MaxGridSize = 36,
+                    Name = "Silverstone International Historic 2001",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 5,
+                    Grade = GradeHistoric,
+                    LengthM = 2630,
+                    MaxGridSize = 36,
+                    Name = "Silverstone National Historic 2001",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeHistoric,
+                    LengthM = 5220,
+                    MaxGridSize = 36,
+                    Name = "Silverstone Historic 1991",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = GradeHistoric,
+                    LengthM = 4710,
+                    MaxGridSize = 36,
+                    Name = "Silverstone Historic 1975",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 8,
+                    Grade = GradeHistoric,
+                    LengthM = 4710,
+                    MaxGridSize = 36,
+                    Name = "Silverstone Historic 1975 (no chicane)",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 43,
+            Country = "England",
+            CountryCode = "GBR-ENG",
+            FullName = "Snetterton Circuit",
+            Latitude = 52.4648,
+            Longitude = 0.9473,
+            ShortName = "Snetterton",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade2,
+                    LengthM = 4780,
+                    MaxGridSize = 26,
+                    Name = "Snetterton 300",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 8,
+                    Grade = Grade2,
+                    LengthM = 3220,
+                    MaxGridSize = 26,
+                    Name = "Snetterton 200",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = Grade4,
+                    LengthM = 1580,
+                    MaxGridSize = 26,
+                    Name = "Snetterton 100",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 394,
+            Country = "Belgium",
+            CountryCode = "BEL",
+            FullName = "Circuit de Spa-Francorchamps",
+            Latitude = 50.4375,
+            Longitude = 5.9685,
+            ShortName = "Spa-Francorchamps",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 20,
+                    Grade = Grade1,
+                    LengthM = 7000,
+                    MaxGridSize = 48,
+                    Name = "Spa-Francorchamps 2022",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 20,
+                    Grade = Grade1,
+                    LengthM = 7000,
+                    MaxGridSize = 48,
+                    Name = "Spa-Francorchamps 2020",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 5,
+                    Grade = GradeRallycross,
+                    LengthM = 890,
+                    MaxGridSize = 8,
+                    Name = "Spa-Francorchamps RX",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 23,
+                    Grade = GradeHistoric,
+                    LengthM = 6940,
+                    MaxGridSize = 30,
+                    Name = "Spa-Francorchamps Historic 1993",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 21,
+                    Grade = GradeHistoric,
+                    LengthM = 14120,
+                    MaxGridSize = 32,
+                    Name = "Spa-Francorchamps Historic 1970",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 21,
+                    Grade = GradeHistoric,
+                    LengthM = 14120,
+                    MaxGridSize = 32,
+                    Name = "Spa-Francorchamps Historic 1970 1000KM",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 700,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Speedland Kart Centre",
+            Latitude = -23.5333361,
+            Longitude = -46.5863756,
+            ShortName = "Speedland",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 29,
+                    Grade = GradeKart,
+                    LengthM = 960,
+                    MaxGridSize = 14,
+                    Name = "Speedland Kart 1",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 30,
+                    Grade = GradeKart,
+                    LengthM = 980,
+                    MaxGridSize = 14,
+                    Name = "Speedland Kart 2",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = GradeKart,
+                    LengthM = 430,
+                    MaxGridSize = 14,
+                    Name = "Speedland Kart 2",
+                    TrackType = TrackTypeKart
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = GradeKart,
+                    LengthM = 580,
+                    MaxGridSize = 14,
+                    Name = "Speedland Kart 4",
+                    TrackType = TrackTypeKart
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 660,
+            Country = "Austria",
+            CountryCode = "AUT",
+            FullName = "Red Bull Ring",
+            Latitude = 47.2228736,
+            Longitude = 14.760198,
+            ShortName = "Spielberg",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade1,
+                    LengthM = 4310,
+                    MaxGridSize = 32,
+                    Name = "Spielberg",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = Grade3,
+                    LengthM = 2330,
+                    MaxGridSize = 32,
+                    Name = "Spielberg Short",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = Grade3,
+                    LengthM = 2330,
+                    MaxGridSize = 20,
+                    Name = "Spielberg STT",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = GradeHistoric,
+                    LengthM = 5890,
+                    MaxGridSize = 26,
+                    Name = "Spielberg Historic 1974",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 71,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Internacional de Tarumã",
+            Latitude = -30.048611,
+            Longitude = -51.019167,
+            ShortName = "Tarumã",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade4,
+                    LengthM = 3010,
+                    MaxGridSize = 32,
+                    Name = "Tarumã Internacional",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade3,
+                    LengthM = 3070,
+                    MaxGridSize = 32,
+                    Name = "Tarumã Chicane",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 280,
+            Country = "Argentina",
+            CountryCode = "ARG",
+            FullName = "Autódromo Termas de Río Hondo",
+            Latitude = -27.505861,
+            Longitude = -64.914472,
+            ShortName = "Termas de Río Hondo",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade2,
+                    LengthM = 4800,
+                    MaxGridSize = 48,
+                    Name = "Termas de Río Hondo",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 81,
+            Country = "Finland",
+            CountryCode = "FIN",
+            FullName = "Kouvola Circuit",
+            Latitude = 60.8838619,
+            Longitude = 26.7913711,
+            ShortName = "Tykki",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = GradeRallycross,
+                    LengthM = 1010,
+                    MaxGridSize = 8,
+                    Name = "Tykki RX",
+                    TrackType = TrackTypeRallycross
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = GradeOffRoad,
+                    LengthM = 750,
+                    MaxGridSize = 16,
+                    Name = "Tykki Tarmac",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 8,
+                    Grade = GradeOffRoad,
+                    LengthM = 910,
+                    MaxGridSize = 16,
+                    Name = "Tykki Dirt 1",
+                    TrackType = TrackTypeRallycross
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = GradeOffRoad,
+                    LengthM = 1680,
+                    MaxGridSize = 16,
+                    Name = "Tykki Dirt 2",
+                    TrackType = TrackTypeRallycross
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 750,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Autódromo Velo Città",
+            Latitude = -22.288889,
+            Longitude = -46.848333,
+            ShortName = "Velo Città",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade3,
+                    LengthM = 3320,
+                    MaxGridSize = 34,
+                    Name = "Velo Città",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = Grade3,
+                    LengthM = 3360,
+                    MaxGridSize = 34,
+                    Name = "Velo Città Track Day",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade3,
+                    LengthM = 1720,
+                    MaxGridSize = 34,
+                    Name = "Velo Città Club Day",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 15,
+            Country = "Brazil",
+            CountryCode = "BRA",
+            FullName = "Velopark",
+            Latitude = -29.822778,
+            Longitude = -51.320833,
+            ShortName = "Velopark",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade3,
+                    LengthM = 2270,
+                    MaxGridSize = 20,
+                    Name = "Velopark",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade3,
+                    LengthM = 2270,
+                    MaxGridSize = 34,
+                    Name = "Velopark 2017",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade3,
+                    LengthM = 2150,
+                    MaxGridSize = 34,
+                    Name = "Velopark 2010",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 65,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Virginia International Raceway (VIR)",
+            Latitude = 36.561667,
+            Longitude = -79.204722,
+            ShortName = "Virginia",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade2,
+                    LengthM = 5260,
+                    MaxGridSize = 48,
+                    Name = "VIRginia International Raceway Full",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 24,
+                    Grade = Grade3,
+                    LengthM = 6750,
+                    MaxGridSize = 28,
+                    Name = "VIRginia International Raceway Grand",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade3,
+                    LengthM = 3620,
+                    MaxGridSize = 48,
+                    Name = "VIRginia International Raceway North",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade3,
+                    LengthM = 2650,
+                    MaxGridSize = 26,
+                    Name = "VIRginia International Raceway South",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
+        },
+        new Ams2TrackInfo
+        {
+            AltitudeM = 452,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Watkins Glen International",
+            Latitude = 42.3362,
+            Longitude = -76.9252,
+            ShortName = "Watkins Glen",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 18,
+                    Grade = Grade2,
+                    LengthM = 5260,
+                    MaxGridSize = 48,
+                    Name = "Watkins Glen GP",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = Grade2,
+                    LengthM = 5550,
+                    MaxGridSize = 48,
+                    Name = "Watkins Glen GP (Inner Loop)",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade2,
+                    LengthM = 3900,
+                    MaxGridSize = 48,
+                    Name = "Watkins Glen Short",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade2,
+                    LengthM = 3940,
+                    MaxGridSize = 48,
+                    Name = "Watkins Glen Short (Inner Loop)",
+                    TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade2,
+                    LengthM = 3940,
+                    MaxGridSize = 20,
+                    Name = "Watkins Glen STT",
+                    TrackType = TrackTypeCircuit
+                }
+            ]
         }
     ];
 
