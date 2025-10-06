@@ -297,6 +297,10 @@ public class AccMonitor : IAccMonitor
 
             if(this.currentPhase == SessionPhase.Session)
             {
+                if(this.currentSession != null) {
+                    this.EndCurrentSession();
+                }
+
                 this.currentSession = new AccMonitorSession(this.currentEvent.Id,
                     sessionType,
                     realtimeUpdate.SessionEndTime);
@@ -313,7 +317,17 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        if(this.accSharedMemoryEvent != null)
+        this.EndCurrentSession();
+
+    }
+
+    private void EndCurrentSession() {
+        if (this.currentSession == null)
+        {
+            return;            
+        }
+
+        if (this.accSharedMemoryEvent != null)
         {
             this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
             this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
