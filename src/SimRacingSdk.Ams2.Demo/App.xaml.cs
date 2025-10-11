@@ -5,6 +5,7 @@ using System.Windows;
 using NLog.Extensions.Logging;
 using SimRacingSdk.Ams2.Demo.Controls.Console;
 using SimRacingSdk.Ams2.Demo.Abstractions;
+using SimRacingSdk.Ams2.Demo.CarExplorer;
 using SimRacingSdk.Ams2.Demo.Demos;
 using SimRacingSdk.Ams2.Demo.LogViewer;
 using SimRacingSdk.Ams2.Demo.Services;
@@ -62,6 +63,7 @@ public partial class App : Application
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();
+        services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IUdpLog, UdpLog>();
 

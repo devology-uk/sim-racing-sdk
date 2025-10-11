@@ -33,18 +33,21 @@
             <Button Content="UDP Demo"
                     Command="{Binding StartUdpDemoCommand}"
                     ToolTip="Start the demo of AccUdpConnection for connection to the ACC Broadcasting API" />
-            <Button Content="Shared Memory Demo"
-                    Command="{Binding StartSharedMemoryDemoCommand}"
-                    ToolTip="Start the demo of AccSharedMemoryConnection for connecting to the ACC Shared Memory channels" />
-            <Button Content="Monitor Demo"
-                    Command="{Binding StartMonitorDemoCommand}"
-                    ToolTip="Start the demo of AccMonitor, which combines AccUdpConnection and AccTelemetryOnlyConnection to provide state and data an application can use." />
+            <!-- <Button Content="Shared Memory Demo" -->
+            <!--         Command="{Binding StartSharedMemoryDemoCommand}" -->
+            <!--         ToolTip="Start the demo of AccSharedMemoryConnection for connecting to the ACC Shared Memory channels" /> -->
+            <!-- <Button Content="Monitor Demo" -->
+            <!--         Command="{Binding StartMonitorDemoCommand}" -->
+            <!--         ToolTip="Start the demo of AccMonitor, which combines AccUdpConnection and AccTelemetryOnlyConnection to provide state and data an application can use." /> -->
             <Button Content="Open Log Viewer"
                     Command="{Binding OpenLogViewerCommand}"
                     ToolTip="Open a window for analysing log files" />
             <Button Content="Open Log Folder"
                     Command="{Binding OpenLogFolderCommand}"
                     ToolTip="Open the folder containing the current log files" />
+            <Button Content="Open Car Explorer"
+                    Command="{Binding OpenCarExplorerCommand}"
+                    ToolTip="Open the car explorer window" />
         </StackPanel>
 
         <Button Grid.Column="0"

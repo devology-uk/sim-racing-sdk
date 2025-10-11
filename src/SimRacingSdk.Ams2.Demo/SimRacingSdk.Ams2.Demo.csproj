@@ -9,6 +9,60 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Images\Manufacturers\alpine.png" />
+	  <None Remove="Images\Manufacturers\aston-martin.png" />
+	  <None Remove="Images\Manufacturers\audi.png" />
+	  <None Remove="Images\Manufacturers\bentley.png" />
+	  <None Remove="Images\Manufacturers\bmw.png" />
+	  <None Remove="Images\Manufacturers\brabham.png" />
+	  <None Remove="Images\Manufacturers\cadillac.png" />
+	  <None Remove="Images\Manufacturers\caterham.png" />
+	  <None Remove="Images\Manufacturers\chevrolet.png" />
+	  <None Remove="Images\Manufacturers\citroen.png" />
+	  <None Remove="Images\Manufacturers\dallara.png" />
+	  <None Remove="Images\Manufacturers\ferrari.png" />
+	  <None Remove="Images\Manufacturers\ford.png" />
+	  <None Remove="Images\Manufacturers\ginetta.png" />
+	  <None Remove="Images\Manufacturers\honda.png" />
+	  <None Remove="Images\Manufacturers\isotta-fraschini.png" />
+	  <None Remove="Images\Manufacturers\iveco.png" />
+	  <None Remove="Images\Manufacturers\jaguar.png" />
+	  <None Remove="Images\Manufacturers\ktm.png" />
+	  <None Remove="Images\Manufacturers\lamborghini.png" />
+	  <None Remove="Images\Manufacturers\lexus.png" />
+	  <None Remove="Images\Manufacturers\ligier.png" />
+	  <None Remove="Images\Manufacturers\lola.png" />
+	  <None Remove="Images\Manufacturers\lopes.png" />
+	  <None Remove="Images\Manufacturers\lotus.png" />
+	  <None Remove="Images\Manufacturers\man.png" />
+	  <None Remove="Images\Manufacturers\maserati.png" />
+	  <None Remove="Images\Manufacturers\mclaren.png" />
+	  <None Remove="Images\Manufacturers\mcr.png" />
+	  <None Remove="Images\Manufacturers\mercedes.png" />
+	  <None Remove="Images\Manufacturers\metalmoro.png" />
+	  <None Remove="Images\Manufacturers\mini.png" />
+	  <None Remove="Images\Manufacturers\mitsubishi.png" />
+	  <None Remove="Images\Manufacturers\nissan.png" />
+	  <None Remove="Images\Manufacturers\oreca.png" />
+	  <None Remove="Images\Manufacturers\peugeot.png" />
+	  <None Remove="Images\Manufacturers\porsche.png" />
+	  <None Remove="Images\Manufacturers\puma.png" />
+	  <None Remove="Images\Manufacturers\reiter.png" />
+	  <None Remove="Images\Manufacturers\reiza.png" />
+	  <None Remove="Images\Manufacturers\reynard.png" />
+	  <None Remove="Images\Manufacturers\roco.png" />
+	  <None Remove="Images\Manufacturers\roco.webp" />
+	  <None Remove="Images\Manufacturers\sigma.png" />
+	  <None Remove="Images\Manufacturers\swift.png" />
+	  <None Remove="Images\Manufacturers\toyota.png" />
+	  <None Remove="Images\Manufacturers\ultima.jpg" />
+	  <None Remove="Images\Manufacturers\ultima.png" />
+	  <None Remove="Images\Manufacturers\vanwall.png" />
+	  <None Remove="Images\Manufacturers\volkswagen.png" />
+	  <None Remove="Images\Manufacturers\xl-sprint-race.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
@@ -35,6 +89,57 @@
 	  <Resource Include="Images\button_blue_goto_next.png" />
 	  <Resource Include="Images\button_blue_goto_previous.png" />
 	  <Resource Include="Images\delete.png" />
+	  <Resource Include="Images\Manufacturers\alpine.png" />
+	  <Resource Include="Images\Manufacturers\aston-martin.png" />
+	  <Resource Include="Images\Manufacturers\audi.png" />
+	  <Resource Include="Images\Manufacturers\bentley.png" />
+	  <Resource Include="Images\Manufacturers\bmw.png" />
+	  <Resource Include="Images\Manufacturers\brabham.png" />
+	  <Resource Include="Images\Manufacturers\cadillac.png" />
+	  <Resource Include="Images\Manufacturers\caterham.png" />
+	  <Resource Include="Images\Manufacturers\chevrolet.png" />
+	  <Resource Include="Images\Manufacturers\citroen.png" />
+	  <Resource Include="Images\Manufacturers\dallara.png" />
+	  <Resource Include="Images\Manufacturers\ferrari.png" />
+	  <Resource Include="Images\Manufacturers\ford.png" />
+	  <Resource Include="Images\Manufacturers\ginetta.png" />
+	  <Resource Include="Images\Manufacturers\honda.png" />
+	  <Resource Include="Images\Manufacturers\isotta-fraschini.png" />
+	  <Resource Include="Images\Manufacturers\iveco.png" />
+	  <Resource Include="Images\Manufacturers\jaguar.png" />
+	  <Resource Include="Images\Manufacturers\ktm.png" />
+	  <Resource Include="Images\Manufacturers\lamborghini.png" />
+	  <Resource Include="Images\Manufacturers\lexus.png" />
+	  <Resource Include="Images\Manufacturers\ligier.png" />
+	  <Resource Include="Images\Manufacturers\lola.png" />
+	  <Resource Include="Images\Manufacturers\lopes.png" />
+	  <Resource Include="Images\Manufacturers\lotus.png" />
+	  <Resource Include="Images\Manufacturers\man.png" />
+	  <Resource Include="Images\Manufacturers\maserati.png" />
+	  <Resource Include="Images\Manufacturers\mclaren.png" />
+	  <Resource Include="Images\Manufacturers\mcr.png" />
+	  <Resource Include="Images\Manufacturers\mercedes.png" />
+	  <Resource Include="Images\Manufacturers\metalmoro.png" />
+	  <Resource Include="Images\Manufacturers\mini.png" />
+	  <Resource Include="Images\Manufacturers\mitsubishi.png" />
+	  <Resource Include="Images\Manufacturers\nissan.png" />
+	  <Resource Include="Images\Manufacturers\oreca.png" />
+	  <Resource Include="Images\Manufacturers\peugeot.png" />
+	  <Resource Include="Images\Manufacturers\porsche.png" />
+	  <Resource Include="Images\Manufacturers\puma.png" />
+	  <Resource Include="Images\Manufacturers\reiter.png" />
+	  <Resource Include="Images\Manufacturers\reiza.png" />
+	  <Resource Include="Images\Manufacturers\reynard.png" />
+	  <Resource Include="Images\Manufacturers\roco.png" />
+	  <Resource Include="Images\Manufacturers\roco.webp" />
+	  <Resource Include="Images\Manufacturers\sigma.png" />
+	  <Resource Include="Images\Manufacturers\swift.png" />
+	  <Resource Include="Images\Manufacturers\toyota.png" />
+	  <Resource Include="Images\Manufacturers\ultima.jpg" />
+	  <Resource Include="Images\Manufacturers\ultima.png" />
+	  <Resource Include="Images\Manufacturers\vanwall.png" />
+	  <Resource Include="Images\Manufacturers\volkswagen.png" />
+	  <Resource Include="Images\Manufacturers\xl-sprint-race.png" />
 	  <Resource Include="Images\trash.png" />
 	</ItemGroup>
 

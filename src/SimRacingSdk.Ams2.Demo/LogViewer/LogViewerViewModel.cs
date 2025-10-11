@@ -10,6 +10,7 @@ namespace SimRacingSdk.Ams2.Demo.LogViewer;
 public partial class LogViewerViewModel : ObservableObject
 {
     private readonly List<LogFileEntry> allLogEntries = [];
+
     [ObservableProperty]
     private int currentPage = 1;
     [ObservableProperty]

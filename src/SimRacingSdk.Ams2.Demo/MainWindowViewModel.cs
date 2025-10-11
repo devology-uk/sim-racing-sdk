@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
+using SimRacingSdk.Ams2.Demo.CarExplorer;
 using SimRacingSdk.Ams2.Demo.LogViewer;
 
 namespace SimRacingSdk.Ams2.Demo;
@@ -37,6 +38,19 @@ public partial class MainWindowViewModel : ObservableObject
         this.ams2CompatibilityChecker = ams2CompatibilityChecker;
         this.ams2GameDetector = ams2GameDetector;
         this.udpDemo = udpDemo;
+    }
+
+    [RelayCommand]
+    private void OpenCarExplorer()
+    {
+        var carViewerViewModel = App.Current.Services.GetRequiredService<CarExplorerViewModel>();
+        var carExplorer = new CarExplorerWindow
+        {
+            DataContext = carViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        carExplorer.Show();
+        carViewerViewModel.Init();
     }
 
     [RelayCommand]
@@ -83,6 +97,13 @@ public partial class MainWindowViewModel : ObservableObject
         }
 
         this.udpDemo.Start();
+    }
+
+    [RelayCommand]
+    private void StopDemo()
+    {
+        this.isDemoCancelled = true;
+        this.StopRunningDemos();
     }
 
     private bool CheckCompatibility()
