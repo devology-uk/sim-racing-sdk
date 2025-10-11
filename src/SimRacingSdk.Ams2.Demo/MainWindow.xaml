@@ -48,6 +48,9 @@
             <Button Content="Open Car Explorer"
                     Command="{Binding OpenCarExplorerCommand}"
                     ToolTip="Open the car explorer window" />
+            <Button Content="Open Track Explorer"
+                    Command="{Binding OpenTrackExplorerCommand}"
+                    ToolTip="Open the track explorer window" />
         </StackPanel>
 
         <Button Grid.Column="0"

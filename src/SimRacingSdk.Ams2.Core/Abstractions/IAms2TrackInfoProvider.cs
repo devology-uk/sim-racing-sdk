@@ -1,3 +1,11 @@
-﻿namespace SimRacingSdk.Ams2.Core.Abstractions;
+﻿using System.Collections.ObjectModel;
+using SimRacingSdk.Ams2.Core.Models;
 
-public interface IAms2TrackInfoProvider { }
+namespace SimRacingSdk.Ams2.Core.Abstractions;
+
+public interface IAms2TrackInfoProvider
+{
+    Ams2TrackInfo? FindTrackByShortName(string shortName);
+    ReadOnlyCollection<Ams2TrackInfo> GeTrackInfos();
+    ReadOnlyCollection<string> GetTrackName();
+}

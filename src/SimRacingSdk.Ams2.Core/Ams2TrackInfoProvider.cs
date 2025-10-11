@@ -1,24 +1,25 @@
-﻿using SimRacingSdk.Ams2.Core.Abstractions;
+﻿using System.Collections.ObjectModel;
+using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Core.Models;
 
 namespace SimRacingSdk.Ams2.Core;
 
 public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
 {
-    private const string Grade3 = "Grade 3";
-    private const string GradeHistoric = "Historic";
-    private const string GradeOffRoad = "Off-road";
-    private const string GradeRallycross = "Rallycross";
-    private const string TrackTypeCircuit = "Circuit";
-    private const string TrackTypeRallycross = "Rallycross";
     private const string Grade1 = "Grade 1";
     private const string Grade2 = "Grade 2";
-    private const string GradeKart = "Kart";
-    private const string TrackTypeKart = "Kart";
-    private const string GradeTemporary = "Temporary";
-    private const string GradeOval = "Oval";
-    private const string TrackTypeOval = "Oval";
+    private const string Grade3 = "Grade 3";
     private const string Grade4 = "Grade 4";
+    private const string GradeHistoric = "Historic";
+    private const string GradeKart = "Kart";
+    private const string GradeOffRoad = "Off-road";
+    private const string GradeOval = "Oval";
+    private const string GradeRallycross = "Rallycross";
+    private const string GradeTemporary = "Temporary";
+    private const string TrackTypeCircuit = "Circuit";
+    private const string TrackTypeKart = "Kart";
+    private const string TrackTypeOval = "Oval";
+    private const string TrackTypeRallycross = "Rallycross";
 
     private static Ams2TrackInfoProvider? singletonInstance;
 
@@ -2611,4 +2612,21 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
     ];
 
     public static Ams2TrackInfoProvider Instance => singletonInstance ??= new Ams2TrackInfoProvider();
+
+    public Ams2TrackInfo? FindTrackByShortName(string shortName)
+    {
+        return this.tracks.FirstOrDefault(t => t.ShortName == shortName);
+    }
+
+    public ReadOnlyCollection<Ams2TrackInfo> GeTrackInfos()
+    {
+        return this.tracks.AsReadOnly();
+    }
+
+    public ReadOnlyCollection<string> GetTrackName()
+    {
+        return this.tracks.Select(t => t.ShortName)
+                   .ToList()
+                   .AsReadOnly();
+    }
 }

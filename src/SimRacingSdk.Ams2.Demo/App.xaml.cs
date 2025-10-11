@@ -9,6 +9,7 @@ using SimRacingSdk.Ams2.Demo.CarExplorer;
 using SimRacingSdk.Ams2.Demo.Demos;
 using SimRacingSdk.Ams2.Demo.LogViewer;
 using SimRacingSdk.Ams2.Demo.Services;
+using SimRacingSdk.Ams2.Demo.TrackExplorer;
 using SimRacingSdk.Ams2.Udp;
 
 namespace SimRacingSdk.Ams2.Demo;
@@ -64,6 +65,7 @@ public partial class App : Application
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();
         services.AddTransient<CarExplorerViewModel>();
+        services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IUdpLog, UdpLog>();
 

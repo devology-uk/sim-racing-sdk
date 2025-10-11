@@ -10,6 +10,7 @@ using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Demo.CarExplorer;
 using SimRacingSdk.Ams2.Demo.LogViewer;
+using SimRacingSdk.Ams2.Demo.TrackExplorer;
 
 namespace SimRacingSdk.Ams2.Demo;
 
@@ -75,6 +76,19 @@ public partial class MainWindowViewModel : ObservableObject
         };
         logViewer.Show();
         logViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private void OpenTrackExplorer()
+    {
+        var trackViewerViewModel = App.Current.Services.GetRequiredService<TrackExplorerViewModel>();
+        var trackExplorer = new TrackExplorerWindow
+        {
+            DataContext = trackViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        trackExplorer.Show();
+        trackViewerViewModel.Init();
     }
 
     [RelayCommand]

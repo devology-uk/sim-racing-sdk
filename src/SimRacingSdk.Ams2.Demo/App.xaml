@@ -7,5 +7,6 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <cvt:BooleanToVisibilityInverseConverter x:Key="BooleanToVisibilityInverseConverter" />
         <cvt:CarManufacturerImageSourceConverter x:Key="CarManufacturerImageSourceConverter"/>
+        <cvt:FlagImageSourceConverter x:Key="FlagImageSourceConverter"/>
     </Application.Resources>
 </Application>
