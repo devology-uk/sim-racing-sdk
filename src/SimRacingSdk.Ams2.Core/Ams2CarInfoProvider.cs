@@ -640,7 +640,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Copa Uno",
+            Class = "Copa Uno 1",
             Differential = "NA",
             DisplacementL = 1.6,
             Driveline = DrivelineFwd,
@@ -666,7 +666,33 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "DPI",
+            Differential = "NA",
+            DisplacementL = 5.5,
+            Driveline = DrivelineRwd,
+            Electronics = "TC",
+            Engine = EngineV8,
+            EnginePlacement = EnginePlacementMidRear,
+            HasAdjustableTurbo = true,
+            HasBoostButton = false,
+            HasDrs = false,
+            HasHeadlights = true,
+            HasOnBoardBrakeBias = true,
+            HasOnBoardRollBars = false,
+            HasPitSpeedLimiter = true,
+            Manufacturer = "Cadillac",
+            Model = "Cadillac DPi VR",
+            PowerHp = 582,
+            TopSpeedKph = 311,
+            TorqueNm = 620,
+            Transmission = Transmission6SpeedHPattern,
+            WeightDistribution = "45.4/54.6",
+            WeightKg = 1015,
+            WheelBaseM = 2.96
+        },
+        new()
+        {
+            Class = "Formula HiTech Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -692,7 +718,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -718,7 +744,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -744,7 +770,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -770,7 +796,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -796,7 +822,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -822,7 +848,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -848,7 +874,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -874,7 +900,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula HiTech",
+            Class = "Formula HiTech Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -952,7 +978,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen1",
             Differential = "NA",
             DisplacementL = 1.49,
             Driveline = DrivelineRwd,
@@ -978,7 +1004,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen1",
             Differential = "NA",
             DisplacementL = 1.49,
             Driveline = DrivelineRwd,
@@ -1004,7 +1030,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen1",
             Differential = "NA",
             DisplacementL = 1.49,
             Driveline = DrivelineRwd,
@@ -1030,7 +1056,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1056,7 +1082,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1082,7 +1108,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen2",
             Differential = "NA",
             DisplacementL = 1.49,
             Driveline = DrivelineRwd,
@@ -1108,7 +1134,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen2",
             Differential = "NA",
             DisplacementL = 1.49,
             Driveline = DrivelineRwd,
@@ -1134,7 +1160,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen3",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1160,7 +1186,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen3",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1186,7 +1212,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen3",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1212,7 +1238,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen3",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1238,7 +1264,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen3",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1264,7 +1290,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen4",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1290,7 +1316,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen4",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1316,7 +1342,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen4",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1342,7 +1368,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Classic",
+            Class = "Formula Classic Gen4",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -1472,7 +1498,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1498,7 +1524,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1524,7 +1550,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1550,7 +1576,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1576,7 +1602,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1602,7 +1628,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1628,7 +1654,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1654,7 +1680,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1680,7 +1706,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1706,7 +1732,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen3",
             Differential = "NA",
             DisplacementL = 1.5,
             Driveline = DrivelineRwd,
@@ -1732,7 +1758,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen3",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1758,7 +1784,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen3",
             Differential = "NA",
             DisplacementL = 1.5,
             Driveline = DrivelineRwd,
@@ -1784,7 +1810,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Retro",
+            Class = "Formula Retro Gen3",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -1914,7 +1940,33 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA 2023",
+            Differential = "NA",
+            DisplacementL = 2.2,
+            Driveline = DrivelineRwd,
+            Electronics = "None",
+            Engine = EngineV8,
+            EnginePlacement = EnginePlacementMidRear,
+            HasAdjustableTurbo = true,
+            HasBoostButton = true,
+            HasDrs = false,
+            HasHeadlights = false,
+            HasOnBoardBrakeBias = true,
+            HasOnBoardRollBars = true,
+            HasPitSpeedLimiter = true,
+            Manufacturer = "Reiza",
+            Model = "Formula USA 2023",
+            PowerHp = 685,
+            TopSpeedKph = 315,
+            TorqueNm = 430,
+            Transmission = Transmission6SpeedSequential,
+            WeightDistribution = "42.3/57.7",
+            WeightKg = 856,
+            WheelBaseM = 3
+        },
+        new()
+        {
+            Class = "Formula USA Gen1",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -1940,7 +1992,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen1",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -1966,7 +2018,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen1",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -1992,7 +2044,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen1",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2018,7 +2070,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen1",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2044,7 +2096,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2070,7 +2122,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2096,7 +2148,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2122,7 +2174,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2148,7 +2200,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2174,7 +2226,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen2",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2200,7 +2252,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2226,7 +2278,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2252,7 +2304,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2278,7 +2330,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2304,7 +2356,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2330,7 +2382,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2356,7 +2408,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula USA",
+            Class = "Formula USA Gen3",
             Differential = "NA",
             DisplacementL = 2.65,
             Driveline = DrivelineRwd,
@@ -2382,7 +2434,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula V10",
+            Class = "Formula V10 Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2408,7 +2460,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula V10",
+            Class = "Formula V10 Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2434,7 +2486,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula V10",
+            Class = "Formula V10 Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2486,7 +2538,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vee",
+            Class = "Formula Vee Gen1",
             Differential = "NA",
             DisplacementL = 1.6,
             Driveline = DrivelineRwd,
@@ -2512,7 +2564,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vee",
+            Class = "Formula Vee Gen1",
             Differential = "NA",
             DisplacementL = 1.6,
             Driveline = DrivelineRwd,
@@ -2538,7 +2590,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vee",
+            Class = "Formula Vee Gen2",
             Differential = "NA",
             DisplacementL = 1.6,
             Driveline = DrivelineRwd,
@@ -2564,7 +2616,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2590,7 +2642,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen1",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2616,7 +2668,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2642,7 +2694,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2668,7 +2720,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2694,7 +2746,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Formula Vintage",
+            Class = "Formula Vintage Gen2",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -2954,7 +3006,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT Classic",
+            Class = "GT Classics",
             Differential = "NA",
             DisplacementL = 7,
             Driveline = DrivelineRwd,
@@ -2980,7 +3032,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT Classic",
+            Class = "GT Classics",
             Differential = "NA",
             DisplacementL = 7,
             Driveline = DrivelineRwd,
@@ -3006,7 +3058,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT Classic",
+            Class = "GT Classics",
             Differential = "NA",
             DisplacementL = 3,
             Driveline = DrivelineRwd,
@@ -3188,7 +3240,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT1",
+            Class = "GT1 2005",
             Differential = "NA",
             DisplacementL = 6,
             Driveline = DrivelineRwd,
@@ -3214,7 +3266,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 5.20,
             Driveline = DrivelineRwd,
@@ -3240,7 +3292,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 4.39,
             Driveline = DrivelineRwd,
@@ -3266,7 +3318,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 3.8,
             Driveline = DrivelineRwd,
@@ -3292,7 +3344,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 6.21,
             Driveline = DrivelineRwd,
@@ -3318,7 +3370,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 3.8,
             Driveline = DrivelineRwd,
@@ -3344,7 +3396,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen1",
             Differential = "NA",
             DisplacementL = 4,
             Driveline = DrivelineRwd,
@@ -3370,7 +3422,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 4,
             Driveline = DrivelineRwd,
@@ -3396,7 +3448,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 5.2,
             Driveline = DrivelineRwd,
@@ -3422,7 +3474,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 2.99,
             Driveline = DrivelineRwd,
@@ -3448,7 +3500,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 5.5,
             Driveline = DrivelineRwd,
@@ -3474,7 +3526,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 5.2,
             Driveline = DrivelineRwd,
@@ -3500,7 +3552,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 3.99,
             Driveline = DrivelineRwd,
@@ -3526,7 +3578,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 6.21,
             Driveline = DrivelineRwd,
@@ -3552,7 +3604,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "GT3",
+            Class = "GT3 Gen2",
             Differential = "NA",
             DisplacementL = 4.19,
             Driveline = DrivelineRwd,
@@ -4176,7 +4228,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Kart",
+            Class = "Karting",
             Differential = "NA",
             DisplacementL = 0.13,
             Driveline = DrivelineRwd,
@@ -4202,7 +4254,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Kart",
+            Class = "Karting",
             Differential = "NA",
             DisplacementL = 0.39,
             Driveline = DrivelineRwd,
@@ -4228,7 +4280,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Kart",
+            Class = "Karting",
             Differential = "NA",
             DisplacementL = 0.39,
             Driveline = DrivelineRwd,
@@ -4254,7 +4306,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Kart",
+            Class = "Karting",
             Differential = "NA",
             DisplacementL = 0.13,
             Driveline = DrivelineRwd,
@@ -4280,7 +4332,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "Kart",
+            Class = "Kart Cross",
             Differential = "NA",
             DisplacementL = 0.6,
             Driveline = DrivelineRwd,
@@ -4748,7 +4800,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen1",
             Differential = "NA",
             DisplacementL = 6.2,
             Driveline = DrivelineRwd,
@@ -4774,7 +4826,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen1",
             Differential = "NA",
             DisplacementL = 6.2,
             Driveline = DrivelineRwd,
@@ -4800,7 +4852,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen1",
             Differential = "NA",
             DisplacementL = 2.4,
             Driveline = DrivelineRwd,
@@ -4826,7 +4878,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen1",
             Differential = "NA",
             DisplacementL = 4.2,
             Driveline = DrivelineRwd,
@@ -4852,7 +4904,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen1",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -4878,7 +4930,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 6.2,
             Driveline = DrivelineRwd,
@@ -4904,7 +4956,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 5.6,
             Driveline = DrivelineRwd,
@@ -4930,7 +4982,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 6.2,
             Driveline = DrivelineRwd,
@@ -4956,7 +5008,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 2.4,
             Driveline = DrivelineRwd,
@@ -4982,7 +5034,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 3.5,
             Driveline = DrivelineRwd,
@@ -5008,7 +5060,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P1 Gen2",
             Differential = "NA",
             DisplacementL = 6,
             Driveline = DrivelineRwd,
@@ -5060,7 +5112,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "P1",
+            Class = "P2",
             Differential = "NA",
             DisplacementL = 4.2,
             Driveline = DrivelineRwd,
@@ -5450,6 +5502,32 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
+            Class = "StockCar",
+            Differential = "NA",
+            DisplacementL = 5.7,
+            Driveline = DrivelineRwd,
+            Electronics = "None",
+            Engine = EngineV8,
+            EnginePlacement = EnginePlacementMidFront,
+            HasAdjustableTurbo = false,
+            HasBoostButton = true,
+            HasDrs = true,
+            HasHeadlights = false,
+            HasOnBoardBrakeBias = true,
+            HasOnBoardRollBars = true,
+            HasPitSpeedLimiter = true,
+            Manufacturer = "Chevrolet",
+            Model = "Chevrolet Cruze Stock Car 2019",
+            PowerHp = 473,
+            TopSpeedKph = 275,
+            TorqueNm = 464,
+            Transmission = Transmission6SpeedHPattern,
+            WeightDistribution = "50.6/49.4",
+            WeightKg = 1340,
+            WheelBaseM = 2.8
+        },
+        new()
+        {
             Class = "StockCar Nova Geração",
             Differential = "NA",
             DisplacementL = 6.8,
@@ -5499,32 +5577,6 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
             WeightDistribution = "50.6/49.4",
             WeightKg = 1370,
             WheelBaseM = 2.73
-        },
-        new()
-        {
-            Class = "StockCar",
-            Differential = "NA",
-            DisplacementL = 5.7,
-            Driveline = DrivelineRwd,
-            Electronics = "None",
-            Engine = EngineV8,
-            EnginePlacement = EnginePlacementMidFront,
-            HasAdjustableTurbo = false,
-            HasBoostButton = false,
-            HasDrs = true,
-            HasHeadlights = false,
-            HasOnBoardBrakeBias = true,
-            HasOnBoardRollBars = true,
-            HasPitSpeedLimiter = true,
-            Manufacturer = "Chevrolet",
-            Model = "Chevrolet Cruze Stock Car 2019",
-            PowerHp = 473,
-            TopSpeedKph = 275,
-            TorqueNm = 464,
-            Transmission = Transmission6SpeedHPattern,
-            WeightDistribution = "50.6/49.4",
-            WeightKg = 1340,
-            WheelBaseM = 2.8
         },
         new()
         {
@@ -5632,7 +5684,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "StockCar Pro Series",
+            Class = "StockCar 2023",
             Differential = "NA",
             DisplacementL = 6.8,
             Driveline = DrivelineRwd,
@@ -5658,7 +5710,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "StockCar Pro Series",
+            Class = "StockCar 2023",
             Differential = "NA",
             DisplacementL = 6.8,
             Driveline = DrivelineRwd,
@@ -5684,7 +5736,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "StockCar Pro Series",
+            Class = "StockCar 2024",
             Differential = "NA",
             DisplacementL = 6.8,
             Driveline = DrivelineRwd,
@@ -5710,7 +5762,7 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         },
         new()
         {
-            Class = "StockCar Pro Series",
+            Class = "StockCar 2024",
             Differential = "NA",
             DisplacementL = 6.8,
             Driveline = DrivelineRwd,
@@ -6214,5 +6266,20 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
     public ReadOnlyCollection<Ams2CarInfo> GetCarInfos()
     {
         return this.cars.AsReadOnly();
+    }
+
+    public ReadOnlyCollection<string> GetCarClasses()
+    {
+        return this.cars.Select(c => c.Class)
+                   .Distinct()
+                   .ToList()
+                   .AsReadOnly();
+    }
+
+    public ReadOnlyCollection<Ams2CarInfo> GetCarInfosForClass(string carClass)
+    {
+        return this.cars.Where(c => c.Class == carClass)
+                   .ToList()
+                   .AsReadOnly();
     }
 }
