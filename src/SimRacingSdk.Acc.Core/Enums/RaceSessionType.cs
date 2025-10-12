@@ -2,6 +2,7 @@
 
 public enum RaceSessionType
 {
+    NONE = -1,
     Practice = 0,
     Qualifying = 4,
     Superpole = 9,

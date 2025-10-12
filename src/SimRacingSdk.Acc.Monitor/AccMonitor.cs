@@ -28,36 +28,37 @@ public class AccMonitor : IAccMonitor
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
-    private readonly ReplaySubject<SessionPhase> currentPhaseSubject = new();
     private readonly List<AccMonitorEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEventEntry>> entryListSubject = new();
-    private readonly ReplaySubject<AccMonitorEvent> eventEndedSubject = new();
-    private readonly ReplaySubject<AccMonitorEventEntry> eventEntriesSubject = new();
+    private readonly Subject<AccMonitorEvent> eventCompletedSubject = new();
+    private readonly Subject<AccMonitorEventEntry> eventEntriesSubject = new();
     private readonly ReplaySubject<AccMonitorEvent> eventStartedSubject = new();
     private readonly Subject<AccMonitorGreenFlag> greenFlagSubject = new();
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
     private readonly Subject<AccMonitorLap> lapCompletedSubject = new();
-    private readonly ReplaySubject<LogMessage> logMessagesSubject = new();
+    private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccMonitorPenalty> penaltiesSubject = new();
     private readonly Subject<AccMonitorLap> personalBestLapSubject = new();
+    private readonly Subject<AccMonitorSessionPhaseChange> phaseChangedSubject = new();
     private readonly Subject<RealtimeCarUpdate> realtimeCarUpdatesSubject = new();
     private readonly Subject<AccMonitorLap> sessionBestLapSubject = new();
-    private readonly ReplaySubject<AccMonitorSession> sessionEndedSubject = new();
-    private readonly Subject<AccMonitorSession> sessionOverSubject = new();
-    private readonly ReplaySubject<AccMonitorSession> sessionStartedSubject = new();
+    private readonly Subject<AccMonitorSessionChange> sessionChangedSubject = new();
+    private readonly Subject<AccMonitorSession> sessionCompletedSubject = new();
+    private readonly Subject<AccMonitorSession> sessionStartedSubject = new();
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private AccSharedMemoryEvent? accSharedMemoryEvent;
     private IAccUdpConnection? accUdpConnection;
     private AccMonitorEvent? currentEvent;
-    private SessionPhase currentPhase;
+    private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private CompositeDisposable? udpSubscriptionSink;
+    private RaceSessionType currentSessionType = RaceSessionType.NONE;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -75,9 +76,8 @@ public class AccMonitor : IAccMonitor
     }
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
-    public IObservable<SessionPhase> CurrentPhase => this.currentPhaseSubject.AsObservable();
     public IObservable<IList<AccMonitorEventEntry>> EntryList => this.entryListSubject.AsObservable();
-    public IObservable<AccMonitorEvent> EventEnded => this.eventEndedSubject.AsObservable();
+    public IObservable<AccMonitorEvent> EventCompleted => this.eventCompletedSubject.AsObservable();
     public IObservable<AccMonitorEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
     public IObservable<AccMonitorEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccMonitorGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
@@ -87,10 +87,11 @@ public class AccMonitor : IAccMonitor
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccMonitorPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccMonitorLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
+    public IObservable<AccMonitorSessionPhaseChange> PhaseChanged => this.phaseChangedSubject.AsObservable();
     public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccMonitorLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
-    public IObservable<AccMonitorSession> SessionEnded => this.sessionEndedSubject.AsObservable();
-    public IObservable<AccMonitorSession> SessionOver => this.sessionOverSubject.AsObservable();
+    public IObservable<AccMonitorSessionChange> SessionChanged => this.sessionChangedSubject.AsObservable();
+    public IObservable<AccMonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
@@ -150,6 +151,24 @@ public class AccMonitor : IAccMonitor
         return this.entryList.All(e => e.CarLocation != CarLocation.Track);
     }
 
+    private void EndCurrentSession()
+    {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
+        if(this.accSharedMemoryEvent != null)
+        {
+            this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+            this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
+        }
+
+        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
+        this.sessionCompletedSubject.OnNext(this.currentSession);
+        this.currentSession = null;
+    }
+
     private void LogMessage(LoggingLevel level, string message, object? data = null)
     {
         this.logMessagesSubject.OnNext(new LogMessage(level, message, data));
@@ -198,10 +217,10 @@ public class AccMonitor : IAccMonitor
 
         if(this.currentSession != null)
         {
-            this.sessionEndedSubject.OnNext(this.currentSession);
+            this.EndCurrentSession();
         }
 
-        this.eventEndedSubject.OnNext(this.currentEvent);
+        this.eventCompletedSubject.OnNext(this.currentEvent);
         this.currentEvent = null;
         this.accSharedMemoryConnection?.Dispose();
     }
@@ -286,56 +305,45 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        var sessionType = realtimeUpdate.SessionType.ToFriendlyName();
+        var sessionType = realtimeUpdate.SessionType;
         var sessionPhase = realtimeUpdate.Phase;
+        var startNewSession = false;
+       
+
+        if(this.currentSessionType != sessionType)
+        {
+            this.LogMessage(LoggingLevel.Information,
+                $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
+            this.sessionChangedSubject.OnNext(new AccMonitorSessionChange(this.currentSessionType, sessionType));
+
+            this.currentSessionType = sessionType;
+        }
 
         if(this.currentPhase != sessionPhase)
         {
+            this.LogMessage(LoggingLevel.Information,
+                $"Phase Changed: From={this.currentPhase.ToFriendlyName()} To={sessionPhase.ToFriendlyName()}");
+            this.phaseChangedSubject.OnNext(
+                new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
+            startNewSession = sessionPhase == SessionPhase.Session;
+
             this.currentPhase = sessionPhase;
-            this.currentPhaseSubject.OnNext(this.currentPhase);
-            this.LogMessage(LoggingLevel.Information, $"Phase Changed: {this.currentPhase.ToFriendlyName()}");
-
-            if(this.currentPhase == SessionPhase.Session)
+            if(this.currentPhase == SessionPhase.SessionOver)
             {
-                if(this.currentSession != null) {
-                    this.EndCurrentSession();
-                }
-
-                this.currentSession = new AccMonitorSession(this.currentEvent.Id,
-                    sessionType,
-                    realtimeUpdate.SessionEndTime);
-                this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
-                this.sessionStartedSubject.OnNext(this.currentSession);
-
-                return;
+                this.EndCurrentSession();
             }
         }
 
-        if(this.currentSession == null || this.currentPhase != SessionPhase.PostSession
-                                       || !this.AllCarsAreFinished())
+        if(!startNewSession)
         {
             return;
         }
 
-        this.EndCurrentSession();
-
-    }
-
-    private void EndCurrentSession() {
-        if (this.currentSession == null)
-        {
-            return;            
-        }
-
-        if (this.accSharedMemoryEvent != null)
-        {
-            this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
-            this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
-        }
-
-        this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
-        this.sessionEndedSubject.OnNext(this.currentSession);
-        this.currentSession = null;
+        this.currentSession = new AccMonitorSession(this.currentEvent.Id,
+            sessionType.ToFriendlyName(),
+            realtimeUpdate.SessionEndTime);
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+        this.sessionStartedSubject.OnNext(this.currentSession);
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
@@ -545,7 +553,7 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessSessionOverEvent(BroadcastingEvent broadcastingEvent)
     {
-        this.sessionOverSubject.OnNext(this.currentSession!);
+        this.sessionCompletedSubject.OnNext(this.currentSession!);
     }
 
     private void ProcessWhiteFlagState(AccFlagState accFlagState)

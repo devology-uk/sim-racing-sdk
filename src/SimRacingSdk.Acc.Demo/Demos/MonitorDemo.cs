@@ -69,24 +69,28 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
 
             this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
-            this.accMonitor.EventEnded.Subscribe(this.OnNextEventEnded),
+            this.accMonitor.EventCompleted.Subscribe(this.OnNextEventEnded),
             this.accMonitor.GreenFlag.Subscribe(this.OnNextGreenFlag),
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
             this.accMonitor.Penalties.Subscribe(this.OnNextPenalty),
             this.accMonitor.PersonalBestLap.Subscribe(this.OnNextPersonalBestLap),
-            this.accMonitor.CurrentPhase.Subscribe(this.OnNextPhaseChanged),
+            this.accMonitor.PhaseChanged.Subscribe(this.OnNextPhaseChanged),
             this.accMonitor.RealtimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
             this.accMonitor.SessionBestLap.Subscribe(this.OnNextSessionBestLap),
-            this.accMonitor.SessionEnded.Subscribe(this.OnNextSessionEnded),
-            this.accMonitor.SessionOver.Subscribe(this.OnNextSessionOver),
+            this.accMonitor.SessionChanged.Subscribe(this.OnNextSessionChanged),
+            this.accMonitor.SessionCompleted.Subscribe(this.OnNextSessionCompleted),
             this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
-
             this.accMonitor.IsWhiteFlagActive.Subscribe(this.OnNextIsWhiteFlagActive),
             this.accMonitor.IsYellowFlagActive.Subscribe(this.OnNextIsYellowFlagActive),
             this.accMonitor.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };
 
         this.accMonitor.Start("ACC Monitor Demo");
+    }
+
+    private void OnNextSessionChanged(AccMonitorSessionChange accMonitorSessionChange)
+    {
+        this.monitorLog.Log($"Session Changed: {accMonitorSessionChange}");
     }
 
     public void Stop()
@@ -178,10 +182,10 @@ public class MonitorDemo : IMonitorDemo
         this.Log($"Best Session Lap: {accMonitorLap}");
     }
 
-    private void OnNextPhaseChanged(SessionPhase sessionPhase)
+    private void OnNextPhaseChanged(AccMonitorSessionPhaseChange accMonitorSessionPhaseChange)
     {
-        this.Log($"Phase Changed from {this.currentPhase} to {sessionPhase}");
-        this.currentPhase = sessionPhase;
+        this.Log($"Phase Changed: {accMonitorSessionPhaseChange}");
+        this.currentPhase = accMonitorSessionPhaseChange.NewPhase;
     }
 
     private void OnNextRealtimeCarUpdate(RealtimeCarUpdate realtimeCarUpdate)
@@ -201,17 +205,11 @@ public class MonitorDemo : IMonitorDemo
         this.Log($"Best Personal Lap: {accMonitorLap}");
     }
 
-    private void OnNextSessionEnded(AccMonitorSession accMonitorSession)
-    {
-        // Session Ended is produced by ACC monitor when it detects a change in session type
-        this.Log($"Session Ended: {accMonitorSession}");
-    }
-
-    private void OnNextSessionOver(AccMonitorSession accMonitorSession)
+    private void OnNextSessionCompleted(AccMonitorSession accMonitorSession)
     {
         // Session Over is produced by a broadcast event from ACC but
         // Not always dispatched so can't rely on it
-        this.Log($"Session Over: {accMonitorSession}");
+        this.Log($"Session Completed: {accMonitorSession}");
     }
 
     private void OnNextSessionStarted(AccMonitorSession accMonitorSession)
