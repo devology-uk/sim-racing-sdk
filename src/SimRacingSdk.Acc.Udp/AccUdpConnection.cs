@@ -18,6 +18,7 @@ public class AccUdpConnection : IAccUdpConnection
     private readonly IPEndPoint ipEndPoint;
     private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
     private readonly CompositeDisposable subscriptionSink = new();
+
     private bool isConnected;
     private bool isDisposed;
     private bool isStopped;
@@ -45,13 +46,11 @@ public class AccUdpConnection : IAccUdpConnection
         this.accUdpMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
     }
 
-    public IObservable<BroadcastingEvent> BroadcastingEvents =>
-        this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
+    public IObservable<BroadcastingEvent> BroadcastingEvents => this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
     public string CommandPassword { get; }
     public string ConnectionIdentifier { get; }
     public string ConnectionPassword { get; }
-    public IObservable<ConnectionState> ConnectionStateChanges =>
-        this.accUdpMessageHandler.ConnectionStateChanges;
+    public IObservable<ConnectionState> ConnectionStateChanges => this.accUdpMessageHandler.ConnectionStateChanges;
     public string DisplayName { get; }
     public IObservable<EntryListUpdate> EntryListUpdates => this.accUdpMessageHandler.EntryListUpdates;
     public string IpAddress { get; }

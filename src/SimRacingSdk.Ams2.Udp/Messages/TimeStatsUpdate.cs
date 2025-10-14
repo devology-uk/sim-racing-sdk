@@ -4,7 +4,7 @@ using SimRacingSdk.Ams2.Udp.Abstractions;
 
 namespace SimRacingSdk.Ams2.Udp.Messages;
 
-internal record TimeStatsUpdate : MessageBase
+public record TimeStatsUpdate : MessageBase
 {
     public TimeStatsUpdate(MessageHeader header)
         : base(header) { }
