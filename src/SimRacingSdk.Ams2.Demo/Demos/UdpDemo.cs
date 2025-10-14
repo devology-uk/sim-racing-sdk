@@ -4,6 +4,7 @@ using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Udp.Abstractions;
+using SimRacingSdk.Ams2.Udp.Messages;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
 
@@ -63,9 +64,49 @@ public class UdpDemo : IUdpDemo
         this.consoleLog.Write(message);
     }
 
+    private void OnNextConnectionStateUpdate(ConnectionState connectionState)
+    {
+        this.Log(connectionState.ToString());
+    }
+
+    private void OnNextGameStateUpdate(GameStateUpdate gameStateUpdate)
+    {
+        this.Log(gameStateUpdate.ToString());
+    }
+
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.Log(logMessage.ToString());
+    }
+
+    private void OnNextParticipantUpdate(ParticipantsUpdate participantsUpdate)
+    {
+        this.Log(participantsUpdate.ToString());
+    }
+
+    private void OnNextTelemetryUpdate(TelemetryUpdate telemetryUpdate)
+    {
+        this.Log(telemetryUpdate.ToString());
+    }
+
+    private void OnNextTimeStatsUpdate(TimeStatsUpdate timeStatsUpdate)
+    {
+        this.Log(timeStatsUpdate.ToString());
+    }
+
+    private void OnNextTimingsUpdate(TimingsUpdate timingsUpdate)
+    {
+        this.Log(timingsUpdate.ToString());
+    }
+
+    private void OnNextVehicleClassUpdate(VehicleClassUpdate vehicleClassUpdate)
+    {
+        this.Log(vehicleClassUpdate.ToString());
+    }
+
+    private void OnNextVehicleInfoUpdate(VehicleInfoUpdate vehicleInfoUpdate)
+    {
+        this.Log(vehicleInfoUpdate.ToString());
     }
 
     private void PrepareUdpMessageHandling()
@@ -77,7 +118,15 @@ public class UdpDemo : IUdpDemo
 
         this.subscriptionSink = new CompositeDisposable
         {
-            this.ams2UdpConnection.LogMessages.Subscribe(this.OnNextLogMessage)
+            this.ams2UdpConnection.ConnectionStateUpdates.Subscribe(this.OnNextConnectionStateUpdate),
+            this.ams2UdpConnection.GameStateUpdates.Subscribe(this.OnNextGameStateUpdate),
+            this.ams2UdpConnection.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.ams2UdpConnection.ParticipantUpdates.Subscribe(this.OnNextParticipantUpdate),
+            this.ams2UdpConnection.TelemetryUpdates.Subscribe(this.OnNextTelemetryUpdate),
+            this.ams2UdpConnection.TimeStatsUpdates.Subscribe(this.OnNextTimeStatsUpdate),
+            this.ams2UdpConnection.TimingsUpdates.Subscribe(this.OnNextTimingsUpdate),
+            this.ams2UdpConnection.VehicleClassUpdates.Subscribe(this.OnNextVehicleClassUpdate),
+            this.ams2UdpConnection.VehicleInfoUpdates.Subscribe(this.OnNextVehicleInfoUpdate)
         };
     }
 }

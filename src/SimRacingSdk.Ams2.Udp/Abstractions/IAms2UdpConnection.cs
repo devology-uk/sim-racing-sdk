@@ -1,14 +1,23 @@
 ﻿using SimRacingSdk.Acc.Core.Messages;
+using SimRacingSdk.Ams2.Udp.Messages;
 
 namespace SimRacingSdk.Ams2.Udp.Abstractions;
 
-public interface IAms2UdpConnection: IDisposable
+public interface IAms2UdpConnection : IDisposable
 {
     string ConnectionIdentifier { get; }
+    IObservable<ConnectionState> ConnectionStateUpdates { get; }
+    IObservable<GameStateUpdate> GameStateUpdates { get; }
     string IpAddress { get; }
-    int Port { get; }
     IObservable<LogMessage> LogMessages { get; }
+    IObservable<ParticipantsUpdate> ParticipantUpdates { get; }
+    int Port { get; }
+    IObservable<RaceInfoUpdate> RaceInfoUpdates { get; }
+    IObservable<TelemetryUpdate> TelemetryUpdates { get; }
+    IObservable<TimeStatsUpdate> TimeStatsUpdates { get; }
+    IObservable<TimingsUpdate> TimingsUpdates { get; }
+    IObservable<VehicleClassUpdate> VehicleClassUpdates { get; }
+    IObservable<VehicleInfoUpdate> VehicleInfoUpdates { get; }
     void Connect(bool autoDetect = true);
-    void Dispose();
     void Stop();
 }
