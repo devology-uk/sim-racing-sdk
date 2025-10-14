@@ -3,6 +3,7 @@ using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Udp.Enums;
+using SimRacingSdk.Ams2.Udp.Extensions;
 using SimRacingSdk.Ams2.Udp.Messages;
 
 namespace SimRacingSdk.Ams2.Udp;
@@ -11,6 +12,13 @@ internal class Ams2UdpMessageHandler
 {
     private readonly Subject<GameStateUpdate> gameStateUpdatesSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly Subject<ParticipantsUpdate> participantUpdatesSubject = new();
+    private readonly Subject<RaceInfoUpdate> raceInfoUpdatesSubject = new();
+    private readonly Subject<TelemetryUpdate> telemetryUpdatesSubject = new();
+    private readonly Subject<TimeStatsUpdate> timeStatsUpdatesSubject = new();
+    private readonly Subject<TimingsUpdate> timingsUpdatesSubject = new();
+    private readonly Subject<VehicleClassUpdate> vehicleClassUpdatesSubject = new();
+    private readonly Subject<VehicleInfoUpdate> vehicleInfoUpdatesSubject = new();
 
     internal Ams2UdpMessageHandler(string connectionIdentifier)
     {
@@ -24,14 +32,19 @@ internal class Ams2UdpMessageHandler
     }
 
     public string ConnectionIdentifier { get; }
-
     public IObservable<GameStateUpdate> GameStateUpdates => this.gameStateUpdatesSubject.AsObservable();
-
+    public IObservable<ParticipantsUpdate> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
+    public IObservable<RaceInfoUpdate> RaceInfoUpdates => this.raceInfoUpdatesSubject.AsObservable();
+    public IObservable<TelemetryUpdate> TelemetryUpdates => this.telemetryUpdatesSubject.AsObservable();
+    public IObservable<TimeStatsUpdate> TimeStatsUpdates => this.timeStatsUpdatesSubject.AsObservable();
+    public IObservable<TimingsUpdate> TimingsUpdates => this.timingsUpdatesSubject.AsObservable();
+    public IObservable<VehicleClassUpdate> VehicleClassUpdates => this.vehicleClassUpdatesSubject.AsObservable();
+    public IObservable<VehicleInfoUpdate> VehicleInfoUpdates => this.vehicleInfoUpdatesSubject.AsObservable();
     internal IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
 
     public void ProcessMessage(BinaryReader reader)
     {
-        var header = this.ReadHeader(reader);
+        var header = reader.ReadHeader();
         switch(header.PacketType)
         {
             case InboundMessageType.Telemetry:
@@ -53,7 +66,7 @@ internal class Ams2UdpMessageHandler
                 this.ProcessTimeStatsMessage(reader, header);
                 break;
             case InboundMessageType.VehicleInfo:
-                this.ProcessVehicleInfoMessage(reader, header);
+                this.ProcessVehicleMessage(reader, header);
                 break;
             default:
                 this.LogMessage(LoggingLevel.Warning, "Unknown message type");
@@ -68,50 +81,70 @@ internal class Ams2UdpMessageHandler
         this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
     }
 
-    private void ProcessGameStateMessage(BinaryReader reader, MessageHeader header) { }
-
-    private void ProcessParticipantsMessage(BinaryReader reader, MessageHeader header)
+    private void ProcessGameStateMessage(BinaryReader reader, MessageHeader header)
     {
-        var gameStateUpdate = new GameStateUpdate(header)
-        {
-            BuildVersionNumber = reader.ReadInt16()
-        };
-
-        var state = reader.ReadByte();
-        gameStateUpdate.SessionState = ((state & 240) >> 4);
-        gameStateUpdate.GameState = (state & 15);
-        gameStateUpdate.AmbientTemperature = reader.ReadByte();
-        gameStateUpdate.TrackTemperature = reader.ReadByte();
-        gameStateUpdate.RainDensity = reader.ReadByte();
-        gameStateUpdate.SnowDensity = reader.ReadByte();
-        gameStateUpdate.WindSpeed = reader.ReadByte();
-        gameStateUpdate.WindDirectionX = reader.ReadByte();
-        gameStateUpdate.WindDirectionY = reader.ReadByte();
+        var gameStateUpdate = reader.ReadGameStateUpdate(header);
 
         this.gameStateUpdatesSubject.OnNext(gameStateUpdate);
     }
 
-    private void ProcessRaceInfoMessage(BinaryReader reader, MessageHeader header) { }
-
-    private void ProcessTelemetryMessage(BinaryReader reader, MessageHeader header) { }
-
-    private void ProcessTimeStatsMessage(BinaryReader reader, MessageHeader header) { }
-
-    private void ProcessTimingsMessage(BinaryReader reader, MessageHeader header) { }
-
-    private void ProcessVehicleInfoMessage(BinaryReader reader, MessageHeader header) { }
-
-    private MessageHeader ReadHeader(BinaryReader reader)
+    private void ProcessParticipantsMessage(BinaryReader reader, MessageHeader header)
     {
-        return new MessageHeader
+        var participantsUpdate = reader.ReadParticipantsUpdate(header);
+
+        this.participantUpdatesSubject.OnNext(participantsUpdate);
+    }
+
+    private void ProcessRaceInfoMessage(BinaryReader reader, MessageHeader header)
+    {
+        var raceInfoUpdate = reader.ReadRaceInfoUpdate(header);
+
+        this.raceInfoUpdatesSubject.OnNext(raceInfoUpdate);
+    }
+
+    private void ProcessTelemetryMessage(BinaryReader reader, MessageHeader header)
+    {
+        var telemetryUpdate = reader.ReadTelemetryUpdate(header);
+
+        this.telemetryUpdatesSubject.OnNext(telemetryUpdate);
+    }
+
+    private void ProcessTimeStatsMessage(BinaryReader reader, MessageHeader header)
+    {
+        var timeStats = reader.ReadTimeStatsUpdate(header);
+
+        this.timeStatsUpdatesSubject.OnNext(timeStats);
+    }
+
+    private void ProcessTimingsMessage(BinaryReader reader, MessageHeader header)
+    {
+        var timingsUpdate = reader.ReadTimingsUpdate(header);
+
+        this.timingsUpdatesSubject.OnNext(timingsUpdate);
+    }
+
+    private void ProcessVehicleClassesUpdate(BinaryReader reader, MessageHeader header)
+    {
+        var vehicleClassUpdate = reader.ReadVehicleClassUpdate(header);
+
+        this.vehicleClassUpdatesSubject.OnNext(vehicleClassUpdate);
+    }
+
+    private void ProcessVehicleInfoUpdate(BinaryReader reader, MessageHeader header)
+    {
+        var vehicleInfoUpdate = reader.ReadVehicleInfoUpdate(header);
+
+        this.vehicleInfoUpdatesSubject.OnNext(vehicleInfoUpdate);
+    }
+
+    private void ProcessVehicleMessage(BinaryReader reader, MessageHeader header)
+    {
+        if(reader.BaseStream.Length == 1164)
         {
-            PacketNumber = reader.ReadInt32(),
-            CategoryPacketNumber = reader.ReadInt32(),
-            PartialPacketIndex = reader.ReadByte(),
-            PartialPacketNumber = reader.ReadByte(),
-            PacketType = (InboundMessageType)reader.ReadByte(),
-            PacketVersion = reader.ReadByte(),
-            PacketLength = reader.BaseStream.Length
-        };
+            this.ProcessVehicleInfoUpdate(reader, header);
+            return;
+        }
+
+        this.ProcessVehicleClassesUpdate(reader, header);
     }
 }

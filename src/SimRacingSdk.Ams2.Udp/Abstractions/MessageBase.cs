@@ -4,9 +4,9 @@ namespace SimRacingSdk.Ams2.Udp.Abstractions;
 
 public abstract record MessageBase
 {
-    protected MessageBase(MessageHeader messageHeader)
+    protected MessageBase(MessageHeader header)
     {
-        this.Header = messageHeader;
+        this.Header = header;
     }
 
     public MessageHeader Header { get; }
