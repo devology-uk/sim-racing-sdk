@@ -339,7 +339,7 @@ public class AccMonitor : IAccMonitor
 
     private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
-        this.currentSession = new AccMonitorSession(this.currentEvent.Id,
+        this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
             sessionType.ToFriendlyName(),
             realtimeUpdate.SessionEndTime);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
