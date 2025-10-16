@@ -30,12 +30,12 @@
                     HorizontalAlignment="Center"
                     Margin="10"
                     Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
-            <Button Content="UDP Demo"
-                    Command="{Binding StartUdpDemoCommand}"
-                    ToolTip="Start the demo of AccUdpConnection for connection to the ACC Broadcasting API" />
-            <!-- <Button Content="Shared Memory Demo" -->
-            <!--         Command="{Binding StartSharedMemoryDemoCommand}" -->
-            <!--         ToolTip="Start the demo of AccSharedMemoryConnection for connecting to the ACC Shared Memory channels" /> -->
+            <!-- <Button Content="UDP Demo" -->
+            <!--         Command="{Binding StartUdpDemoCommand}" -->
+            <!--         ToolTip="Start the demo of AccUdpConnection for connection to the ACC Broadcasting API" /> -->
+            <Button Content="Shared Memory Demo"
+                    Command="{Binding StartSharedMemoryDemoCommand}"
+                    ToolTip="Start the demo of AccSharedMemoryConnection for connecting to the ACC Shared Memory channels" />
             <!-- <Button Content="Monitor Demo" -->
             <!--         Command="{Binding StartMonitorDemoCommand}" -->
             <!--         ToolTip="Start the demo of AccMonitor, which combines AccUdpConnection and AccTelemetryOnlyConnection to provide state and data an application can use." /> -->
