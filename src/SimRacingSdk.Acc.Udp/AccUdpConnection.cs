@@ -25,7 +25,6 @@ public class AccUdpConnection : IAccUdpConnection
     private DateTime lastRealTimeUpdate;
     private Task listenerTask;
     private UdpClient udpClient;
-    private SessionPhase currentPhase;
 
     public AccUdpConnection(string ipAddress,
         int port,
@@ -46,11 +45,13 @@ public class AccUdpConnection : IAccUdpConnection
         this.accUdpMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
     }
 
-    public IObservable<BroadcastingEvent> BroadcastingEvents => this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
+    public IObservable<BroadcastingEvent> BroadcastingEvents =>
+        this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
     public string CommandPassword { get; }
     public string ConnectionIdentifier { get; }
     public string ConnectionPassword { get; }
-    public IObservable<ConnectionState> ConnectionStateChanges => this.accUdpMessageHandler.ConnectionStateChanges;
+    public IObservable<ConnectionState> ConnectionStateChanges =>
+        this.accUdpMessageHandler.ConnectionStateChanges;
     public string DisplayName { get; }
     public IObservable<EntryListUpdate> EntryListUpdates => this.accUdpMessageHandler.EntryListUpdates;
     public string IpAddress { get; }
@@ -67,8 +68,6 @@ public class AccUdpConnection : IAccUdpConnection
             this.accUdpMessageHandler.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange));
         this.subscriptionSink.Add(
             this.accUdpMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
-        this.subscriptionSink.Add(
-            this.accUdpMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
         this.subscriptionSink.Add(
             this.accUdpMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
 
@@ -95,6 +94,11 @@ public class AccUdpConnection : IAccUdpConnection
     {
         GC.SuppressFinalize(this);
         this.Dispose(true);
+    }
+
+    public void RequestEntryList()
+    {
+        this.accUdpMessageHandler.RequestEntryList();
     }
 
     public void SetActiveCamera(string cameraSetName, string cameraName)
@@ -194,12 +198,6 @@ public class AccUdpConnection : IAccUdpConnection
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.lastRealTimeUpdate = DateTime.Now;
-        this.currentPhase = realtimeUpdate.Phase;
-    }
-
-    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
-    {
-        this.accUdpMessageHandler.RequestEntryList();
     }
 
     private async Task ProcessNextMessage()
@@ -236,19 +234,22 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void StartDisconnectedWatcher()
     {
-        var subscription = Observable.Interval(this.messageTimeout).Subscribe(n =>
-            {
-                var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
-                if(!this.isConnected || timeSinceLastUpdate <= this.messageTimeout)
-                {
-                    return;
-                }
+        var subscription = Observable.Interval(this.messageTimeout)
+                                     .Subscribe(n =>
+                                                {
+                                                    var timeSinceLastUpdate =
+                                                        DateTime.Now - this.lastRealTimeUpdate;
+                                                    if(!this.isConnected || timeSinceLastUpdate
+                                                       <= this.messageTimeout)
+                                                    {
+                                                        return;
+                                                    }
 
-                this.accUdpMessageHandler.SessionTerminated();
-                this.LogMessage(LoggingLevel.Information,
-                    "ACC has stopped sending messages, the user has probably quit the session.");
-                this.Shutdown();
-            });
+                                                    this.accUdpMessageHandler.SessionTerminated();
+                                                    this.LogMessage(LoggingLevel.Information,
+                                                        "ACC has stopped sending messages, the user has probably quit the session.");
+                                                    this.Shutdown();
+                                                });
         this.subscriptionSink.Add(subscription);
     }
 

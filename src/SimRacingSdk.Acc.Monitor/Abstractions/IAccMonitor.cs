@@ -22,7 +22,7 @@ public interface IAccMonitor : IDisposable
     IObservable<AccMonitorSessionPhaseChange> PhaseChanged { get; }
     IObservable<RealtimeCarUpdate> RealtimeCarUpdates { get; }
     IObservable<AccMonitorLap> SessionBestLap { get; }
-    IObservable<AccMonitorSessionChange> SessionChanged { get; }
+    IObservable<AccMonitorSessionTypeChange> SessionChanged { get; }
     IObservable<AccMonitorSession> SessionCompleted { get; }
     IObservable<AccMonitorSession> SessionStarted { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }

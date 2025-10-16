@@ -88,9 +88,9 @@ public class MonitorDemo : IMonitorDemo
         this.accMonitor.Start("ACC Monitor Demo");
     }
 
-    private void OnNextSessionChanged(AccMonitorSessionChange accMonitorSessionChange)
+    private void OnNextSessionChanged(AccMonitorSessionTypeChange accMonitorSessionTypeChange)
     {
-        this.monitorLog.Log($"Session Changed: {accMonitorSessionChange}");
+        this.monitorLog.Log($"Session Changed: {accMonitorSessionTypeChange}");
     }
 
     public void Stop()

@@ -3,7 +3,7 @@ using SimRacingSdk.Acc.Udp.Messages;
 
 namespace SimRacingSdk.Acc.Udp.Abstractions;
 
-public interface IAccUdpConnection: IDisposable
+public interface IAccUdpConnection : IDisposable
 {
     IObservable<BroadcastingEvent> BroadcastingEvents { get; }
     string CommandPassword { get; }
@@ -20,6 +20,7 @@ public interface IAccUdpConnection: IDisposable
     IObservable<TrackDataUpdate> TrackDataUpdates { get; }
     int UpdateInterval { get; }
     void Connect(bool autoDetect = true);
+    void RequestEntryList();
     void SetActiveCamera(string cameraSetName, string cameraName);
     void SetActiveCamera(string cameraSetName, string cameraName, int carIndex);
     void SetFocus(int carIndex);

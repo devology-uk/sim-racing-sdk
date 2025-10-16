@@ -5,7 +5,7 @@ using SimRacingSdk.Acc.Monitor.Abstractions;
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccMonitorSessionChange(
+public record AccMonitorSessionTypeChange(
     RaceSessionType OldSessionType,
     RaceSessionType NewSessionType) : AccMonitorMessageBase
 {
