@@ -70,6 +70,8 @@ public class AccUdpConnection : IAccUdpConnection
             this.accUdpMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
         this.subscriptionSink.Add(
             this.accUdpMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
+        this.subscriptionSink.Add(
+            this.accUdpMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
 
         try
         {
@@ -198,6 +200,11 @@ public class AccUdpConnection : IAccUdpConnection
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.lastRealTimeUpdate = DateTime.Now;
+    }
+
+    private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
+    {
+        this.accUdpMessageHandler.RequestEntryList();
     }
 
     private async Task ProcessNextMessage()
