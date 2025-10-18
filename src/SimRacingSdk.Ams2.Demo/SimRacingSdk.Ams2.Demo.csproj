@@ -326,7 +326,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SimRacingSdk.Acc.Demo\SimRacingSdk.Acc.Demo.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Ams2.Core\SimRacingSdk.Ams2.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.Ams2.SharedMemory\SimRacingSdk.Ams2.SharedMemory.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Ams2.Udp\SimRacingSdk.Ams2.Udp.csproj" />
 	</ItemGroup>
 

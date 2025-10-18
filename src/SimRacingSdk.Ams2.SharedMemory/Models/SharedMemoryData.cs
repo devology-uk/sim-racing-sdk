@@ -30,6 +30,7 @@ public record SharedMemoryData
         this.LapsInEvent = sharedMemoryPage.LapsInEvent;
         this.TrackLocation = sharedMemoryPage.TrackLocation;
         this.TrackLayout = sharedMemoryPage.TrackLayout;
+        this.TrackLength = sharedMemoryPage.TrackLength;
         this.SectorCount = sharedMemoryPage.SectorCount;
         this.IsLapInvalid = sharedMemoryPage.IsLapInvalid;
         this.BestLapTime = TimeSpan.FromMilliseconds(sharedMemoryPage.BestLapTime);
@@ -100,7 +101,8 @@ public record SharedMemoryData
             (Ams2TyreFlag)sharedMemoryPage.TyreFlags[1],
             (Ams2TyreFlag)sharedMemoryPage.TyreFlags[2],
             (Ams2TyreFlag)sharedMemoryPage.TyreFlags[3]);
-        this.Terrain = new Ams2WheelMetric<Ams2TerrainMaterial>((Ams2TerrainMaterial)sharedMemoryPage.Terrain[0],
+        this.Terrain = new Ams2WheelMetric<Ams2TerrainMaterial>(
+            (Ams2TerrainMaterial)sharedMemoryPage.Terrain[0],
             (Ams2TerrainMaterial)sharedMemoryPage.Terrain[1],
             (Ams2TerrainMaterial)sharedMemoryPage.Terrain[2],
             (Ams2TerrainMaterial)sharedMemoryPage.Terrain[3]);
@@ -211,17 +213,17 @@ public record SharedMemoryData
         this.Orientations = sharedMemoryPage.Orientations.Select(o => new Vector3(o[0], o[1], o[2]))
                                             .ToArray();
         this.Speeds = sharedMemoryPage.Speeds;
-        this.CarNames = sharedMemoryPage.CarNames;
-        this.CarClassNames = sharedMemoryPage.CarClassNames;
+        this.CarNames = sharedMemoryPage.CarNames.Select(n => n.Value).ToArray();
+        this.CarClassNames = sharedMemoryPage.CarClassNames.Select(n => n.Value).ToArray();
         this.PitStopEnforcedOnLap = sharedMemoryPage.PitStopEnforcedOnLap;
         this.TranslatedTrackLocation = sharedMemoryPage.TranslatedTrackLocation;
         this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout;
         this.BrakeBias = sharedMemoryPage.BrakeBias;
         this.TurboBoostPressure = sharedMemoryPage.TurboBoostPressure;
-        this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompound[0],
-            sharedMemoryPage.TyreCompound[1],
-            sharedMemoryPage.TyreCompound[2],
-            sharedMemoryPage.TyreCompound[3]);
+        this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompound[0].Value,
+            sharedMemoryPage.TyreCompound[1].Value,
+            sharedMemoryPage.TyreCompound[2].Value,
+            sharedMemoryPage.TyreCompound[3].Value);
         this.PitSchedules = sharedMemoryPage.PitSchedules.Select(s => (Ams2PitStopSchedule)s)
                                             .ToArray();
         this.HighestFlagColors = sharedMemoryPage.HighestFlagColours.Select(c => (Ams2FlagColor)c)
@@ -230,6 +232,7 @@ public record SharedMemoryData
                                                   .ToArray();
         this.Nationalities = sharedMemoryPage.Nationalities;
         this.SnowDensity = sharedMemoryPage.SnowDensity;
+        this.SessionDuration = sharedMemoryPage.SessionDuration;
         this.SessionAdditionalLaps = sharedMemoryPage.SessionAdditionalLaps;
         this.TyreTempLeftC = new Ams2WheelMetric<float>(sharedMemoryPage.TyreTempLeftC[0],
             sharedMemoryPage.TyreTempLeftC[1],
@@ -363,6 +366,7 @@ public record SharedMemoryData
     public int SectorCount { get; init; }
     public float SequenceNumber { get; init; }
     public int SessionAdditionalLaps { get; init; }
+    public float SessionDuration { get; set; }
     public Ams2SessionState SessionState { get; init; }
     public float SnowDensity { get; init; }
     public float Speed { get; init; }
@@ -377,6 +381,7 @@ public record SharedMemoryData
     public Ams2WheelMetric<Ams2TerrainMaterial> Terrain { get; init; }
     public float Throttle { get; init; }
     public string TrackLayout { get; init; }
+    public float TrackLength { get; init; }
     public string TrackLocation { get; init; }
     public float TrackTempC { get; init; }
     public string TranslatedTrackLayout { get; init; }
@@ -412,7 +417,6 @@ public record SharedMemoryData
     public Vector3 WorldVelocity { get; init; }
     public Ams2YellowFlagState YellowFlagState { get; init; }
 
-
     public List<Ams2Participant> GetConsolidatedParticipants()
     {
         var result = new List<Ams2Participant>();
@@ -447,13 +451,43 @@ public record SharedMemoryData
                 RacePosition = participantInfo.RacePosition,
                 RaceState = this.RaceStates[i],
                 Speed = this.Speeds[i],
-                WorldPosition = participantInfo.WorldPosition,
+                WorldPosition = participantInfo.WorldPosition
             };
 
             result.Add(participant);
         }
 
         return result;
+    }
+
+    public Ams2GameStatus GetGameStatus()
+    {
+        return new Ams2GameStatus
+        {
+            AmbientTempC = this.AmbientTempC,
+            BuildVersion = this.BuildVersion,
+            CloudBrightness = this.CloudBrightness,
+            DPadMask = this.DPadMask,
+            FocusedParticipantIndex = this.FocusedParticipantIndex,
+            GameState = this.GameState,
+            JoyPad0Mask = this.JoyPad0Mask,
+            LapsInEvent = this.LapsInEvent,
+            ParticipantCount = this.ParticipantCount,
+            RaceState = this.RaceState,
+            RainDensity = this.RainDensity,
+            SessionAdditionalLaps = this.SessionAdditionalLaps,
+            SectorCount = this.SectorCount,
+            SessionDuration = this.SessionDuration,
+            SessionState = this.SessionState,
+            SnowDensity = this.SnowDensity,
+            TrackLayout = this.TrackLayout,
+            TrackLength = this.TrackLength,
+            TrackLocation = this.TrackLocation,
+            TrackTempC = this.TrackTempC,
+            Version = this.Version,
+            WindDirectionX = this.WindDirectionX,
+            WindDirectionY = this.WindDirectionY
+        };
     }
 
     public Ams2Participant GetPlayer()
@@ -486,13 +520,13 @@ public record SharedMemoryData
             RacePosition = participantInfo.RacePosition,
             RaceState = this.RaceState,
             Speed = this.Speed,
-            WorldPosition = participantInfo.WorldPosition,
+            WorldPosition = participantInfo.WorldPosition
         };
     }
 
-    public Ams2VehicleState GetVehicleState()
+    public Ams2TelemetryFrame GetTelemetryFrame()
     {
-        return new Ams2VehicleState
+        return new Ams2TelemetryFrame
         {
             AbsSetting = this.AbsSetting,
             AeroDamage = this.AeroDamage,

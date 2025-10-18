@@ -20,8 +20,10 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IAms2GameDetector ams2GameDetector;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<MainWindowViewModel> logger;
+    private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
     private readonly IUdpDemo udpDemo;
+
     private bool isDemoCancelled;
     private bool isGameRunning;
 
@@ -32,13 +34,15 @@ public partial class MainWindowViewModel : ObservableObject
         IConsoleLog consoleLog,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
         IAms2GameDetector ams2GameDetector,
-        IUdpDemo udpDemo)
+        IUdpDemo udpDemo,
+        ISharedMemoryDemo sharedMemoryDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.ams2CompatibilityChecker = ams2CompatibilityChecker;
         this.ams2GameDetector = ams2GameDetector;
         this.udpDemo = udpDemo;
+        this.sharedMemoryDemo = sharedMemoryDemo;
     }
 
     [RelayCommand]
@@ -89,6 +93,28 @@ public partial class MainWindowViewModel : ObservableObject
         };
         trackExplorer.Show();
         trackViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private async Task StartSharedMemoryDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.sharedMemoryDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitFormGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.sharedMemoryDemo.Start();
     }
 
     [RelayCommand]
@@ -163,6 +189,7 @@ public partial class MainWindowViewModel : ObservableObject
     private void StopRunningDemos()
     {
         this.udpDemo.Stop();
+        this.sharedMemoryDemo.Stop();
         this.IsRunningDemo = false;
     }
 

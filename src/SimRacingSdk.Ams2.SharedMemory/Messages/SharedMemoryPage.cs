@@ -182,9 +182,9 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public float[] Speeds;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public string[] CarNames;
+    public MaxLengthString[] CarNames;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public string[] CarClassNames;
+    public MaxLengthString[] CarClassNames;
     public int PitStopEnforcedOnLap;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
     public string TranslatedTrackLocation;
@@ -193,7 +193,7 @@ public class SharedMemoryPage
     public float BrakeBias;
     public float TurboBoostPressure;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public string[] TyreCompound;
+    public TyreCompoundName[] TyreCompound;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public uint[] PitSchedules;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]

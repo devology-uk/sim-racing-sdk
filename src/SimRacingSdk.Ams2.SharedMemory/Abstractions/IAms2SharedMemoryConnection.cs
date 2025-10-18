@@ -1,3 +1,10 @@
-﻿namespace SimRacingSdk.Ams2.SharedMemory.Abstractions;
+﻿using SimRacingSdk.Acc.Core.Messages;
 
-public interface IAms2SharedMemoryConnection { }
+namespace SimRacingSdk.Ams2.SharedMemory.Abstractions;
+
+public interface IAms2SharedMemoryConnection : IDisposable
+{
+    IObservable<LogMessage> LogMessages { get; }
+    void Start(double updateIntervalMs = 300);
+    void Stop();
+}

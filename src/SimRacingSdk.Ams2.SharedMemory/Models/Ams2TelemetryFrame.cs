@@ -5,7 +5,7 @@ using SimRacingSdk.Ams2.SharedMemory.Enums;
 
 namespace SimRacingSdk.Ams2.SharedMemory.Models;
 
-public record Ams2VehicleState
+public record Ams2TelemetryFrame
 {
     public int AbsSetting { get; set; }
     public float AeroDamage { get; init; }
