@@ -105,6 +105,7 @@ public class AccMonitor : IAccMonitor
 
     public void Start(string? connectionIdentifier = null)
     {
+        this.sessionCount = 0;
         this.LogMessage(LoggingLevel.Information,
             $"Starting ACC Monitor connection with ID: {connectionIdentifier}");
 
@@ -307,7 +308,7 @@ public class AccMonitor : IAccMonitor
         
         var sessionType = realtimeUpdate.SessionType;
         var sessionPhase = realtimeUpdate.Phase;
-        var startNewSession =  this.sessionCount == 0 ||  realtimeUpdate.SessionTime < this.currentSessionTime;
+        var startNewSession =  this.sessionCount == 0 ||  realtimeUpdate.SessionTime.TotalSeconds < this.currentSessionTime.TotalSeconds;
 
         this.currentSessionTime = realtimeUpdate.SessionTime;
 
@@ -326,6 +327,7 @@ public class AccMonitor : IAccMonitor
                 $"Phase Changed: From={this.currentPhase.ToFriendlyName()} To={sessionPhase.ToFriendlyName()}");
             this.phaseChangedSubject.OnNext(
                 new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
+            this.currentPhase = sessionPhase;
         }
 
         if(!startNewSession)
