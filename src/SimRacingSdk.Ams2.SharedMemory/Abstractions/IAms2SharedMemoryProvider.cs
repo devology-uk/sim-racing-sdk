@@ -1,3 +1,10 @@
-﻿namespace SimRacingSdk.Ams2.SharedMemory.Abstractions;
+﻿using SimRacingSdk.Ams2.SharedMemory.Messages;
+using SimRacingSdk.Ams2.SharedMemory.Models;
 
-public interface IAms2SharedMemoryProvider { }
+namespace SimRacingSdk.Ams2.SharedMemory.Abstractions;
+
+public interface IAms2SharedMemoryProvider
+{
+    SharedMemoryPage ReadSharedMemoryPage();
+    SharedMemoryData ReadSharedMemoryData();
+}

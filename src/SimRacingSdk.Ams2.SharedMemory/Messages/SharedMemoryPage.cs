@@ -86,30 +86,54 @@ public class SharedMemoryPage
     public float LasOpponentCollisionMagnitude;
     [MarshalAs(UnmanagedType.I1)]
     public bool IsBoostActive;
-    public Vector3 Orientation;
-    public Vector3 LocalVelocity;
-    public Vector3 WorldVelocity;
-    public Vector3 AngularVelocity;
-    public Vector3 LocalAcceleration;
-    public Vector3 WorldAcceleration;
-    public Vector3 ExtentsCenter;
-    public Wheel<uint> TyreFlags;
-    public Wheel<uint> Terrain;
-    public Wheel<float> TyreY;
-    public Wheel<float> TyreRps;
-    public Wheel<float> TyreSlipSpeed;
-    public Wheel<float> TyreTemp;
-    public Wheel<float> TyreGrip;
-    public Wheel<float> TyreHeightAboveGround;
-    public Wheel<float> TyreWear;
-    public Wheel<float> BrakeDamage;
-    public Wheel<float> SuspensionDamage;
-    public Wheel<float> BrakeTempC;
-    public Wheel<float> TyreTreadTempC;
-    public Wheel<float> TyreLayerTempC;
-    public Wheel<float> TyreCarcassTempC;
-    public Wheel<float> TyreRimTempC;
-    public Wheel<float> TyreInternalAirTempC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] Orientation;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] LocalVelocity;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] WorldVelocity;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] AngularVelocity;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] LocalAcceleration;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] WorldAcceleration;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] ExtentsCenter;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public uint[] TyreFlags;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public uint[] Terrain;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreY;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreRps;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreSlipSpeed;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreTempC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreGrip;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreHeightAboveGround;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreWear;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] BrakeDamage;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] SuspensionDamage;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] BrakeTempC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreTreadTempK;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreLayerTempK;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreCarcassTempK;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreRimTempK;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreInternalAirTempK;
     public uint CrashState;
     public float AeroDamage;
     public float EngineDamage;
@@ -120,10 +144,14 @@ public class SharedMemoryPage
     public float WindDirectionY;
     public float CloudBrightness;
     public volatile float SequenceNumber;
-    public Wheel<float> WheelLocalPositionY;
-    public Wheel<float> SuspensionTravel;
-    public Wheel<float> SuspensionVelocity;
-    public Wheel<float> AirPressure;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] WheelLocalPositionY;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] SuspensionTravel;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] SuspensionVelocity;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] AirPressure;
     public float EngineSpeed;
     public float EngineTorque;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
@@ -150,7 +178,7 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public uint[] PitModes;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public Vector3[] Orientations;
+    public float[][] Orientations;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public float[] Speeds;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
@@ -164,7 +192,8 @@ public class SharedMemoryPage
     public string TranslatedTrackLayout;
     public float BrakeBias;
     public float TurboBoostPressure;
-    public Wheel<string> TyreCompound;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
+    public string[] TyreCompound;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public uint[] PitSchedules;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
@@ -176,11 +205,15 @@ public class SharedMemoryPage
     public float SnowDensity;
     public float SessionDuration;
     public int SessionAdditionalLaps;
-    public Wheel<float> TyreTempLeftC;
-    public Wheel<float> TyreTempCentreC;
-    public Wheel<float> TyreTempRightC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreTempLeftC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreTempCenterC;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreTempRightC;
     public uint DrsState;
-    public Wheel<float> RideHeight;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] RideHeight;
     public uint JoyPad0;
     public uint DPad;
     public int AbsSetting;
@@ -188,7 +221,7 @@ public class SharedMemoryPage
     public int ErsDeploymentMode;
     [MarshalAs(UnmanagedType.I1)]
     public bool IsErsAutoModeEnabled;
-    public float ClutchTempC;
+    public float ClutchTempK;
     public float ClutchWear;
     [MarshalAs(UnmanagedType.I1)]
     public bool IsClutchOverheated;

@@ -10,7 +10,8 @@ public struct ParticipantInfo
     public bool IsActive;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
     public string Name;
-    public Vector3 WorldPosition;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
+    public float[] WorldPosition;
     public float DistanceIntoCurrentLap;
     public uint RacePosition;
     public uint LapsCompleted;

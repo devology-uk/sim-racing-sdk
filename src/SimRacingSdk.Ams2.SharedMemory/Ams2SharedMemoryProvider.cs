@@ -24,4 +24,9 @@ public class Ams2SharedMemoryProvider : IAms2SharedMemoryProvider
             return new SharedMemoryData();
         }
     }
+
+    public SharedMemoryPage ReadSharedMemoryPage()
+    {
+        return SharedMemoryPage.Read();
+    }
 }
