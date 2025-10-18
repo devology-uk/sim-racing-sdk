@@ -17,13 +17,13 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<AccSharedMemorySession> newSessionSubject = new();
     private readonly IAccSharedMemoryProvider sharedMemoryProvider;
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
-    
+
     private int actualSectorIndex;
     private StaticData? currentStaticData;
+    private bool isConnected;
     private bool isOnActiveLap;
     private GraphicsData? lastGraphicsData;
     private IDisposable? updateSubscription;
-    private bool isConnected;
 
     public AccSharedMemoryConnection(IAccSharedMemoryProvider sharedMemoryProvider)
     {
@@ -106,6 +106,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
                                                                 != staticData.IsOnline);
     }
 
+    private void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    {
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+    }
+
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
@@ -114,14 +119,16 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         {
             if(this.isConnected)
             {
-                this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Information, "Shared Memory data is no longer available, the user has probably quit the event."));
+                this.LogMessage(LoggingLevel.Information,
+                    "Shared Memory data is no longer available, the user has probably quit the event.");
                 this.connectedStateSubject.OnNext(false);
             }
+
             this.isConnected = false;
             return;
         }
 
-        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, staticData.ToString()));
+        this.LogMessage(LoggingLevel.Debug, staticData.ToString());
 
         this.isConnected = true;
         this.connectedStateSubject.OnNext(true);
@@ -133,7 +140,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
-        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, graphicsData.ToString()));
+        this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
 
         var flagState = new AccFlagState(graphicsData.IsWhiteFlagActive,
             graphicsData.IsYellowFlagActive,
@@ -163,7 +170,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             this.actualSectorIndex = 0;
             var accSharedMemoryLap = new AccSharedMemoryLap(staticData, graphicsData);
             this.newLapSubject.OnNext(accSharedMemoryLap);
-            this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, accSharedMemoryLap.ToString()));
+            this.LogMessage(LoggingLevel.Debug, accSharedMemoryLap.ToString());
         }
 
         if(!this.isOnActiveLap)
@@ -186,6 +193,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             graphicsData,
             physicsData,
             this.actualSectorIndex));
-        this.logMessagesSubject.OnNext(new LogMessage(LoggingLevel.Debug, physicsData.ToString()));
+        this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
     }
 }
