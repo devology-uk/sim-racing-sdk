@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Reactive" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SimRacingSdk.Ams2.Core\SimRacingSdk.Ams2.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.Ams2.SharedMemory\SimRacingSdk.Ams2.SharedMemory.csproj" />
+	</ItemGroup>
+
+</Project>
