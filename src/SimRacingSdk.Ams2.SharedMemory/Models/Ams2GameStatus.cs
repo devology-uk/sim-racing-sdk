@@ -29,4 +29,5 @@ public record Ams2GameStatus
     public uint Version { get; init; }
     public float WindDirectionX { get; init; }
     public float WindDirectionY { get; init; }
+    public float WindSpeed { get; init; }
 }

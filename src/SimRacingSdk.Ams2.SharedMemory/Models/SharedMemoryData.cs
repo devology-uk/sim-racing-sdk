@@ -8,7 +8,10 @@ namespace SimRacingSdk.Ams2.SharedMemory.Models;
 
 public record SharedMemoryData
 {
-    internal SharedMemoryData() { }
+    internal SharedMemoryData()
+    {
+        this.IsEmpty = true;
+    }
 
     internal SharedMemoryData(SharedMemoryPage sharedMemoryPage)
     {
@@ -25,11 +28,11 @@ public record SharedMemoryData
         this.UnfilteredBrake = sharedMemoryPage.UnfilteredBrake;
         this.UnfilteredSteering = sharedMemoryPage.UnfilteredSteering;
         this.UnfilteredClutch = sharedMemoryPage.UnfilteredClutch;
-        this.CarName = sharedMemoryPage.CarName;
-        this.CarClassName = sharedMemoryPage.CarClassName;
+        this.CarName = sharedMemoryPage.CarName.Value;
+        this.CarClassName = sharedMemoryPage.CarClassName.Value;
         this.LapsInEvent = sharedMemoryPage.LapsInEvent;
-        this.TrackLocation = sharedMemoryPage.TrackLocation;
-        this.TrackLayout = sharedMemoryPage.TrackLayout;
+        this.TrackLocation = sharedMemoryPage.TrackLocation.Value;
+        this.TrackLayout = sharedMemoryPage.TrackLayout.Value;
         this.TrackLength = sharedMemoryPage.TrackLength;
         this.SectorCount = sharedMemoryPage.SectorCount;
         this.IsLapInvalid = sharedMemoryPage.IsLapInvalid;
@@ -47,6 +50,9 @@ public record SharedMemoryData
         this.BestSector1Time = TimeSpan.FromMilliseconds(sharedMemoryPage.BestSector1Time);
         this.BestSector2Time = TimeSpan.FromMilliseconds(sharedMemoryPage.BestSector2Time);
         this.BestSector3Time = TimeSpan.FromMilliseconds(sharedMemoryPage.BestSector3Time);
+        this.PersonalBestSector1Time = TimeSpan.FromMilliseconds(sharedMemoryPage.PersonalBestSector1Time);
+        this.PersonalBestSector2Time = TimeSpan.FromMilliseconds(sharedMemoryPage.PersonalBestSector2Time);
+        this.PersonalBestSector3Time = TimeSpan.FromMilliseconds(sharedMemoryPage.PersonalBestSector3Time);
         this.OverallBestSector1Time = TimeSpan.FromMilliseconds(sharedMemoryPage.OverallBestSector1Time);
         this.OverallBestSector2Time = TimeSpan.FromMilliseconds(sharedMemoryPage.OverallBestSector2Time);
         this.OverallBestSector3Time = TimeSpan.FromMilliseconds(sharedMemoryPage.OverallBestSector3Time);
@@ -76,6 +82,7 @@ public record SharedMemoryData
         this.LastOpponentCollisionIndex = sharedMemoryPage.LastOpponentCollisionIndex;
         this.LastOpponentCollisionMagnitude = sharedMemoryPage.LasOpponentCollisionMagnitude;
         this.IsBoostActive = sharedMemoryPage.IsBoostActive;
+        this.BoostAmount = sharedMemoryPage.BoostAmount;
         this.Orientation = new Vector3(sharedMemoryPage.Orientation[0],
             sharedMemoryPage.Orientation[1],
             sharedMemoryPage.Orientation[2]);
@@ -130,6 +137,10 @@ public record SharedMemoryData
             sharedMemoryPage.TyreHeightAboveGround[1],
             sharedMemoryPage.TyreHeightAboveGround[2],
             sharedMemoryPage.TyreHeightAboveGround[3]);
+        this.TyreLateralStiffness = new Ams2WheelMetric<float>(sharedMemoryPage.TyreLateralStiffness[0],
+            sharedMemoryPage.TyreLateralStiffness[1],
+            sharedMemoryPage.TyreLateralStiffness[2],
+            sharedMemoryPage.TyreLateralStiffness[3]);
         this.TyreWear = new Ams2WheelMetric<float>(sharedMemoryPage.TyreWear[0],
             sharedMemoryPage.TyreWear[1],
             sharedMemoryPage.TyreWear[2],
@@ -172,6 +183,7 @@ public record SharedMemoryData
         this.AmbientTempC = sharedMemoryPage.AmbientTempC;
         this.TrackTempC = sharedMemoryPage.TrackTempC;
         this.RainDensity = sharedMemoryPage.RainDensity;
+        this.WindSpeed = sharedMemoryPage.WindSpeed;
         this.WindDirectionX = sharedMemoryPage.WindDirectionX;
         this.WindDirectionY = sharedMemoryPage.WindDirectionY;
         this.CloudBrightness = sharedMemoryPage.CloudBrightness;
@@ -208,16 +220,19 @@ public record SharedMemoryData
                                                 .ToArray();
         this.RaceStates = sharedMemoryPage.RaceStates.Select(s => (Ams2RaceState)s)
                                           .ToArray();
-        this.PitModes = sharedMemoryPage.RaceStates.Select(m => (Ams2PitMode)m)
+        this.PitModes = sharedMemoryPage.PitModes.Select(m => (Ams2PitMode)m)
                                         .ToArray();
-        this.Orientations = sharedMemoryPage.Orientations.Select(o => new Vector3(o[0], o[1], o[2]))
-                                            .ToArray();
+        this.Orientations = sharedMemoryPage
+                            .Orientations.Select(o => new Vector3(o.Value[0], o.Value[1], o.Value[2]))
+                            .ToArray();
         this.Speeds = sharedMemoryPage.Speeds;
-        this.CarNames = sharedMemoryPage.CarNames.Select(n => n.Value).ToArray();
-        this.CarClassNames = sharedMemoryPage.CarClassNames.Select(n => n.Value).ToArray();
+        this.CarNames = sharedMemoryPage.CarNames.Select(n => n.Value)
+                                        .ToArray();
+        this.CarClassNames = sharedMemoryPage.CarClassNames.Select(n => n.Value)
+                                             .ToArray();
         this.PitStopEnforcedOnLap = sharedMemoryPage.PitStopEnforcedOnLap;
-        this.TranslatedTrackLocation = sharedMemoryPage.TranslatedTrackLocation;
-        this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout;
+        this.TranslatedTrackLocation = sharedMemoryPage.TranslatedTrackLocation.Value;
+        this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout.Value;
         this.BrakeBias = sharedMemoryPage.BrakeBias;
         this.TurboBoostPressure = sharedMemoryPage.TurboBoostPressure;
         this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompound[0].Value,
@@ -278,6 +293,7 @@ public record SharedMemoryData
     public float[] BestSector2Times { get; init; }
     public TimeSpan BestSector3Time { get; init; }
     public float[] BestSector3Times { get; init; }
+    public float BoostAmount { get; set; }
     public float Brake { get; init; }
     public float BrakeBias { get; init; }
     public Ams2WheelMetric<float> BrakeDamage { get; init; }
@@ -325,6 +341,7 @@ public record SharedMemoryData
     public bool IsBoostActive { get; init; }
     public bool IsClutchOverheated { get; init; }
     public bool IsClutchSlipping { get; init; }
+    public bool IsEmpty { get; init; }
     public bool IsErsAutoModeEnabled { get; init; }
     public bool IsLapInvalid { get; init; }
     public bool[] IsLapInvalidated { get; init; }
@@ -352,6 +369,9 @@ public record SharedMemoryData
     public int ParticipantCount { get; init; }
     public Ams2ParticipantInfo[] ParticipantInfo { get; init; }
     public TimeSpan PersonalBestLapTime { get; init; }
+    public TimeSpan PersonalBestSector1Time { get; set; }
+    public TimeSpan PersonalBestSector2Time { get; set; }
+    public TimeSpan PersonalBestSector3Time { get; set; }
     public Ams2PitMode PitMode { get; init; }
     public Ams2PitMode[] PitModes { get; init; }
     public Ams2PitStopSchedule PitSchedule { get; init; }
@@ -393,6 +413,7 @@ public record SharedMemoryData
     public Ams2WheelMetric<float> TyreGrip { get; init; }
     public Ams2WheelMetric<float> TyreHeightAboveGround { get; init; }
     public Ams2WheelMetric<float> TyreInternalAirTempK { get; init; }
+    public Ams2WheelMetric<float> TyreLateralStiffness { get; set; }
     public Ams2WheelMetric<float> TyreLayerTempK { get; init; }
     public Ams2WheelMetric<float> TyreRimTempK { get; init; }
     public Ams2WheelMetric<float> TyreRps { get; init; }
@@ -413,6 +434,7 @@ public record SharedMemoryData
     public Ams2WheelMetric<float> WheelLocalPositionY { get; init; }
     public float WindDirectionX { get; init; }
     public float WindDirectionY { get; init; }
+    public float WindSpeed { get; set; }
     public Vector3 WorldAcceleration { get; init; }
     public Vector3 WorldVelocity { get; init; }
     public Ams2YellowFlagState YellowFlagState { get; init; }
@@ -486,7 +508,8 @@ public record SharedMemoryData
             TrackTempC = this.TrackTempC,
             Version = this.Version,
             WindDirectionX = this.WindDirectionX,
-            WindDirectionY = this.WindDirectionY
+            WindDirectionY = this.WindDirectionY,
+            WindSpeed = this.WindSpeed,
         };
     }
 
@@ -495,9 +518,9 @@ public record SharedMemoryData
         var participantInfo = this.ParticipantInfo[this.FocusedParticipantIndex];
         return new Ams2Participant
         {
-            BestSector1Time = this.BestSector1Time,
-            BestSector2Time = this.BestSector2Time,
-            BestSector3Time = this.BestSector3Time,
+            BestSector1Time = this.PersonalBestSector1Time,
+            BestSector2Time = this.PersonalBestSector2Time,
+            BestSector3Time = this.PersonalBestSector3Time,
             CarClassName = this.CarClassName,
             CarName = this.CarName,
             CurrentLap = participantInfo.CurrentLap,
@@ -532,6 +555,7 @@ public record SharedMemoryData
             AeroDamage = this.AeroDamage,
             AirPressure = this.AirPressure,
             AngularVelocity = this.AngularVelocity,
+            BoostAmount = this.BoostAmount,
             Brake = this.Brake,
             BrakeBias = this.BrakeBias,
             BrakeTempC = this.BrakeTempC,

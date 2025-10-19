@@ -12,6 +12,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private readonly IAms2CompatibilityChecker ams2CompatibilityChecker;
     private readonly IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory;
     private readonly IConsoleLog consoleLog;
+    private readonly ISharedMemoryLog sharedMemoryLog;
     private readonly ILogger<ISharedMemoryDemo> logger;
 
     private IAms2SharedMemoryConnection? ams2SharedMemoryConnection;
@@ -19,11 +20,13 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     public SharedMemoryDemo(ILogger<ISharedMemoryDemo> logger,
         IConsoleLog consoleLog,
+        ISharedMemoryLog sharedMemoryLog,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
         IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.sharedMemoryLog = sharedMemoryLog;
         this.ams2CompatibilityChecker = ams2CompatibilityChecker;
         this.ams2SharedMemoryConnectionFactory = ams2SharedMemoryConnectionFactory;
     }
@@ -64,7 +67,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.Log(logMessage.ToString());
+        this.sharedMemoryLog.Log(logMessage.ToString());
     }
 
     private void PrepareMessageHandling()

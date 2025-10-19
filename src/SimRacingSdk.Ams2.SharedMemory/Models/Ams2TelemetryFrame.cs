@@ -11,6 +11,7 @@ public record Ams2TelemetryFrame
     public float AeroDamage { get; init; }
     public Ams2WheelMetric<float> AirPressure { get; init; }
     public Vector3 AngularVelocity { get; init; }
+    public float BoostAmount { get; init; }
     public float Brake { get; init; }
     public float BrakeBias { get; init; }
     public Ams2WheelMetric<float> BrakeDamage { get; init; }

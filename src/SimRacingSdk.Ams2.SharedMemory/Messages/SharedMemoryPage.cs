@@ -1,7 +1,6 @@
 ﻿#nullable disable
 
 using System.IO.MemoryMappedFiles;
-using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Ams2.SharedMemory.Messages;
@@ -10,7 +9,7 @@ namespace SimRacingSdk.Ams2.SharedMemory.Messages;
 [StructLayout(LayoutKind.Sequential)]
 public class SharedMemoryPage
 {
-    private const string SharedMemoryMap = "$pcars$";
+    private const string SharedMemoryMap = "$pcars2$";
 
     private static readonly int size = Marshal.SizeOf<SharedMemoryPage>();
     private static readonly byte[] buffer = new byte[size];
@@ -28,15 +27,11 @@ public class SharedMemoryPage
     public float UnfilteredBrake;
     public float UnfilteredSteering;
     public float UnfilteredClutch;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string CarName;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string CarClassName;
+    public MaxLengthString CarName;
+    public MaxLengthString CarClassName;
     public uint LapsInEvent;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string TrackLocation;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string TrackLayout;
+    public MaxLengthString TrackLocation;
+    public MaxLengthString TrackLayout;
     public float TrackLength;
     public int SectorCount;
     [MarshalAs(UnmanagedType.I1)]
@@ -55,6 +50,9 @@ public class SharedMemoryPage
     public float BestSector1Time;
     public float BestSector2Time;
     public float BestSector3Time;
+    public float PersonalBestSector1Time;
+    public float PersonalBestSector2Time;
+    public float PersonalBestSector3Time;
     public float OverallBestSector1Time;
     public float OverallBestSector2Time;
     public float OverallBestSector3Time;
@@ -86,6 +84,7 @@ public class SharedMemoryPage
     public float LasOpponentCollisionMagnitude;
     [MarshalAs(UnmanagedType.I1)]
     public bool IsBoostActive;
+    public float BoostAmount;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
     public float[] Orientation;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.VectorMetricSize)]
@@ -117,6 +116,8 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
     public float[] TyreHeightAboveGround;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
+    public float[] TyreLateralStiffness;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
     public float[] TyreWear;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
     public float[] BrakeDamage;
@@ -140,10 +141,11 @@ public class SharedMemoryPage
     public float AmbientTempC;
     public float TrackTempC;
     public float RainDensity;
+    public float WindSpeed;
     public float WindDirectionX;
     public float WindDirectionY;
     public float CloudBrightness;
-    public volatile float SequenceNumber;
+    public float SequenceNumber;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
     public float[] WheelLocalPositionY;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
@@ -178,7 +180,7 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public uint[] PitModes;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public float[][] Orientations;
+    public Orientation[] Orientations;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public float[] Speeds;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
@@ -186,10 +188,8 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public MaxLengthString[] CarClassNames;
     public int PitStopEnforcedOnLap;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string TranslatedTrackLocation;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
-    public string TranslatedTrackLayout;
+    public MaxLengthString TranslatedTrackLocation;
+    public MaxLengthString TranslatedTrackLayout;
     public float BrakeBias;
     public float TurboBoostPressure;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]

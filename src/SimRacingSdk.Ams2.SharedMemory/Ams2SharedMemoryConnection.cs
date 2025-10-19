@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System.Diagnostics;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Core.Messages;
@@ -28,7 +29,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
 
     public void Start(double updateIntervalMs = 300)
     {
-        this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
+       this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
                                             .Subscribe(this.OnNextUpdate, this.OnError, this.OnCompleted);
     }
 
@@ -61,13 +62,20 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
     {
         var sharedMemoryData = this.ams2SharedMemoryProvider.ReadSharedMemoryData();
 
-        if(sharedMemoryData.SequenceNumber % 2 > 0)
+        if(sharedMemoryData.IsEmpty || sharedMemoryData.SequenceNumber % 2 > 0)
         {
+            Debug.WriteLine("Received incomplete data page");
             return;
         }
 
         this.LogMessage(LoggingLevel.Information, sharedMemoryData.GetGameStatus().ToString());
-        this.LogMessage(LoggingLevel.Information, sharedMemoryData.GetPlayer().ToString());
+        if(sharedMemoryData.FocusedParticipantIndex >= 0)
+        {
+            this.LogMessage(LoggingLevel.Information,
+                sharedMemoryData.GetPlayer()
+                                .ToString());
+        }
+
         this.LogMessage(LoggingLevel.Information, sharedMemoryData.GetTelemetryFrame().ToString());
     }
 }
