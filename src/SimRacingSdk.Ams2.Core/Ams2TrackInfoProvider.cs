@@ -43,7 +43,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3210,
                     MaxGridSize = 39,
                     Name = "Adelaide",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Adelaide_Modern"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -61,7 +62,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3210,
                     MaxGridSize = 20,
                     Name = "Adelaide STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Adelaide_Modern_STT"
                 }
             ]
         },
@@ -114,7 +116,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3330,
                     MaxGridSize = 26,
                     Name = "Azure Circuit",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "azure_circuit_2021"
                 }
             ]
         },
@@ -136,7 +139,9 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1120,
                     MaxGridSize = 8,
                     Name = "Circuit de Barcelona-Catalunya RX",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "barcelona_rx"
+
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -145,7 +150,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4670,
                     MaxGridSize = 48,
                     Name = "Circuit de Barcelona-Catalunya GP",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Barcelona_GP"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -154,7 +160,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4650,
                     MaxGridSize = 48,
                     Name = "Circuit de Barcelona-Catalunya GP (no chicane)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Barcelona_GP_NC"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -163,7 +170,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4740,
                     MaxGridSize = 32,
                     Name = "Circuit de Barcelona-Catalunya Historic 1991",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "barcelona_1991"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -172,7 +180,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2990,
                     MaxGridSize = 48,
                     Name = "Circuit de Barcelona-Catalunya National",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Barcelona_NAT_NC"
                 }
             ]
         },
@@ -194,7 +203,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6210,
                     MaxGridSize = 48,
                     Name = "Bathurst 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "bathurst_2020"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -203,7 +213,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6170,
                     MaxGridSize = 32,
                     Name = "Bathurst Historic 1983",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "bathurst_1983"
                 }
             ]
         },
@@ -225,7 +236,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3910,
                     MaxGridSize = 32,
                     Name = "Brands Hatch",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "BrandsHatch_GP"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -234,7 +246,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1940,
                     MaxGridSize = 32,
                     Name = "Brands Hatch Indy",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "BrandsHatch_Indy"
                 }
             ]
         },
@@ -256,7 +269,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5470,
                     MaxGridSize = 30,
                     Name = "Brasília Full",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Brasilia"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -265,7 +279,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2910,
                     MaxGridSize = 30,
                     Name = "Brasília Outer",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Brasilia_outer"
                 }
             ]
         },
@@ -287,7 +302,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4310,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.6 S",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_6_T"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -296,7 +312,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4250,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.6",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_6"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -305,7 +322,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2600,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.7",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_7"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -314,7 +332,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3320,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.8",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_8"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -323,7 +342,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3330,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.9",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_9"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -332,7 +352,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5650,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.12",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_12"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -341,7 +362,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5940,
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.15",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Buenos_Aries_15"
                 }
             ]
         },
@@ -363,7 +385,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1530,
                     MaxGridSize = 32,
                     Name = "Buskerud Kart Long",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Buskerud_Long"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -372,7 +395,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 950,
                     MaxGridSize = 24,
                     Name = "Buskerud Kart Short",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Buskerud_Short"
                 }
             ]
         },
@@ -394,7 +418,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3500,
                     MaxGridSize = 26,
                     Name = "Cadwell Park",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "cadwellpark"
                 }
             ]
         },
@@ -416,7 +441,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3430,
                     MaxGridSize = 48,
                     Name = "Campo Grande",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "campogrande"
                 }
             ]
         },
@@ -478,7 +504,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3300,
                     MaxGridSize = 48,
                     Name = "Cascavel",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "cascavel"
                 }
             ]
         },
@@ -540,7 +567,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2600,
                     MaxGridSize = 30,
                     Name = "Curitiba Outer",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Curitiba_outer"
                 }
             ]
         },
@@ -562,7 +590,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4420,
                     MaxGridSize = 48,
                     Name = "Curvelo Long",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Curvelo"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -571,7 +600,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3330,
                     MaxGridSize = 48,
                     Name = "Curvelo Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Curvelob"
                 }
             ]
         },
@@ -593,7 +623,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4060,
                     MaxGridSize = 26,
                     Name = "Córdoba No.4",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Cordoba_GP"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -602,7 +633,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3650,
                     MaxGridSize = 26,
                     Name = "Córdoba TC",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Cordoba"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -611,7 +643,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2060,
                     MaxGridSize = 26,
                     Name = "Córdoba No.2",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Cordoba_NATL"
                 }
             ]
         },
@@ -633,7 +666,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5720,
                     MaxGridSize = 48,
                     Name = "Daytona Sports Car Course",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Daytona_Circuit"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -651,7 +685,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4020,
                     MaxGridSize = 48,
                     Name = "Daytona Nascar Tri-Oval",
-                    TrackType = TrackTypeOval
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "Daytona"
                 }
             ]
         },
@@ -682,7 +717,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3180,
                     MaxGridSize = 38,
                     Name = "Donington National",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Donington_Nat"
                 }
             ]
         },
@@ -704,7 +740,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3210,
                     MaxGridSize = 32,
                     Name = "Auto Club Speedway Oval",
-                    TrackType = TrackTypeOval
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "Fontana_OVAL"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -713,7 +750,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4500,
                     MaxGridSize = 30,
                     Name = "Auto Club Speedway Sports Car Course",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Fontana_SCC"
                 }
             ]
         },
@@ -735,7 +773,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 910,
                     MaxGridSize = 8,
                     Name = "Foz",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "foz_rx"
                 }
             ]
         },
@@ -757,7 +796,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3200,
                     MaxGridSize = 32,
                     Name = "Galeao Airport",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "galeao_airport"
                 }
             ]
         },
@@ -779,7 +819,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2010,
                     MaxGridSize = 32,
                     Name = "WWT Raceway Oval",
-                    TrackType = TrackTypeOval
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "Gateway_OVAL"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -788,7 +829,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2570,
                     MaxGridSize = 32,
                     Name = "WWT Raceway Road Course (Short)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Gateway_RC1"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -797,7 +839,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3210,
                     MaxGridSize = 32,
                     Name = "WWT Raceway Road Course (Long)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Gateway_RC2"
                 }
             ]
         },
@@ -819,7 +862,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3820,
                     MaxGridSize = 48,
                     Name = "Goiânia",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Goiania"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -828,7 +872,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1910,
                     MaxGridSize = 36,
                     Name = "Goiânia Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "GoianiaShort"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -837,7 +882,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2590,
                     MaxGridSize = 48,
                     Name = "Goiânia External",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "GoianiaOuter"
                 }
             ]
         },
@@ -859,7 +905,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 980,
                     MaxGridSize = 28,
                     Name = "Copa São Paulo Kart Stage 2",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Granja_VianaCSP2"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -868,7 +915,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1010,
                     MaxGridSize = 28,
                     Name = "Granja Viana Kart 101",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Granja_VianaKGV101"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -877,7 +925,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 990,
                     MaxGridSize = 28,
                     Name = "Granja Viana Kart 102",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Granja_VianaKGV102"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -886,7 +935,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 800,
                     MaxGridSize = 28,
                     Name = "Granja Viana Kart 121",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Granja_VianaKGV121"
                 }
             ]
         },
@@ -908,7 +958,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3080,
                     MaxGridSize = 40,
                     Name = "Guaporé",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Guapore"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -917,7 +968,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3080,
                     MaxGridSize = 20,
                     Name = "Guaporé STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Guapore_STT"
                 }
             ]
         },

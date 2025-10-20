@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Acc.Monitor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Ams2.Demo", "SimRacingSdk.Ams2.Demo\SimRacingSdk.Ams2.Demo.csproj", "{578B13A2-921E-854F-81BE-0DE7AD26DF9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Ams2.SharedMemory", "SimRacingSdk.Ams2.SharedMemory\SimRacingSdk.Ams2.SharedMemory.csproj", "{3E3694DA-BD35-FF8C-2BB4-9D099DED5E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Ams2.Monitor", "SimRacingSdk.Ams2.Monitor\SimRacingSdk.Ams2.Monitor.csproj", "{CA6CD8D3-2250-824F-E0B2-DB4BE2C6AE03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{578B13A2-921E-854F-81BE-0DE7AD26DF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{578B13A2-921E-854F-81BE-0DE7AD26DF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{578B13A2-921E-854F-81BE-0DE7AD26DF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3694DA-BD35-FF8C-2BB4-9D099DED5E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3694DA-BD35-FF8C-2BB4-9D099DED5E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3694DA-BD35-FF8C-2BB4-9D099DED5E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3694DA-BD35-FF8C-2BB4-9D099DED5E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA6CD8D3-2250-824F-E0B2-DB4BE2C6AE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA6CD8D3-2250-824F-E0B2-DB4BE2C6AE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA6CD8D3-2250-824F-E0B2-DB4BE2C6AE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA6CD8D3-2250-824F-E0B2-DB4BE2C6AE03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
