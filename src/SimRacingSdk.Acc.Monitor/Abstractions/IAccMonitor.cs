@@ -28,4 +28,5 @@ public interface IAccMonitor : IDisposable
     IObservable<AccTelemetryFrame> Telemetry { get; }
     void Start(string? connectionIdentifier = null);
     void Stop();
+    void RequestEntryList();
 }

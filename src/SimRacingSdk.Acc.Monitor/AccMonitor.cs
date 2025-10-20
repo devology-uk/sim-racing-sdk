@@ -54,13 +54,12 @@ public class AccMonitor : IAccMonitor
     private AccMonitorEvent? currentEvent;
     private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
+    private TimeSpan currentSessionTime;
+    private RaceSessionType currentSessionType = RaceSessionType.NONE;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private CompositeDisposable? udpSubscriptionSink;
-    private RaceSessionType currentSessionType = RaceSessionType.NONE;
-    private TimeSpan currentSessionTime;
-    private int sessionCount = 0;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -92,7 +91,8 @@ public class AccMonitor : IAccMonitor
     public IObservable<AccMonitorSessionPhaseChange> PhaseChanged => this.phaseChangedSubject.AsObservable();
     public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccMonitorLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
-    public IObservable<AccMonitorSessionTypeChange> SessionChanged => this.sessionChangedSubject.AsObservable();
+    public IObservable<AccMonitorSessionTypeChange> SessionChanged =>
+        this.sessionChangedSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
@@ -103,9 +103,13 @@ public class AccMonitor : IAccMonitor
         GC.SuppressFinalize(this);
     }
 
+    public void RequestEntryList()
+    {
+        this.accUdpConnection?.RequestEntryList();
+    }
+
     public void Start(string? connectionIdentifier = null)
     {
-        this.sessionCount = 0;
         this.LogMessage(LoggingLevel.Information,
             $"Starting ACC Monitor connection with ID: {connectionIdentifier}");
 
@@ -147,11 +151,6 @@ public class AccMonitor : IAccMonitor
         }
 
         this.Stop();
-    }
-
-    private bool AllCarsAreFinished()
-    {
-        return this.entryList.All(e => e.CarLocation != CarLocation.Track);
     }
 
     private void EndCurrentSession()
@@ -305,10 +304,12 @@ public class AccMonitor : IAccMonitor
         {
             return;
         }
-        
+
         var sessionType = realtimeUpdate.SessionType;
         var sessionPhase = realtimeUpdate.Phase;
-        var startNewSession =  this.sessionCount == 0 ||  realtimeUpdate.SessionTime.TotalSeconds < this.currentSessionTime.TotalSeconds;
+        var startNewSession = this.currentSession == null
+                              || realtimeUpdate.SessionTime.TotalSeconds
+                              < this.currentSessionTime.TotalSeconds;
 
         this.currentSessionTime = realtimeUpdate.SessionTime;
 
@@ -316,9 +317,14 @@ public class AccMonitor : IAccMonitor
         {
             this.LogMessage(LoggingLevel.Information,
                 $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
-            this.sessionChangedSubject.OnNext(new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
+            this.sessionChangedSubject.OnNext(
+                new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
 
             this.currentSessionType = sessionType;
+            if(!startNewSession)
+            {
+                startNewSession = true;
+            }
         }
 
         if(this.currentPhase != sessionPhase)
@@ -337,16 +343,6 @@ public class AccMonitor : IAccMonitor
 
         this.EndCurrentSession();
         this.StartNewSession(realtimeUpdate, sessionType);
-    }
-
-    private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
-    {
-        this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
-            sessionType.ToFriendlyName(),
-            realtimeUpdate.SessionEndTime);
-        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
-        this.sessionStartedSubject.OnNext(this.currentSession);
-        this.sessionCount++;
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
@@ -579,5 +575,14 @@ public class AccMonitor : IAccMonitor
 
         this.isYellowFlagActive = accFlagState.IsYellowFlagActive;
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
+    }
+
+    private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
+    {
+        this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
+            sessionType.ToFriendlyName(),
+            realtimeUpdate.SessionEndTime);
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+        this.sessionStartedSubject.OnNext(this.currentSession);
     }
 }
