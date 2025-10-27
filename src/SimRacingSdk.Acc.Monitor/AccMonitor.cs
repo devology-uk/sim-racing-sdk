@@ -300,6 +300,10 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
+        if(this.currentEvent == null || !this.entryList.Any()) {
+            return;
+        }
+
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
 
