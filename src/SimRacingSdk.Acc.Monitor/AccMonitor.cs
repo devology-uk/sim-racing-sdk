@@ -300,13 +300,9 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
-        if(this.currentEvent == null || !this.entryList.Any())
-        {
-            return;
-        }
-
-        var sessionType = realtimeUpdate.SessionType;
         var sessionPhase = realtimeUpdate.Phase;
+        var sessionType = realtimeUpdate.SessionType;
+
         var startNewSession = this.currentSession == null
                               || realtimeUpdate.SessionTime.TotalSeconds
                               < this.currentSessionTime.TotalSeconds;
@@ -579,6 +575,7 @@ public class AccMonitor : IAccMonitor
 
     private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
+        this.accUdpConnection!.RequestEntryList();
         this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
             sessionType.ToFriendlyName(),
             realtimeUpdate.SessionEndTime);
