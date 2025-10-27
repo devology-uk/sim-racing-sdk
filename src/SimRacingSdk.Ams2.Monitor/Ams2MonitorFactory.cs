@@ -33,3 +33,4 @@ public class Ams2MonitorFactory : IAms2MonitorFactory
             this.accCompatibilityChecker,
             this.accCarInfoProvider);
     }
+}
