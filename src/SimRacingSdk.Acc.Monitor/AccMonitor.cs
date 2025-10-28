@@ -54,7 +54,7 @@ public class AccMonitor : IAccMonitor
     private AccMonitorEvent? currentEvent;
     private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
-    private TimeSpan currentSessionTime;
+    private TimeSpan currentSessionTime = TimeSpan.Zero;
     private RaceSessionType currentSessionType = RaceSessionType.NONE;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
@@ -301,6 +301,7 @@ public class AccMonitor : IAccMonitor
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
         if(this.currentEvent == null || !this.entryList.Any()) {
+            this.LogMessage(LoggingLevel.Information, "No event or entry list.");
             return;
         }
 
@@ -308,8 +309,8 @@ public class AccMonitor : IAccMonitor
         var sessionType = realtimeUpdate.SessionType;
 
         var startNewSession = this.currentSession == null
-                              || realtimeUpdate.SessionTime.TotalSeconds
-                              < this.currentSessionTime.TotalSeconds;
+                              || realtimeUpdate.SessionTime.TotalMilliseconds
+                              < this.currentSessionTime.TotalMilliseconds;
 
         this.currentSessionTime = realtimeUpdate.SessionTime;
 
