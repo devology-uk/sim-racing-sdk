@@ -367,7 +367,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 35,
             Country = "Norway",
@@ -400,7 +400,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 122,
             Country = "England",
@@ -423,7 +423,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 592,
             Country = "Brazil",
@@ -446,7 +446,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 130,
             Country = "Portugal",
@@ -486,7 +486,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 750,
             Country = "Brazil",
@@ -509,7 +509,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 199,
             Country = "USA",
@@ -540,7 +540,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 881,
             Country = "Brazil",
@@ -572,7 +572,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 672,
             Country = "Brazil",
@@ -605,7 +605,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 586,
             Country = "Argentina",
@@ -648,7 +648,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 9,
             Country = "USA",
@@ -690,7 +690,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 96,
             Country = "England",
@@ -722,7 +722,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 377,
             Country = "USA",
@@ -755,7 +755,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 164,
             Country = "Brazil",
@@ -778,7 +778,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 10,
             Country = "Brazil",
@@ -801,7 +801,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 377,
             Country = "USA",
@@ -844,7 +844,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 757,
             Country = "Brazil",
@@ -887,7 +887,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 828,
             Country = "Brazil",
@@ -940,7 +940,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 474,
             Country = "Brazil",
@@ -973,7 +973,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 102,
             Country = "Germany",
@@ -991,7 +991,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4570,
                     MaxGridSize = 48,
                     Name = "Hockenheim",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_GP"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1000,7 +1001,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1120,
                     MaxGridSize = 8,
                     Name = "Hockenheim Rallycross",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "Hockenheim_RX"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1018,7 +1020,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2630,
                     MaxGridSize = 30,
                     Name = "Hockenheim Short A",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_ShortA"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1027,7 +1030,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2600,
                     MaxGridSize = 30,
                     Name = "Hockenheim Short B",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_ShortB"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1036,7 +1040,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6820,
                     MaxGridSize = 30,
                     Name = "Hockenheim Historic 2001",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_2001"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1045,7 +1050,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2630,
                     MaxGridSize = 20,
                     Name = "Hockenheim STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_STT"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1054,7 +1060,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6790,
                     MaxGridSize = 36,
                     Name = "Hockenheim Historic 1988",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_1988"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1063,7 +1070,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2630,
                     MaxGridSize = 36,
                     Name = "Hockenheim Historic 1988 Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_1988_short"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1072,11 +1080,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6780,
                     MaxGridSize = 36,
                     Name = "Hockenheim Historic 1977",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Hockenheim_1977"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 2190,
             Country = "Ecuador",
@@ -1094,7 +1103,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4300,
                     MaxGridSize = 30,
                     Name = "Autódromo Yahuarcocha",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Ibarra"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1103,7 +1113,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4300,
                     MaxGridSize = 30,
                     Name = "Autódromo Yahuarcocha Reverse",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Ibarra_R"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1112,11 +1123,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4300,
                     MaxGridSize = 20,
                     Name = "Autódromo Yahuarcocha STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Ibarra_STT"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 47,
             Country = "Italy",
@@ -1134,7 +1146,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4900,
                     MaxGridSize = 48,
                     Name = "Imola",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "imola"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1143,7 +1156,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4930,
                     MaxGridSize = 26,
                     Name = "Imola Historic 2001",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "imola_01"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1152,7 +1166,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5040,
                     MaxGridSize = 26,
                     Name = "Imola Historic 1988",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "imola_88"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1161,11 +1176,45 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5010,
                     MaxGridSize = 26,
                     Name = "Imola Historic 1972",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "imola_72"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
+        {
+            AltitudeM = 220,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Indianapolis Motor Speedway",
+            Latitude = 39.7903187,
+            Longitude = -86.236236,
+            ShortName = "Indianapolis",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade1,
+                    LengthM = 3920,
+                    MaxGridSize = 48,
+                    Name = "Indianapolis Motor Speedway Road Course",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Indianapolis_2022_RC"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 4020,
+                    MaxGridSize = 48,
+                    Name = "Indianapolis Motor Speedway Oval",
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "Indianapolis_2022_Oval"
+                }
+            ]
+        },
+        new()
         {
             AltitudeM = 750,
             Country = "Brazil",
@@ -1183,7 +1232,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4290,
                     MaxGridSize = 48,
                     Name = "Interlagos GP",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1192,7 +1242,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4290,
                     MaxGridSize = 48,
                     Name = "Interlagos Stock Car Brasil",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos_SCB"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1201,7 +1252,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4320,
                     MaxGridSize = 32,
                     Name = "Interlagos Historic 1993",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos_1993"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1210,11 +1262,62 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4320,
                     MaxGridSize = 32,
                     Name = "Interlagos Historic 1991",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos_1991"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeHistoric,
+                    LengthM = 7920,
+                    MaxGridSize = 32,
+                    Name = "Interlagos Historic 1976",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos_Historic"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 17,
+                    Grade = GradeHistoric,
+                    LengthM = 3230,
+                    MaxGridSize = 32,
+                    Name = "Interlagos Historic 1978 Outer",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Interlagos_Historic_Outer"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 19,
+                    Grade = GradeKart,
+                    LengthM = 1120,
+                    MaxGridSize = 38,
+                    Name = "Interlagos Kart One",
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Interlagos_Kart1"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 15,
+                    Grade = GradeKart,
+                    LengthM = 1120,
+                    MaxGridSize = 38,
+                    Name = "Interlagos Kart Two",
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Interlagos_Kart2"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = GradeKart,
+                    LengthM = 690,
+                    MaxGridSize = 38,
+                    Name = "Interlagos Kart Three",
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Interlagos_Kart3"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 30,
             Country = "Brazil",
@@ -1232,7 +1335,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4900,
                     MaxGridSize = 40,
                     Name = "Jacarepaguá Historic 2005",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Jacarepagua2005"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1241,7 +1345,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5000,
                     MaxGridSize = 40,
                     Name = "Jacarepaguá Historic 1988",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "jacarepagua_historic"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1250,7 +1355,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3000,
                     MaxGridSize = 32,
                     Name = "Jacarepaguá Historic 2005 Oval",
-                    TrackType = TrackTypeOval
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "JacarepaguaOVAL"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1259,7 +1365,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3300,
                     MaxGridSize = 40,
                     Name = "Jacarepaguá Historic 2012 SCB",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "JacarepaguaSCB"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1268,11 +1375,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3040,
                     MaxGridSize = 40,
                     Name = "Jacarepaguá Historic 2012 Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "JacarepaguaSHORT"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 38,
             Country = "Spain",
@@ -1290,7 +1398,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4410,
                     MaxGridSize = 42,
                     Name = "Jerez Moto",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Jerez_Standard"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1299,7 +1408,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4420,
                     MaxGridSize = 40,
                     Name = "Jerez Chicane",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Jerez_2019"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1308,11 +1418,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4210,
                     MaxGridSize = 32,
                     Name = "Jerez Historic 1988",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "jerez_1988"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 47,
             Country = "Japan",
@@ -1330,7 +1441,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5810,
                     MaxGridSize = 48,
                     Name = "Kansai GP",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1339,7 +1450,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3460,
                     MaxGridSize = 26,
                     Name = "Kansai West",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1361,7 +1472,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 1532,
             Country = "South Africa",
@@ -1379,7 +1490,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4520,
                     MaxGridSize = 48,
                     Name = "Kyalami",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "kyalami_2019"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1388,11 +1500,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4040,
                     MaxGridSize = 26,
                     Name = "Kyalami Historic 1976",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "kyalami_historic"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 220,
             Country = "USA",
@@ -1410,11 +1523,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3600,
                     MaxGridSize = 48,
                     Name = "Laguna Seca 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "laguna_seca_2020"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 52,
             Country = "France",
@@ -1432,7 +1546,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 13620,
                     MaxGridSize = 60,
                     Name = "Circuit des 24 Heures du Mans",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "le_mans_24h"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1441,11 +1556,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4180,
                     MaxGridSize = 32,
                     Name = "Le Mans Circuit Bugatti",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "le_mans_bugatti"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 566,
             Country = "Brazil",
@@ -1463,7 +1579,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3020,
                     MaxGridSize = 48,
                     Name = "Londrina Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Londrina"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1472,7 +1589,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3140,
                     MaxGridSize = 48,
                     Name = "Londrina Long",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Londrina_long"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1481,7 +1599,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1000,
                     MaxGridSize = 28,
                     Name = "Londrina Kart One",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Londrinakart1"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1490,11 +1609,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 860,
                     MaxGridSize = 28,
                     Name = "Londrina Kart Two",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Londrinakart2"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 2,
             Country = "USA",
@@ -1525,7 +1645,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 13,
             Country = "Canada",
@@ -1543,7 +1663,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4360,
                     MaxGridSize = 40,
                     Name = "Montreal",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "montrealmodern"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1552,7 +1673,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4430,
                     MaxGridSize = 40,
                     Name = "Montreal Historic 1991",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "MontrealHistoric_1991"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1561,11 +1683,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4430,
                     MaxGridSize = 40,
                     Name = "Montreal Historic 1988",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "montrealhistoric"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 180,
             Country = "Italy",
@@ -1583,7 +1706,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5790,
                     MaxGridSize = 48,
                     Name = "Monza",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_2020"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1592,7 +1716,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2400,
                     MaxGridSize = 32,
                     Name = "Monza Junior",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_2020_Junior"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1601,7 +1726,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5800,
                     MaxGridSize = 32,
                     Name = "Monza Historic 1991",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_1991"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1610,7 +1736,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5750,
                     MaxGridSize = 26,
                     Name = "Monza Historic 1971",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_1971"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1619,7 +1746,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2400,
                     MaxGridSize = 26,
                     Name = "Monza Historic 1971 Junior",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_1971_Junior"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1628,7 +1756,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 10100,
                     MaxGridSize = 26,
                     Name = "Monza Historic 1971 10K",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_1971_10k"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1637,7 +1766,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 10000,
                     MaxGridSize = 26,
                     Name = "Monza Historic 1971 10K (no chicane)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_1971_10knc"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1646,11 +1776,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2040,
                     MaxGridSize = 20,
                     Name = "Monza STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Monza_2020_STT"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 300,
             Country = "Canada",
@@ -1668,11 +1799,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3950,
                     MaxGridSize = 48,
                     Name = "Mosport",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "mosport"
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 397,
             Country = "Germany",
@@ -1690,7 +1822,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 20830,
                     MaxGridSize = 28,
                     Name = "Nordschleife 2025",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "nordschleife_2025"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1708,7 +1841,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2390,
                     MaxGridSize = 32,
                     Name = "Betonschleife Historic 1971",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_1921_Beton"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1717,7 +1851,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 25370,
                     MaxGridSize = 48,
                     Name = "Nordschleife 24 Hour 2025",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "nordschleife_2025_24hr"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1726,7 +1861,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 25370,
                     MaxGridSize = 48,
                     Name = "Nordschleife 24 Hour 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "nordschleife_2020_24hr"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1735,7 +1871,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1020,
                     MaxGridSize = 8,
                     Name = "Nürburgring RX",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "Nurb_2020_RX"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1744,7 +1881,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5140,
                     MaxGridSize = 48,
                     Name = "Nürburgring GP 2025",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_GP_2025"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1753,7 +1891,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5140,
                     MaxGridSize = 48,
                     Name = "Nürburgring GP 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_GP_2020"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1762,7 +1901,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5130,
                     MaxGridSize = 48,
                     Name = "Nürburgring Veedol 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_GP_2020_Veedol"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1811,7 +1951,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 137,
             Country = "Italy",
@@ -1860,7 +2000,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 65,
             Country = "England",
@@ -1909,7 +2049,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 300,
             Country = "USA",
@@ -1949,7 +2089,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 277,
             Country = "USA",
@@ -1980,7 +2120,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 68,
             Country = "Brazil",
@@ -2002,7 +2142,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 120,
             Country = "Brazil",
@@ -2024,7 +2164,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 18,
             Country = "USA",
@@ -2073,7 +2213,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 154,
             Country = "England",
@@ -2167,7 +2307,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 43,
             Country = "England",
@@ -2207,7 +2347,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 394,
             Country = "Belgium",
@@ -2274,7 +2414,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 700,
             Country = "Brazil",
@@ -2323,7 +2463,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 660,
             Country = "Austria",
@@ -2372,7 +2512,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 71,
             Country = "Brazil",
@@ -2403,7 +2543,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 280,
             Country = "Argentina",
@@ -2425,7 +2565,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 81,
             Country = "Finland",
@@ -2474,7 +2614,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 750,
             Country = "Brazil",
@@ -2514,7 +2654,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 15,
             Country = "Brazil",
@@ -2554,7 +2694,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 65,
             Country = "USA",
@@ -2603,7 +2743,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 }
             ]
         },
-        new Ams2TrackInfo
+        new()
         {
             AltitudeM = 452,
             Country = "USA",
