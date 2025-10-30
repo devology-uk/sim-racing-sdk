@@ -135,6 +135,7 @@ public class AccMonitor : IAccMonitor
 
     public void Stop()
     {
+        this.EndCurrentSession();
         this.udpSubscriptionSink?.Dispose();
         this.sharedMemorySubscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
