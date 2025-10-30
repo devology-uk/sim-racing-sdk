@@ -16,7 +16,7 @@ public class AccUdpConnection : IAccUdpConnection
 {
     private readonly AccUdpMessageHandler accUdpMessageHandler;
     private readonly IPEndPoint ipEndPoint;
-    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
+    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(30);
     private readonly CompositeDisposable subscriptionSink = new();
 
     private bool isConnected;
