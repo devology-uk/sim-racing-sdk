@@ -4,6 +4,14 @@ namespace SimRacingSdk.Ams2.Core.Models;
 
 public record Ams2CarInfo
 {
+    private string ams2CarId;
+
+    public string Ams2CarId
+    {
+        get => this.ams2CarId ?? this.Model.Replace(" ", "_");
+        set => this.ams2CarId = value;
+    }
+
     public string Class { get; set; }
     public string Differential { get; set; }
     public double DisplacementL { get; set; }

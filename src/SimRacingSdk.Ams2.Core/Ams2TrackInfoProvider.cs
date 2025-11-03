@@ -141,7 +141,6 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Name = "Circuit de Barcelona-Catalunya RX",
                     TrackType = TrackTypeRallycross,
                     Ams2TrackId = "barcelona_rx"
-
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1441,7 +1440,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5810,
                     MaxGridSize = 48,
                     Name = "Kansai GP",
-                    TrackType = TrackTypeCircuit,
+                    TrackType = TrackTypeCircuit
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1450,7 +1449,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3460,
                     MaxGridSize = 26,
                     Name = "Kansai West",
-                    TrackType = TrackTypeCircuit,
+                    TrackType = TrackTypeCircuit
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1548,6 +1547,16 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Name = "Circuit des 24 Heures du Mans",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "le_mans_24h"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 38,
+                    Grade = Grade2,
+                    LengthM = 13650,
+                    MaxGridSize = 48,
+                    Name = "Circuit des 24 Heures du Mans Historic 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "le_mans_24h_2005"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1911,7 +1920,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3620,
                     MaxGridSize = 48,
                     Name = "Nürburgring Sprint 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_GP_2020_Sprint"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1920,7 +1930,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3050,
                     MaxGridSize = 30,
                     Name = "Nürburgring Sprint S 2020",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_GP_2020_Sprint_S"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1929,7 +1940,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 28260,
                     MaxGridSize = 32,
                     Name = "Gesamtstrecke Historic 1971",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_1971_Gesamt"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1938,7 +1950,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 22830,
                     MaxGridSize = 32,
                     Name = "Nordschleife Historic 1971",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_1971_Nords"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1947,7 +1960,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 7740,
                     MaxGridSize = 32,
                     Name = "Südschleife Historic 1971",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Nurb_1971_Suds"
                 }
             ]
         },
@@ -1969,7 +1983,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1500,
                     MaxGridSize = 30,
                     Name = "Ortona Kart One",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Ortona"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1978,7 +1993,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1550,
                     MaxGridSize = 30,
                     Name = "Ortona Kart TWo",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Ortona2"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1987,7 +2003,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1330,
                     MaxGridSize = 30,
                     Name = "Ortona Kart Three",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Ortona3"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1996,7 +2013,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 960,
                     MaxGridSize = 30,
                     Name = "Ortona Kart Four",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Ortona4"
                 }
             ]
         },
@@ -2018,7 +2036,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4330,
                     MaxGridSize = 28,
                     Name = "Oulton Park International",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "OultonPark"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2027,7 +2046,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3630,
                     MaxGridSize = 28,
                     Name = "Oulton Park Island",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "OultonParkIsland"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2036,7 +2056,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2660,
                     MaxGridSize = 28,
                     Name = "Oulton Park Fosters",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "OultonParkFosters"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2045,7 +2066,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4290,
                     MaxGridSize = 28,
                     Name = "Oulton Park Classic",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "OultonParkClassic"
                 }
             ]
         },
@@ -2067,7 +2089,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6510,
                     MaxGridSize = 48,
                     Name = "Road America",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Road_America"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2076,7 +2099,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6510,
                     MaxGridSize = 48,
                     Name = "Road America (Bend)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Road_America_RCB"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2085,7 +2109,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6510,
                     MaxGridSize = 20,
                     Name = "Road America STT",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Road_America_STT"
                 }
             ]
         },
@@ -2108,6 +2133,26 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 48,
                     Name = "Road Atlanta",
                     TrackType = TrackTypeCircuit
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 12,
+                    Grade = Grade2,
+                    LengthM = 4080,
+                    MaxGridSize = 48,
+                    Name = "Road Atlanta Historic 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "road_atlanta_2005"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade2,
+                    LengthM = 2580,
+                    MaxGridSize = 48,
+                    Name = "Road Atlanta Historic 2005 Short",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "road_atlanta_2005_short"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2138,7 +2183,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2720,
                     MaxGridSize = 34,
                     Name = "Salvador Street Circuit",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "salvador"
                 }
             ]
         },
@@ -2160,7 +2206,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3320,
                     MaxGridSize = 48,
                     Name = "Santa Cruz do Sul",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "santacruz"
                 }
             ]
         },
@@ -2191,7 +2238,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3210,
                     MaxGridSize = 32,
                     Name = "Sebring School",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "sebring"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2231,7 +2279,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5890,
                     MaxGridSize = 48,
                     Name = "Silverstone",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_2019"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2240,7 +2289,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2970,
                     MaxGridSize = 32,
                     Name = "Silverstone International",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_Intl_2019"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2249,7 +2299,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2630,
                     MaxGridSize = 36,
                     Name = "Silverstone National",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_Natl_2019"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2258,7 +2309,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5140,
                     MaxGridSize = 36,
                     Name = "Silverstone Historic 2001",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_2001"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2267,7 +2319,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3610,
                     MaxGridSize = 36,
                     Name = "Silverstone International Historic 2001",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_Intl_2001"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2276,7 +2329,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2630,
                     MaxGridSize = 36,
                     Name = "Silverstone National Historic 2001",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit, 
+                        Ams2TrackId = "Silverstone_Natl_2001"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2285,7 +2339,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5220,
                     MaxGridSize = 36,
                     Name = "Silverstone Historic 1991",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "silverstone_1991"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2294,7 +2349,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4710,
                     MaxGridSize = 36,
                     Name = "Silverstone Historic 1975",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_1975"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2303,7 +2359,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4710,
                     MaxGridSize = 36,
                     Name = "Silverstone Historic 1975 (no chicane)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Silverstone_1975nc"
                 }
             ]
         },
@@ -2325,7 +2382,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4780,
                     MaxGridSize = 26,
                     Name = "Snetterton 300",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Snetterton2019_300"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2334,7 +2392,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3220,
                     MaxGridSize = 26,
                     Name = "Snetterton 200",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Snetterton2019_200"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2343,7 +2402,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1580,
                     MaxGridSize = 26,
                     Name = "Snetterton 100",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Snetterton2019_100"
                 }
             ]
         },
@@ -2383,7 +2443,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 890,
                     MaxGridSize = 8,
                     Name = "Spa-Francorchamps RX",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spa-francorchamps_2022_RX"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2392,7 +2453,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6940,
                     MaxGridSize = 30,
                     Name = "Spa-Francorchamps Historic 1993",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "spa-francorchamps_1993"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2401,7 +2463,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 14120,
                     MaxGridSize = 32,
                     Name = "Spa-Francorchamps Historic 1970",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spa-francorchamps_1970"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2410,7 +2473,28 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 14120,
                     MaxGridSize = 32,
                     Name = "Spa-Francorchamps Historic 1970 1000KM",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spa-francorchamps_1970_NC"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 24,
+                    Grade = Grade1,
+                    LengthM = 6970,
+                    MaxGridSize = 48,
+                    Name = "Spa-Francorchamps Historic 2005 Endurance",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "spa-francorchamps_2005_ec"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 24,
+                    Grade = Grade1,
+                    LengthM = 6970,
+                    MaxGridSize = 48,
+                    Name = "Spa-Francorchamps Historic 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "spa-francorchamps_2005"
                 }
             ]
         },
@@ -2432,7 +2516,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 960,
                     MaxGridSize = 14,
                     Name = "Speedland Kart 1",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Speedland1"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2441,7 +2526,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 980,
                     MaxGridSize = 14,
                     Name = "Speedland Kart 2",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Speedland2"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2450,7 +2536,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 430,
                     MaxGridSize = 14,
                     Name = "Speedland Kart 2",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Speedland3"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2459,7 +2546,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 580,
                     MaxGridSize = 14,
                     Name = "Speedland Kart 4",
-                    TrackType = TrackTypeKart
+                    TrackType = TrackTypeKart,
+                    Ams2TrackId = "Speedland4"
                 }
             ]
         },
@@ -2481,7 +2569,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4310,
                     MaxGridSize = 32,
                     Name = "Spielberg",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spielberg_GP"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2508,7 +2597,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5890,
                     MaxGridSize = 26,
                     Name = "Spielberg Historic 1974",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spielberg_Vintage"
                 }
             ]
         },
@@ -2530,7 +2620,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3010,
                     MaxGridSize = 32,
                     Name = "Tarumã Internacional",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Taruma"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2539,7 +2630,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3070,
                     MaxGridSize = 32,
                     Name = "Tarumã Chicane",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "TarumaC"
                 }
             ]
         },
@@ -2561,7 +2653,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 4800,
                     MaxGridSize = 48,
                     Name = "Termas de Río Hondo",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "termas_rio_hondo"
                 }
             ]
         },
@@ -2601,7 +2694,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 910,
                     MaxGridSize = 16,
                     Name = "Tykki Dirt 1",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "Tykki_Dirt1"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2610,7 +2704,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1680,
                     MaxGridSize = 16,
                     Name = "Tykki Dirt 2",
-                    TrackType = TrackTypeRallycross
+                    TrackType = TrackTypeRallycross,
+                    Ams2TrackId = "Tykki_Dirt2"
                 }
             ]
         },
@@ -2632,7 +2727,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3320,
                     MaxGridSize = 34,
                     Name = "Velo Città",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Velocitta"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2641,7 +2737,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3360,
                     MaxGridSize = 34,
                     Name = "Velo Città Track Day",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VelocittaTD"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2650,7 +2747,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 1720,
                     MaxGridSize = 34,
                     Name = "Velo Città Club Day",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VelocittaCD"
                 }
             ]
         },
@@ -2681,7 +2779,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2270,
                     MaxGridSize = 34,
                     Name = "Velopark 2017",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Velopark2"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2690,7 +2789,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2150,
                     MaxGridSize = 34,
                     Name = "Velopark 2010",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Velopark2_STT"
                 }
             ]
         },
@@ -2712,7 +2812,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5260,
                     MaxGridSize = 48,
                     Name = "VIRginia International Raceway Full",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VirginiaFull"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2721,7 +2822,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 6750,
                     MaxGridSize = 28,
                     Name = "VIRginia International Raceway Grand",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VirginiaGrand"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2730,7 +2832,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3620,
                     MaxGridSize = 48,
                     Name = "VIRginia International Raceway North",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VirginiaNorth"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2739,7 +2842,18 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 2650,
                     MaxGridSize = 26,
                     Name = "VIRginia International Raceway South",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VirginiaSouth"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade4,
+                    LengthM = 1770,
+                    MaxGridSize = 26,
+                    Name = "VIRginia International Raceway Patriot",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "VirginiaPatriot"
                 }
             ]
         },
@@ -2761,7 +2875,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5260,
                     MaxGridSize = 48,
                     Name = "Watkins Glen GP",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Watkins_Glen"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2770,7 +2885,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 5550,
                     MaxGridSize = 48,
                     Name = "Watkins Glen GP (Inner Loop)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Watkins_Glen_GPIL"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2779,7 +2895,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3900,
                     MaxGridSize = 48,
                     Name = "Watkins Glen Short",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Watkins_Glen_S"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2788,7 +2905,8 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     LengthM = 3940,
                     MaxGridSize = 48,
                     Name = "Watkins Glen Short (Inner Loop)",
-                    TrackType = TrackTypeCircuit
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Watkins_Glen_SIL"
                 },
                 new Ams2TrackLayoutInfo
                 {

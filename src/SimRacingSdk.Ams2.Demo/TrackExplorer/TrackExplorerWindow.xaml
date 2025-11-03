@@ -129,6 +129,8 @@
                                         Binding="{Binding LengthMi, StringFormat=N2}" />
                     <DataGridTextColumn Header="Max Grid Size"
                                         Binding="{Binding MaxGridSize}" />
+                    <DataGridTextColumn Header="AMS2 ID"
+                                        Binding="{Binding Ams2TrackId}" />
                 </DataGrid.Columns>
             </DataGrid>
 
