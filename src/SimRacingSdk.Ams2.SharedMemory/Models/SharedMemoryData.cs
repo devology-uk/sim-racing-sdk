@@ -235,10 +235,10 @@ public record SharedMemoryData
         this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout.Value;
         this.BrakeBias = sharedMemoryPage.BrakeBias;
         this.TurboBoostPressure = sharedMemoryPage.TurboBoostPressure;
-        this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompound[0].Value,
-            sharedMemoryPage.TyreCompound[1].Value,
-            sharedMemoryPage.TyreCompound[2].Value,
-            sharedMemoryPage.TyreCompound[3].Value);
+        this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompounds[0].Value,
+            sharedMemoryPage.TyreCompounds[1].Value,
+            sharedMemoryPage.TyreCompounds[2].Value,
+            sharedMemoryPage.TyreCompounds[3].Value);
         this.PitSchedules = sharedMemoryPage.PitSchedules.Select(s => (Ams2PitStopSchedule)s)
                                             .ToArray();
         this.HighestFlagColors = sharedMemoryPage.HighestFlagColours.Select(c => (Ams2FlagColor)c)
@@ -439,7 +439,7 @@ public record SharedMemoryData
     public Vector3 WorldVelocity { get; init; }
     public Ams2YellowFlagState YellowFlagState { get; init; }
 
-    public List<Ams2Participant> GetConsolidatedParticipants()
+    public List<Ams2Participant> GetParticipants()
     {
         var result = new List<Ams2Participant>();
 
@@ -462,6 +462,7 @@ public record SharedMemoryData
                 HighestFlagColor = this.HighestFlagColors[i],
                 HighestFlagReason = this.HighestFlagReasons[i],
                 IsActive = participantInfo.IsActive,
+                IsFocusedParticipant = i == this.FocusedParticipantIndex,
                 IsLapInvalid = this.IsLapInvalidated[i],
                 LapsCompleted = participantInfo.LapsCompleted,
                 LastLapTime = TimeSpan.FromMilliseconds(this.LastLapTimes[i]),
@@ -532,6 +533,7 @@ public record SharedMemoryData
             HighestFlagColor = this.HighestFlagColor,
             HighestFlagReason = this.HighestFlagReason,
             IsActive = participantInfo.IsActive,
+            IsFocusedParticipant = true,
             IsLapInvalid = this.IsLapInvalid,
             LapsCompleted = participantInfo.LapsCompleted,
             LastLapTime = this.LastLapTime,

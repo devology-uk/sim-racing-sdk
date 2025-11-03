@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Ams2.SharedMemory.Messages;
 
-[StructLayout(LayoutKind.Sequential)]
 public struct TyreCompoundName
 {
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxTyreCompoundNameLength)]

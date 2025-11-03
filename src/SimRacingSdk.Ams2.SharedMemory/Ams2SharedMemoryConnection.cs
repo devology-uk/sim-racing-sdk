@@ -54,9 +54,15 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
     }
 
-    private void OnCompleted() { }
+    private void OnCompleted()
+    {
+        this.LogMessage(LoggingLevel.Warning, "Update stream completed.");
+    }
 
-    private void OnError(Exception exception) { }
+    private void OnError(Exception exception)
+    {
+        this.LogMessage(LoggingLevel.Error, "Unexpected error processing updates:", exception.GetBaseException().Message);
+    }
 
     private void OnNextUpdate(long index)
     {
@@ -75,6 +81,12 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
                 sharedMemoryData.GetPlayer()
                                 .ToString());
         }
+
+        foreach(var ams2Participant in sharedMemoryData.GetParticipants())
+        {
+            this.LogMessage(LoggingLevel.Information, ams2Participant.ToString());
+        }
+
 
         this.LogMessage(LoggingLevel.Information, sharedMemoryData.GetTelemetryFrame().ToString());
     }

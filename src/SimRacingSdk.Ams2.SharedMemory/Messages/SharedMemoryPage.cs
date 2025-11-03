@@ -27,11 +27,15 @@ public class SharedMemoryPage
     public float UnfilteredBrake;
     public float UnfilteredSteering;
     public float UnfilteredClutch;
-    public MaxLengthString CarName;
-    public MaxLengthString CarClassName;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string CarName;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string CarClassName;
     public uint LapsInEvent;
-    public MaxLengthString TrackLocation;
-    public MaxLengthString TrackLayout;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string TrackLocation;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string TrackLayout;
     public float TrackLength;
     public int SectorCount;
     [MarshalAs(UnmanagedType.I1)]
@@ -193,7 +197,7 @@ public class SharedMemoryPage
     public float BrakeBias;
     public float TurboBoostPressure;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
-    public TyreCompoundName[] TyreCompound;
+    public TyreCompoundName[] TyreCompounds;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public uint[] PitSchedules;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]

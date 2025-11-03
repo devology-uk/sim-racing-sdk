@@ -21,6 +21,7 @@ public record Ams2Participant
     public Ams2FlagColor HighestFlagColor { get; init; }
     public Ams2FlagReason HighestFlagReason { get; init; }
     public bool IsActive { get; init; }
+    public bool IsFocusedParticipant { get; set; }
     public bool IsLapInvalid { get; init; }
     public uint LapsCompleted { get; init; }
     public TimeSpan LastLapTime { get; init; }
