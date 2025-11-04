@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="BinIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/bin.png" />
+    <BitmapImage x:Key="DeleteIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/delete.png" />
+    <BitmapImage x:Key="FirstPageIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/button_blue_goto_first.png" />
+    <BitmapImage x:Key="LastPageIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/button_blue_goto_last.png" />
+    <BitmapImage x:Key="NextPageIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/button_blue_goto_next.png" />
+    <BitmapImage x:Key="PreviousPageIcon"
+                 UriSource="/SimRacingSdk.LogViewer;component/Icons/button_blue_goto_previous.png" />
+
+</ResourceDictionary>

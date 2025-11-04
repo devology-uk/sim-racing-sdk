@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Icons\bin.png" />
+	  <Resource Include="Icons\button_blue_goto_first.png" />
+	  <Resource Include="Icons\button_blue_goto_last.png" />
+	  <Resource Include="Icons\button_blue_goto_next.png" />
+	  <Resource Include="Icons\button_blue_goto_previous.png" />
+	  <Resource Include="Icons\delete.png" />
+	</ItemGroup>
+
+</Project>

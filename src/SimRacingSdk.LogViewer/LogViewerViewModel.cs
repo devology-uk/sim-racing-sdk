@@ -1,15 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace SimRacingSdk.Acc.Demo.LogViewer;
+namespace SimRacingSdk.LogViewer;
 
 public partial class LogViewerViewModel : ObservableObject
 {
+    private string logFolderPath = null!;
     private readonly List<LogFileEntry> allLogEntries = [];
+
     [ObservableProperty]
     private int currentPage = 1;
     [ObservableProperty]
@@ -112,21 +113,21 @@ public partial class LogViewerViewModel : ObservableObject
         this.Filter = string.Empty;
     }
 
-    public void Init()
+    public void Init(string logFolderPath)
     {
+        this.logFolderPath = logFolderPath;
         this.LoadLogs();
     }
 
     private void LoadLogs()
     {
         this.IsBusy = true;
-        var logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs";
-        if(!Directory.Exists(logFolderPath))
+        if(!Directory.Exists(this.logFolderPath))
         {
             return;
         }
 
-        var logFolders = Directory.GetDirectories(logFolderPath);
+        var logFolders = Directory.GetDirectories(this.logFolderPath);
         foreach(var logFolder in logFolders)
         {
             var logFolderItem = new LogFolderItem(Path.GetFileNameWithoutExtension(logFolder), logFolder);
@@ -315,11 +316,10 @@ public partial class LogViewerViewModel : ObservableObject
         if(!string.IsNullOrWhiteSpace(this.Filter) && this.Filter.Length >= 3)
         {
             filteredEntries = filteredEntries
-                .Where(entry => entry.Content.Contains(this.Filter, StringComparison.OrdinalIgnoreCase))
+                .Where(entry => entry.Content.Contains((string)this.Filter, StringComparison.OrdinalIgnoreCase))
                 .ToList();
         }
-        var pageEntries = filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1))
-                              .Take(this.PageSize);
+        var pageEntries = Enumerable.Take(filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1)), (int)this.PageSize);
         this.PageCount = (int)Math.Ceiling((double)filteredEntries.Count / this.PageSize);
 
         this.LogEntries.Clear();

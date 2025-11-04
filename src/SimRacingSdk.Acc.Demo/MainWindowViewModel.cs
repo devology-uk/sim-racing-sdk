@@ -10,7 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Demo.Abstractions;
-using SimRacingSdk.Acc.Demo.LogViewer;
+using SimRacingSdk.LogViewer;
 
 namespace SimRacingSdk.Acc.Demo;
 
@@ -20,6 +20,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IAccGameDetector accGameDetector;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<MainWindowViewModel> logger;
+    private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
     private readonly IMonitorDemo monitorDemo;
@@ -51,8 +52,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void OpenLogFolder()
     {
-        var currentLogPath =
-            $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\{DateTime.Now.Date:yyyy-MM-dd}\";
+        var currentLogPath = $@"{this.logFolderPath}{DateTime.Now.Date:yyyy-MM-dd}\";
         if(Directory.Exists(currentLogPath))
         {
             Process.Start("explorer.exe", currentLogPath);
@@ -69,7 +69,7 @@ public partial class MainWindowViewModel : ObservableObject
             Owner = App.Current.MainWindow
         };
         logViewer.Show();
-        logViewerViewModel.Init();
+        logViewerViewModel.Init(this.logFolderPath);
     }
 
     [RelayCommand]
