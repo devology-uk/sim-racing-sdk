@@ -2,10 +2,11 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Extensions;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Udp;
 
@@ -97,9 +98,9 @@ internal class AccUdpMessageHandler
         }
     }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    internal void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
     }
 
     internal void ProcessMessage(BinaryReader reader)

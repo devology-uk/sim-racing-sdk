@@ -5,7 +5,6 @@ using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Exceptions;
 using SimRacingSdk.Acc.Monitor.Messages;
@@ -14,6 +13,8 @@ using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Monitor;
 
@@ -172,9 +173,9 @@ public class AccMonitor : IAccMonitor
         this.currentSession = null;
     }
 
-    private void LogMessage(LoggingLevel level, string message, object? data = null)
+    private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(level, content));
     }
 
     private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)

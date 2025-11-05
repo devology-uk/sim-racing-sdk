@@ -1,4 +1,4 @@
-﻿namespace SimRacingSdk.Acc.Core.Enums;
+﻿namespace SimRacingSdk.Core.Enums;
 
 public enum LoggingLevel
 {

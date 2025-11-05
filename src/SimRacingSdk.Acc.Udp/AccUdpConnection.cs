@@ -6,9 +6,10 @@ using System.Net.Sockets;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Udp;
 
@@ -173,9 +174,9 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void LogMessage(LoggingLevel level, string message, object? data = null)
+    private void LogMessage(LoggingLevel level, string content)
     {
-        this.accUdpMessageHandler.LogMessage(level, message, data);
+        this.accUdpMessageHandler.LogMessage(level, content);
     }
 
     private void OnNextConnectionStateChange(ConnectionState connectionState)

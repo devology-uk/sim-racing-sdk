@@ -1,10 +1,11 @@
 ﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Udp.Enums;
 using SimRacingSdk.Ams2.Udp.Extensions;
 using SimRacingSdk.Ams2.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Udp;
 
@@ -76,9 +77,9 @@ internal class Ams2UdpMessageHandler
 
     internal void Disconnect(bool sendUnregister = true) { }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    internal void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
     }
 
     private void ProcessGameStateMessage(BinaryReader reader, MessageHeader header)

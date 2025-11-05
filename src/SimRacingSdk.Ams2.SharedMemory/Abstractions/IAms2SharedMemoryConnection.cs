@@ -1,4 +1,4 @@
-﻿using SimRacingSdk.Acc.Core.Messages;
+﻿using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.SharedMemory.Abstractions;
 

@@ -1,9 +1,10 @@
 ﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
 using SimRacingSdk.Acc.SharedMemory.Models;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.SharedMemory;
 
@@ -106,9 +107,9 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
                                                                 != staticData.IsOnline);
     }
 
-    private void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
     }
 
     private void OnNextUpdate(long index)
