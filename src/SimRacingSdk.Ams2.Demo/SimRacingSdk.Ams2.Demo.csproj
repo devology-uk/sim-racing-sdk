@@ -306,7 +306,6 @@
 	  <None Remove="Images\Manufacturers\reiza.png" />
 	  <None Remove="Images\Manufacturers\reynard.png" />
 	  <None Remove="Images\Manufacturers\roco.png" />
-	  <None Remove="Images\Manufacturers\roco.webp" />
 	  <None Remove="Images\Manufacturers\sigma.png" />
 	  <None Remove="Images\Manufacturers\swift.png" />
 	  <None Remove="Images\Manufacturers\toyota.png" />
@@ -637,11 +636,9 @@
 	  <Resource Include="Images\Manufacturers\reiza.png" />
 	  <Resource Include="Images\Manufacturers\reynard.png" />
 	  <Resource Include="Images\Manufacturers\roco.png" />
-	  <Resource Include="Images\Manufacturers\roco.webp" />
 	  <Resource Include="Images\Manufacturers\sigma.png" />
 	  <Resource Include="Images\Manufacturers\swift.png" />
 	  <Resource Include="Images\Manufacturers\toyota.png" />
-	  <Resource Include="Images\Manufacturers\ultima.jpg" />
 	  <Resource Include="Images\Manufacturers\ultima.png" />
 	  <Resource Include="Images\Manufacturers\vanwall.png" />
 	  <Resource Include="Images\Manufacturers\volkswagen.png" />
