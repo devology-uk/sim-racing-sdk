@@ -53,8 +53,6 @@
                                     Binding="{Binding PowerHp}" />
                 <DataGridTextColumn Header="Transmission"
                                     Binding="{Binding Transmission}" />
-                <DataGridTextColumn Header="Top Speed KPH"
-                                    Binding="{Binding TopSpeedKph}" />
             </DataGrid.Columns>
         </DataGrid>
         <GroupBox Grid.Column="1"
