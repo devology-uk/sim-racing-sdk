@@ -8,7 +8,6 @@ namespace SimRacingSdk.LogViewer;
 
 public partial class LogViewerViewModel : ObservableObject
 {
-    private string logFolderPath = null!;
     private readonly List<LogFileEntry> allLogEntries = [];
 
     [ObservableProperty]
@@ -17,6 +16,7 @@ public partial class LogViewerViewModel : ObservableObject
     private string filter = string.Empty;
     [ObservableProperty]
     private bool isBusy = false;
+    private string logFolderPath = null!;
     [ObservableProperty]
     private int pageCount;
     [ObservableProperty]
@@ -27,12 +27,21 @@ public partial class LogViewerViewModel : ObservableObject
     private LogFileEntry? selectedLogEntry;
     [ObservableProperty]
     private LogFolderItem? selectedLogFolder;
+    [ObservableProperty]
+    private List<object> selectedMessageTypes = [];
 
     public ObservableCollection<LogFileEntry> LogEntries { get; } = [];
     public ObservableCollection<LogEntryProperty> LogEntryProperties { get; } = [];
     public ObservableCollection<LogFileItem> LogFiles { get; } = [];
     public ObservableCollection<LogFolderItem> LogFolders { get; } = [];
-    
+    public ObservableCollection<string> MessageTypes { get; } = [];
+
+    [RelayCommand]
+    private void ClearFilter()
+    {
+        this.Filter = string.Empty;
+    }
+
     [RelayCommand]
     private void DeleteSelectedLogFolder()
     {
@@ -55,16 +64,6 @@ public partial class LogViewerViewModel : ObservableObject
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
-    }
-
-    private bool CanExecutePreviousPage()
-    {
-        return this.CurrentPage > 1;
-    }
-
-    private bool CanExecuteNextPage()
-    {
-        return this.CurrentPage < this.PageCount;
     }
 
     [RelayCommand(CanExecute = nameof(CanExecutePreviousPage))]
@@ -107,16 +106,31 @@ public partial class LogViewerViewModel : ObservableObject
         this.ShowCurrentPage();
     }
 
-    [RelayCommand]
-    private void ClearFilter()
-    {
-        this.Filter = string.Empty;
-    }
-
     public void Init(string logFolderPath)
     {
         this.logFolderPath = logFolderPath;
         this.LoadLogs();
+    }
+
+    private void AddProperty(string currentToken, string nestingPrefix)
+    {
+        if(string.IsNullOrWhiteSpace(currentToken))
+        {
+            return;
+        }
+
+        var propertyElements = currentToken.Split('=', StringSplitOptions.TrimEntries);
+        this.LogEntryProperties.Add(new LogEntryProperty($"{nestingPrefix}{propertyElements[0]}", propertyElements[1]));
+    }
+
+    private bool CanExecuteNextPage()
+    {
+        return this.CurrentPage < this.PageCount;
+    }
+
+    private bool CanExecutePreviousPage()
+    {
+        return this.CurrentPage > 1;
     }
 
     private void LoadLogs()
@@ -155,6 +169,11 @@ public partial class LogViewerViewModel : ObservableObject
         this.ShowCurrentPage();
     }
 
+    partial void OnFilterChanged(string? value)
+    {
+        this.ShowCurrentPage();
+    }
+
     partial void OnPageSizeChanged(int value)
     {
         this.PageCount = (int)Math.Ceiling((double)this.allLogEntries.Count / this.PageSize);
@@ -169,6 +188,8 @@ public partial class LogViewerViewModel : ObservableObject
     partial void OnSelectedLogChanged(LogFileItem? value)
     {
         this.IsBusy = true;
+        this.MessageTypes.Clear();
+        this.SelectedMessageTypes.Clear();
         this.LogEntries.Clear();
         this.allLogEntries.Clear();
         this.SelectedLogEntry = null;
@@ -190,8 +211,17 @@ public partial class LogViewerViewModel : ObservableObject
                 this.allLogEntries.Add(logFileEntry);
             }
 
-            this.CurrentPage = 1;
-            this.PageCount = (int)Math.Ceiling((double)this.allLogEntries.Count / this.PageSize);
+            var messageTypes = this.allLogEntries.Select(e => e.ContentType)
+                                   .Distinct()
+                                   .ToList();
+            var selectedTypes = new List<object>();
+            foreach(var messageType in messageTypes)
+            {
+                selectedTypes.Add(messageType);
+                this.MessageTypes.Add(messageType);
+            }
+
+            this.SelectedMessageTypes = selectedTypes;
             this.ShowCurrentPage();
         }
         catch(Exception exception)
@@ -230,11 +260,7 @@ public partial class LogViewerViewModel : ObservableObject
             return;
         }
 
-        var properties = this.ParseContent(value.Content);
-        foreach(var property in properties)
-        {
-            this.LogEntryProperties.Add(new LogEntryProperty(property.Key, property.Value));
-        }
+        this.ParseContent(value.Content);
     }
 
     partial void OnSelectedLogFolderChanged(LogFolderItem? value)
@@ -260,31 +286,68 @@ public partial class LogViewerViewModel : ObservableObject
         this.IsBusy = false;
     }
 
-    partial void OnFilterChanged(string? value)
-    {
-        this.ShowCurrentPage();
-    }
-
-    private Dictionary<string, string> ParseContent(string content)
+    private void ParseContent(string content)
     {
         var contentStartIndex = content.IndexOf('{');
         var contentEndIndex = content.LastIndexOf('}');
-        var propertyContent = content[(contentStartIndex + 1)..contentEndIndex]
+        var propertiesContent = content[(contentStartIndex + 1)..(contentEndIndex - 1)]
             .Trim();
-        var properties = propertyContent.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-        var result = new Dictionary<string, string>();
-        foreach(var property in properties)
+
+        var currentToken = string.Empty;
+        var nestingPrefix = string.Empty;
+        var outputNextComma = false;
+        foreach(var character in propertiesContent)
         {
-            var propertyElements = property.Split('=', StringSplitOptions.TrimEntries);
-            if(!result.ContainsKey(propertyElements[0]))
+            if(character != ',' && character != '{' && character != '}')
             {
-                result.Add(propertyElements[0],
-                    propertyElements.Length == 2? propertyElements[1]: string.Empty);
+                currentToken += character;
+            }
+
+            switch(character)
+            {
+                case ',' when outputNextComma:
+                    currentToken += character;
+                    break;
+                case ',':
+                {
+                    if(string.IsNullOrWhiteSpace(currentToken))
+                    {
+                        break;
+                    }
+
+                    this.AddProperty(currentToken, nestingPrefix);
+                    currentToken = string.Empty;
+                    break;
+                }
+                case '<':
+                    outputNextComma = true;
+                    break;
+                case '>':
+                    outputNextComma = false;
+                    this.AddProperty(currentToken, nestingPrefix);
+                    currentToken = string.Empty;
+                    break;
+                case '{':
+                {
+                    this.AddProperty(currentToken, nestingPrefix);
+                    nestingPrefix += "    ";
+                    currentToken = string.Empty;
+                    break;
+                }
+                case '}':
+                {
+                    this.AddProperty(currentToken, nestingPrefix);
+                    currentToken = string.Empty;
+                    if(nestingPrefix.Length >= 4)
+                    {
+                        nestingPrefix = nestingPrefix[0..^4];
+                    }
+
+                    break;
+                }
             }
         }
-
-        return result;
     }
 
     private string ParseContentType(string content)
@@ -309,18 +372,33 @@ public partial class LogViewerViewModel : ObservableObject
         return new LogFileEntry(lineElements[0], lineElements[1], line, contentType);
     }
 
-    private void ShowCurrentPage()
+    private void ShowCurrentPage(List<string>? selectedTypes = null)
     {
-        var filteredEntries = this.allLogEntries;
-
+        var messageTypes = selectedTypes ?? this.SelectedMessageTypes.Select(m => m.ToString())
+                                                .ToList()!;
+        var filteredByMessageType = this.allLogEntries.Where(e => messageTypes.Contains(e.ContentType))
+                                        .ToList();
+        var filteredEntries = filteredByMessageType;
         if(!string.IsNullOrWhiteSpace(this.Filter) && this.Filter.Length >= 3)
         {
-            filteredEntries = filteredEntries
-                .Where(entry => entry.Content.Contains((string)this.Filter, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var filters = this.Filter.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            filteredEntries = [];
+            foreach(var keywordOrPhrase in filters)
+            {
+                var matchedEntries =
+                    filteredByMessageType.Where(
+                        e => e.Content.Contains(keywordOrPhrase, StringComparison.OrdinalIgnoreCase));
+                filteredEntries.AddRange(matchedEntries);
+            }
         }
-        var pageEntries = Enumerable.Take(filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1)), (int)this.PageSize);
+
+        var pageEntries = filteredEntries.Skip(this.PageSize * (this.CurrentPage - 1))
+                                         .Take(this.PageSize);
         this.PageCount = (int)Math.Ceiling((double)filteredEntries.Count / this.PageSize);
+        if(this.PageCount < 1)
+        {
+            this.PageCount = 1;
+        }
 
         this.LogEntries.Clear();
         foreach(var entry in pageEntries)
