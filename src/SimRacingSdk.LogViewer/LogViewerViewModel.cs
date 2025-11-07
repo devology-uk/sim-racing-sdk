@@ -112,7 +112,7 @@ public partial class LogViewerViewModel : ObservableObject
         this.LoadLogs();
     }
 
-    private void AddProperty(string currentToken, string nestingPrefix)
+    private void AddLogEntryProperty(string currentToken, string nestingPrefix)
     {
         if(string.IsNullOrWhiteSpace(currentToken))
         {
@@ -120,7 +120,8 @@ public partial class LogViewerViewModel : ObservableObject
         }
 
         var propertyElements = currentToken.Split('=', StringSplitOptions.TrimEntries);
-        this.LogEntryProperties.Add(new LogEntryProperty($"{nestingPrefix}{propertyElements[0]}", propertyElements[1]));
+        this.LogEntryProperties.Add(new LogEntryProperty($"{nestingPrefix}{propertyElements[0]}",
+            propertyElements[1]));
     }
 
     private bool CanExecuteNextPage()
@@ -293,7 +294,6 @@ public partial class LogViewerViewModel : ObservableObject
         var propertiesContent = content[(contentStartIndex + 1)..(contentEndIndex - 1)]
             .Trim();
 
-
         var currentToken = string.Empty;
         var nestingPrefix = string.Empty;
         var outputNextComma = false;
@@ -316,7 +316,7 @@ public partial class LogViewerViewModel : ObservableObject
                         break;
                     }
 
-                    this.AddProperty(currentToken, nestingPrefix);
+                    this.AddLogEntryProperty(currentToken, nestingPrefix);
                     currentToken = string.Empty;
                     break;
                 }
@@ -325,19 +325,19 @@ public partial class LogViewerViewModel : ObservableObject
                     break;
                 case '>':
                     outputNextComma = false;
-                    this.AddProperty(currentToken, nestingPrefix);
+                    this.AddLogEntryProperty(currentToken, nestingPrefix);
                     currentToken = string.Empty;
                     break;
                 case '{':
                 {
-                    this.AddProperty(currentToken, nestingPrefix);
+                    this.AddLogEntryProperty(currentToken, nestingPrefix);
                     nestingPrefix += "    ";
                     currentToken = string.Empty;
                     break;
                 }
                 case '}':
                 {
-                    this.AddProperty(currentToken, nestingPrefix);
+                    this.AddLogEntryProperty(currentToken, nestingPrefix);
                     currentToken = string.Empty;
                     if(nestingPrefix.Length >= 4)
                     {
