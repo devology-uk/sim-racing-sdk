@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Udp.Abstractions;
 using SimRacingSdk.Acc.Udp.Messages;
 using SimRacingSdk.Core.Enums;
