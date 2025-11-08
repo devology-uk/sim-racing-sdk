@@ -257,7 +257,14 @@ public partial class LogViewerViewModel : ObservableObject
 
         if(value.ContentType == "Text")
         {
-            this.LogEntryProperties.Add(new LogEntryProperty("Content", value.Content));
+            var content = value.Content;
+            if(content.Contains("|"))
+            {
+                var contentElements = content.Split("|",
+                    StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                content = contentElements[^1];
+            }
+            this.LogEntryProperties.Add(new LogEntryProperty("Content", content));
             return;
         }
 
@@ -348,6 +355,8 @@ public partial class LogViewerViewModel : ObservableObject
                 }
             }
         }
+        
+        this.AddLogEntryProperty(currentToken, nestingPrefix);
     }
 
     private string ParseContentType(string content)
