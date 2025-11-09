@@ -61,6 +61,7 @@ public class AccMonitor : IAccMonitor
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private CompositeDisposable? udpSubscriptionSink;
+    private string? connectionIdentifier;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -111,6 +112,7 @@ public class AccMonitor : IAccMonitor
 
     public void Start(string? connectionIdentifier = null)
     {
+        this.connectionIdentifier = connectionIdentifier;
         this.LogMessage(LoggingLevel.Information,
             $"Starting ACC Monitor connection with ID: {connectionIdentifier}");
 
@@ -121,17 +123,7 @@ public class AccMonitor : IAccMonitor
             throw new InvalidBroadcastingSettingsException();
         }
 
-        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC UDP interface.");
-        var broadcastingSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
-        this.accUdpConnection = this.accUdpConnectionFactory.Create(LocalhostIpAddress,
-            broadcastingSettings.UdpListenerPort,
-            connectionIdentifier ?? $"{LocalhostIpAddress}:{broadcastingSettings.UdpListenerPort}",
-            broadcastingSettings.ConnectionPassword,
-            broadcastingSettings.CommandPassword);
-
-        this.PrepareUdpMessageProcessing();
-
-        this.accUdpConnection.Connect();
+        this.PrepareAndStartNewAccConnection(connectionIdentifier);
     }
 
     public void Stop()
@@ -219,14 +211,13 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        if(this.currentSession != null)
+        if(connectionState is not { IsConnected: false, WasConnected: true })
         {
-            this.EndCurrentSession();
+            return;
         }
 
-        this.eventCompletedSubject.OnNext(this.currentEvent);
-        this.currentEvent = null;
-        this.accSharedMemoryConnection?.Dispose();
+        this.Stop();
+        this.PrepareAndStartNewAccConnection(this.connectionIdentifier);
     }
 
     private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
@@ -302,7 +293,8 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
-        if(this.currentEvent == null || !this.entryList.Any()) {
+        if(this.currentEvent == null || !this.entryList.Any())
+        {
             this.LogMessage(LoggingLevel.Information, "No event or entry list.");
             return;
         }
@@ -310,8 +302,7 @@ public class AccMonitor : IAccMonitor
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
 
-        var startNewSession = this.currentSession == null
-                              || realtimeUpdate.SessionTime.TotalMilliseconds
+        var startNewSession = this.currentSession == null || realtimeUpdate.SessionTime.TotalMilliseconds
                               < this.currentSessionTime.TotalMilliseconds;
 
         this.currentSessionTime = realtimeUpdate.SessionTime;
@@ -366,6 +357,21 @@ public class AccMonitor : IAccMonitor
         this.entryListSubject.OnNext(this.entryList);
 
         this.PrepareSharedMemoryConnection();
+    }
+
+    private void PrepareAndStartNewAccConnection(string? connectionIdentifier)
+    {
+        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC UDP interface.");
+        var broadcastingSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
+        this.accUdpConnection = this.accUdpConnectionFactory.Create(LocalhostIpAddress,
+            broadcastingSettings.UdpListenerPort,
+            connectionIdentifier ?? $"{LocalhostIpAddress}:{broadcastingSettings.UdpListenerPort}",
+            broadcastingSettings.ConnectionPassword,
+            broadcastingSettings.CommandPassword);
+
+        this.PrepareUdpMessageProcessing();
+
+        this.accUdpConnection.Connect();
     }
 
     private void PrepareSharedMemoryConnection()

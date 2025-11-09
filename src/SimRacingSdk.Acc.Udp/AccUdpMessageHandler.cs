@@ -80,7 +80,7 @@ internal class AccUdpMessageHandler
 
     internal void Disconnect(bool sendUnregister = true)
     {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
 
         if(sendUnregister)
         {
@@ -202,7 +202,7 @@ internal class AccUdpMessageHandler
 
     internal void SessionTerminated()
     {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
     }
 
     internal void SetCamera(string cameraSet, string camera)
@@ -306,7 +306,7 @@ internal class AccUdpMessageHandler
         var isReadonly = reader.ReadByte() == 0;
         var errMsg = reader.ReadString();
 
-        var connectionState = new ConnectionState(this.ConnectionId, connectionSuccess, isReadonly, errMsg);
+        var connectionState = new ConnectionState(this.ConnectionId, connectionSuccess, isReadonly, false, errMsg);
         this.connectionStateChangeSubject.OnNext(connectionState);
         Debug.WriteLine(connectionState.ToString());
     }
