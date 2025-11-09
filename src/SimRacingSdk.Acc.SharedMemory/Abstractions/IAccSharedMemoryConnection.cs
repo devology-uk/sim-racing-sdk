@@ -1,5 +1,5 @@
-﻿using SimRacingSdk.Acc.Core.Messages;
-using SimRacingSdk.Acc.SharedMemory.Models;
+﻿using SimRacingSdk.Acc.SharedMemory.Models;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.SharedMemory.Abstractions;
 

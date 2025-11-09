@@ -1,4 +1,4 @@
-﻿namespace SimRacingSdk.Acc.Demo.LogViewer;
+﻿namespace SimRacingSdk.LogViewer;
 
 public record LogFolderItem(string Name, string Path)
 {

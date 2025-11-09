@@ -7,7 +7,7 @@ using SimRacingSdk.Ams2.Demo.Controls.Console;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Demo.CarExplorer;
 using SimRacingSdk.Ams2.Demo.Demos;
-using SimRacingSdk.Ams2.Demo.LogViewer;
+using SimRacingSdk.LogViewer;
 using SimRacingSdk.Ams2.Demo.Services;
 using SimRacingSdk.Ams2.Demo.TrackExplorer;
 using SimRacingSdk.Ams2.SharedMemory;

@@ -1,10 +1,11 @@
 ﻿using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Monitor.Abstractions;
 using SimRacingSdk.Ams2.SharedMemory.Abstractions;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Monitor;
 
@@ -54,8 +55,8 @@ public class Ams2Monitor : IAms2Monitor
         this.Stop();
     }
 
-    private void LogMessage(LoggingLevel level, string message, object? data = null)
+    private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(level, content));
     }
 }

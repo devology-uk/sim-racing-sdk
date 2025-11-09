@@ -28,11 +28,11 @@ public record SharedMemoryData
         this.UnfilteredBrake = sharedMemoryPage.UnfilteredBrake;
         this.UnfilteredSteering = sharedMemoryPage.UnfilteredSteering;
         this.UnfilteredClutch = sharedMemoryPage.UnfilteredClutch;
-        this.CarName = sharedMemoryPage.CarName.Value;
-        this.CarClassName = sharedMemoryPage.CarClassName.Value;
+        this.CarName = sharedMemoryPage.CarName;
+        this.CarClassName = sharedMemoryPage.CarClassName;
         this.LapsInEvent = sharedMemoryPage.LapsInEvent;
-        this.TrackLocation = sharedMemoryPage.TrackLocation.Value;
-        this.TrackLayout = sharedMemoryPage.TrackLayout.Value;
+        this.TrackLocation = sharedMemoryPage.TrackLocation;
+        this.TrackLayout = sharedMemoryPage.TrackLayout;
         this.TrackLength = sharedMemoryPage.TrackLength;
         this.SectorCount = sharedMemoryPage.SectorCount;
         this.IsLapInvalid = sharedMemoryPage.IsLapInvalid;

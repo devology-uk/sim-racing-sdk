@@ -1,14 +1,24 @@
-﻿<Window x:Class="SimRacingSdk.Ams2.Demo.LogViewer.LogViewerWindow"
+﻿<Window x:Class="SimRacingSdk.LogViewer.LogViewerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimRacingSdk.Ams2.Demo.LogViewer"
+        xmlns:local="clr-namespace:SimRacingSdk.LogViewer"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Sim Racing SDK - Log Viewer"
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:LogViewerViewModel}"
-        PreviewKeyDown="HandlePreviewKeyDown">
+        PreviewKeyDown="HandlePreviewKeyDown"
+        Height="900"
+        Width="1200">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SimRacingSdk.LogViewer;component/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="Right"
                     Modifiers="Alt"
@@ -29,6 +39,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <ToolBarTray Grid.Column="0"
@@ -36,7 +47,7 @@
                      Grid.ColumnSpan="4">
             <ToolBar>
                 <Button Command="{Binding DeleteSelectedLogFolderCommand}">
-                    <Image Source="/Images/bin.png" />
+                    <Image Source="{StaticResource BinIcon}" />
                 </Button>
                 <Label Content="Search" />
                 <StackPanel Orientation="Horizontal"
@@ -45,8 +56,17 @@
                              Width="300"
                              Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Button Command="{Binding ClearFilterCommand}">
-                        <Image Source="/Images/delete.png" />
+                        <Image Source="{StaticResource DeleteIcon}" />
                     </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
+                    <Label Content="Message Types"
+                           VerticalAlignment="Center"
+                           Margin="5 0" />
+                    <xctk:CheckComboBox ItemsSource="{Binding MessageTypes}"
+                                        SelectedItemsOverride="{Binding SelectedMessageTypes, Mode=TwoWay}" />
                 </StackPanel>
             </ToolBar>
         </ToolBarTray>
@@ -106,11 +126,11 @@
                          Margin="5 0 10 0" />
 
                 <Button Command="{Binding FirstPageCommand}">
-                    <Image Source="/Images/button_blue_goto_first.png" />
+                    <Image Source="{StaticResource FirstPageIcon}" />
                 </Button>
 
                 <Button Command="{Binding PreviousPageCommand}">
-                    <Image Source="/Images/button_blue_goto_previous.png" />
+                    <Image Source="{StaticResource PreviousPageIcon}" />
                 </Button>
                 <Label Content="Page"
                        VerticalAlignment="Center" />
@@ -123,10 +143,10 @@
                 <Label Content="{Binding PageCount}"
                        VerticalAlignment="Center" />
                 <Button Command="{Binding NextPageCommand}">
-                    <Image Source="/Images/button_blue_goto_next.png" />
+                    <Image Source="{StaticResource NextPageIcon}" />
                 </Button>
                 <Button Command="{Binding LastPageCommand}">
-                    <Image Source="/Images/button_blue_goto_last.png" />
+                    <Image Source="{StaticResource LastPageIcon}" />
                 </Button>
             </StackPanel>
 
@@ -152,5 +172,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <!-- <xctk:PropertyGrid Grid.Column="3" Grid.Row="2" x:Name="PropertyGrid" -->
+        <!--                    Width="450" -->
+        <!--                    Margin="10"> -->
+        <!-- </xctk:PropertyGrid> -->
+
+        <StatusBar Grid.Column="0"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="4"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Stretch">
+            <StatusBarItem>
+                <TextBlock>
+                    Powered by WPF Extended Toolkit by Exceed
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

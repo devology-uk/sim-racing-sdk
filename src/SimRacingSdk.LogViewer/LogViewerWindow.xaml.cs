@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace SimRacingSdk.Ams2.Demo.LogViewer;
+namespace SimRacingSdk.LogViewer;
 
 public partial class LogViewerWindow : Window
 {

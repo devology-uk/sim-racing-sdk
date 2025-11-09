@@ -9,8 +9,8 @@ using CommunityToolkit.Mvvm.Input;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Demo.CarExplorer;
-using SimRacingSdk.Ams2.Demo.LogViewer;
 using SimRacingSdk.Ams2.Demo.TrackExplorer;
+using SimRacingSdk.LogViewer;
 
 namespace SimRacingSdk.Ams2.Demo;
 
@@ -19,11 +19,12 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IAms2CompatibilityChecker ams2CompatibilityChecker;
     private readonly IAms2GameDetector ams2GameDetector;
     private readonly IConsoleLog consoleLog;
+    private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
     private readonly IUdpDemo udpDemo;
-
+    
     private bool isDemoCancelled;
     private bool isGameRunning;
 
@@ -61,8 +62,7 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void OpenLogFolder()
     {
-        var currentLogPath =
-            $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\{DateTime.Now.Date:yyyy-MM-dd}\";
+        var currentLogPath = $@"{this.logFolderPath}{DateTime.Now.Date:yyyy-MM-dd}\";
         if(Directory.Exists(currentLogPath))
         {
             Process.Start("explorer.exe", currentLogPath);
@@ -79,7 +79,7 @@ public partial class MainWindowViewModel : ObservableObject
             Owner = App.Current.MainWindow
         };
         logViewer.Show();
-        logViewerViewModel.Init();
+        logViewerViewModel.Init(this.logFolderPath);
     }
 
     [RelayCommand]

@@ -22,12 +22,12 @@
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Demo.Abstractions;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
 

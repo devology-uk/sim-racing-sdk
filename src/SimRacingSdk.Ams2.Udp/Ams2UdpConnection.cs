@@ -7,9 +7,10 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.Udp.Abstractions;
 using SimRacingSdk.Ams2.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Udp;
 
@@ -133,9 +134,9 @@ public class Ams2UdpConnection : IAms2UdpConnection
         }
     }
 
-    private void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.ams2UdpMessageHandler.LogMessage(loggingLevel, message, data);
+        this.ams2UdpMessageHandler.LogMessage(loggingLevel, content);
     }
 
     private async Task ProcessNextMessage()

@@ -2,10 +2,11 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Extensions;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Udp;
 
@@ -79,7 +80,7 @@ internal class AccUdpMessageHandler
 
     internal void Disconnect(bool sendUnregister = true)
     {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
 
         if(sendUnregister)
         {
@@ -97,9 +98,9 @@ internal class AccUdpMessageHandler
         }
     }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    internal void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
     }
 
     internal void ProcessMessage(BinaryReader reader)
@@ -201,7 +202,7 @@ internal class AccUdpMessageHandler
 
     internal void SessionTerminated()
     {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false));
+        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
     }
 
     internal void SetCamera(string cameraSet, string camera)
@@ -305,7 +306,7 @@ internal class AccUdpMessageHandler
         var isReadonly = reader.ReadByte() == 0;
         var errMsg = reader.ReadString();
 
-        var connectionState = new ConnectionState(this.ConnectionId, connectionSuccess, isReadonly, errMsg);
+        var connectionState = new ConnectionState(this.ConnectionId, connectionSuccess, isReadonly, false, errMsg);
         this.connectionStateChangeSubject.OnNext(connectionState);
         Debug.WriteLine(connectionState.ToString());
     }

@@ -2,8 +2,9 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core.Enums;
-using SimRacingSdk.Acc.Core.Messages;
 using SimRacingSdk.Ams2.SharedMemory.Abstractions;
+using SimRacingSdk.Core.Enums;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.SharedMemory;
 
@@ -49,9 +50,9 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         this.updateSubscription?.Dispose();
     }
 
-    private void LogMessage(LoggingLevel loggingLevel, string message, object? data = null)
+    private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, message, data));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
     }
 
     private void OnCompleted()
@@ -61,7 +62,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
 
     private void OnError(Exception exception)
     {
-        this.LogMessage(LoggingLevel.Error, "Unexpected error processing updates:", exception.GetBaseException().Message);
+        this.LogMessage(LoggingLevel.Error, $"Unexpected error processing updates: {exception.GetBaseException().Message}");
     }
 
     private void OnNextUpdate(long index)

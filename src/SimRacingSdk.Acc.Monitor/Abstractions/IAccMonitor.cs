@@ -1,7 +1,7 @@
-﻿using SimRacingSdk.Acc.Core.Messages;
-using SimRacingSdk.Acc.Monitor.Messages;
+﻿using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Monitor.Abstractions;
 

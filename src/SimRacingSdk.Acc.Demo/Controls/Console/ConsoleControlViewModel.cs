@@ -8,7 +8,7 @@ public partial class ConsoleControlViewModel : ObservableObject
 {
     private readonly IDisposable entriesSubscription;
     private readonly ILogger<ConsoleControlViewModel> logger;
-    private readonly IList<string> messages = new List<string>();
+    private IList<string> messages = new List<string>();
 
     [ObservableProperty]
     private string consoleContent = string.Empty;
@@ -34,7 +34,7 @@ public partial class ConsoleControlViewModel : ObservableObject
         this.messages.Add(entry);
         if(this.messages.Count > 100)
         {
-            this.messages.RemoveAt(0);
+            this.messages = this.messages.TakeLast(100).ToList();
         }
 
         this.ConsoleContent = string.Join(Environment.NewLine, this.messages);

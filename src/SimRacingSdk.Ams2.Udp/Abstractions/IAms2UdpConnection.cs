@@ -1,5 +1,5 @@
-﻿using SimRacingSdk.Acc.Core.Messages;
-using SimRacingSdk.Ams2.Udp.Messages;
+﻿using SimRacingSdk.Ams2.Udp.Messages;
+using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Udp.Abstractions;
 
