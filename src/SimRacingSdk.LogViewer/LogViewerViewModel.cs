@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -17,7 +16,6 @@ public partial class LogViewerViewModel : ObservableObject
     private string filter = string.Empty;
     [ObservableProperty]
     private bool isBusy = false;
-    private string logFolderPath = null!;
     [ObservableProperty]
     private int pageCount;
     [ObservableProperty]
@@ -28,16 +26,17 @@ public partial class LogViewerViewModel : ObservableObject
     private LogFileEntry? selectedLogEntry;
     [ObservableProperty]
     private LogFolderItem? selectedLogFolder;
-    
-    
-    public ObservableCollection<string> SelectedMessageTypes { get; set; } = [];
+
+    private string logFolderPath = null!;
+
     public ObservableCollection<LogFileEntry> LogEntries { get; } = [];
     public ObservableCollection<LogEntryProperty> LogEntryProperties { get; } = [];
     public ObservableCollection<LogFileItem> LogFiles { get; } = [];
     public ObservableCollection<LogFolderItem> LogFolders { get; } = [];
-    public ObservableCollection<string> MessageTypes { get; } = [];
-    
-    private void HandleSelectedMessageTypesChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
+    public ObservableCollection<MessageTypeItem> MessageTypes { get; } = [];
+
+    [RelayCommand]
+    private void ApplyFilter()
     {
         this.ShowCurrentPage();
     }
@@ -111,7 +110,6 @@ public partial class LogViewerViewModel : ObservableObject
         this.CurrentPage = previousPage;
         this.ShowCurrentPage();
     }
-
 
     public void Init(string logFolderPath)
     {
@@ -195,7 +193,6 @@ public partial class LogViewerViewModel : ObservableObject
 
     partial void OnSelectedLogChanged(LogFileItem? value)
     {
-       
         this.IsBusy = true;
         this.MessageTypes.Clear();
         this.LogEntries.Clear();
@@ -222,21 +219,12 @@ public partial class LogViewerViewModel : ObservableObject
             var messageTypes = this.allLogEntries.Select(e => e.ContentType)
                                    .Distinct()
                                    .ToList();
-            var selectedMessageTypes = new ObservableCollection<string>();
             foreach(var messageType in messageTypes)
             {
-                this.MessageTypes.Add(messageType);
-                selectedMessageTypes.Add(messageType);
+                this.MessageTypes.Add(new MessageTypeItem(messageType));
             }
 
-            this.SelectedMessageTypes.CollectionChanged -= this.HandleSelectedMessageTypesChanged;
-            this.SelectedMessageTypes.Clear();
-            foreach(var selectedMessageType in selectedMessageTypes)
-            {
-                this.SelectedMessageTypes.Add(selectedMessageType);
-            }
             this.ShowCurrentPage();
-            this.SelectedMessageTypes.CollectionChanged += this.HandleSelectedMessageTypesChanged;
         }
         catch(Exception exception)
         {
@@ -383,8 +371,10 @@ public partial class LogViewerViewModel : ObservableObject
             return "Text";
         }
 
-        return content[..contentStartIndex]
+        var contentType = content[..contentStartIndex]
             .Trim();
+        return contentType.Split(":",
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)[0];
     }
 
     private LogFileEntry ParseLogFileEntry(string line)
@@ -397,7 +387,7 @@ public partial class LogViewerViewModel : ObservableObject
 
     private void ShowCurrentPage(List<string>? selectedTypes = null)
     {
-       var messageTypes = selectedTypes ?? this.SelectedMessageTypes.Select(m => m.ToString())
+        var messageTypes = selectedTypes ?? this.MessageTypes.Where(m => m.IsSelected).Select(m => m.Name)
                                                 .ToList()!;
         var filteredByMessageType = this.allLogEntries.Where(e => messageTypes.Contains(e.ContentType))
                                         .ToList();
