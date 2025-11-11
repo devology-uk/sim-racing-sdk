@@ -12,6 +12,6 @@ public record DriverInfo
     public DriverCategory Category { get; init; }
     public string FirstName { get; init; }
     public string LastName { get; init; }
-    public Nationality Nationality { get; init; }
+    public AccNationality Nationality { get; init; }
     public string ShortName { get; init; }
 }

@@ -26,24 +26,24 @@ public static class AccExtensions
                };
     }
 
-    public static string ToFriendlyName(this Nationality nationality)
+    public static string ToFriendlyName(this AccNationality accNationality)
     {
-        return nationality switch
+        return accNationality switch
         {
-            Nationality.ChineseTaipei => "Chinese Taipei",
-            Nationality.CzechRepublic => "Czech Republic",
-            Nationality.GreatBritain => "Great Britain",
-            Nationality.HongKong => "Hong Kong",
-            Nationality.NewCaledonia => "New Caledonia",
-            Nationality.NewZealand => "New Zealand",
-            Nationality.NorthernIreland => "Northern Ireland",
-            Nationality.PapuaNewGuinea => "Papua New Guinea",
-            Nationality.PuertoRico => "Puerto Rico",
-            Nationality.SanMarino => "San Marino",
-            Nationality.SaudiArabia => "Saudi Arabia",
-            Nationality.SouthAfrica => "South Africa",
-            Nationality.SouthKorea => "South Korea",
-            _ => nationality.ToString()
+            AccNationality.ChineseTaipei => "Chinese Taipei",
+            AccNationality.CzechRepublic => "Czech Republic",
+            AccNationality.GreatBritain => "Great Britain",
+            AccNationality.HongKong => "Hong Kong",
+            AccNationality.NewCaledonia => "New Caledonia",
+            AccNationality.NewZealand => "New Zealand",
+            AccNationality.NorthernIreland => "Northern Ireland",
+            AccNationality.PapuaNewGuinea => "Papua New Guinea",
+            AccNationality.PuertoRico => "Puerto Rico",
+            AccNationality.SanMarino => "San Marino",
+            AccNationality.SaudiArabia => "Saudi Arabia",
+            AccNationality.SouthAfrica => "South Africa",
+            AccNationality.SouthKorea => "South Korea",
+            _ => accNationality.ToString()
         };
     }
 }
