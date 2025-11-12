@@ -85,7 +85,7 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
 
-        await this.WaitFormGame();
+        await this.WaitForGame();
         if(!this.isGameRunning)
         {
             return;
@@ -106,7 +106,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             return;
         }
-        await this.WaitFormGame();
+        await this.WaitForGame();
         if(!this.isGameRunning)
         {
             return;
@@ -127,7 +127,7 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
 
-        await this.WaitFormGame();
+        await this.WaitForGame();
         if(!this.isGameRunning)
         {
             return;
@@ -200,7 +200,7 @@ public partial class MainWindowViewModel : ObservableObject
         this.IsRunningDemo = false;
     }
 
-    private async Task WaitFormGame()
+    private async Task WaitForGame()
     {
         this.isDemoCancelled = false;
         this.StartGameDetection();
