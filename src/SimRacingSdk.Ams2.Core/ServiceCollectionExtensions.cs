@@ -13,6 +13,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IAms2PathProvider, Ams2PathProvider>();
         services.TryAddSingleton<IAms2CarInfoProvider, Ams2CarInfoProvider>();
         services.TryAddSingleton<IAms2TrackInfoProvider, Ams2TrackInfoProvider>();
+        services.TryAddSingleton<IAms2NationalityInfoProvider, Ams2NationalityInfoProvider>();
         return services;
     }
 }

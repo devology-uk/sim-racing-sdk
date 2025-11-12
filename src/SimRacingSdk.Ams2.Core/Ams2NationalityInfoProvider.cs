@@ -1,9 +1,10 @@
-﻿using SimRacingSdk.Ams2.Core.Enums;
+﻿using SimRacingSdk.Ams2.Core.Abstractions;
+using SimRacingSdk.Ams2.Core.Enums;
 using SimRacingSdk.Ams2.Core.Models;
 
 namespace SimRacingSdk.Ams2.Core;
 
-public class Ams2NationalityInfoProvider
+public class Ams2NationalityInfoProvider : IAms2NationalityInfoProvider
 {
     private static Ams2NationalityInfoProvider? singletonInstance;
 

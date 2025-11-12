@@ -464,6 +464,7 @@ public record SharedMemoryData
                 IsActive = participantInfo.IsActive,
                 IsFocusedParticipant = i == this.FocusedParticipantIndex,
                 IsLapInvalid = this.IsLapInvalidated[i],
+                Index = i,
                 LapsCompleted = participantInfo.LapsCompleted,
                 LastLapTime = TimeSpan.FromMilliseconds(this.LastLapTimes[i]),
                 Name = participantInfo.Name,
