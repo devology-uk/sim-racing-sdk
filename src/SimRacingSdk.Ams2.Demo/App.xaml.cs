@@ -10,6 +10,7 @@ using SimRacingSdk.Ams2.Demo.Demos;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Ams2.Demo.Services;
 using SimRacingSdk.Ams2.Demo.TrackExplorer;
+using SimRacingSdk.Ams2.Monitor;
 using SimRacingSdk.Ams2.SharedMemory;
 using SimRacingSdk.Ams2.Udp;
 
@@ -61,6 +62,7 @@ public partial class App : Application
 
         services.UseAms2Udp();
         services.UseAms2SharedMemory();
+        services.UseAms2Monitor();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -72,6 +74,8 @@ public partial class App : Application
         services.AddTransient<IUdpLog, UdpLog>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
+        services.AddTransient<IMonitorDemo, MonitorDemo>();
+        services.AddTransient<IMonitorLog, MonitorLog>();
 
         return services.BuildServiceProvider();
     }

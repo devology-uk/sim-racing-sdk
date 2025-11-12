@@ -22,6 +22,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
+    private readonly IMonitorDemo monitorDemo;
     private readonly CompositeDisposable subscriptionSink = new();
     private readonly IUdpDemo udpDemo;
     
@@ -36,7 +37,8 @@ public partial class MainWindowViewModel : ObservableObject
         IAms2CompatibilityChecker ams2CompatibilityChecker,
         IAms2GameDetector ams2GameDetector,
         IUdpDemo udpDemo,
-        ISharedMemoryDemo sharedMemoryDemo)
+        ISharedMemoryDemo sharedMemoryDemo,
+        IMonitorDemo monitorDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
@@ -44,6 +46,7 @@ public partial class MainWindowViewModel : ObservableObject
         this.ams2GameDetector = ams2GameDetector;
         this.udpDemo = udpDemo;
         this.sharedMemoryDemo = sharedMemoryDemo;
+        this.monitorDemo = monitorDemo;
     }
 
     [RelayCommand]
@@ -96,6 +99,28 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task StartMonitorDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.monitorDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.monitorDemo.Start();
+    }
+
+    [RelayCommand]
     private async Task StartSharedMemoryDemo()
     {
         this.consoleLog.Clear();
@@ -108,7 +133,7 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
 
-        await this.WaitFormGame();
+        await this.WaitForGame();
         if(!this.isGameRunning)
         {
             return;
@@ -130,7 +155,7 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
 
-        await this.WaitFormGame();
+        await this.WaitForGame();
         if(!this.isGameRunning)
         {
             return;
@@ -190,10 +215,11 @@ public partial class MainWindowViewModel : ObservableObject
     {
         this.udpDemo.Stop();
         this.sharedMemoryDemo.Stop();
+        this.monitorDemo.Stop();
         this.IsRunningDemo = false;
     }
 
-    private async Task WaitFormGame()
+    private async Task WaitForGame()
     {
         this.isDemoCancelled = false;
         this.StartGameDetection();
