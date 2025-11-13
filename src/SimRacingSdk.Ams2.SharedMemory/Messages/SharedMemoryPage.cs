@@ -45,6 +45,7 @@ public class SharedMemoryPage
     public float CurrentLapTime;
     public float SplitTimeAhead;
     public float SplitTimeBehind;
+    public float SplitTime;
     public float EventTimeRemaining;
     public float PersonalBestLapTime;
     public float OverallBestLapTime;
@@ -149,7 +150,7 @@ public class SharedMemoryPage
     public float WindDirectionX;
     public float WindDirectionY;
     public float CloudBrightness;
-    public float SequenceNumber;
+    public uint SequenceNumber;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
     public float[] WheelLocalPositionY;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.WheelMetricSize)]
@@ -176,6 +177,8 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public float[] BestSector3Times;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
+    public float[] BestLapTimes;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public float[] LastLapTimes;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public byte[] IsLapInvalidated;
@@ -192,8 +195,10 @@ public class SharedMemoryPage
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]
     public MaxLengthString[] CarClassNames;
     public int PitStopEnforcedOnLap;
-    public MaxLengthString TranslatedTrackLocation;
-    public MaxLengthString TranslatedTrackLayout;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string TranslatedTrackLocation;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = SharedMemoryConstants.MaxStringLength)]
+    public string TranslatedTrackLayout;
     public float BrakeBias;
     public float TurboBoostPressure;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = SharedMemoryConstants.MaxParticipants)]

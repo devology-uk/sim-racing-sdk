@@ -4,7 +4,6 @@ using System.Reactive.Subjects;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Core.Enums;
 using SimRacingSdk.Ams2.Monitor.Abstractions;
-using SimRacingSdk.Ams2.Monitor.Enums;
 using SimRacingSdk.Ams2.Monitor.Messages;
 using SimRacingSdk.Ams2.SharedMemory.Abstractions;
 using SimRacingSdk.Ams2.SharedMemory.Enums;
@@ -117,25 +116,29 @@ public class Ams2Monitor : IAms2Monitor
             return;
         }
 
-        if(this.currentGameStatus.GameState != ams2GameStatus.GameState
-           && ams2GameStatus.GameState == Ams2GameState.InGamePlaying)
+        if(this.currentGameStatus.SessionState == Ams2SessionState.Invalid
+           && ams2GameStatus.SessionState != Ams2SessionState.Invalid)
         {
-            this.currentEvent = new Ams2MonitorEvent
+            if(this.currentEvent == null)
             {
-                TimeStamp = DateTime.UtcNow,
-                TrackLayout = ams2GameStatus.TrackLayout,
-                TrackLocation = ams2GameStatus.TrackLocation
-            };
+                this.StartNewEvent(ams2GameStatus);
+            }
 
-            this.LogMessage(LoggingLevel.Information, $"Event Started: {this.currentEvent}");
-            this.eventStartedSubject.OnNext(this.currentEvent);
+            this.StartNewSession(ams2GameStatus);
         }
 
-        if(this.currentGameStatus.SessionState != ams2GameStatus.SessionState
-           && ams2GameStatus.SessionState.ToSessionType() != Ams2MonitorSessionType.None)
+        if(this.currentSession != null && this.currentGameStatus.SessionState != Ams2SessionState.Invalid
+                                       && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
         {
             this.EndCurrentSession(ams2GameStatus);
-            this.StartNewSession(ams2GameStatus);
+        }
+
+        if(this.currentEvent != null && this.currentGameStatus.GameState != Ams2GameState.FrontEnd
+                                     && ams2GameStatus.GameState == Ams2GameState.FrontEnd)
+        {
+            this.LogMessage(LoggingLevel.Information, $"Event Completed: {this.currentEvent}");
+            this.eventCompletedSubject.OnNext(this.currentEvent!);
+            this.currentEvent = null;
         }
 
         this.currentGameStatus = ams2GameStatus;
@@ -144,7 +147,8 @@ public class Ams2Monitor : IAms2Monitor
     private void OnNextParticipantUpdate(Ams2Participant ams2Participant)
     {
         var carInfo = this.amsCarInfoProvider.FindByModel(ams2Participant.CarName);
-        var countryCode = this.ams2NationalityInfoProvider.GetCountryCode((Ams2Nationality)ams2Participant.Nationality);
+        var countryCode =
+            this.ams2NationalityInfoProvider.GetCountryCode((Ams2Nationality)ams2Participant.Nationality);
         var ams2MonitorParticipant = new Ams2MonitorParticipant(ams2Participant)
         {
             CarManufacturer = carInfo?.Manufacturer,
@@ -173,6 +177,19 @@ public class Ams2Monitor : IAms2Monitor
         };
 
         this.ams2SharedMemoryConnection.Start();
+    }
+
+    private void StartNewEvent(Ams2GameStatus ams2GameStatus)
+    {
+        this.currentEvent = new Ams2MonitorEvent
+        {
+            TimeStamp = DateTime.UtcNow,
+            TrackLayout = ams2GameStatus.TrackLayout,
+            TrackLocation = ams2GameStatus.TrackLocation
+        };
+
+        this.LogMessage(LoggingLevel.Information, $"Event Started: {this.currentEvent}");
+        this.eventStartedSubject.OnNext(this.currentEvent);
     }
 
     private void StartNewSession(Ams2GameStatus ams2GameStatus)

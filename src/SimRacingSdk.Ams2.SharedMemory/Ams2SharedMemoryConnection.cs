@@ -155,6 +155,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
                     };
 
                     this.LogMessage(LoggingLevel.Information, $"Completed Lap: {completedLap}");
+                    this.completedLapsSubject.OnNext(completedLap);
                 }
             }
 

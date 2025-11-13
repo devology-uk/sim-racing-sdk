@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Monitor.Abstractions;
+using SimRacingSdk.Ams2.Monitor.Messages;
 using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
@@ -17,7 +18,7 @@ public class MonitorDemo : IMonitorDemo
     private IAms2Monitor? ams2Monitor;
     private CompositeDisposable? subscriptionSink;
 
-    public MonitorDemo(ILogger<IMonitorDemo> logger,
+    public MonitorDemo(ILogger<MonitorDemo> logger,
         IConsoleLog consoleLog,
         IMonitorLog monitorLog,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
@@ -67,6 +68,7 @@ public class MonitorDemo : IMonitorDemo
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.monitorLog.Log(logMessage.ToString());
+        this.consoleLog.Write(logMessage.ToString());
     }
 
     private void PrepareMessageHandling()
@@ -78,7 +80,31 @@ public class MonitorDemo : IMonitorDemo
 
         this.subscriptionSink = new CompositeDisposable
         {
-            this.ams2Monitor.LogMessages.Subscribe(this.OnNextLogMessage)
+            this.ams2Monitor.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.ams2Monitor.EventStarted.Subscribe(this.OnNextEventStarted),
+            this.ams2Monitor.EventCompleted.Subscribe(this.OnNextEventCompleted),
+            this.ams2Monitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
+            this.ams2Monitor.SessionCompleted.Subscribe(this.OnNextSessionCompleted)
         };
+    }
+
+    private void OnNextSessionCompleted(Ams2MonitorSession ams2MonitorSession)
+    {
+        this.Log($"Session Ended: {ams2MonitorSession}");
+    }
+
+    private void OnNextSessionStarted(Ams2MonitorSession ams2MonitorSession)
+    {
+        this.Log($"Session Started: {ams2MonitorSession}");
+    }
+
+    private void OnNextEventCompleted(Ams2MonitorEvent ams2MonitorEvent)
+    {
+        this.Log($"Event Started: {ams2MonitorEvent}");
+    }
+
+    private void OnNextEventStarted(Ams2MonitorEvent ams2MonitorEvent)
+    {
+        this.Log($"Event Started: {ams2MonitorEvent}");
     }
 }
