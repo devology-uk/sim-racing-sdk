@@ -47,8 +47,7 @@ public class Ams2Monitor : IAms2Monitor
     public IObservable<Ams2MonitorEvent> EventCompleted => this.eventCompletedSubject.AsObservable();
     public IObservable<Ams2MonitorEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
-    public IObservable<Ams2MonitorParticipant> ParticipantUpdates =>
-        this.participantUpdatesSubject.AsObservable();
+    public IObservable<Ams2MonitorParticipant> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<Ams2TelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
@@ -105,6 +104,7 @@ public class Ams2Monitor : IAms2Monitor
 
     private void OnNextCompletedLap(Ams2Lap ams2Lap)
     {
+        this.LogMessage(LoggingLevel.Information, $"Lap Completed: {ams2Lap}");
         this.completedLapsSubject.OnNext(ams2Lap);
     }
 
