@@ -41,6 +41,7 @@ public record SharedMemoryData
         this.CurrentLapTime = TimeSpan.FromMilliseconds(sharedMemoryPage.CurrentLapTime);
         this.SplitTimeAhead = TimeSpan.FromMilliseconds(sharedMemoryPage.SplitTimeAhead);
         this.SplitTimeBehind = TimeSpan.FromMilliseconds(sharedMemoryPage.SplitTimeBehind);
+        this.SplitTime = TimeSpan.FromMilliseconds(sharedMemoryPage.SplitTime);
         this.EventTimeRemaining = TimeSpan.FromMilliseconds(sharedMemoryPage.EventTimeRemaining);
         this.PersonalBestLapTime = TimeSpan.FromMilliseconds(sharedMemoryPage.PersonalBestLapTime);
         this.OverallBestLapTime = TimeSpan.FromMilliseconds(sharedMemoryPage.OverallBestLapTime);
@@ -215,6 +216,7 @@ public record SharedMemoryData
         this.BestSector1Times = sharedMemoryPage.BestSector1Times;
         this.BestSector2Times = sharedMemoryPage.BestSector2Times;
         this.BestSector3Times = sharedMemoryPage.BestSector3Times;
+        this.BestLapTimes = sharedMemoryPage.BestLapTimes;
         this.LastLapTimes = sharedMemoryPage.LastLapTimes;
         this.IsLapInvalidated = sharedMemoryPage.IsLapInvalidated.Select(b => b != 0)
                                                 .ToArray();
@@ -231,8 +233,8 @@ public record SharedMemoryData
         this.CarClassNames = sharedMemoryPage.CarClassNames.Select(n => n.Value)
                                              .ToArray();
         this.PitStopEnforcedOnLap = sharedMemoryPage.PitStopEnforcedOnLap;
-        this.TranslatedTrackLocation = sharedMemoryPage.TranslatedTrackLocation.Value;
-        this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout.Value;
+        this.TranslatedTrackLocation = sharedMemoryPage.TranslatedTrackLocation;
+        this.TranslatedTrackLayout = sharedMemoryPage.TranslatedTrackLayout;
         this.BrakeBias = sharedMemoryPage.BrakeBias;
         this.TurboBoostPressure = sharedMemoryPage.TurboBoostPressure;
         this.TyreCompound = new Ams2WheelMetric<string>(sharedMemoryPage.TyreCompounds[0].Value,
@@ -280,6 +282,10 @@ public record SharedMemoryData
         this.IsPrivateSession = sharedMemoryPage.IsPrivateSession;
         this.LaunchStage = (Ams2LaunchStage)sharedMemoryPage.LaunchStage;
     }
+
+    public float[] BestLapTimes { get; init; }
+
+    public TimeSpan SplitTime { get; init; }
 
     public int AbsSetting { get; init; }
     public float AeroDamage { get; init; }
@@ -384,7 +390,7 @@ public record SharedMemoryData
     public Ams2WheelMetric<float> RideHeight { get; init; }
     public float Rpm { get; init; }
     public int SectorCount { get; init; }
-    public float SequenceNumber { get; init; }
+    public uint SequenceNumber { get; init; }
     public int SessionAdditionalLaps { get; init; }
     public float SessionDuration { get; set; }
     public Ams2SessionState SessionState { get; init; }
@@ -464,6 +470,7 @@ public record SharedMemoryData
                 IsActive = participantInfo.IsActive,
                 IsFocusedParticipant = i == this.FocusedParticipantIndex,
                 IsLapInvalid = this.IsLapInvalidated[i],
+                Index = i,
                 LapsCompleted = participantInfo.LapsCompleted,
                 LastLapTime = TimeSpan.FromMilliseconds(this.LastLapTimes[i]),
                 Name = participantInfo.Name,

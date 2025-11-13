@@ -11,7 +11,7 @@ public class CarInfo(ushort carIndex)
     public byte CarModelType { get; internal set; }
     public byte CupCategory { get; internal set; }
     public int CurrentDriverIndex { get; internal set; }
-    public Nationality Nationality { get; internal set; }
+    public AccNationality Nationality { get; internal set; }
     public int RaceNumber { get; internal set; }
     public string TeamName { get; internal set; }
 

@@ -18,7 +18,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private IAms2SharedMemoryConnection? ams2SharedMemoryConnection;
     private CompositeDisposable subscriptionSink = null!;
 
-    public SharedMemoryDemo(ILogger<ISharedMemoryDemo> logger,
+    public SharedMemoryDemo(ILogger<SharedMemoryDemo> logger,
         IConsoleLog consoleLog,
         ISharedMemoryLog sharedMemoryLog,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
@@ -68,6 +68,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.sharedMemoryLog.Log(logMessage.ToString());
+        this.consoleLog.Write(logMessage.ToString());
     }
 
     private void PrepareMessageHandling()

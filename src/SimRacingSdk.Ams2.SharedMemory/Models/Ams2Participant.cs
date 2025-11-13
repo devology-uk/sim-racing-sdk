@@ -20,6 +20,7 @@ public record Ams2Participant
     public float DistanceIntoCurrentLap { get; init; }
     public Ams2FlagColor HighestFlagColor { get; init; }
     public Ams2FlagReason HighestFlagReason { get; init; }
+    public int Index { get; set; }
     public bool IsActive { get; init; }
     public bool IsFocusedParticipant { get; set; }
     public bool IsLapInvalid { get; init; }

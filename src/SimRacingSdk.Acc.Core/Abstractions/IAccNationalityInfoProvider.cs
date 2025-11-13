@@ -5,6 +5,6 @@ namespace SimRacingSdk.Acc.Core.Abstractions;
 
 public interface IAccNationalityInfoProvider
 {
-    AccNationalityInfo? FindById(Nationality accNationality);
-    string GetCountryCode(Nationality accNationality);
+    AccNationalityInfo? FindById(AccNationality accNationality);
+    string GetCountryCode(AccNationality accNationality);
 }

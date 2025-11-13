@@ -1,6 +1,6 @@
 ﻿namespace SimRacingSdk.Acc.Core.Enums;
 
-public enum Nationality
+public enum AccNationality
 {
     Any = 0,
     Italy = 1,

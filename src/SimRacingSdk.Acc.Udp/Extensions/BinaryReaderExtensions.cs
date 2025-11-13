@@ -88,7 +88,7 @@ internal static class BinaryReaderExtensions
         carInfo.RaceNumber = reader.ReadInt32();
         carInfo.CupCategory = reader.ReadByte();
         carInfo.CurrentDriverIndex = reader.ReadByte();
-        carInfo.Nationality = (Nationality) reader.ReadUInt16();
+        carInfo.Nationality = (AccNationality) reader.ReadUInt16();
 
         var driversOnCarCount = reader.ReadByte();
         for(var di = 0; di < driversOnCarCount; di++)
@@ -99,7 +99,7 @@ internal static class BinaryReaderExtensions
                 LastName = reader.ReadStr(),
                 ShortName = reader.ReadStr(),
                 Category = (DriverCategory) reader.ReadByte(),
-                Nationality = (Nationality) reader.ReadUInt16()
+                Nationality = (AccNationality) reader.ReadUInt16()
             };
 
             carInfo.AddDriver(driverInfo);
