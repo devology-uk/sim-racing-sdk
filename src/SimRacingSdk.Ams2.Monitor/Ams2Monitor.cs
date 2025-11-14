@@ -19,8 +19,6 @@ public class Ams2Monitor : IAms2Monitor
     private readonly IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory;
     private readonly IAms2CarInfoProvider amsCarInfoProvider;
     private readonly Subject<Ams2Lap> completedLapsSubject = new();
-    private readonly Subject<Ams2MonitorEvent> eventCompletedSubject = new();
-    private readonly Subject<Ams2MonitorEvent> eventStartedSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly Subject<Ams2MonitorParticipant> participantUpdatesSubject = new();
     private readonly Subject<Ams2MonitorSession> sessionCompletedSubject = new();
@@ -28,11 +26,11 @@ public class Ams2Monitor : IAms2Monitor
     private readonly Subject<Ams2TelemetryFrame> telemetrySubject = new();
 
     private IAms2SharedMemoryConnection? ams2SharedMemoryConnection;
-    private Ams2MonitorEvent? currentEvent;
     private Ams2GameStatus? currentGameStatus;
     private Ams2MonitorSession? currentSession;
     private int lapCount = 0;
     private CompositeDisposable? subscriptionSink;
+    private int playerLapCount;
 
     public Ams2Monitor(IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory,
         IAms2CarInfoProvider ams2CarInfoProvider,
@@ -44,8 +42,6 @@ public class Ams2Monitor : IAms2Monitor
     }
 
     public IObservable<Ams2Lap> CompletedLaps => this.completedLapsSubject.AsObservable();
-    public IObservable<Ams2MonitorEvent> EventCompleted => this.eventCompletedSubject.AsObservable();
-    public IObservable<Ams2MonitorEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<Ams2MonitorParticipant> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
@@ -90,8 +86,8 @@ public class Ams2Monitor : IAms2Monitor
         }
 
         this.currentSession.EndTime = DateTime.UtcNow;
-        this.currentSession.LapCount = this.lapCount;
-        this.currentSession.ParticipantCount = ams2GameStatus.ParticipantCount;
+        this.currentSession.TotalLapCount = this.lapCount;
+        this.currentSession.PlayerLapCount = this.playerLapCount;
 
         this.sessionCompletedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
@@ -104,6 +100,11 @@ public class Ams2Monitor : IAms2Monitor
 
     private void OnNextCompletedLap(Ams2Lap ams2Lap)
     {
+        this.lapCount++;
+        if(ams2Lap.IsPlayerLap)
+        {
+            this.playerLapCount++;
+        }
         this.LogMessage(LoggingLevel.Information, $"Lap Completed: {ams2Lap}");
         this.completedLapsSubject.OnNext(ams2Lap);
     }
@@ -116,29 +117,17 @@ public class Ams2Monitor : IAms2Monitor
             return;
         }
 
-        if(this.currentGameStatus.SessionState == Ams2SessionState.Invalid
-           && ams2GameStatus.SessionState != Ams2SessionState.Invalid)
-        {
-            if(this.currentEvent == null)
-            {
-                this.StartNewEvent(ams2GameStatus);
-            }
-
-            this.StartNewSession(ams2GameStatus);
-        }
-
         if(this.currentSession != null && this.currentGameStatus.SessionState != Ams2SessionState.Invalid
                                        && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
         {
             this.EndCurrentSession(ams2GameStatus);
         }
-
-        if(this.currentEvent != null && this.currentGameStatus.GameState != Ams2GameState.FrontEnd
-                                     && ams2GameStatus.GameState == Ams2GameState.FrontEnd)
+        
+        if(this.currentGameStatus.SessionState == Ams2SessionState.Invalid
+           && ams2GameStatus.SessionState != Ams2SessionState.Invalid)
         {
-            this.LogMessage(LoggingLevel.Information, $"Event Completed: {this.currentEvent}");
-            this.eventCompletedSubject.OnNext(this.currentEvent!);
-            this.currentEvent = null;
+
+            this.StartNewSession(ams2GameStatus);
         }
 
         this.currentGameStatus = ams2GameStatus;
@@ -179,27 +168,17 @@ public class Ams2Monitor : IAms2Monitor
         this.ams2SharedMemoryConnection.Start();
     }
 
-    private void StartNewEvent(Ams2GameStatus ams2GameStatus)
-    {
-        this.currentEvent = new Ams2MonitorEvent
-        {
-            TimeStamp = DateTime.UtcNow,
-            TrackLayout = ams2GameStatus.TrackLayout,
-            TrackLocation = ams2GameStatus.TrackLocation
-        };
-
-        this.LogMessage(LoggingLevel.Information, $"Event Started: {this.currentEvent}");
-        this.eventStartedSubject.OnNext(this.currentEvent);
-    }
-
     private void StartNewSession(Ams2GameStatus ams2GameStatus)
     {
         this.currentSession = new Ams2MonitorSession
         {
+            ParticipantCount = ams2GameStatus.ParticipantCount,
             ScheduledDurationMs = ams2GameStatus.SessionDuration,
             ScheduledLaps = ams2GameStatus.LapsInEvent,
             SessionType = ams2GameStatus.SessionState.ToSessionType(),
-            StartTime = DateTime.UtcNow
+            StartTime = DateTime.UtcNow,
+            TrackLayout = ams2GameStatus.TrackLayout,
+            TrackLocation = ams2GameStatus.TrackLocation
         };
         this.lapCount = 0;
         this.sessionStartedSubject.OnNext(this.currentSession);
