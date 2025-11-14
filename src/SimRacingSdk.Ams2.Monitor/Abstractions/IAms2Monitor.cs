@@ -8,8 +8,6 @@ public interface IAms2Monitor : IDisposable
 {
     void Start();
     void Stop();
-    IObservable<Ams2MonitorEvent> EventCompleted { get; }
-    IObservable<Ams2MonitorEvent> EventStarted { get; }
     IObservable<LogMessage> LogMessages { get; }
     IObservable<Ams2MonitorSession> SessionCompleted { get; }
     IObservable<Ams2MonitorSession> SessionStarted { get; }

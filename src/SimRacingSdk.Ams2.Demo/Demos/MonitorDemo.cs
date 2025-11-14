@@ -4,6 +4,7 @@ using SimRacingSdk.Ams2.Core.Abstractions;
 using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Monitor.Abstractions;
 using SimRacingSdk.Ams2.Monitor.Messages;
+using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
@@ -65,27 +66,15 @@ public class MonitorDemo : IMonitorDemo
         this.consoleLog.Write(message);
     }
 
+    private void OnNextCompletedLap(Ams2Lap ams2Lap)
+    {
+        this.Log($"Lap Completed: {ams2Lap}");
+    }
+
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.monitorLog.Log(logMessage.ToString());
         this.consoleLog.Write(logMessage.ToString());
-    }
-
-    private void PrepareMessageHandling()
-    {
-        if(this.ams2Monitor == null)
-        {
-            return;
-        }
-
-        this.subscriptionSink = new CompositeDisposable
-        {
-            this.ams2Monitor.LogMessages.Subscribe(this.OnNextLogMessage),
-            this.ams2Monitor.EventStarted.Subscribe(this.OnNextEventStarted),
-            this.ams2Monitor.EventCompleted.Subscribe(this.OnNextEventCompleted),
-            this.ams2Monitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
-            this.ams2Monitor.SessionCompleted.Subscribe(this.OnNextSessionCompleted)
-        };
     }
 
     private void OnNextSessionCompleted(Ams2MonitorSession ams2MonitorSession)
@@ -98,13 +87,19 @@ public class MonitorDemo : IMonitorDemo
         this.Log($"Session Started: {ams2MonitorSession}");
     }
 
-    private void OnNextEventCompleted(Ams2MonitorEvent ams2MonitorEvent)
+    private void PrepareMessageHandling()
     {
-        this.Log($"Event Started: {ams2MonitorEvent}");
-    }
+        if(this.ams2Monitor == null)
+        {
+            return;
+        }
 
-    private void OnNextEventStarted(Ams2MonitorEvent ams2MonitorEvent)
-    {
-        this.Log($"Event Started: {ams2MonitorEvent}");
+        this.subscriptionSink = new CompositeDisposable
+        {
+            this.ams2Monitor.CompletedLaps.Subscribe(this.OnNextCompletedLap),
+            this.ams2Monitor.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.ams2Monitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
+            this.ams2Monitor.SessionCompleted.Subscribe(this.OnNextSessionCompleted)
+        };
     }
 }
