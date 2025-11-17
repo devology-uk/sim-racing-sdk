@@ -2,8 +2,6 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Ams2.SharedMemory.Abstractions;
-using SimRacingSdk.Ams2.SharedMemory.Enums;
-using SimRacingSdk.Ams2.SharedMemory.Messages;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
@@ -34,10 +32,6 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<Ams2Participant> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2TelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
-
-    private readonly Subject<Ams2GameStatusChange> gameStatusChangesSubject = new();
-
-    public IObservable<Ams2GameStatusChange> GameStatusChanges => this.gameStatusChangesSubject.AsObservable();
 
     public void Dispose()
     {
@@ -102,15 +96,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
     private void UpdateGameStatus(SharedMemoryData sharedMemoryData)
     {
         var gameStatus = sharedMemoryData.GetGameStatus();
-        this.LogMessage(LoggingLevel.Information, $"Game State Update: {gameStatus}");
-
-        if(this.currentGameStatus?.GameState != gameStatus.GameState)
-        {
-            var ams2GameStatusChange = new Ams2GameStatusChange(this.currentGameStatus?.GameState ?? Ams2GameState.Exited, gameStatus.GameState);
-            this.gameStatusChangesSubject.OnNext(ams2GameStatusChange);
-            this.LogMessage(LoggingLevel.Debug, $"Game State Change: {ams2GameStatusChange}" );
-        }
-
+       
         if(this.currentGameStatus != null && this.currentGameStatus.GameState == gameStatus.GameState
                                           && this.currentGameStatus.SessionState == gameStatus.SessionState
                                           && this.currentGameStatus.RaceState == gameStatus.RaceState)
@@ -118,8 +104,10 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
             return;
         }
 
+        this.gameStatusUpdatesSubject.OnNext(gameStatus);
+        this.LogMessage(LoggingLevel.Information, $"Game State Update: {gameStatus}");
         this.currentGameStatus = gameStatus;
-        this.gameStatusUpdatesSubject.OnNext(this.currentGameStatus);
+
     }
 
     private void UpdateParticipants(SharedMemoryData sharedMemoryData)
@@ -127,7 +115,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         var participants = sharedMemoryData.GetParticipants();
         foreach(var participant in participants)
         {
-            this.LogMessage(LoggingLevel.Information,  $"Participant Update: {participant}");
+            this.LogMessage(LoggingLevel.Information, $"Participant Update: {participant}");
             if(this.entries.TryGetValue(participant.Index, out var entry))
             {
                 if(participant.LapsCompleted > entry.LapsCompleted)

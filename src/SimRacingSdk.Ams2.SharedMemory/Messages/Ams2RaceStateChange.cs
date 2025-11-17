@@ -2,6 +2,5 @@
 
 namespace SimRacingSdk.Ams2.SharedMemory.Messages;
 
-public record Ams2GameStatusChange(Ams2GameState From, Ams2GameState To)
-{
-}
+public record Ams2RaceStateChange(Ams2RaceState From, Ams2RaceState To)
+{ }
