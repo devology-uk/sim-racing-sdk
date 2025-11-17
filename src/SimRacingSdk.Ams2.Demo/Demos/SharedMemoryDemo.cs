@@ -117,11 +117,8 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         {
             this.ams2SharedMemoryConnection.LogMessages.Subscribe(this.OnNextLogMessage),
             this.ams2SharedMemoryConnection.CompletedLaps.Subscribe(this.OnNextCompletedLap),
-            this.ams2SharedMemoryConnection.GameStateChanges.Subscribe(this.OnNextGameStateChange),
             this.ams2SharedMemoryConnection.GameStatusUpdates.Subscribe(this.OnNextGameStatusUpdate),
             this.ams2SharedMemoryConnection.ParticipantUpdates.Subscribe(this.OnNextParticipantUpdate),
-            this.ams2SharedMemoryConnection.RaceStateChanges.Subscribe(this.OnNextRaceStateChange),
-            this.ams2SharedMemoryConnection.SessionStateChanges.Subscribe(this.OnNextSessionStateChange),
             this.ams2SharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };
     }
