@@ -116,21 +116,56 @@ public class Ams2Monitor : IAms2Monitor
             this.currentGameStatus = ams2GameStatus;
             return;
         }
-
-        if(this.currentSession != null && this.currentGameStatus.SessionState != Ams2SessionState.Invalid
-                                       && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
+        
+        if(this.HasChangedToActiveSessionType(ams2GameStatus))
         {
             this.EndCurrentSession(ams2GameStatus);
-        }
-        
-        if(this.currentGameStatus.SessionState == Ams2SessionState.Invalid
-           && ams2GameStatus.SessionState != Ams2SessionState.Invalid)
-        {
-
             this.StartNewSession(ams2GameStatus);
         }
 
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Invalid
+           && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
+        {
+            this.EndCurrentSession(ams2GameStatus);
+        }
+
         this.currentGameStatus = ams2GameStatus;
+    }
+
+    private bool HasChangedToActiveSessionType(Ams2GameStatus ams2GameStatus)
+    {
+
+        if(this.currentGameStatus == null)
+        {
+            return false;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Practice
+           && ams2GameStatus.SessionState == Ams2SessionState.Practice)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Test
+           && ams2GameStatus.SessionState == Ams2SessionState.Test)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Qualify
+           && ams2GameStatus.SessionState == Ams2SessionState.Qualify)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Race
+           && ams2GameStatus.SessionState == Ams2SessionState.Race)
+        {
+            return true;
+        }
+
+        return this.currentGameStatus.SessionState != Ams2SessionState.TimeAttack
+               && ams2GameStatus.SessionState == Ams2SessionState.TimeAttack;
     }
 
     private void OnNextParticipantUpdate(Ams2Participant ams2Participant)
