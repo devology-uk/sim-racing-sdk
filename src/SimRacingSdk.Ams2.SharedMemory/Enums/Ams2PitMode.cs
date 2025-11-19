@@ -7,5 +7,5 @@ public enum Ams2PitMode : uint
     InPit,
     ExitingPits,
     InGarage,
-    ExistingGarage
+    ExitingGarage
 }
