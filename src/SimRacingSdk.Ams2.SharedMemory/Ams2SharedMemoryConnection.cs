@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Ams2.SharedMemory.Abstractions;
+using SimRacingSdk.Ams2.SharedMemory.Enums;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
@@ -89,8 +90,8 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         }
 
         this.UpdateGameStatus(sharedMemoryData);
-        this.UpdateTelemetry(sharedMemoryData);
         this.UpdateParticipants(sharedMemoryData);
+        this.UpdateTelemetry(sharedMemoryData);
     }
 
     private void UpdateGameStatus(SharedMemoryData sharedMemoryData)
@@ -134,6 +135,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
                         ParticipantIndex = participant.Index,
                         ParticipantName = entry.Name,
                         ParticipantNationality = entry.Nationality,
+                        Position = participant.RacePosition,
                         Sector1Time = entry.CurrentSector1Time,
                         Sector2Time = entry.CurrentSector2Time,
                         Sector3Time = entry.CurrentSector3Time

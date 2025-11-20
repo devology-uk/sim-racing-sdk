@@ -16,8 +16,9 @@ public record Ams2TelemetryFrame
     public float BrakeBias { get; init; }
     public Ams2WheelMetric<float> BrakeDamage { get; init; }
     public Ams2WheelMetric<float> BrakeTempC { get; init; }
+    public string CarClass { get; set; }
     public Ams2CarFlags CarFlags { get; init; }
-    public string Class { get; set; }
+    public string CarName { get; set; }
     public float Clutch { get; init; }
     public float ClutchTempK { get; init; }
     public float ClutchWear { get; init; }
@@ -55,6 +56,8 @@ public record Ams2TelemetryFrame
     public float Steering { get; init; }
     public int TCSetting { get; init; }
     public float Throttle { get; init; }
+    public string TrackLayout { get; set; }
+    public string TrackLocation { get; set; }
     public Ams2WheelMetric<float> TyreCarcassTempK { get; init; }
     public Ams2WheelMetric<string> TyreCompound { get; init; }
     public Ams2WheelMetric<Ams2TyreFlag> TyreFlags { get; init; }
@@ -79,5 +82,6 @@ public record Ams2TelemetryFrame
     public float WaterTempC { get; init; }
     public Ams2WheelMetric<float> WheelLocalPositionY { get; init; }
     public Vector3 WorldAcceleration { get; init; }
+    public Vector3? WorldPosition { get; set; }
     public Vector3 WorldVelocity { get; init; }
 }

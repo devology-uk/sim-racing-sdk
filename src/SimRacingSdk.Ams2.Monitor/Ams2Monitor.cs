@@ -29,8 +29,8 @@ public class Ams2Monitor : IAms2Monitor
     private Ams2GameStatus? currentGameStatus;
     private Ams2MonitorSession? currentSession;
     private int lapCount = 0;
-    private CompositeDisposable? subscriptionSink;
     private int playerLapCount;
+    private CompositeDisposable? subscriptionSink;
 
     public Ams2Monitor(IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory,
         IAms2CarInfoProvider ams2CarInfoProvider,
@@ -43,7 +43,8 @@ public class Ams2Monitor : IAms2Monitor
 
     public IObservable<Ams2Lap> CompletedLaps => this.completedLapsSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
-    public IObservable<Ams2MonitorParticipant> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
+    public IObservable<Ams2MonitorParticipant> ParticipantUpdates =>
+        this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<Ams2TelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
@@ -93,6 +94,41 @@ public class Ams2Monitor : IAms2Monitor
         this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
     }
 
+    private bool HasChangedToActiveSessionType(Ams2GameStatus ams2GameStatus)
+    {
+        if(this.currentGameStatus == null)
+        {
+            return false;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Practice
+           && ams2GameStatus.SessionState == Ams2SessionState.Practice)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Test
+           && ams2GameStatus.SessionState == Ams2SessionState.Test)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Qualify
+           && ams2GameStatus.SessionState == Ams2SessionState.Qualify)
+        {
+            return true;
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Race
+           && ams2GameStatus.SessionState == Ams2SessionState.Race)
+        {
+            return true;
+        }
+
+        return this.currentGameStatus.SessionState != Ams2SessionState.TimeAttack
+               && ams2GameStatus.SessionState == Ams2SessionState.TimeAttack;
+    }
+
     private void LogMessage(LoggingLevel level, string content)
     {
         this.logMessagesSubject.OnNext(new LogMessage(level, content));
@@ -105,6 +141,7 @@ public class Ams2Monitor : IAms2Monitor
         {
             this.playerLapCount++;
         }
+
         this.LogMessage(LoggingLevel.Information, $"Lap Completed: {ams2Lap}");
         this.completedLapsSubject.OnNext(ams2Lap);
     }
@@ -117,17 +154,16 @@ public class Ams2Monitor : IAms2Monitor
             return;
         }
 
-        if(this.currentSession != null && this.currentGameStatus.SessionState != Ams2SessionState.Invalid
-                                       && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
+        if(this.HasChangedToActiveSessionType(ams2GameStatus))
         {
             this.EndCurrentSession(ams2GameStatus);
-        }
-        
-        if(this.currentGameStatus.SessionState == Ams2SessionState.Invalid
-           && ams2GameStatus.SessionState != Ams2SessionState.Invalid)
-        {
-
             this.StartNewSession(ams2GameStatus);
+        }
+
+        if(this.currentGameStatus.SessionState != Ams2SessionState.Invalid
+           && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
+        {
+            this.EndCurrentSession(ams2GameStatus);
         }
 
         this.currentGameStatus = ams2GameStatus;
@@ -135,6 +171,11 @@ public class Ams2Monitor : IAms2Monitor
 
     private void OnNextParticipantUpdate(Ams2Participant ams2Participant)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = this.amsCarInfoProvider.FindByModel(ams2Participant.CarName);
         var countryCode =
             this.ams2NationalityInfoProvider.GetCountryCode((Ams2Nationality)ams2Participant.Nationality);

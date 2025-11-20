@@ -558,6 +558,7 @@ public record SharedMemoryData
 
     public Ams2TelemetryFrame GetTelemetryFrame()
     {
+        var playerParticipant = this.ParticipantInfo[this.FocusedParticipantIndex];
         return new Ams2TelemetryFrame
         {
             AbsSetting = this.AbsSetting,
@@ -570,7 +571,8 @@ public record SharedMemoryData
             BrakeTempC = this.BrakeTempC,
             BrakeDamage = this.BrakeDamage,
             CarFlags = this.CarFlags,
-            Class = this.CarClassName,
+            CarClass = this.CarClassName,
+            CarName = this.CarName,
             Clutch = this.Clutch,
             ClutchTempK = this.ClutchTempK,
             ClutchWear = this.ClutchWear,
@@ -608,6 +610,8 @@ public record SharedMemoryData
             Steering = this.Steering,
             TCSetting = this.TCSetting,
             Throttle = this.Throttle,
+            TrackLayout = this.TrackLayout,
+            TrackLocation = this.TrackLocation,
             TyreCarcassTempK = this.TyreCarcassTempK,
             TyreCompound = this.TyreCompound,
             TyreFlags = this.TyreFlags,
@@ -632,6 +636,7 @@ public record SharedMemoryData
             WaterTempC = this.WaterTempC,
             WheelLocalPositionY = this.WheelLocalPositionY,
             WorldAcceleration = this.WorldAcceleration,
+            WorldPosition = playerParticipant?.WorldPosition,
             WorldVelocity = this.WorldVelocity
         };
     }

@@ -16,6 +16,7 @@ public record Ams2Lap
     public int ParticipantIndex { get; init; }
     public string ParticipantName { get; init; }
     public uint ParticipantNationality { get; init; }
+    public uint Position { get; set; }
     public TimeSpan Sector1Time { get; init; }
     public TimeSpan Sector2Time { get; init; }
     public TimeSpan Sector3Time { get; init; }
