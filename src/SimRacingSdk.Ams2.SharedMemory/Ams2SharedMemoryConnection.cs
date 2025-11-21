@@ -139,9 +139,6 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
                         Sector1Time = entry.CurrentSector1Time,
                         Sector2Time = entry.CurrentSector2Time,
                         Sector3Time = entry.CurrentSector3Time
-                                      + TimeSpan.FromMilliseconds(
-                                          this.updateIntervalMs
-                                          - participant.CurrentSector1Time.TotalMilliseconds)
                     };
 
                     this.LogMessage(LoggingLevel.Information, $"Completed Lap: {completedLap}");
