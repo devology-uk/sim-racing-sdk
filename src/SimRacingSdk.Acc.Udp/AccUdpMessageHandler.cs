@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Extensions;
 using SimRacingSdk.Acc.Udp.Messages;
@@ -15,7 +14,7 @@ internal class AccUdpMessageHandler
     internal const int BroadcastingProtocolVersion = 4;
 
     private readonly Subject<BroadcastingEvent> broadcastingEventSubject = new();
-    private readonly Subject<ConnectionState> connectionStateChangeSubject = new();
+    private readonly Subject<Connection> connectionStateChangeSubject = new();
     private readonly Subject<byte[]> dispatchedMessagesSubject = new();
     private readonly IList<CarInfo> entryList = new List<CarInfo>();
     private readonly Subject<EntryListUpdate> entryListUpdateSubject = new();
@@ -40,7 +39,7 @@ internal class AccUdpMessageHandler
     internal IObservable<BroadcastingEvent> BroadcastingEvents =>
         this.broadcastingEventSubject.AsObservable();
     internal string ConnectionIdentifier { get; }
-    internal IObservable<ConnectionState> ConnectionStateChanges =>
+    internal IObservable<Connection> ConnectionStateChanges =>
         this.connectionStateChangeSubject.AsObservable();
     internal IObservable<byte[]> DispatchedMessages => this.dispatchedMessagesSubject.AsObservable();
     internal IObservable<EntryListUpdate> EntryListUpdates => this.entryListUpdateSubject.AsObservable();
@@ -80,8 +79,6 @@ internal class AccUdpMessageHandler
 
     internal void Disconnect(bool sendUnregister = true)
     {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
-
         if(sendUnregister)
         {
             try
@@ -96,6 +93,8 @@ internal class AccUdpMessageHandler
                 Console.WriteLine(exception);
             }
         }
+
+        this.connectionStateChangeSubject.OnNext(new Connection(this.ConnectionId, false, false));
     }
 
     internal void LogMessage(LoggingLevel loggingLevel, string content, string source = "")
@@ -133,19 +132,6 @@ internal class AccUdpMessageHandler
                 this.LogMessage(LoggingLevel.Warning, "Unknown message type");
                 break;
         }
-    }
-
-    internal void RequestConnection(string displayName,
-        string connectionPassword,
-        int updateInterval,
-        string commandPassword)
-    {
-        var message = this.CreateRegisterCommandApplicationMessage(displayName,
-            connectionPassword,
-            updateInterval,
-            commandPassword);
-
-        this.DispatchMessage(message);
     }
 
     internal void RequestEntryList()
@@ -198,11 +184,6 @@ internal class AccUdpMessageHandler
         writer.Write(this.ConnectionId);
 
         this.DispatchMessage(stream.ToArray());
-    }
-
-    internal void SessionTerminated()
-    {
-        this.connectionStateChangeSubject.OnNext(new ConnectionState(this.ConnectionId, false, false, true));
     }
 
     internal void SetCamera(string cameraSet, string camera)
@@ -302,11 +283,11 @@ internal class AccUdpMessageHandler
     private void ProcessRegistrationResultMessage(BinaryReader reader)
     {
         this.ConnectionId = reader.ReadInt32();
-        var connectionSuccess = reader.ReadByte() > 0;
+        var isConnected = reader.ReadByte() > 0;
         var isReadonly = reader.ReadByte() == 0;
         var errMsg = reader.ReadString();
 
-        var connectionState = new ConnectionState(this.ConnectionId, connectionSuccess, isReadonly, false, errMsg);
+        var connectionState = new Connection(this.ConnectionId, isConnected, isReadonly, errMsg);
         this.connectionStateChangeSubject.OnNext(connectionState);
         Debug.WriteLine(connectionState.ToString());
     }

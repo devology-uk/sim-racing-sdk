@@ -99,9 +99,9 @@ public class UdpDemo : IUdpDemo
         this.Log(logMessage.ToString());
     }
 
-    private void OnNextConnectionStateChange(ConnectionState connectionState)
+    private void OnNextConnectionStateChange(Connection connection)
     {
-        this.Log(connectionState.ToString());
+        this.Log(connection.ToString());
     }
 
     private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
