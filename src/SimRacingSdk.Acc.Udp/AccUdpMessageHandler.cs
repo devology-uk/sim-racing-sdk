@@ -98,9 +98,9 @@ internal class AccUdpMessageHandler
         }
     }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string content)
+    internal void LogMessage(LoggingLevel loggingLevel, string content, string source = "")
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, source));
     }
 
     internal void ProcessMessage(BinaryReader reader)

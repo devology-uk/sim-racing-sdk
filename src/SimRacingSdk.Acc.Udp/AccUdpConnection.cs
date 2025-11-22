@@ -175,7 +175,7 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.accUdpMessageHandler.LogMessage(level, content);
+        this.accUdpMessageHandler.LogMessage(level, content, nameof(AccUdpConnection));
     }
 
     private void OnNextConnectionStateChange(ConnectionState connectionState)

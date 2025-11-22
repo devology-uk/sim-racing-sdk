@@ -167,7 +167,7 @@ public class AccMonitor : IAccMonitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content));
+        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(AccMonitor)));
     }
 
     private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)
@@ -302,8 +302,9 @@ public class AccMonitor : IAccMonitor
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
 
-        var startNewSession = this.currentSession == null || realtimeUpdate.SessionTime.TotalMilliseconds
-                              < this.currentSessionTime.TotalMilliseconds;
+        var startNewSession = this.currentSession == null 
+                              || realtimeUpdate.SessionTime.TotalMilliseconds
+                              < this.currentSessionTime.TotalMilliseconds ;
 
         this.currentSessionTime = realtimeUpdate.SessionTime;
 
@@ -315,10 +316,7 @@ public class AccMonitor : IAccMonitor
                 new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
 
             this.currentSessionType = sessionType;
-            if(!startNewSession)
-            {
-                startNewSession = true;
-            }
+            startNewSession = true;
         }
 
         if(this.currentPhase != sessionPhase)
@@ -592,7 +590,7 @@ public class AccMonitor : IAccMonitor
         this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
             sessionType.ToFriendlyName(),
             realtimeUpdate.SessionEndTime);
-        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
         this.sessionStartedSubject.OnNext(this.currentSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
 }

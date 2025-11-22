@@ -65,7 +65,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, nameof(Ams2SharedMemoryConnection)));
     }
 
     private void OnCompleted()

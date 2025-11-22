@@ -131,7 +131,7 @@ public class Ams2Monitor : IAms2Monitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content));
+        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(Ams2Monitor)));
     }
 
     private void OnNextCompletedLap(Ams2Lap ams2Lap)
