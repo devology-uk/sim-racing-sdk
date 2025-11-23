@@ -579,7 +579,8 @@ public class AccMonitor : IAccMonitor
         this.accUdpConnection!.RequestEntryList();
         this.currentSession = new AccMonitorSession(this.connection!.ConnectionId,
             sessionType.ToFriendlyName(),
-            realtimeUpdate.SessionEndTime);
+            realtimeUpdate.SessionEndTime,
+            this.trackData!.TrackName);
         this.sessionStartedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
