@@ -109,7 +109,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, nameof(AccSharedMemoryConnection)));
     }
 
     private void OnNextUpdate(long index)

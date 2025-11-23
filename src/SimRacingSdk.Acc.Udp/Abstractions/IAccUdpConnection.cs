@@ -9,7 +9,7 @@ public interface IAccUdpConnection : IDisposable
     string CommandPassword { get; }
     string ConnectionIdentifier { get; }
     string ConnectionPassword { get; }
-    IObservable<ConnectionState> ConnectionStateChanges { get; }
+    IObservable<Connection> ConnectionStateChanges { get; }
     string DisplayName { get; }
     IObservable<EntryListUpdate> EntryListUpdates { get; }
     string IpAddress { get; }

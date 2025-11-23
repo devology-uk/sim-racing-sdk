@@ -13,10 +13,10 @@ public record AccMonitorEventEntry : AccMonitorMessageBase
     public CarLocation CarLocation { get; internal set; }
     public string CarManufacturer { get; init; }
     public string CarModelName { get; init; }
+    public string ConnectionId { get; init; }
     public int CurrentDriverIndex { get; init; }
     public AccMonitorDriver CurrentMonitorDriver { get; init; }
     public List<AccMonitorDriver> Drivers { get; init; }
-    public string EventId { get; init; }
     public int RaceNumber { get; init; }
     public string TeamName { get; init; }
 }

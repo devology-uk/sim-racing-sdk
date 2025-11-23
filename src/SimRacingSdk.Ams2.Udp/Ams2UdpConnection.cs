@@ -136,7 +136,7 @@ public class Ams2UdpConnection : IAms2UdpConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.ams2UdpMessageHandler.LogMessage(loggingLevel, content);
+        this.ams2UdpMessageHandler.LogMessage(loggingLevel, content, nameof(Ams2UdpConnection));
     }
 
     private async Task ProcessNextMessage()

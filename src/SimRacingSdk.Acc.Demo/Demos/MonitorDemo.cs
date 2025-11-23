@@ -68,8 +68,6 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
             this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
 
-            this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
-            this.accMonitor.EventCompleted.Subscribe(this.OnNextEventEnded),
             this.accMonitor.GreenFlag.Subscribe(this.OnNextGreenFlag),
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
             this.accMonitor.Penalties.Subscribe(this.OnNextPenalty),
@@ -137,19 +135,9 @@ public class MonitorDemo : IMonitorDemo
         }
     }
 
-    private void OnNextEventEnded(AccMonitorEvent accMonitorEvent)
-    {
-        this.Log($"Event Ended: {accMonitorEvent}");
-    }
-
     private void OnNextEventEntry(AccMonitorEventEntry accMonitorEventEntry)
     {
         this.Log(accMonitorEventEntry.ToString());
-    }
-
-    private void OnNextEventStarted(AccMonitorEvent accMonitorEvent)
-    {
-        this.Log($"Event Started: {accMonitorEvent}");
     }
 
     private void OnNextGreenFlag(AccMonitorGreenFlag accMonitorGreenFlag)

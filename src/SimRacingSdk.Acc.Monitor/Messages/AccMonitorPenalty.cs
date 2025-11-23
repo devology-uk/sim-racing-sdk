@@ -11,9 +11,9 @@ public record AccMonitorPenalty : AccMonitorMessageBase
     public CupCategory CarCupCategory { get; set; }
     public string CarManufacturer { get; init; }
     public string CarModelName { get; init; }
-    public AccMonitorDriver CurrentMonitorDriver { get; init; }
+    public int ConnectionId { get; init; }
     public int CurrentDriverIndex { get; init; }
-    public string? EventId { get; init; }
+    public AccMonitorDriver CurrentMonitorDriver { get; init; }
     public int Index { get; init; }
     public string Penalty { get; init; }
     public int RaceNumber { get; init; }

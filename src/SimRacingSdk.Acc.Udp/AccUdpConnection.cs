@@ -45,13 +45,11 @@ public class AccUdpConnection : IAccUdpConnection
         this.accUdpMessageHandler = new AccUdpMessageHandler(this.ConnectionIdentifier);
     }
 
-    public IObservable<BroadcastingEvent> BroadcastingEvents =>
-        this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
+    public IObservable<BroadcastingEvent> BroadcastingEvents => this.accUdpMessageHandler.BroadcastingEvents.AsObservable();
     public string CommandPassword { get; }
+    public IObservable<Connection> ConnectionStateChanges => this.accUdpMessageHandler.ConnectionStateChanges;
     public string ConnectionIdentifier { get; }
     public string ConnectionPassword { get; }
-    public IObservable<ConnectionState> ConnectionStateChanges =>
-        this.accUdpMessageHandler.ConnectionStateChanges;
     public string DisplayName { get; }
     public IObservable<EntryListUpdate> EntryListUpdates => this.accUdpMessageHandler.EntryListUpdates;
     public string IpAddress { get; }
@@ -175,13 +173,13 @@ public class AccUdpConnection : IAccUdpConnection
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.accUdpMessageHandler.LogMessage(level, content);
+        this.accUdpMessageHandler.LogMessage(level, content, nameof(AccUdpConnection));
     }
 
-    private void OnNextConnectionStateChange(ConnectionState connectionState)
+    private void OnNextConnectionStateChange(Connection connection)
     {
-        this.isConnected = connectionState.IsConnected;
-        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
+        this.isConnected = connection.IsConnected;
+        this.LogMessage(LoggingLevel.Information, connection.ToString());
     }
 
     private void OnNextDispatchedMessage(byte[] message)
@@ -219,7 +217,7 @@ public class AccUdpConnection : IAccUdpConnection
         catch(Exception exception)
         {
             this.LogMessage(LoggingLevel.Error, $"Unexpected Error Processing Message: {exception.Message}");
-            this.Shutdown();
+            this.Stop();
         }
     }
 
@@ -232,7 +230,7 @@ public class AccUdpConnection : IAccUdpConnection
 
         this.LogMessage(LoggingLevel.Information, "Disconnecting from ACC Broadcasting API...");
         this.isStopped = true;
-        this.accUdpMessageHandler.Disconnect();
+        this.accUdpMessageHandler.Disconnect(true);
         this.subscriptionSink?.Dispose();
         this.udpClient?.Close();
         this.udpClient?.Dispose();
@@ -244,18 +242,14 @@ public class AccUdpConnection : IAccUdpConnection
         var subscription = Observable.Interval(this.messageTimeout)
                                      .Subscribe(n =>
                                                 {
-                                                    var timeSinceLastUpdate =
-                                                        DateTime.Now - this.lastRealTimeUpdate;
-                                                    if(!this.isConnected || timeSinceLastUpdate
-                                                       <= this.messageTimeout)
+                                                    var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
+                                                    if(!this.isConnected || timeSinceLastUpdate <= this.messageTimeout)
                                                     {
                                                         return;
                                                     }
 
-                                                    this.accUdpMessageHandler.SessionTerminated();
-                                                    this.LogMessage(LoggingLevel.Information,
-                                                        "ACC has stopped sending messages, the user has probably quit the session.");
-                                                    this.Shutdown();
+                                                    this.accUdpMessageHandler.Disconnect(false);
+                                                    this.LogMessage(LoggingLevel.Information, "ACC has stopped sending messages, the user has probably quit the session.");
                                                 });
         this.subscriptionSink.Add(subscription);
     }

@@ -2570,7 +2570,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Spielberg",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Spielberg_GP"
+                    Ams2TrackId = "Spielberg_Modern"
                 },
                 new Ams2TrackLayoutInfo
                 {

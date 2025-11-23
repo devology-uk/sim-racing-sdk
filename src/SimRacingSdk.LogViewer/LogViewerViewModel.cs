@@ -329,13 +329,22 @@ public partial class LogViewerViewModel : ObservableObject
                     currentToken = string.Empty;
                     break;
                 }
-                case '<':
+                case '<' or '[':
                     outputNextComma = true;
                     break;
                 case '>':
                     outputNextComma = false;
                     this.AddLogEntryProperty(currentToken, nestingPrefix);
                     currentToken = string.Empty;
+                    break;
+                case ']':
+                    outputNextComma = false;
+                    if(!currentToken.EndsWith(']'))
+                    {
+                        this.AddLogEntryProperty(currentToken, nestingPrefix);
+                        currentToken = string.Empty;
+                    }
+
                     break;
                 case '{':
                 {

@@ -70,16 +70,16 @@ internal class Ams2UdpMessageHandler
                 this.ProcessVehicleMessage(reader, header);
                 break;
             default:
-                this.LogMessage(LoggingLevel.Warning, "Unknown message type");
+                this.LogMessage(LoggingLevel.Warning, "Unknown message type", nameof(Ams2UdpMessageHandler));
                 break;
         }
     }
 
     internal void Disconnect(bool sendUnregister = true) { }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string content)
+    internal void LogMessage(LoggingLevel loggingLevel, string content, string source = "")
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, source));
     }
 
     private void ProcessGameStateMessage(BinaryReader reader, MessageHeader header)

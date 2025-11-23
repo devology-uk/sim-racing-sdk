@@ -2,4 +2,4 @@
 
 namespace SimRacingSdk.Core.Messages;
 
-public record LogMessage(LoggingLevel Level, string Content) { }
+public record LogMessage(LoggingLevel Level, string Content, string Source = "") { }

@@ -31,9 +31,7 @@ public class AccMonitor : IAccMonitor
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
     private readonly List<AccMonitorEventEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEventEntry>> entryListSubject = new();
-    private readonly Subject<AccMonitorEvent> eventCompletedSubject = new();
     private readonly Subject<AccMonitorEventEntry> eventEntriesSubject = new();
-    private readonly ReplaySubject<AccMonitorEvent> eventStartedSubject = new();
     private readonly Subject<AccMonitorGreenFlag> greenFlagSubject = new();
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
@@ -52,7 +50,7 @@ public class AccMonitor : IAccMonitor
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private AccSharedMemoryEvent? accSharedMemoryEvent;
     private IAccUdpConnection? accUdpConnection;
-    private AccMonitorEvent? currentEvent;
+    private string? connectionIdentifier;
     private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
     private TimeSpan currentSessionTime = TimeSpan.Zero;
@@ -60,8 +58,9 @@ public class AccMonitor : IAccMonitor
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
     private CompositeDisposable? sharedMemorySubscriptionSink;
+    private TrackDataUpdate? trackData;
     private CompositeDisposable? udpSubscriptionSink;
-    private string? connectionIdentifier;
+    private Connection? connection;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -80,9 +79,7 @@ public class AccMonitor : IAccMonitor
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
     public IObservable<IList<AccMonitorEventEntry>> EntryList => this.entryListSubject.AsObservable();
-    public IObservable<AccMonitorEvent> EventCompleted => this.eventCompletedSubject.AsObservable();
     public IObservable<AccMonitorEventEntry> EventEntries => this.eventEntriesSubject.AsObservable();
-    public IObservable<AccMonitorEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccMonitorGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
@@ -135,6 +132,7 @@ public class AccMonitor : IAccMonitor
         this.accUdpConnection = null;
         this.accSharedMemoryConnection?.Dispose();
         this.accSharedMemoryConnection = null;
+        this.connection = null;
     }
 
     protected virtual void Dispose(bool disposing)
@@ -167,7 +165,7 @@ public class AccMonitor : IAccMonitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content));
+        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(AccMonitor)));
     }
 
     private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)
@@ -203,16 +201,12 @@ public class AccMonitor : IAccMonitor
         }
     }
 
-    private void OnNextConnectionStateChange(ConnectionState connectionState)
+    private void OnNextConnectionStateChange(Connection connection)
     {
-        this.LogMessage(LoggingLevel.Information, connectionState.ToString());
-        if(connectionState.IsConnected || this.currentEvent == null)
+        this.LogMessage(LoggingLevel.Information, connection.ToString());
+        if(connection.IsConnected)
         {
-            return;
-        }
-
-        if(connectionState is not { IsConnected: false, WasConnected: true })
-        {
+            this.connection = connection;
             return;
         }
 
@@ -242,7 +236,7 @@ public class AccMonitor : IAccMonitor
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             Drivers = drivers,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connectionIdentifier,
             CarIndex = carInfo.CarIndex,
             RaceNumber = carInfo.RaceNumber,
             TeamName = carInfo.TeamName
@@ -293,9 +287,9 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
 
-        if(this.currentEvent == null || !this.entryList.Any())
+        if(this.connection == null || !this.entryList.Any())
         {
-            this.LogMessage(LoggingLevel.Information, "No event or entry list.");
+            this.LogMessage(LoggingLevel.Information, "No connection or entry list.");
             return;
         }
 
@@ -315,10 +309,7 @@ public class AccMonitor : IAccMonitor
                 new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
 
             this.currentSessionType = sessionType;
-            if(!startNewSession)
-            {
-                startNewSession = true;
-            }
+            startNewSession = true;
         }
 
         if(this.currentPhase != sessionPhase)
@@ -349,10 +340,7 @@ public class AccMonitor : IAccMonitor
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
         this.LogMessage(LoggingLevel.Information, trackDataUpdate.ToString());
-        this.currentEvent = new AccMonitorEvent(trackDataUpdate.TrackId,
-            trackDataUpdate.TrackName,
-            trackDataUpdate.TrackMeters);
-        this.eventStartedSubject.OnNext(this.currentEvent);
+        this.trackData = trackDataUpdate;
         this.entryList.Clear();
         this.entryListSubject.OnNext(this.entryList);
 
@@ -425,7 +413,7 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connection!.ConnectionId,
             CarIndex = carInfo.CarIndex,
             RaceNumber = carInfo.RaceNumber,
             TeamName = carInfo.TeamName
@@ -454,7 +442,7 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connection!.ConnectionId,
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
@@ -484,7 +472,7 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connection!.ConnectionId,
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
@@ -519,7 +507,7 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connection!.ConnectionId,
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
@@ -549,7 +537,7 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            EventId = this.currentEvent!.Id,
+            ConnectionId = this.connection!.ConnectionId,
             Index = carInfo.CarIndex,
             Penalty = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
@@ -589,10 +577,11 @@ public class AccMonitor : IAccMonitor
     private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
         this.accUdpConnection!.RequestEntryList();
-        this.currentSession = new AccMonitorSession(this.currentEvent!.Id,
+        this.currentSession = new AccMonitorSession(this.connection!.ConnectionId,
             sessionType.ToFriendlyName(),
-            realtimeUpdate.SessionEndTime);
-        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+            realtimeUpdate.SessionEndTime,
+            this.trackData!.TrackName);
         this.sessionStartedSubject.OnNext(this.currentSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
 }
