@@ -296,10 +296,8 @@ public class AccMonitor : IAccMonitor
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
 
-        var startNewSession = this.currentSession == null || realtimeUpdate.SessionTime.TotalMilliseconds
-                              < this.currentSessionTime.TotalMilliseconds;
-
-        this.currentSessionTime = realtimeUpdate.SessionTime;
+        var sessionTypeChanged = false;
+        var phaseChanged = false;
 
         if(this.currentSessionType != sessionType)
         {
@@ -307,9 +305,10 @@ public class AccMonitor : IAccMonitor
                 $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
             this.sessionChangedSubject.OnNext(
                 new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
-
+            
             this.currentSessionType = sessionType;
-            startNewSession = true;
+            sessionTypeChanged = true;
+            this.EndCurrentSession();
         }
 
         if(this.currentPhase != sessionPhase)
@@ -319,15 +318,20 @@ public class AccMonitor : IAccMonitor
             this.phaseChangedSubject.OnNext(
                 new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
             this.currentPhase = sessionPhase;
+            phaseChanged = true;
         }
 
-        if(!startNewSession)
+
+
+        if(this.currentSession == null || sessionTypeChanged || realtimeUpdate.SessionTime.TotalMilliseconds
+           < this.currentSessionTime.TotalMilliseconds)
         {
-            return;
+            this.StartNewSession(realtimeUpdate, sessionType);
         }
-
-        this.EndCurrentSession();
-        this.StartNewSession(realtimeUpdate, sessionType);
+        else
+        {
+            this.currentSessionTime = realtimeUpdate.SessionTime;
+        }
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
@@ -582,6 +586,7 @@ public class AccMonitor : IAccMonitor
             realtimeUpdate.SessionEndTime,
             this.trackData!.TrackName);
         this.sessionStartedSubject.OnNext(this.currentSession);
+        this.currentSessionTime = TimeSpan.Zero;
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
 }
