@@ -27,7 +27,7 @@ namespace SimRacingSdk.Ams2.Demo.TrackExplorer
 
         public void Init()
         {
-            foreach(var trackName in this.trackInfoProvider.GetTrackName())
+            foreach(var trackName in this.trackInfoProvider.GetTrackNames())
             {
                 this.TrackNames.Add(trackName);
             }
@@ -65,10 +65,10 @@ namespace SimRacingSdk.Ams2.Demo.TrackExplorer
                     Mode = FileMode.Create
                 });
 
-            foreach(var ams2TrackInfo in this.trackInfoProvider.GeTrackInfos())
+            foreach(var ams2TrackInfo in this.trackInfoProvider.GetTrackInfos())
             {
                 var trackInfo =
-                    $"{ams2TrackInfo.ShortName},{ams2TrackInfo.FullName},{ams2TrackInfo.AltitudeM},{ams2TrackInfo.CountryCode},{ams2TrackInfo.CountryCode},{ams2TrackInfo.Latitude},{ams2TrackInfo.Longitude}";
+                    $"{ams2TrackInfo.ShortName},{ams2TrackInfo.FullName},{ams2TrackInfo.Country},{ams2TrackInfo.CountryCode},{ams2TrackInfo.Latitude},{ams2TrackInfo.Longitude},{ams2TrackInfo.AltitudeM}";
                 tracksStreamWriter.WriteLine(trackInfo);
                 tracksStreamWriter.Flush();
 

@@ -44,6 +44,12 @@
             <Button Content="Open Log Folder"
                     Command="{Binding OpenLogFolderCommand}"
                     ToolTip="Open the folder containing the current log files" />
+            <Button Content="Open Car Explorer"
+                    Command="{Binding OpenCarExplorerCommand}"
+                    ToolTip="Open the car explorer window" />
+            <Button Content="Open Track Explorer"
+                    Command="{Binding OpenTrackExplorerCommand}"
+                    ToolTip="Open the track explorer window" />
         </StackPanel>
 
         <Button Grid.Column="0"

@@ -1,5 +1,6 @@
 ﻿using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Core.Models;
+using System.Collections.ObjectModel;
 
 namespace SimRacingSdk.Acc.Core;
 
@@ -621,5 +622,20 @@ public class AccCarInfoProvider : IAccCarInfoProvider
     public IReadOnlyCollection<AccCarInfo> GetCarInfos()
     {
         return this.cars.AsReadOnly();
+    }
+
+    public ReadOnlyCollection<string> GetCarClasses()
+    {
+        return this.cars.Select(c => c.Class)
+                   .Distinct()
+                   .ToList()
+                   .AsReadOnly();
+    }
+
+    public ReadOnlyCollection<AccCarInfo> GetCarInfosForClass(string carClass)
+    {
+        return this.cars.Where(c => c.Class == carClass)
+                   .ToList()
+                   .AsReadOnly();
     }
 }

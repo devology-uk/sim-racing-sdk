@@ -1,4 +1,5 @@
-﻿using SimRacingSdk.Acc.Core.Abstractions;
+﻿using System.Collections.ObjectModel;
+using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Core.Models;
 
 namespace SimRacingSdk.Acc.Core;
@@ -12,7 +13,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 16,
-            CountryTag = "ESP",
+            Country = "Spain",
+            CountryCode = "ESP",
             FullName = "Circuit de Barcelona-Catalunya",
             Latitude = 41.5695,
             Longitude = 2.2575,
@@ -22,7 +24,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 9,
-            CountryTag = "GBR-ENG",
+            Country = "England",
+            CountryCode = "GBR-ENG",
             FullName = "Brands Hatch Circuit",
             Latitude = 51.3566,
             Longitude = 0.2614,
@@ -32,7 +35,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 20,
-            CountryTag = "USA",
+            Country = "USA",
+            CountryCode = "USA",
             FullName = "Circuit of the Americas",
             Latitude = 30.135,
             Longitude = -97.6341,
@@ -42,7 +46,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 12,
-            CountryTag = "GBR-ENG",
+            Country = "England",
+            CountryCode = "GBR-ENG",
             FullName = "Donington Park",
             Latitude = 52.8304,
             Longitude = -1.3749,
@@ -52,7 +57,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 14,
-            CountryTag = "HUN",
+            Country = "Hungary",
+            CountryCode = "HUN",
             FullName = "Hungaroring",
             Latitude = 47.583,
             Longitude = 19.2498,
@@ -62,7 +68,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 22,
-            CountryTag = "ITA",
+            Country = "Italy",
+            CountryCode = "ITA",
             FullName = "Autodromo Enzo e Dino Ferrari",
             Latitude = 44.3408,
             Longitude = 11.7137,
@@ -72,7 +79,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 14,
-            CountryTag = "USA",
+            Country = "USA",
+            CountryCode = "USA",
             FullName = "Indianapolis Motor Speedway",
             Latitude = 39.7951,
             Longitude = -86.2348,
@@ -82,7 +90,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 16,
-            CountryTag = "ZAF",
+            Country = "South Africa",
+            CountryCode = "ZAF",
             FullName = "Kyalami Grand Prix Circuit",
             Latitude = -25.9976,
             Longitude = 28.0682,
@@ -92,7 +101,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 11,
-            CountryTag = "USA",
+            Country = "USA",
+            CountryCode = "USA",
             FullName = "WeatherTech Raceway Laguna Seca",
             Latitude = 36.5845,
             Longitude = -121.7535,
@@ -102,7 +112,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 16,
-            CountryTag = "ITA",
+            Country = "Italy",
+            CountryCode = "ITA",
             FullName = "Misano World Circuit",
             Latitude = 43.96242,
             Longitude = 12.68381,
@@ -112,7 +123,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 11,
-            CountryTag = "ITA",
+            Country = "Italy",
+            CountryCode = "ITA",
             FullName = "Monza Circuit",
             Latitude = 45.621,
             Longitude = 9.286,
@@ -122,7 +134,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 23,
-            CountryTag = "AUT",
+            Country = "Australia",
+            CountryCode = "AUS",
             FullName = "Mount Panorama Circuit",
             Latitude = -33.4486,
             Longitude = 149.5547,
@@ -132,7 +145,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 17,
-            CountryTag = "DEU",
+            Country = "Germany",
+            CountryCode = "DEU",
             FullName = "Nürburgring",
             Latitude = 50.3309,
             Longitude = 6.9414,
@@ -142,7 +156,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 17,
-            CountryTag = "GBR-ENG",
+            Country = "England",
+            CountryCode = "GBR-ENG",
             FullName = "Oulton Park",
             Latitude = 53.1768,
             Longitude = -2.6168,
@@ -152,7 +167,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 13,
-            CountryTag = "FRA",
+            Country = "France",
+            CountryCode = "FRA",
             FullName = "Circuit Paul Ricard",
             Latitude = 43.2529,
             Longitude = 5.7912,
@@ -162,7 +178,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 18,
-            CountryTag = "GBR-ENG",
+            Country = "England",
+            CountryCode = "GBR-ENG",
             FullName = "Silverstone",
             Latitude = 52.071,
             Longitude = -1.0147,
@@ -172,7 +189,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 12,
-            CountryTag = "GBR-ENG",
+            Country = "England",
+            CountryCode = "GBR-ENG",
             FullName = "Snetterton Circuit",
             Latitude = 52.4648,
             Longitude = 0.9473,
@@ -182,7 +200,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 19,
-            CountryTag = "BEL",
+            Country = "Belgium",
+            CountryCode = "BEL",
             FullName = "Circuit de Spa-Francorchamps",
             Latitude = 50.4375,
             Longitude = 5.9685,
@@ -192,7 +211,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 18,
-            CountryTag = "JPN",
+            Country = "Japan",
+            CountryCode = "JPN",
             FullName = "Suzuka Circuit",
             Latitude = 34.8441,
             Longitude = 136.5329,
@@ -202,7 +222,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 11,
-            CountryTag = "USA",
+            Country = "USA",
+            CountryCode = "USA",
             FullName = "Watkins Glen International",
             Latitude = 42.3362,
             Longitude = -76.9252,
@@ -212,7 +233,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 14,
-            CountryTag = "NLD",
+            Country = "Netherlands",
+            CountryCode = "NLD",
             FullName = "Circuit Zandvoort",
             Latitude = 52.3881,
             Longitude = 4.545,
@@ -222,7 +244,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 10,
-            CountryTag = "BEL",
+            Country = "Belgium",
+            CountryCode = "BEL",
             FullName = "Circuit Zolder",
             Latitude = 50.9905,
             Longitude = 5.258,
@@ -232,7 +255,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 14,
-            CountryTag = "ESP",
+            Country = "Spain",
+            CountryCode = "ESP",
             FullName = "Circuit Ricardo Tormo Valencia",
             Latitude = 39.48562,
             Longitude = -0.63056,
@@ -242,7 +266,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 10,
-            CountryTag = "AUT",
+            Country = "Austria",
+            CountryCode = "AUT",
             FullName = "Red Bull Ring",
             Latitude = 47.2228736,
             Longitude = 14.760198,
@@ -252,7 +277,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         new()
         {
             Corners = 170,
-            CountryTag = "DEU",
+            Country = "Germany",
+            CountryCode = "DEU",
             FullName = "24H Nürburgring",
             Latitude = 50.3576,
             Longitude = 6.955,
@@ -279,8 +305,15 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
         return track?.ShortName ?? string.Empty;
     }
 
-    public IReadOnlyCollection<AccTrackInfo> GetTrackInfos()
+    public ReadOnlyCollection<AccTrackInfo> GetTrackInfos()
     {
         return this.tracks.AsReadOnly();
+    }
+
+    public ReadOnlyCollection<string> GetTrackNames()
+    {
+        return this.tracks.Select(t => t.FullName)
+                   .ToList()
+                   .AsReadOnly();
     }
 }
