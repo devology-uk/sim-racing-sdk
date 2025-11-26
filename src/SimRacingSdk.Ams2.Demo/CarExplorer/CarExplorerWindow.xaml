@@ -11,6 +11,10 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
         d:DataContext="{d:DesignInstance local:CarExplorerViewModel}">
+    <Window.InputBindings>
+        <KeyBinding Gesture="CTRL+SHIFT+ALT+C"
+                    Command="{Binding ExportCsvCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
