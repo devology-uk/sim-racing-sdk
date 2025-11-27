@@ -2928,12 +2928,12 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
         return this.tracks.FirstOrDefault(t => t.ShortName == shortName);
     }
 
-    public ReadOnlyCollection<Ams2TrackInfo> GeTrackInfos()
+    public ReadOnlyCollection<Ams2TrackInfo> GetTrackInfos()
     {
         return this.tracks.AsReadOnly();
     }
 
-    public ReadOnlyCollection<string> GetTrackName()
+    public ReadOnlyCollection<string> GetTrackNames()
     {
         return this.tracks.Select(t => t.ShortName)
                    .ToList()

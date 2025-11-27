@@ -542,4 +542,20 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
     {
         return this.cars.AsReadOnly();
     }
+
+    public ReadOnlyCollection<string> GetCarClasses()
+    {
+        return this.cars.Select(c => c.Class)
+                   .Distinct()
+                   .ToList()
+                   .AsReadOnly();
+    }
+
+
+    public ReadOnlyCollection<LmuCarInfo> GetCarInfosForClass(string carClass)
+    {
+        return this.cars.Where(c => c.Class == carClass)
+                   .ToList()
+                   .AsReadOnly();
+    }
 }

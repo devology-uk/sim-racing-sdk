@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="SimRacingSdk.Lmu.Demo.Controls.Console.ConsoleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimRacingSdk.Lmu.Demo.Controls.Console"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:ConsoleControlViewModel}">
+    <ScrollViewer VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  ScrollChanged="HandleScrollChanged"
+                  Name="ScrollViewer"
+                  Background="Black">
+        <TextBlock Text="{Binding ConsoleContent}"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Background="Black"
+                   Foreground="White"
+                   TextWrapping="WrapWithOverflow"
+                   Margin="5" />
+    </ScrollViewer>
+</UserControl>

@@ -10,7 +10,12 @@
         Width="800"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
+        Background="LightGray"
         d:DataContext="{d:DesignInstance local:TrackExplorerViewModel}">
+    <Window.InputBindings>
+        <KeyBinding Gesture="CTRL+SHIFT+ALT+C"
+                    Command="{Binding ExportCsvCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

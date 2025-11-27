@@ -1,16 +1,18 @@
 ﻿// ReSharper disable AsyncVoidMethod
 
-using System.Diagnostics;
-using System.IO;
-using System.Reactive.Disposables;
-using Microsoft.Extensions.Logging;
-using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Demo.Abstractions;
+using SimRacingSdk.Acc.Demo.CarExplorer;
+using SimRacingSdk.Acc.Demo.TrackExplorer;
 using SimRacingSdk.LogViewer;
+using System.Diagnostics;
+using System.IO;
+using System.Reactive.Disposables;
+using System.Reflection;
 
 namespace SimRacingSdk.Acc.Demo;
 
@@ -50,6 +52,20 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void OpenCarExplorer()
+    {
+        var carViewerViewModel = App.Current.Services.GetRequiredService<CarExplorerViewModel>();
+        var carExplorer = new CarExplorerWindow
+        {
+            DataContext = carViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        carExplorer.Show();
+        carViewerViewModel.Init();
+    }
+
+
+    [RelayCommand]
     private void OpenLogFolder()
     {
         var currentLogPath = $@"{this.logFolderPath}{DateTime.Now.Date:yyyy-MM-dd}\";
@@ -70,6 +86,19 @@ public partial class MainWindowViewModel : ObservableObject
         };
         logViewer.Show();
         logViewerViewModel.Init(this.logFolderPath);
+    }
+
+    [RelayCommand]
+    private void OpenTrackExplorer()
+    {
+        var trackViewerViewModel = App.Current.Services.GetRequiredService<TrackExplorerViewModel>();
+        var trackExplorer = new TrackExplorerWindow
+        {
+            DataContext = trackViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        trackExplorer.Show();
+        trackViewerViewModel.Init();
     }
 
     [RelayCommand]
