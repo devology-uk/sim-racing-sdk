@@ -1,4 +1,5 @@
-﻿using SimRacingSdk.Lmu.Core.Abstractions;
+﻿using System.Collections.ObjectModel;
+using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Core.Models;
 
 namespace SimRacingSdk.Lmu.Core.Services;
@@ -289,6 +290,11 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
 
     public static LmuTrackInfoProvider Instance => singletonInstance ??= new LmuTrackInfoProvider();
 
+    public LmuTrackInfo? FindTrackByShortName(string shortName)
+    {
+        return this.tracks.FirstOrDefault(t => t.ShortName == shortName);
+    }
+
     public LmuTrackInfo? GeTrackInfoByVenue(string venue)
     {
         return this.tracks.FirstOrDefault(t => t.Name.Equals(venue,
@@ -298,5 +304,12 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
     public IReadOnlyCollection<LmuTrackInfo> GetTrackInfos()
     {
         return this.tracks.AsReadOnly();
+    }
+
+    public ReadOnlyCollection<string> GetTrackNames()
+    {
+        return this.tracks.Select(t => t.ShortName)
+                   .ToList()
+                   .AsReadOnly();
     }
 }

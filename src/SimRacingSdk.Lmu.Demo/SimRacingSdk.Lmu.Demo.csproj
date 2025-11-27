@@ -1,0 +1,352 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+	  <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Manufacturers\glickenhaus.png" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
+		<PackageReference Include="System.Reactive" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SimRacingSdk.Lmu.Core\SimRacingSdk.Lmu.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Flags\ABW.png" />
+    <Resource Include="Images\Flags\AFG.png" />
+    <Resource Include="Images\Flags\AGO.png" />
+    <Resource Include="Images\Flags\AIA.png" />
+    <Resource Include="Images\Flags\ALA.png" />
+    <Resource Include="Images\Flags\ALB.png" />
+    <Resource Include="Images\Flags\AND.png" />
+    <Resource Include="Images\Flags\ANT.png" />
+    <Resource Include="Images\Flags\ARE.png" />
+    <Resource Include="Images\Flags\ARG.png" />
+    <Resource Include="Images\Flags\ARM.png" />
+    <Resource Include="Images\Flags\ASM.png" />
+    <Resource Include="Images\Flags\ATA.png" />
+    <Resource Include="Images\Flags\ATF.png" />
+    <Resource Include="Images\Flags\ATG.png" />
+    <Resource Include="Images\Flags\AUS.png" />
+    <Resource Include="Images\Flags\AUT.png" />
+    <Resource Include="Images\Flags\AZE.png" />
+    <Resource Include="Images\Flags\BDI.png" />
+    <Resource Include="Images\Flags\BEL.png" />
+    <Resource Include="Images\Flags\BEN.png" />
+    <Resource Include="Images\Flags\BFA.png" />
+    <Resource Include="Images\Flags\BGD.png" />
+    <Resource Include="Images\Flags\BGR.png" />
+    <Resource Include="Images\Flags\BHR.png" />
+    <Resource Include="Images\Flags\BHS.png" />
+    <Resource Include="Images\Flags\BIH.png" />
+    <Resource Include="Images\Flags\BLR.png" />
+    <Resource Include="Images\Flags\BLZ.png" />
+    <Resource Include="Images\Flags\BMU.png" />
+    <Resource Include="Images\Flags\BOL.png" />
+    <Resource Include="Images\Flags\BRA.png" />
+    <Resource Include="Images\Flags\BRB.png" />
+    <Resource Include="Images\Flags\BRN.png" />
+    <Resource Include="Images\Flags\BTN.png" />
+    <Resource Include="Images\Flags\BUR.png" />
+    <Resource Include="Images\Flags\BWA.png" />
+    <Resource Include="Images\Flags\CA-QC.png" />
+    <Resource Include="Images\Flags\CAF.png" />
+    <Resource Include="Images\Flags\CAN.png" />
+    <Resource Include="Images\Flags\CCK.png" />
+    <Resource Include="Images\Flags\CHE.png" />
+    <Resource Include="Images\Flags\CHL.png" />
+    <Resource Include="Images\Flags\CHN.png" />
+    <Resource Include="Images\Flags\CIS.png" />
+    <Resource Include="Images\Flags\CIV.png" />
+    <Resource Include="Images\Flags\CMR.png" />
+    <Resource Include="Images\Flags\COD.png" />
+    <Resource Include="Images\Flags\COG.png" />
+    <Resource Include="Images\Flags\COK.png" />
+    <Resource Include="Images\Flags\COL.png" />
+    <Resource Include="Images\Flags\COM.png" />
+    <Resource Include="Images\Flags\CPV.png" />
+    <Resource Include="Images\Flags\CRI.png" />
+    <Resource Include="Images\Flags\CUB.png" />
+    <Resource Include="Images\Flags\CUW.png" />
+    <Resource Include="Images\Flags\CXR.png" />
+    <Resource Include="Images\Flags\CYM.png" />
+    <Resource Include="Images\Flags\CYP.png" />
+    <Resource Include="Images\Flags\CZE.png" />
+    <Resource Include="Images\Flags\DEU.png" />
+    <Resource Include="Images\Flags\DJI.png" />
+    <Resource Include="Images\Flags\DMA.png" />
+    <Resource Include="Images\Flags\DNK.png" />
+    <Resource Include="Images\Flags\DOM.png" />
+    <Resource Include="Images\Flags\DZA.png" />
+    <Resource Include="Images\Flags\ECU.png" />
+    <Resource Include="Images\Flags\EGY.png" />
+    <Resource Include="Images\Flags\ERI.png" />
+    <Resource Include="Images\Flags\ES-CN.png" />
+    <Resource Include="Images\Flags\ESH.png" />
+    <Resource Include="Images\Flags\ESP.png" />
+    <Resource Include="Images\Flags\EST.png" />
+    <Resource Include="Images\Flags\ETH.png" />
+    <Resource Include="Images\Flags\EUR.png" />
+    <Resource Include="Images\Flags\FIN.png" />
+    <Resource Include="Images\Flags\FJI.png" />
+    <Resource Include="Images\Flags\FLK.png" />
+    <Resource Include="Images\Flags\FRA.png" />
+    <Resource Include="Images\Flags\FRO.png" />
+    <Resource Include="Images\Flags\FSM.png" />
+    <Resource Include="Images\Flags\GAB.png" />
+    <Resource Include="Images\Flags\GBR-ENG.png" />
+    <Resource Include="Images\Flags\GBR-SCT.png" />
+    <Resource Include="Images\Flags\GBR-WAL.png" />
+    <Resource Include="Images\Flags\GBR.png" />
+    <Resource Include="Images\Flags\GEO.png" />
+    <Resource Include="Images\Flags\GGY.png" />
+    <Resource Include="Images\Flags\GHA.png" />
+    <Resource Include="Images\Flags\GIB.png" />
+    <Resource Include="Images\Flags\GIN.png" />
+    <Resource Include="Images\Flags\GLP.png" />
+    <Resource Include="Images\Flags\GMB.png" />
+    <Resource Include="Images\Flags\GNB.png" />
+    <Resource Include="Images\Flags\GNQ.png" />
+    <Resource Include="Images\Flags\GRC.png" />
+    <Resource Include="Images\Flags\GRD.png" />
+    <Resource Include="Images\Flags\GRL.png" />
+    <Resource Include="Images\Flags\GTM.png" />
+    <Resource Include="Images\Flags\GUF.png" />
+    <Resource Include="Images\Flags\GUM.png" />
+    <Resource Include="Images\Flags\GUY.png" />
+    <Resource Include="Images\Flags\HKG.png" />
+    <Resource Include="Images\Flags\HMD.png" />
+    <Resource Include="Images\Flags\HND.png" />
+    <Resource Include="Images\Flags\HRV.png" />
+    <Resource Include="Images\Flags\HTI.png" />
+    <Resource Include="Images\Flags\HUN.png" />
+    <Resource Include="Images\Flags\IDN.png" />
+    <Resource Include="Images\Flags\IMN.png" />
+    <Resource Include="Images\Flags\IND.png" />
+    <Resource Include="Images\Flags\IOT.png" />
+    <Resource Include="Images\Flags\IRL.png" />
+    <Resource Include="Images\Flags\IRN.png" />
+    <Resource Include="Images\Flags\IRQ.png" />
+    <Resource Include="Images\Flags\ISL.png" />
+    <Resource Include="Images\Flags\ISR.png" />
+    <Resource Include="Images\Flags\ITA.png" />
+    <Resource Include="Images\Flags\JAM.png" />
+    <Resource Include="Images\Flags\JEY.png" />
+    <Resource Include="Images\Flags\JOR.png" />
+    <Resource Include="Images\Flags\JPN.png" />
+    <Resource Include="Images\Flags\KAZ.png" />
+    <Resource Include="Images\Flags\KEN.png" />
+    <Resource Include="Images\Flags\KGZ.png" />
+    <Resource Include="Images\Flags\KHM.png" />
+    <Resource Include="Images\Flags\KIR.png" />
+    <Resource Include="Images\Flags\KNA.png" />
+    <Resource Include="Images\Flags\KOR.png" />
+    <Resource Include="Images\Flags\KWT.png" />
+    <Resource Include="Images\Flags\LAO.png" />
+    <Resource Include="Images\Flags\LBN.png" />
+    <Resource Include="Images\Flags\LBR.png" />
+    <Resource Include="Images\Flags\LBY.png" />
+    <Resource Include="Images\Flags\LCA.png" />
+    <Resource Include="Images\Flags\LIE.png" />
+    <Resource Include="Images\Flags\LKA.png" />
+    <Resource Include="Images\Flags\LSO.png" />
+    <Resource Include="Images\Flags\LTU.png" />
+    <Resource Include="Images\Flags\LUX.png" />
+    <Resource Include="Images\Flags\LVA.png" />
+    <Resource Include="Images\Flags\MAC.png" />
+    <Resource Include="Images\Flags\MAR.png" />
+    <Resource Include="Images\Flags\MCO.png" />
+    <Resource Include="Images\Flags\MDA.png" />
+    <Resource Include="Images\Flags\MDG.png" />
+    <Resource Include="Images\Flags\MDV.png" />
+    <Resource Include="Images\Flags\MEX.png" />
+    <Resource Include="Images\Flags\MHL.png" />
+    <Resource Include="Images\Flags\MKD.png" />
+    <Resource Include="Images\Flags\MLI.png" />
+    <Resource Include="Images\Flags\MLT.png" />
+    <Resource Include="Images\Flags\MMR.png" />
+    <Resource Include="Images\Flags\MNE.png" />
+    <Resource Include="Images\Flags\MNG.png" />
+    <Resource Include="Images\Flags\MNP.png" />
+    <Resource Include="Images\Flags\MOZ.png" />
+    <Resource Include="Images\Flags\MRT.png" />
+    <Resource Include="Images\Flags\MSR.png" />
+    <Resource Include="Images\Flags\MTQ.png" />
+    <Resource Include="Images\Flags\MUS.png" />
+    <Resource Include="Images\Flags\MWI.png" />
+    <Resource Include="Images\Flags\MYS.png" />
+    <Resource Include="Images\Flags\MYT.png" />
+    <Resource Include="Images\Flags\NAM.png" />
+    <Resource Include="Images\Flags\NCL.png" />
+    <Resource Include="Images\Flags\NEPAL.png" />
+    <Resource Include="Images\Flags\NER.png" />
+    <Resource Include="Images\Flags\NFK.png" />
+    <Resource Include="Images\Flags\NGA.png" />
+    <Resource Include="Images\Flags\NIC.png" />
+    <Resource Include="Images\Flags\NIU.png" />
+    <Resource Include="Images\Flags\NLD.png" />
+    <Resource Include="Images\Flags\NOR.png" />
+    <Resource Include="Images\Flags\NRU.png" />
+    <Resource Include="Images\Flags\NZL.png" />
+    <Resource Include="Images\Flags\OMN.png" />
+    <Resource Include="Images\Flags\PAK.png" />
+    <Resource Include="Images\Flags\PAN.png" />
+    <Resource Include="Images\Flags\PCN.png" />
+    <Resource Include="Images\Flags\PER.png" />
+    <Resource Include="Images\Flags\PHL.png" />
+    <Resource Include="Images\Flags\PLW.png" />
+    <Resource Include="Images\Flags\PNG.png" />
+    <Resource Include="Images\Flags\POL.png" />
+    <Resource Include="Images\Flags\PRI.png" />
+    <Resource Include="Images\Flags\PRK.png" />
+    <Resource Include="Images\Flags\PRT.png" />
+    <Resource Include="Images\Flags\PRY.png" />
+    <Resource Include="Images\Flags\PSE.png" />
+    <Resource Include="Images\Flags\PYF.png" />
+    <Resource Include="Images\Flags\QAT.png" />
+    <Resource Include="Images\Flags\ROU.png" />
+    <Resource Include="Images\Flags\RUS.png" />
+    <Resource Include="Images\Flags\RWA.png" />
+    <Resource Include="Images\Flags\RZA.png" />
+    <Resource Include="Images\Flags\SAU.png" />
+    <Resource Include="Images\Flags\SDN.png" />
+    <Resource Include="Images\Flags\SEN.png" />
+    <Resource Include="Images\Flags\SGP.png" />
+    <Resource Include="Images\Flags\SGS.png" />
+    <Resource Include="Images\Flags\SLB.png" />
+    <Resource Include="Images\Flags\SLE.png" />
+    <Resource Include="Images\Flags\SLV.png" />
+    <Resource Include="Images\Flags\SMR.png" />
+    <Resource Include="Images\Flags\SOM.png" />
+    <Resource Include="Images\Flags\SPM.png" />
+    <Resource Include="Images\Flags\SRB.png" />
+    <Resource Include="Images\Flags\SSD.png" />
+    <Resource Include="Images\Flags\STP.png" />
+    <Resource Include="Images\Flags\SUN.png" />
+    <Resource Include="Images\Flags\SUR.png" />
+    <Resource Include="Images\Flags\SVK.png" />
+    <Resource Include="Images\Flags\SVN.png" />
+    <Resource Include="Images\Flags\SWE.png" />
+    <Resource Include="Images\Flags\SWZ.png" />
+    <Resource Include="Images\Flags\SXM.png" />
+    <Resource Include="Images\Flags\SYC.png" />
+    <Resource Include="Images\Flags\SYR.png" />
+    <Resource Include="Images\Flags\TCA.png" />
+    <Resource Include="Images\Flags\TCD.png" />
+    <Resource Include="Images\Flags\TGO.png" />
+    <Resource Include="Images\Flags\THA.png" />
+    <Resource Include="Images\Flags\TJK.png" />
+    <Resource Include="Images\Flags\TKL.png" />
+    <Resource Include="Images\Flags\TKM.png" />
+    <Resource Include="Images\Flags\TLS.png" />
+    <Resource Include="Images\Flags\TON.png" />
+    <Resource Include="Images\Flags\TTO.png" />
+    <Resource Include="Images\Flags\TUN.png" />
+    <Resource Include="Images\Flags\TUR.png" />
+    <Resource Include="Images\Flags\TUV.png" />
+    <Resource Include="Images\Flags\TWN.png" />
+    <Resource Include="Images\Flags\TZA.png" />
+    <Resource Include="Images\Flags\UGA.png" />
+    <Resource Include="Images\Flags\UKR.png" />
+    <Resource Include="Images\Flags\URY.png" />
+    <Resource Include="Images\Flags\USA.png" />
+    <Resource Include="Images\Flags\UZB.png" />
+    <Resource Include="Images\Flags\VAT.png" />
+    <Resource Include="Images\Flags\VCT.png" />
+    <Resource Include="Images\Flags\VEN.png" />
+    <Resource Include="Images\Flags\VGB.png" />
+    <Resource Include="Images\Flags\VIR.png" />
+    <Resource Include="Images\Flags\VNM.png" />
+    <Resource Include="Images\Flags\VUT.png" />
+    <Resource Include="Images\Flags\WLF.png" />
+    <Resource Include="Images\Flags\WSM.png" />
+    <Resource Include="Images\Flags\XKX.png" />
+    <Resource Include="Images\Flags\YEM.png" />
+    <Resource Include="Images\Flags\YUG.png" />
+    <Resource Include="Images\Flags\ZAF.png" />
+    <Resource Include="Images\Flags\ZMB.png" />
+    <Resource Include="Images\Flags\ZWE.png" />
+    <Resource Include="Images\Manufacturers\alpine.png" />
+    <Resource Include="Images\Manufacturers\aston-martin.png" />
+    <Resource Include="Images\Manufacturers\audi.png" />
+    <Resource Include="Images\Manufacturers\bentley.png" />
+    <Resource Include="Images\Manufacturers\bmw.png" />
+    <Resource Include="Images\Manufacturers\brabham.png" />
+    <Resource Include="Images\Manufacturers\cadillac.png" />
+    <Resource Include="Images\Manufacturers\caterham.png" />
+    <Resource Include="Images\Manufacturers\chevrolet.png" />
+    <Resource Include="Images\Manufacturers\citroen.png" />
+    <Resource Include="Images\Manufacturers\dallara.png" />
+    <Resource Include="Images\Manufacturers\ferrari.png" />
+    <Resource Include="Images\Manufacturers\ford.png" />
+    <Resource Include="Images\Manufacturers\ginetta.png" />
+    <Resource Include="Images\Manufacturers\glickenhaus.png" />
+    <Resource Include="Images\Manufacturers\honda.png" />
+    <Resource Include="Images\Manufacturers\isotta-fraschini.png" />
+    <Resource Include="Images\Manufacturers\iveco.png" />
+    <Resource Include="Images\Manufacturers\jaguar.png" />
+    <Resource Include="Images\Manufacturers\ktm.png" />
+    <Resource Include="Images\Manufacturers\lamborghini.png" />
+    <Resource Include="Images\Manufacturers\lexus.png" />
+    <Resource Include="Images\Manufacturers\ligier.png" />
+    <Resource Include="Images\Manufacturers\lola.png" />
+    <Resource Include="Images\Manufacturers\lopes.png" />
+    <Resource Include="Images\Manufacturers\lotus.png" />
+    <Resource Include="Images\Manufacturers\man.png" />
+    <Resource Include="Images\Manufacturers\maserati.png" />
+    <Resource Include="Images\Manufacturers\mclaren.png" />
+    <Resource Include="Images\Manufacturers\mcr.png" />
+    <Resource Include="Images\Manufacturers\mercedes.png" />
+    <Resource Include="Images\Manufacturers\metalmoro.png" />
+    <Resource Include="Images\Manufacturers\mini.png" />
+    <Resource Include="Images\Manufacturers\mitsubishi.png" />
+    <Resource Include="Images\Manufacturers\nissan.png" />
+    <Resource Include="Images\Manufacturers\oreca.png" />
+    <Resource Include="Images\Manufacturers\peugeot.png" />
+    <Resource Include="Images\Manufacturers\porsche.png" />
+    <Resource Include="Images\Manufacturers\puma.png" />
+    <Resource Include="Images\Manufacturers\reiter.png" />
+    <Resource Include="Images\Manufacturers\reiza.png" />
+    <Resource Include="Images\Manufacturers\reynard.png" />
+    <Resource Include="Images\Manufacturers\roco.png" />
+    <Resource Include="Images\Manufacturers\sigma.png" />
+    <Resource Include="Images\Manufacturers\swift.png" />
+    <Resource Include="Images\Manufacturers\toyota.png" />
+    <Resource Include="Images\Manufacturers\ultima.png" />
+    <Resource Include="Images\Manufacturers\vanwall.png" />
+    <Resource Include="Images\Manufacturers\volkswagen.png" />
+    <Resource Include="Images\Manufacturers\xl-sprint-race.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CarExplorer\CarExplorerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TrackExplorer\TrackExplorerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
