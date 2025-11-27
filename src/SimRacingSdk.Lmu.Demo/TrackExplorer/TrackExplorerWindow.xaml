@@ -10,7 +10,8 @@
         Width="800"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
-        d:DataContext="{d:DesignInstance local:TrackExplorerViewModel}">
+        d:DataContext="{d:DesignInstance local:TrackExplorerViewModel}"
+        Background="LightGray">
     <Window.InputBindings>
         <KeyBinding Gesture="CTRL+SHIFT+ALT+C"
                     Command="{Binding ExportCsvCommand}" />

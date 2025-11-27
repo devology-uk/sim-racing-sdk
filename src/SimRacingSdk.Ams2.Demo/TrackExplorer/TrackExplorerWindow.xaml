@@ -10,6 +10,7 @@
         Width="800"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
+        Background="LightGray"
         d:DataContext="{d:DesignInstance local:TrackExplorerViewModel}">
     <Window.InputBindings>
         <KeyBinding Gesture="CTRL+SHIFT+ALT+C"

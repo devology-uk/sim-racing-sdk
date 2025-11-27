@@ -9,6 +9,7 @@
         Width="900"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
+        Background="LightGray"
         d:DataContext="{d:DesignInstance local:CarExplorerViewModel}">
     <Window.InputBindings>
         <KeyBinding Gesture="CTRL+SHIFT+ALT+C"
