@@ -29,18 +29,21 @@
                     HorizontalAlignment="Center"
                     Margin="10"
                     Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
-            <Button Content="Open Log Viewer"
-                    Command="{Binding OpenLogViewerCommand}"
+            <Button Content="Open Result Explorer"
+                    Command="{Binding OpenResultExplorerCommand}"
                     ToolTip="Open a window for analysing log files" />
-            <Button Content="Open Log Folder"
-                    Command="{Binding OpenLogFolderCommand}"
-                    ToolTip="Open the folder containing the current log files" />
             <Button Content="Open Car Explorer"
                     Command="{Binding OpenCarExplorerCommand}"
                     ToolTip="Open the car explorer window" />
             <Button Content="Open Track Explorer"
                     Command="{Binding OpenTrackExplorerCommand}"
                     ToolTip="Open the track explorer window" />
+            <Button Content="Open Log Viewer"
+                    Command="{Binding OpenLogViewerCommand}"
+                    ToolTip="Open a window for analysing log files" />
+            <Button Content="Open Log Folder"
+                    Command="{Binding OpenLogFolderCommand}"
+                    ToolTip="Open the folder containing the current log files" />
         </StackPanel>
 
         <Button Grid.Column="0"

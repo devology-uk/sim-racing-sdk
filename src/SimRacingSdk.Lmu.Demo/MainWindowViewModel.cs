@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Demo.Abstractions;
 using SimRacingSdk.Lmu.Demo.CarExplorer;
+using SimRacingSdk.Lmu.Demo.ResultExplorer;
 using SimRacingSdk.Lmu.Demo.TrackExplorer;
 using SimRacingSdk.LogViewer;
 
@@ -47,6 +48,20 @@ public partial class MainWindowViewModel : ObservableObject
         };
         carExplorer.Show();
         carViewerViewModel.Init();
+    }
+
+
+    [RelayCommand]
+    private void OpenResultExplorer()
+    {
+        var resultViewerViewModel = App.Current.Services.GetRequiredService<ResultExplorerViewModel>();
+        var resultExplorer = new ResultExplorerWindow
+        {
+            DataContext = resultViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        resultExplorer.Show();
+        resultViewerViewModel.Init();
     }
 
     [RelayCommand]

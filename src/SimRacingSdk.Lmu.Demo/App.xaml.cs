@@ -7,6 +7,7 @@ using SimRacingSdk.Lmu.Core;
 using SimRacingSdk.Lmu.Demo.Abstractions;
 using SimRacingSdk.Lmu.Demo.CarExplorer;
 using SimRacingSdk.Lmu.Demo.Controls.Console;
+using SimRacingSdk.Lmu.Demo.ResultExplorer;
 using SimRacingSdk.Lmu.Demo.Services;
 using SimRacingSdk.Lmu.Demo.TrackExplorer;
 using SimRacingSdk.LogViewer;
@@ -65,6 +66,7 @@ public partial class App : Application
         services.AddTransient<LogViewerViewModel>();
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
+        services.AddTransient<ResultExplorerViewModel>();
         // services.AddTransient<IUdpDemo, UdpDemo>();
         // services.AddTransient<IUdpLog, UdpLog>();
         // services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
