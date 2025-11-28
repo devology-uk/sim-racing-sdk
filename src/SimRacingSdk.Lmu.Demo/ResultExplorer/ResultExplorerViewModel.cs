@@ -45,6 +45,10 @@ public partial class ResultExplorerViewModel : ObservableObject
     [ObservableProperty]
     private string? sessionDateTime;
     [ObservableProperty]
+    private string sessionName = null!;
+    [ObservableProperty]
+    private string sessionType = null!;
+    [ObservableProperty]
     private string setting = null!;
     [ObservableProperty]
     private string? trackCourse;
@@ -60,6 +64,19 @@ public partial class ResultExplorerViewModel : ObservableObject
     private bool tyreWarmers;
     [ObservableProperty]
     private string vehiclesAllowed = null!;
+    [ObservableProperty]
+    private string fileDateTime = null!;
+    [ObservableProperty]
+    private int sessionLaps;
+    [ObservableProperty]
+    private int sessionMinutes;
+    [ObservableProperty]
+    private bool sessionFormationAndStart;
+    [ObservableProperty]
+    private int sessionMostLapsCompleted;
+
+    public ObservableCollection<DriverItem> Drivers { get; } = [];
+    public ObservableCollection<string> EventStream { get; } = [];
 
     public ResultExplorerViewModel(ILogger<ResultExplorerViewModel> logger,
         ILmuGameDataProvider lmuGameDataProvider)
@@ -89,7 +106,10 @@ public partial class ResultExplorerViewModel : ObservableObject
 
     partial void OnSelectedResultChanged(ResultFileItem? value)
     {
-        if(value == null)
+        this.Drivers.Clear();
+        this.EventStream.Clear();
+
+        if (value == null)
         {
             return;
         }
@@ -109,7 +129,7 @@ public partial class ResultExplorerViewModel : ObservableObject
         this.RaceLaps = resultFile.RaceLaps;
         this.RaceTime = resultFile.RaceTime;
         this.ServerName = resultFile.ServerName ?? string.Empty;
-        this.SessionDateTime = resultFile.TimeString;
+        this.FileDateTime = resultFile.TimeString ?? string.Empty;
         this.TrackVenue = resultFile.TrackVenue;
         this.TrackCourse = resultFile.TrackCourse;
         this.TrackEvent = resultFile.TrackEvent;
@@ -117,5 +137,39 @@ public partial class ResultExplorerViewModel : ObservableObject
         this.TyreMultiplier = resultFile.TireMultiplier;
         this.TyreWarmers = resultFile.TireWarmers != 0;
         this.VehiclesAllowed = resultFile.VehiclesAllowed ?? string.Empty;
+
+        var session = resultFile.Session;
+        this.SessionType = session?.SessionType ?? string.Empty;
+        this.SessionName = session?.SessionName ?? string.Empty;
+        this.SessionDateTime = session?.TimeString ?? string.Empty;
+        var drivingSessionLaps = (session?.Laps ?? 0);
+        this.SessionLaps = drivingSessionLaps == int.MaxValue? 0: drivingSessionLaps;
+        var drivingSessionMinutes = (session?.Minutes ?? 0);
+        this.SessionMinutes = drivingSessionMinutes == int.MaxValue? 0: drivingSessionMinutes;
+        this.SessionFormationAndStart = (session?.FormationAndStart ?? 0) != 0;
+        this.SessionMostLapsCompleted = session?.MostLapsCompleted ?? 0;
+
+        if(session == null)
+        {
+            return;
+        }
+
+        if(session.Drivers.Any())
+        {
+            foreach(var driver in session.Drivers.OrderBy(d => d.Position))
+            {
+                this.Drivers.Add(new DriverItem(driver));
+            }
+        }
+
+        if(!session.Stream.Any())
+        {
+            return;
+        }
+
+        foreach(var lmuStreamEvent in session.Stream)
+        {
+            this.EventStream.Add(lmuStreamEvent.ToString());
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimRacingSdk.Lmu.Demo.ResultExplorer"
         mc:Ignorable="d"
         Title="Result Explorer"
-        Height="900"
+        Height="950"
         Width="1200"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
@@ -43,41 +43,49 @@
                HorizontalAlignment="Center"
                VerticalAlignment="Center" />
         <Grid Column="1"
-              Row="1" Margin="10">
+              Row="1"
+              Margin="10">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="Recorded" FontWeight="Bold"/>
-            <Label Grid.Column="1" Grid.Row="0" Content="{Binding SessionDateTime}" />
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Content="Recorded"
+                   FontWeight="Bold" />
+            <Label Grid.Column="1"
+                   Grid.Row="0"
+                   Content="{Binding FileDateTime}" />
 
             <Label Grid.Column="0"
                    Grid.Row="1"
                    Content="Track Venue"
                    FontWeight="Bold" />
             <Label Grid.Column="1"
-                       Grid.Row="1"
-                       Content="{Binding TrackVenue}" />
+                   Grid.Row="1"
+                   Content="{Binding TrackVenue}" />
 
             <Label Grid.Column="2"
                    Grid.Row="1"
                    Content="Track Course"
                    FontWeight="Bold" />
             <Label Grid.Column="3"
-                       Grid.Row="1"
-                       Content="{Binding TrackCourse}" />
+                   Grid.Row="1"
+                   Content="{Binding TrackCourse}" />
 
             <Label Grid.Column="0"
                    Grid.Row="2"
@@ -95,7 +103,187 @@
                    Grid.Row="2"
                    Content="{Binding TrackLength}" />
 
-            <GroupBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Header="Settings">
+            <GroupBox Grid.Column="0"
+                      Grid.Row="3"
+                      Grid.ColumnSpan="4"
+                      Header="Settings">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           Content="Client Fuel Visible"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="1"
+                              Grid.Row="0"
+                              IsChecked="{Binding ClientFuelVisible}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="0"
+                           Content="Damage Multiplier"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="0"
+                           Content="{Binding DamageMultiplier}" />
+
+                    <Label Grid.Column="4"
+                           Grid.Row="0"
+                           Content="Dedicated"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="5"
+                              Grid.Row="0"
+                              IsChecked="{Binding Dedicated}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="1"
+                           Content="Fixed Setup"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="1"
+                              Grid.Row="1"
+                              IsChecked="{Binding FixedSetup}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="1"
+                           Content="Fixed Upgrades"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="3"
+                              Grid.Row="1"
+                              IsChecked="{Binding FixedUpgrades}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="4"
+                           Grid.Row="1"
+                           Content="Free Settings"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="5"
+                              Grid.Row="1"
+                              IsChecked="{Binding FreeSettings}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="2"
+                           Content="Fuel Multiplier"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="2"
+                           Content="{Binding FuelMultiplier}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="2"
+                           Content="Game Version"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="2"
+                           Content="{Binding GameVersion}" />
+
+                    <Label Grid.Column="4"
+                           Grid.Row="2"
+                           Content="Limited Tyres"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="5"
+                              Grid.Row="2"
+                              IsChecked="{Binding LimitedTyres}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="3"
+                           Content="Mechanical Fail Rate"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="3"
+                           Content="{Binding MechanicalFailRate}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="3"
+                           Content="Parc Ferme"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="3"
+                           Content="{Binding ParcFerme}" />
+
+                    <Label Grid.Column="4"
+                           Grid.Row="3"
+                           Content="Race Laps"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="5"
+                              Grid.Row="3"
+                              Content="{Binding RaceLaps}"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="4"
+                           Content="Race Time"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="4"
+                           Content="{Binding RaceTime}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="4"
+                           Content="Server Name"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="4"
+                           Content="{Binding ServerName}" />
+
+                    <Label Grid.Column="4"
+                           Grid.Row="4"
+                           Content="Tyre Multiplier"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="5"
+                           Grid.Row="4"
+                           Content="{Binding TyreMultiplier}"
+                           VerticalAlignment="Center" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="5"
+                           Content="Tyre Warmers"
+                           FontWeight="Bold" />
+                    <CheckBox Grid.Column="1"
+                              Grid.Row="5"
+                              IsChecked="{Binding TyreWarmers}"
+                              IsEnabled="False"
+                              VerticalAlignment="Center" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="5"
+                           Content="Vehicles Allowed"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="5"
+                           Grid.ColumnSpan="3"
+                           Content="{Binding VehiclesAllowed}"
+                           VerticalAlignment="Center" />
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" Header="Session">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -114,16 +302,112 @@
 
                     <Label Grid.Column="0"
                            Grid.Row="0"
-                           Content="Client Fuel Visible"
+                           Content="Type"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="0"
+                           Content="{Binding SessionType}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="0"
+                           Content="Name"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="0"
+                           Content="{Binding SessionName}" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="1"
+                           Content="Started"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="3"
+                           Content="{Binding SessionDateTime}" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="2"
+                           Content="Laps"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="1"
+                           Grid.Row="2"
+                           Content="{Binding SessionLaps}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="2"
+                           Content="Minutes"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="2"
+                           Content="{Binding SessionMinutes}" />
+
+                    <Label Grid.Column="0"
+                           Grid.Row="3"
+                           Content="Formation and Start"
                            FontWeight="Bold" />
                     <CheckBox Grid.Column="1"
-                           Grid.Row="1"
-                           Content="{Binding ClientFuelVisible}" />
+                           Grid.Row="3"
+                           IsChecked="{Binding SessionFormationAndStart}"
+                           IsEnabled="False"
+                           VerticalAlignment="Center"/>
+
+                    <Label Grid.Column="2"
+                           Grid.Row="3"
+                           Content="Most Laps Completed"
+                           FontWeight="Bold" />
+                    <Label Grid.Column="3"
+                           Grid.Row="3"
+                           Content="{Binding SessionMostLapsCompleted}" />
                 </Grid>
+
             </GroupBox>
 
-        </Grid>
+            <GroupBox Grid.Column="0"
+                      Grid.Row="5"
+                      Grid.ColumnSpan="4"
+                      Header="Drivers">
+                <DataGrid AutoGenerateColumns="False"
+                          Height="200"
+                          ItemsSource="{Binding Drivers}"
+                          IsReadOnly="True"
+                          VerticalAlignment="Top"
+                          Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Position"
+                                            Binding="{Binding Position}" />
+                        <DataGridTextColumn Header="Class Position"
+                                            Binding="{Binding ClassPosition}" />
+                        <DataGridTextColumn Header="Name"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Car"
+                                            Binding="{Binding Car}" />
+                        <DataGridTextColumn Header="Race Number"
+                                            Binding="{Binding RaceNumber}" />
+                        <DataGridTextColumn Header="Car Class"
+                                            Binding="{Binding CarClass}" />
+                        <DataGridTextColumn Header="Grid Position"
+                                            Binding="{Binding GridPosition}" />
+                        <DataGridTextColumn Header="Class Grid Position"
+                                            Binding="{Binding ClassGridPosition}" />
+                        <DataGridTextColumn Header="Laps"
+                                            Binding="{Binding LapsCompleted}" />
+                        <DataGridTextColumn Header="Best Lap"
+                                            Binding="{Binding BestLap}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </GroupBox>
+
+            <GroupBox Grid.Column="0"
+                      Grid.Row="6"
+                      Grid.ColumnSpan="4"
+                      Header="Event Stream">
+               
+                <ListBox ItemsSource="{Binding EventStream}" Height="200"/>
+            </GroupBox>
 
 
         </Grid>
+
+    </Grid>
 </Window>
