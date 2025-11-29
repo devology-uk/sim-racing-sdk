@@ -50,6 +50,7 @@ public class AccMonitor : IAccMonitor
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private AccSharedMemoryEvent? accSharedMemoryEvent;
     private IAccUdpConnection? accUdpConnection;
+    private Connection? connection;
     private string? connectionIdentifier;
     private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
@@ -60,7 +61,6 @@ public class AccMonitor : IAccMonitor
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private TrackDataUpdate? trackData;
     private CompositeDisposable? udpSubscriptionSink;
-    private Connection? connection;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
@@ -295,9 +295,7 @@ public class AccMonitor : IAccMonitor
 
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
-
-        var sessionTypeChanged = false;
-        var phaseChanged = false;
+        var sessionTime = realtimeUpdate.SessionTime.TotalMilliseconds;
 
         if(this.currentSessionType != sessionType)
         {
@@ -305,10 +303,6 @@ public class AccMonitor : IAccMonitor
                 $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
             this.sessionChangedSubject.OnNext(
                 new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
-            
-            this.currentSessionType = sessionType;
-            sessionTypeChanged = true;
-            this.EndCurrentSession();
         }
 
         if(this.currentPhase != sessionPhase)
@@ -317,21 +311,21 @@ public class AccMonitor : IAccMonitor
                 $"Phase Changed: From={this.currentPhase.ToFriendlyName()} To={sessionPhase.ToFriendlyName()}");
             this.phaseChangedSubject.OnNext(
                 new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
-            this.currentPhase = sessionPhase;
-            phaseChanged = true;
         }
 
+        if(this.ShouldEndSession(sessionType, sessionPhase, sessionTime))
+        {
+            this.EndCurrentSession();
+        }
 
-
-        if(this.currentSession == null || sessionTypeChanged || realtimeUpdate.SessionTime.TotalMilliseconds
-           < this.currentSessionTime.TotalMilliseconds)
+        if(this.ShouldStartNewSession(sessionType))
         {
             this.StartNewSession(realtimeUpdate, sessionType);
         }
-        else
-        {
-            this.currentSessionTime = realtimeUpdate.SessionTime;
-        }
+
+        this.currentSessionType = sessionType;
+        this.currentPhase = sessionPhase;
+        this.currentSessionTime = realtimeUpdate.SessionTime;
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
@@ -578,6 +572,32 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
 
+    private bool ShouldEndSession(RaceSessionType sessionType, SessionPhase sessionPhase, double sessionTime)
+    {
+        if(this.currentSession == null)
+        {
+            return false;
+        }
+
+        if(this.currentPhase != sessionPhase && sessionPhase == SessionPhase.PostSession)
+        {
+            return true;
+        }
+
+        if(this.currentSessionType != sessionType)
+        {
+            return true;
+        }
+
+        return sessionTime < this.currentSessionTime.TotalMilliseconds;
+    }
+
+    private bool ShouldStartNewSession(RaceSessionType sessionType)
+    {
+        return this.currentSession == null && sessionType != RaceSessionType.NONE
+                                           && sessionType != RaceSessionType.Replay;
+    }
+
     private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
         this.accUdpConnection!.RequestEntryList();
@@ -586,7 +606,6 @@ public class AccMonitor : IAccMonitor
             realtimeUpdate.SessionEndTime,
             this.trackData!.TrackName);
         this.sessionStartedSubject.OnNext(this.currentSession);
-        this.currentSessionTime = TimeSpan.Zero;
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
 }
