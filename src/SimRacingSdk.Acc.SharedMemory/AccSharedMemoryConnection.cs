@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.SharedMemory.Abstractions;
+using SimRacingSdk.Acc.SharedMemory.Enums;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
@@ -10,6 +10,7 @@ namespace SimRacingSdk.Acc.SharedMemory;
 
 public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
+    private readonly Subject<AccAppStatusChange> appStatusChangesSubject = new();
     private readonly Subject<bool> connectedStateSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
@@ -31,6 +32,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.sharedMemoryProvider = sharedMemoryProvider;
     }
 
+    public IObservable<AccAppStatusChange> AppStatusChanges => this.appStatusChangesSubject.AsObservable();
     public IObservable<bool> ConnectedState => this.connectedStateSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
@@ -67,6 +69,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         this.updateSubscription?.Dispose();
+    }
+
+    private bool HasAppStatusChanged(GraphicsData graphicsData)
+    {
+        return this.lastGraphicsData != null && this.lastGraphicsData.Status != graphicsData.Status;
     }
 
     private bool HasStartedOutLap(GraphicsData graphicsData)
@@ -109,7 +116,9 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, nameof(AccSharedMemoryConnection)));
+        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel,
+            content,
+            nameof(AccSharedMemoryConnection)));
     }
 
     private void OnNextUpdate(long index)
@@ -153,9 +162,15 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
         if(this.lastGraphicsData == null)
         {
-            this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
+            this.appStatusChangesSubject.OnNext(new AccAppStatusChange(AccAppStatus.Off, AccAppStatus.Live));
         }
-        else if(this.lastGraphicsData.SessionType != graphicsData.SessionType)
+        else if(this.HasAppStatusChanged(graphicsData))
+        {
+            this.appStatusChangesSubject.OnNext(new AccAppStatusChange(this.lastGraphicsData.Status,
+                graphicsData.Status));
+        }
+
+        if (this.lastGraphicsData == null || this.lastGraphicsData.SessionType != graphicsData.SessionType)
         {
             this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
         }
@@ -163,7 +178,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
         this.actualSectorIndex = graphicsData.CurrentSectorIndex;
-
+        
         this.lastGraphicsData = graphicsData;
 
         if(hasStartedOutLap || hasStartedPaceLap)
