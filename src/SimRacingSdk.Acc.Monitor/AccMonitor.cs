@@ -125,7 +125,7 @@ public class AccMonitor : IAccMonitor
 
     public void Stop()
     {
-        this.EndCurrentSession();
+        this.StopCurrentSession();
         this.udpSubscriptionSink?.Dispose();
         this.sharedMemorySubscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
@@ -143,24 +143,6 @@ public class AccMonitor : IAccMonitor
         }
 
         this.Stop();
-    }
-
-    private void EndCurrentSession()
-    {
-        if(this.currentSession == null)
-        {
-            return;
-        }
-
-        if(this.accSharedMemoryEvent != null)
-        {
-            this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
-            this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
-        }
-
-        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
-        this.sessionCompletedSubject.OnNext(this.currentSession);
-        this.currentSession = null;
     }
 
     private void LogMessage(LoggingLevel level, string content)
@@ -295,9 +277,10 @@ public class AccMonitor : IAccMonitor
 
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
-        var sessionTime = realtimeUpdate.SessionTime.TotalMilliseconds;
+        var hasSessionTypeChanged = this.currentSessionType != sessionType;
+        var hasPhaseChanged = this.currentPhase != sessionPhase;
 
-        if(this.currentSessionType != sessionType)
+        if(hasSessionTypeChanged)
         {
             this.LogMessage(LoggingLevel.Information,
                 $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
@@ -305,7 +288,7 @@ public class AccMonitor : IAccMonitor
                 new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
         }
 
-        if(this.currentPhase != sessionPhase)
+        if(hasPhaseChanged)
         {
             this.LogMessage(LoggingLevel.Information,
                 $"Phase Changed: From={this.currentPhase.ToFriendlyName()} To={sessionPhase.ToFriendlyName()}");
@@ -313,13 +296,11 @@ public class AccMonitor : IAccMonitor
                 new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
         }
 
-        if(this.ShouldEndSession(sessionType, sessionPhase, sessionTime))
+        if((hasPhaseChanged && sessionPhase == SessionPhase.Session)
+           || (this.currentPhase == SessionPhase.Session && realtimeUpdate.SessionTime.TotalMilliseconds
+               < this.currentSessionTime.TotalMilliseconds))
         {
-            this.EndCurrentSession();
-        }
-
-        if(this.ShouldStartNewSession(sessionType))
-        {
+            this.StopCurrentSession();
             this.StartNewSession(realtimeUpdate, sessionType);
         }
 
@@ -571,33 +552,7 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActive = accFlagState.IsYellowFlagActive;
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
-
-    private bool ShouldEndSession(RaceSessionType sessionType, SessionPhase sessionPhase, double sessionTime)
-    {
-        if(this.currentSession == null)
-        {
-            return false;
-        }
-
-        if(this.currentPhase != sessionPhase && sessionPhase == SessionPhase.PostSession)
-        {
-            return true;
-        }
-
-        if(this.currentSessionType != sessionType)
-        {
-            return true;
-        }
-
-        return sessionTime < this.currentSessionTime.TotalMilliseconds;
-    }
-
-    private bool ShouldStartNewSession(RaceSessionType sessionType)
-    {
-        return this.currentSession == null && sessionType != RaceSessionType.NONE
-                                           && sessionType != RaceSessionType.Replay;
-    }
-
+    
     private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
         this.accUdpConnection!.RequestEntryList();
@@ -607,5 +562,23 @@ public class AccMonitor : IAccMonitor
             this.trackData!.TrackName);
         this.sessionStartedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+    }
+
+    private void StopCurrentSession()
+    {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
+        if(this.accSharedMemoryEvent != null)
+        {
+            this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+            this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
+        }
+
+        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
+        this.sessionCompletedSubject.OnNext(this.currentSession);
+        this.currentSession = null;
     }
 }
