@@ -16,13 +16,11 @@ public class AccUdpConnection : IAccUdpConnection
 {
     private readonly AccUdpMessageHandler accUdpMessageHandler;
     private readonly IPEndPoint ipEndPoint;
-    private readonly TimeSpan messageTimeout = TimeSpan.FromSeconds(2);
     private readonly CompositeDisposable subscriptionSink = new();
 
     private bool isConnected;
     private bool isDisposed;
     private bool isStopped;
-    private DateTime lastRealTimeUpdate;
     private Task listenerTask;
     private UdpClient udpClient;
 
@@ -67,8 +65,6 @@ public class AccUdpConnection : IAccUdpConnection
         this.subscriptionSink.Add(
             this.accUdpMessageHandler.DispatchedMessages.Subscribe(this.OnNextDispatchedMessage));
         this.subscriptionSink.Add(
-            this.accUdpMessageHandler.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate));
-        this.subscriptionSink.Add(
             this.accUdpMessageHandler.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate));
 
         try
@@ -80,7 +76,6 @@ public class AccUdpConnection : IAccUdpConnection
 
             this.listenerTask = this.HandleMessages();
             this.accUdpMessageHandler.RequestTrackData();
-            this.StartDisconnectedWatcher();
         }
         catch(Exception exception)
         {
@@ -195,11 +190,6 @@ public class AccUdpConnection : IAccUdpConnection
         }
     }
 
-    private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
-    {
-        this.lastRealTimeUpdate = DateTime.Now;
-    }
-
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
         this.accUdpMessageHandler.RequestEntryList();
@@ -235,23 +225,6 @@ public class AccUdpConnection : IAccUdpConnection
         this.udpClient?.Close();
         this.udpClient?.Dispose();
         this.udpClient = null;
-    }
-
-    private void StartDisconnectedWatcher()
-    {
-        var subscription = Observable.Interval(this.messageTimeout)
-                                     .Subscribe(n =>
-                                                {
-                                                    var timeSinceLastUpdate = DateTime.Now - this.lastRealTimeUpdate;
-                                                    if(!this.isConnected || timeSinceLastUpdate <= this.messageTimeout)
-                                                    {
-                                                        return;
-                                                    }
-
-                                                    this.accUdpMessageHandler.Disconnect(false);
-                                                    this.LogMessage(LoggingLevel.Information, "ACC has stopped sending messages, the user has probably quit the session.");
-                                                });
-        this.subscriptionSink.Add(subscription);
     }
 
     private void WaitUntilRegistered()
