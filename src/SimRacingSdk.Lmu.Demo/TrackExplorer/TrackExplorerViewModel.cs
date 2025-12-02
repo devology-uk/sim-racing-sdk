@@ -68,7 +68,7 @@ namespace SimRacingSdk.Lmu.Demo.TrackExplorer
             foreach(var lmuTrackInfo in this.trackInfoProvider.GetTrackInfos())
             {
                 var trackInfo =
-                    $"{lmuTrackInfo.ShortName},{lmuTrackInfo.Name},{lmuTrackInfo.Country},{lmuTrackInfo.CountryCode},{lmuTrackInfo.Latitude},{lmuTrackInfo.Longitude}";
+                    $"{lmuTrackInfo.ShortName},{lmuTrackInfo.ShortName},{lmuTrackInfo.Name},{lmuTrackInfo.Country},{lmuTrackInfo.CountryCode},{lmuTrackInfo.Latitude},{lmuTrackInfo.Longitude}";
                 tracksStreamWriter.WriteLine(trackInfo);
                 tracksStreamWriter.Flush();
 

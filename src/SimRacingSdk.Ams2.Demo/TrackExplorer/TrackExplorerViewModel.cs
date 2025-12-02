@@ -68,13 +68,13 @@ namespace SimRacingSdk.Ams2.Demo.TrackExplorer
             foreach(var ams2TrackInfo in this.trackInfoProvider.GetTrackInfos())
             {
                 var trackInfo =
-                    $"{ams2TrackInfo.ShortName},{ams2TrackInfo.FullName},{ams2TrackInfo.Country},{ams2TrackInfo.CountryCode},{ams2TrackInfo.Latitude},{ams2TrackInfo.Longitude},{ams2TrackInfo.AltitudeM}";
+                    $"{ams2TrackInfo.ShortName},{ams2TrackInfo.ShortName},{ams2TrackInfo.FullName},{ams2TrackInfo.Country},{ams2TrackInfo.CountryCode},{ams2TrackInfo.Latitude},{ams2TrackInfo.Longitude},{ams2TrackInfo.AltitudeM}";
                 tracksStreamWriter.WriteLine(trackInfo);
                 tracksStreamWriter.Flush();
 
                 foreach(var ams2TrackLayoutInfo in ams2TrackInfo.Layouts)
                 {
-                    var layoutInfo = $"{ams2TrackInfo.ShortName},{ams2TrackLayoutInfo.Ams2TrackId},{ams2TrackLayoutInfo.Name},{ams2TrackLayoutInfo.Corners},{ams2TrackLayoutInfo.Grade},{ams2TrackLayoutInfo.LengthKm},{ams2TrackLayoutInfo.MaxGridSize},{ams2TrackLayoutInfo.TrackType}";
+                    var layoutInfo = $"{ams2TrackInfo.ShortName},{ams2TrackLayoutInfo.Ams2TrackId},{ams2TrackLayoutInfo.Name},{ams2TrackLayoutInfo.Corners},{ams2TrackLayoutInfo.LengthM},{ams2TrackLayoutInfo.Grade},{ams2TrackLayoutInfo.LengthKm},{ams2TrackLayoutInfo.MaxGridSize},{ams2TrackLayoutInfo.TrackType}";
                     layoutsStreamWriter.WriteLine(layoutInfo);
                     layoutsStreamWriter.Flush();
                 }
