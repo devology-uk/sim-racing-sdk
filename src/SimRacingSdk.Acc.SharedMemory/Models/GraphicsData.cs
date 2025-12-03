@@ -7,7 +7,9 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record GraphicsData
 {
-    internal GraphicsData() { }
+    internal GraphicsData() {
+        this.IsEmpty = true;
+    }
 
     internal GraphicsData(GraphicsPage graphicsPage)
     {
@@ -121,6 +123,7 @@ public record GraphicsData
     public float FuelPerLap { get; }
     public int GapAheadMs { get; }
     public int GapBehindMs { get; }
+    public bool IsEmpty { get; }
     public bool IsDeltaPositive { get; }
     public bool IsIdealLineOn { get; }
     public bool IsInPitLane { get; }

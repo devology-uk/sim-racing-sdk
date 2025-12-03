@@ -6,7 +6,9 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record PhysicsData
 {
-    internal PhysicsData() { }
+    internal PhysicsData() {
+        this.IsEmpty = true;
+    }
 
     internal PhysicsData(PhysicsPage physicsPage)
     {
@@ -84,6 +86,7 @@ public record PhysicsData
     public int Gear { get; }
     public float GearVibrations { get; }
     public float Heading { get; }
+    public bool IsEmpty { get; }
     public bool IgnitionOn { get; }
     public bool IsAiControlled { get; }
     public bool IsEngineRunning { get; }

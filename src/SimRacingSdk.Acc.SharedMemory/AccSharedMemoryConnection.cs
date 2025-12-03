@@ -124,6 +124,9 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
+        if(staticData.IsEmpty) {
+            return; 
+        }
 
         if(!staticData.IsActualEvent())
         {
@@ -150,6 +153,10 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
+        if(graphicsData.IsEmpty) {
+            return;
+        }
+
         this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
 
         var flagState = new AccFlagState(graphicsData.IsWhiteFlagActive,
@@ -205,6 +212,10 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
+        if(physicsData.IsEmpty) {
+            return;
+        }
+
         this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
             graphicsData,
             physicsData,
