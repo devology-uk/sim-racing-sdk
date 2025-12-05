@@ -6,7 +6,9 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record StaticData
 {
-    internal StaticData() { }
+    internal StaticData() {
+        this.IsEmpty = true;
+    }
 
     internal StaticData(StaticDataPage staticDataPage)
     {
@@ -47,6 +49,7 @@ public record StaticData
     public float AidTyreRate { get; }
     public string CarModel { get; }
     public string DryTyresName { get; }
+    public bool IsEmpty { get; }
     public bool IsOnline { get; }
     public float MaxFuel { get; }
     public int MaxRpm { get; }
