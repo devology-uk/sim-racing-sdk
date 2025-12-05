@@ -297,7 +297,7 @@ public class AccMonitor : IAccMonitor
         }
 
         if((hasPhaseChanged && sessionPhase == SessionPhase.Session)
-           || (this.currentPhase == SessionPhase.Session && realtimeUpdate.SessionTime.TotalMilliseconds
+           || (!hasPhaseChanged && this.currentPhase == SessionPhase.Session && realtimeUpdate.SessionTime.TotalMilliseconds
                < this.currentSessionTime.TotalMilliseconds))
         {
             this.StopCurrentSession();
@@ -580,7 +580,7 @@ public class AccMonitor : IAccMonitor
 
                                                                       this.LogMessage(
                                                                           LoggingLevel.Information,
-                                                                          "ACC has stopped sending messages, the user has probably quit the session.");
+                                                                          "ACC has stopped sending messages the user has probably quit the session.");
                                                                       this.Stop();
                                                                   });
     }

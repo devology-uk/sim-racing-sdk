@@ -124,7 +124,7 @@ public partial class LogViewerViewModel : ObservableObject
             return;
         }
 
-        var propertyElements = currentToken.Split('=', StringSplitOptions.TrimEntries);
+        var propertyElements = currentToken.Split(['=', ':'], StringSplitOptions.TrimEntries);
         this.LogEntryProperties.Add(new LogEntryProperty($"{nestingPrefix}{propertyElements[0]}",
             propertyElements[1]));
     }

@@ -130,7 +130,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             if(this.isConnected)
             {
                 this.LogMessage(LoggingLevel.Information,
-                    "Shared Memory data is no longer available, the user has probably quit the event.");
+                    "Shared Memory data is no longer available the user has probably quit the event.");
                 this.connectedStateSubject.OnNext(false);
             }
 

@@ -188,7 +188,7 @@ public class Ams2UdpConnection : IAms2UdpConnection
                                                     this.isConnected = false;
                                                     this.connectionStateUpdatesSubject.OnNext(new ConnectionState(false, this.currentConnectionId));
                                                     this.LogMessage(LoggingLevel.Information,
-                                                        "AMS2 has stopped sending messages, the user has probably quit the session.");
+                                                        "AMS2 has stopped sending messages the user has probably quit the session.");
                                                     this.Shutdown();
                                                 });
         this.subscriptionSink.Add(subscription);
