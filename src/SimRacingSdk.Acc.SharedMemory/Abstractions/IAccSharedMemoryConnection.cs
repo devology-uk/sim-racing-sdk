@@ -9,10 +9,12 @@ public interface IAccSharedMemoryConnection : IDisposable
     IObservable<AccSharedMemoryConnectedState> ConnectedState { get; }
     IObservable<AccFlagState> FlagState { get; }
     IObservable<LogMessage> LogMessages { get; }
-    IObservable<AccSharedMemoryEvent> NewEvent { get; }
-    IObservable<AccSharedMemoryLap> NewLap { get; }
-    IObservable<AccSharedMemorySession> NewSession { get; }
+    IObservable<AccSharedMemoryEvent> EventStarted { get; }
+    IObservable<AccSharedMemoryLap> Laps { get; }
+    IObservable<AccSharedMemorySession> SessionStarted { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }
+    IObservable<AccSharedMemoryEvent> EventEnded { get; }
+    IObservable<AccSharedMemorySession> SessionEnded { get; }
     void Start(double updateIntervalMs = 100);
     void Stop();
 }

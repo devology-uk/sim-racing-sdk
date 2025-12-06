@@ -42,11 +42,14 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.subscriptionSink = new CompositeDisposable
         {
             this.accSharedMemoryConnection.LogMessages.Subscribe(this.OnNextLogMessage),
+            this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStateChange),
             this.accSharedMemoryConnection.ConnectedState.Subscribe(this.OnNextConnectedState),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.NewEvent.Subscribe(this.OnNextNewEvent),
-            this.accSharedMemoryConnection.NewLap.Subscribe(this.OnNextNewLap),
-            this.accSharedMemoryConnection.NewSession.Subscribe(this.OnNextNewSession),
+            this.accSharedMemoryConnection.EventEnded.Subscribe(this.OnNextEventEnded),
+            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextEventStarted),
+            this.accSharedMemoryConnection.Laps.Subscribe(this.OnNextNewLap),
+            this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSessionEnded),
+            this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextSessionStarted),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };
         this.accSharedMemoryConnection.Start();
@@ -78,15 +81,24 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.consoleLog.Write(message);
     }
 
-    private void OnNextConnectedState(bool isConnected)
+    private void OnNextAppStateChange(AccAppStatusChange accAppStatusChange)
     {
-        if(isConnected)
-        {
-            this.Log("Connected to ACC Shared Memory interface...");
-            return;
-        }
+        this.Log(accAppStatusChange.ToString());
+    }
 
-        this.Log("Disconnected from ACC Shared Memory interface...", LogLevel.Warning);
+    private void OnNextConnectedState(AccSharedMemoryConnectedState accSharedMemoryConnectedState)
+    {
+        this.Log(accSharedMemoryConnectedState.ToString());
+    }
+
+    private void OnNextEventEnded(AccSharedMemoryEvent accSharedMemoryEvent)
+    {
+        this.Log(accSharedMemoryEvent.ToString());
+    }
+
+    private void OnNextEventStarted(AccSharedMemoryEvent accSharedMemoryEvent)
+    {
+        this.Log(accSharedMemoryEvent.ToString());
     }
 
     private void OnNextFlagState(AccFlagState accFlagState)
@@ -94,21 +106,9 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.Log(accFlagState.ToString());
     }
 
-    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
-    {
-        // too much information to log telemetry frames, which are logged via log messages
-        // just maintaining a count to report at the end
-        this.telemetryFrameCount++;
-    }
-
     private void OnNextLogMessage(LogMessage logMessage)
     {
         this.sharedMemoryLog.Log(logMessage.ToString());
-    }
-
-    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.Log(accSharedMemoryEvent.ToString());
     }
 
     private void OnNextNewLap(AccSharedMemoryLap accSharedMemoryLap)
@@ -116,8 +116,20 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         this.Log(accSharedMemoryLap.ToString());
     }
 
-    private void OnNextNewSession(AccSharedMemorySession sharedMemorySession)
+    private void OnNextSessionEnded(AccSharedMemorySession sharedMemorySession)
     {
         this.Log(sharedMemorySession.ToString());
+    }
+
+    private void OnNextSessionStarted(AccSharedMemorySession sharedMemorySession)
+    {
+        this.Log(sharedMemorySession.ToString());
+    }
+
+    private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
+    {
+        // too much information to log telemetry frames, which are logged via log messages
+        // just maintaining a count to report at the end
+        this.telemetryFrameCount++;
     }
 }

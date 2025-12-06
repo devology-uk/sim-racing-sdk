@@ -4,6 +4,7 @@ public record AccSharedMemoryEvent
 {
     public AccSharedMemoryEvent(StaticData staticData)
     {
+        this.EventId = Guid.NewGuid();
         this.AccVersion = staticData.AccVersion;
         this.IsOnline = staticData.IsOnline;
         this.NumberOfCars = staticData.NumberOfCars;
@@ -16,6 +17,7 @@ public record AccSharedMemoryEvent
         this.TrackId = staticData.Track;
     }
 
+    public Guid EventId { get; }
     public string AccVersion { get; }
     public bool IsOnline { get; }
     public int NumberOfCars { get; }
