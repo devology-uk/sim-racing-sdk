@@ -11,7 +11,7 @@ namespace SimRacingSdk.Acc.SharedMemory;
 public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
     private readonly Subject<AccAppStatusChange> appStatusChangesSubject = new();
-    private readonly Subject<bool> connectedStateSubject = new();
+    private readonly Subject<AccSharedMemoryConnectedState> connectedStateSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccSharedMemoryEvent> newEventSubject = new();
@@ -24,6 +24,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private StaticData? currentStaticData;
     private bool isConnected;
     private bool isOnActiveLap;
+    private AccFlagState? lastFlagState;
     private GraphicsData? lastGraphicsData;
     private IDisposable? updateSubscription;
 
@@ -33,7 +34,8 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     }
 
     public IObservable<AccAppStatusChange> AppStatusChanges => this.appStatusChangesSubject.AsObservable();
-    public IObservable<bool> ConnectedState => this.connectedStateSubject.AsObservable();
+    public IObservable<AccSharedMemoryConnectedState> ConnectedState =>
+        this.connectedStateSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> NewEvent => this.newEventSubject.AsObservable();
@@ -124,68 +126,52 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
-        if(staticData.IsEmpty) {
-            return; 
-        }
+        this.UpdateConnectionState(staticData.IsConnected);
 
-        if(!staticData.IsActualEvent())
+        if(!this.isConnected)
         {
-            if(this.isConnected)
-            {
-                this.LogMessage(LoggingLevel.Information,
-                    "Shared Memory data is no longer available the user has probably quit the event.");
-                this.connectedStateSubject.OnNext(false);
-            }
-
-            this.isConnected = false;
             return;
         }
 
         this.LogMessage(LoggingLevel.Debug, staticData.ToString());
 
-        this.isConnected = true;
-        this.connectedStateSubject.OnNext(true);
-
-        if(this.IsNewEvent(staticData!))
-        {
-            this.newEventSubject.OnNext(new AccSharedMemoryEvent(staticData));
-            this.currentStaticData = staticData!;
-        }
+        this.UpdateEvent(staticData);
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
-        if(graphicsData.IsEmpty) {
+        if(graphicsData.IsEmpty)
+        {
             return;
         }
 
         this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
 
-        var flagState = new AccFlagState(graphicsData.IsWhiteFlagActive,
-            graphicsData.IsYellowFlagActive,
-            graphicsData.IsYellowFlagActiveInSector1,
-            graphicsData.IsYellowFlagActiveInSector2,
-            graphicsData.IsYellowFlagActiveInSector3);
-
-        this.flagStateSubject.OnNext(flagState);
-
-        if(this.lastGraphicsData == null)
+        this.UpdateFlagState(graphicsData);
+        this.UpdateAppStatus(graphicsData);
+        this.UpdateSession(graphicsData, staticData);
+        if(!this.UpdateActiveLap(graphicsData, staticData))
         {
-            this.appStatusChangesSubject.OnNext(new AccAppStatusChange(AccAppStatus.Off, AccAppStatus.Live));
-        }
-        else if(this.HasAppStatusChanged(graphicsData))
-        {
-            this.appStatusChangesSubject.OnNext(new AccAppStatusChange(this.lastGraphicsData.Status,
-                graphicsData.Status));
+            return;
         }
 
-        if (this.lastGraphicsData == null || this.lastGraphicsData.SessionType != graphicsData.SessionType)
+        var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
+        if(physicsData.IsEmpty)
         {
-            this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
+            return;
         }
 
+        this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
+            graphicsData,
+            physicsData,
+            this.actualSectorIndex));
+        this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
+    }
+
+    private bool UpdateActiveLap(GraphicsData graphicsData, StaticData staticData)
+    {
         var hasStartedOutLap = this.HasStartedOutLap(graphicsData);
         var hasStartedPaceLap = this.HasStartedPaceLap(graphicsData);
         this.actualSectorIndex = graphicsData.CurrentSectorIndex;
-        
+
         this.lastGraphicsData = graphicsData;
 
         if(hasStartedOutLap || hasStartedPaceLap)
@@ -206,20 +192,64 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
             this.isOnActiveLap = false;
         }
 
-        if(!this.isOnActiveLap)
+        return this.isOnActiveLap;
+    }
+
+    private void UpdateAppStatus(GraphicsData graphicsData)
+    {
+        var currentStatus = this.lastGraphicsData?.Status ?? AccAppStatus.Off;
+        if(graphicsData.Status == currentStatus)
         {
             return;
         }
 
-        var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
-        if(physicsData.IsEmpty) {
+        this.appStatusChangesSubject.OnNext(new AccAppStatusChange(currentStatus, graphicsData.Status));
+    }
+
+    private void UpdateConnectionState(bool isConnected)
+    {
+        if(this.isConnected == isConnected)
+        {
             return;
         }
 
-        this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
-            graphicsData,
-            physicsData,
-            this.actualSectorIndex));
-        this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
+        this.connectedStateSubject.OnNext(new AccSharedMemoryConnectedState(this.isConnected, isConnected));
+        this.isConnected = isConnected;
+    }
+
+    private void UpdateEvent(StaticData staticData)
+    {
+        if(!this.IsNewEvent(staticData!))
+        {
+            return;
+        }
+
+        this.newEventSubject.OnNext(new AccSharedMemoryEvent(staticData));
+        this.currentStaticData = staticData!;
+    }
+
+    private void UpdateFlagState(GraphicsData graphicsData)
+    {
+        var flagState = new AccFlagState(graphicsData.IsWhiteFlagActive,
+            graphicsData.IsYellowFlagActive,
+            graphicsData.IsYellowFlagActiveInSector1,
+            graphicsData.IsYellowFlagActiveInSector2,
+            graphicsData.IsYellowFlagActiveInSector3);
+
+        if(this.lastFlagState != null && flagState == this.lastFlagState)
+        {
+            return;
+        }
+
+        this.lastFlagState = flagState;
+        this.flagStateSubject.OnNext(flagState);
+    }
+
+    private void UpdateSession(GraphicsData graphicsData, StaticData staticData)
+    {
+        if(this.lastGraphicsData == null || this.lastGraphicsData.SessionType != graphicsData.SessionType)
+        {
+            this.newSessionSubject.OnNext(new AccSharedMemorySession(staticData, graphicsData));
+        }
     }
 }

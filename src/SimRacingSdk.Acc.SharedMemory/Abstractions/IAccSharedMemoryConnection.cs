@@ -6,7 +6,7 @@ namespace SimRacingSdk.Acc.SharedMemory.Abstractions;
 public interface IAccSharedMemoryConnection : IDisposable
 {
     IObservable<AccAppStatusChange> AppStatusChanges { get; }
-    IObservable<bool> ConnectedState { get; }
+    IObservable<AccSharedMemoryConnectedState> ConnectedState { get; }
     IObservable<AccFlagState> FlagState { get; }
     IObservable<LogMessage> LogMessages { get; }
     IObservable<AccSharedMemoryEvent> NewEvent { get; }

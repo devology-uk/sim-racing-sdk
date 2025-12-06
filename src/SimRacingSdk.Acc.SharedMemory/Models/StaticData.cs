@@ -7,7 +7,7 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 public record StaticData
 {
     internal StaticData() {
-        this.IsEmpty = true;
+        this.IsConnected = false;
     }
 
     internal StaticData(StaticDataPage staticDataPage)
@@ -22,6 +22,7 @@ public record StaticData
         this.AidTyreRate = staticDataPage.AidTireRate;
         this.CarModel = staticDataPage.CarModel;
         this.DryTyresName = staticDataPage.DryTyresName;
+        this.IsConnected = true;
         this.IsOnline = staticDataPage.IsOnline;
         this.MaxFuel = staticDataPage.MaxFuel;
         this.MaxRpm = staticDataPage.MaxRpm;
@@ -49,7 +50,7 @@ public record StaticData
     public float AidTyreRate { get; }
     public string CarModel { get; }
     public string DryTyresName { get; }
-    public bool IsEmpty { get; }
+    public bool IsConnected { get; }
     public bool IsOnline { get; }
     public float MaxFuel { get; }
     public int MaxRpm { get; }
