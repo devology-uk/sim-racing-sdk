@@ -8,8 +8,8 @@ namespace SimRacingSdk.Acc.Monitor.Abstractions;
 public interface IAccMonitor : IDisposable
 {
     IObservable<AccMonitorAccident> Accidents { get; }
-    IObservable<IList<AccMonitorEventEntry>> EntryList { get; }
-    IObservable<AccMonitorEventEntry> EventEntries { get; }
+    IObservable<IList<AccMonitorEntry>> EntryList { get; }
+    IObservable<AccMonitorEntry> Entries { get; }
     IObservable<AccMonitorGreenFlag> GreenFlag { get; }
     IObservable<bool> IsWhiteFlagActive { get; }
     IObservable<bool> IsYellowFlagActive { get; }
@@ -20,7 +20,7 @@ public interface IAccMonitor : IDisposable
     IObservable<AccMonitorSessionPhaseChange> PhaseChanged { get; }
     IObservable<RealtimeCarUpdate> RealtimeCarUpdates { get; }
     IObservable<AccMonitorLap> SessionBestLap { get; }
-    IObservable<AccMonitorSessionTypeChange> SessionChanged { get; }
+    IObservable<AccMonitorSessionTypeChange> SessionTypeChanged { get; }
     IObservable<AccMonitorSession> SessionCompleted { get; }
     IObservable<AccMonitorSession> SessionStarted { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }

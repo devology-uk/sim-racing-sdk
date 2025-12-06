@@ -2,6 +2,7 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using SimRacingSdk.Acc.Core;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Monitor.Abstractions;
@@ -18,7 +19,7 @@ using SimRacingSdk.Core.Messages;
 
 namespace SimRacingSdk.Acc.Monitor;
 
-public class AccMonitor : IAccMonitor
+internal class AccMonitorUdp: IAccMonitor
 {
     private const string LocalhostIpAddress = "127.0.0.1";
 
@@ -29,9 +30,10 @@ public class AccMonitor : IAccMonitor
     private readonly IAccNationalityInfoProvider accNationalityInfoProvider;
     private readonly IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory;
     private readonly IAccUdpConnectionFactory accUdpConnectionFactory;
-    private readonly Subject<AccMonitorEntry> entriesSubject = new();
+    private readonly TimeSpan connectionTimeout = TimeSpan.FromSeconds(2);
     private readonly List<AccMonitorEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEntry>> entryListSubject = new();
+    private readonly Subject<AccMonitorEntry> eventEntriesSubject = new();
     private readonly Subject<AccMonitorGreenFlag> greenFlagSubject = new();
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
@@ -42,26 +44,30 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccMonitorSessionPhaseChange> phaseChangedSubject = new();
     private readonly Subject<RealtimeCarUpdate> realtimeCarUpdatesSubject = new();
     private readonly Subject<AccMonitorLap> sessionBestLapSubject = new();
+    private readonly Subject<AccMonitorSessionTypeChange> sessionChangedSubject = new();
     private readonly Subject<AccMonitorSession> sessionCompletedSubject = new();
     private readonly Subject<AccMonitorSession> sessionStartedSubject = new();
-    private readonly Subject<AccMonitorSessionTypeChange> sessionTypeChangedSubject = new();
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
     private AccSharedMemoryEvent? accSharedMemoryEvent;
-    private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
+    private Connection? connection;
     private string? connectionIdentifier;
     private AccAppStatus currentAppStatus;
+    private SessionPhase currentPhase = SessionPhase.NONE;
     private AccMonitorSession? currentSession;
-    private SessionPhase currentUdpPhase = SessionPhase.NONE;
-    private RaceSessionType currentUdpSessionType = RaceSessionType.NONE;
+    private TimeSpan currentSessionTime = TimeSpan.Zero;
+    private RaceSessionType currentSessionType = RaceSessionType.NONE;
+    private IDisposable? disconnectWatcherSubscription;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
+    private DateTime lastRealTimeUpdate;
     private CompositeDisposable? sharedMemorySubscriptionSink;
+    private TrackDataUpdate? trackData;
     private CompositeDisposable? udpSubscriptionSink;
 
-    public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
+    public AccMonitorUdp(IAccUdpConnectionFactory accUdpConnectionFactory,
         IAccSharedMemoryConnectionFactory accSharedMemoryConnectionFactory,
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
@@ -77,8 +83,8 @@ public class AccMonitor : IAccMonitor
     }
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
-    public IObservable<AccMonitorEntry> Entries => this.entriesSubject.AsObservable();
     public IObservable<IList<AccMonitorEntry>> EntryList => this.entryListSubject.AsObservable();
+    public IObservable<AccMonitorEntry> Entries => this.eventEntriesSubject.AsObservable();
     public IObservable<AccMonitorGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
@@ -89,10 +95,10 @@ public class AccMonitor : IAccMonitor
     public IObservable<AccMonitorSessionPhaseChange> PhaseChanged => this.phaseChangedSubject.AsObservable();
     public IObservable<RealtimeCarUpdate> RealtimeCarUpdates => this.realtimeCarUpdatesSubject.AsObservable();
     public IObservable<AccMonitorLap> SessionBestLap => this.sessionBestLapSubject.AsObservable();
+    public IObservable<AccMonitorSessionTypeChange> SessionTypeChanged =>
+        this.sessionChangedSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<AccMonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
-    public IObservable<AccMonitorSessionTypeChange> SessionTypeChanged =>
-        this.sessionTypeChangedSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
@@ -112,29 +118,32 @@ public class AccMonitor : IAccMonitor
         this.LogMessage(LoggingLevel.Information,
             $"Starting ACC Monitor connection with ID: {connectionIdentifier}");
 
-        if(!this.accCompatibilityChecker.HasValidBroadcastingSettings())
+        if (!this.accCompatibilityChecker.HasValidBroadcastingSettings())
         {
             this.LogMessage(LoggingLevel.Error,
                 "ACC Monitor cannot start because ACC has not been configured for broadcasting.");
             throw new InvalidBroadcastingSettingsException();
         }
 
-        this.StartSharedMemoryConnection();
+        this.PrepareAndStartNewAccConnection(connectionIdentifier);
     }
 
     public void Stop()
     {
+        this.StopCurrentSession();
+        this.disconnectWatcherSubscription?.Dispose();
         this.udpSubscriptionSink?.Dispose();
         this.sharedMemorySubscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null;
         this.accSharedMemoryConnection?.Dispose();
         this.accSharedMemoryConnection = null;
+        this.connection = null;
     }
 
     protected virtual void Dispose(bool disposing)
     {
-        if(!disposing)
+        if (!disposing)
         {
             return;
         }
@@ -142,30 +151,9 @@ public class AccMonitor : IAccMonitor
         this.Stop();
     }
 
-    private void CompleteCurrentSession()
-    {
-        if(this.currentSession == null)
-        {
-            return;
-        }
-
-        this.currentSession.IsRunning = false;
-        this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
-        this.sessionCompletedSubject.OnNext(this.currentSession);
-        this.currentSession = null;
-    }
-
     private void LogMessage(LoggingLevel level, string content)
     {
         this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(AccMonitor)));
-    }
-
-    private void OnNexSharedMemorySessionStarted(AccSharedMemorySession accSharedMemorySession)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
-        this.accSharedMemorySession = accSharedMemorySession;
-
-        this.StartNewSession();
     }
 
     private void OnNextAppStatusChange(AccAppStatusChange appStatusChange)
@@ -177,7 +165,7 @@ public class AccMonitor : IAccMonitor
     private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)
     {
         this.LogMessage(LoggingLevel.Information, broadcastingEvent.ToString());
-        switch(broadcastingEvent.BroadcastingEventType)
+        switch (broadcastingEvent.BroadcastingEventType)
         {
             case BroadcastingEventType.GreenFlag:
                 this.ProcessGreenFlagEvent(broadcastingEvent);
@@ -236,7 +224,7 @@ public class AccMonitor : IAccMonitor
         };
 
         this.entryList.Add(eventEntry);
-        this.entriesSubject.OnNext(eventEntry);
+        this.eventEntriesSubject.OnNext(eventEntry);
         this.entryListSubject.OnNext(this.entryList);
     }
 
@@ -247,12 +235,30 @@ public class AccMonitor : IAccMonitor
         this.ProcessWhiteFlagState(accFlagState);
     }
 
+    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
+        this.accSharedMemoryEvent = accSharedMemoryEvent;
+        if (this.currentSession == null)
+        {
+            return;
+        }
+        //
+        // this.currentSession.IsOnline = accSharedMemoryEvent.IsOnline;
+        // this.currentSession.NumberOfCars = accSharedMemoryEvent.NumberOfCars;
+    }
+
+    private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
+    {
+        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
+    }
+
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
         var eventEntry = this.entryList.FirstOrDefault(e => e.CarIndex == realTimeCarUpdate.CarIndex);
-        if(eventEntry != null)
+        if (eventEntry != null)
         {
             eventEntry.CarLocation = realTimeCarUpdate.CarLocation;
         }
@@ -261,61 +267,97 @@ public class AccMonitor : IAccMonitor
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
+        this.lastRealTimeUpdate = DateTime.Now;
+
+        if (this.connection == null || !this.entryList.Any())
+        {
+            this.LogMessage(LoggingLevel.Information, "No connection or entry list.");
+            return;
+        }
 
         var sessionPhase = realtimeUpdate.Phase;
         var sessionType = realtimeUpdate.SessionType;
-        var hasSessionTypeChanged = this.currentUdpSessionType != sessionType;
-        var hasPhaseChanged = this.currentUdpPhase != sessionPhase;
+        var hasSessionTypeChanged = this.currentSessionType != sessionType;
+        var hasPhaseChanged = this.currentPhase != sessionPhase;
 
-        if(hasSessionTypeChanged)
+        if (hasSessionTypeChanged)
         {
-            var accMonitorSessionTypeChange =
-                new AccMonitorSessionTypeChange(this.currentUdpSessionType, sessionType);
-            this.sessionTypeChangedSubject.OnNext(accMonitorSessionTypeChange);
-            this.LogMessage(LoggingLevel.Information, accMonitorSessionTypeChange.ToString());
+            this.LogMessage(LoggingLevel.Information,
+                $"Session Type Changed: From={this.currentSessionType.ToFriendlyName()} To={sessionType.ToFriendlyName()}");
+            this.sessionChangedSubject.OnNext(
+                new AccMonitorSessionTypeChange(this.currentSessionType, sessionType));
         }
 
-        if(hasPhaseChanged)
+        if (hasPhaseChanged)
         {
-            var accMonitorSessionPhaseChange =
-                new AccMonitorSessionPhaseChange(this.currentUdpPhase, sessionPhase);
-            this.phaseChangedSubject.OnNext(accMonitorSessionPhaseChange);
-            this.LogMessage(LoggingLevel.Information, accMonitorSessionPhaseChange.ToString());
+            this.LogMessage(LoggingLevel.Information,
+                $"Phase Changed: From={this.currentPhase.ToFriendlyName()} To={sessionPhase.ToFriendlyName()}");
+            this.phaseChangedSubject.OnNext(
+                new AccMonitorSessionPhaseChange(this.currentPhase, sessionPhase));
         }
 
-        this.currentUdpSessionType = sessionType;
-        this.currentUdpPhase = sessionPhase;
-    }
+        if ((hasPhaseChanged && sessionPhase == SessionPhase.Session)
+           || (!hasPhaseChanged && this.currentPhase == SessionPhase.Session && realtimeUpdate.SessionTime.TotalMilliseconds
+               < this.currentSessionTime.TotalMilliseconds))
+        {
+            this.StopCurrentSession();
+            this.StartNewSession(realtimeUpdate, sessionType);
+        }
 
-    private void OnNextSharedMemoryEventEnded(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = null;
-        this.StopUdpConnection();
-    }
-
-    private void OnNextSharedMemoryEventStarted(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = accSharedMemoryEvent;
-        this.StartUdpConnection();
-    }
-
-    private void OnNextSharedMemorySessionEnded(AccSharedMemorySession accSharedMemorySession)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
-        this.CompleteCurrentSession();
+        this.currentSessionType = sessionType;
+        this.currentPhase = sessionPhase;
+        this.currentSessionTime = realtimeUpdate.SessionTime;
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
     {
         this.LogMessage(LoggingLevel.Information, telemetryFrame.ToString());
+
         this.telemetrySubject.OnNext(telemetryFrame);
     }
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
         this.LogMessage(LoggingLevel.Information, trackDataUpdate.ToString());
+        this.trackData = trackDataUpdate;
+        this.entryList.Clear();
+        this.entryListSubject.OnNext(this.entryList);
+
+        this.PrepareSharedMemoryConnection();
+    }
+
+    private void PrepareAndStartNewAccConnection(string? connectionIdentifier)
+    {
+        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC UDP interface.");
+        var broadcastingSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
+        this.accUdpConnection = this.accUdpConnectionFactory.Create(LocalhostIpAddress,
+            broadcastingSettings.UdpListenerPort,
+            connectionIdentifier ?? $"{LocalhostIpAddress}:{broadcastingSettings.UdpListenerPort}",
+            broadcastingSettings.ConnectionPassword,
+            broadcastingSettings.CommandPassword);
+
+        this.PrepareUdpMessageProcessing();
+
+        this.accUdpConnection.Connect();
+        this.StartDisconnectedWatcher();
+    }
+
+    private void PrepareSharedMemoryConnection()
+    {
+        this.LogMessage(LoggingLevel.Information,
+            "Preparing connection to ACC Shared Memory interface for telemetry.");
+        this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
+
+        this.sharedMemorySubscriptionSink = new CompositeDisposable
+        {
+            this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
+            this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
+            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame),
+            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextNewEvent),
+            this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextNewSharedMemorySession)
+        };
+
+        this.accSharedMemoryConnection.Start();
     }
 
     private void PrepareUdpMessageProcessing()
@@ -324,11 +366,18 @@ public class AccMonitor : IAccMonitor
         {
             this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
             this.accUdpConnection.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
+            this.accUdpConnection.ConnectionStateChanges.Subscribe(this.OnNextConnectionStateChange),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
             this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),
             this.accUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealTimeCarUpdate),
             this.accUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate)
         };
+    }
+
+    private void OnNextConnectionStateChange(Connection connection)
+    {
+        this.LogMessage(LoggingLevel.Information, $"Connection State Change: {connection}");
+        this.connection = connection;
     }
 
     private void ProcessAccidentEvent(BroadcastingEvent broadcastingEvent)
@@ -353,7 +402,6 @@ public class AccMonitor : IAccMonitor
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             CarIndex = carInfo.CarIndex,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -383,7 +431,6 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -413,7 +460,6 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -448,7 +494,6 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -475,10 +520,10 @@ public class AccMonitor : IAccMonitor
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            ConnectionId = this.connection!.ConnectionId,
             Index = carInfo.CarIndex,
             Penalty = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -492,7 +537,7 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessWhiteFlagState(AccFlagState accFlagState)
     {
-        if(this.isWhiteFlagActive == accFlagState.IsWhiteFlagActive)
+        if (this.isWhiteFlagActive == accFlagState.IsWhiteFlagActive)
         {
             return;
         }
@@ -503,7 +548,7 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessYellowFlagState(AccFlagState accFlagState)
     {
-        if(this.isYellowFlagActive == accFlagState.IsYellowFlagActive)
+        if (this.isYellowFlagActive == accFlagState.IsYellowFlagActive)
         {
             return;
         }
@@ -512,71 +557,56 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
 
-    private void StartNewSession()
+    private void StartDisconnectedWatcher()
     {
-        this.accUdpConnection!.RequestEntryList();
-        this.currentSession = new AccMonitorSession
-        {
-            Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
-            EventId = this.accSharedMemorySession.EventId,
-            IsOnline = this.accSharedMemorySession.IsOnline,
-            IsRunning = true,
-            NumberOfCars = this.accSharedMemorySession.NumberOfCars,
-            SessionId = this.accSharedMemorySession.SessionId,
-            SessionType = this.accSharedMemorySession.SessionType,
-            TrackName = this.accSharedMemorySession.TrackName
-        };
+        this.disconnectWatcherSubscription = Observable.Interval(this.connectionTimeout)
+                                                       .Subscribe(n =>
+                                                       {
+                                                           var timeSinceLastUpdate =
+                                                               DateTime.Now
+                                                               - this.lastRealTimeUpdate;
+                                                           if (this.accUdpConnection == null
+                                                                  || this.currentAppStatus
+                                                                  != AccAppStatus.Live
+                                                                  || timeSinceLastUpdate
+                                                                  <= this.connectionTimeout)
+                                                           {
+                                                               return;
+                                                           }
 
-        this.sessionStartedSubject.OnNext(this.currentSession);
-        this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
+                                                           this.LogMessage(
+                                                               LoggingLevel.Information,
+                                                               "ACC has stopped sending messages the user has probably quit the session.");
+                                                           this.Stop();
+                                                       });
     }
 
-    private void StartSharedMemoryConnection()
+    private void StartNewSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
-        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC Shared Memory interface.");
-        this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
-
-        this.sharedMemorySubscriptionSink = new CompositeDisposable
-        {
-            this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
-            this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.EventEnded.Subscribe(this.OnNextSharedMemoryEventEnded),
-            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextSharedMemoryEventStarted),
-            this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSharedMemorySessionEnded),
-            this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNexSharedMemorySessionStarted),
-            this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
-        };
-
-        this.accSharedMemoryConnection.Start();
+        // this.accUdpConnection!.RequestEntryList();
+        // this.currentSession = new AccMonitorSession(this.connection!.ConnectionId,
+        //     sessionType.ToFriendlyName(),
+        //     realtimeUpdate.SessionEndTime,
+        //     this.trackData!.TrackName);
+        // this.sessionStartedSubject.OnNext(this.currentSession);
+        // this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
 
-    private void StartUdpConnection()
+    private void StopCurrentSession()
     {
-        this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC UDP interface.");
-        var broadcastingSettings = this.accLocalConfigProvider.GetBroadcastingSettings()!;
-        this.accUdpConnection = this.accUdpConnectionFactory.Create(LocalhostIpAddress,
-            broadcastingSettings.UdpListenerPort,
-            this.connectionIdentifier ?? $"{LocalhostIpAddress}:{broadcastingSettings.UdpListenerPort}",
-            broadcastingSettings.ConnectionPassword,
-            broadcastingSettings.CommandPassword);
-
-        this.PrepareUdpMessageProcessing();
-
-        this.accUdpConnection.Connect();
-    }
-
-    private void StopUdpConnection()
-    {
-        if(this.accUdpConnection == null)
+        if (this.currentSession == null)
         {
             return;
         }
+        //
+        // if (this.accSharedMemoryEvent != null)
+        // {
+        //     this.currentSession.IsOnline = this.accSharedMemoryEvent.IsOnline;
+        //     this.currentSession.NumberOfCars = this.accSharedMemoryEvent.NumberOfCars;
+        // }
 
-        this.CompleteCurrentSession();
-        this.udpSubscriptionSink?.Dispose();
-        this.accUdpConnection?.Dispose();
-        this.accUdpConnection = null;
-        this.entryList.Clear();
-        this.entryListSubject.OnNext(this.entryList);
+        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
+        this.sessionCompletedSubject.OnNext(this.currentSession);
+        this.currentSession = null;
     }
 }

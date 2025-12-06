@@ -1,12 +1,17 @@
 ﻿#nullable disable
 
-using SimRacingSdk.Acc.Core.Enums;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccMonitorSession(int ConnectionId, string SessionType, TimeSpan Duration, string TrackName) : AccMonitorMessageBase
+public record AccMonitorSession() : AccMonitorMessageBase
 {
-    public bool IsOnline { get; internal set; }
-    public int NumberOfCars { get; internal set; }
+    public TimeSpan Duration { get; init; }
+    public Guid EventId { get; init; }
+    public bool IsOnline { get; init; }
+    public bool IsRunning { internal set; get; }
+    public int NumberOfCars { get; init; }
+    public Guid SessionId { get; init; }
+    public string SessionType { get; init; }
+    public string TrackName { get; init; }
 }

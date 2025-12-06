@@ -12,7 +12,6 @@ public record AccMonitorAccident : AccMonitorMessageBase
     public int CarIndex { get; init; }
     public string CarManufacturer { get; init; }
     public string CarModelName { get; init; }
-    public int ConnectionId { get; init; }
     public int CurrentDriverIndex { get; init; }
     public AccMonitorDriver CurrentMonitorDriver { get; init; }
     public int RaceNumber { get; init; }

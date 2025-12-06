@@ -66,7 +66,7 @@ public class MonitorDemo : IMonitorDemo
 
             // usually you would only subscribe to one of the next two, but both are shown here for demonstration purposes
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
-            this.accMonitor.EventEntries.Subscribe(this.OnNextEventEntry),
+            this.accMonitor.Entries.Subscribe(this.OnNextEventEntry),
 
             this.accMonitor.GreenFlag.Subscribe(this.OnNextGreenFlag),
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
@@ -75,7 +75,7 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.PhaseChanged.Subscribe(this.OnNextPhaseChanged),
             this.accMonitor.RealtimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
             this.accMonitor.SessionBestLap.Subscribe(this.OnNextSessionBestLap),
-            this.accMonitor.SessionChanged.Subscribe(this.OnNextSessionChanged),
+            this.accMonitor.SessionTypeChanged.Subscribe(this.OnNextSessionChanged),
             this.accMonitor.SessionCompleted.Subscribe(this.OnNextSessionCompleted),
             this.accMonitor.SessionStarted.Subscribe(this.OnNextSessionStarted),
             this.accMonitor.IsWhiteFlagActive.Subscribe(this.OnNextIsWhiteFlagActive),
@@ -126,7 +126,7 @@ public class MonitorDemo : IMonitorDemo
         this.Log(accMonitorLap.ToString());
     }
 
-    private void OnNextEntryList(IList<AccMonitorEventEntry> entryList)
+    private void OnNextEntryList(IList<AccMonitorEntry> entryList)
     {
         this.Log("Entry List Updated:");
         foreach(var entry in entryList)
@@ -135,9 +135,9 @@ public class MonitorDemo : IMonitorDemo
         }
     }
 
-    private void OnNextEventEntry(AccMonitorEventEntry accMonitorEventEntry)
+    private void OnNextEventEntry(AccMonitorEntry accMonitorEntry)
     {
-        this.Log(accMonitorEventEntry.ToString());
+        this.Log(accMonitorEntry.ToString());
     }
 
     private void OnNextGreenFlag(AccMonitorGreenFlag accMonitorGreenFlag)
