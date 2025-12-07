@@ -2,14 +2,14 @@
 
 namespace SimRacingSdk.LogViewer;
 
-public partial class MessageTypeItem : ObservableObject
+public partial class FilterItem : ObservableObject
 {
     [ObservableProperty]
     private bool isSelected;
     [ObservableProperty]
     private string name;
 
-    public MessageTypeItem(string name)
+    public FilterItem(string name)
     {
         this.Name = name;
         this.IsSelected = true;

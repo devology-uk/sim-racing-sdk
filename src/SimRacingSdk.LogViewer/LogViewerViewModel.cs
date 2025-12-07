@@ -16,6 +16,8 @@ public partial class LogViewerViewModel : ObservableObject
     private string filter = string.Empty;
     [ObservableProperty]
     private bool isBusy = false;
+
+    private string logFolderPath = null!;
     [ObservableProperty]
     private int pageCount;
     [ObservableProperty]
@@ -27,17 +29,36 @@ public partial class LogViewerViewModel : ObservableObject
     [ObservableProperty]
     private LogFolderItem? selectedLogFolder;
 
-    private string logFolderPath = null!;
-
     public ObservableCollection<LogFileEntry> LogEntries { get; } = [];
     public ObservableCollection<LogEntryProperty> LogEntryProperties { get; } = [];
     public ObservableCollection<LogFileItem> LogFiles { get; } = [];
     public ObservableCollection<LogFolderItem> LogFolders { get; } = [];
-    public ObservableCollection<MessageTypeItem> MessageTypes { get; } = [];
+    public ObservableCollection<FilterItem> MessageSources { get; } = [];
+    public ObservableCollection<FilterItem> MessageTypes { get; } = [];
 
     [RelayCommand]
-    private void ApplyFilter()
+    private void ApplyMessageTypeFilter()
     {
+        this.ShowCurrentPage();
+    }
+
+    [RelayCommand]
+    private void ApplyMessageSourceFilter()
+    {
+        var selectedMessageSources = this.MessageSources.Where(s => s.IsSelected)
+                                         .Select(s => s.Name).ToList();
+
+        var filteredMessageTypes = this.allLogEntries.Where(e => selectedMessageSources.Contains(e.Source))
+                                     .Select(e => e.ContentType)
+                                     .Distinct()
+                                     .ToList();
+
+        this.MessageTypes.Clear();
+        foreach(var messageType in filteredMessageTypes)
+        {
+            this.MessageTypes.Add(new FilterItem(messageType));
+        }
+
         this.ShowCurrentPage();
     }
 
@@ -194,6 +215,7 @@ public partial class LogViewerViewModel : ObservableObject
     partial void OnSelectedLogChanged(LogFileItem? value)
     {
         this.IsBusy = true;
+        this.MessageSources.Clear();
         this.MessageTypes.Clear();
         this.LogEntries.Clear();
         this.allLogEntries.Clear();
@@ -216,12 +238,21 @@ public partial class LogViewerViewModel : ObservableObject
                 this.allLogEntries.Add(logFileEntry);
             }
 
+            var messageSources = this.allLogEntries.Select(e => e.Source)
+                                     .Distinct()
+                                     .ToList();
+
+            foreach(var source in messageSources)
+            {
+                this.MessageSources.Add(new FilterItem(source));
+            }
+
             var messageTypes = this.allLogEntries.Select(e => e.ContentType)
                                    .Distinct()
                                    .ToList();
             foreach(var messageType in messageTypes)
             {
-                this.MessageTypes.Add(new MessageTypeItem(messageType));
+                this.MessageTypes.Add(new FilterItem(messageType));
             }
 
             this.ShowCurrentPage();
@@ -389,16 +420,48 @@ public partial class LogViewerViewModel : ObservableObject
     private LogFileEntry ParseLogFileEntry(string line)
     {
         var lineElements = line.Split('|', StringSplitOptions.RemoveEmptyEntries);
-        var contentType = this.ParseContentType(lineElements[2]);
+        var isContinuation = lineElements.Length < 2;
 
-        return new LogFileEntry(lineElements[0], lineElements[1], line, contentType);
+        var contentType = isContinuation? "Text": this.ParseContentType(lineElements[2]);
+        var timeStamp = isContinuation? "Continuation": lineElements[0];
+        var level = isContinuation? "ERROR": lineElements[1];
+        var source = isContinuation? "Continuation": this.ParseSource(lineElements[2]);
+
+        return new LogFileEntry(timeStamp, level, line, contentType, source);
+    }
+
+    private string ParseSource(string content)
+    {
+        if(!content.Contains(" Source ="))
+        {
+            return "NA";
+        }
+
+        var sourceStartIndex = content.IndexOf(" Source =", 0, StringComparison.InvariantCulture) + 1;
+        var sourceEndIndex = content.IndexOf(",", sourceStartIndex, StringComparison.InvariantCulture);
+
+        if(sourceEndIndex < 0)
+        {
+            sourceEndIndex = content.Length - 1;
+        }
+
+        var sourceValue = content[sourceStartIndex..(sourceEndIndex - 1)];
+        var elements = sourceValue.Split("=",
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        return elements[1];
     }
 
     private void ShowCurrentPage(List<string>? selectedTypes = null)
     {
-        var messageTypes = selectedTypes ?? this.MessageTypes.Where(m => m.IsSelected).Select(m => m.Name)
+        var messageSources = this.MessageSources.Where(s => s.IsSelected)
+                                 .Select(s => s.Name)
+                                 .ToList();
+
+        var messageTypes = selectedTypes ?? this.MessageTypes.Where(m => m.IsSelected)
+                                                .Select(m => m.Name)
                                                 .ToList()!;
-        var filteredByMessageType = this.allLogEntries.Where(e => messageTypes.Contains(e.ContentType))
+        var filteredByMessageType = this.allLogEntries.Where(e => messageSources.Contains(e.Source)
+                                                                  && messageTypes.Contains(e.ContentType))
                                         .ToList();
         var filteredEntries = filteredByMessageType;
         if(!string.IsNullOrWhiteSpace(this.Filter) && this.Filter.Length >= 3)
@@ -408,8 +471,8 @@ public partial class LogViewerViewModel : ObservableObject
             foreach(var keywordOrPhrase in filters)
             {
                 var matchedEntries =
-                    filteredByMessageType.Where(
-                        e => e.Content.Contains(keywordOrPhrase, StringComparison.OrdinalIgnoreCase));
+                    filteredByMessageType.Where(e => e.Content.Contains(keywordOrPhrase,
+                                                    StringComparison.OrdinalIgnoreCase));
                 filteredEntries.AddRange(matchedEntries);
             }
         }

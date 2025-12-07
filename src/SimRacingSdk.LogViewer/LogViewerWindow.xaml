@@ -9,8 +9,8 @@
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:LogViewerViewModel}"
         PreviewKeyDown="HandlePreviewKeyDown"
-        Height="900"
-        Width="1200"
+        Height="1000"
+        Width="1800"
         x:Name="LogViewer">
     <Window.Resources>
         <ResourceDictionary>
@@ -29,6 +29,7 @@
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -87,9 +88,27 @@
 
         <Label Grid.Column="2"
                Grid.Row="1"
-               Content="Message Types"
+               Content="Message Sources"
                HorizontalAlignment="Center" />
         <ListBox Grid.Column="2"
+                 Grid.Row="2"
+                 SelectionMode="Multiple"
+                 ItemsSource="{Binding MessageSources}"
+                 VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Name}"
+                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                              Command="{Binding DataContext.ApplyMessageSourceFilterCommand, ElementName=LogViewer}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Grid.Column="3"
+               Grid.Row="1"
+               Content="Message Types"
+               HorizontalAlignment="Center" />
+        <ListBox Grid.Column="3"
                  Grid.Row="2"
                  SelectionMode="Multiple"
                  ItemsSource="{Binding MessageTypes}"
@@ -98,16 +117,16 @@
                 <DataTemplate>
                     <CheckBox Content="{Binding Name}"
                               IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                              Command="{Binding DataContext.ApplyFilterCommand, ElementName=LogViewer}"/>
+                              Command="{Binding DataContext.ApplyMessageTypeFilterCommand, ElementName=LogViewer}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Label Grid.Column="3"
+        <Label Grid.Column="4"
                Grid.Row="1"
                Content="Log Entries"
                HorizontalAlignment="Center" />
-        <Grid Grid.Column="3"
+        <Grid Grid.Column="4"
               Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -162,11 +181,11 @@
 
         </Grid>
 
-        <Label Grid.Column="4"
+        <Label Grid.Column="5"
                Grid.Row="1"
                Content="Details"
                HorizontalAlignment="Center" />
-        <DataGrid Grid.Column="4"
+        <DataGrid Grid.Column="5"
                   Grid.Row="2"
                   ItemsSource="{Binding LogEntryProperties}"
                   VerticalAlignment="Top"
@@ -184,7 +203,7 @@
 
         <StatusBar Grid.Column="0"
                    Grid.Row="3"
-                   Grid.ColumnSpan="4"
+                   Grid.ColumnSpan="5"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Stretch">
             <StatusBarItem>
