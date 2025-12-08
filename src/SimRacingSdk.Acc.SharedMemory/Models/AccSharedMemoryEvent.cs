@@ -20,6 +20,7 @@ public record AccSharedMemoryEvent
     public Guid EventId { get; }
     public string AccVersion { get; }
     public bool IsOnline { get; }
+    public bool IsRunning { get; internal set; } = true;
     public int NumberOfCars { get; }
     public int NumberOfSessions { get; }
     public string PlayerCarModel { get; }
