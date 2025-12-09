@@ -7,12 +7,15 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record GraphicsData
 {
+    private readonly GraphicsPage graphicsPage;
+
     internal GraphicsData() {
         this.IsEmpty = true;
     }
 
     internal GraphicsData(GraphicsPage graphicsPage)
     {
+        this.graphicsPage = graphicsPage;
         this.Abs = graphicsPage.ABS;
         this.ActiveCars = graphicsPage.ActiveCars;
         this.BestTime = graphicsPage.BestTime;

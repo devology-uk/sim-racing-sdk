@@ -4,11 +4,21 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record AccTelemetryFrame
 {
+    private readonly StaticData staticData;
+    private readonly GraphicsData graphicsData;
+    private readonly PhysicsData physicsData;
+    private readonly int actualSectorIndex;
+
     public AccTelemetryFrame(StaticData staticData,
         GraphicsData graphicsData,
         PhysicsData physicsData,
         int actualSectorIndex)
     {
+        this.staticData = staticData;
+        this.graphicsData = graphicsData;
+        this.physicsData = physicsData;
+        this.actualSectorIndex = actualSectorIndex;
+
         this.Abs = physicsData.Abs;
         this.Accelerator = physicsData.Accelerator;
         this.Brake = physicsData.Brake;

@@ -6,12 +6,15 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record PhysicsData
 {
+    private readonly PhysicsPage physicsPage;
+
     internal PhysicsData() {
         this.IsEmpty = true;
     }
 
     internal PhysicsData(PhysicsPage physicsPage)
     {
+        this.physicsPage = physicsPage;
         this.Abs = physicsPage.Abs;
         this.AbsVibrations = physicsPage.AbsVibrations;
         this.Accelerator = physicsPage.Gas;

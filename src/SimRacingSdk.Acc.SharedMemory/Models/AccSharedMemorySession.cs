@@ -2,11 +2,16 @@
 
 public record AccSharedMemorySession
 {
+    private readonly StaticData staticData;
+    private readonly GraphicsData graphicsData;
+
     public AccSharedMemorySession(StaticData staticData,
         GraphicsData graphicsData,
         Guid eventId,
         bool isRunning = true)
     {
+        this.staticData = staticData;
+        this.graphicsData = graphicsData;
         this.DurationMs = graphicsData.SessionTimeLeft;
         this.EventId = eventId;
         this.IsOnline = staticData.IsOnline;
@@ -18,7 +23,6 @@ public record AccSharedMemorySession
     }
 
     public float DurationMs { get; }
-
     public bool IsRunning { get; internal set; }
     public int NumberOfCars { get; }
     public Guid SessionId { get; }

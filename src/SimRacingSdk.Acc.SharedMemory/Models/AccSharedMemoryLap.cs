@@ -1,14 +1,32 @@
 ﻿namespace SimRacingSdk.Acc.SharedMemory.Models;
 
-public record AccSharedMemoryLap(StaticData staticData, GraphicsData graphicsData)
+public record AccSharedMemoryLap
 {
-    public string CarId { get; } = staticData.CarModel;
-    public int CompletedLaps { get; } = graphicsData.CompletedLaps;
-    public string DriverName { get; } = $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
-    public float FuelPerLap { get; } = graphicsData.FuelPerLap;
-    public bool IsOnline { get; } = staticData.IsOnline;
-    public float SessionTimeLeft { get; } = graphicsData.SessionTimeLeft;
-    public string SessionType { get; } = graphicsData.SessionType.ToFriendlyName();
-    public DateTime TimeStamp { get; } = graphicsData.TimeStamp;
-    public string TrackId { get; } = staticData.Track;
+    private GraphicsData graphicsData;
+    private StaticData staticData;
+
+    public AccSharedMemoryLap(StaticData staticData, GraphicsData graphicsData)
+    {
+        this.staticData = staticData;
+        this.graphicsData = graphicsData;
+        this.CarId = staticData.CarModel;
+        this.CompletedLaps = graphicsData.CompletedLaps;
+        this.DriverName = $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
+        this.FuelPerLap = graphicsData.FuelPerLap;
+        this.IsOnline = staticData.IsOnline;
+        this.SessionTimeLeft = graphicsData.SessionTimeLeft;
+        this.SessionType = graphicsData.SessionType.ToFriendlyName();
+        this.TimeStamp = graphicsData.TimeStamp;
+        this.TrackId = staticData.Track;
+    }
+
+    public string CarId { get; }
+    public int CompletedLaps { get; }
+    public string DriverName { get; }
+    public float FuelPerLap { get; }
+    public bool IsOnline { get; }
+    public float SessionTimeLeft { get; }
+    public string SessionType { get; }
+    public DateTime TimeStamp { get; }
+    public string TrackId { get; }
 }

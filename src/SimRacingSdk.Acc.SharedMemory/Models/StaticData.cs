@@ -6,12 +6,15 @@ namespace SimRacingSdk.Acc.SharedMemory.Models;
 
 public record StaticData
 {
+    private readonly StaticDataPage staticDataPage;
+
     internal StaticData() {
         this.IsConnected = false;
     }
 
     internal StaticData(StaticDataPage staticDataPage)
     {
+        this.staticDataPage = staticDataPage;
         this.AccVersion = staticDataPage.AccVersion;
         this.AidAllowTyreBlankets = staticDataPage.AidAllowTyreBlankets;
         this.AidAutoBlip = staticDataPage.AidAutoBlip;

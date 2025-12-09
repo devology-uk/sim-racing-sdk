@@ -2,8 +2,11 @@
 
 public record AccSharedMemoryEvent
 {
+    private readonly StaticData staticData;
+
     public AccSharedMemoryEvent(StaticData staticData)
     {
+        this.staticData = staticData;
         this.EventId = Guid.NewGuid();
         this.AccVersion = staticData.AccVersion;
         this.IsOnline = staticData.IsOnline;
