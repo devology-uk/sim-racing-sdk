@@ -7,13 +7,11 @@ public record AccSharedMemorySession
 
     public AccSharedMemorySession(StaticData staticData,
         GraphicsData graphicsData,
-        Guid eventId,
         bool isRunning = true)
     {
         this.staticData = staticData;
         this.graphicsData = graphicsData;
         this.DurationMs = graphicsData.SessionTimeLeft;
-        this.EventId = eventId;
         this.IsOnline = staticData.IsOnline;
         this.IsRunning = isRunning;
         this.NumberOfCars = staticData.NumberOfCars;

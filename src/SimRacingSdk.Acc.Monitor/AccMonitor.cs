@@ -48,7 +48,6 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
-    private AccSharedMemoryEvent? accSharedMemoryEvent;
     private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
     private string? connectionIdentifier;
@@ -285,20 +284,6 @@ public class AccMonitor : IAccMonitor
 
         this.currentUdpSessionType = sessionType;
         this.currentUdpPhase = sessionPhase;
-    }
-
-    private void OnNextSharedMemoryEventEnded(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = null;
-        this.StopUdpConnection();
-    }
-
-    private void OnNextSharedMemoryEventStarted(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = accSharedMemoryEvent;
-        this.StartUdpConnection();
     }
 
     private void OnNextSharedMemorySessionEnded(AccSharedMemorySession accSharedMemorySession)
@@ -540,8 +525,6 @@ public class AccMonitor : IAccMonitor
         {
             this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.EventEnded.Subscribe(this.OnNextSharedMemoryEventEnded),
-            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextSharedMemoryEventStarted),
             this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSharedMemorySessionEnded),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNexSharedMemorySessionStarted),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)

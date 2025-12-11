@@ -50,7 +50,6 @@ internal class AccMonitorUdp: IAccMonitor
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
-    private AccSharedMemoryEvent? accSharedMemoryEvent;
     private IAccUdpConnection? accUdpConnection;
     private Connection? connection;
     private string? connectionIdentifier;
@@ -235,19 +234,6 @@ internal class AccMonitorUdp: IAccMonitor
         this.ProcessWhiteFlagState(accFlagState);
     }
 
-    private void OnNextNewEvent(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.LogMessage(LoggingLevel.Information, accSharedMemoryEvent.ToString());
-        this.accSharedMemoryEvent = accSharedMemoryEvent;
-        if (this.currentSession == null)
-        {
-            return;
-        }
-        //
-        // this.currentSession.IsOnline = accSharedMemoryEvent.IsOnline;
-        // this.currentSession.NumberOfCars = accSharedMemoryEvent.NumberOfCars;
-    }
-
     private void OnNextNewSharedMemorySession(AccSharedMemorySession accSharedMemorySession)
     {
         this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
@@ -353,7 +339,6 @@ internal class AccMonitorUdp: IAccMonitor
             this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame),
-            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextNewEvent),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextNewSharedMemorySession)
         };
 

@@ -12,8 +12,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
     private readonly Subject<AccAppStatusChange> appStatusChangesSubject = new();
     private readonly Subject<AccSharedMemoryConnectedState> connectedStateSubject = new();
-    private readonly Subject<AccSharedMemoryEvent> eventEndedSubject = new();
-    private readonly Subject<AccSharedMemoryEvent> eventStartedSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
     private readonly Subject<LogMessage> logMessagesSubject = new();
     private readonly Subject<AccSharedMemoryLap> newLapSubject = new();
@@ -23,7 +21,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private int actualSectorIndex;
-    private AccSharedMemoryEvent? currentEvent;
     private AccSharedMemorySession? currentSession;
     private StaticData? currentStaticData;
     private bool isConnected;
@@ -40,8 +37,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     public IObservable<AccAppStatusChange> AppStatusChanges => this.appStatusChangesSubject.AsObservable();
     public IObservable<AccSharedMemoryConnectedState> ConnectedState => this.connectedStateSubject.AsObservable();
-    public IObservable<AccSharedMemoryEvent> EventEnded => this.eventEndedSubject.AsObservable();
-    public IObservable<AccSharedMemoryEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
     public IObservable<AccSharedMemoryLap> Laps => this.newLapSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
@@ -66,7 +61,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public void Stop()
     {
         this.EndCurrentSession();
-        this.EndCurrentEvent();
         this.updateSubscription?.Dispose();
         this.updateSubscription = null;
     }
@@ -79,18 +73,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         this.Stop();
-    }
-
-    private void EndCurrentEvent()
-    {
-        if(this.currentEvent == null)
-        {
-            return;
-        }
-
-        this.currentEvent.IsRunning = false;
-        this.eventEndedSubject.OnNext(this.currentEvent);
-        this.currentEvent = null;
     }
 
     private void EndCurrentSession()
@@ -140,7 +122,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
         this.LogMessage(LoggingLevel.Debug, staticData.ToString());
 
-        this.UpdateEvent(staticData);
         this.currentStaticData = staticData!;
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
@@ -232,30 +213,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         }
 
         this.EndCurrentSession();
-        this.EndCurrentEvent();
-    }
-
-    private void UpdateEvent(StaticData staticData)
-    {
-        if(this.currentStaticData == null || string.IsNullOrWhiteSpace(staticData.SharedMemoryVersion))
-        {
-            return;
-        }
-
-        var createEvent = this.currentEvent == null || this.currentStaticData.Track != staticData.Track
-                                                    || this.currentStaticData.CarModel != staticData.CarModel
-                                                    || this.currentStaticData.PlayerFirstName
-                                                    != staticData.PlayerFirstName
-                                                    || this.currentStaticData.IsOnline != staticData.IsOnline;
-
-        if(!createEvent)
-        {
-            return;
-        }
-
-        this.EndCurrentEvent();
-        this.currentEvent = new AccSharedMemoryEvent(staticData);
-        this.eventStartedSubject.OnNext(this.currentEvent);
     }
 
     private void UpdateFlagState(GraphicsData graphicsData)
@@ -282,7 +239,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void UpdateSession(GraphicsData graphicsData, StaticData staticData)
     {
-        if(this.lastGraphicsData == null || this.currentEvent == null)
+        if(this.lastGraphicsData == null)
         {
             return;
         }
@@ -295,7 +252,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         if(this.lastGraphicsData.Status == AccAppStatus.Off && graphicsData.Status == AccAppStatus.Live)
         {
             this.currentSession =
-                new AccSharedMemorySession(staticData, graphicsData, this.currentEvent!.EventId);
+                new AccSharedMemorySession(staticData, graphicsData);
             this.sessionStartedSubject.OnNext(this.currentSession);
         }
     }
