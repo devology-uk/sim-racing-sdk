@@ -285,6 +285,24 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                     Corners = 18
                 }
             }
+        },
+        new()
+        {
+            Name = "Circuit Paul Ricard",
+            ShortName = "Paul Ricard",
+            Country = "France",
+            CountryCode = "FRA",
+            Latitude = 43.2514641,
+            Longitude = 5.7907357,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 5770,
+                    Corners = 13
+                }
+            }
         }
     ];
 

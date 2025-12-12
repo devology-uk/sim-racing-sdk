@@ -520,6 +520,23 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             Transmission = "6 Speed Sequential",
             WeightKg = 950,
             WidthMm = 1900
+        },
+
+        new()
+        {
+            Category = "LMP3",
+            Class = "P3",
+            DisplayName = "Ginetta G61-LT-P325-Evo",
+            Engine = "3.5L Twin Turbo V6",
+            HeightMm = 1050,
+            LengthMm = 4605,
+            Manufacturer = "Ligier",
+            PowerBhp = 470,
+            PowerKw = 339,
+            ResultCarType = "Ginetta G61-LT-P325-Evo",
+            Transmission = "6 Speed Sequential",
+            WeightKg = 950,
+            WidthMm = 1900
         }
     ];
 
