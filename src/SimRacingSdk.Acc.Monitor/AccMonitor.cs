@@ -182,7 +182,7 @@ public class AccMonitor : IAccMonitor
         this.entryListSubject.OnNext(this.entryList);
     }
 
-    private void CompleteCurrentSession()
+    private void CompleteCurrentUdpSession()
     {
         if(this.currentSession == null)
         {
@@ -301,12 +301,17 @@ public class AccMonitor : IAccMonitor
             this.LogMessage(LoggingLevel.Information, accMonitorSessionPhaseChange.ToString());
         }
 
+        if(hasPhaseChanged && sessionPhase == SessionPhase.PostSession)
+        {
+            this.CompleteCurrentUdpSession();
+        }
+
         if((hasPhaseChanged && sessionPhase == SessionPhase.Session)
            || (!hasPhaseChanged && this.currentUdpPhase == SessionPhase.Session
                                 && realtimeUpdate.SessionTime.TotalMilliseconds
                                 < this.currentSessionTime.TotalMilliseconds))
         {
-            this.CompleteCurrentSession();
+            this.CompleteCurrentUdpSession();
             this.StartNewUdpSession(realtimeUpdate, sessionType);
         }
 
@@ -640,7 +645,7 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
-        this.CompleteCurrentSession();
+        this.CompleteCurrentUdpSession();
         this.udpSubscriptionSink?.Dispose();
         this.accUdpConnection?.Dispose();
         this.accUdpConnection = null;
