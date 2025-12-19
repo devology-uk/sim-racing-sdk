@@ -52,7 +52,6 @@ public class AccMonitor : IAccMonitor
     private AccSharedMemoryEvent? accSharedMemoryEvent;
     private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
-    private Connection? connection;
     private string? connectionIdentifier;
     private AccAppStatus currentAppStatus;
     private AccMonitorSession? currentSession;
@@ -61,8 +60,8 @@ public class AccMonitor : IAccMonitor
     private RaceSessionType currentUdpSessionType = RaceSessionType.NONE;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
-    private DateTime lastRealTimeUpdate;
     private CompositeDisposable? sharedMemorySubscriptionSink;
+    private TrackDataUpdate? trackData;
     private CompositeDisposable? udpSubscriptionSink;
 
     public AccMonitor(IAccUdpConnectionFactory accUdpConnectionFactory,
@@ -146,6 +145,43 @@ public class AccMonitor : IAccMonitor
         this.Stop();
     }
 
+    private void AddEntryIfNotExists(CarInfo carInfo)
+    {
+        var entry = this.FindEntryByCarIndex(carInfo.CarIndex);
+        if(entry != null)
+        {
+            return;
+        }
+
+        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
+        var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
+                                                 d.LastName,
+                                                 d.ShortName,
+                                                 d.Category.ToString(),
+                                                 this.accNationalityInfoProvider
+                                                     .GetCountryCode(d.Nationality)))
+                             .ToList();
+        var eventEntry = new AccMonitorEntry
+        {
+            AccCarModelId = carInfo.CarModelType,
+            CarManufacturer = car!.ManufacturerTag,
+            CarModelName = car.DisplayName,
+            CarCupCategory = (CupCategory)carInfo.CupCategory,
+            CarLocation = CarLocation.Pitlane,
+            CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
+            CurrentDriverIndex = carInfo.CurrentDriverIndex,
+            Drivers = drivers,
+            ConnectionId = this.connectionIdentifier,
+            CarIndex = carInfo.CarIndex,
+            RaceNumber = carInfo.RaceNumber,
+            TeamName = carInfo.TeamName
+        };
+
+        this.entryList.Add(eventEntry);
+        this.entriesSubject.OnNext(eventEntry);
+        this.entryListSubject.OnNext(this.entryList);
+    }
+
     private void CompleteCurrentSession()
     {
         if(this.currentSession == null)
@@ -157,6 +193,12 @@ public class AccMonitor : IAccMonitor
         this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
         this.sessionCompletedSubject.OnNext(this.currentSession);
         this.currentSession = null;
+    }
+
+    private AccMonitorEntry? FindEntryByCarIndex(int carIndex)
+    {
+        return this.entryList.FirstOrDefault(e => e.CarIndex == carIndex);
+        ;
     }
 
     private void LogMessage(LoggingLevel level, string content)
@@ -207,33 +249,7 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
         var carInfo = entryListUpdate.CarInfo;
-        var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
-        var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
-                                                 d.LastName,
-                                                 d.ShortName,
-                                                 d.Category.ToString(),
-                                                 this.accNationalityInfoProvider
-                                                     .GetCountryCode(d.Nationality)))
-                             .ToList();
-        var eventEntry = new AccMonitorEntry
-        {
-            AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
-            CarCupCategory = (CupCategory)carInfo.CupCategory,
-            CarLocation = CarLocation.Pitlane,
-            CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
-            CurrentDriverIndex = carInfo.CurrentDriverIndex,
-            Drivers = drivers,
-            ConnectionId = this.connectionIdentifier,
-            CarIndex = carInfo.CarIndex,
-            RaceNumber = carInfo.RaceNumber,
-            TeamName = carInfo.TeamName
-        };
-
-        this.entryList.Add(eventEntry);
-        this.entriesSubject.OnNext(eventEntry);
-        this.entryListSubject.OnNext(this.entryList);
+        this.AddEntryIfNotExists(carInfo);
     }
 
     private void OnNextFlagState(AccFlagState accFlagState)
@@ -247,7 +263,7 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
-        var eventEntry = this.entryList.FirstOrDefault(e => e.CarIndex == realTimeCarUpdate.CarIndex);
+        var eventEntry = this.FindEntryByCarIndex(realTimeCarUpdate.CarIndex);
         if(eventEntry != null)
         {
             eventEntry.CarLocation = realTimeCarUpdate.CarLocation;
@@ -257,11 +273,10 @@ public class AccMonitor : IAccMonitor
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
-        this.lastRealTimeUpdate = DateTime.Now;
 
-        if(this.connection == null || !this.entryList.Any())
+        if(!this.entryList.Any())
         {
-            this.LogMessage(LoggingLevel.Information, "No ACC UDP connection or entry list.");
+            this.LogMessage(LoggingLevel.Information, "No ACC entry list.");
             return;
         }
 
@@ -317,6 +332,7 @@ public class AccMonitor : IAccMonitor
     private void OnNextSharedMemorySessionEnded(AccSharedMemorySession accSharedMemorySession)
     {
         this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
+        this.accSharedMemorySession = null;
     }
 
     private void OnNextSharedMemorySessionStarted(AccSharedMemorySession accSharedMemorySession)
@@ -333,6 +349,7 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextTrackDataUpdate(TrackDataUpdate trackDataUpdate)
     {
+        this.trackData = trackDataUpdate;
         this.LogMessage(LoggingLevel.Information, trackDataUpdate.ToString());
     }
 
@@ -375,6 +392,8 @@ public class AccMonitor : IAccMonitor
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
 
+        this.AddEntryIfNotExists(carInfo);
+
         var accAccident = new AccMonitorAccident()
         {
             AccCarModelId = carInfo.CarModelType,
@@ -403,6 +422,8 @@ public class AccMonitor : IAccMonitor
                                                  this.accNationalityInfoProvider
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
+
+        this.AddEntryIfNotExists(carInfo);
 
         var accLap = new AccMonitorLap()
         {
@@ -433,6 +454,8 @@ public class AccMonitor : IAccMonitor
                                                  this.accNationalityInfoProvider
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
+
+        this.AddEntryIfNotExists(carInfo);
 
         var accLap = new AccMonitorLap()
         {
@@ -469,6 +492,8 @@ public class AccMonitor : IAccMonitor
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
 
+        this.AddEntryIfNotExists(carInfo);
+
         var accLap = new AccMonitorLap()
         {
             AccCarModelId = carInfo.CarModelType,
@@ -498,6 +523,9 @@ public class AccMonitor : IAccMonitor
                                                  this.accNationalityInfoProvider
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
+
+
+        this.AddEntryIfNotExists(carInfo);
 
         var accPenalty = new AccMonitorPenalty()
         {
@@ -544,35 +572,34 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
 
-    private void StartNewSession()
-    {
-        this.accUdpConnection!.RequestEntryList();
-        this.currentSession = new AccMonitorSession
-        {
-            Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
-            EventId = this.accSharedMemorySession.EventId,
-            IsOnline = this.accSharedMemorySession.IsOnline,
-            IsRunning = true,
-            NumberOfCars = this.accSharedMemorySession.NumberOfCars,
-            SessionId = this.accSharedMemorySession.SessionId,
-            SessionType = this.accSharedMemorySession.SessionType,
-            TrackName = this.accSharedMemorySession.TrackName
-        };
-
-        this.sessionStartedSubject.OnNext(this.currentSession);
-        this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
-    }
+    // private void StartNewSession()
+    // {
+    //     this.accUdpConnection!.RequestEntryList();
+    //     this.currentSession = new AccMonitorSession
+    //     {
+    //         Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
+    //         EventId = this.accSharedMemorySession.EventId,
+    //         IsOnline = this.accSharedMemorySession.IsOnline,
+    //         IsRunning = true,
+    //         NumberOfCars = this.accSharedMemorySession.NumberOfCars,
+    //         SessionId = this.accSharedMemorySession.SessionId,
+    //         SessionType = this.accSharedMemorySession.SessionType,
+    //         TrackName = this.accSharedMemorySession.TrackName
+    //     };
+    //
+    //     this.sessionStartedSubject.OnNext(this.currentSession);
+    //     this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
+    // }
 
     private void StartNewUdpSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
-        this.accUdpConnection!.RequestEntryList();
         this.currentSession = new AccMonitorSession
         {
             Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
-            EventId = this.accSharedMemorySession.EventId,
-            IsOnline = this.accSharedMemorySession.IsOnline,
+            EventId = this.accSharedMemoryEvent!.EventId,
+            IsOnline = this.accSharedMemoryEvent.IsOnline,
             IsRunning = true,
-            NumberOfCars = this.accSharedMemorySession.NumberOfCars,
+            NumberOfCars = this.accSharedMemoryEvent.NumberOfCars,
             SessionId = this.accSharedMemorySession.SessionId,
             SessionType = sessionType.ToFriendlyName(),
             TrackName = this.accSharedMemorySession.TrackName
