@@ -69,7 +69,8 @@ public class AccMonitor : IAccMonitor
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
         IAccCarInfoProvider accCarInfoProvider,
-        IAccNationalityInfoProvider accNationalityInfoProvider)
+        IAccNationalityInfoProvider accNationalityInfoProvider
+        )
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
         this.accSharedMemoryConnectionFactory = accSharedMemoryConnectionFactory;
@@ -366,6 +367,7 @@ public class AccMonitor : IAccMonitor
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
             this.accSharedMemoryConnection.EventEnded.Subscribe(this.OnNextSharedMemoryEventEnded),
             this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextSharedMemoryEventStarted),
+            this.accSharedMemoryConnection.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
             this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSharedMemorySessionEnded),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextSharedMemorySessionStarted),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
@@ -576,25 +578,6 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActive = accFlagState.IsYellowFlagActive;
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
-
-    // private void StartNewSession()
-    // {
-    //     this.accUdpConnection!.RequestEntryList();
-    //     this.currentSession = new AccMonitorSession
-    //     {
-    //         Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
-    //         EventId = this.accSharedMemorySession.EventId,
-    //         IsOnline = this.accSharedMemorySession.IsOnline,
-    //         IsRunning = true,
-    //         NumberOfCars = this.accSharedMemorySession.NumberOfCars,
-    //         SessionId = this.accSharedMemorySession.SessionId,
-    //         SessionType = this.accSharedMemorySession.SessionType,
-    //         TrackName = this.accSharedMemorySession.TrackName
-    //     };
-    //
-    //     this.sessionStartedSubject.OnNext(this.currentSession);
-    //     this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
-    // }
 
     private void StartNewUdpSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
