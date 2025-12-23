@@ -58,9 +58,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public void Start(double updateIntervalMs = 100)
     {
         this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
-                                            .Subscribe(this.OnNextUpdate,
-                                                e => this.telemetrySubject.OnError(e),
-                                                () => this.telemetrySubject.OnCompleted());
+                                            .Subscribe(this.OnNextUpdate);
     }
 
     public void Stop()
@@ -131,47 +129,63 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
-        this.UpdateConnectionState(staticData.IsConnected);
-
-        if(!this.isConnected)
-        {
-            return;
-        }
-
-        this.LogMessage(LoggingLevel.Debug, staticData.ToString());
-
-        this.UpdateEvent(staticData);
+        // this.UpdateConnectionState(staticData.IsConnected);
+        //
+        // if(!this.isConnected)
+        // {
+        //     return;
+        // }
+        //
+        this.LogStaticData(staticData);
+        //
+        // this.UpdateEvent(staticData);
         this.currentStaticData = staticData!;
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
-        if(graphicsData.IsEmpty)
+        // if(graphicsData.IsEmpty)
+        // {
+        //     return;
+        // }
+
+        this.LogGraphicsData(graphicsData);
+
+        // this.UpdateSession(graphicsData, staticData);
+        // this.UpdateAppStatus(graphicsData);
+        // this.UpdateFlagState(graphicsData);
+        // if(!this.UpdateActiveLap(graphicsData, staticData))
+        // {
+        //     return;
+        // }
+        //
+        // this.lastGraphicsData = graphicsData;
+
+        // var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
+        // if(physicsData.IsEmpty)
+        // {
+        //     return;
+        // }
+
+        // this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
+        // this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
+        //     graphicsData,
+        //     physicsData,
+        //     this.actualSectorIndex));
+    }
+
+    private void LogGraphicsData(GraphicsData graphicsData)
+    {
+        if(this.lastGraphicsData == null || this.lastGraphicsData != graphicsData)
         {
-            return;
+            this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
         }
+    }
 
-        this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
-
-        this.UpdateSession(graphicsData, staticData);
-        this.UpdateAppStatus(graphicsData);
-        this.UpdateFlagState(graphicsData);
-        if(!this.UpdateActiveLap(graphicsData, staticData))
+    private void LogStaticData(StaticData staticData)
+    {
+        if(this.currentStaticData == null || this.currentStaticData != staticData)
         {
-            return;
+            this.LogMessage(LoggingLevel.Debug, staticData.ToString());
         }
-
-        this.lastGraphicsData = graphicsData;
-
-        var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
-        if(physicsData.IsEmpty)
-        {
-            return;
-        }
-
-        this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
-        this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
-            graphicsData,
-            physicsData,
-            this.actualSectorIndex));
     }
 
     private bool UpdateActiveLap(GraphicsData graphicsData, StaticData staticData)
