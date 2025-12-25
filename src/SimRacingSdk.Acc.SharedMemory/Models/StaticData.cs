@@ -8,7 +8,8 @@ public record StaticData
 {
     private readonly StaticDataPage staticDataPage;
 
-    internal StaticData() {
+    internal StaticData()
+    {
         this.IsConnected = false;
     }
 
@@ -70,23 +71,12 @@ public record StaticData
     public string Track { get; }
     public string WetTyresName { get; }
 
-    public string PlayerDisplayName()
+    public bool ComparesTo(StaticData other)
     {
-        if(!string.IsNullOrEmpty(this.PlayerFirstName))
-        {
-            return $"{this.PlayerFirstName[..1]}. {this.PlayerLastName}";
-        }
-
-        if(!string.IsNullOrEmpty(this.PlayerNickname))
-        {
-            return this.PlayerNickname;
-        }
-
-        return "Not Available";
+        return this.Track == other?.Track && this.IsOnline == other?.IsOnline
+                                          && this.IsConnected == other?.IsConnected
+                                          && this.PlayerFirstName == other?.PlayerFirstName
+                                          && this.PlayerLastName == other?.PlayerLastName;
     }
 
-    internal bool IsActualEvent()
-    {
-        return !string.IsNullOrWhiteSpace(this.AccVersion);
-    }
 }

@@ -129,14 +129,15 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     private void OnNextUpdate(long index)
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
-        // this.UpdateConnectionState(staticData.IsConnected);
-        //
+        this.LogStaticData(staticData);
+
+        this.UpdateConnectionState(staticData.IsConnected);
+        
         // if(!this.isConnected)
         // {
         //     return;
         // }
         //
-        this.LogStaticData(staticData);
         //
         // this.UpdateEvent(staticData);
         this.currentStaticData = staticData!;
@@ -174,15 +175,12 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void LogGraphicsData(GraphicsData graphicsData)
     {
-        if(this.lastGraphicsData == null || this.lastGraphicsData != graphicsData)
-        {
-            this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
-        }
+        this.LogMessage(LoggingLevel.Debug, graphicsData.ToString());
     }
 
     private void LogStaticData(StaticData staticData)
     {
-        if(this.currentStaticData == null || this.currentStaticData != staticData)
+        if(this.currentStaticData?.ComparesTo(staticData) is false)
         {
             this.LogMessage(LoggingLevel.Debug, staticData.ToString());
         }
