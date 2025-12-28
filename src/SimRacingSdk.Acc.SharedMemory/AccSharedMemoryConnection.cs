@@ -11,7 +11,6 @@ namespace SimRacingSdk.Acc.SharedMemory;
 public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
     private readonly Subject<AccAppStatusChange> appStatusChangesSubject = new();
-    private readonly Subject<AccSharedMemoryConnectedState> connectedStateSubject = new();
     private readonly Subject<AccSharedMemoryEvent> eventEndedSubject = new();
     private readonly Subject<AccSharedMemoryEvent> eventStartedSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
@@ -39,7 +38,6 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     }
 
     public IObservable<AccAppStatusChange> AppStatusChanges => this.appStatusChangesSubject.AsObservable();
-    public IObservable<AccSharedMemoryConnectedState> ConnectedState => this.connectedStateSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> EventEnded => this.eventEndedSubject.AsObservable();
     public IObservable<AccSharedMemoryEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
@@ -130,47 +128,40 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     {
         var staticData = this.sharedMemoryProvider.ReadStaticData();
         this.LogStaticData(staticData);
+        this.UpdateEvent(staticData);
 
-        this.UpdateConnectionState(staticData.IsConnected);
-        
-        // if(!this.isConnected)
-        // {
-        //     return;
-        // }
-        //
-        //
-        // this.UpdateEvent(staticData);
         this.currentStaticData = staticData!;
 
         var graphicsData = this.sharedMemoryProvider.ReadGraphicsData();
-        // if(graphicsData.IsEmpty)
-        // {
-        //     return;
-        // }
-
         this.LogGraphicsData(graphicsData);
 
-        // this.UpdateSession(graphicsData, staticData);
-        // this.UpdateAppStatus(graphicsData);
-        // this.UpdateFlagState(graphicsData);
-        // if(!this.UpdateActiveLap(graphicsData, staticData))
-        // {
-        //     return;
-        // }
-        //
-        // this.lastGraphicsData = graphicsData;
+        if(this.currentEvent == null)
+        {
+            this.lastGraphicsData = graphicsData;
+            return;
+        }
 
-        // var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
-        // if(physicsData.IsEmpty)
-        // {
-        //     return;
-        // }
+        this.UpdateSession(graphicsData, staticData);
+        this.UpdateAppStatus(graphicsData);
+        this.UpdateFlagState(graphicsData);
+        if(!this.UpdateActiveLap(graphicsData, staticData))
+        {
+            return;
+        }
+        
+        this.lastGraphicsData = graphicsData;
 
-        // this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
-        // this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
-        //     graphicsData,
-        //     physicsData,
-        //     this.actualSectorIndex));
+        var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
+        if(physicsData.IsEmpty)
+        {
+            return;
+        }
+
+        this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
+        this.telemetrySubject.OnNext(new AccTelemetryFrame(staticData,
+            graphicsData,
+            physicsData,
+            this.actualSectorIndex));
     }
 
     private void LogGraphicsData(GraphicsData graphicsData)
@@ -227,38 +218,22 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.appStatusChangesSubject.OnNext(new AccAppStatusChange(currentStatus, graphicsData.Status));
     }
 
-    private void UpdateConnectionState(bool isConnected)
-    {
-        if(this.isConnected == isConnected)
-        {
-            return;
-        }
-
-        var accSharedMemoryConnectedState = new AccSharedMemoryConnectedState(this.isConnected, isConnected);
-        this.connectedStateSubject.OnNext(accSharedMemoryConnectedState);
-        this.isConnected = isConnected;
-
-        if(this.isConnected)
-        {
-            return;
-        }
-
-        this.EndCurrentSession();
-        this.EndCurrentEvent();
-    }
-
     private void UpdateEvent(StaticData staticData)
     {
-        if(this.currentStaticData == null || string.IsNullOrWhiteSpace(staticData.SharedMemoryVersion))
+        if(this.currentStaticData == null)
         {
+            this.currentStaticData = staticData;
             return;
         }
 
-        var createEvent = this.currentEvent == null || this.currentStaticData.Track != staticData.Track
-                                                    || this.currentStaticData.CarModel != staticData.CarModel
-                                                    || this.currentStaticData.PlayerFirstName
-                                                    != staticData.PlayerFirstName
-                                                    || this.currentStaticData.IsOnline != staticData.IsOnline;
+        if(!string.IsNullOrWhiteSpace(this.currentStaticData.SharedMemoryVersion)
+           && string.IsNullOrWhiteSpace(staticData.SharedMemoryVersion))
+        {
+            this.EndCurrentEvent();
+            return;
+        }
+
+        var createEvent = this.currentEvent == null || !this.currentStaticData.ComparesTo(staticData);
 
         if(!createEvent)
         {
