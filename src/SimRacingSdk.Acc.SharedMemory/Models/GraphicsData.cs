@@ -9,7 +9,8 @@ public record GraphicsData
 {
     private readonly GraphicsPage graphicsPage;
 
-    internal GraphicsData() {
+    internal GraphicsData()
+    {
         this.IsEmpty = true;
     }
 
@@ -126,26 +127,26 @@ public record GraphicsData
     public float FuelPerLap { get; }
     public int GapAheadMs { get; }
     public int GapBehindMs { get; }
-    public bool IsEmpty { get; }
     public bool IsDeltaPositive { get; }
+    public bool IsEmpty { get; }
     public bool IsIdealLineOn { get; }
     public bool IsInPitLane { get; }
     public bool IsInPits { get; }
     public bool IsLeftIndicatorOn { get; }
+    public bool IsMandatoryPitDone { get; }
     public bool IsRightIndicatorOn { get; }
     public bool IsSetupMenuVisible { get; }
     public bool IsValidLap { get; }
     public bool IsWhiteFlagActive { get; }
-    public bool IsYellowFlagActiveInSector3 { get; }
     public bool IsYellowFlagActive { get; }
     public bool IsYellowFlagActiveInSector1 { get; }
     public bool IsYellowFlagActiveInSector2 { get; }
+    public bool IsYellowFlagActiveInSector3 { get; }
     public int LastSectorTime { get; }
     public string LastTime { get; }
     public int LastTimeMs { get; }
     public int LightsStage { get; }
     public int MainDisplayIndex { get; }
-    public bool IsMandatoryPitDone { get; }
     public int MandatoryPitStopsLeft { get; }
     public float MfdFuelToAdd { get; }
     public float MfdTyrePressureLf { get; }
@@ -184,4 +185,10 @@ public record GraphicsData
     public float WindDirection { get; }
     public float WindSpeed { get; }
     public int WiperLevel { get; }
+
+    public bool IsSameSession(GraphicsData graphicsData)
+    {
+        return this.SessionIndex == graphicsData.SessionIndex && this.SessionType == graphicsData.SessionType
+                                                              && this.Status == graphicsData.Status;
+    }
 }

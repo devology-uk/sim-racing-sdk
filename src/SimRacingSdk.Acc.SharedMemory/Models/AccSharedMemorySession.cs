@@ -6,16 +6,13 @@ public record AccSharedMemorySession
     private readonly GraphicsData graphicsData;
 
     public AccSharedMemorySession(StaticData staticData,
-        GraphicsData graphicsData,
-        Guid eventId,
-        bool isRunning = true)
+        GraphicsData graphicsData)
     {
         this.staticData = staticData;
         this.graphicsData = graphicsData;
         this.DurationMs = graphicsData.SessionTimeLeft;
-        this.EventId = eventId;
         this.IsOnline = staticData.IsOnline;
-        this.IsRunning = isRunning;
+        this.IsRunning = true;
         this.NumberOfCars = staticData.NumberOfCars;
         this.SessionId = Guid.NewGuid();
         this.SessionType = graphicsData.SessionType.ToFriendlyName();
@@ -28,6 +25,5 @@ public record AccSharedMemorySession
     public Guid SessionId { get; }
     public string SessionType { get; }
     public string TrackName { get; }
-    public Guid EventId { get; set; }
     public bool IsOnline { get; set; }
 }
