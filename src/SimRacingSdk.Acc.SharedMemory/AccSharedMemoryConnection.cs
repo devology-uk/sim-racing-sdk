@@ -118,7 +118,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void LogStaticData(StaticData staticData)
     {
-        if(this.lastStaticData?.ComparesTo(staticData) is false)
+        if(this.lastStaticData == null || !this.lastStaticData.ComparesTo(staticData))
         {
             this.LogMessage(LoggingLevel.Debug, staticData.ToString());
         }

@@ -43,10 +43,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
         {
             this.accSharedMemoryConnection.LogMessages.Subscribe(this.OnNextLogMessage),
             this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStateChange),
-            this.accSharedMemoryConnection.ConnectedState.Subscribe(this.OnNextConnectedState),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.EventEnded.Subscribe(this.OnNextEventEnded),
-            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextEventStarted),
             this.accSharedMemoryConnection.Laps.Subscribe(this.OnNextNewLap),
             this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSessionEnded),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextSessionStarted),
@@ -84,21 +81,6 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private void OnNextAppStateChange(AccAppStatusChange accAppStatusChange)
     {
         this.Log(accAppStatusChange.ToString());
-    }
-
-    private void OnNextConnectedState(AccSharedMemoryConnectedState accSharedMemoryConnectedState)
-    {
-        this.Log(accSharedMemoryConnectedState.ToString());
-    }
-
-    private void OnNextEventEnded(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.Log(accSharedMemoryEvent.ToString());
-    }
-
-    private void OnNextEventStarted(AccSharedMemoryEvent accSharedMemoryEvent)
-    {
-        this.Log(accSharedMemoryEvent.ToString());
     }
 
     private void OnNextFlagState(AccFlagState accFlagState)

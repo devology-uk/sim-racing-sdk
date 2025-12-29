@@ -353,7 +353,6 @@ internal class AccMonitorUdp: IAccMonitor
             this.accSharedMemoryConnection.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame),
-            this.accSharedMemoryConnection.EventStarted.Subscribe(this.OnNextNewEvent),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextNewSharedMemorySession)
         };
 
