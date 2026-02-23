@@ -333,6 +333,12 @@ public class AccMonitor : IAccMonitor
             this.CompleteCurrentUdpSession();
             this.StartNewUdpSession(realtimeUpdate, sessionType);
         }
+        else if(this.currentSession == null
+                && this.currentUdpPhase == SessionPhase.Session
+                && sessionPhase == SessionPhase.Session)
+        {
+            this.StartNewUdpSession(realtimeUpdate, sessionType);
+        }
 
         this.currentUdpSessionType = sessionType;
         this.currentUdpPhase = sessionPhase;
@@ -356,6 +362,7 @@ public class AccMonitor : IAccMonitor
 
         if(!isNewEvent)
         {
+            this.CompleteCurrentUdpSession();
             return;
         }
 

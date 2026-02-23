@@ -208,6 +208,13 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     {
         if(this.lastGraphicsData!.IsSameSession(graphicsData))
         {
+            if(this.currentSession != null
+               && graphicsData.Status == AccAppStatus.Live
+               && graphicsData.SessionTimeLeft > this.lastGraphicsData.SessionTimeLeft + 60000)
+            {
+                this.BeginNewSession(graphicsData, staticData);
+            }
+
             return;
         }
 
