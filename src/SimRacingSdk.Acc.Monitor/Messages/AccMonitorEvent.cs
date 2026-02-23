@@ -1,5 +1,12 @@
-﻿using SimRacingSdk.Acc.Monitor.Abstractions;
+using SimRacingSdk.Acc.Monitor.Abstractions;
 
 namespace SimRacingSdk.Acc.Monitor.Messages;
 
-public record AccMonitorEvent(int TrackId, string TrackName, float TrackMeters) : AccMonitorMessageBase { }
+public record AccMonitorEvent : AccMonitorMessageBase
+{
+    public Guid EventId { get; init; }
+    public bool IsOnline { get; init; }
+    public bool IsRunning { get; internal set; } = true;
+    public int NumberOfCars { get; init; }
+    public string TrackName { get; init; } = string.Empty;
+}

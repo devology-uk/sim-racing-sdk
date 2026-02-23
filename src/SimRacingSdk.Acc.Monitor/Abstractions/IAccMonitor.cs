@@ -10,6 +10,8 @@ public interface IAccMonitor : IDisposable
     IObservable<AccMonitorAccident> Accidents { get; }
     IObservable<IList<AccMonitorEntry>> EntryList { get; }
     IObservable<AccMonitorEntry> Entries { get; }
+    IObservable<AccMonitorEvent> EventEnded { get; }
+    IObservable<AccMonitorEvent> EventStarted { get; }
     IObservable<AccMonitorGreenFlag> GreenFlag { get; }
     IObservable<bool> IsWhiteFlagActive { get; }
     IObservable<bool> IsYellowFlagActive { get; }

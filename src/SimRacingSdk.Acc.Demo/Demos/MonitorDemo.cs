@@ -68,6 +68,8 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
             this.accMonitor.Entries.Subscribe(this.OnNextEventEntry),
 
+            this.accMonitor.EventStarted.Subscribe(this.OnNextEventStarted),
+            this.accMonitor.EventEnded.Subscribe(this.OnNextEventEnded),
             this.accMonitor.GreenFlag.Subscribe(this.OnNextGreenFlag),
             this.accMonitor.LogMessages.Subscribe(this.OnNextLogMessage),
             this.accMonitor.Penalties.Subscribe(this.OnNextPenalty),
@@ -114,6 +116,16 @@ public class MonitorDemo : IMonitorDemo
     {
         this.logger.LogInformation(message);
         this.consoleLog.Write(message);
+    }
+
+    private void OnNextEventStarted(AccMonitorEvent accMonitorEvent)
+    {
+        this.Log($"Event Started: {accMonitorEvent}");
+    }
+
+    private void OnNextEventEnded(AccMonitorEvent accMonitorEvent)
+    {
+        this.Log($"Event Ended: {accMonitorEvent}");
     }
 
     private void OnNextAccident(AccMonitorAccident monitorAccident)

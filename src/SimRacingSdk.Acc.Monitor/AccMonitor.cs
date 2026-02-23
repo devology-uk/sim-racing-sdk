@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -22,6 +22,7 @@ namespace SimRacingSdk.Acc.Monitor;
 public class AccMonitor : IAccMonitor
 {
     private const string LocalhostIpAddress = "127.0.0.1";
+    private readonly TimeSpan udpTimeoutThreshold = TimeSpan.FromSeconds(5);
 
     private readonly IAccCarInfoProvider accCarInfoProvider;
     private readonly IAccCompatibilityChecker accCompatibilityChecker;
@@ -33,6 +34,8 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccMonitorEntry> entriesSubject = new();
     private readonly List<AccMonitorEntry> entryList = [];
     private readonly ReplaySubject<IList<AccMonitorEntry>> entryListSubject = new();
+    private readonly Subject<AccMonitorEvent> eventEndedSubject = new();
+    private readonly Subject<AccMonitorEvent> eventStartedSubject = new();
     private readonly Subject<AccMonitorGreenFlag> greenFlagSubject = new();
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
@@ -49,17 +52,19 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<AccTelemetryFrame> telemetrySubject = new();
 
     private IAccSharedMemoryConnection? accSharedMemoryConnection;
-    private AccSharedMemoryEvent? accSharedMemoryEvent;
     private AccSharedMemorySession? accSharedMemorySession;
     private IAccUdpConnection? accUdpConnection;
     private string? connectionIdentifier;
     private AccAppStatus currentAppStatus;
+    private AccMonitorEvent? currentEvent;
     private AccMonitorSession? currentSession;
     private TimeSpan currentSessionTime = TimeSpan.Zero;
     private SessionPhase currentUdpPhase = SessionPhase.NONE;
     private RaceSessionType currentUdpSessionType = RaceSessionType.NONE;
+    private IDisposable? disconnectWatcherSubscription;
     private bool isWhiteFlagActive;
     private bool isYellowFlagActive;
+    private DateTime lastRealtimeUpdate;
     private CompositeDisposable? sharedMemorySubscriptionSink;
     private TrackDataUpdate? trackData;
     private CompositeDisposable? udpSubscriptionSink;
@@ -69,8 +74,7 @@ public class AccMonitor : IAccMonitor
         IAccCompatibilityChecker accCompatibilityChecker,
         IAccLocalConfigProvider accLocalConfigProvider,
         IAccCarInfoProvider accCarInfoProvider,
-        IAccNationalityInfoProvider accNationalityInfoProvider
-        )
+        IAccNationalityInfoProvider accNationalityInfoProvider)
     {
         this.accUdpConnectionFactory = accUdpConnectionFactory;
         this.accSharedMemoryConnectionFactory = accSharedMemoryConnectionFactory;
@@ -81,8 +85,10 @@ public class AccMonitor : IAccMonitor
     }
 
     public IObservable<AccMonitorAccident> Accidents => this.accidentsSubject.AsObservable();
-    public IObservable<AccMonitorEntry> Entries => this.entriesSubject.AsObservable();
     public IObservable<IList<AccMonitorEntry>> EntryList => this.entryListSubject.AsObservable();
+    public IObservable<AccMonitorEntry> Entries => this.entriesSubject.AsObservable();
+    public IObservable<AccMonitorEvent> EventEnded => this.eventEndedSubject.AsObservable();
+    public IObservable<AccMonitorEvent> EventStarted => this.eventStartedSubject.AsObservable();
     public IObservable<AccMonitorGreenFlag> GreenFlag => this.greenFlagSubject.AsObservable();
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
@@ -128,10 +134,10 @@ public class AccMonitor : IAccMonitor
 
     public void Stop()
     {
-        this.udpSubscriptionSink?.Dispose();
+        this.disconnectWatcherSubscription?.Dispose();
+        this.disconnectWatcherSubscription = null;
+        this.EndCurrentEvent();
         this.sharedMemorySubscriptionSink?.Dispose();
-        this.accUdpConnection?.Dispose();
-        this.accUdpConnection = null;
         this.accSharedMemoryConnection?.Dispose();
         this.accSharedMemoryConnection = null;
     }
@@ -148,7 +154,7 @@ public class AccMonitor : IAccMonitor
 
     private void AddEntryIfNotExists(CarInfo carInfo)
     {
-        var entry = this.FindEntryByCarIndex(carInfo.CarIndex);
+        var entry = this.entryList.FirstOrDefault(e => e.CarIndex == carInfo.CarIndex);
         if(entry != null)
         {
             return;
@@ -196,10 +202,18 @@ public class AccMonitor : IAccMonitor
         this.currentSession = null;
     }
 
-    private AccMonitorEntry? FindEntryByCarIndex(int carIndex)
+    private void EndCurrentEvent()
     {
-        return this.entryList.FirstOrDefault(e => e.CarIndex == carIndex);
-        ;
+        if(this.currentEvent == null)
+        {
+            return;
+        }
+
+        this.StopUdpConnection();
+        this.currentEvent.IsRunning = false;
+        this.LogMessage(LoggingLevel.Information, $"Event Ended: {this.currentEvent}");
+        this.eventEndedSubject.OnNext(this.currentEvent);
+        this.currentEvent = null;
     }
 
     private void LogMessage(LoggingLevel level, string content)
@@ -211,6 +225,11 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, appStatusChange.ToString());
         this.currentAppStatus = appStatusChange.To;
+
+        if(appStatusChange.To == AccAppStatus.Off)
+        {
+            this.EndCurrentEvent();
+        }
     }
 
     private void OnNextBroadcastEvent(BroadcastingEvent broadcastingEvent)
@@ -249,8 +268,7 @@ public class AccMonitor : IAccMonitor
     private void OnNextEntryListUpdate(EntryListUpdate entryListUpdate)
     {
         this.LogMessage(LoggingLevel.Information, entryListUpdate.ToString());
-        var carInfo = entryListUpdate.CarInfo;
-        this.AddEntryIfNotExists(carInfo);
+        this.AddEntryIfNotExists(entryListUpdate.CarInfo);
     }
 
     private void OnNextFlagState(AccFlagState accFlagState)
@@ -264,7 +282,7 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
-        var eventEntry = this.FindEntryByCarIndex(realTimeCarUpdate.CarIndex);
+        var eventEntry = this.entryList.FirstOrDefault(e => e.CarIndex == realTimeCarUpdate.CarIndex);
         if(eventEntry != null)
         {
             eventEntry.CarLocation = realTimeCarUpdate.CarLocation;
@@ -274,6 +292,7 @@ public class AccMonitor : IAccMonitor
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
         this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
+        this.lastRealtimeUpdate = DateTime.Now;
 
         if(!this.entryList.Any())
         {
@@ -288,18 +307,17 @@ public class AccMonitor : IAccMonitor
 
         if(hasSessionTypeChanged)
         {
-            var accMonitorSessionTypeChange =
+            var sessionTypeChange =
                 new AccMonitorSessionTypeChange(this.currentUdpSessionType, sessionType);
-            this.sessionTypeChangedSubject.OnNext(accMonitorSessionTypeChange);
-            this.LogMessage(LoggingLevel.Information, accMonitorSessionTypeChange.ToString());
+            this.sessionTypeChangedSubject.OnNext(sessionTypeChange);
+            this.LogMessage(LoggingLevel.Information, sessionTypeChange.ToString());
         }
 
         if(hasPhaseChanged)
         {
-            var accMonitorSessionPhaseChange =
-                new AccMonitorSessionPhaseChange(this.currentUdpPhase, sessionPhase);
-            this.phaseChangedSubject.OnNext(accMonitorSessionPhaseChange);
-            this.LogMessage(LoggingLevel.Information, accMonitorSessionPhaseChange.ToString());
+            var phaseChange = new AccMonitorSessionPhaseChange(this.currentUdpPhase, sessionPhase);
+            this.phaseChangedSubject.OnNext(phaseChange);
+            this.LogMessage(LoggingLevel.Information, phaseChange.ToString());
         }
 
         if(hasPhaseChanged && sessionPhase == SessionPhase.PostSession)
@@ -331,6 +349,18 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, accSharedMemorySession.ToString());
         this.accSharedMemorySession = accSharedMemorySession;
+
+        var isNewEvent = this.currentEvent == null
+                         || this.currentEvent.TrackName != accSharedMemorySession.TrackName
+                         || this.currentEvent.IsOnline != accSharedMemorySession.IsOnline;
+
+        if(!isNewEvent)
+        {
+            return;
+        }
+
+        this.EndCurrentEvent();
+        this.StartNewEvent(accSharedMemorySession);
     }
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
@@ -373,6 +403,11 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessAccidentEvent(BroadcastingEvent broadcastingEvent)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = broadcastingEvent.CarData;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
         var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
@@ -385,7 +420,7 @@ public class AccMonitor : IAccMonitor
 
         this.AddEntryIfNotExists(carInfo);
 
-        var accAccident = new AccMonitorAccident()
+        var accAccident = new AccMonitorAccident
         {
             AccCarModelId = carInfo.CarModelType,
             CarManufacturer = car!.ManufacturerTag,
@@ -395,7 +430,7 @@ public class AccMonitor : IAccMonitor
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
             CarIndex = carInfo.CarIndex,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
+            SessionId = this.currentSession.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -404,6 +439,11 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessBestPersonalLap(BroadcastingEvent broadcastingEvent)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = broadcastingEvent.CarData;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
         var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
@@ -416,7 +456,7 @@ public class AccMonitor : IAccMonitor
 
         this.AddEntryIfNotExists(carInfo);
 
-        var accLap = new AccMonitorLap()
+        var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
             CarManufacturer = car!.ManufacturerTag,
@@ -427,7 +467,7 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
+            SessionId = this.currentSession.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -436,6 +476,11 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessBestSessionLapEvent(BroadcastingEvent broadcastingEvent)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = broadcastingEvent.CarData;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
         var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
@@ -448,7 +493,7 @@ public class AccMonitor : IAccMonitor
 
         this.AddEntryIfNotExists(carInfo);
 
-        var accLap = new AccMonitorLap()
+        var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
             CarManufacturer = car!.ManufacturerTag,
@@ -459,7 +504,7 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
+            SessionId = this.currentSession.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -473,6 +518,11 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessLapCompletedEvent(BroadcastingEvent broadcastingEvent)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = broadcastingEvent.CarData;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
         var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
@@ -485,7 +535,7 @@ public class AccMonitor : IAccMonitor
 
         this.AddEntryIfNotExists(carInfo);
 
-        var accLap = new AccMonitorLap()
+        var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
             CarManufacturer = car!.ManufacturerTag,
@@ -496,7 +546,7 @@ public class AccMonitor : IAccMonitor
             CarIndex = carInfo.CarIndex,
             LapTime = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
+            SessionId = this.currentSession.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -505,6 +555,11 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessPenaltyComMsgEvent(BroadcastingEvent broadcastingEvent)
     {
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var carInfo = broadcastingEvent.CarData;
         var car = this.accCarInfoProvider.FindByModelId(carInfo.CarModelType);
         var drivers = carInfo.Drivers.Select(d => new AccMonitorDriver(d.FirstName,
@@ -515,10 +570,9 @@ public class AccMonitor : IAccMonitor
                                                      .GetCountryCode(d.Nationality)))
                              .ToList();
 
-
         this.AddEntryIfNotExists(carInfo);
 
-        var accPenalty = new AccMonitorPenalty()
+        var accPenalty = new AccMonitorPenalty
         {
             AccCarModelId = carInfo.CarModelType,
             CarManufacturer = car!.ManufacturerTag,
@@ -529,7 +583,7 @@ public class AccMonitor : IAccMonitor
             Index = carInfo.CarIndex,
             Penalty = broadcastingEvent.Message,
             RaceNumber = carInfo.RaceNumber,
-            SessionId = this.currentSession!.SessionId.ToString(),
+            SessionId = this.currentSession.SessionId.ToString(),
             TeamName = carInfo.TeamName
         };
 
@@ -538,7 +592,12 @@ public class AccMonitor : IAccMonitor
 
     private void ProcessSessionOverEvent(BroadcastingEvent broadcastingEvent)
     {
-        this.sessionCompletedSubject.OnNext(this.currentSession!);
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
+        this.sessionCompletedSubject.OnNext(this.currentSession);
     }
 
     private void ProcessWhiteFlagState(AccFlagState accFlagState)
@@ -563,19 +622,71 @@ public class AccMonitor : IAccMonitor
         this.isYellowFlagActiveSubject.OnNext(this.isYellowFlagActive);
     }
 
+    private void StartDisconnectWatcher()
+    {
+        this.disconnectWatcherSubscription?.Dispose();
+        this.lastRealtimeUpdate = DateTime.Now;
+        this.disconnectWatcherSubscription = Observable.Interval(this.udpTimeoutThreshold)
+                                                       .Subscribe(_ =>
+                                                       {
+                                                           if(this.accUdpConnection == null
+                                                              || this.currentAppStatus != AccAppStatus.Live)
+                                                           {
+                                                               return;
+                                                           }
+
+                                                           var timeSinceLastUpdate =
+                                                               DateTime.Now - this.lastRealtimeUpdate;
+                                                           if(timeSinceLastUpdate <= this.udpTimeoutThreshold)
+                                                           {
+                                                               return;
+                                                           }
+
+                                                           this.LogMessage(LoggingLevel.Information,
+                                                               "UDP connection appears to have dropped, attempting reconnect.");
+                                                           this.StopUdpConnection();
+                                                           this.StartUdpConnection();
+                                                       });
+    }
+
+    private void StartNewEvent(AccSharedMemorySession accSharedMemorySession)
+    {
+        this.currentEvent = new AccMonitorEvent
+        {
+            EventId = Guid.NewGuid(),
+            IsOnline = accSharedMemorySession.IsOnline,
+            IsRunning = true,
+            NumberOfCars = accSharedMemorySession.NumberOfCars,
+            TrackName = accSharedMemorySession.TrackName
+        };
+
+        this.LogMessage(LoggingLevel.Information, $"Event Started: {this.currentEvent}");
+        this.eventStartedSubject.OnNext(this.currentEvent);
+        this.StartUdpConnection();
+        this.StartDisconnectWatcher();
+    }
+
     private void StartNewUdpSession(RealtimeUpdate realtimeUpdate, RaceSessionType sessionType)
     {
+        if(this.accSharedMemorySession == null || this.currentEvent == null)
+        {
+            this.LogMessage(LoggingLevel.Information,
+                "Cannot start new session: shared memory session or current event is not available.");
+            return;
+        }
+
         this.currentSession = new AccMonitorSession
         {
-            Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession!.DurationMs),
-            EventId = this.accSharedMemoryEvent!.EventId,
-            IsOnline = this.accSharedMemoryEvent.IsOnline,
+            Duration = TimeSpan.FromMilliseconds(this.accSharedMemorySession.DurationMs),
+            EventId = this.currentEvent.EventId,
+            IsOnline = this.currentEvent.IsOnline,
             IsRunning = true,
-            NumberOfCars = this.accSharedMemoryEvent.NumberOfCars,
+            NumberOfCars = this.currentEvent.NumberOfCars,
             SessionId = this.accSharedMemorySession.SessionId,
             SessionType = sessionType.ToFriendlyName(),
             TrackName = this.accSharedMemorySession.TrackName
         };
+
         this.sessionStartedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
@@ -584,9 +695,7 @@ public class AccMonitor : IAccMonitor
     {
         this.LogMessage(LoggingLevel.Information, "Preparing connection to ACC Shared Memory interface.");
         this.accSharedMemoryConnection = this.accSharedMemoryConnectionFactory.Create();
-
         this.PrepareSharedMemoryMessageProcessing();
-
         this.accSharedMemoryConnection.Start();
     }
 
@@ -601,7 +710,6 @@ public class AccMonitor : IAccMonitor
             broadcastingSettings.CommandPassword);
 
         this.PrepareUdpMessageProcessing();
-
         this.accUdpConnection.Connect();
     }
 
@@ -614,9 +722,12 @@ public class AccMonitor : IAccMonitor
 
         this.CompleteCurrentUdpSession();
         this.udpSubscriptionSink?.Dispose();
-        this.accUdpConnection?.Dispose();
+        this.accUdpConnection.Dispose();
         this.accUdpConnection = null;
         this.entryList.Clear();
         this.entryListSubject.OnNext(this.entryList);
+        this.currentUdpPhase = SessionPhase.NONE;
+        this.currentUdpSessionType = RaceSessionType.NONE;
+        this.currentSessionTime = TimeSpan.Zero;
     }
 }

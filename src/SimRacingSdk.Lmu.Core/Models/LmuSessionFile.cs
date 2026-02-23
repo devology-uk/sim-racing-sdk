@@ -36,6 +36,7 @@ public class LmuSessionFile
 
     public static LmuSessionFile Load(string filePath)
     {
+
         var document = XElement.Load(filePath);
         var raceResultsElement = document.Element("RaceResults");
 
