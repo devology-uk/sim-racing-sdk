@@ -215,10 +215,16 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         {
             case AccAppStatus.Live:
                 this.BeginNewSession(graphicsData, staticData);
-                return;
+                break;
             case AccAppStatus.Off:
                 this.EndCurrentSession();
                 break;
+        }
+
+        if(this.lastGraphicsData.Status != graphicsData.Status)
+        {
+            this.appStatusChangesSubject.OnNext(new AccAppStatusChange(this.lastGraphicsData.Status,
+                graphicsData.Status));
         }
     }
 }
