@@ -146,6 +146,11 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.lastStaticData = staticData;
         this.lastGraphicsData = graphicsData;
 
+        if(this.currentSession == null)
+        {
+            return;
+        }
+
         var physicsData = this.sharedMemoryProvider.ReadPhysicsData();
         if(physicsData.IsEmpty)
         {

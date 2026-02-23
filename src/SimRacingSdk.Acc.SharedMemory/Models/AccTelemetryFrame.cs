@@ -39,8 +39,12 @@ public record AccTelemetryFrame
         this.DiscLifeRr = physicsData.DiscLife[3];
         this.DriverFirstName = staticData.PlayerFirstName;
         this.DriverLastName = staticData.PlayerLastName;
-        this.DriverDisplayName = $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
-        this.DriverFullName = $"{staticData.PlayerFirstName} {staticData.PlayerLastName}";
+        this.DriverDisplayName = string.IsNullOrEmpty(staticData.PlayerFirstName)
+            ? staticData.PlayerLastName
+            : $"{staticData.PlayerFirstName[..1]}. {staticData.PlayerLastName}";
+        this.DriverFullName = string.IsNullOrEmpty(staticData.PlayerFirstName)
+            ? staticData.PlayerLastName
+            : $"{staticData.PlayerFirstName} {staticData.PlayerLastName}";
         this.FrontBrakeCompound = physicsData.FrontBrakeCompound;
         this.Fuel = physicsData.Fuel;
         this.Gear = physicsData.Gear;
