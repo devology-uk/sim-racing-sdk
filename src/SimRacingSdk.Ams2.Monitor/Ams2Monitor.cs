@@ -90,8 +90,10 @@ public class Ams2Monitor : IAms2Monitor
         this.currentSession.TotalLapCount = this.lapCount;
         this.currentSession.PlayerLapCount = this.playerLapCount;
 
-        this.sessionCompletedSubject.OnNext(this.currentSession);
-        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
+        var completedSession = this.currentSession;
+        this.currentSession = null;
+        this.sessionCompletedSubject.OnNext(completedSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Completed: {completedSession}");
     }
 
     private bool HasChangedToActiveSessionType(Ams2GameStatus ams2GameStatus)
@@ -222,6 +224,7 @@ public class Ams2Monitor : IAms2Monitor
             TrackLocation = ams2GameStatus.TrackLocation
         };
         this.lapCount = 0;
+        this.playerLapCount = 0;
         this.sessionStartedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
     }
