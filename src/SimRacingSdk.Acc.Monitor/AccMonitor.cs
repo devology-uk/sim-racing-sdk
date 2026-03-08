@@ -363,6 +363,11 @@ public class AccMonitor : IAccMonitor
         if(!isNewEvent)
         {
             this.CompleteCurrentUdpSession();
+            if(this.accUdpConnection == null)
+            {
+                this.StartUdpConnection();
+                this.StartDisconnectWatcher();
+            }
             return;
         }
 
