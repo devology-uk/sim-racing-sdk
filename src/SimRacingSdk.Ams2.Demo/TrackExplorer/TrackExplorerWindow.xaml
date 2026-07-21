@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Track Explorer"
         Height="500"
-        Width="800"
+        Width="1000"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
         Background="LightGray"
@@ -134,6 +134,8 @@
                                         Binding="{Binding LengthMi, StringFormat=N2}" />
                     <DataGridTextColumn Header="Max Grid Size"
                                         Binding="{Binding MaxGridSize}" />
+                    <DataGridTextColumn Header="DLC Pack"
+                                        Binding="{Binding DlcPack}" />
                     <DataGridTextColumn Header="AMS2 ID"
                                         Binding="{Binding Ams2TrackId}" />
                 </DataGrid.Columns>

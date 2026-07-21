@@ -40,7 +40,7 @@ public partial class CarExplorerViewModel : ObservableObject
 
         foreach(var ams2CarInfo in this.carInfoProvider.GetCarInfos())
         {
-            var carInfo = $"{ams2CarInfo.Class},{ams2CarInfo.Model},{ams2CarInfo.Model},2025,{ams2CarInfo.Manufacturer}";
+            var carInfo = $"{ams2CarInfo.Class},{ams2CarInfo.Model},{ams2CarInfo.Model},2025,{ams2CarInfo.Manufacturer},{ams2CarInfo.DlcPack}";
             streamWriter.WriteLine(carInfo);
             streamWriter.Flush();
         }

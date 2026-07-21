@@ -87,6 +87,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image Grid.Column="0"
@@ -294,6 +295,18 @@
                           IsEnabled="False"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="8"
+                       Content="DLC Pack"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                
+                <Label Grid.Column="1"
+                       Grid.Row="8"
+                       Grid.ColumnSpan="6"
+                       Content="{Binding DlcPack}"
+                       VerticalAlignment="Center" />
             </Grid>
         </GroupBox>
     </Grid>

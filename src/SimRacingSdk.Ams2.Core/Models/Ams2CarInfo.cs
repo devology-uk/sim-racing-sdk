@@ -15,6 +15,7 @@ public record Ams2CarInfo
     public string Class { get; set; }
     public string Differential { get; set; }
     public double DisplacementL { get; set; }
+    public string DlcPack { get; set; }
     public string Driveline { get; set; }
     public string Electronics { get; set; }
     public string Engine { get; set; }

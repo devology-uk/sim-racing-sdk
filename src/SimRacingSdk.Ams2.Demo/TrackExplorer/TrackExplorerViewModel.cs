@@ -74,7 +74,7 @@ namespace SimRacingSdk.Ams2.Demo.TrackExplorer
 
                 foreach(var ams2TrackLayoutInfo in ams2TrackInfo.Layouts)
                 {
-                    var layoutInfo = $"{ams2TrackInfo.ShortName},{ams2TrackLayoutInfo.Ams2TrackId},{ams2TrackLayoutInfo.Name},{ams2TrackLayoutInfo.Corners},{ams2TrackLayoutInfo.LengthM},{ams2TrackLayoutInfo.Grade},{ams2TrackLayoutInfo.LengthKm},{ams2TrackLayoutInfo.MaxGridSize},{ams2TrackLayoutInfo.TrackType}";
+                    var layoutInfo = $"{ams2TrackInfo.ShortName},{ams2TrackLayoutInfo.Ams2TrackId},{ams2TrackLayoutInfo.Name},{ams2TrackLayoutInfo.Corners},{ams2TrackLayoutInfo.LengthM},{ams2TrackLayoutInfo.Grade},{ams2TrackLayoutInfo.LengthKm},{ams2TrackLayoutInfo.MaxGridSize},{ams2TrackLayoutInfo.TrackType},{ams2TrackLayoutInfo.DlcPack}";
                     layoutsStreamWriter.WriteLine(layoutInfo);
                     layoutsStreamWriter.Flush();
                 }

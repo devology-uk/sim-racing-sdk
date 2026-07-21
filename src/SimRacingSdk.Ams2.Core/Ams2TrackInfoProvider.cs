@@ -58,6 +58,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 3210,
                     MaxGridSize = 20,
@@ -90,6 +91,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 8,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 910,
                     MaxGridSize = 16,
@@ -135,6 +137,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 1120,
                     MaxGridSize = 8,
@@ -145,6 +148,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 4670,
                     MaxGridSize = 48,
@@ -155,6 +159,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 4650,
                     MaxGridSize = 48,
@@ -165,6 +170,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart2,
                     Grade = GradeHistoric,
                     LengthM = 4740,
                     MaxGridSize = 32,
@@ -175,6 +181,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = GradeHistoric,
                     LengthM = 4720,
                     MaxGridSize = 40,
@@ -185,6 +192,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = GradeHistoric,
                     LengthM = 4720,
                     MaxGridSize = 40,
@@ -195,6 +203,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade2,
                     LengthM = 2990,
                     MaxGridSize = 48,
@@ -228,6 +237,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 20,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 6170,
                     MaxGridSize = 32,
@@ -497,6 +507,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart1,
                     Grade = GradeHistoric,
                     LengthM = 4350,
                     MaxGridSize = 30,
@@ -542,6 +553,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = GradeTemporary,
                     LengthM = 3380,
                     MaxGridSize = 32,
@@ -551,6 +563,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = GradeTemporary,
                     LengthM = 3380,
                     MaxGridSize = 20,
@@ -681,6 +694,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 12,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart1,
                     Grade = Grade3,
                     LengthM = 5720,
                     MaxGridSize = 48,
@@ -691,6 +705,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart1,
                     Grade = Grade3,
                     LengthM = 5720,
                     MaxGridSize = 48,
@@ -700,6 +715,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 3,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart1,
                     Grade = GradeOval,
                     LengthM = 4020,
                     MaxGridSize = 48,
@@ -755,6 +771,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = GradeOval,
                     LengthM = 3210,
                     MaxGridSize = 48,
@@ -765,6 +782,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = GradeOval,
                     LengthM = 3210,
                     MaxGridSize = 32,
@@ -775,6 +793,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 4500,
                     MaxGridSize = 30,
@@ -798,6 +817,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 8,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 910,
                     MaxGridSize = 8,
@@ -844,6 +864,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = GradeOval,
                     LengthM = 2010,
                     MaxGridSize = 32,
@@ -854,6 +875,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 2570,
                     MaxGridSize = 32,
@@ -864,6 +886,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 3210,
                     MaxGridSize = 32,
@@ -993,6 +1016,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 7,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 3080,
                     MaxGridSize = 20,
@@ -1016,6 +1040,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 4570,
                     MaxGridSize = 48,
@@ -1026,6 +1051,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 1120,
                     MaxGridSize = 8,
@@ -1036,6 +1062,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade2,
                     LengthM = 3690,
                     MaxGridSize = 30,
@@ -1045,6 +1072,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 2630,
                     MaxGridSize = 30,
@@ -1055,6 +1083,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 2600,
                     MaxGridSize = 30,
@@ -1065,6 +1094,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 6820,
                     MaxGridSize = 30,
@@ -1075,6 +1105,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 2630,
                     MaxGridSize = 20,
@@ -1085,6 +1116,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 6790,
                     MaxGridSize = 36,
@@ -1095,6 +1127,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 2630,
                     MaxGridSize = 36,
@@ -1105,6 +1138,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 6780,
                     MaxGridSize = 36,
@@ -1128,6 +1162,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.Hungaroring,
                     Grade = Grade1,
                     LengthM = 4380,
                     MaxGridSize = 48,
@@ -1171,6 +1206,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 18,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade4,
                     LengthM = 4300,
                     MaxGridSize = 20,
@@ -1204,6 +1240,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 21,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = GradeHistoric,
                     LengthM = 4930,
                     MaxGridSize = 26,
@@ -1257,6 +1294,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade1,
                     LengthM = 3920,
                     MaxGridSize = 48,
@@ -1267,6 +1305,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = GradeOval,
                     LengthM = 4020,
                     MaxGridSize = 48,
@@ -1277,6 +1316,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = Grade1,
                     LengthM = 3920,
                     MaxGridSize = 48,
@@ -1287,6 +1327,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = GradeOval,
                     LengthM = 4020,
                     MaxGridSize = 48,
@@ -1330,6 +1371,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart2,
                     Grade = GradeHistoric,
                     LengthM = 4320,
                     MaxGridSize = 32,
@@ -1340,6 +1382,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart2,
                     Grade = GradeHistoric,
                     LengthM = 4320,
                     MaxGridSize = 32,
@@ -1496,6 +1539,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 4210,
                     MaxGridSize = 32,
@@ -1601,6 +1645,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart1,
                     Grade = Grade2,
                     LengthM = 3600,
                     MaxGridSize = 48,
@@ -1624,6 +1669,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 38,
+                    DlcPack = Ams2DlcPacks.CircuitDes24HeuresDuMans,
                     Grade = Grade2,
                     LengthM = 13620,
                     MaxGridSize = 60,
@@ -1634,6 +1680,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 38,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart3,
                     Grade = Grade2,
                     LengthM = 13650,
                     MaxGridSize = 48,
@@ -1644,6 +1691,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.CircuitDes24HeuresDuMans,
                     Grade = Grade2,
                     LengthM = 4180,
                     MaxGridSize = 32,
@@ -1720,6 +1768,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart1,
                     Grade = Grade3,
                     LengthM = 3160,
                     MaxGridSize = 48,
@@ -1729,6 +1778,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 3160,
                     MaxGridSize = 20,
@@ -1761,6 +1811,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart2,
                     Grade = GradeHistoric,
                     LengthM = 4430,
                     MaxGridSize = 40,
@@ -1794,6 +1845,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 5790,
                     MaxGridSize = 48,
@@ -1804,6 +1856,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 5790,
                     MaxGridSize = 48,
@@ -1814,6 +1867,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 2400,
                     MaxGridSize = 32,
@@ -1824,6 +1878,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 5800,
                     MaxGridSize = 32,
@@ -1834,6 +1889,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 7,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 5750,
                     MaxGridSize = 26,
@@ -1844,6 +1900,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 2400,
                     MaxGridSize = 26,
@@ -1854,6 +1911,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 10100,
                     MaxGridSize = 26,
@@ -1864,6 +1922,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 10000,
                     MaxGridSize = 26,
@@ -1874,6 +1933,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 4,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 2040,
                     MaxGridSize = 20,
@@ -1897,6 +1957,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 3950,
                     MaxGridSize = 48,
@@ -1920,6 +1981,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 73,
+                    DlcPack = Ams2DlcPacks.Nurburgring2025,
                     Grade = Grade3,
                     LengthM = 20830,
                     MaxGridSize = 28,
@@ -1930,6 +1992,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 88,
+                    DlcPack = Ams2DlcPacks.Nurburgring2025,
                     Grade = Grade3,
                     LengthM = 1909,
                     MaxGridSize = 48,
@@ -1940,6 +2003,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 73,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 20830,
                     MaxGridSize = 28,
@@ -1949,6 +2013,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 7,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 2390,
                     MaxGridSize = 32,
@@ -1959,6 +2024,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 88,
+                    DlcPack = Ams2DlcPacks.Nurburgring2025,
                     Grade = Grade3,
                     LengthM = 25370,
                     MaxGridSize = 48,
@@ -1969,6 +2035,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 88,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 25370,
                     MaxGridSize = 48,
@@ -1979,6 +2046,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 6,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 1020,
                     MaxGridSize = 8,
@@ -1989,6 +2057,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.Nurburgring2025,
                     Grade = Grade1,
                     LengthM = 5140,
                     MaxGridSize = 48,
@@ -1999,6 +2068,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 5140,
                     MaxGridSize = 48,
@@ -2009,6 +2079,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 5130,
                     MaxGridSize = 48,
@@ -2019,6 +2090,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 3620,
                     MaxGridSize = 48,
@@ -2029,6 +2101,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 3050,
                     MaxGridSize = 30,
@@ -2039,6 +2112,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 187,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 28260,
                     MaxGridSize = 32,
@@ -2049,6 +2123,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 160,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 22830,
                     MaxGridSize = 32,
@@ -2059,6 +2134,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 27,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 7740,
                     MaxGridSize = 32,
@@ -2188,6 +2264,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 3020,
                     MaxGridSize = 32,
@@ -2198,6 +2275,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 2200,
                     MaxGridSize = 32,
@@ -2208,6 +2286,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 7,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 4020,
                     MaxGridSize = 32,
@@ -2218,6 +2297,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 4030,
                     MaxGridSize = 32,
@@ -2228,6 +2308,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 3,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = GradeOval,
                     LengthM = 4020,
                     MaxGridSize = 48,
@@ -2238,6 +2319,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 3630,
                     MaxGridSize = 32,
@@ -2248,6 +2330,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart3,
                     Grade = Grade2,
                     LengthM = 2200,
                     MaxGridSize = 32,
@@ -2271,6 +2354,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 6510,
                     MaxGridSize = 48,
@@ -2281,6 +2365,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 6510,
                     MaxGridSize = 48,
@@ -2291,6 +2376,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 14,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade2,
                     LengthM = 6510,
                     MaxGridSize = 20,
@@ -2314,6 +2400,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 12,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 4080,
                     MaxGridSize = 48,
@@ -2323,6 +2410,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 12,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart3,
                     Grade = Grade2,
                     LengthM = 4080,
                     MaxGridSize = 48,
@@ -2333,6 +2421,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart3,
                     Grade = Grade2,
                     LengthM = 2580,
                     MaxGridSize = 48,
@@ -2343,6 +2432,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 12,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 4100,
                     MaxGridSize = 32,
@@ -2411,6 +2501,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 5850,
                     MaxGridSize = 48,
@@ -2420,6 +2511,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 3210,
                     MaxGridSize = 32,
@@ -2430,6 +2522,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 13,
+                    DlcPack = Ams2DlcPacks.ImsaTrackPack,
                     Grade = Grade2,
                     LengthM = 2730,
                     MaxGridSize = 32,
@@ -2439,6 +2532,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade2,
                     LengthM = 3210,
                     MaxGridSize = 20,
@@ -2461,6 +2555,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 18,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 5890,
                     MaxGridSize = 48,
@@ -2471,6 +2566,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 9,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade2,
                     LengthM = 2970,
                     MaxGridSize = 32,
@@ -2481,6 +2577,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 5,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade3,
                     LengthM = 2630,
                     MaxGridSize = 36,
@@ -2491,6 +2588,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 16,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 5140,
                     MaxGridSize = 36,
@@ -2501,6 +2599,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 3610,
                     MaxGridSize = 36,
@@ -2511,6 +2610,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 5,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 2630,
                     MaxGridSize = 36,
@@ -2521,6 +2621,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 17,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 5220,
                     MaxGridSize = 36,
@@ -2531,6 +2632,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 4710,
                     MaxGridSize = 36,
@@ -2541,6 +2643,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 8,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 4710,
                     MaxGridSize = 36,
@@ -2607,6 +2710,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 20,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 7000,
                     MaxGridSize = 48,
@@ -2616,6 +2720,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 20,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = Grade1,
                     LengthM = 7000,
                     MaxGridSize = 48,
@@ -2625,6 +2730,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 5,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 890,
                     MaxGridSize = 8,
@@ -2635,6 +2741,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 23,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 6940,
                     MaxGridSize = 30,
@@ -2645,6 +2752,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 21,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 14120,
                     MaxGridSize = 32,
@@ -2655,6 +2763,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 21,
+                    DlcPack = Ams2DlcPacks.PremiumTrackPack,
                     Grade = GradeHistoric,
                     LengthM = 14120,
                     MaxGridSize = 32,
@@ -2665,6 +2774,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 24,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart3,
                     Grade = Grade1,
                     LengthM = 6970,
                     MaxGridSize = 48,
@@ -2674,7 +2784,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 },
                 new Ams2TrackLayoutInfo
                 {
-                    Corners = 24,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart3,
                     Grade = Grade1,
                     LengthM = 6970,
                     MaxGridSize = 48,
@@ -2770,6 +2880,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 6,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 2330,
                     MaxGridSize = 20,
@@ -2789,6 +2900,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 6,
+                    DlcPack = Ams2DlcPacks.HistoricTrackPackPart4,
                     Grade = Grade3,
                     LengthM = 4310,
                     MaxGridSize = 26,
@@ -2878,6 +2990,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart1,
                     Grade = GradeRallycross,
                     LengthM = 1010,
                     MaxGridSize = 8,
@@ -2991,6 +3104,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 10,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade3,
                     LengthM = 2150,
                     MaxGridSize = 34,
@@ -3077,6 +3191,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 18,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 5260,
                     MaxGridSize = 48,
@@ -3087,6 +3202,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 15,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 5550,
                     MaxGridSize = 48,
@@ -3097,6 +3213,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 7,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 3900,
                     MaxGridSize = 48,
@@ -3107,6 +3224,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.RacinUsaExpansionPackPart2,
                     Grade = Grade2,
                     LengthM = 3940,
                     MaxGridSize = 48,
@@ -3117,6 +3235,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 new Ams2TrackLayoutInfo
                 {
                     Corners = 11,
+                    DlcPack = Ams2DlcPacks.AdrenalinePackPart2,
                     Grade = Grade2,
                     LengthM = 3940,
                     MaxGridSize = 20,
