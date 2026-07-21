@@ -299,6 +299,7 @@
 	  <None Remove="Images\Manufacturers\mitsubishi.png" />
 	  <None Remove="Images\Manufacturers\nissan.png" />
 	  <None Remove="Images\Manufacturers\oreca.png" />
+	  <None Remove="Images\Manufacturers\panoz.png" />
 	  <None Remove="Images\Manufacturers\peugeot.png" />
 	  <None Remove="Images\Manufacturers\porsche.png" />
 	  <None Remove="Images\Manufacturers\puma.png" />
@@ -306,9 +307,12 @@
 	  <None Remove="Images\Manufacturers\reiza.png" />
 	  <None Remove="Images\Manufacturers\reynard.png" />
 	  <None Remove="Images\Manufacturers\roco.png" />
+	  <None Remove="Images\Manufacturers\saleen.png" />
 	  <None Remove="Images\Manufacturers\sigma.png" />
+	  <None Remove="Images\Manufacturers\spyker.png" />
 	  <None Remove="Images\Manufacturers\swift.png" />
 	  <None Remove="Images\Manufacturers\toyota.png" />
+	  <None Remove="Images\Manufacturers\tvr.png" />
 	  <None Remove="Images\Manufacturers\ultima.jpg" />
 	  <None Remove="Images\Manufacturers\ultima.png" />
 	  <None Remove="Images\Manufacturers\vanwall.png" />
@@ -318,7 +322,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
@@ -630,6 +633,7 @@
 	  <Resource Include="Images\Manufacturers\mitsubishi.png" />
 	  <Resource Include="Images\Manufacturers\nissan.png" />
 	  <Resource Include="Images\Manufacturers\oreca.png" />
+	  <Resource Include="Images\Manufacturers\panoz.png" />
 	  <Resource Include="Images\Manufacturers\peugeot.png" />
 	  <Resource Include="Images\Manufacturers\porsche.png" />
 	  <Resource Include="Images\Manufacturers\puma.png" />
@@ -637,9 +641,12 @@
 	  <Resource Include="Images\Manufacturers\reiza.png" />
 	  <Resource Include="Images\Manufacturers\reynard.png" />
 	  <Resource Include="Images\Manufacturers\roco.png" />
+	  <Resource Include="Images\Manufacturers\saleen.png" />
 	  <Resource Include="Images\Manufacturers\sigma.png" />
+	  <Resource Include="Images\Manufacturers\spyker.png" />
 	  <Resource Include="Images\Manufacturers\swift.png" />
 	  <Resource Include="Images\Manufacturers\toyota.png" />
+	  <Resource Include="Images\Manufacturers\tvr.png" />
 	  <Resource Include="Images\Manufacturers\ultima.png" />
 	  <Resource Include="Images\Manufacturers\vanwall.png" />
 	  <Resource Include="Images\Manufacturers\volkswagen.png" />

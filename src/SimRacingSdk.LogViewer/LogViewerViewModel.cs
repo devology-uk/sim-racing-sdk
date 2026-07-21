@@ -196,7 +196,7 @@ public partial class LogViewerViewModel : ObservableObject
         this.ShowCurrentPage();
     }
 
-    partial void OnFilterChanged(string? value)
+    partial void OnFilterChanged(string value)
     {
         this.ShowCurrentPage();
     }

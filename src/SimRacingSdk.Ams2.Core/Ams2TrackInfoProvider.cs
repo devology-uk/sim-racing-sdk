@@ -174,6 +174,26 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                 },
                 new Ams2TrackLayoutInfo
                 {
+                    Corners = 13,
+                    Grade = GradeHistoric,
+                    LengthM = 4720,
+                    MaxGridSize = 40,
+                    Name = "Circuit de Barcelona-Catalunya Historic 2001",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "barcelona_gp_2001"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = GradeHistoric,
+                    LengthM = 4720,
+                    MaxGridSize = 40,
+                    Name = "Circuit de Barcelona-Catalunya Historic 1999",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "barcelona_gp_1999"
+                },
+                new Ams2TrackLayoutInfo
+                {
                     Corners = 9,
                     Grade = Grade2,
                     LengthM = 2990,
@@ -737,6 +757,16 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Corners = 4,
                     Grade = GradeOval,
                     LengthM = 3210,
+                    MaxGridSize = 48,
+                    Name = "Fontan Oval Historic",
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "fontana_oval_historic"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 3210,
                     MaxGridSize = 32,
                     Name = "Auto Club Speedway Oval",
                     TrackType = TrackTypeOval,
@@ -1086,6 +1116,29 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
         },
         new()
         {
+            AltitudeM = 200,
+            Country = "Hungary",
+            CountryCode = "HUN",
+            FullName = "Hungaroring",
+            Latitude = 47.5819196,
+            Longitude = 19.2489391,
+            ShortName = "Hungaroring",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade1,
+                    LengthM = 4380,
+                    MaxGridSize = 48,
+                    Name = "Hungaroring GP 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "hungaroring_gp_2005"
+                }
+            ]
+        },
+        new()
+        {
             AltitudeM = 2190,
             Country = "Ecuador",
             CountryCode = "ECU",
@@ -1154,6 +1207,16 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Grade = GradeHistoric,
                     LengthM = 4930,
                     MaxGridSize = 26,
+                    Name = "Imola Historic 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "imola_05"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 21,
+                    Grade = GradeHistoric,
+                    LengthM = 4930,
+                    MaxGridSize = 26,
                     Name = "Imola Historic 2001",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "imola_01"
@@ -1200,6 +1263,26 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Name = "Indianapolis Motor Speedway Road Course",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "Indianapolis_2022_RC"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 4,
+                    Grade = GradeOval,
+                    LengthM = 4020,
+                    MaxGridSize = 48,
+                    Name = "Indianapolis Motor Speedway Historic 2001 Oval",
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "indianapolis_2001_oval"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 14,
+                    Grade = Grade1,
+                    LengthM = 3920,
+                    MaxGridSize = 48,
+                    Name = "Indianapolis Motor Speedway Historic 2001 Road",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "indianapolis_2001_rc"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -1714,6 +1797,16 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Grade = Grade1,
                     LengthM = 5790,
                     MaxGridSize = 48,
+                    Name = "Monza Historic 2005",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "monza_2005"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = Grade1,
+                    LengthM = 5790,
+                    MaxGridSize = 48,
                     Name = "Monza",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "Monza_2020"
@@ -1833,6 +1926,16 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Name = "Nordschleife 2025",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "nordschleife_2025"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 88,
+                    Grade = Grade3,
+                    LengthM = 1909,
+                    MaxGridSize = 48,
+                    Name = "Nordschleife Tourist 2025",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "nordschleife_2025_tourist"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -2069,6 +2172,89 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "OultonParkClassic"
                 }
+            ]
+        },
+        new()
+        {
+            AltitudeM = 560,
+            Country = "USA",
+            CountryCode = "USA",
+            FullName = "Pocono Raceway",
+            Latitude = 41.0565549,
+            Longitude = -75.5118204,
+            ShortName = "Pocono",
+            Layouts =
+            [
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 9,
+                    Grade = Grade2,
+                    LengthM = 3020,
+                    MaxGridSize = 32,
+                    Name = "Pocono Southeast Course 5",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC5"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 13,
+                    Grade = Grade2,
+                    LengthM = 2200,
+                    MaxGridSize = 32,
+                    Name = "Pocono East Course 1",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC1"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 7,
+                    Grade = Grade2,
+                    LengthM = 4020,
+                    MaxGridSize = 32,
+                    Name = "Pocono North/South Course 1 (no chicane)",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC2"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade2,
+                    LengthM = 4030,
+                    MaxGridSize = 32,
+                    Name = "Pocono North/South Course 1",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC3"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 3,
+                    Grade = GradeOval,
+                    LengthM = 4020,
+                    MaxGridSize = 48,
+                    Name = "Pocono Oval",
+                    TrackType = TrackTypeOval,
+                    Ams2TrackId = "Pocono_OVAL"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 10,
+                    Grade = Grade2,
+                    LengthM = 3630,
+                    MaxGridSize = 32,
+                    Name = "Pocono North/South Course 2",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC4"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 16,
+                    Grade = Grade2,
+                    LengthM = 2200,
+                    MaxGridSize = 32,
+                    Name = "Pocono Southeast Course 1",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Pocono_RC6"
+                },
             ]
         },
         new()
@@ -2599,6 +2785,26 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Name = "Spielberg Historic 1974",
                     TrackType = TrackTypeCircuit,
                     Ams2TrackId = "Spielberg_Vintage"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 6,
+                    Grade = Grade3,
+                    LengthM = 4310,
+                    MaxGridSize = 26,
+                    Name = "Spielberg Historic 2001",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "spielberg_2001"
+                },
+                new Ams2TrackLayoutInfo
+                {
+                    Corners = 11,
+                    Grade = GradeHistoric,
+                    LengthM = 5910,
+                    MaxGridSize = 34,
+                    Name = "Spielberg Historic 1977",
+                    TrackType = TrackTypeCircuit,
+                    Ams2TrackId = "Spielberg_Historic"
                 }
             ]
         },
