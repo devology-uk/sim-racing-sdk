@@ -1,0 +1,13 @@
+#nullable disable
+
+namespace SimRacingSdk.Ace.Udp.Messages;
+
+public record TrackDataUpdate
+{
+    public Dictionary<string, List<string>> CameraSets { get; internal set; }
+    public IEnumerable<string> HudPages { get; internal set; }
+    public string ConnectionIdentifier { get; internal set; }
+    public int TrackId { get; internal set; }
+    public float TrackMeters { get; internal set; }
+    public string TrackName { get; internal set; }
+}
