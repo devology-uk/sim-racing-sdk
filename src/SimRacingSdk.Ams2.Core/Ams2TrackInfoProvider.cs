@@ -332,7 +332,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.6 S",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_6_T"
+                    Ams2TrackId = "Buenos_Aires_6_T"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -342,7 +342,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.6",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_6"
+                    Ams2TrackId = "Buenos_Aires_6"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -352,7 +352,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.7",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_7"
+                    Ams2TrackId = "Buenos_Aires_7"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -362,7 +362,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.8",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_8"
+                    Ams2TrackId = "Buenos_Aires_8"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -372,7 +372,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.9",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_9"
+                    Ams2TrackId = "Buenos_Aires_9"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -382,7 +382,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.12",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_12"
+                    Ams2TrackId = "Buenos_Aires_12"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -392,7 +392,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Buenos Aires Circuito No.15",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Buenos_Aries_15"
+                    Ams2TrackId = "Buenos_Aires_15"
                 }
             ]
         },
@@ -1166,9 +1166,9 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Grade = Grade1,
                     LengthM = 4380,
                     MaxGridSize = 48,
-                    Name = "Hungaroring GP 2005",
+                    Name = "Hungaroring GP 2025",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "hungaroring_gp_2005"
+                    Ams2TrackId = "hungaroring_gp_2025"
                 }
             ]
         },
@@ -2019,7 +2019,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     MaxGridSize = 32,
                     Name = "Betonschleife Historic 1971",
                     TrackType = TrackTypeCircuit,
-                    Ams2TrackId = "Nurb_1921_Beton"
+                    Ams2TrackId = "Nurb_1971_Beton"
                 },
                 new Ams2TrackLayoutInfo
                 {
@@ -3088,7 +3088,7 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
                     Grade = Grade3,
                     LengthM = 2270,
                     MaxGridSize = 20,
-                    Name = "Velopark",
+                    Name = "Velopark 2017 STT",
                     TrackType = TrackTypeCircuit
                 },
                 new Ams2TrackLayoutInfo
