@@ -2,10 +2,9 @@ using SimRacingSdk.Ace.Core.Abstractions;
 
 namespace SimRacingSdk.Ace.Core;
 
-// Folder/file layout mirrors Acc's Documents structure with "Assetto Corsa EVO" substituted as
-// the folder name - Ace = Assetto Corsa Evo is confirmed, but this exact Documents folder name
-// and whether Evo keeps the same Config/account.json/broadcasting.json layout as Acc is an
-// unverified assumption pending a check against a real installation.
+// Folder/file layout mirrors Acc's Documents structure with the confirmed "ACE" Documents folder
+// name substituted in. Whether Evo keeps the same Config/account.json/broadcasting.json layout as
+// Acc is still an unverified assumption pending a check against a real installation.
 public class AcePathProvider : IAcePathProvider
 {
     private const string AccountFileName = "account.json";
@@ -15,7 +14,7 @@ public class AcePathProvider : IAcePathProvider
     private const string CustomDriversFolderName = "Drivers";
     private const string CustomLiveriesFolderName = "Liveries";
     private const string CustomsFolderName = "Customs";
-    private const string DocumentsFolderName = "Assetto Corsa EVO";
+    private const string DocumentsFolderName = "ACE";
     private const string ReplaysFolderName = "Replay";
     private const string ReplaySavedFolderName = "Saved";
     private const string ResultsFolderName = "Results";
