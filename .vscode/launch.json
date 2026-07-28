@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Acc.Demo",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Acc.Demo",
+            "program": "${workspaceFolder}/src/SimRacingSdk.Acc.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Acc.Demo.exe",
+            "cwd": "${workspaceFolder}/src/SimRacingSdk.Acc.Demo/bin/Debug/net9.0-windows",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Ams2.Demo",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Ams2.Demo",
+            "program": "${workspaceFolder}/src/SimRacingSdk.Ams2.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Ams2.Demo.exe",
+            "cwd": "${workspaceFolder}/src/SimRacingSdk.Ams2.Demo/bin/Debug/net9.0-windows",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Lmu.Demo",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Lmu.Demo",
+            "program": "${workspaceFolder}/src/SimRacingSdk.Lmu.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Lmu.Demo.exe",
+            "cwd": "${workspaceFolder}/src/SimRacingSdk.Lmu.Demo/bin/Debug/net9.0-windows",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Ace.Demo",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Ace.Demo",
+            "program": "${workspaceFolder}/src/SimRacingSdk.Ace.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Ace.Demo.exe",
+            "cwd": "${workspaceFolder}/src/SimRacingSdk.Ace.Demo/bin/Debug/net9.0-windows",
+            "stopAtEntry": false
+        }
+    ]
+}
