@@ -3,11 +3,12 @@ using SimRacingSdk.Ace.Core.Abstractions;
 namespace SimRacingSdk.Ace.Core;
 
 // Folder/file layout mirrors Acc's Documents structure with the confirmed "ACE" Documents folder
-// name substituted in. Whether Evo keeps the same Config/account.json/broadcasting.json layout as
-// Acc is still an unverified assumption pending a check against a real installation.
+// name substituted in. The account-equivalent file is confirmed as "local.driverdescriptor.json"
+// sitting directly in Documents/ACE (not under Config, unlike Acc's account.json). Whether Evo
+// keeps broadcasting.json under Config in the same shape as Acc is still unverified.
 public class AcePathProvider : IAcePathProvider
 {
-    private const string AccountFileName = "account.json";
+    private const string AccountFileName = "local.driverdescriptor.json";
     private const string BroadcastingSettingsFileName = "broadcasting.json";
     private const string ConfigFolderName = "Config";
     private const string CustomCarsFolderName = "Cars";
@@ -27,7 +28,7 @@ public class AcePathProvider : IAcePathProvider
         var myDocumentsFolderPath =
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 DocumentsFolderName);
-        this.AccountFilePath = Path.Combine(myDocumentsFolderPath, ConfigFolderName, AccountFileName);
+        this.AccountFilePath = Path.Combine(myDocumentsFolderPath, AccountFileName);
 
         this.BroadcastingSettingsFilePath = Path.Combine(myDocumentsFolderPath,
             ConfigFolderName,

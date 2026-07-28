@@ -4,7 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace SimRacingSdk.Ace.Core.Models.Config;
 
-// Shape assumed identical to Acc's account.json - unverified against a real Ace Evo install.
+// Shape confirmed 2026-07-28 from a real local.driverdescriptor.json (Evo's account.json
+// equivalent) - much thinner than Acc's Account: no email, discord username, game platform user
+// id or local machine id. player_id is the driver's SteamID64.
 public class Account
 {
     [JsonIgnore()]
@@ -12,20 +14,24 @@ public class Account
     [JsonIgnore()]
     public string FullName => $"{this.FirstName} {this.LastName}";
 
-    [JsonPropertyName("country")]
-    public string Country { get; set; }
-    [JsonPropertyName("discordUserName")]
-    public string DiscordUserName { get; set; }
-    [JsonPropertyName("email")]
-    public string Email { get; set; }
-    [JsonPropertyName("firstName")]
+    [JsonPropertyName("first_name")]
     public string FirstName { get; set; }
-    [JsonPropertyName("gamePlatformUserId")]
-    public string GamePlatformUserId { get; set; }
-    [JsonPropertyName("lastName")]
+    [JsonPropertyName("guid")]
+    public AccountGuid Guid { get; set; }
+    [JsonPropertyName("last_name")]
     public string LastName { get; set; }
-    [JsonPropertyName("localMachineId")]
-    public string LocalMachineId { get; set; }
-    [JsonPropertyName("nickName")]
+    [JsonPropertyName("nation")]
+    public string Nation { get; set; }
+    [JsonPropertyName("nickname")]
     public string NickName { get; set; }
+    [JsonPropertyName("player_id")]
+    public string PlayerId { get; set; }
+}
+
+public class AccountGuid
+{
+    [JsonPropertyName("a")]
+    public string A { get; set; }
+    [JsonPropertyName("b")]
+    public string B { get; set; }
 }
