@@ -4,9 +4,11 @@ namespace SimRacingSdk.Ace.Core.Abstractions;
 
 public interface IAceCarInfoProvider
 {
-    // Unverified assumption: treats the UDP CarModelType byte as an index into cars.json's
-    // array order, since the file has no explicit numeric car ID. See AceCarInfoProvider.cs.
+    // ModelId is null on every seeded car until Mike finds a real numeric car ID source for
+    // Evo - see AceCarInfoProvider.cs. FindByModelId will not resolve anything until then.
     AceCarInfo? FindByModelId(int modelId);
     AceCarInfo? FindByName(string name);
     IReadOnlyCollection<AceCarInfo> GetCarInfos();
+    IReadOnlyCollection<AceCarInfo> GetCarInfosForManufacturer(string manufacturer);
+    IReadOnlyCollection<string> GetManufacturers();
 }

@@ -7,8 +7,6 @@ using SimRacingSdk.Ace.Core.Models;
 
 namespace SimRacingSdk.Ace.Demo.CarExplorer;
 
-// Flat list, no class grouping - unlike Acc's cars.json, Evo's cars.json has no
-// class/manufacturer/year/fuel/rpm fields, only Name and DisplayName.
 public partial class CarExplorerViewModel : ObservableObject
 {
     private readonly IAceCarInfoProvider carInfoProvider;
@@ -16,12 +14,16 @@ public partial class CarExplorerViewModel : ObservableObject
     [ObservableProperty]
     private AceCarInfo? selectedCar = null;
 
+    [ObservableProperty]
+    private string selectedManufacturer = string.Empty;
+
     public CarExplorerViewModel(IAceCarInfoProvider carInfoProvider)
     {
         this.carInfoProvider = carInfoProvider;
     }
 
     public ObservableCollection<AceCarInfo> Cars { get; } = [];
+    public ObservableCollection<string> Manufacturers { get; } = [];
 
     [RelayCommand]
     private void ExportCsv()
@@ -45,8 +47,23 @@ public partial class CarExplorerViewModel : ObservableObject
 
     internal void Init()
     {
+        this.Manufacturers.Clear();
+        foreach(var manufacturer in this.carInfoProvider.GetManufacturers())
+        {
+            this.Manufacturers.Add(manufacturer);
+        }
+
+        if(this.Manufacturers.Count > 0)
+        {
+            this.SelectedManufacturer = this.Manufacturers[0];
+        }
+    }
+
+    partial void OnSelectedManufacturerChanged(string value)
+    {
         this.Cars.Clear();
-        foreach(var aceCarInfo in this.carInfoProvider.GetCarInfos())
+
+        foreach(var aceCarInfo in this.carInfoProvider.GetCarInfosForManufacturer(value))
         {
             this.Cars.Add(aceCarInfo);
         }

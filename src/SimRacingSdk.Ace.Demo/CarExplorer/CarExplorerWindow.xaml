@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:SimRacingSdk.Ace.Demo.CarExplorer"
         mc:Ignorable="d"
         Title="Car Explorer"
-        Height="650"
-        Width="700"
+        Height="700"
+        Width="950"
         WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow"
         Background="LightGray"
@@ -17,31 +17,54 @@
                     Command="{Binding ExportCsvCommand}" />
     </Window.InputBindings>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition />
             <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0"
+        <ListBox Grid.Column="0"
+                 Grid.Row="0"
+                 Grid.RowSpan="2"
+                 ItemsSource="{Binding Manufacturers}"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Stretch"
+                 SelectedItem="{Binding SelectedManufacturer, Mode=TwoWay}" />
+
+        <DataGrid Grid.Column="1"
+                  Grid.Row="0"
                   ItemsSource="{Binding Cars}"
                   SelectedItem="{Binding SelectedCar, Mode=TwoWay}"
-                  VerticalAlignment="Stretch"
+                  VerticalAlignment="Top"
                   HorizontalAlignment="Stretch"
+                  Height="200"
                   AutoGenerateColumns="False"
                   Margin="5"
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Preset Name"
-                                    Binding="{Binding Name}"
-                                    Width="*" />
-                <DataGridTextColumn Header="Display Name"
-                                    Binding="{Binding DisplayName}"
-                                    Width="2*" />
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Variant"
+                                    Binding="{Binding Variant}" />
+                <DataGridTextColumn Header="Year"
+                                    Binding="{Binding Year}" />
+                <DataGridTextColumn Header="Displacement (L)"
+                                    Binding="{Binding DisplacementL}" />
+                <DataGridTextColumn Header="Top Speed (KMH)"
+                                    Binding="{Binding MaxSpeedKmh}" />
+                <DataGridTextColumn Header="0-100 (KMH)"
+                                    Binding="{Binding ZeroToOneHundredKmh}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Grid.Row="1"
+        <GroupBox Grid.Column="1"
+                  Grid.Row="1"
                   HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
                   Header="Car Details"
                   DataContext="{Binding SelectedCar}"
                   Margin="10">
@@ -49,31 +72,231 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0"
                        Grid.Row="0"
-                       Content="Preset Name"
-                       HorizontalAlignment="Left"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="0"
-                       Content="{Binding Name}"
-                       HorizontalAlignment="Left" />
+                       Grid.ColumnSpan="6"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       Content="{Binding DisplayName}"
+                       VerticalAlignment="Center" />
 
                 <Label Grid.Column="0"
                        Grid.Row="1"
-                       Content="Display Name"
+                       Content="Performance Rating"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="1"
-                       Content="{Binding DisplayName}"
+                       Content="{Binding PerformanceRating}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="1"
+                       Content="Year"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="1"
+                       Content="{Binding Year}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="1"
+                       Content="Model Id"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="1"
+                       Content="{Binding ModelId}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="2"
+                       Content="Drive Layout"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="2"
+                       Content="{Binding DriveLayout}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="2"
+                       Content="Engine Layout"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="2"
+                       Content="{Binding EngineLayout}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="2"
+                       Content="Engine"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="2"
+                       Content="{Binding Engine}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="3"
+                       Content="Body"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="3"
+                       Content="{Binding Body}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="3"
+                       Content="Racing Class"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="3"
+                       Content="{Binding RacingClass}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="3"
+                       Content="Cylinders"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="3"
+                       Content="{Binding Cylinders}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="4"
+                       Content="Power (PS)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="4"
+                       Content="{Binding PowerPs}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="4"
+                       Content="Torque (Nm)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="4"
+                       Content="{Binding TorqueNm}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="4"
+                       Content="Displacement (L)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="4"
+                       Content="{Binding DisplacementL}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="5"
+                       Content="Weight (KG)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="5"
+                       Content="{Binding WeightKg}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="5"
+                       Content="Top Speed (KMH)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="5"
+                       Content="{Binding MaxSpeedKmh}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="5"
+                       Content="0-100 (KMH)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="5"
+                       Content="{Binding ZeroToOneHundredKmh}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="6"
+                       Content="Gears"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="6"
+                       Content="{Binding Gears}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="2"
+                       Grid.Row="6"
+                       Content="Fuel Tank (L)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="3"
+                       Grid.Row="6"
+                       Content="{Binding FuelTankL}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="4"
+                       Grid.Row="6"
+                       Content="Battery (KWH)"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="5"
+                       Grid.Row="6"
+                       Content="{Binding BatteryKwh}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="7"
+                       Content="Max RPM"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="7"
+                       Content="{Binding MaxRpm}"
+                       HorizontalAlignment="Left" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="8"
+                       Content="Categories"
+                       HorizontalAlignment="Left"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="8"
+                       Grid.ColumnSpan="5"
+                       Content="{Binding Categories}"
                        HorizontalAlignment="Left" />
             </Grid>
         </GroupBox>
