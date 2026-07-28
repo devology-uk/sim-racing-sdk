@@ -300,12 +300,11 @@
 	  <Resource Include="Images\Manufacturers\porsche.png" />
 	  <Resource Include="Images\Manufacturers\reiter.png" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<None Update="nlog.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-
 
 </Project>

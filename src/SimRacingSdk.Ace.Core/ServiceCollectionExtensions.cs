@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     {
         services.TryAddSingleton<IAceCarInfoProvider, AceCarInfoProvider>();
         services.TryAddSingleton<IAceCompatibilityChecker, AceCompatibilityChecker>();
+        services.TryAddSingleton<IAceGameDetector, AceGameDetector>();
         services.TryAddSingleton<IAceLocalConfigProvider, AceLocalConfigProvider>();
         services.TryAddSingleton<IAceNationalityInfoProvider, AceNationalityInfoProvider>();
         services.TryAddSingleton<IAcePathProvider, AcePathProvider>();

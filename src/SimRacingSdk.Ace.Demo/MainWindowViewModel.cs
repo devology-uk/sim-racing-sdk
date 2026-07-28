@@ -1,0 +1,252 @@
+// ReSharper disable AsyncVoidMethod
+
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using SimRacingSdk.Ace.Core.Abstractions;
+using SimRacingSdk.Ace.Demo.Abstractions;
+using SimRacingSdk.Ace.Demo.CarExplorer;
+using SimRacingSdk.Ace.Demo.TrackExplorer;
+using SimRacingSdk.LogViewer;
+using System.Diagnostics;
+using System.IO;
+using System.Reactive.Disposables;
+using System.Reflection;
+
+namespace SimRacingSdk.Ace.Demo;
+
+public partial class MainWindowViewModel : ObservableObject
+{
+    private readonly IAceCompatibilityChecker aceCompatibilityChecker;
+    private readonly IAceGameDetector aceGameDetector;
+    private readonly IConsoleLog consoleLog;
+    private readonly ILogger<MainWindowViewModel> logger;
+    private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
+    private readonly ISharedMemoryDemo sharedMemoryDemo;
+    private readonly CompositeDisposable subscriptionSink = new();
+    private readonly IMonitorDemo monitorDemo;
+    private readonly IUdpDemo udpDemo;
+
+    private bool isGameRunning;
+    private bool isDemoCancelled = false;
+
+    [ObservableProperty]
+    private bool isRunningDemo = false;
+
+    public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
+        IConsoleLog consoleLog,
+        IAceCompatibilityChecker aceCompatibilityChecker,
+        IAceGameDetector aceGameDetector,
+        IUdpDemo udpDemo,
+        ISharedMemoryDemo sharedMemoryDemo,
+        IMonitorDemo monitorDemo)
+    {
+        this.logger = logger;
+        this.consoleLog = consoleLog;
+        this.aceCompatibilityChecker = aceCompatibilityChecker;
+        this.aceGameDetector = aceGameDetector;
+        this.udpDemo = udpDemo;
+        this.sharedMemoryDemo = sharedMemoryDemo;
+        this.monitorDemo = monitorDemo;
+    }
+
+    [RelayCommand]
+    private void OpenCarExplorer()
+    {
+        var carViewerViewModel = App.Current.Services.GetRequiredService<CarExplorerViewModel>();
+        var carExplorer = new CarExplorerWindow
+        {
+            DataContext = carViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        carExplorer.Show();
+        carViewerViewModel.Init();
+    }
+
+
+    [RelayCommand]
+    private void OpenLogFolder()
+    {
+        var currentLogPath = $@"{this.logFolderPath}{DateTime.Now.Date:yyyy-MM-dd}\";
+        if(Directory.Exists(currentLogPath))
+        {
+            Process.Start("explorer.exe", currentLogPath);
+        }
+    }
+
+    [RelayCommand]
+    private void OpenLogViewer()
+    {
+        var logViewerViewModel = App.Current.Services.GetRequiredService<LogViewerViewModel>();
+        var logViewer = new LogViewerWindow
+        {
+            DataContext = logViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        logViewer.Show();
+        logViewerViewModel.Init(this.logFolderPath);
+    }
+
+    [RelayCommand]
+    private void OpenTrackExplorer()
+    {
+        var trackViewerViewModel = App.Current.Services.GetRequiredService<TrackExplorerViewModel>();
+        var trackExplorer = new TrackExplorerWindow
+        {
+            DataContext = trackViewerViewModel,
+            Owner = App.Current.MainWindow
+        };
+        trackExplorer.Show();
+        trackViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private async Task StartMonitorDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.monitorDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.monitorDemo.Start();
+    }
+
+    [RelayCommand]
+    private async Task StartSharedMemoryDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.sharedMemoryDemo.Validate())
+        {
+            return;
+        }
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+        this.sharedMemoryDemo.Start();
+    }
+
+    [RelayCommand]
+    private async Task StartUdpDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+        this.CheckCompatibility();
+
+        if(!this.udpDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.udpDemo.Start();
+    }
+
+    [RelayCommand]
+    private void StopDemo()
+    {
+        this.isDemoCancelled = true;
+        this.StopRunningDemos();
+    }
+
+    private bool CheckCompatibility()
+    {
+        this.Log("Checking ACE compatibility with this demo...");
+        if(!this.aceCompatibilityChecker.IsAceInstalled())
+        {
+            this.Log("ACE is not installed. Please install ACE and run this demo again.", LogLevel.Warning);
+            return false;
+        }
+
+        this.Log("Checking ACE Account is available...");
+        if(!this.aceCompatibilityChecker.IsAccountAvailable())
+        {
+            this.Log(
+                "No account profile found. Please run ACE and complete the initial configuration then run this demo again.",
+                LogLevel.Warning);
+            return false;
+        }
+
+        this.Log("ACE compatibility check was completed successfully.");
+        return true;
+    }
+
+    private void HandleGameDetection(bool isDetected)
+    {
+        if(isDetected)
+        {
+            this.Log("ACE game detected successfully.");
+            this.isGameRunning = true;
+        }
+        else
+        {
+            this.Log("ACE game is not running or has been shutdown.", LogLevel.Warning);
+            this.isGameRunning = false;
+        }
+    }
+
+    private void Log(string message, LogLevel logLevel = LogLevel.Information)
+    {
+        this.logger.Log(logLevel, message);
+        this.consoleLog.Write(message);
+    }
+
+    private void StartGameDetection()
+    {
+        this.Log("Starting ACE game detection...");
+        this.subscriptionSink.Add(this.aceGameDetector.Start()
+                                      .Subscribe(this.HandleGameDetection));
+    }
+
+    private void StopRunningDemos()
+    {
+        this.sharedMemoryDemo.Stop();
+        this.udpDemo.Stop();
+        this.monitorDemo.Stop();
+        this.IsRunningDemo = false;
+    }
+
+    private async Task WaitForGame()
+    {
+        this.isDemoCancelled = false;
+        this.StartGameDetection();
+        while(!this.isGameRunning)
+        {
+            this.Log("Waiting for ACE...");
+            await Task.Delay(5000);
+            if(this.isDemoCancelled)
+            {
+                return;
+            }
+        }
+    }
+
+    ~MainWindowViewModel()
+    {
+        this.StopRunningDemos();
+        this.subscriptionSink.Dispose();
+    }
+}
