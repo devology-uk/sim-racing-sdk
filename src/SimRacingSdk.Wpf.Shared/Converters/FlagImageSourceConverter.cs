@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace SimRacingSdk.Wpf.Shared.Converters;
 
@@ -11,14 +10,10 @@ public class FlagImageSourceConverter : IValueConverter
         var stringValue = (string)value;
         if(string.IsNullOrWhiteSpace(stringValue))
         {
-            return new BitmapImage(new Uri(
-                "pack://application:,,,/SimRacingSdk.Wpf.Shared;component/Images/delete.png",
-                UriKind.Absolute));
+            return MissingImagePlaceholder.Source;
         }
 
-        return new BitmapImage(new Uri(
-            $@"pack://application:,,,/SimRacingSdk.Wpf.Shared;component/Images/Flags/{stringValue}.png",
-            UriKind.Absolute));
+        return PackResourceImageLoader.LoadOrPlaceholder($"Images/Flags/{stringValue}.png");
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
