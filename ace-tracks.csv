@@ -1,37 +1,37 @@
-Continent	Country Code	Name	Short Name	Layout	Length M	Pit Boxes
-Europe	GBR-ENG	Brands Hatch	Brands Hatch	GP	3916	32
-Europe	GBR-ENG	Brands Hatch	Brands Hatch	Indy	1944	32
-North America	USA	Circuit Of The Americas	COTA	GP	5615	34
-North America	USA	Circuit Of The Americas	COTA	National	3702	34
-Europe	BEL	Circuit de Spa Francorchamps	Spa	GP	7004	35
-Europe	GBR-ENG	Donington Park	Donington	GP	4020	19
-Europe	GBR-ENG	Donington Park	Donington	National	3149	19
-Asia	JAP	Fuji Speedway	Fuji	GP	4549	34
-Asia	JAP	Fuji Speedway	Fuji	GP Short	4526	34
-Europe	ITA	Imola	Imola	GP	4909	29
-Africa	ZAF	Kyalami	Kyalami	GP	4522	20
-North America	USA	Laguna Seca	Laguna Seca	GP	4502	24
-Europe	ITA	Monza	Monza	GP	5793	30
-Australia	AUS	Mount Panorama	Mount Panorama	GP	6213	35
-Europe	DEU	Nurburgring	Nurburgring	24H	25947	30
-Europe	DEU	Nurburgring	Nurburgring	Gp Strecke	5148	30
-Europe	DEU	Nurburgring	Nurburgring	Nordschleife	20832	5
-Europe	DEU	Nurburgring	Nurburgring	Sprint	3629	30
-Europe	DEU	Nurburgring	Nurburgring	Touristenfarten	19300	50
-Europe	GBR-ENG	Oulton Park	Oulton Park	International	4333	16
-Europe	GBR-ENG	Oulton Park	Oulton Park	Fosters	2552	16
-Europe	FRA	Paul Ricard	Paul Ricard	Layout 1A-V2	5770	34
-Europe	FRA	Paul Ricard	Paul Ricard	Layout 1C-V2	5842	34
-Europe	FRA	Paul Ricard	Paul Ricard	Layout 3A	3793	34
-Europe	FRA	Paul Ricard	Paul Ricard	Layout 3C	3841	34
-Europe	AUT	Red Bull Ring	Red Bull Ring	GP	4318	28
-Europe	AUT	Red Bull Ring	Red Bull Ring	National	2336	28
-North America	USA	Road Atlanta	Road Atlanta	GP	4088	28
-North America	USA	Sebring International Raceway	Sebring	GP	5954	45
-Asia	JAP	Suzuka	Suzuka	GP	5807	25
-Asia	JAP	Suzuka	Suzuka	East	2243	25
-Asia	JAP	Suzuka	Suzuka	West	3466	10
-North America	USA	Watkins Glen	Watkins Glen	GP Inner Loop	5552	40
-North America	USA	Watkins Glen	Watkins Glen	Short Inner Loop	3943	40
-North America	USA	Watkins Glen	Watkins Glen	GP	5435	40
-North America	USA	Watkins Glen	Watkins Glen	Short	3907	40
+Continent	Country Code	Name	Short Name	Layout	Length M	Pit Boxes	Latitude	Longitude
+Europe	GBR-ENG	Brands Hatch	Brands Hatch	GP	3916	32	51.3566	0.2614
+Europe	GBR-ENG	Brands Hatch	Brands Hatch	Indy	1944	32	51.3566	0.2614
+North America	USA	Circuit Of The Americas	COTA	GP	5615	34	30.135	-97.6341
+North America	USA	Circuit Of The Americas	COTA	National	3702	34	30.135	-97.6341
+Europe	BEL	Circuit de Spa Francorchamps	Spa	GP	7004	35	50.4375	5.9685
+Europe	GBR-ENG	Donington Park	Donington	GP	4020	19	52.8304	-1.3749
+Europe	GBR-ENG	Donington Park	Donington	National	3149	19	52.8304	-1.3749
+Asia	JAP	Fuji Speedway	Fuji	GP	4549	34	35.371667	138.926667
+Asia	JAP	Fuji Speedway	Fuji	GP Short	4526	34	35.371667	138.926667
+Europe	ITA	Imola	Imola	GP	4909	29	44.3408	11.7137
+Africa	ZAF	Kyalami	Kyalami	GP	4522	20	-25.9976	28.0682
+North America	USA	Laguna Seca	Laguna Seca	GP	4502	24	36.5845	-121.7535
+Europe	ITA	Monza	Monza	GP	5793	30	45.621	9.286
+Australia	AUS	Mount Panorama	Mount Panorama	GP	6213	35	-33.4486	149.5547
+Europe	DEU	Nurburgring	Nurburgring	24H	25947	30	50.3309	6.9414
+Europe	DEU	Nurburgring	Nurburgring	Gp Strecke	5148	30	50.3309	6.9414
+Europe	DEU	Nurburgring	Nurburgring	Nordschleife	20832	5	50.3309	6.9414
+Europe	DEU	Nurburgring	Nurburgring	Sprint	3629	30	50.3309	6.9414
+Europe	DEU	Nurburgring	Nurburgring	Touristenfarten	19300	50	50.3309	6.9414
+Europe	GBR-ENG	Oulton Park	Oulton Park	International	4333	16	53.1768	-2.6168
+Europe	GBR-ENG	Oulton Park	Oulton Park	Fosters	2552	16	53.1768	-2.6168
+Europe	FRA	Paul Ricard	Paul Ricard	Layout 1A-V2	5770	34	43.2529	5.7912
+Europe	FRA	Paul Ricard	Paul Ricard	Layout 1C-V2	5842	34	43.2529	5.7912
+Europe	FRA	Paul Ricard	Paul Ricard	Layout 3A	3793	34	43.2529	5.7912
+Europe	FRA	Paul Ricard	Paul Ricard	Layout 3C	3841	34	43.2529	5.7912
+Europe	AUT	Red Bull Ring	Red Bull Ring	GP	4318	28	47.2228736	14.760198
+Europe	AUT	Red Bull Ring	Red Bull Ring	National	2336	28	47.2228736	14.760198
+North America	USA	Road Atlanta	Road Atlanta	GP	4088	28	34.146667	-83.817778
+North America	USA	Sebring International Raceway	Sebring	GP	5954	45	27.455	-81.35
+Asia	JAP	Suzuka	Suzuka	GP	5807	25	34.8441	136.5329
+Asia	JAP	Suzuka	Suzuka	East	2243	25	34.8441	136.5329
+Asia	JAP	Suzuka	Suzuka	West	3466	10	34.8441	136.5329
+North America	USA	Watkins Glen	Watkins Glen	GP Inner Loop	5552	40	42.3362	-76.9252
+North America	USA	Watkins Glen	Watkins Glen	Short Inner Loop	3943	40	42.3362	-76.9252
+North America	USA	Watkins Glen	Watkins Glen	GP	5435	40	42.3362	-76.9252
+North America	USA	Watkins Glen	Watkins Glen	Short	3907	40	42.3362	-76.9252

@@ -14,4 +14,6 @@ public record AceTrackInfo
     public string Layout { get; init; }
     public float TrackLengthMeters { get; init; }
     public int MaxPitSlot { get; init; }
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
 }

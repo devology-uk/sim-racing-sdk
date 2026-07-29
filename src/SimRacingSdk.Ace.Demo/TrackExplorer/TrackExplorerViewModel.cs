@@ -47,7 +47,7 @@ public partial class TrackExplorerViewModel : ObservableObject
         foreach(var aceTrackInfo in this.trackInfoProvider.GetTrackInfos())
         {
             var trackInfo =
-                $"{aceTrackInfo.Continent},{aceTrackInfo.CountryCode},{aceTrackInfo.Track},{aceTrackInfo.ShortName},{aceTrackInfo.Layout},{aceTrackInfo.TrackLengthMeters},{aceTrackInfo.MaxPitSlot}";
+                $"{aceTrackInfo.Continent},{aceTrackInfo.CountryCode},{aceTrackInfo.Track},{aceTrackInfo.ShortName},{aceTrackInfo.Layout},{aceTrackInfo.TrackLengthMeters},{aceTrackInfo.MaxPitSlot},{aceTrackInfo.Latitude},{aceTrackInfo.Longitude}";
             tracksStreamWriter.WriteLine(trackInfo);
             tracksStreamWriter.Flush();
         }
