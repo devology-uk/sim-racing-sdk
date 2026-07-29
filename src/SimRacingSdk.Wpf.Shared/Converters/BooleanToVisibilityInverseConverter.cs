@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace SimRacingSdk.Acc.Demo.Converters;
+namespace SimRacingSdk.Wpf.Shared.Converters;
 
 public class BooleanToVisibilityInverseConverter : IValueConverter
 {
