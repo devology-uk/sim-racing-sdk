@@ -17,6 +17,9 @@ public partial class TrackExplorerViewModel : ObservableObject
     private AceTrackInfo? selectedLayout = null;
 
     [ObservableProperty]
+    private string selectedContinent = string.Empty;
+
+    [ObservableProperty]
     private string selectedTrackName = string.Empty;
 
     public TrackExplorerViewModel(IAceTrackInfoProvider trackInfoProvider)
@@ -25,6 +28,7 @@ public partial class TrackExplorerViewModel : ObservableObject
     }
 
     public ObservableCollection<AceTrackInfo> Layouts { get; } = [];
+    public ObservableCollection<string> Continents { get; } = [];
     public ObservableCollection<string> TrackNames { get; } = [];
 
     [RelayCommand]
@@ -43,7 +47,7 @@ public partial class TrackExplorerViewModel : ObservableObject
         foreach(var aceTrackInfo in this.trackInfoProvider.GetTrackInfos())
         {
             var trackInfo =
-                $"{aceTrackInfo.Track},{aceTrackInfo.Layout},{aceTrackInfo.TrackLengthMeters},{aceTrackInfo.MaxPitSlot}";
+                $"{aceTrackInfo.Continent},{aceTrackInfo.CountryCode},{aceTrackInfo.Track},{aceTrackInfo.ShortName},{aceTrackInfo.Layout},{aceTrackInfo.TrackLengthMeters},{aceTrackInfo.MaxPitSlot}";
             tracksStreamWriter.WriteLine(trackInfo);
             tracksStreamWriter.Flush();
         }
@@ -51,16 +55,27 @@ public partial class TrackExplorerViewModel : ObservableObject
 
     public void Init()
     {
+        this.Continents.Clear();
+        foreach(var continent in this.trackInfoProvider.GetContinents())
+        {
+            this.Continents.Add(continent);
+        }
+
+        if(this.Continents.Count > 0)
+        {
+            this.SelectedContinent = this.Continents[0];
+        }
+    }
+
+    partial void OnSelectedContinentChanged(string value)
+    {
         this.TrackNames.Clear();
-        foreach(var trackName in this.trackInfoProvider.GetTrackNames())
+        foreach(var trackName in this.trackInfoProvider.GetTrackNamesForContinent(value))
         {
             this.TrackNames.Add(trackName);
         }
 
-        if(this.TrackNames.Count > 0)
-        {
-            this.SelectedTrackName = this.TrackNames[0];
-        }
+        this.SelectedTrackName = this.TrackNames.Count > 0? this.TrackNames[0]: string.Empty;
     }
 
     partial void OnSelectedTrackNameChanged(string value)

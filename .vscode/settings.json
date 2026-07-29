@@ -1,0 +1,15 @@
+{
+    "files.watcherExclude": {
+        "**/*_wpftmp.csproj": true,
+        "**/*_wpftmp/**": true,
+        "**/bin/**": true,
+        "**/obj/**": true
+    },
+    "files.exclude": {
+        "**/*_wpftmp.csproj": true
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    }
+}

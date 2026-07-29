@@ -20,17 +20,25 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Column="0"
+                 ItemsSource="{Binding Continents}"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Stretch"
+                 SelectedItem="{Binding SelectedContinent, Mode=TwoWay}"
+                 MinWidth="120" />
+
+        <ListBox Grid.Column="1"
                  ItemsSource="{Binding TrackNames}"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Stretch"
                  SelectedItem="{Binding SelectedTrackName, Mode=TwoWay}"
                  MinWidth="180" />
 
-        <ListBox Grid.Column="1"
+        <ListBox Grid.Column="2"
                  ItemsSource="{Binding Layouts}"
                  DisplayMemberPath="Layout"
                  HorizontalAlignment="Left"
@@ -38,7 +46,7 @@
                  SelectedItem="{Binding SelectedLayout, Mode=TwoWay}"
                  MinWidth="120" />
 
-        <GroupBox Grid.Column="2"
+        <GroupBox Grid.Column="3"
                   Header="Layout Details"
                   Margin="5"
                   VerticalAlignment="Top"
@@ -54,40 +62,50 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0"
+                <Image Grid.Column="0"
                        Grid.Row="0"
-                       Content="Track"
-                       FontWeight="Bold" />
+                       Source="{Binding CountryCode, Converter={StaticResource FlagImageSourceConverter}}"
+                       Width="64" />
                 <Label Grid.Column="1"
                        Grid.Row="0"
                        Content="{Binding Track}"
                        FontWeight="Bold"
-                       FontSize="16" />
+                       FontSize="16"
+                       VerticalAlignment="Bottom" />
 
                 <Label Grid.Column="0"
                        Grid.Row="1"
+                       Content="Short Name"
+                       FontWeight="SemiBold" />
+                <Label Grid.Column="1"
+                       Grid.Row="1"
+                       Content="{Binding ShortName}" />
+
+                <Label Grid.Column="0"
+                       Grid.Row="2"
                        Content="Layout"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="1"
+                       Grid.Row="2"
                        Content="{Binding Layout}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Content="Length (m)"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Content="{Binding TrackLengthMeters}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        Content="Max Pit Slot"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        Content="{Binding MaxPitSlot}" />
             </Grid>
         </GroupBox>
