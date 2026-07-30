@@ -32,4 +32,15 @@ public struct AceInstrumentation
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 101)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceInstrumentation {{ MainLightStage = {this.MainLightStage}, SpecialLightStage = {this.SpecialLightStage}, "
+             + $"CockpitLightStage = {this.CockpitLightStage}, WiperLevel = {this.WiperLevel}, RainLights = {this.RainLights}, "
+             + $"DirectionLightLeft = {this.DirectionLightLeft}, DirectionLightRight = {this.DirectionLightRight}, "
+             + $"FlashingLights = {this.FlashingLights}, WarningLights = {this.WarningLights}, "
+             + $"SelectedDisplayIndex = {this.SelectedDisplayIndex}, "
+             + $"DisplayCurrentPageIndex = {SharedMemoryLogFormatting.FormatArray(this.DisplayCurrentPageIndex)}, "
+             + $"AreHeadlightsVisible = {this.AreHeadlightsVisible} }}";
+    }
 }

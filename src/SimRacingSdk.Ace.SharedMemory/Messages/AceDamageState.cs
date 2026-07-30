@@ -22,4 +22,12 @@ public struct AceDamageState
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 92)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceDamageState {{ DamageFront = {this.DamageFront}, DamageRear = {this.DamageRear}, "
+             + $"DamageLeft = {this.DamageLeft}, DamageRight = {this.DamageRight}, DamageCenter = {this.DamageCenter}, "
+             + $"DamageSuspensionLf = {this.DamageSuspensionLf}, DamageSuspensionRf = {this.DamageSuspensionRf}, "
+             + $"DamageSuspensionLr = {this.DamageSuspensionLr}, DamageSuspensionRr = {this.DamageSuspensionRr} }}";
+    }
 }

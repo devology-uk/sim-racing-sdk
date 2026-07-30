@@ -40,4 +40,18 @@ public struct AceElectronics
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 88)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceElectronics {{ TcLevel = {this.TcLevel}, TcCutLevel = {this.TcCutLevel}, "
+             + $"AbsLevel = {this.AbsLevel}, EscLevel = {this.EscLevel}, EbbLevel = {this.EbbLevel}, "
+             + $"BrakeBias = {this.BrakeBias}, EngineMapLevel = {this.EngineMapLevel}, TurboLevel = {this.TurboLevel}, "
+             + $"ErsDeploymentMap = {this.ErsDeploymentMap}, ErsRechargeMap = {this.ErsRechargeMap}, "
+             + $"IsErsHeatChargingOn = {this.IsErsHeatChargingOn}, IsErsOvertakeModeOn = {this.IsErsOvertakeModeOn}, "
+             + $"IsDrsOpen = {this.IsDrsOpen}, DiffPowerLevel = {this.DiffPowerLevel}, DiffCoastLevel = {this.DiffCoastLevel}, "
+             + $"FrontBumpDamperLevel = {this.FrontBumpDamperLevel}, FrontReboundDamperLevel = {this.FrontReboundDamperLevel}, "
+             + $"RearBumpDamperLevel = {this.RearBumpDamperLevel}, RearReboundDamperLevel = {this.RearReboundDamperLevel}, "
+             + $"IsIgnitionOn = {this.IsIgnitionOn}, IsPitLimiterOn = {this.IsPitLimiterOn}, "
+             + $"ActivePerformanceMode = {this.ActivePerformanceMode} }}";
+    }
 }

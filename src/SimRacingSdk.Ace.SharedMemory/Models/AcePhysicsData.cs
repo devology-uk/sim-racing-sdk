@@ -118,4 +118,42 @@ public record AcePhysicsData
     public bool IgnitionOn { get; }
     public bool IsEngineRunning { get; }
     public DateTime TimeStamp { get; } = DateTime.UtcNow;
+
+    // Array-typed members need explicit formatting here - the compiler's generated PrintMembers
+    // would otherwise print Array.ToString()'s type name instead of the per-wheel/coordinate values.
+    protected virtual bool PrintMembers(System.Text.StringBuilder builder)
+    {
+        builder.Append($"PacketId = {this.PacketId}, Accelerator = {this.Accelerator}, Brake = {this.Brake}, "
+            + $"Fuel = {this.Fuel}, Gear = {this.Gear}, Rpm = {this.Rpm}, SteerAngle = {this.SteerAngle}, "
+            + $"SpeedKmh = {this.SpeedKmh}, Velocity = {SharedMemoryLogFormatting.FormatArray(this.Velocity)}, "
+            + $"AccG = {SharedMemoryLogFormatting.FormatArray(this.AccG)}, "
+            + $"WheelSlip = {SharedMemoryLogFormatting.FormatArray(this.WheelSlip)}, "
+            + $"WheelLoad = {SharedMemoryLogFormatting.FormatArray(this.WheelLoad)}, "
+            + $"WheelsPressure = {SharedMemoryLogFormatting.FormatArray(this.WheelsPressure)}, "
+            + $"WheelAngularSpeed = {SharedMemoryLogFormatting.FormatArray(this.WheelAngularSpeed)}, "
+            + $"TyreWear = {SharedMemoryLogFormatting.FormatArray(this.TyreWear)}, "
+            + $"TyreCoreTemperature = {SharedMemoryLogFormatting.FormatArray(this.TyreCoreTemperature)}, "
+            + $"SuspensionTravel = {SharedMemoryLogFormatting.FormatArray(this.SuspensionTravel)}, Drs = {this.Drs}, "
+            + $"TractionControl = {this.TractionControl}, Heading = {this.Heading}, Pitch = {this.Pitch}, "
+            + $"Roll = {this.Roll}, CarDamage = {SharedMemoryLogFormatting.FormatArray(this.CarDamage)}, "
+            + $"IsEmpty = {this.IsEmpty}, PitLimiterOn = {this.PitLimiterOn}, Abs = {this.Abs}, "
+            + $"TurboBoost = {this.TurboBoost}, AirTemp = {this.AirTemp}, RoadTemp = {this.RoadTemp}, "
+            + $"BrakeTemperature = {SharedMemoryLogFormatting.FormatArray(this.BrakeTemperature)}, Clutch = {this.Clutch}, "
+            + $"TyreTempI = {SharedMemoryLogFormatting.FormatArray(this.TyreTempI)}, "
+            + $"TyreTempM = {SharedMemoryLogFormatting.FormatArray(this.TyreTempM)}, "
+            + $"TyreTempO = {SharedMemoryLogFormatting.FormatArray(this.TyreTempO)}, "
+            + $"IsAiControlled = {this.IsAiControlled}, "
+            + $"TyreContactPoints = {SharedMemoryLogFormatting.FormatArray(this.TyreContactPoints)}, "
+            + $"BrakeBias = {this.BrakeBias}, LocalVelocity = {SharedMemoryLogFormatting.FormatArray(this.LocalVelocity)}, "
+            + $"SlipRatio = {SharedMemoryLogFormatting.FormatArray(this.SlipRatio)}, "
+            + $"SlipAngle = {SharedMemoryLogFormatting.FormatArray(this.SlipAngle)}, "
+            + $"SuspensionDamage = {SharedMemoryLogFormatting.FormatArray(this.SuspensionDamage)}, "
+            + $"TyreTemp = {SharedMemoryLogFormatting.FormatArray(this.TyreTemp)}, WaterTemp = {this.WaterTemp}, "
+            + $"BrakeTorque = {SharedMemoryLogFormatting.FormatArray(this.BrakeTorque)}, "
+            + $"FrontBrakeCompound = {this.FrontBrakeCompound}, RearBrakeCompound = {this.RearBrakeCompound}, "
+            + $"PadLife = {SharedMemoryLogFormatting.FormatArray(this.PadLife)}, "
+            + $"DiscLife = {SharedMemoryLogFormatting.FormatArray(this.DiscLife)}, IgnitionOn = {this.IgnitionOn}, "
+            + $"IsEngineRunning = {this.IsEngineRunning}, TimeStamp = {this.TimeStamp}");
+        return true;
+    }
 }

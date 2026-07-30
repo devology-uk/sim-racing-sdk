@@ -41,4 +41,16 @@ public struct AceSessionState
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 140)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceSessionState {{ PhaseName = {this.PhaseName}, TimeLeft = {this.TimeLeft}, "
+             + $"TimeLeftMs = {this.TimeLeftMs}, WaitTime = {this.WaitTime}, TotalLap = {this.TotalLap}, "
+             + $"CurrentLap = {this.CurrentLap}, LightsOn = {this.LightsOn}, LightsMode = {this.LightsMode}, "
+             + $"LapLengthKm = {this.LapLengthKm}, EndSessionFlag = {this.EndSessionFlag}, "
+             + $"TimeToNextSession = {this.TimeToNextSession}, DisconnectedFromServer = {this.DisconnectedFromServer}, "
+             + $"RestartSeasonEnabled = {this.RestartSeasonEnabled}, UiEnableDrive = {this.UiEnableDrive}, "
+             + $"UiEnableSetup = {this.UiEnableSetup}, IsReadyToNextBlinking = {this.IsReadyToNextBlinking}, "
+             + $"ShowWaitingForPlayers = {this.ShowWaitingForPlayers} }}";
+    }
 }

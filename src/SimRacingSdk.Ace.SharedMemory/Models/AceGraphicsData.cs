@@ -177,4 +177,46 @@ public record AceGraphicsData
     public float MaxTurboBoost { get; }
     public bool UseSingleCompound { get; }
     public DateTime TimeStamp { get; } = DateTime.UtcNow;
+
+    // Array-typed members (CarCoordinates/CarIds) need explicit formatting here - the compiler's
+    // generated PrintMembers would otherwise print Array.ToString()'s type name instead of the
+    // per-car values these exist to expose.
+    protected virtual bool PrintMembers(System.Text.StringBuilder builder)
+    {
+        builder.Append($"PacketId = {this.PacketId}, Status = {this.Status}, FocusedCarId = {this.FocusedCarId}, "
+            + $"PlayerCarId = {this.PlayerCarId}, Rpm = {this.Rpm}, IsRpmLimiterOn = {this.IsRpmLimiterOn}, "
+            + $"TcActive = {this.TcActive}, AbsActive = {this.AbsActive}, EscActive = {this.EscActive}, "
+            + $"LaunchActive = {this.LaunchActive}, IsIgnitionOn = {this.IsIgnitionOn}, "
+            + $"IsEngineRunning = {this.IsEngineRunning}, IsWrongWay = {this.IsWrongWay}, "
+            + $"IsDrsAvailable = {this.IsDrsAvailable}, DisplaySpeedKmh = {this.DisplaySpeedKmh}, "
+            + $"DisplaySpeedMph = {this.DisplaySpeedMph}, GearInt = {this.GearInt}, RpmPercent = {this.RpmPercent}, "
+            + $"GasPercent = {this.GasPercent}, BrakePercent = {this.BrakePercent}, ClutchPercent = {this.ClutchPercent}, "
+            + $"SteeringPercent = {this.SteeringPercent}, WaterTemperatureC = {this.WaterTemperatureC}, "
+            + $"AirTemperatureC = {this.AirTemperatureC}, OilTemperatureC = {this.OilTemperatureC}, "
+            + $"TurboBoost = {this.TurboBoost}, CurrentKm = {this.CurrentKm}, TotalKm = {this.TotalKm}, "
+            + $"DeltaTimeMs = {this.DeltaTimeMs}, CurrentLapTimeMs = {this.CurrentLapTimeMs}, "
+            + $"PredictedLapTimeMs = {this.PredictedLapTimeMs}, "
+            + $"FuelLiterCurrentQuantity = {this.FuelLiterCurrentQuantity}, "
+            + $"FuelLiterCurrentQuantityPercent = {this.FuelLiterCurrentQuantityPercent}, "
+            + $"CurrentTorque = {this.CurrentTorque}, CurrentBhp = {this.CurrentBhp}, TyreLf = {this.TyreLf}, "
+            + $"TyreRf = {this.TyreRf}, TyreLr = {this.TyreLr}, TyreRr = {this.TyreRr}, "
+            + $"NormalizedPosition = {this.NormalizedPosition}, CarDamage = {this.CarDamage}, "
+            + $"CarLocation = {this.CarLocation}, PitInfo = {this.PitInfo}, FuelLiterUsed = {this.FuelLiterUsed}, "
+            + $"FuelLiterPerLap = {this.FuelLiterPerLap}, LapsPossibleWithFuel = {this.LapsPossibleWithFuel}, "
+            + $"Instrumentation = {this.Instrumentation}, Electronics = {this.Electronics}, IsEmpty = {this.IsEmpty}, "
+            + $"TotalLapCount = {this.TotalLapCount}, CurrentPosition = {this.CurrentPosition}, "
+            + $"TotalDrivers = {this.TotalDrivers}, LastLapTimeMs = {this.LastLapTimeMs}, "
+            + $"BestLapTimeMs = {this.BestLapTimeMs}, Flag = {this.Flag}, GlobalFlag = {this.GlobalFlag}, "
+            + $"MaxGears = {this.MaxGears}, EngineType = {this.EngineType}, HasKers = {this.HasKers}, "
+            + $"IsLastLap = {this.IsLastLap}, PerformanceModeName = {this.PerformanceModeName}, "
+            + $"SessionState = {this.SessionState}, TimingState = {this.TimingState}, DriverName = {this.DriverName}, "
+            + $"DriverSurname = {this.DriverSurname}, CarModel = {this.CarModel}, IsInPitBox = {this.IsInPitBox}, "
+            + $"IsInPitLane = {this.IsInPitLane}, IsValidLap = {this.IsValidLap}, "
+            + $"CarCoordinates = {SharedMemoryLogFormatting.FormatArray(this.CarCoordinates)}, "
+            + $"CarIds = {SharedMemoryLogFormatting.FormatArray(this.CarIds)}, GapAhead = {this.GapAhead}, "
+            + $"GapBehind = {this.GapBehind}, ActiveCars = {this.ActiveCars}, AssistsState = {this.AssistsState}, "
+            + $"MaxFuel = {this.MaxFuel}, MaxTurboBoost = {this.MaxTurboBoost}, "
+            + $"UseSingleCompound = {this.UseSingleCompound}, TimeStamp = {this.TimeStamp}");
+        return true;
+    }
 }

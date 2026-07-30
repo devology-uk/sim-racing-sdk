@@ -37,4 +37,19 @@ public struct AceTyreState
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceTyreState {{ Slip = {this.Slip}, Lock = {this.Lock}, TyrePressure = {this.TyrePressure}, "
+             + $"TyreTemperatureC = {this.TyreTemperatureC}, BrakeTemperatureC = {this.BrakeTemperatureC}, "
+             + $"BrakePressure = {this.BrakePressure}, TyreTemperatureLeft = {this.TyreTemperatureLeft}, "
+             + $"TyreTemperatureCenter = {this.TyreTemperatureCenter}, TyreTemperatureRight = {this.TyreTemperatureRight}, "
+             + $"TyreCompoundFront = {this.TyreCompoundFront}, TyreCompoundRear = {this.TyreCompoundRear}, "
+             + $"TyreNormalizedPressure = {this.TyreNormalizedPressure}, "
+             + $"TyreNormalizedTemperatureLeft = {this.TyreNormalizedTemperatureLeft}, "
+             + $"TyreNormalizedTemperatureCenter = {this.TyreNormalizedTemperatureCenter}, "
+             + $"TyreNormalizedTemperatureRight = {this.TyreNormalizedTemperatureRight}, "
+             + $"BrakeNormalizedTemperature = {this.BrakeNormalizedTemperature}, "
+             + $"TyreNormalizedTemperatureCore = {this.TyreNormalizedTemperatureCore} }}";
+    }
 }

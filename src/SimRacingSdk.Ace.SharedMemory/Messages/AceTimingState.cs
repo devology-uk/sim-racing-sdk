@@ -31,4 +31,12 @@ public struct AceTimingState
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 136)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceTimingState {{ CurrentLapTime = {this.CurrentLapTime}, DeltaCurrent = {this.DeltaCurrent}, "
+             + $"DeltaCurrentP = {this.DeltaCurrentP}, LastLapTime = {this.LastLapTime}, DeltaLast = {this.DeltaLast}, "
+             + $"DeltaLastP = {this.DeltaLastP}, BestLapTime = {this.BestLapTime}, IdealLapTime = {this.IdealLapTime}, "
+             + $"TotalTime = {this.TotalTime}, IsInvalid = {this.IsInvalid} }}";
+    }
 }

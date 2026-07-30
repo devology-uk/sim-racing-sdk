@@ -22,4 +22,13 @@ public struct AceAssistsState
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 48)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AceAssistsState {{ AutoGear = {this.AutoGear}, AutoBlip = {this.AutoBlip}, "
+             + $"AutoClutch = {this.AutoClutch}, AutoClutchOnStart = {this.AutoClutchOnStart}, "
+             + $"ManualIgnitionEStart = {this.ManualIgnitionEStart}, AutoPitLimiter = {this.AutoPitLimiter}, "
+             + $"StandingStartAssist = {this.StandingStartAssist}, AutoSteer = {this.AutoSteer}, "
+             + $"ArcadeStabilityControl = {this.ArcadeStabilityControl} }}";
+    }
 }

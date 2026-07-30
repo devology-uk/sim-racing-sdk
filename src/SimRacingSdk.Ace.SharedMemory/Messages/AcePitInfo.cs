@@ -20,4 +20,10 @@ public struct AcePitInfo
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 58)]
     public byte[] Reserved;
+
+    public override readonly string ToString()
+    {
+        return $"AcePitInfo {{ Damage = {this.Damage}, Fuel = {this.Fuel}, TyresLf = {this.TyresLf}, "
+             + $"TyresRf = {this.TyresRf}, TyresLr = {this.TyresLr}, TyresRr = {this.TyresRr} }}";
+    }
 }
