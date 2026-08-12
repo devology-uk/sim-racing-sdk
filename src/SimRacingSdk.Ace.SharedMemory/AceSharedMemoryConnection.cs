@@ -81,6 +81,9 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     {
         this.EndCurrentSession();
 
+        this.sector1TimeMs = null;
+        this.sector2TimeMs = null;
+
         this.currentSession = new AceSharedMemorySession(staticData, graphicsData);
         this.sessionStartedSubject.OnNext(this.currentSession);
     }
