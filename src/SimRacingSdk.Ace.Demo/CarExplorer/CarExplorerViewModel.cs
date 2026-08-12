@@ -40,10 +40,22 @@ public partial class CarExplorerViewModel : ObservableObject
 
         foreach(var aceCarInfo in this.carInfoProvider.GetCarInfos())
         {
-            streamWriter.WriteLine($"{aceCarInfo.Name},{aceCarInfo.DisplayName}");
+            var fullName = string.IsNullOrEmpty(aceCarInfo.Variant)
+                ? $"{aceCarInfo.Manufacturer} {aceCarInfo.Name}"
+                : $"{aceCarInfo.Manufacturer} {aceCarInfo.Variant}";
+
+            streamWriter.WriteLine(string.Join(",",
+                CsvField(fullName),
+                CsvField(aceCarInfo.RacingClass),
+                CsvField(aceCarInfo.Year.ToString()),
+                CsvField(aceCarInfo.Manufacturer),
+                CsvField(aceCarInfo.ModelId)));
             streamWriter.Flush();
         }
     }
+
+    private static string CsvField(string value) =>
+        $"\"{value?.Replace("\"", "\"\"")}\"";
 
     internal void Init()
     {

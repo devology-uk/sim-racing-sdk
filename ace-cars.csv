@@ -1,92 +1,92 @@
-Manufacturer,Name,Variant,Performance Rating,Categories,Drive Layout,Engine Layout,Engine,Body,Racing Class,Year,Power PS/KW,Torque NM,Displacement L,Cylinders,Weight KG,Max Speed KMH,0-100 KMH,Gears,Fuel Tank L,Battery KWH,Max RPM
-Abarth,695 Biposto,,10.2,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2015,190,250,1.4,4,997,230,5.9,5,35,,
-Alpha Romeo,75 Turbo Evoluzione,,8,Road:Vintage:ICE,RWD,Front,Turbo Charged,Saloon,,1987,155,226,1.8,4,1150,225,7.6,5,49,,
-Alpha Romeo,Giulia GT Am,,12.8,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,540,600,2.5,6,1580,300,3.4,8,58,,
-Alpha Romeo,Giulia Sprint GTA,,7.7,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,Rally,1965,170,180,1.5,4,760,220,8,5,58,,
-Alpha Romeo,Elettrico 280 CV Veloce,,10.5,Road:Modern:EV,FWD,Front,Electric Motor,SUV,,2024,207,345,,,1560,200,5.9,,,54,
-Alpine,A110 3 Aero Kit,,12,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2021,300,340,1.8,4,1110,275,4.1,7,45,,
-Alpine,A290 Beta,,9.8,Road:Modern:EV,AWD,Mid,Electric Motor,Hatch Back,,2023,220,300,,,1479,170,6.4,,,52,
-Audi,R8 LMS GT3 Evo II,,20.5,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT3,2022,550,600,5.2,10,1400,300,3,6,120,,
-Audi,R8 LMS GT4 Evo,,15.5,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT4,2022,495,550,5.2,10,1460,280,3.5,6,120,,
-Audi,RS 3 Sportback,,12.2,Road:Modern:ICE,AWD,Front,Turbo Charged,Hatch Back,,2022,400,500,2.5,5,1570,250,3.8,7,55,,
-Audi,RS 6 Avant,,12.2,Road:Modern:ICE,AWD,Front,Turbo Charged,Estate,,2022,600,800,4,8,2075,250,3.6,8,73,,
-Audi,Sport Quattro,,10.7,Road:Vintage:ICE,AWD,Front,Turbo Charged,Coupe,,1983,306,350,2.1,5,1300,250,4.9,5,90,,
-BMW,M2 CS Racing,No Power Stick,13.1,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,Cup:TCX,2020,365,550,3,6,1610,270,4.2,7,120,,
-BMW,M2 CS Racing,Black Power Stick,13.5,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,Cup:TCX,2020,450,550,3,6,1610,295,3.8,7,120,,
-BMW,M2 Coupe,M2 G87 Coupe,11.5,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,460,550,3,6,1775,302,3.8,6,52,,
-BMW,M2 Coupe,M2 G87 Coupe M Performance,11.7,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,460,550,3,6,1775,302,3.8,6,52,,
-BMW,M3 E30 Sporte Evo,,9.4,Road:Youngtimer:ICE,,Front,Naturally Aspirated,Coupe,,1990,238,240,2.5,6,1200,248,6.5,5,70,,
-BMW,M3 E45 CSL,,10,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2003,350,370,3.2,6,1450,250,4.9,8,63,,
-BMW,M4 CSL,,11.9,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,550,650,3,6,1625,250,3.7,8,59,,
-BMW,M4 GT3 Evo,,21.1,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,GT3,2025,590,700,3,6,1400,300,2.9,6,120,,
-BMW,M8 Competition,,11.6,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,625,750,4.4,8,1885,250,3.2,8,68,,
-Caterham,485 CSR,485 CSR Road,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
-Caterham,485 CSR,485 CSR Track,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
-Caterham,485 CSR,485 CSR Final Edition,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
-Caterham,Academy,,8.8,Racing:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,135,150,1.5,4,630,200,6,5,36,,
-Chevrolet,Camaro ZL1,Zl1,12.3,Road:Modern:ICE,RWD,Front,Supercharged,Coupe,,2023,659,881,6.2,8,1753,318,3.5,6,72,,
-Chevrolet,Camaro ZL1,Zl1 1LE Extreme Track Performance,12.5,Road:Modern:ICE,RWD,Front,Supercharged,Coupe,,2023,659,881,6.2,8,1753,318,3.5,6,72,,
-Dallara,EXP,,22.5,Track:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2023,500,700,2.3,4,890,290,3,6,55,,
-Dallara,Stradale,Stradale Targa/Coupe,19,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
-Dallara,Stradale,Stradale Barchetta/Spider,19,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
-Dallara,Stradale,Trackday,21.3,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
-Ferrari,288 GTO,,11.1,Road:Vintage:ICE,RWD,Mid,Turbo Charged,Coupe,,1984,400,496,2.9,8,1160,305,4.7,5,120,,
-Ferrari,295 GT3,,22.3,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT3,2022,550,640,2.9,6,1400,320,2.9,6,120,,
-Ferrari,296 GTB,296 GTB,14.7,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2022,830,740,3,6,1675,330,2.9,8,65,,
-Ferrari,296 GTB,296 GTB Assetto Fiorano,14.7,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2022,830,740,3,6,1660,330,2.9,8,65,,
-Ferrari,Trofeo Challenge,,20.2,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2:Cup,2021,670,760,3.9,8,1410,320,2.9,7,120,,
-Ferrari,Daytona SP3,,16.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Convertible,,2021,840,697,6.5,12,1405,340,2.7,7,86,,
-Ferrari,Scuderia Ferrari F2004,,41.4,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Open Wheel,Formula,2004,900,350,3,10,605,350,2,7,150,,
-Ferrari,F40 LM,,20.2,Racing:Youngtimer:ICE,RWD,Mid,Turbo Charged,Coupe,Prototype,1993,900,750,2.9,8,1140,370,3,5,120,,
-Ferrari,SF-25,,43,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Open Wheel,Formula,2025,1000,750,1.6,6,800,350,2,8,145,,
-Ford,Escort RS Cosworth,,8.4,Road:Youngtimer:ICE,AWD,Front,Turbo Charged,Coupe,,1994,227,294,2,4,1275,230,6.1,5,55,,
-Ford,Mustang GT3,,19.4,Racing:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,GT3,2024,550,620,5.4,8,1400,300,2.8,6,120,,
-Honda,NSX-R 92R,,10.8,Road:Youngtimer:ICE,RWD,Mid,Naturally Aspirated,Coupe,,1995,270,285,3,6,1230,260,4.8,5,70,,
-Honda,S2000 AP 1,,9.9,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2003,240,208,2,4,1270,240,6.2,6,50,,
-Hyundai,i30 N Hatchback,Performance,9.4,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,280,392,3,4,1490,250,5.5,6,50,,
-Hyundai,i30 N Hatchback,Drive-N Limited Edition,9.6,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,280,392,3,4,1490,250,5.5,6,50,,
-KTM,X-Bow GT2,,19.3,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2,2021,600,615,2.5,5,1267,300,2.9,6,120,,
-KTM,X-Bow GT4,,19,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT4,2018,360,450,2,4,975,265,3.9,6,120,,
-Lamborghini,Countach LP5000 Q3,,9.5,Road:Vintage:ICE,RWD,Mid,Naturally Aspirated,Coupe,,1988,455,500,5.2,12,1490,293,5.2,5,120,,
-Lamborghini,Huracan ST EVO2,,18.4,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT2:Cup,2021,620,570,5.2,10,1250,310,2.8,6,120,,
-Lamborghini,Huracan STO,STO,15.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2021,640,565,5.2,10,1519,310,3,7,80,,
-Lamborghini,Huracan STO,STO Track Options,15.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2021,640,565,5.2,10,1519,310,3,7,80,,
-Maserati,GT2,,17.7,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2,2023,630,700,3,6,1400,300,2.8,6,120,,
-Mazda,MX-5 NA,MX-5 NA Facelift,9.1,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,1990,115,135,1.6,4,950,195,8.8,5,45,,
-Mazda,MX-5 NA,MX-5 NA Eunos R8 Limited,9.3,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,1990,131,152,1.6,4,950,195,8.8,5,45,,
-Mazda,MX5 ND Cup,MX-5 ND Global Cup - ND1 Manual,10.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,Cup,2016,155,200,2,4,1020,225,6.5,6,45,,7000
-Mazda,MX5 ND Cup,MX-5 ND Global Cup - ND1 Sequential,11.2,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,Cup,2016,181,200,2,4,1020,240,6,6,45,,7500
-Mercedes,AMG GT2,,18,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,GT2,2023,707,800,4,8,1400,300,2.8,6,120,,
-Mercedes,190E Evo II,,9.8,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Sedan,,1996,235,245,2.5,4,1340,250,7.1,5,70,,
-Mini,John Cooper S,MK VI John Cooper S,9.5,Road:Youngtimer:ICE,FWD,Front,Naturally Aspirated,Sedan,,1990,83,114,1.3,4,710,163,9.8,4,34,,
-Mini,John Cooper S,MK VI B16 Tune,10.8,Road:Youngtimer:ICE,FWD,Front,Naturally Aspirated,Sedan,,1990,160,150,1.6,4,710,200,6,5,34,,
-Nissan,Datsun 240 Z,240Z (S30),7.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1971,153,198,2.4,6,1115,201,8,4,60,,
-Nissan,Datsun 240 Z,240Z (S30) 0-Nose Tune,8.1,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1971,197,240,2.8,6,1140,220,7,5,60,,
-Peugeot,205 T16,,9.8,Road:Youngtimer:ICE,AWD,Mid,Turbo Charged,Hatch Back,,1990,200,255,1.8,4,1145,210,6,5,90,,
-Porsche,718 Cayman GT4 Clubsport,,16.3,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT4,2019,420,425,3.8,6,1295,280,3.4,7,115,,7800
-Porsche,718 Gaymane GT4 RS,718 Gaymane GT4 RS,12.7,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2022,500,450,4,6,1490,315,3.4,7,64,,9000
-Porsche,718 Gaymane GT4 RS,718 Gaymane GT4 RS with Weissach-package,12.7,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2022,500,450,4,6,1490,315,3.4,7,64,,9000
-Porsche,911 GT2 RS,,18.2,Racing:Modern:ICE,RWD,Rear,Turbo Charged,Coupe,GT2,2023,700,630,3.8,6,1315,300,2.9,7,120,,7200
-Porsche,911 GT3 Cup (992),Carrera Cup ABS & TC,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
-Porsche,911 GT3 Cup (992),Carrera Cup ABS,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
-Porsche,911 GT3 Cup (992),Carrera Cup Base,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
-Porsche,911 GTR R Rennsport (992),GT3 R Rennsport GT3,19.8,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,GT3,2022,540,510,4.2,6,1250,290,2.9,6,117,,9400
-Porsche,911 GTR R Rennsport (992),GT3 R Rennsport Unrestricted,20.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,GT3,2022,540,510,4.2,6,1250,290,2.9,6,117,,9400
-Porsche,911 GT3 RS (992),GT3 RS (992),16.5,Road:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,,2021,525,455,4,6,1450,296,3.2,7,90,,8500
-Porsche,911 GT3 RS (992),GT3 RS (992) with Wiessach-package,16.6,Road:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,,2021,525,455,4,6,1430,296,3.2,7,90,,8500
-Porsche,911 Turbo 3.6 (964),964 Turbo,12.3,Road:Youngtimer:ICE,RWD,Rear,Turbo Charged,Coupe,,1993,350,520,3.5,6,1460,280,4.8,5,92,,
-Porsche,911 Turbo 3.6 (964),964 Turbo Power Package,12.4,Road:Youngtimer:ICE,RWD,Rear,Turbo Charged,Coupe,,1993,385,520,3.5,6,1460,280,4.8,5,92,,
-Porsche,935,,17.9,Racing:Modern:ICE,RWD,Rear,Turbo Charged,Coupe,GT2,2019,700,630,3.8,6,1315,300,299,7,120,,7200
-Renault,5 GT Turbo,,8.5,Road:Youngtimer:ICE,FWD,Front,Turbo Charged,Hatch Back,,1990,120,165,1.4,4,863,204,8,5,50,,
-Toyota,GR86,GR86 Premium,8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1280,225,6.3,6,50,,7400
-Toyota,GR86,"GR86 Trueno Edition, Performance Package",8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1270,225,6.3,6,50,,7400
-Toyota,GR86,"GR86 Hakone Edition, Performance Package",8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1270,225,6.3,6,50,,7400
-Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Zenki,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
-Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Kouki,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
-Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Black Limited Edition,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
-Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Zenki Anime Tribute,9.6,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,250,192,1.6,4,920,240,6,6,50,,
-Toyota,Supra MK IV,RZ 3.0 Turbo,10.1,Road:Youngtimer:ICE,RWD,Front,Turbo Charged,Coupe,,1998,280,451,3,6,1510,254,5.1,6,70,,
-Toyota,Supra MK IV,Drift Tune Step,13,Road:Youngtimer:ICE,RWD,Front,Turbo Charged,Coupe,,1998,600,700,3,6,1510,280,4,6,70,,8000
-Volkswagen,Golf 8 GTI,,10.8,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,300,400,2,4,1388,270,5.9,7,50,,6400
-Volkswagen,Golf 8 R,,10,Road:Modern:ICE,AWD,Front,Turbo Charged,Hatch Back,,2021,320,420,2,4,1553,250,4.5,7,55,,
-Volkswagen,Golf GTI Mk1,,7.4,Road:Vintage:ICE,FWD,Front,Naturally Aspirated,Hatch Back,,1978,110,140,1.6,4,810,180,9,4,40,,
+Manufacturer,Name,Variant,Model Id,Performance Rating,Categories,Drive Layout,Engine Layout,Engine,Body,Racing Class,Year,Power PS/KW,Torque NM,Displacement L,Cylinders,Weight KG,Max Speed KMH,0-100 KMH,Gears,Fuel Tank L,Battery KWH,Max RPM
+Abarth,695 Biposto,,preset_695b_mech_1,10.2,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2015,190,250,1.4,4,997,230,5.9,5,35,,
+Alpha Romeo,75 Turbo Evoluzione,,preset_75t_mech_1,8,Road:Vintage:ICE,RWD,Front,Turbo Charged,Saloon,,1987,155,226,1.8,4,1150,225,7.6,5,49,,
+Alpha Romeo,Giulia GT Am,,preset_gtam_mech_1,12.8,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,540,600,2.5,6,1580,300,3.4,8,58,,
+Alpha Romeo,Giulia Sprint GTA,,preset_sprintgta_mech_1,7.7,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,Rally,1965,170,180,1.5,4,760,220,8,5,58,,
+Alpha Romeo,Elettrico 280 CV Veloce,,preset_mln_mech_1,10.5,Road:Modern:EV,FWD,Front,Electric Motor,SUV,,2024,207,345,,,1560,200,5.9,,,54,
+Alpine,A110 3 Aero Kit,,preset_a110s_mech_1,12,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2021,300,340,1.8,4,1110,275,4.1,7,45,,
+Alpine,A290 Beta,,preset_a290b_mech_1,9.8,Road:Modern:EV,AWD,Mid,Electric Motor,Hatch Back,,2023,220,300,,,1479,170,6.4,,,52,
+Audi,R8 LMS GT3 Evo II,,preset_r8gt3_mech_1,20.5,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT3,2022,550,600,5.2,10,1400,300,3,6,120,,
+Audi,R8 LMS GT4 Evo,,preset_r8gt4_mech_1,15.5,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT4,2022,495,550,5.2,10,1460,280,3.5,6,120,,
+Audi,RS 3 Sportback,,preset_rs3_mech_1,12.2,Road:Modern:ICE,AWD,Front,Turbo Charged,Hatch Back,,2022,400,500,2.5,5,1570,250,3.8,7,55,,
+Audi,RS 6 Avant,,preset_rs6_mech_1,12.2,Road:Modern:ICE,AWD,Front,Turbo Charged,Estate,,2022,600,800,4,8,2075,250,3.6,8,73,,
+Audi,Sport Quattro,,preset_sq_mech_1,10.7,Road:Vintage:ICE,AWD,Front,Turbo Charged,Coupe,,1983,306,350,2.1,5,1300,250,4.9,5,90,,
+BMW,M2 CS Racing,No Power Stick,preset_m2csr_mech_1,13.1,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,Cup:TCX,2020,365,550,3,6,1610,270,4.2,7,120,,
+BMW,M2 CS Racing,Black Power Stick,preset_m2csr_mech_2,13.5,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,Cup:TCX,2020,450,550,3,6,1610,295,3.8,7,120,,
+BMW,M2 Coupe,M2 G87 Coupe,preset_m2_mech_1,11.5,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,460,550,3,6,1775,302,3.8,6,52,,
+BMW,M2 Coupe,M2 G87 Coupe M Performance,preset_m2_mech_2,11.7,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,460,550,3,6,1775,302,3.8,6,52,,
+BMW,M3 E30 Sporte Evo,,preset_m3evoiii_mech_1,9.4,Road:Youngtimer:ICE,,Front,Naturally Aspirated,Coupe,,1990,238,240,2.5,6,1200,248,6.5,5,70,,
+BMW,M3 E45 CSL,,preset_e46csl_mech_1,10,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2003,350,370,3.2,6,1450,250,4.9,8,63,,
+BMW,M4 CSL,,preset_m4csl_mech_1,11.9,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,550,650,3,6,1625,250,3.7,8,59,,
+BMW,M4 GT3 Evo,,preset_m4gt3_mech_1,21.1,Racing:Modern:ICE,RWD,Front,Turbo Charged,Coupe,GT3,2025,590,700,3,6,1400,300,2.9,6,120,,
+BMW,M8 Competition,,preset_m8c_mech_1,11.6,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,,2021,625,750,4.4,8,1885,250,3.2,8,68,,
+Caterham,485 CSR,485 CSR Road,ks_caterham_485_csr_mech_1,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
+Caterham,485 CSR,485 CSR Track,ks_caterham_485_csr_mech_2,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
+Caterham,485 CSR,485 CSR Final Edition,ks_caterham_485_csr_mech_3,7.8,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,237,206,2,4,630,225,3.9,5,36,,
+Caterham,Academy,,ks_caterham_acmd_mech_1,8.8,Racing:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2023,135,150,1.5,4,630,200,6,5,36,,
+Chevrolet,Camaro ZL1,Zl1,preset_zl1_mech_1,12.3,Road:Modern:ICE,RWD,Front,Supercharged,Coupe,,2023,659,881,6.2,8,1753,318,3.5,6,72,,
+Chevrolet,Camaro ZL1,Zl1 1LE Extreme Track Performance,preset_zl1_mech_2,12.5,Road:Modern:ICE,RWD,Front,Supercharged,Coupe,,2023,659,881,6.2,8,1753,318,3.5,6,72,,
+Dallara,EXP,,preset_dalexp_mech_1,22.5,Track:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2023,500,700,2.3,4,890,290,3,6,55,,
+Dallara,Stradale,Stradale Targa/Coupe,preset_dalsc_mech_1,19,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
+Dallara,Stradale,Stradale Barchetta/Spider,preset_dalsc_mech_2,19,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
+Dallara,Stradale,Trackday,preset_dalsc_mech_3,21.3,Road:Modern:ICE,RWD,Mid,Turbo Charged,Cabriolet,,2017,400,500,2.3,4,855,280,3.3,6,55,,
+Ferrari,288 GTO,,preset_288gto_mech_1,11.1,Road:Vintage:ICE,RWD,Mid,Turbo Charged,Coupe,,1984,400,496,2.9,8,1160,305,4.7,5,120,,
+Ferrari,295 GT3,,preset_296gt3_mech_1,22.3,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT3,2022,550,640,2.9,6,1400,320,2.9,6,120,,
+Ferrari,296 GTB,296 GTB,preset_296gtb_mech_1,14.7,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2022,830,740,3,6,1675,330,2.9,8,65,,
+Ferrari,296 GTB,296 GTB Assetto Fiorano,preset_296gtb_mech_2,14.7,Road:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,,2022,830,740,3,6,1660,330,2.9,8,65,,
+Ferrari,Trofeo Challenge,,preset_f488ce_mech_1,20.2,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2:Cup,2021,670,760,3.9,8,1410,320,2.9,7,120,,
+Ferrari,Daytona SP3,,preset_sp3_mech_1,16.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Convertible,,2021,840,697,6.5,12,1405,340,2.7,7,86,,
+Ferrari,Scuderia Ferrari F2004,,preset_f2004_mech_1,41.4,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Open Wheel,Formula,2004,900,350,3,10,605,350,2,7,150,,
+Ferrari,F40 LM,,preset_f40lm_mech_1,20.2,Racing:Youngtimer:ICE,RWD,Mid,Turbo Charged,Coupe,Prototype,1993,900,750,2.9,8,1140,370,3,5,120,,
+Ferrari,SF-25,,preset_sf25_mech_1,43,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Open Wheel,Formula,2025,1000,750,1.6,6,800,350,2,8,145,,
+Ford,Escort RS Cosworth,,preset_escortrs_mech_1,8.4,Road:Youngtimer:ICE,AWD,Front,Turbo Charged,Coupe,,1994,227,294,2,4,1275,230,6.1,5,55,,
+Ford,Mustang GT3,,preset_msggt3_mech_1,19.4,Racing:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,GT3,2024,550,620,5.4,8,1400,300,2.8,6,120,,
+Honda,NSX-R 92R,,preset_nsxr_mech_1,10.8,Road:Youngtimer:ICE,RWD,Mid,Naturally Aspirated,Coupe,,1995,270,285,3,6,1230,260,4.8,5,70,,
+Honda,S2000 AP 1,,preset_s2000ap1_mech_1,9.9,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,2003,240,208,2,4,1270,240,6.2,6,50,,
+Hyundai,i30 N Hatchback,Performance,preset_i30n_hb_mech_1,9.4,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,280,392,3,4,1490,250,5.5,6,50,,
+Hyundai,i30 N Hatchback,Drive-N Limited Edition,preset_i30n_hb_mech_2,9.6,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,280,392,3,4,1490,250,5.5,6,50,,
+KTM,X-Bow GT2,,preset_xbgt2_mech_1,19.3,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2,2021,600,615,2.5,5,1267,300,2.9,6,120,,
+KTM,X-Bow GT4,,preset_xbgt4_mech_1,19,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT4,2018,360,450,2,4,975,265,3.9,6,120,,
+Lamborghini,Countach LP5000 Q3,,preset_cntqv_mech_1,9.5,Road:Vintage:ICE,RWD,Mid,Naturally Aspirated,Coupe,,1988,455,500,5.2,12,1490,293,5.2,5,120,,
+Lamborghini,Huracan ST EVO2,,preset_stevo2_mech_1,18.4,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT2:Cup,2021,620,570,5.2,10,1250,310,2.8,6,120,,
+Lamborghini,Huracan STO,STO,preset_sto_mech_1,15.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2021,640,565,5.2,10,1519,310,3,7,80,,
+Lamborghini,Huracan STO,STO Track Options,preset_sto_mech_2,15.1,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2021,640,565,5.2,10,1519,310,3,7,80,,
+Maserati,GT2,,preset_mcgt2_mech_1,17.7,Racing:Modern:ICE,RWD,Mid,Turbo Charged,Coupe,GT2,2023,630,700,3,6,1400,300,2.8,6,120,,
+Mazda,MX-5 NA,MX-5 NA Facelift,preset_mx5na_mech_1,9.1,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,1990,115,135,1.6,4,950,195,8.8,5,45,,
+Mazda,MX-5 NA,MX-5 NA Eunos R8 Limited,preset_mx5na_mech_2,9.3,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Cabriolet,,1990,131,152,1.6,4,950,195,8.8,5,45,,
+Mazda,MX5 ND Cup,MX-5 ND Global Cup - ND1 Manual,preset_mx5ndcup_mech_1,10.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,Cup,2016,155,200,2,4,1020,225,6.5,6,45,,7000
+Mazda,MX5 ND Cup,MX-5 ND Global Cup - ND1 Sequential,preset_mx5ndcup_mech_2,11.2,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Cabriolet,Cup,2016,181,200,2,4,1020,240,6,6,45,,7500
+Mercedes,AMG GT2,,preset_amggt2_mech_1,18,Road:Modern:ICE,RWD,Front,Turbo Charged,Coupe,GT2,2023,707,800,4,8,1400,300,2.8,6,120,,
+Mercedes,190E Evo II,,preset_190e_mech_1,9.8,Road:Youngtimer:ICE,RWD,Front,Naturally Aspirated,Sedan,,1996,235,245,2.5,4,1340,250,7.1,5,70,,
+Mini,John Cooper S,MK VI John Cooper S,preset_jcs_mech_1,9.5,Road:Youngtimer:ICE,FWD,Front,Naturally Aspirated,Sedan,,1990,83,114,1.3,4,710,163,9.8,4,34,,
+Mini,John Cooper S,MK VI B16 Tune,preset_jcs_mech_2,10.8,Road:Youngtimer:ICE,FWD,Front,Naturally Aspirated,Sedan,,1990,160,150,1.6,4,710,200,6,5,34,,
+Nissan,Datsun 240 Z,240Z (S30),preset_240z_mech_1,7.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1971,153,198,2.4,6,1115,201,8,4,60,,
+Nissan,Datsun 240 Z,240Z (S30) 0-Nose Tune,preset_240z_mech_2,8.1,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1971,197,240,2.8,6,1140,220,7,5,60,,
+Peugeot,205 T16,,preset_t16_mech_1,9.8,Road:Youngtimer:ICE,AWD,Mid,Turbo Charged,Hatch Back,,1990,200,255,1.8,4,1145,210,6,5,90,,
+Porsche,718 Cayman GT4 Clubsport,,preset_gt4csmr_mech_1,16.3,Racing:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,GT4,2019,420,425,3.8,6,1295,280,3.4,7,115,,7800
+Porsche,718 Gaymane GT4 RS,718 Gaymane GT4 RS,preset_718gt4rs_mech_1,12.7,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2022,500,450,4,6,1490,315,3.4,7,64,,9000
+Porsche,718 Gaymane GT4 RS,718 Gaymane GT4 RS with Weissach-package,preset_718gt4rs_mech_2,12.7,Road:Modern:ICE,RWD,Mid,Naturally Aspirated,Coupe,,2022,500,450,4,6,1490,315,3.4,7,64,,9000
+Porsche,911 GT2 RS,,preset_gt2rscs_mech_1,18.2,Racing:Modern:ICE,RWD,Rear,Turbo Charged,Coupe,GT2,2023,700,630,3.8,6,1315,300,2.9,7,120,,7200
+Porsche,911 GT3 Cup (992),Carrera Cup ABS & TC,preset_992c_mech_1,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
+Porsche,911 GT3 Cup (992),Carrera Cup ABS,preset_992c_mech_2,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
+Porsche,911 GT3 Cup (992),Carrera Cup Base,preset_992c_mech_3,17.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,Cup,2021,510,474,4,6,1260,293,2.9,6,112,,8750
+Porsche,911 GTR R Rennsport (992),GT3 R Rennsport GT3,preset_992ren_mech_1,19.8,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,GT3,2022,540,510,4.2,6,1250,290,2.9,6,117,,9400
+Porsche,911 GTR R Rennsport (992),GT3 R Rennsport Unrestricted,preset_992ren_mech_2,20.3,Racing:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,GT3,2022,540,510,4.2,6,1250,290,2.9,6,117,,9400
+Porsche,911 GT3 RS (992),GT3 RS (992),preset_gt3rs_mech_1,16.5,Road:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,,2021,525,455,4,6,1450,296,3.2,7,90,,8500
+Porsche,911 GT3 RS (992),GT3 RS (992) with Wiessach-package,preset_gt3rs_mech_2,16.6,Road:Modern:ICE,RWD,Rear,Naturally Aspirated,Coupe,,2021,525,455,4,6,1430,296,3.2,7,90,,8500
+Porsche,911 Turbo 3.6 (964),964 Turbo,preset_964_mech_1,12.3,Road:Youngtimer:ICE,RWD,Rear,Turbo Charged,Coupe,,1993,350,520,3.5,6,1460,280,4.8,5,92,,
+Porsche,911 Turbo 3.6 (964),964 Turbo Power Package,preset_964_mech_2,12.4,Road:Youngtimer:ICE,RWD,Rear,Turbo Charged,Coupe,,1993,385,520,3.5,6,1460,280,4.8,5,92,,
+Porsche,935,,preset_935_mech_1,17.9,Racing:Modern:ICE,RWD,Rear,Turbo Charged,Coupe,GT2,2019,700,630,3.8,6,1315,300,299,7,120,,7200
+Renault,5 GT Turbo,,preset_r5gt_mech_1,8.5,Road:Youngtimer:ICE,FWD,Front,Turbo Charged,Hatch Back,,1990,120,165,1.4,4,863,204,8,5,50,,
+Toyota,GR86,GR86 Premium,preset_gr86_mech_1,8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1280,225,6.3,6,50,,7400
+Toyota,GR86,"GR86 Trueno Edition, Performance Package",preset_gr86_mech_2,8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1270,225,6.3,6,50,,7400
+Toyota,GR86,"GR86 Hakone Edition, Performance Package",preset_gr86_mech_3,8.9,Road:Modern:ICE,RWD,Front,Naturally Aspirated,Coupe,,2021,235,250,2.4,4,1270,225,6.3,6,50,,7400
+Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Zenki,preset_ae86_mech_1,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
+Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Kouki,preset_ae86_mech_2,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
+Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Black Limited Edition,preset_ae86_mech_3,8.3,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,130,149,1.6,4,920,180,8.5,5,50,,
+Toyota,Sprinter Trueno 1600GT - Apex (AE86),GT-Apex Zenki Anime Tribute,preset_ae86_mech_4,9.6,Road:Vintage:ICE,RWD,Front,Naturally Aspirated,Coupe,,1984,250,192,1.6,4,920,240,6,6,50,,
+Toyota,Supra MK IV,RZ 3.0 Turbo,preset_supramkiv_mech_1,10.1,Road:Youngtimer:ICE,RWD,Front,Turbo Charged,Coupe,,1998,280,451,3,6,1510,254,5.1,6,70,,
+Toyota,Supra MK IV,Drift Tune Step,preset_supramkiv_mech_2,13,Road:Youngtimer:ICE,RWD,Front,Turbo Charged,Coupe,,1998,600,700,3,6,1510,280,4,6,70,,8000
+Volkswagen,Golf 8 GTI,,preset_mk8gti_mech_1,10.8,Road:Modern:ICE,FWD,Front,Turbo Charged,Hatch Back,,2021,300,400,2,4,1388,270,5.9,7,50,,6400
+Volkswagen,Golf 8 R,,preset_mk8r_mech_1,10,Road:Modern:ICE,AWD,Front,Turbo Charged,Hatch Back,,2021,320,420,2,4,1553,250,4.5,7,55,,
+Volkswagen,Golf GTI Mk1,,preset_gtimk1_mech_1,7.4,Road:Vintage:ICE,FWD,Front,Naturally Aspirated,Hatch Back,,1978,110,140,1.6,4,810,180,9,4,40,,
