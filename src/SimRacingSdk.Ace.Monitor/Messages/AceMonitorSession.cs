@@ -7,7 +7,6 @@ namespace SimRacingSdk.Ace.Monitor.Messages;
 public record AceMonitorSession() : AceMonitorMessageBase
 {
     public TimeSpan Duration { get; init; }
-    public Guid EventId { get; init; }
     public bool IsOnline { get; init; }
     public bool IsRunning { internal set; get; }
     public int NumberOfCars { get; init; }

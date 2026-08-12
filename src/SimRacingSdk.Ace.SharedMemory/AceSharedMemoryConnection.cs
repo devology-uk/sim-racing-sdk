@@ -24,10 +24,15 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     private readonly IAceSharedMemoryProvider sharedMemoryProvider;
     private readonly Subject<AceTelemetryFrame> telemetrySubject = new();
 
+    private const float Sector1Boundary = 1f / 3f;
+    private const float Sector2Boundary = 2f / 3f;
+
     private AceSharedMemorySession? currentSession;
     private AceFlagState? lastFlagState;
     private AceGraphicsData? lastGraphicsData;
     private AceStaticData? lastStaticData;
+    private int? sector1TimeMs;
+    private int? sector2TimeMs;
     private IDisposable? updateSubscription;
 
     public AceSharedMemoryConnection(IAceSharedMemoryProvider sharedMemoryProvider)
@@ -129,6 +134,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 
         this.UpdateSession(graphicsData, staticData);
         this.UpdateFlagState(graphicsData);
+        this.UpdateSectorSplits(graphicsData);
         this.UpdateActiveLap(graphicsData, staticData);
 
         this.lastStaticData = staticData;
@@ -156,9 +162,15 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             return;
         }
 
-        var aceSharedMemoryLap = new AceSharedMemoryLap(staticData, graphicsData);
+        var aceSharedMemoryLap = new AceSharedMemoryLap(staticData,
+            graphicsData,
+            this.sector1TimeMs,
+            this.sector2TimeMs);
         this.newLapSubject.OnNext(aceSharedMemoryLap);
         this.LogMessage(LoggingLevel.Debug, aceSharedMemoryLap.ToString());
+
+        this.sector1TimeMs = null;
+        this.sector2TimeMs = null;
     }
 
     private void UpdateFlagState(AceGraphicsData graphicsData)
@@ -177,6 +189,27 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 
         this.lastFlagState = flagState;
         this.flagStateSubject.OnNext(flagState);
+    }
+
+    private void UpdateSectorSplits(AceGraphicsData graphicsData)
+    {
+        if(this.lastGraphicsData == null)
+        {
+            return;
+        }
+
+        var lastPosition = this.lastGraphicsData.NormalizedPosition;
+        var currentPosition = graphicsData.NormalizedPosition;
+
+        if(this.sector1TimeMs == null && lastPosition < Sector1Boundary && currentPosition >= Sector1Boundary)
+        {
+            this.sector1TimeMs = graphicsData.CurrentLapTimeMs;
+        }
+
+        if(this.sector2TimeMs == null && lastPosition < Sector2Boundary && currentPosition >= Sector2Boundary)
+        {
+            this.sector2TimeMs = graphicsData.CurrentLapTimeMs;
+        }
     }
 
     private void UpdateSession(AceGraphicsData graphicsData, AceStaticData staticData)

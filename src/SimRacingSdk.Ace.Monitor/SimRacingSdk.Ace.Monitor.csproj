@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SimRacingSdk.Ace.Core\SimRacingSdk.Ace.Core.csproj" />
     <ProjectReference Include="..\SimRacingSdk.Ace.SharedMemory\SimRacingSdk.Ace.SharedMemory.csproj" />
-    <ProjectReference Include="..\SimRacingSdk.Ace.Udp\SimRacingSdk.Ace.Udp.csproj" />
   </ItemGroup>
 
 </Project>

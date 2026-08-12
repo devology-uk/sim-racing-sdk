@@ -4,8 +4,6 @@ using SimRacingSdk.Ace.Core;
 using SimRacingSdk.Ace.Monitor.Abstractions;
 using SimRacingSdk.Ace.SharedMemory;
 using SimRacingSdk.Ace.SharedMemory.Abstractions;
-using SimRacingSdk.Ace.Udp;
-using SimRacingSdk.Ace.Udp.Abstractions;
 
 namespace SimRacingSdk.Ace.Monitor;
 
@@ -16,7 +14,6 @@ public static class ServiceCollectionExtensions
         services.UseAceSdk();
 
         services.TryAddSingleton<IAceSharedMemoryConnectionFactory, AceSharedMemoryConnectionFactory>();
-        services.TryAddSingleton<IAceUdpConnectionFactory, AceUdpConnectionFactory>();
 
         services.AddSingleton<IAceMonitorFactory, AceMonitorFactory>();
         return services;
