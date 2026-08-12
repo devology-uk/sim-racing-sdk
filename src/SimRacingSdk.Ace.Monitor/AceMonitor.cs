@@ -113,7 +113,7 @@ public class AceMonitor : IAceMonitor
             return;
         }
 
-        var car = this.aceCarInfoProvider.FindByName(aceSharedMemoryLap.CarModel);
+        var car = this.aceCarInfoProvider.FindByAceName(aceSharedMemoryLap.CarModel);
         var aceMonitorLap = new AceMonitorLap
         {
             CarManufacturer = car?.Manufacturer ?? UnknownCarText,

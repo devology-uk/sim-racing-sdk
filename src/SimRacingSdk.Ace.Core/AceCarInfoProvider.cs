@@ -122,6 +122,11 @@ public class AceCarInfoProvider : IAceCarInfoProvider
         return this.cars.FirstOrDefault(c => c.Name == name);
     }
 
+    public AceCarInfo? FindByAceName(string aceName)
+    {
+        return this.cars.FirstOrDefault(c => c.AceName == aceName);
+    }
+
     public IReadOnlyCollection<AceCarInfo> GetCarInfos()
     {
         return this.cars.AsReadOnly();

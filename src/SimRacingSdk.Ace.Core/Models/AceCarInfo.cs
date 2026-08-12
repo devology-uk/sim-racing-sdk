@@ -37,4 +37,8 @@ public record AceCarInfo
         string.IsNullOrEmpty(this.Variant)
             ? $"{this.Manufacturer} {this.Name}"
             : $"{this.Manufacturer} {this.Name} - {this.Variant}";
+
+    // Matches the CarModel string Ace's shared memory actually reports (e.g. "BMW M4 GT3 Evo") -
+    // unlike DisplayName, never includes Variant, since shared memory has no variant concept.
+    public string AceName => $"{this.Manufacturer} {this.Name}";
 }
