@@ -27,7 +27,9 @@ public record AceCarInfo
     public double PerformanceRating { get; init; }
     public int PowerPs { get; init; }
     public string RacingClass { get; init; }
+    public AceSetupSchema SetupSchema { get; init; } = new();
     public int TorqueNm { get; init; }
+    public string[] TyreCompounds { get; init; } = [];
     public string Variant { get; init; }
     public int WeightKg { get; init; }
     public int Year { get; init; }

@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Ace.Demo", "Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Wpf.Shared", "SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj", "{C9C8B0E1-B7A3-4209-8E75-5BD806FC55DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.Tools.AceCarCatalogImport", "SimRacingSdk.Tools.AceCarCatalogImport\SimRacingSdk.Tools.AceCarCatalogImport.csproj", "{FCBCE6C5-A664-493A-8854-2BDB57E10461}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -315,6 +317,18 @@ Global
 		{C9C8B0E1-B7A3-4209-8E75-5BD806FC55DE}.Release|x64.Build.0 = Release|Any CPU
 		{C9C8B0E1-B7A3-4209-8E75-5BD806FC55DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{C9C8B0E1-B7A3-4209-8E75-5BD806FC55DE}.Release|x86.Build.0 = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|x64.Build.0 = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|x64.ActiveCfg = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|x64.Build.0 = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCBCE6C5-A664-493A-8854-2BDB57E10461}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
