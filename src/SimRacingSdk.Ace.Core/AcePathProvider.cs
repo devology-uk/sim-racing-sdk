@@ -1,3 +1,4 @@
+using System.Linq;
 using SimRacingSdk.Ace.Core.Abstractions;
 
 namespace SimRacingSdk.Ace.Core;
@@ -23,7 +24,7 @@ public class AcePathProvider : IAcePathProvider
     private const string ReplaySavedFolderName = "Saved";
     private const string ResultsFolderName = "Results";
     private const string SavedGamesFolderName = "Saved Games";
-    private const string SetupsFolderName = "Setups";
+    private const string SetupsFolderName = "Car Setups";
 
     private static AcePathProvider? singletonInstance;
 
@@ -59,12 +60,17 @@ public class AcePathProvider : IAcePathProvider
             SavedGamesFolderName,
             DocumentsFolderName);
 
-        if (!Directory.Exists(documentsPath) && Directory.Exists(savedGamesPath))
-        {
-            return savedGamesPath;
-        }
+        // Bare Directory.Exists isn't a strong enough signal to pick between the two candidates:
+        // on a rig with OneDrive-redirected Documents, ACE (or OneDrive itself) can leave a
+        // near-empty Documents/ACE containing just server_launcher.json while the real game data
+        // - Car Setups, account file, etc. - lives entirely under Saved Games/ACE. Whichever
+        // candidate actually has more on disk is the real one.
+        return CountEntries(savedGamesPath) > CountEntries(documentsPath) ? savedGamesPath : documentsPath;
+    }
 
-        return documentsPath;
+    private static int CountEntries(string path)
+    {
+        return Directory.Exists(path) ? Directory.EnumerateFileSystemEntries(path).Count() : 0;
     }
 
     public string AccountFilePath { get; }
