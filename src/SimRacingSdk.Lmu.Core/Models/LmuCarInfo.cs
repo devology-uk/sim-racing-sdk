@@ -11,6 +11,7 @@ public record LmuCarInfo
     public int HeightMm { get; init; }
     public int LengthMm { get; init; }
     public string Manufacturer { get; init; }
+    public string ModelId { get; init; }
     public int PowerBhp { get; init; }
     public int PowerKw { get; init; }
     public string ResultCarType { get; init; }

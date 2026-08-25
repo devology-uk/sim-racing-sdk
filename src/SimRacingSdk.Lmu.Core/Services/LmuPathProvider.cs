@@ -24,6 +24,7 @@ namespace SimRacingSdk.Lmu.Core.Services
         public string PlayerFolder => Path.Combine(this.UserDataFolder, "player");
         public string ResultsFolder => Path.Combine(this.LogFolder, "Results");
         public string SettingsFilePath => Path.Combine(this.PlayerFolder, "Settings.JSON");
+        public string SetupsFolderPath => Path.Combine(this.PlayerFolder, "Settings");
         public string UserDataFolder => Path.Combine(this.gamePath, "UserData");
     }
 }

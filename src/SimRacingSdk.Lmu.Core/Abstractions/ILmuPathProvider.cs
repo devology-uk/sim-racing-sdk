@@ -6,5 +6,6 @@ public interface ILmuPathProvider
     string PlayerFolder { get; }
     string ResultsFolder { get; }
     string SettingsFilePath { get; }
+    string SetupsFolderPath { get; }
     string UserDataFolder { get; }
 }

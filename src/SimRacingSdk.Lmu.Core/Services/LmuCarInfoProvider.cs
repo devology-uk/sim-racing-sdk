@@ -242,6 +242,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1045,
             LengthMm = 4745,
             Manufacturer = "ORECA",
+            ModelId = "Oreca_07_LM_2023",
             PowerBhp = 603,
             PowerKw = 0,
             ResultCarType = "ORECA 07",
@@ -259,6 +260,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1045,
             LengthMm = 4745,
             Manufacturer = "ORECA",
+            ModelId = "Oreca_07_LM_2023",
             PowerBhp = 603,
             PowerKw = 0,
             ResultCarType = "ORECA 07",
@@ -276,6 +278,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1274,
             LengthMm = 4665,
             Manufacturer = "Aston Martin",
+            ModelId = "Aston_Martin_Vantage_AMR_2023",
             PowerBhp = 500,
             PowerKw = 0,
             ResultCarType = "Aston Martin Vantage AMR",
@@ -344,6 +347,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1144,
             LengthMm = 4616,
             Manufacturer = "Aston Martin",
+            ModelId = "Vantage_AMR_GT3Evo_2024",
             PowerBhp = 535,
             PowerKw = 0,
             ResultCarType = "Aston Martin Vantage AMR LMGT3",
@@ -429,6 +433,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1165,
             LengthMm = 4551,
             Manufacturer = "Lamborghini",
+            ModelId = "Lamborghini_Huracan_GT3_2024",
             PowerBhp = 640,
             PowerKw = 0,
             ResultCarType = "Lamborghini Huracan LMGT3 Evo2",
@@ -446,6 +451,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1271,
             LengthMm = 4846,
             Manufacturer = "Lexus",
+            ModelId = "LexusRCF_GT3_2024",
             PowerBhp = 500,
             PowerKw = 0,
             ResultCarType = "Lexus RCF LMGT3",
@@ -463,6 +469,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1196,
             LengthMm = 4543,
             Manufacturer = "McLaren",
+            ModelId = "McLaren_720sGT3Evo_2023",
             PowerBhp = 600,
             PowerKw = 0,
             ResultCarType = "McLaren 720S LMGT3 Evo",
@@ -480,6 +487,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             HeightMm = 1279,
             LengthMm = 4619,
             Manufacturer = "Porsche",
+            ModelId = "911GT3R_2024",
             PowerBhp = 565,
             PowerKw = 0,
             ResultCarType = "Porsche 911 GT3 R LMGT3",
@@ -544,6 +552,12 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
     {
         return this.cars.FirstOrDefault(
             car => car.DisplayName.Equals(displayName, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    public LmuCarInfo? FindByModelId(string modelId)
+    {
+        return this.cars.FirstOrDefault(
+            car => car.ModelId != null && car.ModelId.Equals(modelId, StringComparison.InvariantCultureIgnoreCase));
     }
 
     /// <summary>
