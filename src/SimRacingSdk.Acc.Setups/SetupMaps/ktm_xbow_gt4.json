@@ -1,0 +1,413 @@
+{
+  "abs": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 4,
+    "min": 0,
+    "step": 1
+  },
+  "antiRollBarFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 3,
+    "min": 0,
+    "step": 1
+  },
+  "antiRollBarRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 1,
+    "min": 0,
+    "step": 1
+  },
+  "brakeBias": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 65.0,
+    "min": 44.0,
+    "step": 0.2
+  },
+  "brakeCompoundFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 4,
+    "min": 1,
+    "step": 1
+  },
+  "brakeCompoundRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 4,
+    "min": 1,
+    "step": 1
+  },
+  "brakeDuctsFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 6,
+    "min": 0,
+    "step": 1
+  },
+  "brakeDuctsRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 6,
+    "min": 0,
+    "step": 1
+  },
+  "brakePower": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 100,
+    "min": 80,
+    "step": 1
+  },
+  "bumpFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 24,
+    "min": 0,
+    "step": 1
+  },
+  "bumpRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 24,
+    "min": 0,
+    "step": 1
+  },
+  "bumpStopRangeFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 52,
+    "min": 0,
+    "step": 1
+  },
+  "bumpStopRangeRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 60,
+    "min": 0,
+    "step": 1
+  },
+  "bumpStopRateFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 1000,
+    "min": 300,
+    "step": 100
+  },
+  "bumpStopRateRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 1000,
+    "min": 300,
+    "step": 100
+  },
+  "camberFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": -0.5,
+    "min": -2.5,
+    "step": 0.1
+  },
+  "camberRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": -0.5,
+    "min": -2.5,
+    "step": 0.1
+  },
+  "caster": {
+    "isFixed": false,
+    "isSupported": true,
+    "values": [
+      1.7,
+      1.9,
+      2.1,
+      2.3,
+      2.5,
+      2.7,
+      2.9,
+      3.1,
+      3.3,
+      3.5,
+      3.7,
+      3.9,
+      4.1,
+      4.3,
+      4.5,
+      4.7,
+      4.8,
+      5.0,
+      5.2,
+      5.4,
+      5.6,
+      5.8,
+      6.0,
+      6.2,
+      6.4,
+      6.6,
+      6.8,
+      7.0,
+      7.1,
+      7.3,
+      7.5,
+      7.7,
+      7.9,
+      8.1,
+      8.3,
+      8.5,
+      8.7,
+      8.9,
+      9.1,
+      9.2,
+      9.4
+    ]
+  },
+  "ecuMap": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 1,
+    "min": 1,
+    "step": 1
+  },
+  "fastBumpFront": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "fastBumpRear": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "fastReboundFront": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "fastReboundRear": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "fuel": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 120,
+    "min": 2,
+    "step": 1
+  },
+  "preload": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 80,
+    "min": 10,
+    "step": 10
+  },
+  "reboundFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 24,
+    "min": 0,
+    "step": 1
+  },
+  "reboundRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 24,
+    "min": 0,
+    "step": 1
+  },
+  "rideHeightFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 130,
+    "min": 110,
+    "step": 1
+  },
+  "rideHeightRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 130,
+    "min": 110,
+    "step": 1
+  },
+  "splitter": {
+    "isFixed": true,
+    "isSupported": true,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "steerRatio": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 17.0,
+    "min": 11.0,
+    "step": 1.0
+  },
+  "strategyBrakeCompoundFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 4,
+    "min": 1,
+    "step": 1
+  },
+  "strategyBrakeCompoundRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 4,
+    "min": 1,
+    "step": 1
+  },
+  "strategyFuelToAdd": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 120,
+    "min": 0,
+    "step": 1
+  },
+  "strategyPitStops": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 30,
+    "min": 1,
+    "step": 1
+  },
+  "strategyTyreCompound": {
+    "values": [
+      "DRY",
+      "WET"
+    ]
+  },
+  "strategyTyrePressureFrontLeft": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "strategyTyrePressureFrontRight": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "strategyTyrePressureRearLeft": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "strategyTyrePressureRearRight": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "tc": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 11,
+    "min": 0,
+    "step": 1
+  },
+  "tc2": {
+    "isFixed": false,
+    "isSupported": false,
+    "max": 0,
+    "min": 0,
+    "step": 1
+  },
+  "telemetryLaps": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 99,
+    "min": 0,
+    "step": 1
+  },
+  "toeFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 0.4,
+    "min": -0.4,
+    "step": 0.01
+  },
+  "toeRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 0.4,
+    "min": -0.4,
+    "step": 0.01
+  },
+  "tyreCompound": {
+    "values": [
+      "DRY",
+      "WET"
+    ]
+  },
+  "tyrePressuresFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "tyrePressuresRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 35.0,
+    "min": 17.0,
+    "step": 0.1
+  },
+  "tyreSet": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 50,
+    "min": 1,
+    "step": 1
+  },
+  "wheelRateFront": {
+    "isFixed": false,
+    "isSupported": true,
+    "values": [
+      87000,
+      97000,
+      107000,
+      117000,
+      127000
+    ]
+  },
+  "wheelRateRear": {
+    "isFixed": false,
+    "isSupported": true,
+    "values": [
+      81000,
+      91000,
+      101000,
+      111000,
+      121000,
+      131000
+    ]
+  },
+  "wing": {
+    "isFixed": false,
+    "isSupported": true,
+    "max": 9,
+    "min": 1,
+    "step": 1
+  }
+}
