@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package SimRacingSdk.Ace.Setups.Models;
+option csharp_namespace = "SimRacingSdk.Ace.Setups.Models";
+
+// Raw reverse-engineered representation of ACE's .carsetup binary format - protobuf wire format,
+// no schema ever published by Kunos. Field numbers and meanings were derived by hand, car by car,
+// diffing before/after saves against isolated in-game changes - see sim-racing-sdk's
+// tools/decode-ace-setup.js and CLAUDE.md for the full methodology and confirmation history.
+//
+// Every confirmed numeric field on this message uses wire type 5 (fixed32), interpreted as an
+// IEEE-754 float - true even for conceptually-integer values like TC/ABS/compound index. `float`
+// is the correct proto type for all of them; `int32`/`fixed32` would decode the same bytes wrong
+// (different wire type, or the same bits read as a raw integer instead of a float). The one
+// exception is field 10 (schemaVersion), genuinely varint-encoded, unlike everything else here.
+//
+// Corner-indexed repeated fields are always ordered [FrontLeft, FrontRight, RearLeft, RearRight].
+message AceRawCarSetup {
+  General general = 1;
+  repeated WheelRateCorner wheelRate = 2;
+  repeated DamperCorner damper = 3;
+  repeated TyreCorner tyre = 4;
+  Electronics electronics = 5;
+  Aero aero = 6;
+  FuelAndStrategy fuelAndStrategy = 7;
+  // Field 8 was never observed populated on any car tested - no data to model.
+  string carPresetId = 9;
+  int32 schemaVersion = 10;
+
+  message General {
+    // Two-element packed array: [frontArb, rearArb]. Packed repeated-scalar wire encoding is
+    // indistinguishable from raw concatenated floats without knowing the field is `repeated` -
+    // this is exactly what the hand-rolled decoder's "raw floats" fallback kept finding.
+    repeated float arb = 1 [packed = true];
+    optional float steerRatio = 2;
+    Brakes brakes = 3;
+    Differential differential = 4;
+  }
+
+  message Brakes {
+    optional float brakeBias = 1;
+    optional float brakeTorqueMultiplier = 2;
+  }
+
+  message Differential {
+    optional float power = 1;
+    optional float coast = 2;
+    optional float preload = 3;
+  }
+
+  message WheelRateCorner {
+    optional float rate = 1;
+    // 2 and 3 were never identified across the whole reverse-engineering pass, despite being
+    // present on every car tested - kept for completeness, deliberately not surfaced in the
+    // curated DTO (same treatment ACC gives fields it deliberately drops).
+    Unidentified unidentifiedA = 2;
+    Unidentified unidentifiedB = 3;
+  }
+
+  message Unidentified {
+    optional float value = 1;
+    optional float bound = 2;
+  }
+
+  message DamperCorner {
+    optional float slowBump = 1;
+    optional float fastBump = 2;
+    optional float slowRebound = 3;
+    optional float fastRebound = 4;
+  }
+
+  message TyreCorner {
+    optional float pressure = 1;
+    optional float camber = 2;
+    optional float toe = 3;
+    // Front-only on every car observed - real caster, occasionally surfaced as an adjustable UI
+    // control (e.g. the Audi R8 LMS GT3 Evo II), present-but-hidden on most others.
+    optional float caster = 4;
+    // 5 and 6 were never identified - always present, shift slightly on every save even when
+    // nothing else changed, most likely a geometry-solver-derived output rather than a raw input.
+    optional float unidentifiedA = 5;
+    optional float unidentifiedB = 6;
+    // Per-car LIST INDEX, not a shared global enum - index 0 is always that car's default
+    // compound (hence omitted). See AceCarInfo.TyreCompounds for the per-car name list.
+    optional float compoundIndex = 7;
+  }
+
+  message Electronics {
+    optional float tractionControl = 1;
+    optional float tractionControl2 = 2;
+    optional float abs = 3;
+    // Confirmed only on the SF-25 (ERS Heat Charging Deploy/Charge toggle) - absent/0 = Deploy.
+    optional float ersHeatCharging = 4;
+    optional float telemetryLaps = 5;
+    optional float esc = 6;
+    optional float turboBoost = 7;
+    // Engine Map / ERS Deployment Map / ERS Recharge Level are confirmed real UI-visible controls
+    // (see AceSetupSchema.Electronics.HasEngineMap etc.) but their raw field numbers were never
+    // confirmed - the only car tested with them (SF-25) has a persistence bug that prevented
+    // isolated delta tests. No field declared here yet; revisit once confirmed.
+  }
+
+  message Aero {
+    // 4-float packed position/heading blob, changes on every save regardless of what was edited -
+    // car position/telemetry at save time, not a setup value. Kept for completeness only.
+    repeated float positionNoise = 1 [packed = true];
+    optional float frontRideHeight = 2;
+    optional float rearRideHeight = 3;
+    optional float frontWingAngle = 4;
+    optional float rearWingAngle = 5;
+  }
+
+  message FuelAndStrategy {
+    // Absent entirely on EV cars.
+    optional float fuel = 1;
+  }
+}
