@@ -6,4 +6,5 @@ public interface IAccSetupProvider
 {
     IReadOnlyList<AccSetupFileInfo> GetSetupFiles();
     AccSetupFileInfo GetSetupFile(string carFolderName, string trackFolderName, string fileName);
+    void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName);
 }

@@ -6,4 +6,5 @@ public interface ILmuSetupProvider
 {
     IReadOnlyList<LmuSetupFileInfo> GetSetupFiles();
     LmuSetupFileInfo GetSetupFile(string trackFolderName, string fileName);
+    void DeleteSetupFile(string trackFolderName, string fileName);
 }

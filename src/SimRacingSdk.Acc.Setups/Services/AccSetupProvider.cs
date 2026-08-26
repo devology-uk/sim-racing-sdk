@@ -88,6 +88,12 @@ public class AccSetupProvider : IAccSetupProvider
         return this.BuildFileInfo(carFolderName, trackFolderName, filePath);
     }
 
+    public void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName)
+    {
+        var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName, fileName);
+        File.Delete(filePath);
+    }
+
     private AccSetupFileInfo BuildFileInfo(string carFolderName, string trackFolderName, string filePath)
     {
         var json = File.ReadAllText(filePath);

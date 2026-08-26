@@ -76,6 +76,12 @@ public class AceSetupProvider : IAceSetupProvider
         return this.BuildFileInfo(carFolderName, trackFolderName, filePath);
     }
 
+    public void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName)
+    {
+        var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName, fileName);
+        File.Delete(filePath);
+    }
+
     // ACE's setup folders are named after the car's display name, not a stable internal id like
     // ACC's - and that name doesn't always match the catalog cleanly (confirmed drift multiple
     // times: "SF25" vs the catalog's "SF-25", a since-renamed EV, etc.). So car identity is
