@@ -4,7 +4,7 @@ namespace SimRacingSdk.Acc.Setups.Abstractions;
 
 public interface IAccSetupProvider
 {
-    IReadOnlyList<AccSetupFileInfo> GetSetupFiles();
+    IReadOnlyList<AccSetupFileIdentity> GetSetupFiles();
     AccSetupFileInfo GetSetupFile(string carFolderName, string trackFolderName, string fileName);
     void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName);
 }

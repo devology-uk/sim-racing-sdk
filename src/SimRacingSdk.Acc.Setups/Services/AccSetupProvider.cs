@@ -37,10 +37,15 @@ public class AccSetupProvider : IAccSetupProvider
         AccCarInfoProvider.Instance,
         AccTrackInfoProvider.Instance);
 
-    public IReadOnlyList<AccSetupFileInfo> GetSetupFiles()
+    // Identity only, deliberately no file content read or decode - CarFolderName/TrackFolderName/
+    // FileName all come from the folder structure, and the display names are catalog lookups by
+    // folder name, so enumerating for a search list/hierarchy never needs to touch a file's bytes.
+    // A corrupt file therefore still appears here even though GetSetupFile would fail to open it -
+    // that failure surfaces when the user actually selects it, not silently at listing time.
+    public IReadOnlyList<AccSetupFileIdentity> GetSetupFiles()
     {
         var setupsFolderPath = this.pathProvider.SetupsFolderPath;
-        var results = new List<AccSetupFileInfo>();
+        var results = new List<AccSetupFileIdentity>();
 
         if(!Directory.Exists(setupsFolderPath))
         {
@@ -50,10 +55,15 @@ public class AccSetupProvider : IAccSetupProvider
         foreach(var carFolderPath in Directory.GetDirectories(setupsFolderPath))
         {
             var carFolderName = Path.GetFileName(carFolderPath);
+            var carDisplayName = this.carInfoProvider.GetCarInfos()
+                                      .FirstOrDefault(c => c.AccName == carFolderName)
+                                      ?.DisplayName ?? carFolderName;
 
             foreach(var trackFolderPath in Directory.GetDirectories(carFolderPath))
             {
                 var trackFolderName = Path.GetFileName(trackFolderPath);
+                var trackDisplayName = this.trackInfoProvider.FindByTrackId(trackFolderName)?.ShortName
+                                        ?? trackFolderName;
 
                 foreach(var filePath in Directory.GetFiles(trackFolderPath, "*.json"))
                 {
@@ -63,18 +73,14 @@ public class AccSetupProvider : IAccSetupProvider
                         continue;
                     }
 
-                    AccSetupFileInfo info;
-                    try
+                    results.Add(new AccSetupFileIdentity
                     {
-                        info = this.BuildFileInfo(carFolderName, trackFolderName, filePath);
-                    }
-                    catch(Exception)
-                    {
-                        // Skip an unreadable/corrupt file rather than failing the whole scan.
-                        continue;
-                    }
-
-                    results.Add(info);
+                        CarFolderName = carFolderName,
+                        TrackFolderName = trackFolderName,
+                        CarDisplayName = carDisplayName,
+                        TrackDisplayName = trackDisplayName,
+                        FileName = fileName
+                    });
                 }
             }
         }
