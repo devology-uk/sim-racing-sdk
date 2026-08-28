@@ -94,6 +94,12 @@ public class AccSetupProvider : IAccSetupProvider
         return this.BuildFileInfo(carFolderName, trackFolderName, filePath);
     }
 
+    public byte[] GetSetupFileBytes(string carFolderName, string trackFolderName, string fileName)
+    {
+        var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName, fileName);
+        return File.ReadAllBytes(filePath);
+    }
+
     public void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName)
     {
         var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName, fileName);
