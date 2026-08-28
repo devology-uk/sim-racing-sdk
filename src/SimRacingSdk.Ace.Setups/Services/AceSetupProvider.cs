@@ -82,6 +82,13 @@ public class AceSetupProvider : IAceSetupProvider
         return File.ReadAllBytes(filePath);
     }
 
+    public void SaveSetupFile(string carFolderName, string trackFolderName, string fileName, byte[] fileBytes)
+    {
+        var folderPath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName);
+        Directory.CreateDirectory(folderPath);
+        File.WriteAllBytes(Path.Combine(folderPath, fileName), fileBytes);
+    }
+
     public void DeleteSetupFile(string carFolderName, string trackFolderName, string fileName)
     {
         var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, carFolderName, trackFolderName, fileName);

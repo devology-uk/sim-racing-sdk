@@ -7,5 +7,6 @@ public interface ILmuSetupProvider
     IReadOnlyList<LmuSetupFileInfo> GetSetupFiles();
     LmuSetupFileInfo GetSetupFile(string trackFolderName, string fileName);
     byte[] GetSetupFileBytes(string trackFolderName, string fileName);
+    void SaveSetupFile(string trackFolderName, string fileName, byte[] fileBytes);
     void DeleteSetupFile(string trackFolderName, string fileName);
 }

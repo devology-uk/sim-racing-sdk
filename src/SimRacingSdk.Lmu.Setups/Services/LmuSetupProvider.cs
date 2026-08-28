@@ -73,6 +73,13 @@ public class LmuSetupProvider : ILmuSetupProvider
         return File.ReadAllBytes(filePath);
     }
 
+    public void SaveSetupFile(string trackFolderName, string fileName, byte[] fileBytes)
+    {
+        var folderPath = Path.Combine(this.pathProvider.SetupsFolderPath, trackFolderName);
+        Directory.CreateDirectory(folderPath);
+        File.WriteAllBytes(Path.Combine(folderPath, fileName), fileBytes);
+    }
+
     public void DeleteSetupFile(string trackFolderName, string fileName)
     {
         var filePath = Path.Combine(this.pathProvider.SetupsFolderPath, trackFolderName, fileName);
