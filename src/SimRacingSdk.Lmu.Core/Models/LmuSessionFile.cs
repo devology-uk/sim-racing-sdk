@@ -148,7 +148,7 @@ public class LmuSessionFile
                                     ?.Value,
                 Connected = GetInt(driverElement.Element("Connected")
                                                        ?.Value),
-                VehicleFile = driverElement.Element("VehicleFile")
+                VehicleFile = driverElement.Element("VehFile")
                                            ?.Value,
                 UpgradeCode = driverElement.Element("UpgradeCode")
                                            ?.Value,
@@ -184,7 +184,7 @@ public class LmuSessionFile
                                                            ?.Value),
                 LapCount = GetInt(driverElement.Element("Laps")
                                                       ?.Value),
-                PitStops = GetInt(driverElement.Element("PitStops")
+                PitStops = GetInt(driverElement.Element("Pitstops")
                                                       ?.Value),
                 FinishStatus = driverElement.Element("FinishStatus")
                                             ?.Value
@@ -230,13 +230,13 @@ public class LmuSessionFile
                     session.Stream.Add(new LmuSectorStreamEvent(GetDouble(eventElement.Attribute("et")
                             ?.Value),
                         eventElement.Value,
-                        eventElement.Element("Driver")
+                        eventElement.Attribute("Driver")
                                     ?.Value ?? string.Empty,
-                        GetInt(eventElement.Element("ID")
+                        GetInt(eventElement.Attribute("ID")
                                                   ?.Value),
-                        GetInt(eventElement.Element("Sector")
+                        GetInt(eventElement.Attribute("Sector")
                                                   ?.Value),
-                        eventElement.Element("Class")
+                        eventElement.Attribute("Class")
                                     ?.Value ?? string.Empty));
                     break;
                 case "Sent":
@@ -249,17 +249,17 @@ public class LmuSessionFile
                             .Attribute("et")
                             ?.Value),
                         eventElement.Value,
-                        eventElement.Element("Driver")
+                        eventElement.Attribute("Driver")
                                     ?.Value ?? string.Empty,
-                        GetInt(eventElement.Element("ID")
+                        GetInt(eventElement.Attribute("ID")
                                                   ?.Value),
-                        GetInt(eventElement.Element("Lap")
+                        GetInt(eventElement.Attribute("Lap")
                                                   ?.Value),
-                        GetInt(eventElement.Element("WarningPoints")
+                        GetInt(eventElement.Attribute("WarningPoints")
                                                   ?.Value),
-                        GetInt(eventElement.Element("CurrentPoints")
+                        GetInt(eventElement.Attribute("CurrentPoints")
                                                   ?.Value),
-                        GetInt(eventElement.Element("Resolution")
+                        GetInt(eventElement.Attribute("Resolution")
                                                   ?.Value)));
                     break;
                 default:
