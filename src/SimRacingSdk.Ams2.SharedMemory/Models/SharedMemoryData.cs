@@ -599,6 +599,9 @@ public record SharedMemoryData
             LocalVelocity = this.LocalVelocity,
             MaxRpm = this.MaxRpm,
             Name = this.CarName,
+            NormalisedCarPosition = this.TrackLength > 0
+                ? Math.Clamp(playerParticipant.DistanceIntoCurrentLap / this.TrackLength, 0f, 1f)
+                : 0f,
             OdometerKm = this.OdometerKm,
             OilPressureKpa = this.OilPressureKpa,
             OilTempC = this.OilTempC,
