@@ -24,7 +24,7 @@ public record AceSharedMemorySession
     public bool IsRunning { get; internal set; }
     public uint NumberOfCars { get; }
     public Guid SessionId { get; }
-    public string SessionType { get; }
+    public string SessionType { get; internal set; }
     public string TrackName { get; }
     public bool IsOnline { get; set; }
 }

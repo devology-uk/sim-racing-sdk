@@ -31,6 +31,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     private AceFlagState? lastFlagState;
     private AceGraphicsData? lastGraphicsData;
     private AceStaticData? lastStaticData;
+    private readonly HashSet<string> observedSessionPhaseNames = new();
     private int? sector1TimeMs;
     private int? sector2TimeMs;
     private IDisposable? updateSubscription;
@@ -83,6 +84,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 
         this.sector1TimeMs = null;
         this.sector2TimeMs = null;
+        this.observedSessionPhaseNames.Clear();
 
         this.currentSession = new AceSharedMemorySession(staticData, graphicsData);
         this.sessionStartedSubject.OnNext(this.currentSession);
@@ -95,6 +97,8 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             return;
         }
 
+        this.currentSession.SessionType = AceSessionTypeResolver.Resolve(this.currentSession.SessionType,
+            this.observedSessionPhaseNames);
         this.currentSession.IsRunning = false;
         this.sessionEndedSubject.OnNext(this.currentSession);
         this.currentSession = null;
@@ -136,6 +140,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
         }
 
         this.UpdateSession(graphicsData, staticData);
+        this.TrackSessionPhase(graphicsData);
         this.UpdateFlagState(graphicsData);
         this.UpdateSectorSplits(graphicsData);
         this.UpdateActiveLap(graphicsData, staticData);
@@ -156,6 +161,16 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 
         this.LogMessage(LoggingLevel.Debug, physicsData.ToString());
         this.telemetrySubject.OnNext(new AceTelemetryFrame(staticData, graphicsData, physicsData));
+    }
+
+    private void TrackSessionPhase(AceGraphicsData graphicsData)
+    {
+        if(this.currentSession == null || string.IsNullOrEmpty(graphicsData.SessionState.PhaseName))
+        {
+            return;
+        }
+
+        this.observedSessionPhaseNames.Add(graphicsData.SessionState.PhaseName);
     }
 
     private void UpdateActiveLap(AceGraphicsData graphicsData, AceStaticData staticData)

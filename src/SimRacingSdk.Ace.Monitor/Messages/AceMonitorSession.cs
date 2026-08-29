@@ -11,6 +11,6 @@ public record AceMonitorSession() : AceMonitorMessageBase
     public bool IsRunning { internal set; get; }
     public int NumberOfCars { get; init; }
     public Guid SessionId { get; init; }
-    public string SessionType { get; init; }
+    public string SessionType { internal set; get; }
     public string TrackName { get; init; }
 }

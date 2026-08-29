@@ -139,6 +139,7 @@ public class AceMonitor : IAceMonitor
             return;
         }
 
+        this.currentSession.SessionType = aceSharedMemorySession.SessionType;
         this.currentSession.IsRunning = false;
         this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
         this.sessionCompletedSubject.OnNext(this.currentSession);
