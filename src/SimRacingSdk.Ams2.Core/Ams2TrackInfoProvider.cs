@@ -3250,7 +3250,18 @@ public class Ams2TrackInfoProvider : IAms2TrackInfoProvider
 
     public Ams2TrackInfo? FindTrackByShortName(string shortName)
     {
-        return this.tracks.FirstOrDefault(t => t.ShortName == shortName);
+        var normalizedShortName = Normalize(shortName);
+        return this.tracks.FirstOrDefault(t => Normalize(t.ShortName) == normalizedShortName);
+    }
+
+    // AMS2's own telemetry reports a track's location using its internal id, not the catalog's
+    // ShortName - sometimes they already match (e.g. "Spielberg"), but just as often the internal
+    // id drops spaces ("OultonPark") or swaps them for underscores ("Laguna_Seca"). Stripping both
+    // down to bare lowercase letters/digits before comparing lets either format resolve to the
+    // same catalog entry.
+    private static string Normalize(string value)
+    {
+        return new string(value.Where(char.IsLetterOrDigit).ToArray()).ToLowerInvariant();
     }
 
     public ReadOnlyCollection<Ams2TrackInfo> GetTrackInfos()

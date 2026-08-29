@@ -296,7 +296,8 @@ public class AccTrackInfoProvider : IAccTrackInfoProvider
 
     public AccTrackInfo? FindByTrackId(string trackId)
     {
-        return this.tracks.FirstOrDefault(t => t.TrackId == trackId);
+        return this.tracks.FirstOrDefault(
+            t => t.TrackId.Equals(trackId, StringComparison.OrdinalIgnoreCase));
     }
 
     public string GetNameByTrackId(string trackId)

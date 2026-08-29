@@ -178,8 +178,8 @@ public class LmuSessionFile
                                                            ?.Value),
                 LapRankIncludingDiscos = GetInt(driverElement.Element("LapRankIncludingDiscos")
                                                                     ?.Value),
-                BestLap = GetDouble(driverElement.Element("BestLapTime")
-                                                        ?.Value),
+                BestLap = GetNullableDouble(driverElement.Element("BestLapTime")
+                                                          ?.Value),
                 FinishTime = GetDouble(driverElement.Element("FinishTime")
                                                            ?.Value),
                 LapCount = GetInt(driverElement.Element("Laps")
@@ -314,6 +314,19 @@ public class LmuSessionFile
 
         Debug.WriteLine($"Failed to parse value '{value}' as double.");
         return defaultValue;
+    }
+
+    // LMU omits BestLapTime entirely (or renders a lap's own time as the "--.----" template) for a
+    // driver with no valid lap - GetDouble's silent 0.0 default would then read as a genuine
+    // (impossible) 0.000 best time instead of "no valid data", so this returns null instead.
+    private static double? GetNullableDouble(string? value)
+    {
+        if(string.IsNullOrEmpty(value) || value.Contains('-'))
+        {
+            return null;
+        }
+
+        return double.TryParse(value, out var result) ? result : null;
     }
 
     private static int GetInt(string? value, int defaultValue = 0)

@@ -564,7 +564,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             ModelId = "Ginetta_G61Evo_2025",
             PowerBhp = 470,
             PowerKw = 339,
-            ResultCarType = "Ginetta G61-LT-P325-Evo",
+            ResultCarType = "Ginetta G61-LT-P325 Evo",
             Transmission = "6 Speed Sequential",
             WeightKg = 950,
             WidthMm = 1900

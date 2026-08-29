@@ -72,7 +72,7 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         },
         new()
         {
-            Name = "Autodromo Jose Carlos Pace",
+            Name = "Autódromo José Carlos Pace",
             ShortName = "Interlagos",
             Country = "Brazil",
             CountryCode = "BRA",
@@ -270,7 +270,7 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         },
         new()
         {
-            Name = "Silverstone International",
+            Name = "Silverstone Circuit",
             ShortName = "Silverstone",
             Country = "England",
             CountryCode = "GBR-ENG",
@@ -288,7 +288,7 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         },
         new()
         {
-            Name = "Circuit Paul Ricard",
+            Name = "Paul Ricard Circuit",
             ShortName = "Paul Ricard",
             Country = "France",
             CountryCode = "FRA",

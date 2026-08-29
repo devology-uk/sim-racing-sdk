@@ -3,10 +3,10 @@
 public record LmuDriver
 {
     public IList<LmuDriverLap> Laps { get; } = new List<LmuDriverLap>();
-    public double BestLap { get; init; }
-    public double BestSector1 { get; internal set; }
-    public double BestSector2 { get; internal set; }
-    public double BestSector3 { get; internal set; }
+    public double? BestLap { get; init; }
+    public double? BestSector1 { get; internal set; }
+    public double? BestSector2 { get; internal set; }
+    public double? BestSector3 { get; internal set; }
     public string? CarClass { get; init; }
     public int CarNumber { get; init; }
     public string? CarType { get; init; }

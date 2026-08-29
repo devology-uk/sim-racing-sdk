@@ -9,7 +9,7 @@ public record DriverItem
 {
     public DriverItem(LmuDriver lmuDriver)
     {
-        this.BestLap = lmuDriver.BestLap.ToTimingStringFromSeconds();
+        this.BestLap = lmuDriver.BestLap?.ToTimingStringFromSeconds() ?? "No Valid Laps";
         this.Car = lmuDriver.VehicleName;
         this.CarClass = lmuDriver.CarClass;
         this.CarType = lmuDriver.CarType;
