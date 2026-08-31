@@ -18,6 +18,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<ILmuPathProvider, LmuPathProvider>();
         services.TryAddSingleton<ILmuSharedMemoryPluginInstaller, LmuSharedMemoryPluginInstaller>();
         services.TryAddSingleton<ILmuTrackInfoProvider, LmuTrackInfoProvider>();
+        services.TryAddSingleton<IRfactor2SharedMemoryPluginInstaller, Rfactor2SharedMemoryPluginInstaller>();
         return services;
     }
 }
