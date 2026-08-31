@@ -5,6 +5,7 @@ using SimRacingSdk.Ams2.Demo.Abstractions;
 using SimRacingSdk.Ams2.Udp.Abstractions;
 using SimRacingSdk.Ams2.Udp.Messages;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
 
@@ -14,17 +15,20 @@ public class UdpDemo : IUdpDemo
     private readonly IAms2UdpConnectionFactory ams2UdpConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<UdpDemo> logger;
+    private readonly IUdpLog udpLog;
 
     private IAms2UdpConnection? ams2UdpConnection;
     private CompositeDisposable subscriptionSink = null!;
 
     public UdpDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
+        IUdpLog udpLog,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
         IAms2UdpConnectionFactory ams2UdpConnectionFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.udpLog = udpLog;
         this.ams2CompatibilityChecker = ams2CompatibilityChecker;
         this.ams2UdpConnectionFactory = ams2UdpConnectionFactory;
     }
@@ -76,7 +80,7 @@ public class UdpDemo : IUdpDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.Log(logMessage.ToString());
+        this.udpLog.Log(logMessage);
     }
 
     private void OnNextParticipantUpdate(ParticipantsUpdate participantsUpdate)

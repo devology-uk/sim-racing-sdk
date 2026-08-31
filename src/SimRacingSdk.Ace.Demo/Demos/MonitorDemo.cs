@@ -17,6 +17,7 @@ using SimRacingSdk.Ace.Monitor.Abstractions;
 using SimRacingSdk.Ace.Monitor.Messages;
 using SimRacingSdk.Ace.SharedMemory.Models;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ace.Demo.Demos;
 
@@ -93,7 +94,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.monitorLog.Log(logMessage.ToString());
+        this.monitorLog.Log(logMessage);
     }
 
     private void OnNextSessionCompleted(AceMonitorSession aceMonitorSession)

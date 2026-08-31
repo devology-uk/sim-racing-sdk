@@ -6,6 +6,7 @@ using SimRacingSdk.Ams2.Monitor.Abstractions;
 using SimRacingSdk.Ams2.Monitor.Messages;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
 
@@ -73,8 +74,8 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.monitorLog.Log(logMessage.ToString());
-        this.consoleLog.Write(logMessage.ToString());
+        this.monitorLog.Log(logMessage);
+        this.consoleLog.Write(logMessage.Content);
     }
 
     private void OnNextSessionCompleted(Ams2MonitorSession ams2MonitorSession)

@@ -10,6 +10,7 @@ using SimRacingSdk.Ams2.SharedMemory.Enums;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ams2.Monitor;
 
@@ -19,7 +20,7 @@ public class Ams2Monitor : IAms2Monitor
     private readonly IAms2SharedMemoryConnectionFactory ams2SharedMemoryConnectionFactory;
     private readonly IAms2CarInfoProvider amsCarInfoProvider;
     private readonly Subject<Ams2Lap> completedLapsSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(Ams2Monitor));
     private readonly Subject<Ams2MonitorParticipant> participantUpdatesSubject = new();
     private readonly Subject<Ams2MonitorSession> sessionCompletedSubject = new();
     private readonly Subject<Ams2MonitorSession> sessionStartedSubject = new();
@@ -42,7 +43,7 @@ public class Ams2Monitor : IAms2Monitor
     }
 
     public IObservable<Ams2Lap> CompletedLaps => this.completedLapsSubject.AsObservable();
-    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     public IObservable<Ams2MonitorParticipant> ParticipantUpdates =>
         this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2MonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
@@ -133,7 +134,7 @@ public class Ams2Monitor : IAms2Monitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(Ams2Monitor)));
+        this.logMessageBroker.Log(level, content);
     }
 
     private void OnNextCompletedLap(Ams2Lap ams2Lap)
@@ -203,7 +204,7 @@ public class Ams2Monitor : IAms2Monitor
         {
             this.ams2SharedMemoryConnection.CompletedLaps.Subscribe(this.OnNextCompletedLap),
             this.ams2SharedMemoryConnection.GameStatusUpdates.Subscribe(this.OnNextGameStatusUpdate),
-            this.ams2SharedMemoryConnection.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
+            this.ams2SharedMemoryConnection.LogMessages.Subscribe(this.logMessageBroker.Relay),
             this.ams2SharedMemoryConnection.ParticipantUpdates.Subscribe(this.OnNextParticipantUpdate),
             this.ams2SharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
         };

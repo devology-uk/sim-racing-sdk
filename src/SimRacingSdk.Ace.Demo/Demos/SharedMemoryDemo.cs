@@ -9,6 +9,7 @@ using SimRacingSdk.Ace.Demo.Abstractions;
 using SimRacingSdk.Ace.SharedMemory.Abstractions;
 using SimRacingSdk.Ace.SharedMemory.Models;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ace.Demo.Demos;
 
@@ -90,7 +91,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.sharedMemoryLog.Log(logMessage.ToString());
+        this.sharedMemoryLog.Log(logMessage);
     }
 
     private void OnNextNewLap(AceSharedMemoryLap aceSharedMemoryLap)

@@ -13,6 +13,7 @@ using SimRacingSdk.Acc.Monitor;
 using SimRacingSdk.Acc.SharedMemory;
 using SimRacingSdk.Acc.Udp;
 using SimRacingSdk.LogViewer;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Acc.Demo;
 
@@ -73,9 +74,12 @@ public partial class App : Application
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IMonitorDemo, MonitorDemo>();
-        services.AddTransient<IUdpLog, UdpLog>();
-        services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
-        services.AddTransient<IMonitorLog, MonitorLog>();
+        services.AddTransient<IUdpLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Acc.Demo.Services.UdpLog")));
+        services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Acc.Demo.Services.SharedMemoryLog")));
+        services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Acc.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }

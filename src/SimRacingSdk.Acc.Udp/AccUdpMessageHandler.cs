@@ -6,6 +6,7 @@ using SimRacingSdk.Acc.Udp.Extensions;
 using SimRacingSdk.Acc.Udp.Messages;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Acc.Udp;
 
@@ -18,7 +19,7 @@ internal class AccUdpMessageHandler
     private readonly Subject<byte[]> dispatchedMessagesSubject = new();
     private readonly IList<CarInfo> entryList = new List<CarInfo>();
     private readonly Subject<EntryListUpdate> entryListUpdateSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(AccUdpMessageHandler));
     private readonly Subject<RealtimeCarUpdate> realTimeCarUpdateSubject = new();
     private readonly Subject<RealtimeUpdate> realTimeUpdateSubject = new();
     private readonly Subject<TrackDataUpdate> trackDataUpdateSubject = new();
@@ -43,7 +44,7 @@ internal class AccUdpMessageHandler
         this.connectionStateChangeSubject.AsObservable();
     internal IObservable<byte[]> DispatchedMessages => this.dispatchedMessagesSubject.AsObservable();
     internal IObservable<EntryListUpdate> EntryListUpdates => this.entryListUpdateSubject.AsObservable();
-    internal IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    internal IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     internal IObservable<RealtimeCarUpdate> RealTimeCarUpdates =>
         this.realTimeCarUpdateSubject.AsObservable();
     internal IObservable<RealtimeUpdate> RealTimeUpdates => this.realTimeUpdateSubject.AsObservable();
@@ -97,9 +98,9 @@ internal class AccUdpMessageHandler
         this.connectionStateChangeSubject.OnNext(new Connection(this.ConnectionId, false, false));
     }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string content, string source = "")
+    internal void LogMessage(LoggingLevel loggingLevel, string content, string? source = null)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, source));
+        this.logMessageBroker.Log(loggingLevel, content, source);
     }
 
     internal void ProcessMessage(BinaryReader reader)

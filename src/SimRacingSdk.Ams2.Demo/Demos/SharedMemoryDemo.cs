@@ -6,6 +6,7 @@ using SimRacingSdk.Ams2.SharedMemory.Abstractions;
 using SimRacingSdk.Ams2.SharedMemory.Messages;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ams2.Demo.Demos;
 
@@ -84,8 +85,8 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.sharedMemoryLog.Log(logMessage.ToString());
-        this.consoleLog.Write(logMessage.ToString());
+        this.sharedMemoryLog.Log(logMessage);
+        this.consoleLog.Write(logMessage.Content);
     }
 
     private void OnNextParticipantUpdate(Ams2Participant ams2Participant)

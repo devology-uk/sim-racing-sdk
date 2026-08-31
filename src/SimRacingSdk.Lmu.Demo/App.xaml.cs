@@ -68,11 +68,14 @@ public partial class App : Application
         services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<ResultExplorerViewModel>();
         // services.AddTransient<IUdpDemo, UdpDemo>();
-        // services.AddTransient<IUdpLog, UdpLog>();
+        // services.AddTransient<IUdpLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+        //     .CreateLogger("SimRacingSdk.Lmu.Demo.Services.UdpLog")));
         // services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
-        // services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
+        // services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+        //     .CreateLogger("SimRacingSdk.Lmu.Demo.Services.SharedMemoryLog")));
         // services.AddTransient<IMonitorDemo, MonitorDemo>();
-        // services.AddTransient<IMonitorLog, MonitorLog>();
+        // services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+        //     .CreateLogger("SimRacingSdk.Lmu.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }

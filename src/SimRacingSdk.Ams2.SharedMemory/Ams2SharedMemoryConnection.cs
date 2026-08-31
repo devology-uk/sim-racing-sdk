@@ -6,6 +6,7 @@ using SimRacingSdk.Ams2.SharedMemory.Enums;
 using SimRacingSdk.Ams2.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ams2.SharedMemory;
 
@@ -15,7 +16,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
     private readonly Subject<Ams2Lap> completedLapsSubject = new();
     private readonly Dictionary<int, Ams2Participant> entries = [];
     private readonly Subject<Ams2GameStatus> gameStatusUpdatesSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(Ams2SharedMemoryConnection));
     private readonly Subject<Ams2Participant> participantUpdatesSubject = new();
     private readonly Subject<Ams2TelemetryFrame> telemetrySubject = new();
 
@@ -30,7 +31,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
 
     public IObservable<Ams2Lap> CompletedLaps => this.completedLapsSubject.AsObservable();
     public IObservable<Ams2GameStatus> GameStatusUpdates => this.gameStatusUpdatesSubject.AsObservable();
-    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     public IObservable<Ams2Participant> ParticipantUpdates => this.participantUpdatesSubject.AsObservable();
     public IObservable<Ams2TelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
@@ -65,7 +66,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, nameof(Ams2SharedMemoryConnection)));
+        this.logMessageBroker.Log(loggingLevel, content);
     }
 
     private void OnCompleted()

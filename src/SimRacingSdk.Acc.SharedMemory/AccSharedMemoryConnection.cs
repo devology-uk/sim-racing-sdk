@@ -5,6 +5,7 @@ using SimRacingSdk.Acc.SharedMemory.Enums;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Acc.SharedMemory;
 
@@ -12,7 +13,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 {
     private readonly Subject<AccAppStatusChange> appStatusChangesSubject = new();
     private readonly Subject<AccFlagState> flagStateSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(AccSharedMemoryConnection));
     private readonly Subject<AccSharedMemoryLap> newLapSubject = new();
     private readonly Subject<AccSharedMemorySession> sessionEndedSubject = new();
     private readonly Subject<AccSharedMemorySession> sessionStartedSubject = new();
@@ -34,7 +35,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     public IObservable<AccAppStatusChange> AppStatusChanges => this.appStatusChangesSubject.AsObservable();
     public IObservable<AccFlagState> FlagState => this.flagStateSubject.AsObservable();
     public IObservable<AccSharedMemoryLap> Laps => this.newLapSubject.AsObservable();
-    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     public IObservable<AccSharedMemorySession> SessionEnded => this.sessionEndedSubject.AsObservable();
     public IObservable<AccSharedMemorySession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<AccTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
@@ -111,9 +112,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
 
     private void LogMessage(LoggingLevel loggingLevel, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel,
-            content,
-            nameof(AccSharedMemoryConnection)));
+        this.logMessageBroker.Log(loggingLevel, content);
     }
 
     private void LogStaticData(StaticData staticData)

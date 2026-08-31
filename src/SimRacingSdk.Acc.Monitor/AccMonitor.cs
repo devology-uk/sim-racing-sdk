@@ -16,6 +16,7 @@ using SimRacingSdk.Acc.Udp.Enums;
 using SimRacingSdk.Acc.Udp.Messages;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Acc.Monitor;
 
@@ -40,7 +41,7 @@ public class AccMonitor : IAccMonitor
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
     private readonly Subject<AccMonitorLap> lapCompletedSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(AccMonitor));
     private readonly Subject<AccMonitorPenalty> penaltiesSubject = new();
     private readonly Subject<AccMonitorLap> personalBestLapSubject = new();
     private readonly Subject<AccMonitorSessionPhaseChange> phaseChangedSubject = new();
@@ -93,7 +94,7 @@ public class AccMonitor : IAccMonitor
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
     public IObservable<AccMonitorLap> LapCompleted => this.lapCompletedSubject.AsObservable();
-    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     public IObservable<AccMonitorPenalty> Penalties => this.penaltiesSubject.AsObservable();
     public IObservable<AccMonitorLap> PersonalBestLap => this.personalBestLapSubject.AsObservable();
     public IObservable<AccMonitorSessionPhaseChange> PhaseChanged => this.phaseChangedSubject.AsObservable();
@@ -218,7 +219,7 @@ public class AccMonitor : IAccMonitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(AccMonitor)));
+        this.logMessageBroker.Log(level, content);
     }
 
     private void OnNextAppStatusChange(AccAppStatusChange appStatusChange)
@@ -393,7 +394,7 @@ public class AccMonitor : IAccMonitor
         {
             this.accSharedMemoryConnection!.AppStatusChanges.Subscribe(this.OnNextAppStatusChange),
             this.accSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
-            this.accSharedMemoryConnection.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
+            this.accSharedMemoryConnection.LogMessages.Subscribe(this.logMessageBroker.Relay),
             this.accSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSharedMemorySessionEnded),
             this.accSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextSharedMemorySessionStarted),
             this.accSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
@@ -404,7 +405,7 @@ public class AccMonitor : IAccMonitor
     {
         this.udpSubscriptionSink = new CompositeDisposable
         {
-            this.accUdpConnection!.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
+            this.accUdpConnection!.LogMessages.Subscribe(this.logMessageBroker.Relay),
             this.accUdpConnection.BroadcastingEvents.Subscribe(this.OnNextBroadcastEvent),
             this.accUdpConnection.EntryListUpdates.Subscribe(this.OnNextEntryListUpdate),
             this.accUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealTimeUpdate),

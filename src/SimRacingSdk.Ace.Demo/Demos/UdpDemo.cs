@@ -10,6 +10,7 @@ using SimRacingSdk.Ace.Demo.Abstractions;
 using SimRacingSdk.Ace.Udp.Abstractions;
 using SimRacingSdk.Ace.Udp.Messages;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ace.Demo.Demos;
 
@@ -21,12 +22,14 @@ public class UdpDemo : IUdpDemo
     private readonly IAceUdpConnectionFactory aceUdpConnectionFactory;
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<UdpDemo> logger;
+    private readonly IUdpLog udpLog;
 
     private IAceUdpConnection? aceUdpConnection;
     private CompositeDisposable subscriptionSink = null!;
 
     public UdpDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
+        IUdpLog udpLog,
         IAceCompatibilityChecker aceCompatibilityChecker,
         IAceLocalConfigProvider aceLocalConfigProvider,
         IAcePathProvider acePathProvider,
@@ -34,6 +37,7 @@ public class UdpDemo : IUdpDemo
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.udpLog = udpLog;
         this.aceCompatibilityChecker = aceCompatibilityChecker;
         this.aceLocalConfigProvider = aceLocalConfigProvider;
 
@@ -94,9 +98,9 @@ public class UdpDemo : IUdpDemo
         this.Log(broadcastingEvent.ToString());
     }
 
-    private void OnNexLogMessage(LogMessage logMessage)
+    private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.Log(logMessage.ToString());
+        this.udpLog.Log(logMessage);
     }
 
     private void OnNextConnectionStateChange(Connection connection)
@@ -139,7 +143,7 @@ public class UdpDemo : IUdpDemo
             this.aceUdpConnection.RealTimeCarUpdates.Subscribe(this.OnNextRealtimeCarUpdate),
             this.aceUdpConnection.RealTimeUpdates.Subscribe(this.OnNextRealtimeUpdate),
             this.aceUdpConnection.TrackDataUpdates.Subscribe(this.OnNextTrackDataUpdate),
-            this.aceUdpConnection.LogMessages.Subscribe(this.OnNexLogMessage)
+            this.aceUdpConnection.LogMessages.Subscribe(this.OnNextLogMessage)
         };
     }
 }

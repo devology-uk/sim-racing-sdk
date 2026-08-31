@@ -6,13 +6,14 @@ using SimRacingSdk.Ams2.Udp.Extensions;
 using SimRacingSdk.Ams2.Udp.Messages;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ams2.Udp;
 
 internal class Ams2UdpMessageHandler
 {
     private readonly Subject<GameStateUpdate> gameStateUpdatesSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(Ams2UdpMessageHandler));
     private readonly Subject<ParticipantsUpdate> participantUpdatesSubject = new();
     private readonly Subject<RaceInfoUpdate> raceInfoUpdatesSubject = new();
     private readonly Subject<TelemetryUpdate> telemetryUpdatesSubject = new();
@@ -41,7 +42,7 @@ internal class Ams2UdpMessageHandler
     public IObservable<TimingsUpdate> TimingsUpdates => this.timingsUpdatesSubject.AsObservable();
     public IObservable<VehicleClassUpdate> VehicleClassUpdates => this.vehicleClassUpdatesSubject.AsObservable();
     public IObservable<VehicleInfoUpdate> VehicleInfoUpdates => this.vehicleInfoUpdatesSubject.AsObservable();
-    internal IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    internal IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
 
     public void ProcessMessage(BinaryReader reader)
     {
@@ -70,16 +71,16 @@ internal class Ams2UdpMessageHandler
                 this.ProcessVehicleMessage(reader, header);
                 break;
             default:
-                this.LogMessage(LoggingLevel.Warning, "Unknown message type", nameof(Ams2UdpMessageHandler));
+                this.LogMessage(LoggingLevel.Warning, "Unknown message type");
                 break;
         }
     }
 
     internal void Disconnect(bool sendUnregister = true) { }
 
-    internal void LogMessage(LoggingLevel loggingLevel, string content, string source = "")
+    internal void LogMessage(LoggingLevel loggingLevel, string content, string? source = null)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(loggingLevel, content, source));
+        this.logMessageBroker.Log(loggingLevel, content, source);
     }
 
     private void ProcessGameStateMessage(BinaryReader reader, MessageHeader header)

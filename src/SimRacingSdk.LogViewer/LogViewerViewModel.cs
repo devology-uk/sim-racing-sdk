@@ -289,15 +289,7 @@ public partial class LogViewerViewModel : ObservableObject
 
         if(value.ContentType == "Text")
         {
-            var content = value.Content;
-            if(content.Contains("|"))
-            {
-                var contentElements = content.Split("|",
-                    StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                content = contentElements[^1];
-            }
-
-            this.LogEntryProperties.Add(new LogEntryProperty("Content", content));
+            this.LogEntryProperties.Add(new LogEntryProperty("Content", value.Content));
             return;
         }
 
@@ -419,36 +411,22 @@ public partial class LogViewerViewModel : ObservableObject
 
     private LogFileEntry ParseLogFileEntry(string line)
     {
-        var lineElements = line.Split('|', StringSplitOptions.RemoveEmptyEntries);
-        var isContinuation = lineElements.Length < 2;
-
-        var contentType = isContinuation? "Text": this.ParseContentType(lineElements[2]);
-        var timeStamp = isContinuation? "Continuation": lineElements[0];
-        var level = isContinuation? "ERROR": lineElements[1];
-        var source = isContinuation? "Continuation": this.ParseSource(lineElements[2]);
-
-        return new LogFileEntry(timeStamp, level, line, contentType, source);
-    }
-
-    private string ParseSource(string content)
-    {
-        if(!content.Contains(" Source ="))
+        // Layout is fixed at 6 pipe-delimited fields: timestamp|level|message|event-properties|source|exception -
+        // capped with a count so a pipe inside the exception text can't shift field positions.
+        var lineElements = line.Split('|', 6);
+        if(lineElements.Length < 6)
         {
-            return "NA";
+            return new LogFileEntry("Continuation", "ERROR", line, "Text", "Continuation");
         }
 
-        var sourceStartIndex = content.IndexOf(" Source =", 0, StringComparison.InvariantCulture) + 1;
-        var sourceEndIndex = content.IndexOf(",", sourceStartIndex, StringComparison.InvariantCulture);
+        var content = lineElements[2].Trim();
+        var source = lineElements[4].Trim();
 
-        if(sourceEndIndex < 0)
-        {
-            sourceEndIndex = content.Length - 1;
-        }
-
-        var sourceValue = content[sourceStartIndex..(sourceEndIndex - 1)];
-        var elements = sourceValue.Split("=",
-            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        return elements[1];
+        return new LogFileEntry(lineElements[0],
+            lineElements[1],
+            content,
+            this.ParseContentType(content),
+            string.IsNullOrEmpty(source)? "NA": source);
     }
 
     private void ShowCurrentPage(List<string>? selectedTypes = null)

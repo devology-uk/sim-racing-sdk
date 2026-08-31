@@ -9,6 +9,7 @@ using SimRacingSdk.Ace.SharedMemory.Enums;
 using SimRacingSdk.Ace.SharedMemory.Models;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ace.Monitor;
 
@@ -27,7 +28,7 @@ public class AceMonitor : IAceMonitor
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
     private readonly Subject<bool> isYellowFlagActiveSubject = new();
     private readonly Subject<AceMonitorLap> lapCompletedSubject = new();
-    private readonly Subject<LogMessage> logMessagesSubject = new();
+    private readonly LogMessageBroker logMessageBroker = new(nameof(AceMonitor));
     private readonly Subject<AceMonitorSession> sessionCompletedSubject = new();
     private readonly Subject<AceMonitorSession> sessionStartedSubject = new();
     private readonly Subject<AceTelemetryFrame> telemetrySubject = new();
@@ -48,7 +49,7 @@ public class AceMonitor : IAceMonitor
     public IObservable<bool> IsWhiteFlagActive => this.isWhiteFlagActiveSubject.AsObservable();
     public IObservable<bool> IsYellowFlagActive => this.isYellowFlagActiveSubject.AsObservable();
     public IObservable<AceMonitorLap> LapCompleted => this.lapCompletedSubject.AsObservable();
-    public IObservable<LogMessage> LogMessages => this.logMessagesSubject.AsObservable();
+    public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
     public IObservable<AceMonitorSession> SessionCompleted => this.sessionCompletedSubject.AsObservable();
     public IObservable<AceMonitorSession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<AceTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
@@ -68,7 +69,7 @@ public class AceMonitor : IAceMonitor
         {
             this.aceSharedMemoryConnection.FlagState.Subscribe(this.OnNextFlagState),
             this.aceSharedMemoryConnection.Laps.Subscribe(this.OnNextLap),
-            this.aceSharedMemoryConnection.LogMessages.Subscribe(m => this.logMessagesSubject.OnNext(m)),
+            this.aceSharedMemoryConnection.LogMessages.Subscribe(this.logMessageBroker.Relay),
             this.aceSharedMemoryConnection.SessionEnded.Subscribe(this.OnNextSessionEnded),
             this.aceSharedMemoryConnection.SessionStarted.Subscribe(this.OnNextSessionStarted),
             this.aceSharedMemoryConnection.Telemetry.Subscribe(this.OnNextTelemetryFrame)
@@ -96,7 +97,7 @@ public class AceMonitor : IAceMonitor
 
     private void LogMessage(LoggingLevel level, string content)
     {
-        this.logMessagesSubject.OnNext(new LogMessage(level, content, nameof(AceMonitor)));
+        this.logMessageBroker.Log(level, content);
     }
 
     private void OnNextFlagState(AceFlagState aceFlagState)

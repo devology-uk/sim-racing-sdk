@@ -13,6 +13,7 @@ using SimRacingSdk.Ams2.Demo.TrackExplorer;
 using SimRacingSdk.Ams2.Monitor;
 using SimRacingSdk.Ams2.SharedMemory;
 using SimRacingSdk.Ams2.Udp;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Ams2.Demo;
 
@@ -71,11 +72,14 @@ public partial class App : Application
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<IUdpDemo, UdpDemo>();
-        services.AddTransient<IUdpLog, UdpLog>();
+        services.AddTransient<IUdpLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Ams2.Demo.Services.UdpLog")));
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
-        services.AddTransient<ISharedMemoryLog, SharedMemoryLog>();
+        services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Ams2.Demo.Services.SharedMemoryLog")));
         services.AddTransient<IMonitorDemo, MonitorDemo>();
-        services.AddTransient<IMonitorLog, MonitorLog>();
+        services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Ams2.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }

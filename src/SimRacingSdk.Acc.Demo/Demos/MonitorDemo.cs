@@ -28,6 +28,7 @@ using SimRacingSdk.Acc.Monitor.Messages;
 using SimRacingSdk.Acc.SharedMemory.Models;
 using SimRacingSdk.Acc.Udp.Messages;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.Acc.Demo.Demos;
 
@@ -90,7 +91,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextSessionChanged(AccMonitorSessionTypeChange accMonitorSessionTypeChange)
     {
-        this.monitorLog.Log($"Session Changed: {accMonitorSessionTypeChange}");
+        this.Log($"Session Changed: {accMonitorSessionTypeChange}");
     }
 
     public void Stop()
@@ -169,7 +170,7 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextLogMessage(LogMessage logMessage)
     {
-        this.monitorLog.Log(logMessage.ToString());
+        this.monitorLog.Log(logMessage);
     }
 
     private void OnNextPenalty(AccMonitorPenalty accMonitorPenalty)
