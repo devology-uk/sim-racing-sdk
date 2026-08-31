@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<ILmuGameDataProvider, LmuGameDataProvider>();
         services.TryAddSingleton<ILmuGameDetector, LmuGameDetector>();
         services.TryAddSingleton<ILmuPathProvider, LmuPathProvider>();
+        services.TryAddSingleton<ILmuSharedMemoryPluginInstaller, LmuSharedMemoryPluginInstaller>();
         services.TryAddSingleton<ILmuTrackInfoProvider, LmuTrackInfoProvider>();
         return services;
     }

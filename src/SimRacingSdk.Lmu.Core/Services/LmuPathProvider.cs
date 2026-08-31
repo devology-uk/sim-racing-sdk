@@ -20,8 +20,10 @@ namespace SimRacingSdk.Lmu.Core.Services
         public static LmuPathProvider Instance { get; } =
             singletonInstance ??= new LmuPathProvider(SteamInfoProvider.Instance);
 
+        public string CustomPluginVariablesFilePath => Path.Combine(this.PlayerFolder, "CustomPluginVariables.JSON");
         public string LogFolder => Path.Combine(this.UserDataFolder, "Log");
         public string PlayerFolder => Path.Combine(this.UserDataFolder, "player");
+        public string PluginsFolder => Path.Combine(this.gamePath, "Plugins");
         public string ResultsFolder => Path.Combine(this.LogFolder, "Results");
         public string SettingsFilePath => Path.Combine(this.PlayerFolder, "Settings.JSON");
         public string SetupsFolderPath => Path.Combine(this.PlayerFolder, "Settings");
