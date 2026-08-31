@@ -4,9 +4,11 @@ using SimRacingSdk.Lmu.Core.Abstractions;
 namespace SimRacingSdk.Lmu.Core.Services;
 
 // Bundled plugin is GPLv3 (github.com/TheIronWolfModding/rF2SharedMemoryMapPlugin, release v3.7.15.1) - standard
-// rFactor2-API telemetry/scoring/graphics buffers, which LMU's own plugin deliberately doesn't duplicate (see
-// LmuSharedMemoryPluginInstaller). EnableDirectMemoryAccess defaults off here (unlike the LMU plugin, where DMA is
-// the only source of any of its fields) since this plugin's core buffers work without it.
+// rFactor2-API telemetry/scoring buffers, which LMU's own plugin deliberately doesn't duplicate (see
+// LmuSharedMemoryPluginInstaller). EnableDirectMemoryAccess is not required here - its Telemetry/Scoring buffers
+// work without DMA - but " Enabled" (leading space, confirmed via this plugin's own GetCustomVariable source) is:
+// same as the LMU plugin, it claims the game's auto-created enable slot itself, defaulting to 0, so it genuinely
+// needs writing rather than relying on any game-level default.
 public class Rfactor2SharedMemoryPluginInstaller : RfactorPluginInstallerBase, IRfactor2SharedMemoryPluginInstaller
 {
     public new const string PluginFileName = "rFactor2SharedMemoryMapPlugin64.dll";
@@ -23,7 +25,7 @@ public class Rfactor2SharedMemoryPluginInstaller : RfactorPluginInstallerBase, I
             "3.7.15.1",
             new JsonObject
             {
-                ["Enabled"] = 1,
+                [" Enabled"] = 1,
                 ["DebugISIInternals"] = 1,
                 ["DebugOutputLevel"] = 0,
                 ["DebugOutputSource"] = 0,
@@ -34,7 +36,7 @@ public class Rfactor2SharedMemoryPluginInstaller : RfactorPluginInstallerBase, I
                 ["EnableWeatherControlInput"] = 0,
                 ["UnsubscribedBuffersMask"] = 160
             },
-            ["Enabled"])
+            [" Enabled"])
     {
     }
 

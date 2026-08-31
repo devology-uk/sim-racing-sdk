@@ -49,10 +49,20 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
 
     public bool IsInstalled => this.IsPluginFileInstalled && this.IsPluginConfigured;
 
+    // "Enabled" is deliberately not something we check or write - confirmed (Mike, 2026-08-31) to be a game-level
+    // flag surfaced in LMU's own settings screens, defaulting to on for any plugin present in the Plugins folder,
+    // not a plugin-declared custom variable. A plugin with no required settings of its own (e.g. the standard
+    // rFactor2 plugin, which works without DMA) is therefore considered configured by file presence alone -
+    // nothing to verify, and nothing to fight other tools (SimHub, CrewChief) over in CustomPluginVariables.JSON.
     public bool IsPluginConfigured
     {
         get
         {
+            if(this.requiredEnabledSettings.Count == 0)
+            {
+                return true;
+            }
+
             var installedFileName = this.FindInstalledFileName();
             if(installedFileName is null)
             {
@@ -95,6 +105,11 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
 
     private void ConfigurePlugin()
     {
+        if(this.requiredEnabledSettings.Count == 0)
+        {
+            return;
+        }
+
         var configFileName = this.FindInstalledFileName() ?? this.PluginFileName;
         var root = this.ReadCustomPluginVariables() ?? new JsonObject();
 
