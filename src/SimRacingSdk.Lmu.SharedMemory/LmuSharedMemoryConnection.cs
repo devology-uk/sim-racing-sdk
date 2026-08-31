@@ -1,3 +1,4 @@
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using SimRacingSdk.Core.Enums;
@@ -19,6 +20,8 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
     private readonly ILmuSharedMemoryProvider sharedMemoryProvider;
     private readonly Subject<LmuTelemetryFrame> telemetrySubject = new();
 
+    private string? lastLoggedWaitReason;
+    private CompositeDisposable? subscriptionSink;
     private IDisposable? updateSubscription;
 
     public LmuSharedMemoryConnection(ILmuSharedMemoryProvider sharedMemoryProvider)
@@ -39,6 +42,10 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
     {
         this.Stop();
         this.LogMessage(LoggingLevel.Information, "Starting LMU Shared Memory connection...");
+        this.subscriptionSink = new CompositeDisposable
+        {
+            this.sharedMemoryProvider.LogMessages.Subscribe(this.logMessageBroker.Relay)
+        };
         this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
                                             .Subscribe(this.OnNextUpdate, this.OnError);
     }
@@ -47,11 +54,24 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
     {
         this.updateSubscription?.Dispose();
         this.updateSubscription = null;
+        this.subscriptionSink?.Dispose();
+        this.subscriptionSink = null;
     }
 
     private void LogMessage(LoggingLevel level, string content)
     {
         this.logMessageBroker.Log(level, content);
+    }
+
+    private void LogWaitReasonOnce(string reason)
+    {
+        if(this.lastLoggedWaitReason == reason)
+        {
+            return;
+        }
+
+        this.lastLoggedWaitReason = reason;
+        this.LogMessage(LoggingLevel.Information, reason);
     }
 
     private void OnError(Exception exception)
@@ -70,6 +90,8 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         var telemetry = data.Value.Telemetry;
         if(!telemetry.PlayerHasVehicle || telemetry.PlayerVehicleIdx >= telemetry.TelemInfo.Length)
         {
+            this.LogWaitReasonOnce(
+                "Connected to LMU shared memory, waiting for a player vehicle (join a session/get in a car)...");
             return;
         }
 
@@ -82,9 +104,12 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
             Array.FindIndex(scoring.VehScoringInfo, 0, numScoredVehicles, vehicle => vehicle.IsPlayer);
         if(playerScoringIndex < 0)
         {
+            this.LogWaitReasonOnce(
+                "Connected to LMU shared memory, have player telemetry but no matching scoring entry yet...");
             return;
         }
 
+        this.lastLoggedWaitReason = null;
         var frame = new LmuTelemetryFrame(playerTelemetry, scoring.VehScoringInfo[playerScoringIndex]);
         this.telemetrySubject.OnNext(frame);
     }

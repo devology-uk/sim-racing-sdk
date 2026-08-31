@@ -37,17 +37,19 @@ internal sealed unsafe class LmuSharedMemoryLock : IDisposable
         this.lockEvent.Dispose();
     }
 
-    public static LmuSharedMemoryLock? TryOpen()
+    public static LmuSharedMemoryLock? TryOpen(out string? failureReason)
     {
         try
         {
             var lockMap = MemoryMappedFile.OpenExisting(LockMapName, MemoryMappedFileRights.ReadWrite);
             var lockView = lockMap.CreateViewAccessor(0, LockDataSize, MemoryMappedFileAccess.ReadWrite);
             var lockEvent = EventWaitHandle.OpenExisting(LockEventName);
+            failureReason = null;
             return new LmuSharedMemoryLock(lockMap, lockView, lockEvent);
         }
-        catch(Exception)
+        catch(Exception exception)
         {
+            failureReason = exception.Message;
             return null;
         }
     }

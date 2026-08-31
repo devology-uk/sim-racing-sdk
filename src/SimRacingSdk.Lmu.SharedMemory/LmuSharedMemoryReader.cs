@@ -29,17 +29,19 @@ internal sealed class LmuSharedMemoryReader : IDisposable
         this.mappedFile.Dispose();
     }
 
-    public static LmuSharedMemoryReader? TryOpen()
+    public static LmuSharedMemoryReader? TryOpen(out string? failureReason)
     {
         try
         {
             var bufferSize = Marshal.SizeOf<LmuSharedMemoryObjectOut>();
             var mappedFile = MemoryMappedFile.OpenExisting(SharedMemoryFileName, MemoryMappedFileRights.Read);
             var viewStream = mappedFile.CreateViewStream(0, bufferSize, MemoryMappedFileAccess.Read);
+            failureReason = null;
             return new LmuSharedMemoryReader(mappedFile, viewStream, bufferSize);
         }
-        catch(Exception)
+        catch(Exception exception)
         {
+            failureReason = exception.Message;
             return null;
         }
     }
@@ -48,7 +50,7 @@ internal sealed class LmuSharedMemoryReader : IDisposable
     {
         if(!sharedMemoryLock.TryAcquire(TimeSpan.FromMilliseconds(100)))
         {
-            return null;
+            throw new TimeoutException("Timed out waiting to acquire the LMU shared memory lock.");
         }
 
         try
