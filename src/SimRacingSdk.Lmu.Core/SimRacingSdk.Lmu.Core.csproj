@@ -16,19 +16,4 @@
     <ProjectReference Include="..\SimRacingSdk.Core\SimRacingSdk.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="PluginResources\LMU_SharedMemoryMapPlugin64.dll">
-      <LogicalName>SimRacingSdk.Lmu.Core.PluginResources.LMU_SharedMemoryMapPlugin64.dll</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PluginResources\LMU_SharedMemoryMapPlugin64-LICENSE.txt">
-      <LogicalName>SimRacingSdk.Lmu.Core.PluginResources.LMU_SharedMemoryMapPlugin64-LICENSE.txt</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PluginResources\rFactor2SharedMemoryMapPlugin64.dll">
-      <LogicalName>SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64.dll</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PluginResources\rFactor2SharedMemoryMapPlugin64-LICENSE.txt">
-      <LogicalName>SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64-LICENSE.txt</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

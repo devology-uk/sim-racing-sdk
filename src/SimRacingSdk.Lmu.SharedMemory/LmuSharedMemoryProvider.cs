@@ -3,28 +3,37 @@ using SimRacingSdk.Lmu.SharedMemory.Messages;
 
 namespace SimRacingSdk.Lmu.SharedMemory;
 
+// Both the mapped file and its lock are per-machine, per-game-instance OS resources - not something that makes
+// sense to open once per Connection - so this is shared as a singleton and lazily (re)opens each on first use, or
+// after either fails to open, since the game may not be running yet when a consumer starts polling.
 public class LmuSharedMemoryProvider : ILmuSharedMemoryProvider
 {
-    private const string ExtendedMapName = "$LMU_SMMP_Extended$";
-    private const string ScoringMapName = "$rFactor2SMMP_Scoring$";
-    private const string TelemetryMapName = "$rFactor2SMMP_Telemetry$";
-
     private static LmuSharedMemoryProvider? singletonInstance;
+
+    private LmuSharedMemoryLock? sharedMemoryLock;
+    private LmuSharedMemoryReader? sharedMemoryReader;
 
     public static LmuSharedMemoryProvider Instance => singletonInstance ??= new LmuSharedMemoryProvider();
 
-    public LmuExtendedBuffer? ReadExtended()
+    public void Dispose()
     {
-        return MappedBufferReader.Read<LmuExtendedBuffer>(ExtendedMapName);
+        this.sharedMemoryReader?.Dispose();
+        this.sharedMemoryReader = null;
+        this.sharedMemoryLock?.Dispose();
+        this.sharedMemoryLock = null;
+        GC.SuppressFinalize(this);
     }
 
-    public Rf2ScoringBuffer? ReadScoring()
+    public LmuSharedMemoryObjectOut? Read()
     {
-        return MappedBufferReader.Read<Rf2ScoringBuffer>(ScoringMapName);
-    }
+        this.sharedMemoryReader ??= LmuSharedMemoryReader.TryOpen();
+        this.sharedMemoryLock ??= LmuSharedMemoryLock.TryOpen();
 
-    public Rf2TelemetryBuffer? ReadTelemetry()
-    {
-        return MappedBufferReader.Read<Rf2TelemetryBuffer>(TelemetryMapName);
+        if(this.sharedMemoryReader is null || this.sharedMemoryLock is null)
+        {
+            return null;
+        }
+
+        return this.sharedMemoryReader.Read(this.sharedMemoryLock);
     }
 }

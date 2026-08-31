@@ -6,7 +6,7 @@ namespace SimRacingSdk.Lmu.SharedMemory.Models;
 
 public record LmuWheelData
 {
-    internal LmuWheelData(Rf2Wheel wheel)
+    internal LmuWheelData(LmuWheelTelemetry wheel)
     {
         this.SuspensionDeflection = wheel.SuspensionDeflection;
         this.RideHeight = wheel.RideHeight;
@@ -36,11 +36,16 @@ public record LmuWheelData
         this.Toe = wheel.Toe;
         this.TireCarcassTemperature = wheel.TireCarcassTemperature;
         this.TireInnerLayerTemperature = wheel.TireInnerLayerTemperature;
+        this.OptimalTemp = wheel.OptimalTemp;
+        this.CompoundIndex = wheel.CompoundIndex;
+        this.CompoundType = wheel.CompoundType;
     }
 
     public double BrakePressure { get; }
     public double BrakeTemp { get; }
     public double Camber { get; }
+    public byte CompoundIndex { get; }
+    public byte CompoundType { get; }
     public bool Detached { get; }
     public bool Flat { get; }
     public double GripFract { get; }
@@ -50,6 +55,7 @@ public record LmuWheelData
     public double LongitudinalForce { get; }
     public double LongitudinalGroundVel { get; }
     public double LongitudinalPatchVel { get; }
+    public float OptimalTemp { get; }
     public double Pressure { get; }
     public double RideHeight { get; }
     public double Rotation { get; }

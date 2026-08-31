@@ -4,10 +4,10 @@ using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Lmu.SharedMemory.Messages;
 
-// Matches rF2Wheel (rF2State.h) / TelemWheelV01 exactly - field order and types are load-bearing for marshalling.
+// Matches TelemWheelV01 (InternalsPlugin.hpp) exactly - field order and types are load-bearing for marshalling.
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-public struct Rf2Wheel
+public struct LmuWheelTelemetry
 {
     public double SuspensionDeflection;
     public double RideHeight;
@@ -47,13 +47,17 @@ public struct Rf2Wheel
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
     public double[] TireInnerLayerTemperature;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
+    public float OptimalTemp;
+    public byte CompoundIndex;
+    public byte CompoundType;
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 18)]
     public byte[] Expansion;
 
     public override readonly string ToString()
     {
-        return $"Rf2Wheel {{ Pressure = {this.Pressure}, Wear = {this.Wear}, "
+        return $"LmuWheelTelemetry {{ Pressure = {this.Pressure}, Wear = {this.Wear}, "
              + $"BrakeTemp = {this.BrakeTemp}, TireLoad = {this.TireLoad}, Flat = {this.Flat}, "
-             + $"Detached = {this.Detached}, SurfaceType = {this.SurfaceType} }}";
+             + $"Detached = {this.Detached}, SurfaceType = {this.SurfaceType}, "
+             + $"CompoundIndex = {this.CompoundIndex}, OptimalTemp = {this.OptimalTemp} }}";
     }
 }

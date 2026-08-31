@@ -3,35 +3,27 @@ using System.Reactive.Subjects;
 using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
 using SimRacingSdk.Core.Services;
-using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.SharedMemory.Abstractions;
-using SimRacingSdk.Lmu.SharedMemory.Exceptions;
 using SimRacingSdk.Lmu.SharedMemory.Messages;
 using SimRacingSdk.Lmu.SharedMemory.Models;
 
 namespace SimRacingSdk.Lmu.SharedMemory;
 
-// Combines rFactor2SharedMemoryMapPlugin64's Telemetry+Scoring buffers with LMU_SharedMemoryMapPlugin64's Extended
-// buffer into one LmuTelemetryFrame per poll - both plugins are required (Start throws if either isn't installed
-// and configured), since the Extended plugin alone carries no telemetry/scoring at all (see the Lmu shared-memory
-// scoping discussion this session) and the standard plugin alone is missing LMU's fuel/energy/penalty/TC fields.
+// Reads LMU's native "LMU_Data" shared memory (Studio 397's own SharedMemoryInterface.hpp) directly - no plugin,
+// no CustomPluginVariables.JSON, no DMA. The player's Telemetry entry comes straight from PlayerVehicleIdx; the
+// matching Scoring entry is found via IsPlayer - both come from the same read, so there's no cross-source
+// lap/session-key linking problem to guard against.
 public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 {
     private readonly LogMessageBroker logMessageBroker = new(nameof(LmuSharedMemoryConnection));
-    private readonly ILmuSharedMemoryPluginInstaller lmuSharedMemoryPluginInstaller;
-    private readonly IRfactor2SharedMemoryPluginInstaller rfactor2SharedMemoryPluginInstaller;
     private readonly ILmuSharedMemoryProvider sharedMemoryProvider;
     private readonly Subject<LmuTelemetryFrame> telemetrySubject = new();
 
     private IDisposable? updateSubscription;
 
-    public LmuSharedMemoryConnection(ILmuSharedMemoryProvider sharedMemoryProvider,
-        ILmuSharedMemoryPluginInstaller lmuSharedMemoryPluginInstaller,
-        IRfactor2SharedMemoryPluginInstaller rfactor2SharedMemoryPluginInstaller)
+    public LmuSharedMemoryConnection(ILmuSharedMemoryProvider sharedMemoryProvider)
     {
         this.sharedMemoryProvider = sharedMemoryProvider;
-        this.lmuSharedMemoryPluginInstaller = lmuSharedMemoryPluginInstaller;
-        this.rfactor2SharedMemoryPluginInstaller = rfactor2SharedMemoryPluginInstaller;
     }
 
     public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
@@ -45,12 +37,6 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
     public void Start(double updateIntervalMs = 20)
     {
-        if(!this.lmuSharedMemoryPluginInstaller.IsInstalled ||
-           !this.rfactor2SharedMemoryPluginInstaller.IsInstalled)
-        {
-            throw new LmuSharedMemoryPluginsNotInstalledException();
-        }
-
         this.Stop();
         this.LogMessage(LoggingLevel.Information, "Starting LMU Shared Memory connection...");
         this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
@@ -75,41 +61,31 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
     private void OnNextUpdate(long tick)
     {
-        var scoringBuffer = this.sharedMemoryProvider.ReadScoring();
-        var telemetryBuffer = this.sharedMemoryProvider.ReadTelemetry();
-        var extendedBuffer = this.sharedMemoryProvider.ReadExtended();
-
-        if(scoringBuffer is null || telemetryBuffer is null || extendedBuffer is null)
+        var data = this.sharedMemoryProvider.Read();
+        if(data is null)
         {
             return;
         }
 
-        var scoring = scoringBuffer.Value;
-        var telemetry = telemetryBuffer.Value;
+        var telemetry = data.Value.Telemetry;
+        if(!telemetry.PlayerHasVehicle || telemetry.PlayerVehicleIdx >= telemetry.TelemInfo.Length)
+        {
+            return;
+        }
 
-        var numScoredVehicles = Math.Clamp(scoring.ScoringInfo.NumVehicles, 0, Rf2TelemetryBuffer.MaxMappedVehicles);
+        var playerTelemetry = telemetry.TelemInfo[telemetry.PlayerVehicleIdx];
+
+        var scoring = data.Value.Scoring;
+        var numScoredVehicles =
+            Math.Clamp(scoring.ScoringInfo.NumVehicles, 0, LmuSharedMemoryScoringData.MaxVehicles);
         var playerScoringIndex =
-            Array.FindIndex(scoring.Vehicles, 0, numScoredVehicles, vehicle => vehicle.IsPlayer);
+            Array.FindIndex(scoring.VehScoringInfo, 0, numScoredVehicles, vehicle => vehicle.IsPlayer);
         if(playerScoringIndex < 0)
         {
             return;
         }
 
-        var playerScoring = scoring.Vehicles[playerScoringIndex];
-
-        var numTelemetryVehicles = Math.Clamp(telemetry.NumVehicles, 0, Rf2TelemetryBuffer.MaxMappedVehicles);
-        var playerTelemetryIndex = Array.FindIndex(telemetry.Vehicles,
-            0,
-            numTelemetryVehicles,
-            vehicle => vehicle.Id == playerScoring.Id);
-        if(playerTelemetryIndex < 0)
-        {
-            return;
-        }
-
-        var frame = new LmuTelemetryFrame(telemetry.Vehicles[playerTelemetryIndex],
-            playerScoring,
-            extendedBuffer.Value);
+        var frame = new LmuTelemetryFrame(playerTelemetry, scoring.VehScoringInfo[playerScoringIndex]);
         this.telemetrySubject.OnNext(frame);
     }
 }

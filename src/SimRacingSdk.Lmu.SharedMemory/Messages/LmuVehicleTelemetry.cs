@@ -1,15 +1,16 @@
 #nullable disable
 
 using System.Runtime.InteropServices;
+using SimRacingSdk.Lmu.SharedMemory.Enums;
 
 namespace SimRacingSdk.Lmu.SharedMemory.Messages;
 
-// Matches rF2VehicleTelemetry (rF2State.h) / TelemInfoV01 exactly - field order and types are load-bearing for
-// marshalling. One entry per car in Rf2TelemetryBuffer.Vehicles; keyed by Id, which is cross-referenced against
-// Rf2VehicleScoring.Id (same slot ID space) to attribute a frame to the right car/lap.
+// Matches TelemInfoV01 (InternalsPlugin.hpp, the official LMU/Studio 397 SDK header - newer and richer than the
+// version the community rF2 plugins mirror) exactly - field order and types are load-bearing for marshalling.
+// One entry per car in LmuSharedMemoryTelemetryData.TelemInfo.
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-public struct Rf2VehicleTelemetry
+public struct LmuVehicleTelemetry
 {
     // Time
     public int Id;
@@ -23,15 +24,15 @@ public struct Rf2VehicleTelemetry
     public string TrackName;
 
     // Position and derivatives
-    public Rf2Vec3 Pos;
-    public Rf2Vec3 LocalVel;
-    public Rf2Vec3 LocalAccel;
+    public LmuVect3 Pos;
+    public LmuVect3 LocalVel;
+    public LmuVect3 LocalAccel;
 
     // Orientation and derivatives
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public Rf2Vec3[] Ori;
-    public Rf2Vec3 LocalRot;
-    public Rf2Vec3 LocalRotAccel;
+    public LmuVect3[] Ori;
+    public LmuVect3 LocalRot;
+    public LmuVect3 LocalRotAccel;
 
     // Vehicle status
     public int Gear;
@@ -79,7 +80,7 @@ public struct Rf2VehicleTelemetry
     public byte[] DentSeverity;
     public double LastImpactEt;
     public double LastImpactMagnitude;
-    public Rf2Vec3 LastImpactPos;
+    public LmuVect3 LastImpactPos;
 
     // Expanded
     public double EngineTorque;
@@ -111,6 +112,8 @@ public struct Rf2VehicleTelemetry
     public float[] PhysicsToGraphicsOffset;
     public float PhysicalSteeringWheelRange;
 
+    public double DeltaBest;
+
     public double BatteryChargeFraction;
 
     // Electric boost motor
@@ -119,21 +122,59 @@ public struct Rf2VehicleTelemetry
     public double ElectricBoostMotorTemperature;
     public double ElectricBoostWaterTemperature;
     public byte ElectricBoostMotorState;
+    [MarshalAs(UnmanagedType.I1)]
+    public bool LapInvalidated;
+    [MarshalAs(UnmanagedType.I1)]
+    public bool AbsActive;
+    [MarshalAs(UnmanagedType.I1)]
+    public bool TcActive;
+    [MarshalAs(UnmanagedType.I1)]
+    public bool SpeedLimiterActive;
+    public byte WiperState;
+    public byte Tc;
+    public byte TcMax;
+    public byte TcSlip;
+    public byte TcSlipMax;
+    public byte TcCut;
+    public byte TcCutMax;
+    public byte Abs;
+    public byte AbsMax;
+    public byte MotorMap;
+    public byte MotorMapMax;
+    public byte Migration;
+    public byte MigrationMax;
+    public byte FrontAntiSway;
+    public byte FrontAntiSwayMax;
+    public byte RearAntiSway;
+    public byte RearAntiSwayMax;
+    public byte LiftAndCoastProgress;
+    public byte TrackLimitsSteps;
+    public float Regen;
+    public float SoC;
+    public float VirtualEnergy;
+    public float TimeGapCarAhead;
+    public float TimeGapCarBehind;
+    public float TimeGapPlaceAhead;
+    public float TimeGapPlaceBehind;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 30)]
+    public string VehicleModel;
+    public LmuVehicleClass VehicleClass;
+    public LmuVehicleChampionship VehicleChampionship;
 
     // Future use
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 111)]
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
     public byte[] Expansion;
 
     // Keeping this at the end of the structure, matching the source layout.
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-    public Rf2Wheel[] Wheels;
+    public LmuWheelTelemetry[] Wheel;
 
     public override readonly string ToString()
     {
-        return $"Rf2VehicleTelemetry {{ Id = {this.Id}, LapNumber = {this.LapNumber}, "
+        return $"LmuVehicleTelemetry {{ Id = {this.Id}, LapNumber = {this.LapNumber}, "
              + $"ElapsedTime = {this.ElapsedTime}, Pos = {this.Pos}, Gear = {this.Gear}, "
              + $"EngineRpm = {this.EngineRpm}, UnfilteredThrottle = {this.UnfilteredThrottle}, "
-             + $"UnfilteredBrake = {this.UnfilteredBrake}, UnfilteredSteering = {this.UnfilteredSteering}, "
-             + $"Fuel = {this.Fuel}, CurrentSector = {this.CurrentSector} }}";
+             + $"UnfilteredBrake = {this.UnfilteredBrake}, Fuel = {this.Fuel}, SoC = {this.SoC}, "
+             + $"VirtualEnergy = {this.VirtualEnergy}, DeltaBest = {this.DeltaBest} }}";
     }
 }

@@ -4,11 +4,13 @@ using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Lmu.SharedMemory.Messages;
 
-// Matches rF2VehicleScoring (rF2State.h) / VehicleScoringInfoV01 exactly. One entry per car in
-// Rf2ScoringBuffer.Vehicles; Id is keyed against Rf2VehicleTelemetry.Id (same slot ID space).
+// Matches VehicleScoringInfoV01 (InternalsPlugin.hpp, official LMU SDK header) exactly. One entry per car in
+// LmuSharedMemoryScoringData.VehScoringInfo; Id is the same slot-ID space as LmuVehicleTelemetry.Id, though the
+// official interface also gives the player's index directly (LmuSharedMemoryTelemetryData.PlayerVehicleIdx), so
+// cross-referencing by Id is no longer needed just to find the player's own car.
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-public struct Rf2VehicleScoring
+public struct LmuVehicleScoring
 {
     public int Id;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
@@ -51,15 +53,15 @@ public struct Rf2VehicleScoring
     public double LapStartEt;
 
     // Position and derivatives
-    public Rf2Vec3 Pos;
-    public Rf2Vec3 LocalVel;
-    public Rf2Vec3 LocalAccel;
+    public LmuVect3 Pos;
+    public LmuVect3 LocalVel;
+    public LmuVect3 LocalAccel;
 
     // Orientation and derivatives
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public Rf2Vec3[] Ori;
-    public Rf2Vec3 LocalRot;
-    public Rf2Vec3 LocalRotAccel;
+    public LmuVect3[] Ori;
+    public LmuVect3 LocalRot;
+    public LmuVect3 LocalRotAccel;
 
     public byte Headlights;
     public byte PitState;
@@ -82,20 +84,32 @@ public struct Rf2VehicleScoring
 
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
     public byte[] UpgradePack;
-
     public float PitLapDist;
 
     public float BestLapSector1;
     public float BestLapSector2;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 48)]
+    public ulong SteamId;
+
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+    public string VehFilename;
+
+    public short AttackMode;
+
+    // 0x00 = 0%, 0xFF = 100% of fuel or battery remaining.
+    public byte FuelFraction;
+
+    [MarshalAs(UnmanagedType.I1)]
+    public bool DrsState;
+
+    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
     public byte[] Expansion;
 
     public override readonly string ToString()
     {
-        return $"Rf2VehicleScoring {{ Id = {this.Id}, DriverName = {this.DriverName}, "
+        return $"LmuVehicleScoring {{ Id = {this.Id}, DriverName = {this.DriverName}, "
              + $"TotalLaps = {this.TotalLaps}, Place = {this.Place}, IsPlayer = {this.IsPlayer}, "
              + $"LastLapTime = {this.LastLapTime}, BestLapTime = {this.BestLapTime}, "
-             + $"NumPitstops = {this.NumPitstops}, NumPenalties = {this.NumPenalties} }}";
+             + $"FuelFraction = {this.FuelFraction}, SteamId = {this.SteamId} }}";
     }
 }

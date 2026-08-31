@@ -1,13 +1,12 @@
 /*
- * This demo shows how to use the LmuSharedMemoryConnection to read and process merged Telemetry+Scoring+Extended
- * data using the two rFactor2-API-family plugins (LMU_SharedMemoryMapPlugin64.dll and
- * rFactor2SharedMemoryMapPlugin64.dll) required for LMU shared memory support.
+ * This demo shows how to use LmuSharedMemoryConnection to read LMU's native shared memory interface
+ * (Studio 397's own SharedMemoryInterface.hpp) - no plugin install required, just "Enable Plugins" turned on in
+ * the game's own Settings -> Gameplay screen.
  */
 
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Core.Messages;
-using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Demo.Abstractions;
 using SimRacingSdk.Lmu.SharedMemory.Abstractions;
 using SimRacingSdk.Lmu.SharedMemory.Models;
@@ -19,9 +18,7 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 {
     private readonly IConsoleLog consoleLog;
     private readonly ILmuSharedMemoryConnectionFactory lmuSharedMemoryConnectionFactory;
-    private readonly ILmuSharedMemoryPluginInstaller lmuSharedMemoryPluginInstaller;
     private readonly ILogger<SharedMemoryDemo> logger;
-    private readonly IRfactor2SharedMemoryPluginInstaller rfactor2SharedMemoryPluginInstaller;
     private readonly ISharedMemoryLog sharedMemoryLog;
 
     private ILmuSharedMemoryConnection? lmuSharedMemoryConnection;
@@ -31,16 +28,12 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     public SharedMemoryDemo(ILogger<SharedMemoryDemo> logger,
         IConsoleLog consoleLog,
         ISharedMemoryLog sharedMemoryLog,
-        ILmuSharedMemoryConnectionFactory lmuSharedMemoryConnectionFactory,
-        ILmuSharedMemoryPluginInstaller lmuSharedMemoryPluginInstaller,
-        IRfactor2SharedMemoryPluginInstaller rfactor2SharedMemoryPluginInstaller)
+        ILmuSharedMemoryConnectionFactory lmuSharedMemoryConnectionFactory)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.sharedMemoryLog = sharedMemoryLog;
         this.lmuSharedMemoryConnectionFactory = lmuSharedMemoryConnectionFactory;
-        this.lmuSharedMemoryPluginInstaller = lmuSharedMemoryPluginInstaller;
-        this.rfactor2SharedMemoryPluginInstaller = rfactor2SharedMemoryPluginInstaller;
     }
 
     public void Start()
@@ -75,34 +68,8 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     public bool Validate()
     {
         this.Log("Validating Shared Memory Demo...");
-
-        this.Log("Checking LMU_SharedMemoryMapPlugin64.dll is installed and configured...");
-        if(!this.lmuSharedMemoryPluginInstaller.IsInstalled)
-        {
-            this.Log("Installing LMU_SharedMemoryMapPlugin64.dll...");
-            this.lmuSharedMemoryPluginInstaller.Install();
-        }
-
-        this.LogPluginVersion("LMU_SharedMemoryMapPlugin64.dll", this.lmuSharedMemoryPluginInstaller);
-
-        this.Log("Checking rFactor2SharedMemoryMapPlugin64.dll is installed and configured...");
-        if(!this.rfactor2SharedMemoryPluginInstaller.IsInstalled)
-        {
-            this.Log("Installing rFactor2SharedMemoryMapPlugin64.dll...");
-            this.rfactor2SharedMemoryPluginInstaller.Install();
-        }
-
-        this.LogPluginVersion("rFactor2SharedMemoryMapPlugin64.dll", this.rfactor2SharedMemoryPluginInstaller);
-
-        if(!this.lmuSharedMemoryPluginInstaller.IsInstalled || !this.rfactor2SharedMemoryPluginInstaller.IsInstalled)
-        {
-            this.Log(
-                "One or both plugins could not be installed/configured automatically. Please check CustomPluginVariables.JSON and the game's Plugins folder.",
-                LogLevel.Warning);
-            return false;
-        }
-
-        this.Log("Both required plugins are installed and configured. If LMU was already running, restart it so the plugins load.");
+        this.Log(
+            "LMU's native shared memory needs no plugin - just confirm \"Enable Plugins\" is on in the game's own Settings -> Gameplay screen.");
         return true;
     }
 
@@ -110,26 +77,6 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     {
         this.logger.Log(logLevel, message);
         this.consoleLog.Write(message);
-    }
-
-    private void LogPluginVersion(string pluginFileName, IRfactorPluginInstaller installer)
-    {
-        var installedVersion = installer.InstalledVersion;
-        if(installedVersion is null)
-        {
-            this.Log($"{pluginFileName}: not installed.", LogLevel.Warning);
-            return;
-        }
-
-        if(installedVersion == installer.BundledVersion)
-        {
-            this.Log($"{pluginFileName}: installed version {installedVersion} matches the bundled version.");
-            return;
-        }
-
-        this.Log(
-            $"{pluginFileName}: installed version {installedVersion} differs from the bundled version {installer.BundledVersion} - likely installed/updated by another tool (e.g. SimHub, CrewChief). Struct layout is only confirmed against the bundled version.",
-            LogLevel.Warning);
     }
 
     private void OnNextLogMessage(LogMessage logMessage)
