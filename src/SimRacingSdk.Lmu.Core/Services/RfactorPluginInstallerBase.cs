@@ -21,10 +21,12 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
     private readonly string licenseFileName;
     private readonly string licenseResourceName;
     private readonly ILmuPathProvider lmuPathProvider;
+    private readonly string productName;
     private readonly IReadOnlyCollection<string> requiredEnabledSettings;
 
     protected RfactorPluginInstallerBase(ILmuPathProvider lmuPathProvider,
         string pluginFileName,
+        string productName,
         string dllResourceName,
         string licenseFileName,
         string licenseResourceName,
@@ -34,6 +36,7 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
     {
         this.lmuPathProvider = lmuPathProvider;
         this.PluginFileName = pluginFileName;
+        this.productName = productName;
         this.dllResourceName = dllResourceName;
         this.licenseFileName = licenseFileName;
         this.licenseResourceName = licenseResourceName;
@@ -50,27 +53,34 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
     {
         get
         {
-            var section = this.ReadPluginConfigSection();
+            var installedFileName = this.FindInstalledFileName();
+            if(installedFileName is null)
+            {
+                return false;
+            }
+
+            var section = this.ReadPluginConfigSection(installedFileName);
             return section is not null &&
                    this.requiredEnabledSettings.All(setting => this.IsSettingEnabled(section, setting));
         }
     }
 
-    public bool IsPluginFileInstalled =>
-        File.Exists(Path.Combine(this.lmuPathProvider.PluginsFolder, this.PluginFileName));
+    public bool IsPluginFileInstalled => this.FindInstalledFileName() is not null;
 
-    // The file actually sitting in the Plugins folder may not be the bundled one - SimHub/CrewChief/etc also ship
-    // and self-update this same plugin family, and Install() never overwrites a file that's already there.
+    // The file actually sitting in the Plugins folder may not be the bundled one, or even be named what we expect
+    // - SimHub/CrewChief/etc also ship and self-update this same plugin family, sometimes under a different
+    // filename (e.g. a version-suffixed name), and Install() never overwrites a file that's already there.
     public string? InstalledVersion
     {
         get
         {
-            if(!this.IsPluginFileInstalled)
+            var installedFileName = this.FindInstalledFileName();
+            if(installedFileName is null)
             {
                 return null;
             }
 
-            var pluginPath = Path.Combine(this.lmuPathProvider.PluginsFolder, this.PluginFileName);
+            var pluginPath = Path.Combine(this.lmuPathProvider.PluginsFolder, installedFileName);
             return FileVersionInfo.GetVersionInfo(pluginPath).FileVersion;
         }
     }
@@ -85,14 +95,15 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
 
     private void ConfigurePlugin()
     {
+        var configFileName = this.FindInstalledFileName() ?? this.PluginFileName;
         var root = this.ReadCustomPluginVariables() ?? new JsonObject();
 
-        if(root.ContainsKey(this.PluginFileName))
+        if(root.ContainsKey(configFileName))
         {
             return;
         }
 
-        root[this.PluginFileName] = this.defaultConfig.DeepClone();
+        root[configFileName] = this.defaultConfig.DeepClone();
 
         this.WriteCustomPluginVariables(root);
     }
@@ -104,6 +115,43 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
                                         $"Embedded resource '{resourceName}' was not found.");
         using var fileStream = File.Create(destinationPath);
         resourceStream.CopyTo(fileStream);
+    }
+
+    // Matches by the DLL's own embedded ProductName rather than trusting the on-disk filename to be our expected
+    // constant - a copy installed by another tool can be renamed (confirmed on Mike's own rig: the LMU plugin was
+    // present as "LMU.3.8.SharedMemoryMapPlugin.dll", not "LMU_SharedMemoryMapPlugin64.dll").
+    private string? FindInstalledFileName()
+    {
+        if(!Directory.Exists(this.lmuPathProvider.PluginsFolder))
+        {
+            return null;
+        }
+
+        var canonicalPath = Path.Combine(this.lmuPathProvider.PluginsFolder, this.PluginFileName);
+        if(File.Exists(canonicalPath))
+        {
+            return this.PluginFileName;
+        }
+
+        foreach(var dllPath in Directory.EnumerateFiles(this.lmuPathProvider.PluginsFolder, "*.dll"))
+        {
+            FileVersionInfo versionInfo;
+            try
+            {
+                versionInfo = FileVersionInfo.GetVersionInfo(dllPath);
+            }
+            catch(Exception)
+            {
+                continue;
+            }
+
+            if(versionInfo.ProductName == this.productName)
+            {
+                return Path.GetFileName(dllPath);
+            }
+        }
+
+        return null;
     }
 
     private void InstallPluginFile()
@@ -137,9 +185,9 @@ public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
         return JsonNode.Parse(json)?.AsObject();
     }
 
-    private JsonObject? ReadPluginConfigSection()
+    private JsonObject? ReadPluginConfigSection(string configFileName)
     {
-        return this.ReadCustomPluginVariables()?[this.PluginFileName]?.AsObject();
+        return this.ReadCustomPluginVariables()?[configFileName]?.AsObject();
     }
 
     private void WriteCustomPluginVariables(JsonObject root)

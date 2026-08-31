@@ -9,13 +9,14 @@ namespace SimRacingSdk.Lmu.Core.Services;
 // the only source of any of its fields) since this plugin's core buffers work without it.
 public class Rfactor2SharedMemoryPluginInstaller : RfactorPluginInstallerBase, IRfactor2SharedMemoryPluginInstaller
 {
-    public const string PluginFileName = "rFactor2SharedMemoryMapPlugin64.dll";
+    public new const string PluginFileName = "rFactor2SharedMemoryMapPlugin64.dll";
 
     private static Rfactor2SharedMemoryPluginInstaller? singletonInstance;
 
     public Rfactor2SharedMemoryPluginInstaller(ILmuPathProvider lmuPathProvider)
         : base(lmuPathProvider,
             PluginFileName,
+            "rF2SharedMemoryMapPlugin",
             "SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64.dll",
             "rFactor2SharedMemoryMapPlugin64-LICENSE.txt",
             "SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64-LICENSE.txt",
