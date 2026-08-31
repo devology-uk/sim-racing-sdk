@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -9,7 +10,7 @@ namespace SimRacingSdk.Lmu.Core.Services;
 // Shared install mechanics for rFactor2-API-family plugins (LMU's own plugin and the standard rFactor2 one) - both
 // copy a DLL into the game's Plugins folder and add a section to CustomPluginVariables.JSON, differing only in
 // filenames/resource names/default config values, which subclasses supply via the constructor.
-public abstract class RfactorPluginInstallerBase
+public abstract class RfactorPluginInstallerBase : IRfactorPluginInstaller
 {
     private readonly string dllResourceName;
     private readonly JsonObject defaultConfig;
@@ -27,6 +28,7 @@ public abstract class RfactorPluginInstallerBase
         string dllResourceName,
         string licenseFileName,
         string licenseResourceName,
+        string bundledVersion,
         JsonObject defaultConfig,
         IReadOnlyCollection<string> requiredEnabledSettings)
     {
@@ -35,9 +37,12 @@ public abstract class RfactorPluginInstallerBase
         this.dllResourceName = dllResourceName;
         this.licenseFileName = licenseFileName;
         this.licenseResourceName = licenseResourceName;
+        this.BundledVersion = bundledVersion;
         this.defaultConfig = defaultConfig;
         this.requiredEnabledSettings = requiredEnabledSettings;
     }
+
+    public string BundledVersion { get; }
 
     public bool IsInstalled => this.IsPluginFileInstalled && this.IsPluginConfigured;
 
@@ -53,6 +58,22 @@ public abstract class RfactorPluginInstallerBase
 
     public bool IsPluginFileInstalled =>
         File.Exists(Path.Combine(this.lmuPathProvider.PluginsFolder, this.PluginFileName));
+
+    // The file actually sitting in the Plugins folder may not be the bundled one - SimHub/CrewChief/etc also ship
+    // and self-update this same plugin family, and Install() never overwrites a file that's already there.
+    public string? InstalledVersion
+    {
+        get
+        {
+            if(!this.IsPluginFileInstalled)
+            {
+                return null;
+            }
+
+            var pluginPath = Path.Combine(this.lmuPathProvider.PluginsFolder, this.PluginFileName);
+            return FileVersionInfo.GetVersionInfo(pluginPath).FileVersion;
+        }
+    }
 
     protected string PluginFileName { get; }
 

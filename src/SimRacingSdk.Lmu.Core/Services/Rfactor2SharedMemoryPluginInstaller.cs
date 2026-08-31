@@ -19,6 +19,7 @@ public class Rfactor2SharedMemoryPluginInstaller : RfactorPluginInstallerBase, I
             "SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64.dll",
             "rFactor2SharedMemoryMapPlugin64-LICENSE.txt",
             "SimRacingSdk.Lmu.Core.PluginResources.rFactor2SharedMemoryMapPlugin64-LICENSE.txt",
+            "3.7.15.1",
             new JsonObject
             {
                 ["Enabled"] = 1,

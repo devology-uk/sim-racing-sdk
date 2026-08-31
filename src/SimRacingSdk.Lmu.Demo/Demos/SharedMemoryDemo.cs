@@ -83,12 +83,16 @@ public class SharedMemoryDemo : ISharedMemoryDemo
             this.lmuSharedMemoryPluginInstaller.Install();
         }
 
+        this.LogPluginVersion("LMU_SharedMemoryMapPlugin64.dll", this.lmuSharedMemoryPluginInstaller);
+
         this.Log("Checking rFactor2SharedMemoryMapPlugin64.dll is installed and configured...");
         if(!this.rfactor2SharedMemoryPluginInstaller.IsInstalled)
         {
             this.Log("Installing rFactor2SharedMemoryMapPlugin64.dll...");
             this.rfactor2SharedMemoryPluginInstaller.Install();
         }
+
+        this.LogPluginVersion("rFactor2SharedMemoryMapPlugin64.dll", this.rfactor2SharedMemoryPluginInstaller);
 
         if(!this.lmuSharedMemoryPluginInstaller.IsInstalled || !this.rfactor2SharedMemoryPluginInstaller.IsInstalled)
         {
@@ -106,6 +110,26 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     {
         this.logger.Log(logLevel, message);
         this.consoleLog.Write(message);
+    }
+
+    private void LogPluginVersion(string pluginFileName, IRfactorPluginInstaller installer)
+    {
+        var installedVersion = installer.InstalledVersion;
+        if(installedVersion is null)
+        {
+            this.Log($"{pluginFileName}: not installed.", LogLevel.Warning);
+            return;
+        }
+
+        if(installedVersion == installer.BundledVersion)
+        {
+            this.Log($"{pluginFileName}: installed version {installedVersion} matches the bundled version.");
+            return;
+        }
+
+        this.Log(
+            $"{pluginFileName}: installed version {installedVersion} differs from the bundled version {installer.BundledVersion} - likely installed/updated by another tool (e.g. SimHub, CrewChief). Struct layout is only confirmed against the bundled version.",
+            LogLevel.Warning);
     }
 
     private void OnNextLogMessage(LogMessage logMessage)

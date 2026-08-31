@@ -16,6 +16,7 @@ public class LmuSharedMemoryPluginInstaller : RfactorPluginInstallerBase, ILmuSh
             "SimRacingSdk.Lmu.Core.PluginResources.LMU_SharedMemoryMapPlugin64.dll",
             "LMU_SharedMemoryMapPlugin64-LICENSE.txt",
             "SimRacingSdk.Lmu.Core.PluginResources.LMU_SharedMemoryMapPlugin64-LICENSE.txt",
+            "4.0.16.7",
             new JsonObject
             {
                 ["Enabled"] = 1,
