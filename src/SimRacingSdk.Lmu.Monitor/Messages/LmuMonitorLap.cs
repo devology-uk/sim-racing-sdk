@@ -1,6 +1,7 @@
 #nullable disable
 
 using SimRacingSdk.Lmu.Monitor.Abstractions;
+using SimRacingSdk.Lmu.SharedMemory.Enums;
 
 namespace SimRacingSdk.Lmu.Monitor.Messages;
 
@@ -15,5 +16,7 @@ public record LmuMonitorLap : LmuMonitorMessageBase
     public int Sector2Ms { get; init; }
     public int Sector3Ms { get; init; }
     public string TrackName { get; init; }
+    public LmuVehicleClass VehicleClass { get; init; }
+    public string VehicleClassName { get; init; }
     public string VehicleName { get; init; }
 }

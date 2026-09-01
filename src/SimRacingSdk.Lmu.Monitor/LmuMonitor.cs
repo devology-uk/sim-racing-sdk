@@ -97,9 +97,9 @@ public class LmuMonitor : ILmuMonitor
             return;
         }
 
-        // VehicleName is shared memory's display-style name (e.g. "Porsche 911 GT3 R") - not confirmed to match
-        // GetCarInfoByDisplayName's catalog values yet, same unverified-match caveat Ace's equivalent lookup has.
-        var car = this.lmuCarInfoProvider.GetCarInfoByDisplayName(lmuSharedMemoryLap.VehicleName);
+        // VehicleModel (e.g. "Porsche 911 GT3 R LMGT3") is the catalog-matchable car identity; VehicleName is the
+        // driver's entry/livery string (team name + car number) - confirmed against a real rig log, see CLAUDE.md.
+        var car = this.lmuCarInfoProvider.GetCarInfoByDisplayName(lmuSharedMemoryLap.VehicleModel);
         var lmuMonitorLap = new LmuMonitorLap
         {
             CarManufacturer = car?.Manufacturer ?? UnknownCarText,
@@ -111,6 +111,8 @@ public class LmuMonitor : ILmuMonitor
             Sector3Ms = lmuSharedMemoryLap.Sector3Ms,
             SessionId = this.currentSession.SessionId,
             TrackName = lmuSharedMemoryLap.TrackName,
+            VehicleClass = lmuSharedMemoryLap.VehicleClass,
+            VehicleClassName = lmuSharedMemoryLap.VehicleClassName,
             VehicleName = lmuSharedMemoryLap.VehicleName
         };
 

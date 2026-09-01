@@ -5,6 +5,7 @@ using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
 using SimRacingSdk.Core.Services;
 using SimRacingSdk.Lmu.SharedMemory.Abstractions;
+using SimRacingSdk.Lmu.SharedMemory.Enums;
 using SimRacingSdk.Lmu.SharedMemory.Messages;
 using SimRacingSdk.Lmu.SharedMemory.Models;
 
@@ -150,14 +151,14 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
         this.lastLoggedWaitReason = null;
         var playerScoring = scoring.VehScoringInfo[playerScoringIndex];
-        this.UpdateLap(playerScoring);
+        this.UpdateLap(playerScoring, playerTelemetry);
         this.lastPlayerScoring = playerScoring;
 
         var frame = new LmuTelemetryFrame(playerTelemetry, playerScoring);
         this.telemetrySubject.OnNext(frame);
     }
 
-    private void UpdateLap(LmuVehicleScoring playerScoring)
+    private void UpdateLap(LmuVehicleScoring playerScoring, LmuVehicleTelemetry playerTelemetry)
     {
         if(this.currentSession is null || this.lastPlayerScoring is null)
         {
@@ -169,14 +170,16 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
             return;
         }
 
-        var lap = new LmuSharedMemoryLap(playerScoring, this.currentSession.SessionId, this.currentSession.TrackName);
+        var lap = new LmuSharedMemoryLap(playerScoring, playerTelemetry, this.currentSession.SessionId,
+            this.currentSession.TrackName);
         this.lapsSubject.OnNext(lap);
         this.LogMessage(LoggingLevel.Information, $"Lap Completed: {lap}");
     }
 
-    // InRealtime is the LMU equivalent of Ace's AceStatus.Live/Off - directly reports whether we're in a live
-    // driving session rather than menus/monitor mode, so it (plus a change in Session, which distinguishes
-    // Practice/Qualify/Race sub-sessions) is enough to detect session start/end without needing GamePhase.
+    // InRealtime alone isn't enough to detect session start/end: it also goes false for a mid-session garage visit
+    // (e.g. pitting to repair damage), which must NOT split one session into two. A change in Session (which
+    // distinguishes Practice/Qualify/Race sub-sessions) is what marks a genuine new session; GamePhase reaching
+    // SessionStopped/SessionOver is what marks a genuine end of the current one.
     private void UpdateSession(LmuScoringInfo scoringInfo)
     {
         if(this.lastScoringInfo is null)
@@ -186,9 +189,13 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
         var previous = this.lastScoringInfo.Value;
 
-        if(!scoringInfo.InRealtime)
+        if(this.currentSession is not null)
         {
-            if(previous.InRealtime)
+            if(previous.Session != scoringInfo.Session)
+            {
+                this.BeginNewSession(scoringInfo);
+            }
+            else if(IsSessionOver(scoringInfo.GamePhase))
             {
                 this.EndCurrentSession();
             }
@@ -196,9 +203,14 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
             return;
         }
 
-        if(!previous.InRealtime || previous.Session != scoringInfo.Session)
+        if(scoringInfo.InRealtime)
         {
             this.BeginNewSession(scoringInfo);
         }
+    }
+
+    private static bool IsSessionOver(byte gamePhase)
+    {
+        return gamePhase is (byte)LmuGamePhase.SessionStopped or (byte)LmuGamePhase.SessionOver;
     }
 }
