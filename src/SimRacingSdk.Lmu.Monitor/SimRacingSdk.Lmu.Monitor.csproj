@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimRacingSdk.Lmu.Core\SimRacingSdk.Lmu.Core.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.Lmu.SharedMemory\SimRacingSdk.Lmu.SharedMemory.csproj" />
+  </ItemGroup>
+
+</Project>

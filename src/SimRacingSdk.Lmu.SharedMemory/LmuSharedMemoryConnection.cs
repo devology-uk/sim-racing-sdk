@@ -16,11 +16,17 @@ namespace SimRacingSdk.Lmu.SharedMemory;
 // lap/session-key linking problem to guard against.
 public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 {
+    private readonly Subject<LmuSharedMemoryLap> lapsSubject = new();
     private readonly LogMessageBroker logMessageBroker = new(nameof(LmuSharedMemoryConnection));
+    private readonly Subject<LmuSharedMemorySession> sessionEndedSubject = new();
+    private readonly Subject<LmuSharedMemorySession> sessionStartedSubject = new();
     private readonly ILmuSharedMemoryProvider sharedMemoryProvider;
     private readonly Subject<LmuTelemetryFrame> telemetrySubject = new();
 
+    private LmuSharedMemorySession? currentSession;
     private string? lastLoggedWaitReason;
+    private LmuVehicleScoring? lastPlayerScoring;
+    private LmuScoringInfo? lastScoringInfo;
     private CompositeDisposable? subscriptionSink;
     private IDisposable? updateSubscription;
 
@@ -29,7 +35,10 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         this.sharedMemoryProvider = sharedMemoryProvider;
     }
 
+    public IObservable<LmuSharedMemoryLap> Laps => this.lapsSubject.AsObservable();
     public IObservable<LogMessage> LogMessages => this.logMessageBroker.Messages;
+    public IObservable<LmuSharedMemorySession> SessionEnded => this.sessionEndedSubject.AsObservable();
+    public IObservable<LmuSharedMemorySession> SessionStarted => this.sessionStartedSubject.AsObservable();
     public IObservable<LmuTelemetryFrame> Telemetry => this.telemetrySubject.AsObservable();
 
     public void Dispose()
@@ -52,10 +61,36 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
     public void Stop()
     {
+        this.EndCurrentSession();
         this.updateSubscription?.Dispose();
         this.updateSubscription = null;
         this.subscriptionSink?.Dispose();
         this.subscriptionSink = null;
+        this.lastScoringInfo = null;
+        this.lastPlayerScoring = null;
+    }
+
+    private void BeginNewSession(LmuScoringInfo scoringInfo)
+    {
+        this.EndCurrentSession();
+
+        this.lastPlayerScoring = null;
+        this.currentSession = new LmuSharedMemorySession(scoringInfo);
+        this.sessionStartedSubject.OnNext(this.currentSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
+    }
+
+    private void EndCurrentSession()
+    {
+        if(this.currentSession is null)
+        {
+            return;
+        }
+
+        this.currentSession.IsRunning = false;
+        this.sessionEndedSubject.OnNext(this.currentSession);
+        this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
+        this.currentSession = null;
     }
 
     private void LogMessage(LoggingLevel level, string content)
@@ -87,6 +122,10 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
             return;
         }
 
+        var scoringInfo = data.Value.Scoring.ScoringInfo;
+        this.UpdateSession(scoringInfo);
+        this.lastScoringInfo = scoringInfo;
+
         var telemetry = data.Value.Telemetry;
         if(!telemetry.PlayerHasVehicle || telemetry.PlayerVehicleIdx >= telemetry.TelemInfo.Length)
         {
@@ -110,7 +149,56 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         }
 
         this.lastLoggedWaitReason = null;
-        var frame = new LmuTelemetryFrame(playerTelemetry, scoring.VehScoringInfo[playerScoringIndex]);
+        var playerScoring = scoring.VehScoringInfo[playerScoringIndex];
+        this.UpdateLap(playerScoring);
+        this.lastPlayerScoring = playerScoring;
+
+        var frame = new LmuTelemetryFrame(playerTelemetry, playerScoring);
         this.telemetrySubject.OnNext(frame);
+    }
+
+    private void UpdateLap(LmuVehicleScoring playerScoring)
+    {
+        if(this.currentSession is null || this.lastPlayerScoring is null)
+        {
+            return;
+        }
+
+        if(playerScoring.TotalLaps <= this.lastPlayerScoring.Value.TotalLaps)
+        {
+            return;
+        }
+
+        var lap = new LmuSharedMemoryLap(playerScoring, this.currentSession.SessionId, this.currentSession.TrackName);
+        this.lapsSubject.OnNext(lap);
+        this.LogMessage(LoggingLevel.Information, $"Lap Completed: {lap}");
+    }
+
+    // InRealtime is the LMU equivalent of Ace's AceStatus.Live/Off - directly reports whether we're in a live
+    // driving session rather than menus/monitor mode, so it (plus a change in Session, which distinguishes
+    // Practice/Qualify/Race sub-sessions) is enough to detect session start/end without needing GamePhase.
+    private void UpdateSession(LmuScoringInfo scoringInfo)
+    {
+        if(this.lastScoringInfo is null)
+        {
+            return;
+        }
+
+        var previous = this.lastScoringInfo.Value;
+
+        if(!scoringInfo.InRealtime)
+        {
+            if(previous.InRealtime)
+            {
+                this.EndCurrentSession();
+            }
+
+            return;
+        }
+
+        if(!previous.InRealtime || previous.Session != scoringInfo.Session)
+        {
+            this.BeginNewSession(scoringInfo);
+        }
     }
 }

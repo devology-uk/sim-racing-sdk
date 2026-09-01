@@ -32,6 +32,9 @@
             <Button Content="Shared Memory Demo"
                     Command="{Binding StartSharedMemoryDemoCommand}"
                     ToolTip="Start the demo of LmuSharedMemoryConnection, combining the LMU and rFactor2 shared memory plugins" />
+            <Button Content="Monitor Demo"
+                    Command="{Binding StartMonitorDemoCommand}"
+                    ToolTip="Start the demo of LmuMonitor, showing session/lap lifecycle events built on top of LmuSharedMemoryConnection" />
             <Button Content="Open Result Explorer"
                     Command="{Binding OpenResultExplorerCommand}"
                     ToolTip="Open a window for analysing log files" />

@@ -21,6 +21,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly ILmuGameDetector lmuGameDetector;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
+    private readonly IMonitorDemo monitorDemo;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
 
@@ -33,12 +34,14 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
         IConsoleLog consoleLog,
         ILmuGameDetector lmuGameDetector,
-        ISharedMemoryDemo sharedMemoryDemo)
+        ISharedMemoryDemo sharedMemoryDemo,
+        IMonitorDemo monitorDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.lmuGameDetector = lmuGameDetector;
         this.sharedMemoryDemo = sharedMemoryDemo;
+        this.monitorDemo = monitorDemo;
     }
 
 
@@ -106,6 +109,27 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task StartMonitorDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+
+        if(!this.monitorDemo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        this.monitorDemo.Start();
+    }
+
+    [RelayCommand]
     private async Task StartSharedMemoryDemo()
     {
         this.consoleLog.Clear();
@@ -163,6 +187,7 @@ public partial class MainWindowViewModel : ObservableObject
     private void StopRunningDemos()
     {
         this.sharedMemoryDemo.Stop();
+        this.monitorDemo.Stop();
         this.IsRunningDemo = false;
     }
 

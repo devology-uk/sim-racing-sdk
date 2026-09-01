@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimRacingSdk.Lmu.Core\SimRacingSdk.Lmu.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.Lmu.Monitor\SimRacingSdk.Lmu.Monitor.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Lmu.SharedMemory\SimRacingSdk.Lmu.SharedMemory.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj" />

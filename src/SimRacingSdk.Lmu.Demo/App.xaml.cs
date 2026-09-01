@@ -11,6 +11,7 @@ using SimRacingSdk.Lmu.Demo.Demos;
 using SimRacingSdk.Lmu.Demo.ResultExplorer;
 using SimRacingSdk.Lmu.Demo.Services;
 using SimRacingSdk.Lmu.Demo.TrackExplorer;
+using SimRacingSdk.Lmu.Monitor;
 using SimRacingSdk.Lmu.SharedMemory;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Wpf.Shared.Logging;
@@ -63,6 +64,7 @@ public partial class App : Application
 
         services.UseLmuSdk();
         services.UseLmuSharedMemory();
+        services.UseLmuMonitor();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -74,12 +76,9 @@ public partial class App : Application
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
             .CreateLogger("SimRacingSdk.Lmu.Demo.Services.SharedMemoryLog")));
-        // services.AddTransient<IUdpDemo, UdpDemo>();
-        // services.AddTransient<IUdpLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
-        //     .CreateLogger("SimRacingSdk.Lmu.Demo.Services.UdpLog")));
-        // services.AddTransient<IMonitorDemo, MonitorDemo>();
-        // services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
-        //     .CreateLogger("SimRacingSdk.Lmu.Demo.Services.MonitorLog")));
+        services.AddTransient<IMonitorDemo, MonitorDemo>();
+        services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Lmu.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }
