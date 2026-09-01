@@ -10,7 +10,7 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
 
     public static LmuCarInfoProvider Instance => singletonInstance ??= new LmuCarInfoProvider();
 
-    private readonly List<LmuCarInfo> cars  =
+    private readonly List<LmuCarInfo> cars =
     [
         new()
         {
@@ -101,6 +101,8 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             WeightKg = 1057,
             WidthMm = 2000
         },
+        new() { Category="LMDh", Class="HY", DisplayName="Genesis GMR-001", Engine="3.2L V8 Twin Turbo", HeightMm=1055, LengthMm=5000, Manufacturer="Genesis", PowerBhp= 690, PowerKw=0, ResultCarType="Genesis GMR-001", Transmission="7 Speed Sequential", WeightKg=1030, WidthMm=2000},
+
 
         new()
         {
@@ -137,7 +139,6 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             WeightKg = 1030,
             WidthMm = 2000
         },
-
         new()
         {
             Category = "LMDh",
@@ -281,6 +282,11 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             WeightKg = 930,
             WidthMm = 1895
         },
+
+        new() { Category="LMP3", Class="P3", DisplayName="ADESS-03", Engine="3.5L V6 Twin Turbo", HeightMm=1050, LengthMm=4643, Manufacturer="ADESS", PowerBhp= 470, PowerKw=0, ResultCarType="ADESS-03", Transmission="6 Speed Sequential", WeightKg=930, WidthMm=1890},
+new() { Category="LMP3", Class="P3", DisplayName="Duqueine 09", Engine="3.5L V6 Twin Turbo", HeightMm=1050, LengthMm=4643, Manufacturer="Duqueine", PowerBhp= 470, PowerKw=0, ResultCarType="Duqueine 09", Transmission="6 Speed Sequential", WeightKg=930, WidthMm=1890},
+new() { Category="LMP3", Class="P3", DisplayName="Ginetta G61-LT-P325-Evo", Engine="3.5L V6 Twin Turbo", HeightMm=1050, LengthMm=4605, Manufacturer="Ginetta", PowerBhp= 470, PowerKw=0, ResultCarType="Ginetta G61-LT-P325-Evo", Transmission="6 Speed Sequential", WeightKg=950, WidthMm=1900},
+new() { Category="LMP3", Class="P3", DisplayName="Ligier JS P325", Engine="3.5L V6 Twin Turbo", HeightMm=1180, LengthMm=4605, Manufacturer="Ligier", PowerBhp= 470, PowerKw=0, ResultCarType="Ligier JS P325", Transmission="6 Speed Sequential", WeightKg=950, WidthMm=1900},
 
         new()
         {
@@ -533,42 +539,6 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
             WeightKg = 1360,
             WidthMm = 2049
         },
-
-        new()
-        {
-            Category = "LMP3",
-            Class = "P3",
-            DisplayName = "Ligier JS P325",
-            Engine = "3.5L Twin Turbo V6",
-            HeightMm = 1180,
-            LengthMm = 4605,
-            Manufacturer = "Ligier",
-            ModelId = "Ligier_JSP325_2025",
-            PowerBhp = 470,
-            PowerKw = 0,
-            ResultCarType = "Ligier JS P325",
-            Transmission = "6 Speed Sequential",
-            WeightKg = 950,
-            WidthMm = 1900
-        },
-
-        new()
-        {
-            Category = "LMP3",
-            Class = "P3",
-            DisplayName = "Ginetta G61-LT-P325-Evo",
-            Engine = "3.5L Twin Turbo V6",
-            HeightMm = 1050,
-            LengthMm = 4605,
-            Manufacturer = "Ligier",
-            ModelId = "Ginetta_G61Evo_2025",
-            PowerBhp = 470,
-            PowerKw = 339,
-            ResultCarType = "Ginetta G61-LT-P325 Evo",
-            Transmission = "6 Speed Sequential",
-            WeightKg = 950,
-            WidthMm = 1900
-        }
     ];
 
     public LmuCarInfo? GetCarInfoByDisplayName(string displayName)
