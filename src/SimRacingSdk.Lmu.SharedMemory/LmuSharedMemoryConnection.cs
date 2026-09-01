@@ -5,7 +5,6 @@ using SimRacingSdk.Core.Enums;
 using SimRacingSdk.Core.Messages;
 using SimRacingSdk.Core.Services;
 using SimRacingSdk.Lmu.SharedMemory.Abstractions;
-using SimRacingSdk.Lmu.SharedMemory.Enums;
 using SimRacingSdk.Lmu.SharedMemory.Messages;
 using SimRacingSdk.Lmu.SharedMemory.Models;
 
@@ -177,9 +176,11 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
     }
 
     // InRealtime alone isn't enough to detect session start/end: it also goes false for a mid-session garage visit
-    // (e.g. pitting to repair damage), which must NOT split one session into two. A change in Session (which
-    // distinguishes Practice/Qualify/Race sub-sessions) is what marks a genuine new session; GamePhase reaching
-    // SessionStopped/SessionOver is what marks a genuine end of the current one.
+    // (e.g. pitting to repair damage) and, as confirmed by a real rig log, flickers unpredictably for tens of
+    // seconds on the post-session results screen too - neither should split or re-split a session. LMU only ever
+    // allows one instance of each session type per event (confirmed by Mike against the game's own behaviour), so
+    // a change in Session - which distinguishes Practice/Qualify/Race - is a sufficient and sole signal for a
+    // genuine new session; once currentSession exists, nothing else here can end or restart it mid-session.
     private void UpdateSession(LmuScoringInfo scoringInfo)
     {
         if(this.lastScoringInfo is null)
@@ -195,10 +196,6 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
             {
                 this.BeginNewSession(scoringInfo);
             }
-            else if(IsSessionOver(scoringInfo.GamePhase))
-            {
-                this.EndCurrentSession();
-            }
 
             return;
         }
@@ -207,10 +204,5 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         {
             this.BeginNewSession(scoringInfo);
         }
-    }
-
-    private static bool IsSessionOver(byte gamePhase)
-    {
-        return gamePhase is (byte)LmuGamePhase.SessionStopped or (byte)LmuGamePhase.SessionOver;
     }
 }
