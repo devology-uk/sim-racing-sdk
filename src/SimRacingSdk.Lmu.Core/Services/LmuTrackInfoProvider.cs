@@ -23,7 +23,7 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                 new()
                 {
                     Name = "Default",
-                    LengthM = 4553,
+                    LengthM = 4653,
                     Corners = 15
                 }
             }
@@ -121,6 +121,24 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                     Name = "Paddock Circuit",
                     LengthM = 3705,
                     Corners = 10
+                }
+            }
+        },
+        new()
+        {
+            Name = "Circuit de Barcelona",
+            ShortName = "Barcelona",
+            Country = "Spain",
+            CountryCode = "ESP",
+            Latitude = 41.5700,
+            Longitude = 2.2578,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 4657,
+                    Corners = 14
                 }
             }
         },
@@ -283,6 +301,18 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                     Name = "Default",
                     LengthM = 5891,
                     Corners = 18
+                },
+                 new()
+                {
+                    Name = "International Circuit",
+                    LengthM = 2979,
+                    Corners = 8
+                },
+                 new()
+                {
+                    Name = "National Circuit",
+                    LengthM = 2639,
+                    Corners = 6
                 }
             }
         },
@@ -301,6 +331,66 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                     Name = "Default",
                     LengthM = 5770,
                     Corners = 13
+                },
+                 new()
+                {
+                    Name = "Layout 1A",
+                    LengthM = 5752,
+                    Corners = 13
+                },
+                 new()
+                {
+                    Name = "Layout 1A-V2",
+                    LengthM = 5841,
+                    Corners = 15
+                },
+                 new()
+                {
+                    Name = "Layout 1A-V2 Short",
+                    LengthM = 5227,
+                    Corners = 14
+                },
+                 new()
+                {
+                    Name = "Layout 3A",
+                    LengthM = 3793,
+                    Corners = 8
+                }
+            }
+        },
+        new()
+        {
+            Name = "Daytona International Speedway",
+            ShortName = "Daytona",
+            Country = "USA",
+            CountryCode = "USA",
+            Latitude = 29.18777976891776,
+            Longitude = -81.0684744190165,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 5729,
+                    Corners = 13
+                }
+            }
+        },
+        new()
+        {
+            Name = "WeatherTech Raceway Laguna Seca",
+            ShortName = "Laguna Seca",
+            Country = "USA",
+            CountryCode = "USA",
+            Latitude = 36.24666666666667,
+            Longitude = -121.87166666666667,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 2602,
+                    Corners = 11
                 }
             }
         }
