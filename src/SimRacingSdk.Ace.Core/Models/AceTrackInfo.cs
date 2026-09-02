@@ -8,6 +8,7 @@ namespace SimRacingSdk.Ace.Core.Models;
 public record AceTrackInfo
 {
     public string Continent { get; init; }
+    public int Corners { get; init; }
     public string CountryCode { get; init; }
     public string Track { get; init; }
     public string ShortName { get; init; }
