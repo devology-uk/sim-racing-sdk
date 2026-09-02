@@ -18,5 +18,6 @@ public record LmuMonitorLap : LmuMonitorMessageBase
     public string TrackName { get; init; }
     public LmuVehicleClass VehicleClass { get; init; }
     public string VehicleClassName { get; init; }
+    public string VehicleModel { get; init; }
     public string VehicleName { get; init; }
 }

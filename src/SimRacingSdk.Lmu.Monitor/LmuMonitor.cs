@@ -113,6 +113,7 @@ public class LmuMonitor : ILmuMonitor
             TrackName = lmuSharedMemoryLap.TrackName,
             VehicleClass = lmuSharedMemoryLap.VehicleClass,
             VehicleClassName = lmuSharedMemoryLap.VehicleClassName,
+            VehicleModel = lmuSharedMemoryLap.VehicleModel,
             VehicleName = lmuSharedMemoryLap.VehicleName
         };
 
