@@ -1,5 +1,6 @@
 #nullable disable
 
+using SimRacingSdk.Lmu.Core.Services;
 using SimRacingSdk.Lmu.SharedMemory.Enums;
 using SimRacingSdk.Lmu.SharedMemory.Messages;
 
@@ -145,6 +146,10 @@ public record LmuTelemetryFrame
         this.Sector = scoring.Sector;
         this.FinishStatus = scoring.FinishStatus;
         this.LapDist = scoring.LapDist;
+        var layout = LmuTrackInfoProvider.Instance.FindLayoutByRawTrackName(this.TrackName);
+        this.NormalisedCarPosition = layout is { LengthM: > 0 }
+            ? (float)Math.Clamp(this.LapDist / layout.LengthM, 0, 1)
+            : 0f;
         this.PathLateral = scoring.PathLateral;
         this.TrackEdge = scoring.TrackEdge;
         this.BestSector1 = scoring.BestSector1;
@@ -268,6 +273,7 @@ public record LmuTelemetryFrame
     public byte MigrationMax { get; }
     public byte MotorMap { get; }
     public byte MotorMapMax { get; }
+    public float NormalisedCarPosition { get; }
     public int NumPenalties { get; }
     public int NumPitstops { get; }
     public LmuVect3[] Ori { get; }
