@@ -413,26 +413,41 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
     // can only guess the "Default" layout, and is wrong for any non-default layout on a multi-layout track).
     public LmuTrackLayoutInfo? FindLayoutByRawTrackName(string rawTrackName)
     {
+        return this.FindTrackAndLayoutByRawTrackName(rawTrackName)?.Layout;
+    }
+
+    // Same matching as FindLayoutByRawTrackName, but also returns the parent track - needed by callers that
+    // have to build a venue+layout composite id (e.g. the Lap Analyser's "last driven combo" default, which
+    // needs the track's own ShortName alongside the resolved layout, not just the layout in isolation).
+    public (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindTrackAndLayoutByRawTrackName(string rawTrackName)
+    {
         if(string.IsNullOrWhiteSpace(rawTrackName))
         {
             return null;
         }
 
-        var layoutNameMatch = this.tracks
-            .SelectMany(track => track.Layouts)
-            .Where(layout => layout.Name != "Default")
-            .FirstOrDefault(layout => rawTrackName.Contains(layout.Name, StringComparison.InvariantCultureIgnoreCase));
-
-        if(layoutNameMatch != null)
+        foreach(var track in this.tracks)
         {
-            return layoutNameMatch;
+            var layoutNameMatch = track.Layouts
+                .Where(layout => layout.Name != "Default")
+                .FirstOrDefault(layout => rawTrackName.Contains(layout.Name, StringComparison.InvariantCultureIgnoreCase));
+            if(layoutNameMatch != null)
+            {
+                return (track, layoutNameMatch);
+            }
         }
 
         var venueTrack = this.GeTrackInfoByVenue(rawTrackName)
             ?? this.tracks.FirstOrDefault(t => t.ShortName.Equals(rawTrackName, StringComparison.InvariantCultureIgnoreCase))
             ?? this.tracks.FirstOrDefault(t => rawTrackName.Contains(t.ShortName, StringComparison.InvariantCultureIgnoreCase));
 
-        return venueTrack?.Layouts.FirstOrDefault(l => l.Name == "Default") ?? venueTrack?.Layouts.FirstOrDefault();
+        if(venueTrack == null)
+        {
+            return null;
+        }
+
+        var layout = venueTrack.Layouts.FirstOrDefault(l => l.Name == "Default") ?? venueTrack.Layouts.FirstOrDefault();
+        return layout == null ? null : (venueTrack, layout);
     }
 
     public LmuTrackInfo? GeTrackInfoByVenue(string venue)
