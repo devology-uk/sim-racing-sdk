@@ -138,8 +138,12 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             return;
         }
 
-        this.UpdateSession(graphicsData, staticData);
+        // TrackSessionPhase must run before UpdateSession: a session-ending phase name (e.g. an
+        // Overtime_* race-finish phase) and the TimeLeftMs jump that ends that same session often
+        // land on the very same frame - recording the phase name first attributes it to the
+        // session that's about to end, not the new one UpdateSession may start right after.
         this.TrackSessionPhase(graphicsData);
+        this.UpdateSession(graphicsData, staticData);
         this.UpdateFlagState(graphicsData);
         this.UpdateSectorSplits(graphicsData);
         this.UpdateActiveLap(graphicsData, staticData);

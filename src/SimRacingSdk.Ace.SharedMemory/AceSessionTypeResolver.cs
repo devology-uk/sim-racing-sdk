@@ -5,14 +5,19 @@ namespace SimRacingSdk.Ace.SharedMemory;
 // Race can report "TimeAttack" for its entire duration (confirmed against a captured race with
 // AI opponents, grid start, and overtime - the static page never left EventId=0/SessionId=0/
 // Session=TimeAttack). SessionState.PhaseName, on the per-frame graphics page, does update live
-// though, and these particular phase names only ever occur once a session has reached its
-// finish/last-lap logic - a concept Practice/Qualify/TimeAttack sessions don't have - so seeing
-// any of them during a session is a reliable signal it was actually a race.
+// though, and these particular phase names are a reliable race-only signal - confirmed against a
+// real AI race weekend capture (2026-09-05) where the actual 10-minute race hit both
+// Overtime_Waiting_For_Leader/Overtime_Waiting_For_Others at its finish, while a 5-minute
+// Qualifying sub-session in the same weekend never did.
+//
+// Waiting_Last_Lap was originally in this list too, on the assumption it was race-exclusive -
+// the same 2026-09-05 capture proved that wrong: Qualifying hit it too at its own natural,
+// time-based end, wrongly resolving that Qualifying session to "Race". Removed rather than kept
+// as a weaker signal, since a false positive here mislabels a real session, not just misses one.
 public static class AceSessionTypeResolver
 {
     private static readonly string[] raceFinishPhaseNames =
     [
-        "Waiting_Last_Lap",
         "Overtime_Waiting_For_Leader",
         "Overtime_Waiting_For_Others"
     ];
