@@ -105,6 +105,7 @@ public class LmuMonitor : ILmuMonitor
             CarManufacturer = car?.Manufacturer ?? UnknownCarText,
             CompletedLaps = lmuSharedMemoryLap.CompletedLaps,
             DriverName = lmuSharedMemoryLap.DriverName,
+            IsValid = lmuSharedMemoryLap.IsValid,
             LastLapTimeMs = lmuSharedMemoryLap.LastLapTimeMs,
             Sector1Ms = lmuSharedMemoryLap.Sector1Ms,
             Sector2Ms = lmuSharedMemoryLap.Sector2Ms,

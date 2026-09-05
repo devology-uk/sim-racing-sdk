@@ -10,6 +10,7 @@ public record LmuMonitorLap : LmuMonitorMessageBase
     public string CarManufacturer { get; init; }
     public int CompletedLaps { get; init; }
     public string DriverName { get; init; }
+    public bool IsValid { get; init; }
     public int LastLapTimeMs { get; init; }
     public Guid SessionId { get; init; }
     public int Sector1Ms { get; init; }

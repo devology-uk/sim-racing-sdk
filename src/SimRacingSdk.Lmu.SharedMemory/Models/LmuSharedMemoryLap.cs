@@ -24,10 +24,20 @@ public record LmuSharedMemoryLap
         this.Sector2Ms = ToMilliseconds(scoring.LastSector2 - scoring.LastSector1);
         this.Sector3Ms = ToMilliseconds(scoring.LastLapTime - scoring.LastSector2);
         this.TrackName = trackName;
+        // scoring.CountLapFlag is rF2's own per-vehicle "does this lap count" signal (confirmed against
+        // InternalsPlugin.hpp: 0 = do not count lap or time, 1 = count lap but not time, 2 = count lap and time),
+        // sampled from the same scoring snapshot LastLapTime/sectors above already come from, so it reflects the
+        // lap that just completed rather than the one now starting. Only flag 2 gets a real, representative lap
+        // time - flags 0 and 1 are both treated as invalid here, since a Fuel/Tyre Pressure calculator has no use
+        // for a lap whose own time isn't trustworthy even if rF2 would still count it toward the lap total.
+        // Unconfirmed against real captured data yet - this is the live-telemetry equivalent of the result file's
+        // "--:--.----" invalid-lap sentinel that LmuResultFileImporter already relies on.
+        this.IsValid = scoring.CountLapFlag == 2;
     }
 
     public int CompletedLaps { get; }
     public string DriverName { get; }
+    public bool IsValid { get; }
     public int LastLapTimeMs { get; }
     public Guid SessionId { get; }
 
