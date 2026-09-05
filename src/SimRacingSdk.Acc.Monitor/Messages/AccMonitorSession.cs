@@ -12,6 +12,7 @@ public record AccMonitorSession() : AccMonitorMessageBase
     public bool IsRunning { internal set; get; }
     public int NumberOfCars { get; init; }
     public Guid SessionId { get; init; }
+    public int SessionIndex { get; init; }
     public string SessionType { get; init; }
     public string TrackName { get; init; }
 }
