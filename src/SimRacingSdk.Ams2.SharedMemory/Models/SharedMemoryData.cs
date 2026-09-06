@@ -602,6 +602,8 @@ public record SharedMemoryData
             NormalisedCarPosition = this.TrackLength > 0
                 ? Math.Clamp(playerParticipant.DistanceIntoCurrentLap / this.TrackLength, 0f, 1f)
                 : 0f,
+            DiagnosticTrackLength = this.TrackLength,
+            DiagnosticDistanceIntoCurrentLap = playerParticipant.DistanceIntoCurrentLap,
             OdometerKm = this.OdometerKm,
             OilPressureKpa = this.OilPressureKpa,
             OilTempC = this.OilTempC,

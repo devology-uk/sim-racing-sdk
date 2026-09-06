@@ -104,6 +104,18 @@ public class Ams2Monitor : IAms2Monitor
             return false;
         }
 
+        // AMS2's shared memory updates SessionState to the next session's type a beat before RaceState
+        // resets away from the just-ended session's Finished value - confirmed 2026-09-06 against real captured
+        // data, where every genuine session start had RaceState = NotStarted, but two spurious phantom
+        // "sessions" (opening and closing within ~0.3s, no participants having driven a lap) both had
+        // RaceState still reporting Finished at the exact moment SessionState flipped. So a SessionState change
+        // seen while RaceState is still Finished is this stale front-end/results-screen echo, not a real new
+        // session, regardless of which session type it flipped to.
+        if(ams2GameStatus.RaceState == Ams2RaceState.Finished)
+        {
+            return false;
+        }
+
         if(this.currentGameStatus.SessionState != Ams2SessionState.Practice
            && ams2GameStatus.SessionState == Ams2SessionState.Practice)
         {
