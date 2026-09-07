@@ -240,7 +240,8 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             if(this.currentSession != null
                && graphicsData.Status == AceStatus.Live
                && this.lastGraphicsData != null
-               && graphicsData.SessionState.TimeLeftMs > this.lastGraphicsData.SessionState.TimeLeftMs + 60000)
+               && graphicsData.SessionState.TimeLeftMs > this.lastGraphicsData.SessionState.TimeLeftMs + 60000
+               && !AceSessionTypeResolver.IsInRaceFinishSequence(this.observedSessionPhaseNames))
             {
                 this.BeginNewSession(graphicsData, staticData);
             }

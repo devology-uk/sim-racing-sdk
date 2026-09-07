@@ -24,6 +24,11 @@ public static class AceSessionTypeResolver
 
     public static string Resolve(string reportedSessionType, IReadOnlySet<string> observedPhaseNames)
     {
-        return observedPhaseNames.Overlaps(raceFinishPhaseNames) ? "Race" : reportedSessionType;
+        return IsInRaceFinishSequence(observedPhaseNames) ? "Race" : reportedSessionType;
+    }
+
+    public static bool IsInRaceFinishSequence(IReadOnlySet<string> observedPhaseNames)
+    {
+        return observedPhaseNames.Overlaps(raceFinishPhaseNames);
     }
 }
