@@ -316,9 +316,6 @@ public class LmuSessionFile
         return defaultValue;
     }
 
-    // LMU omits BestLapTime entirely (or renders a lap's own time as the "--.----" template) for a
-    // driver with no valid lap - GetDouble's silent 0.0 default would then read as a genuine
-    // (impossible) 0.000 best time instead of "no valid data", so this returns null instead.
     private static double? GetNullableDouble(string? value)
     {
         if(string.IsNullOrEmpty(value) || value.Contains('-'))

@@ -14,8 +14,6 @@ public record AceGraphicsData
         this.IsEmpty = true;
     }
 
-    // Instrumentation/Electronics min/max/is-modifiable capability descriptors from the PDF are
-    // deliberately not surfaced here - they describe setup limits, not live telemetry.
     internal AceGraphicsData(AceGraphicsPage graphicsPage)
     {
         this.graphicsPage = graphicsPage;

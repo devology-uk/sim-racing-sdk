@@ -2,11 +2,6 @@
 
 namespace SimRacingSdk.Ace.Core.Models;
 
-// Sourced from Mike's own manually-gathered ace-cars.csv (repo root, populated 2026-07-28 from
-// Evo's in-game car list) - far richer than the earlier cars.json-derived {Name, DisplayName}
-// shape. ModelId is the internal preset id string from the ACE Dedicated Server's cars.json
-// (e.g. "preset_m4gt3_mech_1"), matched by hand against ace-cars.csv on 2026-08-12 - see
-// AceCarInfoProvider.FindByModelId.
 public record AceCarInfo
 {
     public string Body { get; init; }

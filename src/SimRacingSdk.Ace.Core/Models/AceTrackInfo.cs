@@ -2,9 +2,6 @@
 
 namespace SimRacingSdk.Ace.Core.Models;
 
-// Track/layout/length/pit-slot data originally sourced from the AC Evo Dedicated Server's
-// events_practice.json; Continent, CountryCode and ShortName added 2026-07-29 from Mike's own
-// ace-tracks.csv, hand-gathered from the game's own track list (repo root).
 public record AceTrackInfo
 {
     public string Continent { get; init; }

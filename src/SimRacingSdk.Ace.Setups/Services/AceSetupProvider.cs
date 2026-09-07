@@ -7,9 +7,6 @@ using SimRacingSdk.Ace.Setups.Models;
 
 namespace SimRacingSdk.Ace.Setups.Services;
 
-// Discovers and parses the user's live ACE setup files directly from disk (read-only, no mirrored
-// copy or version history). Every raw value is already a real physical unit - ACE needs no
-// click-index-to-real-unit calibration layer, unlike ACC.
 public class AceSetupProvider : IAceSetupProvider
 {
     private static AceSetupProvider? singletonInstance;
@@ -58,7 +55,6 @@ public class AceSetupProvider : IAceSetupProvider
                     }
                     catch(Exception)
                     {
-                        // Skip an unreadable/corrupt file rather than failing the whole scan.
                         continue;
                     }
 
@@ -95,11 +91,6 @@ public class AceSetupProvider : IAceSetupProvider
         File.Delete(filePath);
     }
 
-    // ACE's setup folders are named after the car's display name, not a stable internal id like
-    // ACC's - and that name doesn't always match the catalog cleanly (confirmed drift multiple
-    // times: "SF25" vs the catalog's "SF-25", a since-renamed EV, etc.). So car identity is
-    // resolved from each file's own embedded preset string instead of trusting the folder name -
-    // every ModelId in the catalog is known to appear verbatim as a substring of it.
     private AceSetupFileInfo BuildFileInfo(string carFolderName, string trackFolderName, string filePath)
     {
         var raw = AceRawCarSetup.Parser.ParseFrom(File.ReadAllBytes(filePath));

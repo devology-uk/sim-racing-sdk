@@ -4,8 +4,6 @@ using SimRacingSdk.Ace.Core.Models;
 
 namespace SimRacingSdk.Ace.Core;
 
-// Same broadcasting protocol as Acc (confirmed 2026-07-27), so the same nationality codes and
-// their ISO country codes apply - this table is copied verbatim, not a guess.
 public class AceNationalityInfoProvider : IAceNationalityInfoProvider
 {
     private static AceNationalityInfoProvider? singletonInstance;

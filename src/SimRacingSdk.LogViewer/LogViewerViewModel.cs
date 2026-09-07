@@ -411,8 +411,6 @@ public partial class LogViewerViewModel : ObservableObject
 
     private LogFileEntry ParseLogFileEntry(string line)
     {
-        // Layout is fixed at 6 pipe-delimited fields: timestamp|level|message|event-properties|source|exception -
-        // capped with a count so a pipe inside the exception text can't shift field positions.
         var lineElements = line.Split('|', 6);
         if(lineElements.Length < 6)
         {

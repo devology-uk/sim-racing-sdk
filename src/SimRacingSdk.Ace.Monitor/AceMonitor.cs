@@ -13,12 +13,6 @@ using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ace.Monitor;
 
-// Shared-memory-only, matching Ams2Monitor's pattern: Ace's client has no UDP broadcasting (see
-// AceSharedMemoryConnection remarks), so session lifecycle comes purely from
-// IAceSharedMemoryConnection's own SessionStarted/SessionEnded transitions - no Event wrapper,
-// no UDP-only features (entries, accidents, penalties, green flag, phase/session-type changes)
-// since none of those exist without a UDP feed. Those return if/when an opt-in remote
-// Dedicated-Server UDP client is built.
 public class AceMonitor : IAceMonitor
 {
     private const string UnknownCarText = "Unknown";

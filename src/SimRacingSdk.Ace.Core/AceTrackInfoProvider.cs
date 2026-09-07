@@ -8,8 +8,6 @@ public class AceTrackInfoProvider : IAceTrackInfoProvider
 {
     private static AceTrackInfoProvider? singletonInstance;
 
-    // CountryCode uses JPN rather than the game's own "JAP" label, matching the ISO-alpha-3 flag
-    // assets under Images/Flags (same convention as Acc/Lmu's track providers).
     private readonly List<AceTrackInfo> tracks =
     [
         new() { Continent = "Europe", Corners = 9, CountryCode = "GBR-ENG", Track = "Brands Hatch", ShortName = "Brands Hatch", Layout = "GP", TrackLengthMeters = 3916, MaxPitSlot = 32, Latitude = 51.3566, Longitude = 0.2614 },

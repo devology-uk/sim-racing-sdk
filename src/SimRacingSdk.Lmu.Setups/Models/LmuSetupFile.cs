@@ -3,17 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace SimRacingSdk.Lmu.Setups.Models;
 
-// Parses LMU's rFactor2-derived .svm setup text format into raw section/key data. Deliberately
-// generic (index + comment text per field) rather than typed per-field - the per-field value
-// representation (comment-text-verbatim vs. typed-numeric) is still pending Mike's own comparison
-// against LMU's in-game setup screens, see the LMU Setup Manager plan.
+// Parses LMU's rFactor2-derived .svm setup text format into raw section/key data.
 public class LmuSetupFile
 {
     private static readonly Regex VehiclesPathSegmentRegex =
         new(@"[\\/]Vehicles[\\/]([^\\/]+)[\\/]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-    // The game's own "Quick Setup" convenience view - a simplified view of values shown in full
-    // elsewhere, dropped from v1. See the LMU Setup Manager plan.
+    // The game's own "Quick Setup" convenience view - a simplified view of values shown in full elsewhere.
     private static readonly HashSet<string> DroppedSections = new(StringComparer.OrdinalIgnoreCase) { "BASIC" };
 
     public string? VehicleClassSetting { get; private set; }

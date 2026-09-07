@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 
 namespace SimRacingSdk.Ace.Core.Models.Config;
 
-// Shape assumed identical to Acc's broadcasting.json - unverified against a real Ace Evo install.
 public class BroadcastingSettings
 {
     [JsonPropertyName("commandPassword")]

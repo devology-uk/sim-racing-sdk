@@ -403,22 +403,11 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         return this.tracks.FirstOrDefault(t => t.ShortName == shortName);
     }
 
-    // Live shared memory (LmuScoringInfo/LmuVehicleTelemetry.TrackName) carries only a single 64-char venue
-    // string with no separate layout field - unlike the result-file import path's TrackVenue, this hasn't been
-    // confirmed against real captured data for every track (see lmu_realtime_monitoring_feature memory), so this
-    // is a best-effort match, not a guaranteed one. Layout names (e.g. "International Circuit", "Mulsanne",
-    // "Curva Grande Circuit") are distinctive enough that if LMU's raw string happens to embed the layout name -
-    // plausible, since in rF2's mod structure each layout is typically its own distinct track definition - a
-    // direct substring match on layout name is tried first, before falling back to venue-only matching (which
-    // can only guess the "Default" layout, and is wrong for any non-default layout on a multi-layout track).
     public LmuTrackLayoutInfo? FindLayoutByRawTrackName(string rawTrackName)
     {
         return this.FindTrackAndLayoutByRawTrackName(rawTrackName)?.Layout;
     }
 
-    // Same matching as FindLayoutByRawTrackName, but also returns the parent track - needed by callers that
-    // have to build a venue+layout composite id (e.g. the Lap Analyser's "last driven combo" default, which
-    // needs the track's own ShortName alongside the resolved layout, not just the layout in isolation).
     public (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindTrackAndLayoutByRawTrackName(string rawTrackName)
     {
         if(string.IsNullOrWhiteSpace(rawTrackName))

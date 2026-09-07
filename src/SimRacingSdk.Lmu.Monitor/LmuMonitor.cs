@@ -12,10 +12,6 @@ using SimRacingSdk.Lmu.SharedMemory.Models;
 
 namespace SimRacingSdk.Lmu.Monitor;
 
-// Shared-memory-only, mirroring AceMonitor's pattern: session/lap lifecycle comes purely from
-// ILmuSharedMemoryConnection's own SessionStarted/SessionEnded/Laps transitions, which it derives from diffing
-// LmuScoringInfo/LmuVehicleScoring reads itself (see LmuSharedMemoryConnection.UpdateSession/UpdateLap) - Monitor
-// only enriches with car info and republishes as its own Monitor-domain types.
 public class LmuMonitor : ILmuMonitor
 {
     private const string UnknownCarText = "Unknown";
@@ -97,8 +93,6 @@ public class LmuMonitor : ILmuMonitor
             return;
         }
 
-        // VehicleModel (e.g. "Porsche 911 GT3 R LMGT3") is the catalog-matchable car identity; VehicleName is the
-        // driver's entry/livery string (team name + car number) - confirmed against a real rig log, see CLAUDE.md.
         var car = this.lmuCarInfoProvider.GetCarInfoByDisplayName(lmuSharedMemoryLap.VehicleModel);
         var lmuMonitorLap = new LmuMonitorLap
         {

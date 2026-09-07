@@ -1,9 +1,3 @@
-/*
- * This demo shows how to use LmuSharedMemoryConnection to read LMU's native shared memory interface
- * (Studio 397's own SharedMemoryInterface.hpp) - no plugin install required, just "Enable Plugins" turned on in
- * the game's own Settings -> Gameplay screen.
- */
-
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Core.Messages;
@@ -86,8 +80,6 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     private void OnNextTelemetryFrame(LmuTelemetryFrame lmuTelemetryFrame)
     {
-        // Frames arrive as often as every 20ms - too much to log individually, so just keep a running count and
-        // surface the occasional frame so it's visible the data is actually flowing.
         this.telemetryFrameCount++;
         if(this.telemetryFrameCount % 250 == 0)
         {

@@ -7,9 +7,7 @@ using SimRacingSdk.Ace.SharedMemory.Models;
 
 namespace SimRacingSdk.Ace.SharedMemory.Messages;
 
-// Field layout transcribed from ACE_SharedFileOut_Documentation_v1.pdf (SPageFileGraphicEvo),
-// as of the 2026-04-28 revision (includes CarIds). Embedded sub-structs (AceTyreState etc.)
-// carry an unverified Reserved padding block - see AceTyreState.cs.
+// Field layout transcribed from ACE_SharedFileOut_Documentation_v1.pdf (SPageFileGraphicEvo).
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
 public class AceGraphicsPage

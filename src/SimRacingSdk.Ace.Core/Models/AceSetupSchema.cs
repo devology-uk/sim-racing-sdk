@@ -1,8 +1,5 @@
 namespace SimRacingSdk.Ace.Core.Models;
 
-// Describes which setup tabs and settings a car actually exposes in ACE's UI - Early Access means
-// this genuinely varies per car (not just BOP-disabled fields, some tabs are entirely absent, some
-// underlying values exist in the setup file but aren't surfaced as editable controls at all yet).
 public record AceSetupSchema
 {
     public AceTyresSchema Tyres { get; init; } = new();
@@ -20,9 +17,6 @@ public record AceTyresSchema
     public AceTyreAxleSchema Rear { get; init; } = new();
 }
 
-// Front-left/front-right (and rear-left/rear-right) have always shown the same set of available
-// fields as each other in every car checked so far, only the values differ - so axle-level
-// granularity is enough, no need to model all four corners independently.
 public record AceTyreAxleSchema
 {
     public bool HasPressure { get; init; }

@@ -362,9 +362,6 @@ public class AccMonitor : IAccMonitor
         var previousSharedMemorySession = this.accSharedMemorySession;
         this.accSharedMemorySession = accSharedMemorySession;
 
-        // A track/online-mode change means ACC's own network state is unlikely to have survived, so the
-        // broadcast socket is torn down and recreated - this is purely connection-lifecycle housekeeping,
-        // independent of Event identity (which OnNextRealTimeUpdate now derives from ACC's own EventIndex).
         var requiresFreshConnection = previousSharedMemorySession == null
                                       || previousSharedMemorySession.TrackName != accSharedMemorySession.TrackName
                                       || previousSharedMemorySession.IsOnline != accSharedMemorySession.IsOnline;
@@ -671,10 +668,6 @@ public class AccMonitor : IAccMonitor
                                                        });
     }
 
-    // ACC's own broadcast EventIndex is the authoritative signal for "is this still the same event" -
-    // it increments whenever the dedicated server moves to a genuinely new event, even if the track and
-    // online-mode (the old heuristic this replaced) stay the same, e.g. a fresh event loaded without the
-    // server ever going offline.
     private void UpdateCurrentEvent(int eventIndex)
     {
         if(this.currentEvent != null && this.currentEvent.EventIndex == eventIndex)

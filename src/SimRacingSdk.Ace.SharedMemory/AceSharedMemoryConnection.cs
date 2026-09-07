@@ -9,11 +9,6 @@ using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Ace.SharedMemory;
 
-// Session identity here is derived from AceStaticData (EventId/SessionId/Session/IsOnline),
-// which the PDF documents as written once per session - unlike Acc, where the equivalent
-// identity fields (SessionIndex/SessionType) live on the per-frame graphics page. Lap
-// completion is detected from GraphicsData.TotalLapCount incrementing rather than Acc's
-// sector-index heuristic, because Evo's shared memory doesn't expose sector data.
 public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 {
     private readonly Subject<AceAppStatusChange> appStatusChangesSubject = new();
@@ -138,10 +133,6 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             return;
         }
 
-        // TrackSessionPhase must run before UpdateSession: a session-ending phase name (e.g. an
-        // Overtime_* race-finish phase) and the TimeLeftMs jump that ends that same session often
-        // land on the very same frame - recording the phase name first attributes it to the
-        // session that's about to end, not the new one UpdateSession may start right after.
         this.TrackSessionPhase(graphicsData);
         this.UpdateSession(graphicsData, staticData);
         this.UpdateFlagState(graphicsData);

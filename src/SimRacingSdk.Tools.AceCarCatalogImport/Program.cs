@@ -1,19 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-// Regenerates AceCarInfoProvider.cs's hardcoded car list from ace-cars.csv (the source of truth
-// Mike also uses to populate a car catalog on a couple of WordPress sites). Every catalog field
-// (Manufacturer, Name, physical specs, ...) comes from the CSV and is fully overwritten on each
-// run. Two properties are ACE Setup Manager-specific, not general car-catalog data, so they're
-// deliberately NOT sourced from the CSV at all - the tool preserves them from the existing
-// AceCarInfoProvider.cs instead (keyed by ModelId), so re-running this can never silently wipe
-// them: SetupSchema, and TyreCompounds (a "Tyre Compounds" CSV column existed briefly but was
-// removed once schema work started - both properties are now permanently hand-maintained C# data
-// only). If the CSV ever gains a non-empty "Tyre Compounds" cell for a row again, that value would
-// still take priority over the preserved one - this tool doesn't special-case the column being
-// gone, it just falls back the same way it would for any other still-empty cell.
-// A car with neither a CSV value nor a prior value for these just gets the type's own default.
-//
 // Usage:
 //   dotnet run --project SimRacingSdk.Tools.AceCarCatalogImport
 //     Dry run - writes to AceCarInfoProvider.generated.cs next to the CSV for review.
@@ -74,11 +61,6 @@ static string FindRepoRoot()
         "Could not find repo root (walked up from AppContext.BaseDirectory looking for ace-cars.csv).");
 }
 
-// Extracts a property's exact source text from every car entry in the current provider file,
-// keyed by ModelId - used to carry values forward across a regeneration that aren't (or aren't
-// yet) sourced from the CSV. propertyName's value must start with openChar and its matching
-// closeChar must close it (works for both "{ ... }" object initializers and "[ ... ]" array
-// literals).
 static Dictionary<string, string> ExtractPreservedPropertyValues(
     string providerPath, string propertyName, char openChar, char closeChar)
 {
@@ -110,9 +92,6 @@ static Dictionary<string, string> ExtractPreservedPropertyValues(
     return result;
 }
 
-// Starting just after "<Property> = ", captures the full value expression, correctly balancing
-// nested occurrences of openChar/closeChar (e.g. the Tyres/Electronics/... sub-objects inside a
-// SetupSchema value).
 static string ExtractBalancedExpression(string line, int start, char openChar, char closeChar)
 {
     var openStart = line.IndexOf(openChar, start);
@@ -146,8 +125,6 @@ static (string[] Headers, List<string[]> Rows) ParseCsv(string csvPath)
     return (headers, rows);
 }
 
-// Tolerates the CSV being open in Excel (or the provider file open in Visual Studio) at the same
-// time - both commonly hold a lock that still permits shared reads.
 static string[] ReadAllLinesShared(string path)
 {
     using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

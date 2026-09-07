@@ -1,14 +1,3 @@
-/*
- * This demo provides an example of how to use the LmuMonitor component, which wraps
- * LmuSharedMemoryConnection to provide enriched, application-friendly data objects.
- *
- * The demo simply logs entities but in a real application you might want to save these entities
- * in a database and display the data.
- *
- * Like SharedMemoryDemo, this only ever reports the local player's own session/laps/telemetry -
- * LMU's shared memory has no entry list or other-car data.
- */
-
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Core.Messages;
@@ -99,8 +88,6 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextTelemetryFrame(LmuTelemetryFrame lmuTelemetryFrame)
     {
-        // too much information to log telemetry frames, which are logged via log messages
-        // just maintaining a count to report at the end
         this.telemetryFrameCount++;
     }
 

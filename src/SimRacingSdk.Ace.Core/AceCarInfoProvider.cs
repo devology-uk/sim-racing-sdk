@@ -3,14 +3,6 @@ using SimRacingSdk.Ace.Core.Models;
 
 namespace SimRacingSdk.Ace.Core;
 
-// Sourced from Mike's own manually-gathered ace-cars.csv (repo root, populated 2026-07-28 from
-// Evo's in-game car list). ModelId is the preset id string from the ACE Dedicated Server's
-// cars.json (found 2026-08-12 at "<Steam>\steamapps\common\Assetto Corsa EVO Dedicated
-// Server\cars.json"), matched to each row here by pairing cars.json's display_name (which
-// splits into a base name plus a " - " variant suffix) against this list's Manufacturer/Name/
-// Variant and cross-checking performance_indicator against PerformanceRating - display names
-// and variant wording differ between the two sources (e.g. "Alfa Romeo" vs Mike's "Alpha
-// Romeo", "Huracán" vs "Huracan"), but every base-name group matched 1:1 in count and order.
 public class AceCarInfoProvider : IAceCarInfoProvider
 {
     private static AceCarInfoProvider? singletonInstance;

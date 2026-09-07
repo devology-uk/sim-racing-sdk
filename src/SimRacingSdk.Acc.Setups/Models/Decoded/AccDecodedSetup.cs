@@ -1,8 +1,5 @@
 namespace SimRacingSdk.Acc.Setups.Models;
 
-// Every raw click index already translated through the car's AccSetupMap into real units - the
-// full decode, nothing dropped. SRT's curated AccSetupDetail (and friends) pick a subset of this
-// for what ACC's own setup screens actually show; this type doesn't know about that distinction.
 public class AccDecodedSetup
 {
     public AccDecodedTyres Tyres { get; init; } = new();
@@ -41,8 +38,6 @@ public class AccDecodedElectronics
     public int EcuMap { get; init; }
     public int TelemetryLaps { get; init; }
 
-    // Not present in ACC's own ElectronicsView (acc-tools' ElectronicsViewModel confirms it) - kept
-    // here for a faithful decode, dropped by SRT's curated AccSetupElectronicsDetail.
     public int FuelMix { get; init; }
 }
 
@@ -101,9 +96,6 @@ public class AccDecodedDampers
 
 public class AccDecodedAero
 {
-    // All four corners, unlike SRT's curated AccSetupAeroDetail - ACC only exposes one adjustable
-    // ride height per axle in-game (acc-tools' AeroViewModel reads index 0/2 only), but that's a
-    // curation decision, not a decode one.
     public int RideHeightFl { get; init; }
     public int RideHeightFr { get; init; }
     public int RideHeightRl { get; init; }
@@ -113,8 +105,5 @@ public class AccDecodedAero
     public int BrakeDuctFront { get; init; }
     public int BrakeDuctRear { get; init; }
 
-    // Derived value, not something the player sets or sees in-game (not shown anywhere in
-    // acc-tools' AeroView) - kept here for a faithful decode, dropped by SRT's curated
-    // AccSetupAeroDetail.
     public double[] RodLength { get; init; } = new double[4];
 }

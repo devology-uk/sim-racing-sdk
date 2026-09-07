@@ -6,10 +6,6 @@ using SimRacingSdk.Lmu.Setups.Models;
 
 namespace SimRacingSdk.Lmu.Setups.Services;
 
-// Discovers and parses the user's live LMU setup files directly from disk (read-only, no mirrored
-// copy or version history). Unlike ACC/ACE, LMU's Settings folder has no per-car subfolder - every
-// car's setups for a track sit as loose files, so car identity can only be resolved by opening each
-// file and reading its own //VEH= comment.
 public class LmuSetupProvider : ILmuSetupProvider
 {
     private static LmuSetupProvider? singletonInstance;
@@ -49,8 +45,6 @@ public class LmuSetupProvider : ILmuSetupProvider
                 }
                 catch(Exception)
                 {
-                    // Skip an unreadable/corrupt file rather than failing the whole scan - these are
-                    // freely user- and third-party-edited text files, unlike ACC/ACE's own formats.
                     continue;
                 }
 

@@ -4,12 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Ace.SharedMemory.Messages;
 
-// SMEvoTyreState from the PDF. Only the documented fields are known; the PDF fixes this
-// struct's total size at 256 bytes (2026-03-31 changelog: "inner structures have fixed size"),
-// which is roughly double what the documented fields alone pack to. The trailing Reserved
-// array exists purely to keep AceGraphicsPage's later fields at the correct byte offset -
-// its contents are unmapped/unknown. Unverified against a live game; revisit if real data
-// looks garbled once this can be tested against a running AC Evo instance.
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
 public struct AceTyreState

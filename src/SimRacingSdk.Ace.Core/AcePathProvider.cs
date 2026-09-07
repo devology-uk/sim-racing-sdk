@@ -3,13 +3,6 @@ using SimRacingSdk.Ace.Core.Abstractions;
 
 namespace SimRacingSdk.Ace.Core;
 
-// Folder/file layout mirrors Acc's Documents structure with the confirmed "ACE" Documents folder
-// name substituted in. The account-equivalent file is confirmed as "local.driverdescriptor.json"
-// sitting directly in Documents/ACE (not under Config, unlike Acc's account.json). Whether Evo
-// keeps broadcasting.json under Config in the same shape as Acc is still unverified.
-// Evo has been observed storing this folder under Documents/ACE on one rig and under
-// %UserProfile%/Saved Games/ACE on another with no known trigger for the difference, so both
-// locations are checked and whichever already exists on disk wins, defaulting to Documents/ACE.
 public class AcePathProvider : IAcePathProvider
 {
     private const string AccountFileName = "local.driverdescriptor.json";
@@ -60,11 +53,6 @@ public class AcePathProvider : IAcePathProvider
             SavedGamesFolderName,
             DocumentsFolderName);
 
-        // Bare Directory.Exists isn't a strong enough signal to pick between the two candidates:
-        // on a rig with OneDrive-redirected Documents, ACE (or OneDrive itself) can leave a
-        // near-empty Documents/ACE containing just server_launcher.json while the real game data
-        // - Car Setups, account file, etc. - lives entirely under Saved Games/ACE. Whichever
-        // candidate actually has more on disk is the real one.
         return CountEntries(savedGamesPath) > CountEntries(documentsPath) ? savedGamesPath : documentsPath;
     }
 

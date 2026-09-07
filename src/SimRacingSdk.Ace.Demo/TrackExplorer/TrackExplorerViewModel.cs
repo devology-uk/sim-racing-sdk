@@ -7,8 +7,6 @@ using SimRacingSdk.Ace.Core.Models;
 
 namespace SimRacingSdk.Ace.Demo.TrackExplorer;
 
-// Unlike Acc's one-entry-per-track model, Evo's events_practice.json has multiple layouts
-// per track, so track selection (left list) and layout selection (right list) are separate steps.
 public partial class TrackExplorerViewModel : ObservableObject
 {
     private readonly IAceTrackInfoProvider trackInfoProvider;

@@ -6,9 +6,6 @@ using SimRacingSdk.Lmu.SharedMemory.Messages;
 
 namespace SimRacingSdk.Lmu.SharedMemory;
 
-// Both the mapped file and its lock are per-machine, per-game-instance OS resources - not something that makes
-// sense to open once per Connection - so this is shared as a singleton and lazily (re)opens each on first use, or
-// after either fails to open, since the game may not be running yet when a consumer starts polling.
 public class LmuSharedMemoryProvider : ILmuSharedMemoryProvider
 {
     private static LmuSharedMemoryProvider? singletonInstance;

@@ -2,10 +2,6 @@ using SimRacingSdk.Acc.Setups.Models;
 
 namespace SimRacingSdk.Acc.Setups.Services;
 
-// Translates a parsed AccSetupFile's raw click indices into real units via the car's AccSetupMap -
-// the actual "decode" step, kept separate from SRT's curation (which fields to show, how to round
-// them for display, how many ride-height corners are meaningful). Every field ACC's file format
-// carries is decoded here, whether or not SRT ends up showing it.
 public static class AccSetupDecoder
 {
     public static AccDecodedSetup Decode(AccSetupFile setupFile, AccSetupMap setupMap)
@@ -33,9 +29,6 @@ public static class AccSetupDecoder
             PressureFr = setupMap.TyrePressuresFront.ValueAt(tyres.TyrePressure[1]),
             PressureRl = setupMap.TyrePressuresRear.ValueAt(tyres.TyrePressure[2]),
             PressureRr = setupMap.TyrePressuresRear.ValueAt(tyres.TyrePressure[3]),
-            // ACC writes these out pre-computed alongside the raw clicks - more accurate than
-            // recomputing via the map, which only captures the adjustable portion, not the
-            // car's fixed base geometry.
             CamberFl = Math.Round(alignment.StaticCamber[0], 2),
             CamberFr = Math.Round(alignment.StaticCamber[1], 2),
             CamberRl = Math.Round(alignment.StaticCamber[2], 2),

@@ -60,8 +60,6 @@ public record AceStaticData
     public float TrackLengthM { get; }
     public bool IsConnected { get; }
 
-    // Evo's static page is written once per session/event and carries EventId/SessionId as its
-    // stable identity - unlike Acc, where session identity lives on the per-frame graphics page.
     public bool IsSameSession(AceStaticData other)
     {
         return other != null && this.EventId == other.EventId && this.SessionId == other.SessionId

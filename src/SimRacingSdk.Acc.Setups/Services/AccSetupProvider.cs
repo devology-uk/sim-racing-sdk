@@ -8,9 +8,6 @@ using SimRacingSdk.Acc.Setups.Models;
 
 namespace SimRacingSdk.Acc.Setups.Services;
 
-// Discovers, parses, and decodes the user's live ACC setup files directly from disk (read-only, no
-// mirrored copy or version history). Every raw click index is translated into real units via the
-// car's AccSetupMap before it leaves this provider - SRT never sees clicks or the calibration data.
 public class AccSetupProvider : IAccSetupProvider
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -37,11 +34,6 @@ public class AccSetupProvider : IAccSetupProvider
         AccCarInfoProvider.Instance,
         AccTrackInfoProvider.Instance);
 
-    // Identity only, deliberately no file content read or decode - CarFolderName/TrackFolderName/
-    // FileName all come from the folder structure, and the display names are catalog lookups by
-    // folder name, so enumerating for a search list/hierarchy never needs to touch a file's bytes.
-    // A corrupt file therefore still appears here even though GetSetupFile would fail to open it -
-    // that failure surfaces when the user actually selects it, not silently at listing time.
     public IReadOnlyList<AccSetupFileIdentity> GetSetupFiles()
     {
         var setupsFolderPath = this.pathProvider.SetupsFolderPath;

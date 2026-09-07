@@ -58,7 +58,6 @@ public class SteamInfoProvider : ISteamInfoProvider
         }
         catch(Exception)
         {
-            // ignore error so that default path is used;
         }
 
         if(string.IsNullOrWhiteSpace(this.steamPath))
@@ -124,7 +123,6 @@ public class SteamInfoProvider : ISteamInfoProvider
         }
         catch(Exception)
         {
-            // ignore errors while reading the file
         }
     }
 }

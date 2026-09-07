@@ -111,8 +111,6 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
     private void OnNextTelemetryFrame(AceTelemetryFrame aceTelemetryFrame)
     {
-        // too much information to log telemetry frames, which are logged via log messages
-        // just maintaining a count to report at the end
         this.telemetryFrameCount++;
     }
 }

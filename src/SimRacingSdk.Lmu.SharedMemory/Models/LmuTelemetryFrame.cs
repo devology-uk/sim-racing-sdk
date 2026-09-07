@@ -6,11 +6,6 @@ using SimRacingSdk.Lmu.SharedMemory.Messages;
 
 namespace SimRacingSdk.Lmu.SharedMemory.Models;
 
-// Merges the player's LmuVehicleTelemetry (physics, ~50FPS) and LmuVehicleScoring (lap/session timing, ~5FPS) into
-// one frame per update - both come from the same "LMU_Data" buffer read, so (unlike the ACC UDP-vs-SharedMemory
-// case) there's no cross-source lap/session-key linking problem to worry about. Position/orientation fields are
-// taken from Telemetry only (Scoring repeats them at its own, lower refresh rate); Scoring contributes lap/session
-// timing plus the handful of fields (driver name, Steam ID, pit/flag state) Telemetry doesn't carry.
 public record LmuTelemetryFrame
 {
     internal LmuTelemetryFrame(LmuVehicleTelemetry telemetry, LmuVehicleScoring scoring)
@@ -141,7 +136,6 @@ public record LmuTelemetryFrame
 
         this.Wheels = telemetry.Wheel?.Select(wheel => new LmuWheelData(wheel)).ToList();
 
-        // Scoring - official lap/session timing, from the same "LMU_Data" read as Telemetry.
         this.TotalLaps = scoring.TotalLaps;
         this.Sector = scoring.Sector;
         this.FinishStatus = scoring.FinishStatus;

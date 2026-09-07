@@ -4,9 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace SimRacingSdk.Ace.Core.Models.Config;
 
-// Shape confirmed 2026-07-28 from a real local.driverdescriptor.json (Evo's account.json
-// equivalent) - much thinner than Acc's Account: no email, discord username, game platform user
-// id or local machine id. player_id is the driver's SteamID64.
 public class Account
 {
     [JsonIgnore()]

@@ -5,10 +5,6 @@ namespace SimRacingSdk.Lmu.SharedMemory.Models;
 
 public record LmuSharedMemoryLap
 {
-    // VehicleModel (from Telemetry) is the catalog-matchable car identity (e.g. "911GT3R_2024"-style display
-    // name); Scoring's VehicleName is the driver's entry/livery string (team name + car number), not a car model -
-    // confirmed against a real rig log, see CLAUDE.md. VehicleClassName (Scoring.VehicleClass, a string) and
-    // VehicleClass (Telemetry's own enum) come from different structs despite the name clash.
     public LmuSharedMemoryLap(LmuVehicleScoring scoring, LmuVehicleTelemetry telemetry, Guid sessionId,
         string trackName)
     {
@@ -24,14 +20,6 @@ public record LmuSharedMemoryLap
         this.Sector2Ms = ToMilliseconds(scoring.LastSector2 - scoring.LastSector1);
         this.Sector3Ms = ToMilliseconds(scoring.LastLapTime - scoring.LastSector2);
         this.TrackName = trackName;
-        // scoring.CountLapFlag is rF2's own per-vehicle "does this lap count" signal (confirmed against
-        // InternalsPlugin.hpp: 0 = do not count lap or time, 1 = count lap but not time, 2 = count lap and time),
-        // sampled from the same scoring snapshot LastLapTime/sectors above already come from, so it reflects the
-        // lap that just completed rather than the one now starting. Only flag 2 gets a real, representative lap
-        // time - flags 0 and 1 are both treated as invalid here, since a Fuel/Tyre Pressure calculator has no use
-        // for a lap whose own time isn't trustworthy even if rF2 would still count it toward the lap total.
-        // Unconfirmed against real captured data yet - this is the live-telemetry equivalent of the result file's
-        // "--:--.----" invalid-lap sentinel that LmuResultFileImporter already relies on.
         this.IsValid = scoring.CountLapFlag == 2;
     }
 
@@ -41,8 +29,6 @@ public record LmuSharedMemoryLap
     public int LastLapTimeMs { get; }
     public Guid SessionId { get; }
 
-    // LastSector1/LastSector2 are cumulative-from-lap-start, matching the sector convention already used elsewhere
-    // in this SDK (Acc/Ams2) - confirmed against a real rig log, see CLAUDE.md.
     public int Sector1Ms { get; }
     public int Sector2Ms { get; }
     public int Sector3Ms { get; }

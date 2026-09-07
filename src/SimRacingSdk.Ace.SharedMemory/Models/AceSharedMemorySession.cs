@@ -12,8 +12,6 @@ public record AceSharedMemorySession
         this.DurationMs = graphicsData.SessionState.TimeLeftMs;
         this.IsOnline = staticData.IsOnline;
         this.IsRunning = true;
-        // Evo has no per-session car count on the static page like Acc does - TotalDrivers
-        // is a per-frame graphics field, so this reflects the count at session-start time.
         this.NumberOfCars = graphicsData.TotalDrivers;
         this.SessionId = Guid.NewGuid();
         this.SessionType = staticData.Session.ToString();

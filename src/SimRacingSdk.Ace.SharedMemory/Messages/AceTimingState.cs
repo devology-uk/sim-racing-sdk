@@ -4,8 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace SimRacingSdk.Ace.SharedMemory.Messages;
 
-// SMEvoTimingState from the PDF, fixed at 256 bytes. See AceTyreState.cs for why a trailing
-// Reserved array is used to hit that documented size - unverified against a live game.
 [Serializable]
 [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
 public struct AceTimingState

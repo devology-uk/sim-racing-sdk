@@ -1,6 +1,5 @@
 namespace SimRacingSdk.Ace.Core.Enums;
 
-// Same broadcasting protocol as Acc (confirmed 2026-07-27), so the same phase codes apply.
 public enum SessionPhase
 {
     NONE = 0,

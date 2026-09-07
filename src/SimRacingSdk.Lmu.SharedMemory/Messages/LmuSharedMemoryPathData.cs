@@ -5,8 +5,7 @@ using System.Runtime.InteropServices;
 namespace SimRacingSdk.Lmu.SharedMemory.Messages;
 
 // Matches SharedMemoryPathData (SharedMemoryInterface.hpp) - the game's own reported paths, only populated on
-// Enter/Exit/SetEnvironment events. A more reliable alternative to LmuPathProvider's Steam-based guessing once the
-// game is actually running, though only available at that point - LmuPathProvider still owns pre-launch resolution.
+// Enter/Exit/SetEnvironment events.
 //
 // Pack = 8, not 4: declared outside InternalsPlugin.hpp's pack(4) region - see LmuSharedMemoryObjectOut.
 [Serializable]

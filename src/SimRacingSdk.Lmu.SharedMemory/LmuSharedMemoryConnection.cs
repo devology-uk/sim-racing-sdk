@@ -10,10 +10,6 @@ using SimRacingSdk.Lmu.SharedMemory.Models;
 
 namespace SimRacingSdk.Lmu.SharedMemory;
 
-// Reads LMU's native "LMU_Data" shared memory (Studio 397's own SharedMemoryInterface.hpp) directly - no plugin,
-// no CustomPluginVariables.JSON, no DMA. The player's Telemetry entry comes straight from PlayerVehicleIdx; the
-// matching Scoring entry is found via IsPlayer - both come from the same read, so there's no cross-source
-// lap/session-key linking problem to guard against.
 public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 {
     private readonly Subject<LmuSharedMemoryLap> lapsSubject = new();
@@ -175,12 +171,6 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         this.LogMessage(LoggingLevel.Information, $"Lap Completed: {lap}");
     }
 
-    // InRealtime alone isn't enough to detect session start/end: it also goes false for a mid-session garage visit
-    // (e.g. pitting to repair damage) and, as confirmed by a real rig log, flickers unpredictably for tens of
-    // seconds on the post-session results screen too - neither should split or re-split a session. LMU only ever
-    // allows one instance of each session type per event (confirmed by Mike against the game's own behaviour), so
-    // a change in Session - which distinguishes Practice/Qualify/Race - is a sufficient and sole signal for a
-    // genuine new session; once currentSession exists, nothing else here can end or restart it mid-session.
     private void UpdateSession(LmuScoringInfo scoringInfo)
     {
         if(this.lastScoringInfo is null)

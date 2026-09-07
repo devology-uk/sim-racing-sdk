@@ -65,7 +65,6 @@ public class MonitorDemo : IMonitorDemo
             this.accMonitor.Accidents.Subscribe(this.OnNextAccident),
             this.accMonitor.LapCompleted.Subscribe(this.OnNextCompletedLap),
 
-            // usually you would only subscribe to one of the next two, but both are shown here for demonstration purposes
             this.accMonitor.EntryList.Subscribe(this.OnNextEntryList),
             this.accMonitor.Entries.Subscribe(this.OnNextEventEntry),
 
@@ -193,8 +192,6 @@ public class MonitorDemo : IMonitorDemo
     {
         if(this.currentPhase != SessionPhase.Session && this.currentPhase != SessionPhase.SessionOver)
         {
-            // filter out updates where the car is not actually on a meaningful lap
-            // SessionOver is the phase where the game is waiting for all players to complete the last lap
             return;
         }
 
@@ -208,8 +205,6 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextSessionCompleted(AccMonitorSession accMonitorSession)
     {
-        // Session Over is produced by a broadcast event from ACC but
-        // Not always dispatched so can't rely on it
         this.Log($"Session Completed: {accMonitorSession}");
     }
 
@@ -220,8 +215,6 @@ public class MonitorDemo : IMonitorDemo
 
     private void OnNextTelemetryFrame(AccTelemetryFrame accTelemetryFrame)
     {
-        // too much information to log telemetry frames, which are logged via log messages
-        // just maintaining a count to report at the end
         this.telemetryFrameCount++;
     }
 }
