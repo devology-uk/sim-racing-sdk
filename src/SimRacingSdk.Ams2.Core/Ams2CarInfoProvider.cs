@@ -7389,6 +7389,21 @@ public class Ams2CarInfoProvider : IAms2CarInfoProvider
         return this.cars.FirstOrDefault(c => c.Model == model);
     }
 
+    // AMS2's shared memory appends a BOP-variant suffix to some GT3 cars' names (e.g. "Porsche 992 GT3 R -
+    // Low Downforce"), which the catalog has no separate entry for - falls back to matching the catalog's base
+    // Model as a prefix once an exact match fails.
+    public Ams2CarInfo? FindByRawVehicleName(string rawVehicleName)
+    {
+        var exactMatch = this.cars.FirstOrDefault(c => c.Model == rawVehicleName);
+        if(exactMatch != null)
+        {
+            return exactMatch;
+        }
+
+        return this.cars.FirstOrDefault(c =>
+            rawVehicleName.StartsWith(c.Model + " - ", StringComparison.OrdinalIgnoreCase));
+    }
+
     public ReadOnlyCollection<Ams2CarInfo> GetCarInfos()
     {
         return this.cars.AsReadOnly();

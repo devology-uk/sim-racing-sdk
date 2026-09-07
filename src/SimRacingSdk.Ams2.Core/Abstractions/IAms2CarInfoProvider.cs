@@ -6,6 +6,7 @@ namespace SimRacingSdk.Ams2.Core.Abstractions;
 public interface IAms2CarInfoProvider
 {
     Ams2CarInfo? FindByModel(string model);
+    Ams2CarInfo? FindByRawVehicleName(string rawVehicleName);
     ReadOnlyCollection<string> GetCarClasses();
     ReadOnlyCollection<Ams2CarInfo> GetCarInfos();
     ReadOnlyCollection<Ams2CarInfo> GetCarInfosForClass(string carClass);

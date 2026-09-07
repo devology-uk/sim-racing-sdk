@@ -46,8 +46,6 @@ public record Ams2TelemetryFrame
     public float MaxRpm { get; init; }
     public string Name { get; set; }
     public float NormalisedCarPosition { get; init; }
-    public float DiagnosticTrackLength { get; init; }
-    public float DiagnosticDistanceIntoCurrentLap { get; init; }
     public float OdometerKm { get; init; }
     public float OilPressureKpa { get; init; }
     public float OilTempC { get; init; }

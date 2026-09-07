@@ -49,7 +49,8 @@ public partial class CarExplorerViewModel : ObservableObject
                 CsvField(aceCarInfo.RacingClass),
                 CsvField(aceCarInfo.Year.ToString()),
                 CsvField(aceCarInfo.Manufacturer),
-                CsvField(aceCarInfo.ModelId)));
+                CsvField(aceCarInfo.ModelId),
+                CsvField(aceCarInfo.PerformanceRating.ToString())));
             streamWriter.Flush();
         }
     }
