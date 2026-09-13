@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimRacingSdk.Pmr.Core\SimRacingSdk.Pmr.Core.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.Pmr.Udp\SimRacingSdk.Pmr.Udp.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
