@@ -29,6 +29,18 @@
                     HorizontalAlignment="Center"
                     Margin="10"
                     Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
+            <Label Content="Host:"
+                   VerticalAlignment="Center" />
+            <TextBox Text="{Binding UdpHost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
+                     VerticalAlignment="Center"
+                     ToolTip="The IP address Project Motor Racing (or a relay tool like SimHub) sends its UDP telemetry to" />
+            <Label Content="Port:"
+                   VerticalAlignment="Center" />
+            <TextBox Text="{Binding UdpPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Width="60"
+                     VerticalAlignment="Center"
+                     ToolTip="The port to listen for Project Motor Racing's UDP telemetry on" />
             <Button Content="UDP Demo"
                     Command="{Binding StartUdpDemoCommand}"
                     ToolTip="Start the demo of PmrUdpConnection for receiving Project Motor Racing's UDP telemetry broadcast" />

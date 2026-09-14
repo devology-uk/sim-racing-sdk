@@ -2,15 +2,15 @@
 
 public record PmrVehicleTelemetryChassis
 {
-    public PmrVector3 PositionWorldSpace { get; init; } = new();
+    public PmrVector3 PositionWorldSpaceMeters { get; init; } = new();
     public PmrQuaternion Orientation { get; init; } = new();
-    public PmrVector3 AngularVelocityWorldSpace { get; init; } = new();
-    public PmrVector3 AngularVelocityLocalSpace { get; init; } = new();
-    public PmrVector3 VelocityWorldSpace { get; init; } = new();
-    public PmrVector3 VelocityLocalSpace { get; init; } = new();
-    public PmrVector3 AccelerationWorldSpace { get; init; } = new();
-    public PmrVector3 AccelerationLocalSpace { get; init; } = new();
-    public float OverallSpeed { get; init; }
-    public float ForwardSpeed { get; init; }
-    public float Sideslip { get; init; }
+    public PmrVector3 AngularVelocityWorldSpaceRadiansPerSecond { get; init; } = new();
+    public PmrVector3 AngularVelocityLocalSpaceRadiansPerSecond { get; init; } = new();
+    public PmrVector3 VelocityWorldSpaceMetersPerSecond { get; init; } = new();
+    public PmrVector3 VelocityLocalSpaceMetersPerSecond { get; init; } = new();
+    public PmrVector3 AccelerationWorldSpaceMetersPerSecondSquared { get; init; } = new();
+    public PmrVector3 AccelerationLocalSpaceMetersPerSecondSquared { get; init; } = new();
+    public float OverallSpeedMetersPerSecond { get; init; }
+    public float ForwardSpeedMetersPerSecond { get; init; }
+    public float SideslipRadians { get; init; }
 }

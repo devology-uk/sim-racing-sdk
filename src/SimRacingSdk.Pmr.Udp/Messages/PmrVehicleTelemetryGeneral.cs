@@ -2,13 +2,13 @@
 
 public record PmrVehicleTelemetryGeneral
 {
-    public PmrVector3 CenterOfGravity { get; init; } = new();
-    public float SteeringWheelAngle { get; init; }
-    public float TotalMass { get; init; }
-    public float DrivenWheelAngularVelocity { get; init; }
-    public float NonDrivenWheelAngularVelocity { get; init; }
-    public float EstimatedRollingSpeed { get; init; }
-    public float EstimatedLinearSpeed { get; init; }
-    public float TotalBrakeForce { get; init; }
+    public PmrVector3 CenterOfGravityMeters { get; init; } = new();
+    public float SteeringWheelAngleRadians { get; init; }
+    public float TotalMassKg { get; init; }
+    public float DrivenWheelAngularVelocityRadiansPerSecond { get; init; }
+    public float NonDrivenWheelAngularVelocityRadiansPerSecond { get; init; }
+    public float EstimatedRollingSpeedMetersPerSecond { get; init; }
+    public float EstimatedLinearSpeedMetersPerSecond { get; init; }
+    public float TotalBrakeForceNewtons { get; init; }
     public bool AbsActive { get; init; }
 }

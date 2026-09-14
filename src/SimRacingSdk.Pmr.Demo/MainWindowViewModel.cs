@@ -2,9 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using SimRacingSdk.LogViewer;
+using SimRacingSdk.Pmr.Core.Abstractions;
 using SimRacingSdk.Pmr.Demo.Abstractions;
 using SimRacingSdk.Pmr.Demo.CarExplorer;
 using SimRacingSdk.Pmr.Demo.TrackExplorer;
+using SimRacingSdk.Pmr.Udp;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -20,10 +22,27 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private bool isRunningDemo;
 
-    public MainWindowViewModel(IConsoleLog consoleLog, IUdpDemo udpDemo)
+    [ObservableProperty]
+    private string udpHost = PmrUdpConnection.DefaultHost;
+
+    [ObservableProperty]
+    private string udpPort = PmrUdpConnection.DefaultPort.ToString();
+
+    public MainWindowViewModel(IConsoleLog consoleLog, IUdpDemo udpDemo, IPmrLocalConfigProvider pmrLocalConfigProvider)
     {
         this.consoleLog = consoleLog;
         this.udpDemo = udpDemo;
+
+        // Defaults are read once at startup from the game's own settings file, but the fields
+        // are editable so a user running other UDP-consuming apps (SimHub, Fanatec App,
+        // CrewChief) can point this demo at a relay port instead of the game's actual configured
+        // one, since only one process can bind that port.
+        var localSettings = pmrLocalConfigProvider.GetLocalSettings();
+        if(localSettings != null && !string.IsNullOrWhiteSpace(localSettings.UdpHost) && localSettings.UdpPort > 0)
+        {
+            this.UdpHost = localSettings.UdpHost;
+            this.UdpPort = localSettings.UdpPort.ToString();
+        }
     }
 
     [RelayCommand]
@@ -80,7 +99,15 @@ public partial class MainWindowViewModel : ObservableObject
     {
         this.consoleLog.Clear();
         this.StopRunningDemos();
+
+        if(!int.TryParse(this.UdpPort, out var port))
+        {
+            this.consoleLog.Write($"'{this.UdpPort}' is not a valid port number.");
+            return;
+        }
+
         this.IsRunningDemo = true;
+        this.udpDemo.Configure(this.UdpHost, port);
 
         if(!this.udpDemo.Validate())
         {

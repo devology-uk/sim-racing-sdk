@@ -34,13 +34,13 @@ internal static class BinaryReaderExtensions
         return Encoding.UTF8.GetString(bytes);
     }
 
-    internal static IReadOnlyList<TimeSpan> ReadPmrTimeSpanList(this BinaryReader reader)
+    internal static IReadOnlyList<double> ReadPmrSecondsList(this BinaryReader reader)
     {
         var length = reader.ReadByte();
-        var values = new TimeSpan[length];
+        var values = new double[length];
         for(var i = 0; i < length; i++)
         {
-            values[i] = TimeSpan.FromSeconds(reader.ReadSingle());
+            values[i] = reader.ReadSingle();
         }
 
         return values;
@@ -68,11 +68,11 @@ internal static class BinaryReaderExtensions
             Weather = reader.ReadPmrString(),
             Session = reader.ReadPmrString(),
             GameMode = reader.ReadPmrString(),
-            LayoutLength = reader.ReadSingle(),
-            Duration = reader.ReadSingle(),
-            Overtime = reader.ReadSingle(),
-            AmbientTemperature = reader.ReadSingle(),
-            TrackTemperature = reader.ReadSingle(),
+            LayoutLengthMeters = reader.ReadSingle(),
+            DurationSeconds = reader.ReadSingle(),
+            OvertimeSeconds = reader.ReadSingle(),
+            AmbientTemperatureCelsius = reader.ReadSingle(),
+            TrackTemperatureCelsius = reader.ReadSingle(),
             IsLaps = reader.ReadByte() != 0,
             State = (PmrRaceSessionState)reader.ReadByte(),
             NumberOfParticipants = reader.ReadByte()
@@ -92,12 +92,12 @@ internal static class BinaryReaderExtensions
         var vehicleClass = reader.ReadPmrString();
         var racePosition = reader.ReadInt32();
         var currentLap = reader.ReadInt32();
-        var currentLapTime = TimeSpan.FromSeconds(reader.ReadSingle());
-        var bestLapTime = TimeSpan.FromSeconds(reader.ReadSingle());
+        var currentLapTimeSeconds = (double)reader.ReadSingle();
+        var bestLapTimeSeconds = (double)reader.ReadSingle();
         var lapProgress = reader.ReadSingle();
         var currentSector = reader.ReadInt32();
-        var currentSectorTimes = reader.ReadPmrTimeSpanList();
-        var bestSectorTimes = reader.ReadPmrTimeSpanList();
+        var currentSectorTimesSeconds = reader.ReadPmrSecondsList();
+        var bestSectorTimesSeconds = reader.ReadPmrSecondsList();
 
         return new PmrParticipantRaceState
         {
@@ -109,12 +109,12 @@ internal static class BinaryReaderExtensions
             VehicleClass = vehicleClass,
             RacePosition = racePosition,
             CurrentLap = currentLap,
-            CurrentLapTime = currentLapTime,
-            BestLapTime = bestLapTime,
-            LapProgress = lapProgress,
+            CurrentLapTimeSeconds = currentLapTimeSeconds,
+            BestLapTimeSeconds = bestLapTimeSeconds,
+            LapProgressFraction = lapProgress,
             CurrentSector = currentSector,
-            CurrentSectorTimes = currentSectorTimes,
-            BestSectorTimes = bestSectorTimes,
+            CurrentSectorTimesSeconds = currentSectorTimesSeconds,
+            BestSectorTimesSeconds = bestSectorTimesSeconds,
             InPits = reader.ReadByte() != 0,
             SessionFinished = reader.ReadByte() != 0,
             IsDisqualified = reader.ReadByte() != 0,
@@ -127,28 +127,28 @@ internal static class BinaryReaderExtensions
         return new PmrVehicleTelemetryWheel
         {
             ContactMaterialHash = reader.ReadInt32(),
-            AngularVelocity = reader.ReadSingle(),
-            LinearSpeed = reader.ReadSingle(),
-            SlideLocalSpace = reader.ReadPmrVector3(),
-            ForceLocalSpace = reader.ReadPmrVector3(),
-            MomentLocalSpace = reader.ReadPmrVector3(),
-            ContactRadius = reader.ReadSingle(),
-            Pressure = reader.ReadSingle(),
-            Inclination = reader.ReadSingle(),
+            AngularVelocityRadiansPerSecond = reader.ReadSingle(),
+            LinearSpeedMetersPerSecond = reader.ReadSingle(),
+            SlideLocalSpaceMetersPerSecond = reader.ReadPmrVector3(),
+            ForceLocalSpaceNewtons = reader.ReadPmrVector3(),
+            MomentLocalSpaceNm = reader.ReadPmrVector3(),
+            ContactRadiusMeters = reader.ReadSingle(),
+            PressureKpa = reader.ReadSingle(),
+            InclinationRadians = reader.ReadSingle(),
             SlipRatio = reader.ReadSingle(),
-            SlipAngle = reader.ReadSingle(),
-            Tread = reader.ReadPmrVector3(),
-            Carcass = reader.ReadSingle(),
-            InternalAir = reader.ReadSingle(),
-            WellAir = reader.ReadSingle(),
-            Rim = reader.ReadSingle(),
-            Brake = reader.ReadSingle(),
-            SpringStrain = reader.ReadSingle(),
-            DamperVelocity = reader.ReadSingle(),
-            HubTorque = reader.ReadSingle(),
-            HubPower = reader.ReadSingle(),
-            WheelTorque = reader.ReadSingle(),
-            WheelPower = reader.ReadSingle()
+            SlipAngleRadians = reader.ReadSingle(),
+            TreadTemperatureCelsius = reader.ReadPmrVector3(),
+            CarcassTemperatureCelsius = reader.ReadSingle(),
+            InternalAirTemperatureCelsius = reader.ReadSingle(),
+            WellAirTemperatureCelsius = reader.ReadSingle(),
+            RimTemperatureCelsius = reader.ReadSingle(),
+            BrakeTemperatureCelsius = reader.ReadSingle(),
+            SpringStrainFraction = reader.ReadSingle(),
+            DamperVelocityMetersPerSecond = reader.ReadSingle(),
+            HubTorqueNm = reader.ReadSingle(),
+            HubPowerKw = reader.ReadSingle(),
+            WheelTorqueNm = reader.ReadSingle(),
+            WheelPowerKw = reader.ReadSingle()
         };
     }
 
@@ -156,17 +156,17 @@ internal static class BinaryReaderExtensions
     {
         return new PmrVehicleTelemetryChassis
         {
-            PositionWorldSpace = reader.ReadPmrVector3(),
+            PositionWorldSpaceMeters = reader.ReadPmrVector3(),
             Orientation = reader.ReadPmrQuaternion(),
-            AngularVelocityWorldSpace = reader.ReadPmrVector3(),
-            AngularVelocityLocalSpace = reader.ReadPmrVector3(),
-            VelocityWorldSpace = reader.ReadPmrVector3(),
-            VelocityLocalSpace = reader.ReadPmrVector3(),
-            AccelerationWorldSpace = reader.ReadPmrVector3(),
-            AccelerationLocalSpace = reader.ReadPmrVector3(),
-            OverallSpeed = reader.ReadSingle(),
-            ForwardSpeed = reader.ReadSingle(),
-            Sideslip = reader.ReadSingle()
+            AngularVelocityWorldSpaceRadiansPerSecond = reader.ReadPmrVector3(),
+            AngularVelocityLocalSpaceRadiansPerSecond = reader.ReadPmrVector3(),
+            VelocityWorldSpaceMetersPerSecond = reader.ReadPmrVector3(),
+            VelocityLocalSpaceMetersPerSecond = reader.ReadPmrVector3(),
+            AccelerationWorldSpaceMetersPerSecondSquared = reader.ReadPmrVector3(),
+            AccelerationLocalSpaceMetersPerSecondSquared = reader.ReadPmrVector3(),
+            OverallSpeedMetersPerSecond = reader.ReadSingle(),
+            ForwardSpeedMetersPerSecond = reader.ReadSingle(),
+            SideslipRadians = reader.ReadSingle()
         };
     }
 
@@ -183,32 +183,32 @@ internal static class BinaryReaderExtensions
     {
         var engineRpm = reader.ReadSingle();
         var engineRevRatio = reader.ReadSingle();
-        var engineTorque = reader.ReadSingle();
-        var enginePower = reader.ReadSingle();
-        var engineLoad = reader.ReadSingle();
+        var engineTorqueNm = reader.ReadSingle();
+        var enginePowerKw = reader.ReadSingle();
+        var engineLoadFraction = reader.ReadSingle();
         var engineTurboRpm = reader.ReadSingle();
-        var engineTurboBoostPressure = reader.ReadSingle();
-        var fuelRemaining = reader.ReadSingle();
-        var fuelUseRate = reader.ReadSingle();
-        var engineOilPressure = reader.ReadSingle();
-        var engineOilTemperature = reader.ReadSingle();
-        var engineCoolantTemperature = reader.ReadSingle();
-        var exhaustGasTemperature = reader.ReadSingle();
+        var engineTurboBoostPressureKpa = reader.ReadSingle();
+        var fuelRemainingLitres = reader.ReadSingle();
+        var fuelUseRateLitresPerSecond = reader.ReadSingle();
+        var engineOilPressureKpa = reader.ReadSingle();
+        var engineOilTemperatureCelsius = reader.ReadSingle();
+        var engineCoolantTemperatureCelsius = reader.ReadSingle();
+        var exhaustGasTemperatureCelsius = reader.ReadSingle();
         var motorRpm = reader.ReadSingle();
-        var batteryRemaining = reader.ReadSingle();
-        var batteryUseRate = reader.ReadSingle();
+        var batteryRemainingJoules = reader.ReadSingle();
+        var batteryUseRateJoulesPerSecond = reader.ReadSingle();
         var transmissionRpm = reader.ReadSingle();
         var gearboxInputRpm = reader.ReadSingle();
         var gearboxOutputRpm = reader.ReadSingle();
-        var gearboxTorque = reader.ReadSingle();
-        var gearboxPower = reader.ReadSingle();
-        var gearboxLoadIn = reader.ReadSingle();
-        var gearboxLoadOut = reader.ReadSingle();
-        var timeSinceShift = reader.ReadSingle();
-        var estimatedDrivenSpeed = reader.ReadSingle();
-        var outputTorque = reader.ReadSingle();
-        var outputPower = reader.ReadSingle();
-        var outputEfficiency = reader.ReadSingle();
+        var gearboxTorqueNm = reader.ReadSingle();
+        var gearboxPowerKw = reader.ReadSingle();
+        var gearboxLoadInFraction = reader.ReadSingle();
+        var gearboxLoadOutFraction = reader.ReadSingle();
+        var timeSinceShiftSeconds = reader.ReadSingle();
+        var estimatedDrivenSpeedMetersPerSecond = reader.ReadSingle();
+        var outputTorqueNm = reader.ReadSingle();
+        var outputPowerKw = reader.ReadSingle();
+        var outputEfficiencyFraction = reader.ReadSingle();
         var starterActive = reader.ReadByte() != 0;
         var engineRunning = reader.ReadByte() != 0;
         var engineFanRunning = reader.ReadByte() != 0;
@@ -228,32 +228,32 @@ internal static class BinaryReaderExtensions
         {
             EngineRpm = engineRpm,
             EngineRevRatio = engineRevRatio,
-            EngineTorque = engineTorque,
-            EnginePower = enginePower,
-            EngineLoad = engineLoad,
+            EngineTorqueNm = engineTorqueNm,
+            EnginePowerKw = enginePowerKw,
+            EngineLoadFraction = engineLoadFraction,
             EngineTurboRpm = engineTurboRpm,
-            EngineTurboBoostPressure = engineTurboBoostPressure,
-            FuelRemaining = fuelRemaining,
-            FuelUseRate = fuelUseRate,
-            EngineOilPressure = engineOilPressure,
-            EngineOilTemperature = engineOilTemperature,
-            EngineCoolantTemperature = engineCoolantTemperature,
-            ExhaustGasTemperature = exhaustGasTemperature,
+            EngineTurboBoostPressureKpa = engineTurboBoostPressureKpa,
+            FuelRemainingLitres = fuelRemainingLitres,
+            FuelUseRateLitresPerSecond = fuelUseRateLitresPerSecond,
+            EngineOilPressureKpa = engineOilPressureKpa,
+            EngineOilTemperatureCelsius = engineOilTemperatureCelsius,
+            EngineCoolantTemperatureCelsius = engineCoolantTemperatureCelsius,
+            ExhaustGasTemperatureCelsius = exhaustGasTemperatureCelsius,
             MotorRpm = motorRpm,
-            BatteryRemaining = batteryRemaining,
-            BatteryUseRate = batteryUseRate,
+            BatteryRemainingJoules = batteryRemainingJoules,
+            BatteryUseRateJoulesPerSecond = batteryUseRateJoulesPerSecond,
             TransmissionRpm = transmissionRpm,
             GearboxInputRpm = gearboxInputRpm,
             GearboxOutputRpm = gearboxOutputRpm,
-            GearboxTorque = gearboxTorque,
-            GearboxPower = gearboxPower,
-            GearboxLoadIn = gearboxLoadIn,
-            GearboxLoadOut = gearboxLoadOut,
-            TimeSinceShift = timeSinceShift,
-            EstimatedDrivenSpeed = estimatedDrivenSpeed,
-            OutputTorque = outputTorque,
-            OutputPower = outputPower,
-            OutputEfficiency = outputEfficiency,
+            GearboxTorqueNm = gearboxTorqueNm,
+            GearboxPowerKw = gearboxPowerKw,
+            GearboxLoadInFraction = gearboxLoadInFraction,
+            GearboxLoadOutFraction = gearboxLoadOutFraction,
+            TimeSinceShiftSeconds = timeSinceShiftSeconds,
+            EstimatedDrivenSpeedMetersPerSecond = estimatedDrivenSpeedMetersPerSecond,
+            OutputTorqueNm = outputTorqueNm,
+            OutputPowerKw = outputPowerKw,
+            OutputEfficiencyFraction = outputEfficiencyFraction,
             StarterActive = starterActive,
             EngineRunning = engineRunning,
             EngineFanRunning = engineFanRunning,
@@ -267,11 +267,11 @@ internal static class BinaryReaderExtensions
 
     internal static PmrVehicleTelemetrySuspension ReadPmrVehicleTelemetrySuspension(this BinaryReader reader)
     {
-        var averageLoads = reader.ReadPmrFloatList();
+        var averageLoadsNewtons = reader.ReadPmrFloatList();
         return new PmrVehicleTelemetrySuspension
         {
-            AverageLoads = averageLoads,
-            LoadBias = reader.ReadSingle()
+            AverageLoadsNewtons = averageLoadsNewtons,
+            LoadBiasFraction = reader.ReadSingle()
         };
     }
 
@@ -279,11 +279,11 @@ internal static class BinaryReaderExtensions
     {
         return new PmrVehicleTelemetryInput
         {
-            Steering = reader.ReadSingle(),
-            Accelerator = reader.ReadSingle(),
-            Brake = reader.ReadSingle(),
-            Clutch = reader.ReadSingle(),
-            Handbrake = reader.ReadSingle(),
+            SteeringFraction = reader.ReadSingle(),
+            AcceleratorFraction = reader.ReadSingle(),
+            BrakeFraction = reader.ReadSingle(),
+            ClutchFraction = reader.ReadSingle(),
+            HandbrakeFraction = reader.ReadSingle(),
             Gear = reader.ReadInt32()
         };
     }
@@ -292,11 +292,11 @@ internal static class BinaryReaderExtensions
     {
         return new PmrVehicleTelemetrySetup
         {
-            BrakeBias = reader.ReadSingle(),
-            FrontAntiRollStiffness = reader.ReadSingle(),
-            RearAntiRollStiffness = reader.ReadSingle(),
-            RegenLimit = reader.ReadSingle(),
-            DeployLimit = reader.ReadSingle(),
+            BrakeBiasFraction = reader.ReadSingle(),
+            FrontAntiRollStiffnessNmPerRadian = reader.ReadSingle(),
+            RearAntiRollStiffnessNmPerRadian = reader.ReadSingle(),
+            RegenLimitFraction = reader.ReadSingle(),
+            DeployLimitFraction = reader.ReadSingle(),
             AbsLevel = reader.ReadByte(),
             TcsLevel = reader.ReadByte()
         };
@@ -306,14 +306,14 @@ internal static class BinaryReaderExtensions
     {
         return new PmrVehicleTelemetryGeneral
         {
-            CenterOfGravity = reader.ReadPmrVector3(),
-            SteeringWheelAngle = reader.ReadSingle(),
-            TotalMass = reader.ReadSingle(),
-            DrivenWheelAngularVelocity = reader.ReadSingle(),
-            NonDrivenWheelAngularVelocity = reader.ReadSingle(),
-            EstimatedRollingSpeed = reader.ReadSingle(),
-            EstimatedLinearSpeed = reader.ReadSingle(),
-            TotalBrakeForce = reader.ReadSingle(),
+            CenterOfGravityMeters = reader.ReadPmrVector3(),
+            SteeringWheelAngleRadians = reader.ReadSingle(),
+            TotalMassKg = reader.ReadSingle(),
+            DrivenWheelAngularVelocityRadiansPerSecond = reader.ReadSingle(),
+            NonDrivenWheelAngularVelocityRadiansPerSecond = reader.ReadSingle(),
+            EstimatedRollingSpeedMetersPerSecond = reader.ReadSingle(),
+            EstimatedLinearSpeedMetersPerSecond = reader.ReadSingle(),
+            TotalBrakeForceNewtons = reader.ReadSingle(),
             AbsActive = reader.ReadByte() != 0
         };
     }
@@ -322,20 +322,20 @@ internal static class BinaryReaderExtensions
     {
         return new PmrVehicleTelemetryConstant
         {
-            ChassisBoundingBoxMin = reader.ReadPmrVector3(),
-            ChassisBoundingBoxMax = reader.ReadPmrVector3(),
+            ChassisBoundingBoxMinMeters = reader.ReadPmrVector3(),
+            ChassisBoundingBoxMaxMeters = reader.ReadPmrVector3(),
             StarterIdleRpm = reader.ReadSingle(),
             EngineTorquePeakRpm = reader.ReadSingle(),
             EnginePowerPeakRpm = reader.ReadSingle(),
             EngineMaxRpm = reader.ReadSingle(),
-            EngineMaxTorque = reader.ReadSingle(),
-            EngineMaxPower = reader.ReadSingle(),
-            EngineMaxBoost = reader.ReadSingle(),
-            FuelCapacity = reader.ReadSingle(),
-            BatteryCapacity = reader.ReadSingle(),
-            TrackWidthFront = reader.ReadSingle(),
-            TrackWidthRear = reader.ReadSingle(),
-            Wheelbase = reader.ReadSingle(),
+            EngineMaxTorqueNm = reader.ReadSingle(),
+            EngineMaxPowerKw = reader.ReadSingle(),
+            EngineMaxBoostKpa = reader.ReadSingle(),
+            FuelCapacityLitres = reader.ReadSingle(),
+            BatteryCapacityJoules = reader.ReadSingle(),
+            TrackWidthFrontMeters = reader.ReadSingle(),
+            TrackWidthRearMeters = reader.ReadSingle(),
+            WheelbaseMeters = reader.ReadSingle(),
             NumberOfWheels = reader.ReadByte(),
             NumberOfForwardGears = reader.ReadByte(),
             NumberOfReverseGears = reader.ReadByte(),

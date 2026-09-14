@@ -25,7 +25,9 @@ public class UdpDemo : IUdpDemo
     private readonly IPmrUdpConnectionFactory pmrUdpConnectionFactory;
     private readonly IUdpLog udpLog;
 
+    private string host = PmrUdpConnection.DefaultHost;
     private IPmrUdpConnection? pmrUdpConnection;
+    private int port = PmrUdpConnection.DefaultPort;
     private CompositeDisposable subscriptionSink = null!;
 
     public UdpDemo(ILogger<UdpDemo> logger,
@@ -41,13 +43,25 @@ public class UdpDemo : IUdpDemo
         this.pmrUdpConnectionFactory = pmrUdpConnectionFactory;
     }
 
+    public void Configure(string udpHost, int udpPort)
+    {
+        this.host = udpHost;
+        this.port = udpPort;
+    }
+
     public void Start()
     {
         this.Stop();
-        this.Log("Starting UDP Demo...");
+        this.Log($"Starting UDP Demo, listening on Host={this.host}, Port={this.port}...");
 
-        var (port, useMulticast, multicastGroup) = this.ResolveConnectionSettings();
-        this.pmrUdpConnection = this.pmrUdpConnectionFactory.Create(port, useMulticast, multicastGroup);
+        // Host is where the game (or a relay tool like SimHub, for the "several apps want the
+        // one UDP stream" case) sends telemetry to - normally a plain unicast address, but a
+        // multicast-range address here means we need to join that group instead of just
+        // listening locally.
+        var useMulticast = IsMulticastAddress(this.host);
+        this.pmrUdpConnection = this.pmrUdpConnectionFactory.Create(this.port,
+            useMulticast,
+            useMulticast ? this.host : PmrUdpConnection.DefaultMulticastGroup);
 
         this.PrepareUdpMessageHandling();
         this.pmrUdpConnection.Connect();
@@ -69,14 +83,7 @@ public class UdpDemo : IUdpDemo
     public bool Validate()
     {
         var settings = this.pmrLocalConfigProvider.GetLocalSettings();
-        if(settings == null)
-        {
-            this.Log(
-                "Could not read Project Motor Racing's local settings - falling back to the SDK defaults (127.0.0.1:7576).");
-            return true;
-        }
-
-        if(!settings.UdpEnabled)
+        if(settings is { UdpEnabled: false })
         {
             this.Log(
                 "UDP is currently disabled in Project Motor Racing (Settings > Preferences > UDP Enabled) - no telemetry will arrive until it's turned on.");
@@ -138,22 +145,5 @@ public class UdpDemo : IUdpDemo
             this.pmrUdpConnection.SessionStoppedUpdates.Subscribe(this.OnNextSessionStopped),
             this.pmrUdpConnection.LogMessages.Subscribe(this.OnNextLogMessage)
         };
-    }
-
-    private (int Port, bool UseMulticast, string MulticastGroup) ResolveConnectionSettings()
-    {
-        var settings = this.pmrLocalConfigProvider.GetLocalSettings();
-        if(settings == null || settings.UdpPort <= 0)
-        {
-            return (PmrUdpConnection.DefaultPort, false, PmrUdpConnection.DefaultMulticastGroup);
-        }
-
-        // UDPHost is where the game sends its telemetry to - normally the loopback address
-        // (127.0.0.1), but a user can point it at a multicast-range address instead, in which
-        // case we need to join that group rather than just listen locally.
-        var useMulticast = IsMulticastAddress(settings.UdpHost);
-        this.Log($"Using Project Motor Racing's own UDP settings: Host={settings.UdpHost}, Port={settings.UdpPort}, Frequency={settings.UdpFrequencyHz}Hz.");
-
-        return (settings.UdpPort, useMulticast, useMulticast ? settings.UdpHost : PmrUdpConnection.DefaultMulticastGroup);
     }
 }

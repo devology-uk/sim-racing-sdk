@@ -338,7 +338,7 @@ static List<TrackRow> ParseTracks(string tracksRoot, List<string> warnings)
                 Path.GetFileName(trackFolder),
                 GetString(layoutParameters, "ID"),
                 GetString(layoutParameters, "Name"),
-                GetNumber(layoutParameters, "Length"),
+                GetNumber(layoutParameters, "Length") * 1000, // the game's own layout xml stores this in km - every other catalog in this SDK stores track length in metres and leaves conversion to the presenting app
                 GetInt(layoutParameters, "Turns"),
                 GetInt(layoutParameters, "GridSize"),
                 GetString(layoutParameters, "Direction"),
@@ -455,7 +455,7 @@ static string BuildTrackProviderSource(List<TrackRow> tracks)
 {
     var entryLines = tracks.Select(t =>
         "        new() { "
-        + $"AltitudeMetresAmsl = {CsNumber(t.AltitudeMetresAmsl)}, "
+        + $"AltitudeMetersAmsl = {CsNumber(t.AltitudeMetersAmsl)}, "
         + $"City = {CsString(t.City)}, "
         + $"Continent = {CsString(t.Continent)}, "
         + $"Country = {CsString(t.Country)}, "
@@ -465,10 +465,10 @@ static string BuildTrackProviderSource(List<TrackRow> tracks)
         + $"Latitude = {CsNumber(t.Latitude)}, "
         + $"LayoutId = {CsString(t.LayoutId)}, "
         + $"LayoutName = {CsString(t.LayoutName)}, "
-        + $"LengthKm = {CsNumber(t.LengthKm)}, "
+        + $"LengthMeters = {CsNumber(t.LengthMeters)}, "
         + $"Longitude = {CsNumber(t.Longitude)}, "
         + $"MaxOvertimeSeconds = {CsNumber(t.MaxOvertimeSeconds)}, "
-        + $"PitSpeedLimitMetresPerSecond = {CsNumber(t.PitSpeedLimitMetresPerSecond)}, "
+        + $"PitSpeedLimitMetersPerSecond = {CsNumber(t.PitSpeedLimitMetersPerSecond)}, "
         + $"Turns = {t.Turns}, "
         + $"TrackFolder = {CsString(t.TrackFolder)}, "
         + $"TrackId = {CsString(t.TrackId)}, "
@@ -569,7 +569,7 @@ internal record TrackRow(
     string TrackFolder,
     string LayoutId,
     string LayoutName,
-    double LengthKm,
+    double LengthMeters,
     int Turns,
     int GridSize,
     string Direction,
@@ -580,7 +580,7 @@ internal record TrackRow(
     int TrackYear,
     double Latitude,
     double Longitude,
-    double AltitudeMetresAmsl,
+    double AltitudeMetersAmsl,
     double TimeZoneUtcOffset,
-    double PitSpeedLimitMetresPerSecond,
+    double PitSpeedLimitMetersPerSecond,
     double MaxOvertimeSeconds);

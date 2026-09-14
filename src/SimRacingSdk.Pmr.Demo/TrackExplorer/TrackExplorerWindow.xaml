@@ -105,11 +105,11 @@
 
                 <Label Grid.Column="0"
                        Grid.Row="4"
-                       Content="Length (km)"
+                       Content="Length (m)"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="4"
-                       Content="{Binding LengthKm}" />
+                       Content="{Binding LengthMeters}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="5"
@@ -141,7 +141,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="8"
-                       Content="{Binding AltitudeMetresAmsl}" />
+                       Content="{Binding AltitudeMetersAmsl}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="9"
@@ -157,7 +157,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="10"
-                       Content="{Binding PitSpeedLimitMetresPerSecond}" />
+                       Content="{Binding PitSpeedLimitMetersPerSecond}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="11"

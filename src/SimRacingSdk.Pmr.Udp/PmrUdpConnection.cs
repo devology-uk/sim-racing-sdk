@@ -14,6 +14,7 @@ namespace SimRacingSdk.Pmr.Udp;
 
 public class PmrUdpConnection : IPmrUdpConnection
 {
+    public const string DefaultHost = "127.0.0.1";
     public const string DefaultMulticastGroup = "224.0.0.150";
     public const int DefaultPort = 7576;
 

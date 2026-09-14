@@ -4,7 +4,7 @@ namespace SimRacingSdk.Pmr.Core.Models;
 
 public record PmrTrackInfo
 {
-    public double AltitudeMetresAmsl { get; init; }
+    public double AltitudeMetersAmsl { get; init; }
     public string City { get; init; }
     public string Continent { get; init; }
     public string Country { get; init; }
@@ -17,10 +17,10 @@ public record PmrTrackInfo
     public double Latitude { get; init; }
     public string LayoutId { get; init; }
     public string LayoutName { get; init; }
-    public double LengthKm { get; init; }
+    public double LengthMeters { get; init; }
     public double Longitude { get; init; }
     public double MaxOvertimeSeconds { get; init; }
-    public double PitSpeedLimitMetresPerSecond { get; init; }
+    public double PitSpeedLimitMetersPerSecond { get; init; }
     public int Turns { get; init; }
     public string TrackFolder { get; init; }
     public string TrackId { get; init; }
