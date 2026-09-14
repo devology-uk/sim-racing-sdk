@@ -10,6 +10,7 @@ using SimRacingSdk.Pmr.Demo.Controls.Console;
 using SimRacingSdk.Pmr.Demo.Demos;
 using SimRacingSdk.Pmr.Demo.Services;
 using SimRacingSdk.Pmr.Demo.TrackExplorer;
+using SimRacingSdk.Pmr.Monitor;
 using SimRacingSdk.Pmr.Udp;
 using SimRacingSdk.Wpf.Shared.Logging;
 
@@ -60,6 +61,7 @@ public partial class App : Application
                              });
 
         services.UsePmrUdp();
+        services.UsePmrMonitor();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -70,6 +72,9 @@ public partial class App : Application
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IUdpLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
             .CreateLogger("SimRacingSdk.Pmr.Demo.Services.UdpLog")));
+        services.AddTransient<IMonitorDemo, MonitorDemo>();
+        services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.Pmr.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }

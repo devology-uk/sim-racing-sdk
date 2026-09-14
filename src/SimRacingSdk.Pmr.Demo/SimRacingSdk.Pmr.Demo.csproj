@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SimRacingSdk.Pmr.Core\SimRacingSdk.Pmr.Core.csproj" />
     <ProjectReference Include="..\SimRacingSdk.Pmr.Udp\SimRacingSdk.Pmr.Udp.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.Pmr.Monitor\SimRacingSdk.Pmr.Monitor.csproj" />
     <ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
     <ProjectReference Include="..\SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj" />
   </ItemGroup>

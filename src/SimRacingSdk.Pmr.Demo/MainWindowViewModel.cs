@@ -17,6 +17,7 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IConsoleLog consoleLog;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
+    private readonly IMonitorDemo monitorDemo;
     private readonly IUdpDemo udpDemo;
 
     [ObservableProperty]
@@ -28,10 +29,14 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private string udpPort = PmrUdpConnection.DefaultPort.ToString();
 
-    public MainWindowViewModel(IConsoleLog consoleLog, IUdpDemo udpDemo, IPmrLocalConfigProvider pmrLocalConfigProvider)
+    public MainWindowViewModel(IConsoleLog consoleLog,
+        IUdpDemo udpDemo,
+        IMonitorDemo monitorDemo,
+        IPmrLocalConfigProvider pmrLocalConfigProvider)
     {
         this.consoleLog = consoleLog;
         this.udpDemo = udpDemo;
+        this.monitorDemo = monitorDemo;
 
         // Defaults are read once at startup from the game's own settings file, but the fields
         // are editable so a user running other UDP-consuming apps (SimHub, Fanatec App,
@@ -95,6 +100,30 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void StartMonitorDemo()
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+
+        if(!int.TryParse(this.UdpPort, out var port))
+        {
+            this.consoleLog.Write($"'{this.UdpPort}' is not a valid port number.");
+            return;
+        }
+
+        this.IsRunningDemo = true;
+        this.monitorDemo.Configure(this.UdpHost, port);
+
+        if(!this.monitorDemo.Validate())
+        {
+            this.IsRunningDemo = false;
+            return;
+        }
+
+        this.monitorDemo.Start();
+    }
+
+    [RelayCommand]
     private void StartUdpDemo()
     {
         this.consoleLog.Clear();
@@ -127,6 +156,7 @@ public partial class MainWindowViewModel : ObservableObject
     private void StopRunningDemos()
     {
         this.udpDemo.Stop();
+        this.monitorDemo.Stop();
         this.IsRunningDemo = false;
     }
 
