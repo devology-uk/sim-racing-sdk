@@ -15,7 +15,7 @@ namespace SimRacingSdk.Pmr.Monitor;
 
 public class PmrMonitor : IPmrMonitor
 {
-    private readonly Dictionary<int, PmrParticipantRaceState> entries = [];
+    private readonly Dictionary<(string DriverName, string LiveryId), PmrParticipantRaceState> entries = [];
     private readonly Subject<PmrMonitorLap> lapCompletedSubject = new();
     private readonly LogMessageBroker logMessageBroker = new(nameof(PmrMonitor));
     private readonly Subject<PmrParticipantRaceState> participantUpdatesSubject = new();
@@ -129,13 +129,20 @@ public class PmrMonitor : IPmrMonitor
 
     private void OnNextParticipantRaceState(PmrParticipantRaceState participantRaceState)
     {
-        if(this.entries.TryGetValue(participantRaceState.VehicleId, out var previousState)
+        // Keyed by (DriverName, LiveryId), not VehicleId - a live rig test (2026-09-16) confirmed
+        // PMR sends VehicleId=0 for every car in every ParticipantRaceState packet, so it can't
+        // distinguish cars at all. DriverName is the primary differentiator; LiveryId is added
+        // because online races let drivers pick their own name and livery independently, so two
+        // drivers sharing a name (more likely than sharing both name and livery) would otherwise
+        // collide onto one entry.
+        var key = (participantRaceState.DriverName, participantRaceState.LiveryId);
+        if(this.entries.TryGetValue(key, out var previousState)
            && participantRaceState.CurrentLap > previousState.CurrentLap)
         {
             this.EmitCompletedLap(previousState);
         }
 
-        this.entries[participantRaceState.VehicleId] = participantRaceState;
+        this.entries[key] = participantRaceState;
         this.participantUpdatesSubject.OnNext(participantRaceState);
     }
 
