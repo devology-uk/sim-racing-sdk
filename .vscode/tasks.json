@@ -54,6 +54,19 @@
             "group": "build"
         },
         {
+            "label": "build: Pmr.Demo",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/SimRacingSdk.Pmr.Demo/SimRacingSdk.Pmr.Demo.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
             "label": "build: solution",
             "type": "process",
             "command": "dotnet",

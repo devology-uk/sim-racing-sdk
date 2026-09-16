@@ -36,6 +36,15 @@
             "program": "${workspaceFolder}/src/SimRacingSdk.Ace.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Ace.Demo.exe",
             "cwd": "${workspaceFolder}/src/SimRacingSdk.Ace.Demo/bin/Debug/net9.0-windows",
             "stopAtEntry": false
+        },
+        {
+            "name": "Pmr.Demo",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build: Pmr.Demo",
+            "program": "${workspaceFolder}/src/SimRacingSdk.Pmr.Demo/bin/Debug/net9.0-windows/SimRacingSdk.Pmr.Demo.exe",
+            "cwd": "${workspaceFolder}/src/SimRacingSdk.Pmr.Demo/bin/Debug/net9.0-windows",
+            "stopAtEntry": false
         }
     ]
 }
