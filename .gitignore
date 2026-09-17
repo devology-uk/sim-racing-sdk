@@ -400,3 +400,6 @@ FodyWeavers.xsd
 src/Samples/
 CLAUDE.md
 .claude/
+
+# Dry-run output from catalog import tools (AceCarCatalogImport, PmrCatalogImport)
+*.generated.cs

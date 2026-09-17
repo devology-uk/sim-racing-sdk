@@ -4,9 +4,14 @@ namespace SimRacingSdk.Pmr.Core.Models;
 
 public record PmrCarInfo
 {
-    public string ClassString { get; init; }
-    public string DescriptionKey { get; init; }
-    public string EngineName { get; init; }
+    public double EngineDisplacementLitres { get; init; }
+
+    // Front/Mid/Rear Engine - separate from PowertrainLayout (the drivetrain) since the game's
+    // own car-select screen shows them as two distinct facts, not one combined string.
+    public string EngineLayout { get; init; }
+
+    // Cylinder configuration as the game names it - "V8", "Straight 6", "Flat-6", "4-Rotor" etc.
+    public string EngineType { get; init; }
 
     // Null when the game's own vdef and vset files carry no fuel-tank spec at all - seen only
     // on the Hypercar/LMDh class, which is regulated by an energy allocation rather than a
@@ -21,16 +26,20 @@ public record PmrCarInfo
     // CarManufacturerImageSourceConverter lookup.
     public string IconFileName { get; init; }
 
+    // Derived from Manufacturer + Name, not a game-internal identifier - pmr-cars.csv is the
+    // catalog's source of truth and carries no ID column of its own (see PmrCatalogImport).
     public string Id { get; init; }
-    public string Layout { get; init; }
+
     public string Manufacturer { get; init; }
     public string Name { get; init; }
-    public double PowerBhp { get; init; }
-    public string Region { get; init; }
+    public double PowerKw { get; init; }
+
+    // FWD/RWD/4WD - the drivetrain, as distinct from EngineLayout above.
+    public string PowertrainLayout { get; init; }
+
     public double TorqueNm { get; init; }
     public string Transmission { get; init; }
     public string VehicleClass { get; init; }
-    public string VehiclePath { get; init; }
     public double WeightKg { get; init; }
     public int Year { get; init; }
 

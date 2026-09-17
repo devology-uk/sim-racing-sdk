@@ -48,8 +48,8 @@
                                     Binding="{Binding VehicleClass}" />
                 <DataGridTextColumn Header="Year"
                                     Binding="{Binding Year}" />
-                <DataGridTextColumn Header="Power (BHP)"
-                                    Binding="{Binding PowerBhp}" />
+                <DataGridTextColumn Header="Power (kW)"
+                                    Binding="{Binding PowerKw}" />
                 <DataGridTextColumn Header="Torque (Nm)"
                                     Binding="{Binding TorqueNm}" />
                 <DataGridTextColumn Header="Weight (KG)"
@@ -75,7 +75,6 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -108,62 +107,62 @@
 
                 <Label Grid.Column="2"
                        Grid.Row="1"
-                       Content="Year"
+                       Content="Engine Type"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="3"
                        Grid.Row="1"
-                       Content="{Binding Year}"
+                       Content="{Binding EngineType}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="4"
                        Grid.Row="1"
-                       Content="Region"
+                       Content="Displacement (L)"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="5"
                        Grid.Row="1"
-                       Content="{Binding Region}"
+                       Content="{Binding EngineDisplacementLitres}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="0"
                        Grid.Row="2"
-                       Content="Engine"
+                       Content="Engine Layout"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="2"
-                       Content="{Binding EngineName}"
+                       Content="{Binding EngineLayout}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="2"
                        Grid.Row="2"
-                       Content="Transmission"
+                       Content="Powertrain"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="3"
                        Grid.Row="2"
-                       Content="{Binding Transmission}"
+                       Content="{Binding PowertrainLayout}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="4"
                        Grid.Row="2"
-                       Content="Layout"
+                       Content="Transmission"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="5"
                        Grid.Row="2"
-                       Content="{Binding Layout}"
+                       Content="{Binding Transmission}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="0"
                        Grid.Row="3"
-                       Content="Power (BHP)"
+                       Content="Power (kW)"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="3"
-                       Content="{Binding PowerBhp}"
+                       Content="{Binding PowerKw}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="2"
@@ -198,33 +197,22 @@
 
                 <Label Grid.Column="2"
                        Grid.Row="4"
-                       Content="Class String"
+                       Content="Id"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="3"
                        Grid.Row="4"
-                       Content="{Binding ClassString}"
+                       Content="{Binding Id}"
                        HorizontalAlignment="Left" />
 
                 <Label Grid.Column="4"
                        Grid.Row="4"
-                       Content="Id"
+                       Content="Year"
                        HorizontalAlignment="Left"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="5"
                        Grid.Row="4"
-                       Content="{Binding Id}"
-                       HorizontalAlignment="Left" />
-
-                <Label Grid.Column="0"
-                       Grid.Row="5"
-                       Content="Vehicle Path"
-                       HorizontalAlignment="Left"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="5"
-                       Grid.ColumnSpan="5"
-                       Content="{Binding VehiclePath}"
+                       Content="{Binding Year}"
                        HorizontalAlignment="Left" />
             </Grid>
         </GroupBox>

@@ -1,46 +1,94 @@
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 // Usage:
 //   dotnet run --project SimRacingSdk.Tools.PmrCatalogImport
-//     Dry run - writes PmrCarInfoProvider.generated.cs / PmrTrackInfoProvider.generated.cs
-//     next to the repo root for review.
+//     Reads pmr-cars.csv / pmr-tracks.csv (repo root, hand-curated - the source of truth) and
+//     writes PmrCarInfoProvider.generated.cs / PmrTrackInfoProvider.generated.cs next to the
+//     repo root for review.
 //   dotnet run --project SimRacingSdk.Tools.PmrCatalogImport -- --write
 //     Overwrites PmrCarInfoProvider.cs / PmrTrackInfoProvider.cs directly.
-//   dotnet run --project SimRacingSdk.Tools.PmrCatalogImport -- --installPath="D:\Games\Project Motor Racing"
-//     Reads from a non-default Project Motor Racing install.
+//   dotnet run --project SimRacingSdk.Tools.PmrCatalogImport -- --seed
+//     Parses the game's own install data (data/vehicles/*/data/*.vdef,
+//     data/tracks/*/data/*.tdef + data/tracks/*/data/layouts/*.xml) and appends any car/track
+//     not already present in pmr-cars.csv/pmr-tracks.csv (matched by Manufacturer+Name for cars,
+//     TrackName+LayoutName for tracks). Never touches or removes an existing row, so it's safe
+//     to re-run after a game update to pick up anything new. Confirmed 2026-09-17 that the
+//     install's own files are NOT a complete car/track list (e.g. the Plymouth Barracuda is
+//     selectable in-game with no .vdef anywhere on disk) - seeding only gets a starting point,
+//     the rest has to be added by hand after checking the game itself.
+//   dotnet run --project SimRacingSdk.Tools.PmrCatalogImport -- --seed --installPath="D:\Games\Project Motor Racing"
+//     --seed against a non-default install location.
 //
-// Source of truth is the game's own install - data/vehicles/*/data/*.vdef and
-// data/tracks/*/data/*.tdef (+ data/tracks/*/data/layouts/*.xml) - a custom
-// "<table><parameters><parameter name=".." value=".."/></parameters></table>" XML format.
-// Unlike SimRacingSdk.Tools.AceCarCatalogImport, there is no hand-curated CSV and nothing to
-// preserve between runs - every run fully regenerates both provider files from the install.
+// pmr-cars.csv / pmr-tracks.csv (repo root) are the source of truth - a deliberately trimmed
+// column set: cars carry only what's visible in the game's own car-select screen (Manufacturer,
+// Name, VehicleClass, PowerKw, TorqueNm, WeightKg, EngineDisplacementLitres, EngineType,
+// EngineLayout, PowertrainLayout, Transmission) plus FuelCapacityLitres (kept deliberately - see
+// the Virtual Energy note below); tracks add Latitude/Longitude/AltitudeMetersAmsl and
+// Country/Continent on top of what's visible (TrackName, LayoutName, Turns, GridSize,
+// LengthMeters) - all four researched/typed by hand the same way Ace's track Corners column was
+// (Mike's call, 2026-09-17). Neither CSV stores an ID column - PmrCarInfo.Id and
+// PmrTrackInfo.TrackId/LayoutId are derived at generation time from the name fields, since
+// nothing downstream (the UDP telemetry only ever reports VehicleName as a string; no consumer
+// app matches on a game-internal ID either) needs the game's own identifiers.
+//
+// --seed splits the install's single combined EngineName ("2.4L V6 Twin Turbo") and Layout
+// ("Mid Engine - RWD") strings into the CSV's separate columns, and converts PowerBHP to
+// PowerKw, since the game's own UI shows these as distinct facts, not one combined string, and
+// in kW not bhp.
 
 var repoRoot = FindRepoRoot();
 var write = args.Contains("--write");
-var installPath = ResolveInstallPath(args);
+var seed = args.Contains("--seed");
+var carsCsvPath = Path.Combine(repoRoot, "pmr-cars.csv");
+var tracksCsvPath = Path.Combine(repoRoot, "pmr-tracks.csv");
+var warnings = new List<string>();
 
-if (installPath is null)
+if (seed)
 {
-    Console.WriteLine("Could not find a Project Motor Racing install. Pass --installPath=\"<path>\" explicitly.");
+    var installPath = ResolveInstallPath(args);
+    if (installPath is null)
+    {
+        Console.WriteLine("Could not find a Project Motor Racing install. Pass --installPath=\"<path>\" explicitly.");
+        return 1;
+    }
+
+    var vehiclesRoot = Path.Combine(installPath, "data", "vehicles");
+    var tracksRoot = Path.Combine(installPath, "data", "tracks");
+
+    var addedCars = SeedCars(carsCsvPath, ParseInstallCars(vehiclesRoot, warnings), warnings);
+    var addedTracks = SeedTracks(tracksCsvPath, ParseInstallTracks(tracksRoot, warnings), warnings);
+
+    Console.WriteLine($"Added {addedCars} new car row(s) to {carsCsvPath}");
+    Console.WriteLine($"Added {addedTracks} new track/layout row(s) to {tracksCsvPath}");
+    foreach (var warning in warnings)
+    {
+        Console.WriteLine($"WARNING: {warning}");
+    }
+
+    return 0;
+}
+
+if (!File.Exists(carsCsvPath) || !File.Exists(tracksCsvPath))
+{
+    Console.WriteLine(
+        $"{carsCsvPath} / {tracksCsvPath} not found. Run with --seed first to create them from an install, "
+        + "or create them by hand.");
     return 1;
 }
 
-var vehiclesRoot = Path.Combine(installPath, "data", "vehicles");
-var tracksRoot = Path.Combine(installPath, "data", "tracks");
-var warnings = new List<string>();
-
-var carRows = ParseCars(vehiclesRoot, warnings);
-var trackRows = ParseTracks(tracksRoot, warnings);
+var carRows = LoadCarsCsv(carsCsvPath, warnings);
+var trackRows = LoadTracksCsv(tracksCsvPath, warnings);
 
 var carProviderPath = Path.Combine(repoRoot, "src", "SimRacingSdk.Pmr.Core", "PmrCarInfoProvider.cs");
 var trackProviderPath = Path.Combine(repoRoot, "src", "SimRacingSdk.Pmr.Core", "PmrTrackInfoProvider.cs");
 var carOutputPath = write ? carProviderPath : Path.Combine(repoRoot, "PmrCarInfoProvider.generated.cs");
 var trackOutputPath = write ? trackProviderPath : Path.Combine(repoRoot, "PmrTrackInfoProvider.generated.cs");
 
-File.WriteAllText(carOutputPath, BuildCarProviderSource(carRows));
-File.WriteAllText(trackOutputPath, BuildTrackProviderSource(trackRows));
+File.WriteAllText(carOutputPath, BuildCarProviderSource(carRows, warnings));
+File.WriteAllText(trackOutputPath, BuildTrackProviderSource(trackRows, warnings));
 
 Console.WriteLine($"Wrote {carRows.Count} car entries to {carOutputPath}");
 Console.WriteLine($"Wrote {trackRows.Count} track/layout entries to {trackOutputPath}");
@@ -50,8 +98,8 @@ var noFuelData = carRows.Where(c => c.FuelCapacityLitres is null)
 if (noFuelData.Count > 0)
 {
     Console.WriteLine(
-        $"{noFuelData.Count} cars have no fuel-capacity data anywhere (vdef or vset) - all confirmed Hypercar/LMDh, "
-        + "consistent with that class using an energy allocation rather than a fixed tank size:");
+        $"{noFuelData.Count} cars have no fuel-capacity data - consistent with Hypercar/LMDh's regulated energy "
+        + "allocation rather than a fixed tank size, but worth a glance if an unexpected car shows up here:");
     foreach (var car in noFuelData)
     {
         Console.WriteLine($"  {car.Manufacturer} {car.Name} ({car.VehicleClass})");
@@ -99,6 +147,14 @@ static string? ResolveInstallPath(string[] cliArgs)
     ];
 
     return defaultCandidates.FirstOrDefault(Directory.Exists);
+}
+
+// A stable, human-readable substitute for the game's own internal IDs - never stored in the
+// CSVs, only computed here at generation/seed time, since nothing downstream needs to match the
+// game's own identifiers (see the header comment above).
+static string Slugify(string value)
+{
+    return Regex.Replace(value.Trim(), @"\s+", "_");
 }
 
 static XElement LoadParameters(string path)
@@ -185,9 +241,47 @@ static string ResolveIconFileName(string manufacturer)
         : manufacturer;
 }
 
-static List<CarRow> ParseCars(string vehiclesRoot, List<string> warnings)
+static double BhpToKw(double bhp)
 {
-    var rows = new List<CarRow>();
+    // 1 bhp = 0.745699872 kW (imperial horsepower - the vdef field is explicitly named PowerBHP).
+    // Rounded to a whole kW to match how the game's own UI displays it, and how Mike will type it.
+    return Math.Round(bhp * 0.745699872);
+}
+
+// Splits the vdef's single combined "2.4L V6 Twin Turbo" style string into displacement and
+// cylinder configuration, dropping the forced-induction suffix ("Turbo"/"Twin Turbo") - not on
+// Mike's visible-in-game field list, so out of scope for this schema.
+static (double DisplacementLitres, string EngineType) SplitEngineName(string engineName, List<string> warnings, string context)
+{
+    var match = Regex.Match(
+        engineName,
+        @"^(?<displacement>\d+(\.\d+)?)L\s+(?<type>.+?)(?:\s+(?:Twin\s+)?Turbo)?$");
+    if (!match.Success)
+    {
+        warnings.Add($"Could not split EngineName \"{engineName}\" ({context}) into displacement/type.");
+        return (0, engineName);
+    }
+
+    return (double.Parse(match.Groups["displacement"].Value, CultureInfo.InvariantCulture), match.Groups["type"].Value);
+}
+
+// Splits the vdef's single combined "Mid Engine - RWD" style string into engine position and
+// drivetrain - two distinct facts on the game's own car-select screen, not one combined string.
+static (string EngineLayout, string PowertrainLayout) SplitLayout(string layout, List<string> warnings, string context)
+{
+    var parts = layout.Split(" - ", 2);
+    if (parts.Length != 2)
+    {
+        warnings.Add($"Could not split Layout \"{layout}\" ({context}) into engine/powertrain layout.");
+        return (layout, "");
+    }
+
+    return (parts[0], parts[1]);
+}
+
+static List<CarSpecRow> ParseInstallCars(string vehiclesRoot, List<string> warnings)
+{
+    var rows = new List<CarSpecRow>();
     foreach (var vdefPath in Directory.GetFiles(vehiclesRoot, "*.vdef", SearchOption.AllDirectories))
     {
         var parameters = LoadParameters(vdefPath);
@@ -208,26 +302,23 @@ static List<CarRow> ParseCars(string vehiclesRoot, List<string> warnings)
             ? fuelFromVdef
             : GetVsetNumber(Path.GetDirectoryName(vdefPath)!, "ice-fuel-capacity");
 
-        var manufacturer = GetString(parameters, "Manufacturer");
+        var (displacementLitres, engineType) = SplitEngineName(GetString(parameters, "EngineName"), warnings, id);
+        var (engineLayout, powertrainLayout) = SplitLayout(GetString(parameters, "Layout"), warnings, id);
 
-        rows.Add(new CarRow(
-            id,
-            manufacturer,
+        rows.Add(new CarSpecRow(
+            GetString(parameters, "Manufacturer"),
             GetString(parameters, "Name"),
             GetString(parameters, "VehicleClass"),
-            GetString(parameters, "ClassString"),
+            BhpToKw(GetNumber(parameters, "PowerBHP")),
             GetNumber(parameters, "TorqueNM"),
             GetNumber(parameters, "WeightKG"),
+            displacementLitres,
+            engineType,
+            engineLayout,
+            powertrainLayout,
             GetString(parameters, "Transmission"),
-            GetNumber(parameters, "PowerBHP"),
             fuelCapacityLitres,
-            GetString(parameters, "Layout"),
-            GetString(parameters, "EngineName"),
-            GetString(parameters, "Region"),
-            GetInt(parameters, "Year"),
-            GetString(parameters, "description"),
-            GetString(parameters, "VehiclePath"),
-            ResolveIconFileName(manufacturer)));
+            GetInt(parameters, "Year")));
     }
 
     return rows.OrderBy(c => c.Manufacturer, StringComparer.OrdinalIgnoreCase)
@@ -238,7 +329,9 @@ static List<CarRow> ParseCars(string vehiclesRoot, List<string> warnings)
 // The game's own Country strings are inconsistently cased/snake_cased (e.g. "united_states",
 // "South_Africa", both "United_Kingdom" and "united_kingdom" across different tracks) - keyed
 // here with underscores normalised to spaces and lower-cased so all variants resolve to one
-// clean display name plus the ISO 3166-1 alpha-3 code the flag PNGs are named with.
+// clean display name plus the ISO 3166-1 alpha-3 code the flag PNGs are named with. Idempotent
+// against an already-clean CSV value too (e.g. "Italy" normalises to the same "italy" lookup
+// key), so this doubles as the CSV's own Country -> CountryCode resolver.
 static Dictionary<string, (string DisplayName, string Iso3Code)> BuildCountryLookup()
 {
     return new Dictionary<string, (string, string)>
@@ -250,13 +343,14 @@ static Dictionary<string, (string DisplayName, string Iso3Code)> BuildCountryLoo
         ["canada"] = ("Canada", "CAN"),
         ["germany"] = ("Germany", "DEU"),
         ["italy"] = ("Italy", "ITA"),
+        ["japan"] = ("Japan", "JPN"),
         ["south africa"] = ("South Africa", "ZAF"),
         ["united kingdom"] = ("United Kingdom", "GBR"),
         ["united states"] = ("United States", "USA")
     };
 }
 
-static (string Country, string CountryCode) ResolveCountry(string rawCountry, List<string> warnings, string trackId)
+static (string Country, string CountryCode) ResolveCountry(string rawCountry, List<string> warnings, string context)
 {
     var key = rawCountry.Replace('_', ' ')
                          .Trim()
@@ -266,7 +360,7 @@ static (string Country, string CountryCode) ResolveCountry(string rawCountry, Li
         return (match.DisplayName, match.Iso3Code);
     }
 
-    warnings.Add($"No country-code mapping for \"{rawCountry}\" ({trackId}) - add it to BuildCountryLookup.");
+    warnings.Add($"No country-code mapping for \"{rawCountry}\" ({context}) - add it to BuildCountryLookup.");
     return (rawCountry, "");
 }
 
@@ -278,9 +372,9 @@ static string ResolveContinent(string rawContinent)
     return rawContinent.Equals("Other", StringComparison.OrdinalIgnoreCase) ? "Rest of World" : rawContinent;
 }
 
-static List<TrackRow> ParseTracks(string tracksRoot, List<string> warnings)
+static List<TrackSpecRow> ParseInstallTracks(string tracksRoot, List<string> warnings)
 {
-    var rows = new List<TrackRow>();
+    var rows = new List<TrackSpecRow>();
     foreach (var trackFolder in Directory.GetDirectories(tracksRoot))
     {
         var dataFolder = Path.Combine(trackFolder, "data");
@@ -330,35 +424,300 @@ static List<TrackRow> ParseTracks(string tracksRoot, List<string> warnings)
                 continue;
             }
 
-            var (country, countryCode) = ResolveCountry(GetString(trackParameters, "Country"), warnings, trackId);
+            var (country, _) = ResolveCountry(GetString(trackParameters, "Country"), warnings, trackId);
 
-            rows.Add(new TrackRow(
-                trackId,
+            rows.Add(new TrackSpecRow(
                 GetString(trackParameters, "Name"),
-                Path.GetFileName(trackFolder),
-                GetString(layoutParameters, "ID"),
                 GetString(layoutParameters, "Name"),
-                GetNumber(layoutParameters, "Length") * 1000, // the game's own layout xml stores this in km - every other catalog in this SDK stores track length in metres and leaves conversion to the presenting app
+                country,
+                ResolveContinent(GetString(trackParameters, "Continent")),
+                Math.Round(GetNumber(layoutParameters, "Length") * 1000), // the game's own layout xml stores this in km
                 GetInt(layoutParameters, "Turns"),
                 GetInt(layoutParameters, "GridSize"),
-                GetString(layoutParameters, "Direction"),
-                ResolveContinent(GetString(trackParameters, "Continent")),
-                country,
-                countryCode,
-                GetString(trackParameters, "City"),
-                GetInt(trackParameters, "TrackYear"),
                 GetNumber(trackParameters, "TrackLatitude"),
                 GetNumber(trackParameters, "TrackLongitude"),
-                GetNumber(trackParameters, "TrackAltitudeMetresAMSL"),
-                GetNumber(trackParameters, "TrackTimeZoneUTC"),
-                GetNumber(trackParameters, "pitSpeedLimit"),
-                GetNumber(trackParameters, "maxOvertime")));
+                GetNumber(trackParameters, "TrackAltitudeMetresAMSL")));
         }
     }
 
     return rows.OrderBy(t => t.TrackName, StringComparer.OrdinalIgnoreCase)
                .ThenBy(t => t.LayoutName, StringComparer.OrdinalIgnoreCase)
                .ToList();
+}
+
+static (string[] Headers, List<string[]> Rows) ParseCsv(string csvPath)
+{
+    var lines = ReadAllLinesShared(csvPath).Where(l => !string.IsNullOrWhiteSpace(l)).ToArray();
+    if (lines.Length == 0)
+    {
+        return (Array.Empty<string>(), []);
+    }
+
+    var headers = ParseCsvLine(lines[0]);
+    var rows = lines.Skip(1).Select(ParseCsvLine).ToList();
+    return (headers, rows);
+}
+
+// Plain File.ReadAllLines can fail with a sharing violation while the CSV is open in Excel -
+// FileShare.ReadWrite tolerates that, matching AceCarCatalogImport's own ReadAllLinesShared.
+static string[] ReadAllLinesShared(string path)
+{
+    using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+    using var reader = new StreamReader(stream);
+    var lines = new List<string>();
+    while (reader.ReadLine() is { } line)
+    {
+        lines.Add(line);
+    }
+
+    return lines.ToArray();
+}
+
+static string[] ParseCsvLine(string line)
+{
+    var fields = new List<string>();
+    var current = new StringBuilder();
+    var inQuotes = false;
+
+    for (var i = 0; i < line.Length; i++)
+    {
+        var c = line[i];
+        if (inQuotes)
+        {
+            if (c == '"')
+            {
+                if (i + 1 < line.Length && line[i + 1] == '"')
+                {
+                    current.Append('"');
+                    i++;
+                }
+                else
+                {
+                    inQuotes = false;
+                }
+            }
+            else
+            {
+                current.Append(c);
+            }
+        }
+        else if (c == '"')
+        {
+            inQuotes = true;
+        }
+        else if (c == ',')
+        {
+            fields.Add(current.ToString());
+            current.Clear();
+        }
+        else
+        {
+            current.Append(c);
+        }
+    }
+
+    fields.Add(current.ToString());
+    return fields.ToArray();
+}
+
+static Dictionary<string, int> BuildColumnIndex(string[] headers)
+{
+    var index = new Dictionary<string, int>();
+    for (var i = 0; i < headers.Length; i++)
+    {
+        index[headers[i].Trim()] = i;
+    }
+
+    return index;
+}
+
+static string GetCell(string[] row, Dictionary<string, int> columnIndex, string columnName)
+{
+    return columnIndex.TryGetValue(columnName, out var i) && i < row.Length ? row[i].Trim() : "";
+}
+
+static string CsvCell(string value)
+{
+    return value.Contains(',') || value.Contains('"') || value.Contains('\n')
+        ? $"\"{value.Replace("\"", "\"\"")}\""
+        : value;
+}
+
+static List<CarSpecRow> LoadCarsCsv(string csvPath, List<string> warnings)
+{
+    var (headers, rows) = ParseCsv(csvPath);
+    var columnIndex = BuildColumnIndex(headers);
+    var result = new List<CarSpecRow>();
+
+    foreach (var row in rows)
+    {
+        string Cell(string columnName) => GetCell(row, columnIndex, columnName);
+
+        double? CellNullableNumber(string columnName)
+        {
+            var raw = Cell(columnName);
+            return !string.IsNullOrEmpty(raw)
+                && double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out var value)
+                ? value
+                : null;
+        }
+
+        double CellNumber(string columnName) => CellNullableNumber(columnName) ?? 0;
+
+        var manufacturer = Cell("Manufacturer");
+        var name = Cell("Name");
+        if (string.IsNullOrEmpty(manufacturer) || string.IsNullOrEmpty(name))
+        {
+            warnings.Add($"Skipped pmr-cars.csv row with missing Manufacturer/Name: {string.Join(",", row)}");
+            continue;
+        }
+
+        result.Add(new CarSpecRow(
+            manufacturer,
+            name,
+            Cell("VehicleClass"),
+            CellNumber("PowerKw"),
+            CellNumber("TorqueNm"),
+            CellNumber("WeightKg"),
+            CellNumber("EngineDisplacementLitres"),
+            Cell("EngineType"),
+            Cell("EngineLayout"),
+            Cell("PowertrainLayout"),
+            Cell("Transmission"),
+            CellNullableNumber("FuelCapacityLitres"),
+            (int)CellNumber("Year")));
+    }
+
+    return result.OrderBy(c => c.Manufacturer, StringComparer.OrdinalIgnoreCase)
+                 .ThenBy(c => c.Name, StringComparer.OrdinalIgnoreCase)
+                 .ToList();
+}
+
+static List<TrackSpecRow> LoadTracksCsv(string csvPath, List<string> warnings)
+{
+    var (headers, rows) = ParseCsv(csvPath);
+    var columnIndex = BuildColumnIndex(headers);
+    var result = new List<TrackSpecRow>();
+
+    foreach (var row in rows)
+    {
+        string Cell(string columnName) => GetCell(row, columnIndex, columnName);
+        double CellNumber(string columnName) =>
+            double.TryParse(Cell(columnName), NumberStyles.Float, CultureInfo.InvariantCulture, out var value)
+                ? value
+                : 0;
+
+        var trackName = Cell("TrackName");
+        var layoutName = Cell("LayoutName");
+        if (string.IsNullOrEmpty(trackName) || string.IsNullOrEmpty(layoutName))
+        {
+            warnings.Add($"Skipped pmr-tracks.csv row with missing TrackName/LayoutName: {string.Join(",", row)}");
+            continue;
+        }
+
+        result.Add(new TrackSpecRow(
+            trackName,
+            layoutName,
+            Cell("Country"),
+            Cell("Continent"),
+            CellNumber("LengthMeters"),
+            (int)CellNumber("Turns"),
+            (int)CellNumber("GridSize"),
+            CellNumber("Latitude"),
+            CellNumber("Longitude"),
+            CellNumber("AltitudeMetersAmsl")));
+    }
+
+    return result.OrderBy(t => t.TrackName, StringComparer.OrdinalIgnoreCase)
+                 .ThenBy(t => t.LayoutName, StringComparer.OrdinalIgnoreCase)
+                 .ToList();
+}
+
+static void SaveCarsCsv(string csvPath, List<CarSpecRow> cars)
+{
+    var lines = new List<string>
+    {
+        "Manufacturer,Name,VehicleClass,PowerKw,TorqueNm,WeightKg,EngineDisplacementLitres,EngineType,EngineLayout,PowertrainLayout,Transmission,FuelCapacityLitres,Year"
+    };
+
+    lines.AddRange(cars.Select(c => string.Join(",",
+        CsvCell(c.Manufacturer),
+        CsvCell(c.Name),
+        CsvCell(c.VehicleClass),
+        c.PowerKw.ToString(CultureInfo.InvariantCulture),
+        c.TorqueNm.ToString(CultureInfo.InvariantCulture),
+        c.WeightKg.ToString(CultureInfo.InvariantCulture),
+        c.EngineDisplacementLitres.ToString(CultureInfo.InvariantCulture),
+        CsvCell(c.EngineType),
+        CsvCell(c.EngineLayout),
+        CsvCell(c.PowertrainLayout),
+        CsvCell(c.Transmission),
+        c.FuelCapacityLitres?.ToString(CultureInfo.InvariantCulture) ?? "",
+        c.Year.ToString(CultureInfo.InvariantCulture))));
+
+    File.WriteAllLines(csvPath, lines);
+}
+
+static void SaveTracksCsv(string csvPath, List<TrackSpecRow> tracks)
+{
+    var lines = new List<string>
+    {
+        "TrackName,LayoutName,Country,Continent,LengthMeters,Turns,GridSize,Latitude,Longitude,AltitudeMetersAmsl"
+    };
+
+    lines.AddRange(tracks.Select(t => string.Join(",",
+        CsvCell(t.TrackName),
+        CsvCell(t.LayoutName),
+        CsvCell(t.Country),
+        CsvCell(t.Continent),
+        t.LengthMeters.ToString(CultureInfo.InvariantCulture),
+        t.Turns.ToString(CultureInfo.InvariantCulture),
+        t.GridSize.ToString(CultureInfo.InvariantCulture),
+        t.Latitude.ToString(CultureInfo.InvariantCulture),
+        t.Longitude.ToString(CultureInfo.InvariantCulture),
+        t.AltitudeMetersAmsl.ToString(CultureInfo.InvariantCulture))));
+
+    File.WriteAllLines(csvPath, lines);
+}
+
+static string CarKey(CarSpecRow car)
+{
+    return $"{car.Manufacturer}|{car.Name}|{car.Year}";
+}
+
+static string TrackKey(TrackSpecRow track)
+{
+    return $"{track.TrackName}|{track.LayoutName}";
+}
+
+static int SeedCars(string csvPath, List<CarSpecRow> installCars, List<string> warnings)
+{
+    var existing = File.Exists(csvPath) ? LoadCarsCsv(csvPath, warnings) : [];
+    var existingKeys = existing.Select(CarKey).ToHashSet(StringComparer.OrdinalIgnoreCase);
+    var added = installCars.Where(c => !existingKeys.Contains(CarKey(c))).ToList();
+
+    var merged = existing.Concat(added)
+                          .OrderBy(c => c.Manufacturer, StringComparer.OrdinalIgnoreCase)
+                          .ThenBy(c => c.Name, StringComparer.OrdinalIgnoreCase)
+                          .ToList();
+
+    SaveCarsCsv(csvPath, merged);
+    return added.Count;
+}
+
+static int SeedTracks(string csvPath, List<TrackSpecRow> installTracks, List<string> warnings)
+{
+    var existing = File.Exists(csvPath) ? LoadTracksCsv(csvPath, warnings) : [];
+    var existingKeys = existing.Select(TrackKey).ToHashSet(StringComparer.OrdinalIgnoreCase);
+    var added = installTracks.Where(t => !existingKeys.Contains(TrackKey(t))).ToList();
+
+    var merged = existing.Concat(added)
+                          .OrderBy(t => t.TrackName, StringComparer.OrdinalIgnoreCase)
+                          .ThenBy(t => t.LayoutName, StringComparer.OrdinalIgnoreCase)
+                          .ToList();
+
+    SaveTracksCsv(csvPath, merged);
+    return added.Count;
 }
 
 static string CsString(string value)
@@ -376,28 +735,37 @@ static string CsNullableNumber(double? value)
     return value.HasValue ? CsNumber(value.Value) : "null";
 }
 
-static string BuildCarProviderSource(List<CarRow> cars)
+static string BuildCarProviderSource(List<CarSpecRow> cars, List<string> warnings)
 {
+    var seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     var entryLines = cars.Select(c =>
-        "        new() { "
-        + $"ClassString = {CsString(c.ClassString)}, "
-        + $"DescriptionKey = {CsString(c.DescriptionKey)}, "
-        + $"EngineName = {CsString(c.EngineName)}, "
-        + $"FuelCapacityLitres = {CsNullableNumber(c.FuelCapacityLitres)}, "
-        + $"IconFileName = {CsString(c.IconFileName)}, "
-        + $"Id = {CsString(c.Id)}, "
-        + $"Layout = {CsString(c.Layout)}, "
-        + $"Manufacturer = {CsString(c.Manufacturer)}, "
-        + $"Name = {CsString(c.Name)}, "
-        + $"PowerBhp = {CsNumber(c.PowerBhp)}, "
-        + $"Region = {CsString(c.Region)}, "
-        + $"TorqueNm = {CsNumber(c.TorqueNm)}, "
-        + $"Transmission = {CsString(c.Transmission)}, "
-        + $"VehicleClass = {CsString(c.VehicleClass)}, "
-        + $"VehiclePath = {CsString(c.VehiclePath)}, "
-        + $"WeightKg = {CsNumber(c.WeightKg)}, "
-        + $"Year = {c.Year} "
-        + "},");
+    {
+        // Includes Year - Manufacturer+Name alone collides for cars the game lists twice across
+        // eras (e.g. a 2024 Chevrolet Camaro and a 1969 "Historic USV8" Chevrolet Camaro).
+        var id = Slugify($"{c.Manufacturer} {c.Name} {c.Year}");
+        if (!seenIds.Add(id))
+        {
+            warnings.Add($"Duplicate derived car Id \"{id}\" ({c.Manufacturer} {c.Name}) - rename one of the rows.");
+        }
+
+        return "        new() { "
+            + $"EngineDisplacementLitres = {CsNumber(c.EngineDisplacementLitres)}, "
+            + $"EngineLayout = {CsString(c.EngineLayout)}, "
+            + $"EngineType = {CsString(c.EngineType)}, "
+            + $"FuelCapacityLitres = {CsNullableNumber(c.FuelCapacityLitres)}, "
+            + $"IconFileName = {CsString(ResolveIconFileName(c.Manufacturer))}, "
+            + $"Id = {CsString(id)}, "
+            + $"Manufacturer = {CsString(c.Manufacturer)}, "
+            + $"Name = {CsString(c.Name)}, "
+            + $"PowerKw = {CsNumber(c.PowerKw)}, "
+            + $"PowertrainLayout = {CsString(c.PowertrainLayout)}, "
+            + $"TorqueNm = {CsNumber(c.TorqueNm)}, "
+            + $"Transmission = {CsString(c.Transmission)}, "
+            + $"VehicleClass = {CsString(c.VehicleClass)}, "
+            + $"WeightKg = {CsNumber(c.WeightKg)}, "
+            + $"Year = {c.Year} "
+            + "},";
+    });
 
     return $$"""
              using SimRacingSdk.Pmr.Core.Abstractions;
@@ -419,11 +787,6 @@ static string BuildCarProviderSource(List<CarRow> cars)
                  public PmrCarInfo? FindById(string id)
                  {
                      return this.cars.FirstOrDefault(c => c.Id == id);
-                 }
-
-                 public PmrCarInfo? FindByVehiclePath(string vehiclePath)
-                 {
-                     return this.cars.FirstOrDefault(c => c.VehiclePath == vehiclePath);
                  }
 
                  public IReadOnlyCollection<PmrCarInfo> GetCarInfos()
@@ -451,31 +814,38 @@ static string BuildCarProviderSource(List<CarRow> cars)
              """;
 }
 
-static string BuildTrackProviderSource(List<TrackRow> tracks)
+static string BuildTrackProviderSource(List<TrackSpecRow> tracks, List<string> warnings)
 {
+    var seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     var entryLines = tracks.Select(t =>
-        "        new() { "
-        + $"AltitudeMetersAmsl = {CsNumber(t.AltitudeMetersAmsl)}, "
-        + $"City = {CsString(t.City)}, "
-        + $"Continent = {CsString(t.Continent)}, "
-        + $"Country = {CsString(t.Country)}, "
-        + $"CountryCode = {CsString(t.CountryCode)}, "
-        + $"Direction = {CsString(t.Direction)}, "
-        + $"GridSize = {t.GridSize}, "
-        + $"Latitude = {CsNumber(t.Latitude)}, "
-        + $"LayoutId = {CsString(t.LayoutId)}, "
-        + $"LayoutName = {CsString(t.LayoutName)}, "
-        + $"LengthMeters = {CsNumber(t.LengthMeters)}, "
-        + $"Longitude = {CsNumber(t.Longitude)}, "
-        + $"MaxOvertimeSeconds = {CsNumber(t.MaxOvertimeSeconds)}, "
-        + $"PitSpeedLimitMetersPerSecond = {CsNumber(t.PitSpeedLimitMetersPerSecond)}, "
-        + $"Turns = {t.Turns}, "
-        + $"TrackFolder = {CsString(t.TrackFolder)}, "
-        + $"TrackId = {CsString(t.TrackId)}, "
-        + $"TrackName = {CsString(t.TrackName)}, "
-        + $"TimeZoneUtcOffset = {CsNumber(t.TimeZoneUtcOffset)}, "
-        + $"TrackYear = {t.TrackYear} "
-        + "},");
+    {
+        var trackId = Slugify(t.TrackName);
+        var layoutId = Slugify(t.LayoutName);
+        if (!seenIds.Add($"{trackId}|{layoutId}"))
+        {
+            warnings.Add(
+                $"Duplicate derived track/layout Id \"{trackId}\"/\"{layoutId}\" ({t.TrackName} - {t.LayoutName}) "
+                + "- rename one of the rows.");
+        }
+
+        var (country, countryCode) = ResolveCountry(t.Country, warnings, trackId);
+
+        return "        new() { "
+            + $"AltitudeMetersAmsl = {CsNumber(t.AltitudeMetersAmsl)}, "
+            + $"Continent = {CsString(t.Continent)}, "
+            + $"Country = {CsString(country)}, "
+            + $"CountryCode = {CsString(countryCode)}, "
+            + $"GridSize = {t.GridSize}, "
+            + $"Latitude = {CsNumber(t.Latitude)}, "
+            + $"LayoutId = {CsString(layoutId)}, "
+            + $"LayoutName = {CsString(t.LayoutName)}, "
+            + $"LengthMeters = {CsNumber(t.LengthMeters)}, "
+            + $"Longitude = {CsNumber(t.Longitude)}, "
+            + $"Turns = {t.Turns}, "
+            + $"TrackId = {CsString(trackId)}, "
+            + $"TrackName = {CsString(t.TrackName)} "
+            + "},";
+    });
 
     return $$"""
              using System.Collections.ObjectModel;
@@ -544,43 +914,29 @@ static string BuildTrackProviderSource(List<TrackRow> tracks)
              """;
 }
 
-internal record CarRow(
-    string Id,
+internal record CarSpecRow(
     string Manufacturer,
     string Name,
     string VehicleClass,
-    string ClassString,
+    double PowerKw,
     double TorqueNm,
     double WeightKg,
+    double EngineDisplacementLitres,
+    string EngineType,
+    string EngineLayout,
+    string PowertrainLayout,
     string Transmission,
-    double PowerBhp,
     double? FuelCapacityLitres,
-    string Layout,
-    string EngineName,
-    string Region,
-    int Year,
-    string DescriptionKey,
-    string VehiclePath,
-    string IconFileName);
+    int Year);
 
-internal record TrackRow(
-    string TrackId,
+internal record TrackSpecRow(
     string TrackName,
-    string TrackFolder,
-    string LayoutId,
     string LayoutName,
+    string Country,
+    string Continent,
     double LengthMeters,
     int Turns,
     int GridSize,
-    string Direction,
-    string Continent,
-    string Country,
-    string CountryCode,
-    string City,
-    int TrackYear,
     double Latitude,
     double Longitude,
-    double AltitudeMetersAmsl,
-    double TimeZoneUtcOffset,
-    double PitSpeedLimitMetersPerSecond,
-    double MaxOvertimeSeconds);
+    double AltitudeMetersAmsl);

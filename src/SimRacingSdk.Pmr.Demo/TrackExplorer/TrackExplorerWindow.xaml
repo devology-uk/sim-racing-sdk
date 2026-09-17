@@ -62,10 +62,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image Grid.Column="0"
@@ -81,91 +77,59 @@
 
                 <Label Grid.Column="0"
                        Grid.Row="1"
-                       Content="City"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="1"
-                       Content="{Binding City}" />
-
-                <Label Grid.Column="0"
-                       Grid.Row="2"
                        Content="Country"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="2"
+                       Grid.Row="1"
                        Content="{Binding Country}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="3"
+                       Grid.Row="2"
                        Content="Layout"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="3"
+                       Grid.Row="2"
                        Content="{Binding LayoutName}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="4"
+                       Grid.Row="3"
                        Content="Length (m)"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="4"
+                       Grid.Row="3"
                        Content="{Binding LengthMeters}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="5"
+                       Grid.Row="4"
                        Content="Turns"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="5"
+                       Grid.Row="4"
                        Content="{Binding Turns}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="6"
-                       Content="Direction"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="6"
-                       Content="{Binding Direction}" />
-
-                <Label Grid.Column="0"
-                       Grid.Row="7"
+                       Grid.Row="5"
                        Content="Grid Size"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="7"
+                       Grid.Row="5"
                        Content="{Binding GridSize}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="8"
+                       Grid.Row="6"
                        Content="Altitude (m AMSL)"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="8"
+                       Grid.Row="6"
                        Content="{Binding AltitudeMetersAmsl}" />
 
                 <Label Grid.Column="0"
-                       Grid.Row="9"
+                       Grid.Row="7"
                        Content="Lat / Long"
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
-                       Grid.Row="9"
+                       Grid.Row="7"
                        Content="{Binding Latitude}" />
-
-                <Label Grid.Column="0"
-                       Grid.Row="10"
-                       Content="Pit Speed Limit (m/s)"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="10"
-                       Content="{Binding PitSpeedLimitMetersPerSecond}" />
-
-                <Label Grid.Column="0"
-                       Grid.Row="11"
-                       Content="Year"
-                       FontWeight="SemiBold" />
-                <Label Grid.Column="1"
-                       Grid.Row="11"
-                       Content="{Binding TrackYear}" />
             </Grid>
         </GroupBox>
     </Grid>

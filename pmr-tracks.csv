@@ -1,0 +1,35 @@
+TrackName,LayoutName,Country,Continent,LengthMeters,Turns,GridSize,Latitude,Longitude,AltitudeMetersAmsl
+Brianza,Grand Prix,Italy,Europe,5793,7,28,45.62056,9.28111,162
+Canadian Tire Motorsport Park,Grand Prix,Canada,Americas,4102,6,32,44.05889,-78.67722,334
+Circuit de Spa-Francorchamps,Grand Prix,Belgium,Europe,7004,14,32,50.43722,5.97194,420
+Daytona,Road Course,United States,Americas,5729,12,32,29.1852,-81.0705,8
+Derby,Grand Prix,United Kingdom,Europe,4020,12,30,52.83083,-1.38667,85
+Derby,National,United Kingdom,Europe,3149,9,30,52.83083,-1.38667,85
+Kyalami,Grand Prix,South Africa,Rest of World,4580,12,32,-25.99472,28.08083,1532
+Lexington,Chicane,United States,Americas,3862,14,32,40.69417,-82.52611,420
+Lexington,No Chicane,United States,Americas,3621,12,32,40.69417,-82.52611,420
+Lime Rock Park,Chicanes,United States,Americas,2419,8,32,41.92722,-73.41472,190
+Lime Rock Park,Road Course,United States,Americas,2462,6,32,41.92722,-73.41472,190
+Lime Rock Park,Sports Car,United States,Americas,2372,7,32,41.92722,-73.41472,190
+Mount Panorama Circuit,Grand Prix,Australia,Rest of World,6213,23,32,-33.43789,149.57065,770
+Northampton,Grand Prix,United Kingdom,Europe,5890,15,32,52.073265,-1.01452,153
+Northampton,International,United Kingdom,Europe,2979,7,32,52.073265,-1.01452,153
+Northampton,Original Pits,United Kingdom,Europe,5890,15,32,52.073265,-1.01452,153
+Nürburgring,Grand Prix,Germany,Europe,5148,16,32,50.33444,6.94278,330
+Nürburgring,Sprint,Germany,Europe,3629,11,32,50.33444,6.94278,330
+Nürburgring Nordschleife,Nordschleife,Germany,Europe,20832,73,20,50.33444,6.94278,472
+Nürburgring Nordschleife 24hrs,Nordschleife 24hrs,Germany,Europe,25378,82,32,50.33444,6.94278,472
+San Marino,Grand Prix,Italy,Europe,4909,19,32,44.34306,11.71389,50
+Sebring,Grand Prix,United States,Americas,5954,17,32,27.45146,-81.36872,20
+Sebring,Johnson Club Circuit,United States,Americas,2736,13,30,27.45146,-81.36872,20
+Sebring,School Circuit,United States,Americas,3219,9,32,27.45146,-81.36872,20
+Spielberg,Grand Prix,Austria,Europe,4318,7,32,47.21972,14.76472,677
+Spielberg,National,Austria,Europe,2336,5,32,47.21972,14.76472,677
+São Paulo,Grand Prix,Brazil,Americas,4309,15,32,-23.70361,-46.69722,802
+Zolder,Grand Prix,Belgium,Europe,4010,11,31,50.98972,5.31083,52
+Michelin Raceway Road Atlanta,Grand Prix,United States,Americas,4088,12,32,34.14667,-83.81778,283
+Michelin Raceway Road Atlanta,Short Course,United States,Americas,2864,9,32,34.14667,-83.81778,283
+Rocky Knoll Raceway,Grand Prix,United States,Americas,6515,14,32,43.7975,-87.99389,307
+Rocky Knoll Raceway,Chicane,United States,Americas,6502,15,32,43.7975,-87.99389,307
+Takimaya,Grand Prix,Japan,Asia,3747,13,32,34.8417,136.5389,94
+Takimaya,Short,Japan,Asia,1956,7,32,34.8417,136.5389,94
