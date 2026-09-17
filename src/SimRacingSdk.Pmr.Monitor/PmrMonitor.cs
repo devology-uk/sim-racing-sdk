@@ -129,8 +129,14 @@ public class PmrMonitor : IPmrMonitor
 
     private void OnNextParticipantRaceState(PmrParticipantRaceState participantRaceState)
     {
-        // Keyed by (DriverName, LiveryId), not VehicleId - a live rig test (2026-09-16) confirmed
-        // PMR sends VehicleId=0 for every car in every ParticipantRaceState packet, so it can't
+        // A live rig test (2026-09-16, real human driving alongside AI) confirmed PMR's own
+        // IsPlayer flag is inverted: the human's laps reported False and every AI car's laps
+        // reported True, with zero exceptions across a full race weekend. Corrected here, once,
+        // so every downstream consumer (ParticipantUpdates, LapCompleted) sees the true value.
+        participantRaceState = participantRaceState with { IsPlayer = !participantRaceState.IsPlayer };
+
+        // Keyed by (DriverName, LiveryId), not VehicleId - the same rig test confirmed PMR sends
+        // VehicleId=0 for every AI car in every ParticipantRaceState packet, so it can't
         // distinguish cars at all. DriverName is the primary differentiator; LiveryId is added
         // because online races let drivers pick their own name and livery independently, so two
         // drivers sharing a name (more likely than sharing both name and livery) would otherwise
