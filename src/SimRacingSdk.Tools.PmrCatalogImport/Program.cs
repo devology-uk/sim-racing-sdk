@@ -29,10 +29,11 @@ using System.Xml.Linq;
 // the Virtual Energy note below); tracks add Latitude/Longitude/AltitudeMetersAmsl and
 // Country/Continent on top of what's visible (TrackName, LayoutName, Turns, GridSize,
 // LengthMeters) - all four researched/typed by hand the same way Ace's track Corners column was
-// (Mike's call, 2026-09-17). Neither CSV stores an ID column - PmrCarInfo.Id and
-// PmrTrackInfo.TrackId/LayoutId are derived at generation time from the name fields, since
-// nothing downstream (the UDP telemetry only ever reports VehicleName as a string; no consumer
-// app matches on a game-internal ID either) needs the game's own identifiers.
+// (Mike's call, 2026-09-17). Both CSVs also carry a trailing GameId column - the game's own id
+// (vehicle .vdef / track .tdef "ID", or savegame1\stats.xml for cars and tracks not present as
+// loose files), which a saved setup's .vset file name is keyed on. A track's GameId is shared by
+// all its layouts. PmrCarInfo.Id and PmrTrackInfo.TrackId/LayoutId are still derived at
+// generation time from the name fields.
 //
 // --seed splits the install's single combined EngineName ("2.4L V6 Twin Turbo") and Layout
 // ("Mid Engine - RWD") strings into the CSV's separate columns, and converts PowerBHP to
@@ -81,6 +82,8 @@ if (!File.Exists(carsCsvPath) || !File.Exists(tracksCsvPath))
 
 var carRows = LoadCarsCsv(carsCsvPath, warnings);
 var trackRows = LoadTracksCsv(tracksCsvPath, warnings);
+ValidateCarGameIds(carRows, warnings);
+ValidateTrackGameIds(trackRows, warnings);
 
 var carProviderPath = Path.Combine(repoRoot, "src", "SimRacingSdk.Pmr.Core", "PmrCarInfoProvider.cs");
 var trackProviderPath = Path.Combine(repoRoot, "src", "SimRacingSdk.Pmr.Core", "PmrTrackInfoProvider.cs");
@@ -149,9 +152,8 @@ static string? ResolveInstallPath(string[] cliArgs)
     return defaultCandidates.FirstOrDefault(Directory.Exists);
 }
 
-// A stable, human-readable substitute for the game's own internal IDs - never stored in the
-// CSVs, only computed here at generation/seed time, since nothing downstream needs to match the
-// game's own identifiers (see the header comment above).
+// A stable, human-readable slug derived from the name fields at generation time - distinct from
+// the game's own GameId, which is stored in the CSVs.
 static string Slugify(string value)
 {
     return Regex.Replace(value.Trim(), @"\s+", "_");
@@ -318,7 +320,8 @@ static List<CarSpecRow> ParseInstallCars(string vehiclesRoot, List<string> warni
             powertrainLayout,
             GetString(parameters, "Transmission"),
             fuelCapacityLitres,
-            GetInt(parameters, "Year")));
+            GetInt(parameters, "Year"),
+            id));
     }
 
     return rows.OrderBy(c => c.Manufacturer, StringComparer.OrdinalIgnoreCase)
@@ -436,7 +439,8 @@ static List<TrackSpecRow> ParseInstallTracks(string tracksRoot, List<string> war
                 GetInt(layoutParameters, "GridSize"),
                 GetNumber(trackParameters, "TrackLatitude"),
                 GetNumber(trackParameters, "TrackLongitude"),
-                GetNumber(trackParameters, "TrackAltitudeMetresAMSL")));
+                GetNumber(trackParameters, "TrackAltitudeMetresAMSL"),
+                trackId));
         }
     }
 
@@ -585,7 +589,8 @@ static List<CarSpecRow> LoadCarsCsv(string csvPath, List<string> warnings)
             Cell("PowertrainLayout"),
             Cell("Transmission"),
             CellNullableNumber("FuelCapacityLitres"),
-            (int)CellNumber("Year")));
+            (int)CellNumber("Year"),
+            Cell("GameId")));
     }
 
     return result.OrderBy(c => c.Manufacturer, StringComparer.OrdinalIgnoreCase)
@@ -625,7 +630,8 @@ static List<TrackSpecRow> LoadTracksCsv(string csvPath, List<string> warnings)
             (int)CellNumber("GridSize"),
             CellNumber("Latitude"),
             CellNumber("Longitude"),
-            CellNumber("AltitudeMetersAmsl")));
+            CellNumber("AltitudeMetersAmsl"),
+            Cell("GameId")));
     }
 
     return result.OrderBy(t => t.TrackName, StringComparer.OrdinalIgnoreCase)
@@ -637,7 +643,7 @@ static void SaveCarsCsv(string csvPath, List<CarSpecRow> cars)
 {
     var lines = new List<string>
     {
-        "Manufacturer,Name,VehicleClass,PowerKw,TorqueNm,WeightKg,EngineDisplacementLitres,EngineType,EngineLayout,PowertrainLayout,Transmission,FuelCapacityLitres,Year"
+        "Manufacturer,Name,VehicleClass,PowerKw,TorqueNm,WeightKg,EngineDisplacementLitres,EngineType,EngineLayout,PowertrainLayout,Transmission,FuelCapacityLitres,Year,GameId"
     };
 
     lines.AddRange(cars.Select(c => string.Join(",",
@@ -653,7 +659,8 @@ static void SaveCarsCsv(string csvPath, List<CarSpecRow> cars)
         CsvCell(c.PowertrainLayout),
         CsvCell(c.Transmission),
         c.FuelCapacityLitres?.ToString(CultureInfo.InvariantCulture) ?? "",
-        c.Year.ToString(CultureInfo.InvariantCulture))));
+        c.Year.ToString(CultureInfo.InvariantCulture),
+        CsvCell(c.GameId))));
 
     File.WriteAllLines(csvPath, lines);
 }
@@ -662,7 +669,7 @@ static void SaveTracksCsv(string csvPath, List<TrackSpecRow> tracks)
 {
     var lines = new List<string>
     {
-        "TrackName,LayoutName,Country,Continent,LengthMeters,Turns,GridSize,Latitude,Longitude,AltitudeMetersAmsl"
+        "TrackName,LayoutName,Country,Continent,LengthMeters,Turns,GridSize,Latitude,Longitude,AltitudeMetersAmsl,GameId"
     };
 
     lines.AddRange(tracks.Select(t => string.Join(",",
@@ -675,7 +682,8 @@ static void SaveTracksCsv(string csvPath, List<TrackSpecRow> tracks)
         t.GridSize.ToString(CultureInfo.InvariantCulture),
         t.Latitude.ToString(CultureInfo.InvariantCulture),
         t.Longitude.ToString(CultureInfo.InvariantCulture),
-        t.AltitudeMetersAmsl.ToString(CultureInfo.InvariantCulture))));
+        t.AltitudeMetersAmsl.ToString(CultureInfo.InvariantCulture),
+        CsvCell(t.GameId))));
 
     File.WriteAllLines(csvPath, lines);
 }
@@ -720,6 +728,58 @@ static int SeedTracks(string csvPath, List<TrackSpecRow> installTracks, List<str
     return added.Count;
 }
 
+static void ValidateCarGameIds(List<CarSpecRow> cars, List<string> warnings)
+{
+    foreach (var car in cars.Where(c => string.IsNullOrEmpty(c.GameId)))
+    {
+        warnings.Add($"Car has no GameId: {car.Manufacturer} {car.Name} ({car.Year}).");
+    }
+
+    var duplicates = cars.Where(c => !string.IsNullOrEmpty(c.GameId))
+                         .GroupBy(c => c.GameId, StringComparer.OrdinalIgnoreCase)
+                         .Where(g => g.Count() > 1);
+    foreach (var duplicate in duplicates)
+    {
+        warnings.Add(
+            $"GameId \"{duplicate.Key}\" is shared by more than one car: "
+            + string.Join("; ", duplicate.Select(c => $"{c.Manufacturer} {c.Name} ({c.Year})")));
+    }
+}
+
+static void ValidateTrackGameIds(List<TrackSpecRow> tracks, List<string> warnings)
+{
+    foreach (var track in tracks.Where(t => string.IsNullOrEmpty(t.GameId)))
+    {
+        warnings.Add($"Track layout has no GameId: {track.TrackName} - {track.LayoutName}.");
+    }
+
+    var namesByGameId = tracks.Where(t => !string.IsNullOrEmpty(t.GameId))
+                              .GroupBy(t => t.GameId, StringComparer.OrdinalIgnoreCase);
+    foreach (var group in namesByGameId)
+    {
+        var trackNames = group.Select(t => t.TrackName)
+                              .Distinct()
+                              .ToList();
+        if (trackNames.Count > 1)
+        {
+            warnings.Add($"GameId \"{group.Key}\" is shared by more than one track: {string.Join("; ", trackNames)}");
+        }
+    }
+
+    var gameIdsByTrackName = tracks.Where(t => !string.IsNullOrEmpty(t.GameId))
+                                   .GroupBy(t => t.TrackName);
+    foreach (var group in gameIdsByTrackName)
+    {
+        var gameIds = group.Select(t => t.GameId)
+                           .Distinct(StringComparer.OrdinalIgnoreCase)
+                           .ToList();
+        if (gameIds.Count > 1)
+        {
+            warnings.Add($"Track \"{group.Key}\" has layouts with different GameIds: {string.Join("; ", gameIds)}");
+        }
+    }
+}
+
 static string CsString(string value)
 {
     return $"\"{value.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
@@ -753,6 +813,7 @@ static string BuildCarProviderSource(List<CarSpecRow> cars, List<string> warning
             + $"EngineLayout = {CsString(c.EngineLayout)}, "
             + $"EngineType = {CsString(c.EngineType)}, "
             + $"FuelCapacityLitres = {CsNullableNumber(c.FuelCapacityLitres)}, "
+            + $"GameId = {CsString(c.GameId)}, "
             + $"IconFileName = {CsString(ResolveIconFileName(c.Manufacturer))}, "
             + $"Id = {CsString(id)}, "
             + $"Manufacturer = {CsString(c.Manufacturer)}, "
@@ -783,6 +844,12 @@ static string BuildCarProviderSource(List<CarSpecRow> cars, List<string> warning
                  ];
 
                  public static PmrCarInfoProvider Instance => singletonInstance ??= new PmrCarInfoProvider();
+
+                 public PmrCarInfo? FindByGameId(string gameId)
+                 {
+                     return this.cars.FirstOrDefault(
+                         c => string.Equals(c.GameId, gameId, StringComparison.OrdinalIgnoreCase));
+                 }
 
                  public PmrCarInfo? FindById(string id)
                  {
@@ -835,6 +902,7 @@ static string BuildTrackProviderSource(List<TrackSpecRow> tracks, List<string> w
             + $"Continent = {CsString(t.Continent)}, "
             + $"Country = {CsString(country)}, "
             + $"CountryCode = {CsString(countryCode)}, "
+            + $"GameId = {CsString(t.GameId)}, "
             + $"GridSize = {t.GridSize}, "
             + $"Latitude = {CsNumber(t.Latitude)}, "
             + $"LayoutId = {CsString(layoutId)}, "
@@ -875,6 +943,13 @@ static string BuildTrackProviderSource(List<TrackSpecRow> tracks, List<string> w
                      return this.tracks.Select(t => t.Continent)
                                         .Distinct()
                                         .OrderBy(c => c)
+                                        .ToList()
+                                        .AsReadOnly();
+                 }
+
+                 public ReadOnlyCollection<PmrTrackInfo> GetLayoutsForGameId(string gameId)
+                 {
+                     return this.tracks.Where(t => string.Equals(t.GameId, gameId, StringComparison.OrdinalIgnoreCase))
                                         .ToList()
                                         .AsReadOnly();
                  }
@@ -927,7 +1002,8 @@ internal record CarSpecRow(
     string PowertrainLayout,
     string Transmission,
     double? FuelCapacityLitres,
-    int Year);
+    int Year,
+    string GameId);
 
 internal record TrackSpecRow(
     string TrackName,
@@ -939,4 +1015,5 @@ internal record TrackSpecRow(
     int GridSize,
     double Latitude,
     double Longitude,
-    double AltitudeMetersAmsl);
+    double AltitudeMetersAmsl,
+    string GameId);

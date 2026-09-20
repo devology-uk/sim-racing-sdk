@@ -13,6 +13,7 @@ public interface IPmrTrackInfoProvider
     // folder across genuinely distinct venues with their own TrackName, so TrackFolder can't
     // uniquely identify one for UI drill-down.
     ReadOnlyCollection<PmrTrackInfo> GetLayoutsForTrack(string trackName);
+    ReadOnlyCollection<PmrTrackInfo> GetLayoutsForGameId(string gameId);
     ReadOnlyCollection<PmrTrackInfo> GetTrackInfos();
     ReadOnlyCollection<string> GetTrackNames();
     ReadOnlyCollection<string> GetTrackNamesForContinent(string continent);

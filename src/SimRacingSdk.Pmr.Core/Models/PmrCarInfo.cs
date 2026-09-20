@@ -20,14 +20,18 @@ public record PmrCarInfo
     // default.vset (key "ice-fuel-capacity"), which PmrCatalogImport already falls back to.
     public double? FuelCapacityLitres { get; init; }
 
+    // The game's own vehicle id (e.g. "ID_BMW_M_Hybrid_V8") - the prefix of a saved setup's
+    // .vset file name. Its casing varies between cars in the game's own data, so compare it
+    // case-insensitively.
+    public string GameId { get; init; }
+
     // Usually equal to Manufacturer - overridden where a manufacturer trades under more than
     // one name for logo purposes (e.g. "Mercedes-AMG"/"Mercedes-Benz" both use the one generic
     // Mercedes logo), so consumers can bind straight to this instead of Manufacturer for the
     // CarManufacturerImageSourceConverter lookup.
     public string IconFileName { get; init; }
 
-    // Derived from Manufacturer + Name, not a game-internal identifier - pmr-cars.csv is the
-    // catalog's source of truth and carries no ID column of its own (see PmrCatalogImport).
+    // Derived from Manufacturer + Name + Year - a stable slug, not the game's own id (see GameId).
     public string Id { get; init; }
 
     public string Manufacturer { get; init; }

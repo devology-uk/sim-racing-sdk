@@ -11,11 +11,14 @@ public record PmrTrackInfo
     // ISO 3166-1 alpha-3 - matches the flag PNG names in SimRacingSdk.Wpf.Shared/Images/Flags.
     public string CountryCode { get; init; }
 
+    // The game's own track id (e.g. "ID_SpaFrancorchamps"). Shared by every layout of the track -
+    // the game has no id of its own for a layout.
+    public string GameId { get; init; }
+
     public int GridSize { get; init; }
     public double Latitude { get; init; }
 
-    // Derived from LayoutName, not a game-internal identifier - pmr-tracks.csv is the catalog's
-    // source of truth and carries no ID column of its own (see PmrCatalogImport).
+    // Derived from LayoutName, not a game-internal identifier.
     public string LayoutId { get; init; }
 
     public string LayoutName { get; init; }

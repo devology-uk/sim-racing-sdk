@@ -1,112 +1,112 @@
-Manufacturer,Name,VehicleClass,PowerKw,TorqueNm,WeightKg,EngineDisplacementLitres,EngineType,EngineLayout,PowertrainLayout,Transmission,FuelCapacityLitres,Year
-AMC,Javelin,Historic USV8,335,500,1407,5,V8,Front Engine,RWD,4-Speed Manual,,1971
-Acura,ARX-06,LMDh,499,688,1030,2.4,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023
-Acura,NSX GT3 Evo 22,GT3,387,640,1290,3.5,V6 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,90.60,2022
-Alpine,A110 GT4,GT4,268,488,1160,1.8,L4 Turbo,Mid Engine,RWD,6-Speed Paddle,95.00,2020
-Alpine,A424 Beta,LMDh,499,670,1030,3.4,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024
-Aston Martin,AMR Vantage GT3,GT3,378,690,1325,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2024
-Aston Martin,AMR Vantage GT3 2022,GT3,378,690,1325,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2022
-Aston Martin,AMR Vantage GT4,GT4,354,690,1400,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2020
-Aston Martin,AMR Vantage Gte,GTE,399,700,1245,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,,2020
-Aston Martin,DBR9,GT,466,700,1170,6,V12,Front Engine,RWD,6-Speed Sequential,75.50,2005
-Aston Martin,Valkyrie Hypercar,LMDh,507,750,1030,6.5,V12,Mid Engine,RWD,7-Speed Paddle,110.00,2025
-Audi,90 IMSA GTO,GTO,529,720,1207,2.2,L5 Turbo,Front Engine,4WD,5-Speed Manual,75.50,1989
-Audi,R8 (LMP900),LMP,473,680,911,3.6,V8 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,90.00,2002
-Audi,R8 GT3 Evo II,GT3,384,580,1310,5.2,V10,Mid Engine,RWD,6-Speed Paddle,90.60,2022
-Audi,R8 LMS GT4 Evo,GT4,328,480,1485,5.2,V10,Mid Engine,RWD,7-Speed Paddle,113.00,2020
-BMW,320 Turbo Group 5,Group 5,447,515,880,2,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1978
-BMW,M Hybrid V8,LMDh,499,700,1030,4,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023
-BMW,M3 GTR (E46),N-GT,335,365,1120,4,V8,Front Engine,RWD,6-Speed Sequential,67.50,2004
-BMW,M4 GT3 EVO,GT3,391,650,1360,3,L6 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2025
-BMW,M4 GT4 EVO,GT4,386,550,1430,3,L6 Twin Turbo,Front Engine,RWD,7-Speed Paddle,120.00,2025
-BMW,M8 GTE,GTE,447,700,1170,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,,2020
-BMW,V12 LMR,LMP,439,678,914,6,V12,Mid Engine,RWD,6-Speed Sequential,90.00,1999
-Cadillac,Northstar LMP-02,LMP,462,700,916,4,V8 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,75.50,2002
-Cadillac,V-Series.R,LMDh,499,740,1030,5.5,V8,Mid Engine,RWD,7-Speed Paddle,,2023
-Chaparral,2F,Sports Car 67,391,630,795,7,V8,Mid Engine,RWD,3-Speed Automatic,,1967
-Chevrolet,Camaro,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024
-Chevrolet,Camaro,Historic USV8,328,430,1404,5,V8,Front Engine,RWD,4-Speed Manual,,1969
-Chevrolet,Camaro AU,AUS V8 Evo,447,660,1260,5.7,V8,Front Engine,RWD,6-Speed Sequential,,2023
-Chevrolet,Camaro Z28 GTO,GTO,447,666,1225,6,V8,Front Engine,RWD,5-Speed Manual,75.50,1989
-Chevrolet,Camaro ZL-1 GT4.R,GT4,328,575,1470,6.2,V8,Front Engine,RWD,6-Speed Paddle,87.00,2007
-Chevrolet,Corvette C3,GT 70,391,630,1275,7,V8,Front Engine,RWD,4-Speed Manual,,1973
-Chevrolet,Corvette C5.R,GT,454,770,1270,7,V8,Front Engine,RWD,6-Speed Manual,75.50,2004
-Chevrolet,Corvette C6.R,GT,425,840,1100,7,V8,Front Engine,RWD,6-Speed Sequential,75.50,2005
-Chevrolet,Corvette C7.R,GTE,365,660,1110,5.5,V8,Front Engine,RWD,6-Speed Paddle,,2017
-Chevrolet,Corvette C8.R,GTE,372,650,1170,5.5,V8,Front Engine,RWD,6-Speed Paddle,,2020
-Chevrolet,Corevette Grand Sport,GT 60,361,607,985,6.2,V8,Front Engine,RWD,4-Speed Manual,,1963
-Chevrolet,Corvette Z06 GT3.R,GT3,395,630,1345,5.5,V8,Mid Engine,RWD,6-Speed Paddle,90.60,2023
-Chrysler,Viper GTS-R,GT,462,780,1100,8,V10,Front Engine,RWD,6-Speed Manual,75.50,2003
-Dodge,Challenger,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024
-Dodge,SRT Viper GTS-R,GTE,361,700,1150,8.4,V10,Front Engine,RWD,6-Speed Sequential,,2014
-Dodge,Viper Competition Coupe,N-GT,387,730,1415,8,V10,Front Engine,RWD,6-Speed Manual,67.50,2004
-Ford,Capri Group 5,Group 5,432,485,880,1.7,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1980
-Ford,Capri RS3 100,GT 70,328,380,1040,3.4,V6,Front Engine,RWD,5-Speed Manual,,1973
-Ford,Falcon FG COTF,AUS V8,484,640,1410,5,V8,Front Engine,RWD,6-Speed Manual,,2013
-Ford,GT40 Mk.IV,Sports Car 67,395,640,1065,7,V8,Mid Engine,RWD,4-Speed Manual,,1967
-Ford,GTLM GTE,GTE,387,645,1200,3.5,V6 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,,2017
-Ford,Mustang,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024
-Ford,Mustang AU,AU V8 Evo,447,650,1260,5.4,V8,Front Engine,RWD,6-Speed Sequential,,2023
-Ford,Mustang Boss 302,Historic USV8,350,487,1390,5,V8,Front Engine,RWD,4-Speed Manual,,1970
-Ford,Mustang GT3,GT3,387,660,1300,5.4,V8,Front Engine,RWD,6-Speed Paddle,90.60,2023
-Ford,Mustang GT4,GT4,372,580,1390,5,V8,Front Engine,RWD,6-Speed Paddle,100.00,2024
-Gillet,Vertigo,N-GT,257,425,806,3,V6,Front Engine,RWD,6-Speed Sequential,67.50,2004
-Holden,Commodore COTF,AUS V8,484,640,1410,5,V8,Front Engine,RWD,6-Speed Sequential,,2013
-Honda,Civic JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2024
-Honda,NSX JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2023
-Honda,NSX JP2,JP2,357,392,1120,3.5,V6,Mid Engine,RWD,6-Speed Sequential,,2003
-Jaguar,E-Type Lightweight,GT 60,253,380,1010,3.8,L6,Front Engine,RWD,5-Speed Manual,,1964
-Jaguar,XJR-9,Group C,559,828,880,7,V12,Mid Engine,RWD,5-Speed Manual,100.00,1990
-Lamborghini,Huracán GT3 Evo2,GT3,384,580,1280,5.2,V10,Mid Engine,RWD,6-Speed Paddle,90.60,2022
-Lamborghini,Murcielago R-GT,GT,447,650,1100,6,V12,Mid Engine,RWD,6-Speed Sequential,75.50,2004
-Lamborghini,SC63 LMDh,LMDh,499,710,1030,3.8,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024
-Lister,Storm GT,GT,428,780,1125,7,V12,Front Engine,RWD,6-Speed Sequential,75.50,2004
-Lola,T70 Mk3,Sports Car 67,365,520,865,5.9,V8,Mid Engine,RWD,4-Speed Manual,,1967
-Lola,T70 Mk3B GT,Sports Car 70,335,485,845,5,V8,Mid Engine,RWD,5-Speed Manual,120.00,1970
-Lotus,Elise GT1,GT1,428,625,972,6,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1997
-Marcos,Mantara LM600,N-GT,357,650,1150,6,V8,Front Engine,RWD,6-Speed Sequential,75.50,2004
-Maserati,MC12 GT1,GT,432,600,1100,6,V12,Mid Engine,RWD,6-Speed Sequential,75.50,2004
-Mazda,787B,Group C,521,608,830,2.6,4-Rotor,Mid Engine,RWD,5-Speed Manual,100.00,1991
-Mazda,MX-5 Spec,MX5 Trophy,126,204,1095,2,L4,Front Engine,RWD,6-Speed Manual,34.00,2017
-Mazda,RX-7 GTO,GTO,447,530,1020,2.6,4-Rotor,Front Engine,RWD,5-Speed Manual,75.50,1989
-Mercedes-AMG,GT3,GT3,387,625,1325,6.3,V8,Front Engine,RWD,6-Speed Paddle,90.60,2020
-Mercedes-AMG,GT4,GT4,350,580,1390,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2020
-Mercedes-Benz,CLK-LM,GT1,447,685,971,5,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1998
-Mercedes-Benz,Sauber C9,Group C,611,922,905,5,V8 Twin Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1989
-Mercury,Cougar XR-7 GTO,GTO,503,660,1175,5.5,V8,Front Engine,RWD,5-Speed Manual,75.50,1989
-Morgan,Aero 8 GT(N),N-GT,305,500,1010,4.6,V8,Front Engine,RWD,6-Speed Sequential,75.50,2004
-Mosler,MT900R,N-GT,335,425,1100,5.7,V8,Mid Engine,RWD,6-Speed Sequential,90.00,2004
-Nissan,300ZX Turbo GTO,GTO,559,850,1225,3,V6 Turbo,Front Engine,RWD,5-Speed Manual,75.50,1989
-Nissan,Calsonic Impul Z JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2022
-Nissan,Datsun 280 ZX Turbo,Group 5,573,1060,1167,4.2,V8 Twin Turbo,Front Engine,RWD,5-Speed Manual,,1981
-Nissan,Fairlady Z (Z33) JP2,JP2,346,706,1080,3,V6 Turbo,Front Engine,RWD,6-Speed Sequential,,2004
-Nissan,Motul Autech GT-R JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2021
-Nissan,R390 GT1,GT1,478,706,1000,3.5,V8 Twin Turbo,Mid Engine,RWD,6-Speed Sequential,100.00,1998
-Nissan,Skyline GT-R (R34) JP2,JP2,356,735,1080,3,V6 Twin Turbo,Front Engine,RWD,6-Speed Sequential,,2003
-Nissan,Skyline Super Silhouette,Group 5,425,545,1005,2.1,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1983
-Nissan,R89C,Group C,588,784,900,3.5,V8 Twin Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1989
-Nissan,Z GT4,GT4,328,600,1460,3,V6,Front Engine,RWD,6-Speed Paddle,120.00,2023
-Panoz,Esperante GTR-1,GT1,445,670,960,6,V8,Front Engine,RWD,6-Speed Sequential,100.00,1998
-Panoz,LMP1 Roadster S,LMP,469,670,905,6,V8,Front Engine,RWD,6-Speed Sequential,90.00,1999
-Peugeot,9X8,LMDh,499,670,1030,2.6,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024
-Plymouth,Barracuda,Historic USV8,339,470,1390,5,V8,Front Engine,RWD,4-Speed Manual,,1970
-Porsche,718 Cayman GT4 Clubsport,GT4,320,420,1420,4,Flat-6,Mid Engine,RWD,7-Speed Paddle,115.00,2020
-Porsche,911 Carrera Cup (964),964 Trophy,194,310,1120,3.6,Flat-6,Rear Engine,RWD,5-Speed Manual,100.00,1990
-Porsche,911 Carrera RSR 3.0,GT 70,246,315,900,3,Flat-6,Rear Engine,RWD,5-Speed Manual,,1974
-Porsche,911 GT1-98,GT1,432,630,967,3.2,Flat-6,Mid Engine,RWD,6-Speed Sequential,100.00,1998
-Porsche,911 GT3 Cup (992),992 Trophy,375,470,1260,4,Flat-6,Rear Engine,RWD,6-Speed Paddle,75.50,2024
-Porsche,911 GT3 R (992),GT3,421,560,1325,4.2,Flat-6,Rear Engine,RWD,6-Speed Paddle,90.60,2023
-Porsche,911 GT3-RSR (996),N-GT,335,405,1125,3.6,Flat-6,Rear Engine,RWD,6-Speed Sequential,67.50,2004
-Porsche,911 RSR GTE,GTE,384,490,1235,4,Flat-6,Mid Engine,RWD,6-Speed Paddle,,2020
-Porsche,917K,Sports Car 70,387,490,840,4.5,Flat-12,Mid Engine,RWD,5-Speed Manual,120.00,1970
-Porsche,935/80,Group 5,596,780,1110,2.8,Flat-6 Turbo,Rear Engine,RWD,4-Speed Manual,,1979
-Porsche,962C,Group C,581,710,871,2.8,Flat-6 Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1988
-Porsche,963,LMDh,499,710,1030,4.6,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023
-Saleen,S7R,GT,447,746,1150,7,V8,Mid Engine,RWD,6-Speed Sequential,75.50,2004
-Shelby,Daytona Coupe,GT 60,290,462,1043,4.7,V8,Front Engine,RWD,4-Speed Manual,,1964
-Toyota,GR Supra GT4 EVO,GT4,320,585,1370,3,L6 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2023
-Toyota,GR Supra JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2022
-Toyota,GR010 Hybrid,LMDh,499,740,1030,3.5,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023
-Toyota,GT-One,GT1,447,650,921,3.6,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1998
-Toyota,Supra JP2,JP2,372,588,1100,5.2,V8,Front Engine,RWD,6-Speed Sequential,,2003
-TVR,Tuscan T400R,N-GT,290,420,1100,4,L6,Front Engine,RWD,6-Speed Sequential,67.50,2004
+Manufacturer,Name,VehicleClass,PowerKw,TorqueNm,WeightKg,EngineDisplacementLitres,EngineType,EngineLayout,PowertrainLayout,Transmission,FuelCapacityLitres,Year,GameId
+AMC,Javelin,Historic USV8,335,500,1407,5,V8,Front Engine,RWD,4-Speed Manual,,1971,ID_AMC_Javelin_Trans_Am_1971
+Acura,ARX-06,LMDh,499,688,1030,2.4,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023,ID_Acura_ARX-06_2023
+Acura,NSX GT3 Evo 22,GT3,387,640,1290,3.5,V6 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,90.60,2022,ID_HONDA_NSX_GT3
+Alpine,A110 GT4,GT4,268,488,1160,1.8,L4 Turbo,Mid Engine,RWD,6-Speed Paddle,95.00,2020,ID_Alpine_A110_GT4_2020
+Alpine,A424 Beta,LMDh,499,670,1030,3.4,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024,ID_Alpine_A424_2024
+Aston Martin,AMR Vantage GT3,GT3,378,690,1325,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2024,ID_Aston_Martin_Vantage_GT3_Evo
+Aston Martin,AMR Vantage GT3 2022,GT3,378,690,1325,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2022,ID_Aston_Martin_Vantage_GT3
+Aston Martin,AMR Vantage GT4,GT4,354,690,1400,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2020,ID_Aston_Martin_Vantage_AMR_GT4
+Aston Martin,AMR Vantage Gte,GTE,399,700,1245,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,,2020,ID_Aston_Martin_Vantage_GTE_2020
+Aston Martin,DBR9,GT,466,700,1170,6,V12,Front Engine,RWD,6-Speed Sequential,75.50,2005,ID_Aston_Martin_DBR9_2005
+Aston Martin,Valkyrie Hypercar,LMDh,507,750,1030,6.5,V12,Mid Engine,RWD,7-Speed Paddle,110.00,2025,ID_Aston_Martin_Valkyrie_LMH_2025
+Audi,90 IMSA GTO,GTO,529,720,1207,2.2,L5 Turbo,Front Engine,4WD,5-Speed Manual,75.50,1989,ID_Audi_90_IMSA_GTO_1989
+Audi,R8 (LMP900),LMP,473,680,911,3.6,V8 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,90.00,2002,ID_Audi_R8_LMP900_2002
+Audi,R8 GT3 Evo II,GT3,384,580,1310,5.2,V10,Mid Engine,RWD,6-Speed Paddle,90.60,2022,ID_Audi_R8_LMS_GT3_Evo
+Audi,R8 LMS GT4 Evo,GT4,328,480,1485,5.2,V10,Mid Engine,RWD,7-Speed Paddle,113.00,2020,ID_Audi_R8_LMS_GT4_Evo
+BMW,320 Turbo Group 5,Group 5,447,515,880,2,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1978,ID_BMW_320_Turbo_Group5
+BMW,M Hybrid V8,LMDh,499,700,1030,4,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023,ID_BMW_M_Hybrid_V8
+BMW,M3 GTR (E46),N-GT,335,365,1120,4,V8,Front Engine,RWD,6-Speed Sequential,67.50,2004,ID_BMW_M3_E46
+BMW,M4 GT3 EVO,GT3,391,650,1360,3,L6 Twin Turbo,Front Engine,RWD,6-Speed Paddle,90.60,2025,ID_BMW_M4_GT3
+BMW,M4 GT4 EVO,GT4,386,550,1430,3,L6 Twin Turbo,Front Engine,RWD,7-Speed Paddle,120.00,2025,ID_BMW_M4_GT4
+BMW,M8 GTE,GTE,447,700,1170,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,,2020,ID_BMW_M8_GTE
+BMW,V12 LMR,LMP,439,678,914,6,V12,Mid Engine,RWD,6-Speed Sequential,90.00,1999,ID_BMW_V12_LMR
+Cadillac,Northstar LMP-02,LMP,462,700,916,4,V8 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,75.50,2002,ID_Cadillac_Northstar_LMP900
+Cadillac,V-Series.R,LMDh,499,740,1030,5.5,V8,Mid Engine,RWD,7-Speed Paddle,,2023,ID_Cadillac_V_SeriesR
+Chaparral,2F,Sports Car 67,391,630,795,7,V8,Mid Engine,RWD,3-Speed Automatic,,1967,ID_Chaparral_2F_1967
+Chevrolet,Camaro,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024,ID_TA2_Chevrolet_Camaro_2024
+Chevrolet,Camaro,Historic USV8,328,430,1404,5,V8,Front Engine,RWD,4-Speed Manual,,1969,ID_Chevrolet_Camaro_Z28_Trans_Am_1969
+Chevrolet,Camaro AU,AUS V8 Evo,447,660,1260,5.7,V8,Front Engine,RWD,6-Speed Sequential,,2023,ID_Chevrolet_Camaro_V8Supercar_2024
+Chevrolet,Camaro Z28 GTO,GTO,447,666,1225,6,V8,Front Engine,RWD,5-Speed Manual,75.50,1989,ID_Chevrolet_Camaro_Z28_GTO_1989
+Chevrolet,Camaro ZL-1 GT4.R,GT4,328,575,1470,6.2,V8,Front Engine,RWD,6-Speed Paddle,87.00,2007,ID_Chevrolet_Camaro_ZL-1_GT4_2017
+Chevrolet,Corvette C3,GT 70,391,630,1275,7,V8,Front Engine,RWD,4-Speed Manual,,1973,ID_Chevrolet_Corvette_C3_1973
+Chevrolet,Corvette C5.R,GT,454,770,1270,7,V8,Front Engine,RWD,6-Speed Manual,75.50,2004,ID_Chevrolet_Corvette_C5R
+Chevrolet,Corvette C6.R,GT,425,840,1100,7,V8,Front Engine,RWD,6-Speed Sequential,75.50,2005,ID_Chevrolet_Corvette_C6R
+Chevrolet,Corvette C7.R,GTE,365,660,1110,5.5,V8,Front Engine,RWD,6-Speed Paddle,,2017,ID_Chevrolet_Corvette_C7R_GTE
+Chevrolet,Corvette C8.R,GTE,372,650,1170,5.5,V8,Front Engine,RWD,6-Speed Paddle,,2020,ID_Chevrolet_Corvette_C8R_GTE_2020
+Chevrolet,Corevette Grand Sport,GT 60,361,607,985,6.2,V8,Front Engine,RWD,4-Speed Manual,,1963,ID_Chevrolet_Corvette_Grand_Sport
+Chevrolet,Corvette Z06 GT3.R,GT3,395,630,1345,5.5,V8,Mid Engine,RWD,6-Speed Paddle,90.60,2023,ID_Chevrolet_Corvette_Z06_GT3_2024
+Chrysler,Viper GTS-R,GT,462,780,1100,8,V10,Front Engine,RWD,6-Speed Manual,75.50,2003,ID_Chrysler_Viper_GTS-R
+Dodge,Challenger,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024,ID_TA2_Dodge_Challenger_2024
+Dodge,SRT Viper GTS-R,GTE,361,700,1150,8.4,V10,Front Engine,RWD,6-Speed Sequential,,2014,ID_Dodge_SRT_Viper_GTS-R
+Dodge,Viper Competition Coupe,N-GT,387,730,1415,8,V10,Front Engine,RWD,6-Speed Manual,67.50,2004,ID_Dodge_Viper_CC
+Ford,Capri Group 5,Group 5,432,485,880,1.7,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1980,ID_Ford_Zakspeed_Capri_Group5
+Ford,Capri RS3 100,GT 70,328,380,1040,3.4,V6,Front Engine,RWD,5-Speed Manual,,1973,ID_Ford_Capri_RS3100_1973
+Ford,Falcon FG COTF,AUS V8,484,640,1410,5,V8,Front Engine,RWD,6-Speed Manual,,2013,ID_Ford_Falcon_FG_V8Supercar_2013
+Ford,GT40 Mk.IV,Sports Car 67,395,640,1065,7,V8,Mid Engine,RWD,4-Speed Manual,,1967,ID_Ford_GT40_MkIV_1967
+Ford,GTLM GTE,GTE,387,645,1200,3.5,V6 Twin Turbo,Mid Engine,RWD,6-Speed Paddle,,2017,ID_Ford_GTLM_GTE_2022
+Ford,Mustang,USV8,387,657,1204,6.2,V8,Front Engine,RWD,4-Speed Manual,,2024,ID_TA2_Ford_Mustang_2024
+Ford,Mustang AU,AUS V8 Evo,447,650,1260,5.4,V8,Front Engine,RWD,6-Speed Sequential,,2023,ID_Ford_Mustang_V8Supercar_2024
+Ford,Mustang Boss 302,Historic USV8,350,487,1390,5,V8,Front Engine,RWD,4-Speed Manual,,1970,ID_Ford_Mustang_Boss_302_Trans_Am_1970
+Ford,Mustang GT3,GT3,387,660,1300,5.4,V8,Front Engine,RWD,6-Speed Paddle,90.60,2023,ID_Ford_Mustang_GT3_2023
+Ford,Mustang GT4,GT4,372,580,1390,5,V8,Front Engine,RWD,6-Speed Paddle,100.00,2024,ID_Ford_Mustang_GT4_2024
+Gillet,Vertigo,N-GT,257,425,806,3,V6,Front Engine,RWD,6-Speed Sequential,67.50,2004,ID_Gillet_Vertigo
+Holden,Commodore COTF,AUS V8,484,640,1410,5,V8,Front Engine,RWD,6-Speed Sequential,,2013,ID_Holden_Commodore_VF_V8Supercar_2013
+Honda,Civic JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2024,ID_Honda_Civic_Type-R_GT500
+Honda,NSX JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2023,ID_HONDA_NSX_GT500_2023
+Honda,NSX JP2,JP2,357,392,1120,3.5,V6,Mid Engine,RWD,6-Speed Sequential,,2003,ID_Honda_NSX_JGTC_2003
+Jaguar,E-Type Lightweight,GT 60,253,380,1010,3.8,L6,Front Engine,RWD,5-Speed Manual,,1964,ID_Jaguar_E-Type_Lightweight_1964
+Jaguar,XJR-9,Group C,559,828,880,7,V12,Mid Engine,RWD,5-Speed Manual,100.00,1990,ID_Jaguar_XJR-9
+Lamborghini,Huracán GT3 Evo2,GT3,384,580,1280,5.2,V10,Mid Engine,RWD,6-Speed Paddle,90.60,2022,ID_Lamborghini_Huracan_GT3_Evo_2022
+Lamborghini,Murcielago R-GT,GT,447,650,1100,6,V12,Mid Engine,RWD,6-Speed Sequential,75.50,2004,ID_Lamborghini_Murcielago_R-GT_2004
+Lamborghini,SC63 LMDh,LMDh,499,710,1030,3.8,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024,ID_Lamborghini_SC63_LMDh_2024
+Lister,Storm GT,GT,428,780,1125,7,V12,Front Engine,RWD,6-Speed Sequential,75.50,2004,ID_Lister_Storm_GT
+Lola,T70 Mk3,Sports Car 67,365,520,865,5.9,V8,Mid Engine,RWD,4-Speed Manual,,1967,ID_Lola_T70_MK3_67
+Lola,T70 Mk3B GT,Sports Car 70,335,485,845,5,V8,Mid Engine,RWD,5-Speed Manual,120.00,1970,ID_Lola_T70_MK3B_1970
+Lotus,Elise GT1,GT1,428,625,972,6,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1997,ID_Lotus_Elise_GT1_1997
+Marcos,Mantara LM600,N-GT,357,650,1150,6,V8,Front Engine,RWD,6-Speed Sequential,75.50,2004,ID_Marcos_Mantara_LM600_GT2_2004
+Maserati,MC12 GT1,GT,432,600,1100,6,V12,Mid Engine,RWD,6-Speed Sequential,75.50,2004,ID_Maserati_MC12_GT1
+Mazda,787B,Group C,521,608,830,2.6,4-Rotor,Mid Engine,RWD,5-Speed Manual,100.00,1991,ID_Mazda_787B_1991
+Mazda,MX-5 Spec,MX5 Trophy,126,204,1095,2,L4,Front Engine,RWD,6-Speed Manual,34.00,2017,ID_Mazda_MX-5_Cup_2017
+Mazda,RX-7 GTO,GTO,447,530,1020,2.6,4-Rotor,Front Engine,RWD,5-Speed Manual,75.50,1989,ID_MAZDA_RX-7_GTO_1989
+Mercedes-AMG,GT3,GT3,387,625,1325,6.3,V8,Front Engine,RWD,6-Speed Paddle,90.60,2020,ID_Mercedes_AMG_GT3_Evo
+Mercedes-AMG,GT4,GT4,350,580,1390,4,V8 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2020,ID_Mercedes_AMG_GT4
+Mercedes-Benz,CLK-LM,GT1,447,685,971,5,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1998,ID_Mercedes_CLK-LM_1998
+Mercedes-Benz,Sauber C9,Group C,611,922,905,5,V8 Twin Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1989,ID_Sauber_C9_1989
+Mercury,Cougar XR-7 GTO,GTO,503,660,1175,5.5,V8,Front Engine,RWD,5-Speed Manual,75.50,1989,ID_Mercury_Cougar_XR-7_GTO_1989
+Morgan,Aero 8 GT(N),N-GT,305,500,1010,4.6,V8,Front Engine,RWD,6-Speed Sequential,75.50,2004,ID_Morgan_Aero_8_GTN
+Mosler,MT900R,N-GT,335,425,1100,5.7,V8,Mid Engine,RWD,6-Speed Sequential,90.00,2004,ID_Mosler_MT900R
+Nissan,300ZX Turbo GTO,GTO,559,850,1225,3,V6 Turbo,Front Engine,RWD,5-Speed Manual,75.50,1989,ID_Nissan_300ZX_IMSA_GTO_1989
+Nissan,Calsonic Impul Z JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2022,ID_Nissan_Z_GT500
+Nissan,Datsun 280 ZX Turbo,Group 5,573,1060,1167,4.2,V8 Twin Turbo,Front Engine,RWD,5-Speed Manual,,1981,ID_Nissan_280ZX_IMSA
+Nissan,Fairlady Z (Z33) JP2,JP2,346,706,1080,3,V6 Turbo,Front Engine,RWD,6-Speed Sequential,,2004,ID_NISSAN_350Z_GT500_2004
+Nissan,Motul Autech GT-R JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2021,ID_Nissan_GTR_R35_GT500
+Nissan,R390 GT1,GT1,478,706,1000,3.5,V8 Twin Turbo,Mid Engine,RWD,6-Speed Sequential,100.00,1998,ID_Nissan_R390_GT1
+Nissan,Skyline GT-R (R34) JP2,JP2,356,735,1080,3,V6 Twin Turbo,Front Engine,RWD,6-Speed Sequential,,2003,ID_Nissan_GT-R_R34_JGTC_2003
+Nissan,Skyline Super Silhouette,Group 5,425,545,1005,2.1,L4 Turbo,Front Engine,RWD,5-Speed Manual,,1983,ID_Nissan_Skyline_KDR30
+Nissan,R89C,Group C,588,784,900,3.5,V8 Twin Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1989,ID_Nissan_R89C
+Nissan,Z GT4,GT4,328,600,1460,3,V6,Front Engine,RWD,6-Speed Paddle,120.00,2023,ID_Nissan_Z_GT4_2023
+Panoz,Esperante GTR-1,GT1,445,670,960,6,V8,Front Engine,RWD,6-Speed Sequential,100.00,1998,ID_PANOZ_ESPERANTE_GTR1
+Panoz,LMP1 Roadster S,LMP,469,670,905,6,V8,Front Engine,RWD,6-Speed Sequential,90.00,1999,ID_Panoz_LMP1_Roadster_S_99
+Peugeot,9X8,LMDh,499,670,1030,2.6,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2024,ID_Peugeot_9X8_2024
+Plymouth,Barracuda,Historic USV8,339,470,1390,5,V8,Front Engine,RWD,4-Speed Manual,,1970,ID_Plymouth_Barracuda_Trans_Am_1970
+Porsche,718 Cayman GT4 Clubsport,GT4,320,420,1420,4,Flat-6,Mid Engine,RWD,7-Speed Paddle,115.00,2020,ID_Porsche_Cayman_GT4_Clubsport_2022
+Porsche,911 Carrera Cup (964),964 Trophy,194,310,1120,3.6,Flat-6,Rear Engine,RWD,5-Speed Manual,100.00,1990,ID_Porsche_Carrera_Cup
+Porsche,911 Carrera RSR 3.0,GT 70,246,315,900,3,Flat-6,Rear Engine,RWD,5-Speed Manual,,1974,ID_Porsche_911_RSR_1974
+Porsche,911 GT1-98,GT1,432,630,967,3.2,Flat-6,Mid Engine,RWD,6-Speed Sequential,100.00,1998,ID_Porsche_911_GT1_98
+Porsche,911 GT3 Cup (992),992 Trophy,375,470,1260,4,Flat-6,Rear Engine,RWD,6-Speed Paddle,75.50,2024,ID_Porsche_911_GT3_Cup_2022
+Porsche,911 GT3 R (992),GT3,421,560,1325,4.2,Flat-6,Rear Engine,RWD,6-Speed Paddle,90.60,2023,ID_Porsche_992_GT3R
+Porsche,911 GT3-RSR (996),N-GT,335,405,1125,3.6,Flat-6,Rear Engine,RWD,6-Speed Sequential,67.50,2004,ID_Porsche_911_GT3-RSR_2004
+Porsche,911 RSR GTE,GTE,384,490,1235,4,Flat-6,Mid Engine,RWD,6-Speed Paddle,,2020,ID_Porsche_911_RSR_GTE_2020
+Porsche,917K,Sports Car 70,387,490,840,4.5,Flat-12,Mid Engine,RWD,5-Speed Manual,120.00,1970,ID_Porsche_917K_1970
+Porsche,935/80,Group 5,596,780,1110,2.8,Flat-6 Turbo,Rear Engine,RWD,4-Speed Manual,,1979,ID_Porsche_935_80
+Porsche,962C,Group C,581,710,871,2.8,Flat-6 Turbo,Mid Engine,RWD,5-Speed Manual,100.00,1988,ID_Porsche_962C_88
+Porsche,963,LMDh,499,710,1030,4.6,V8 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023,ID_Porsche_963
+Saleen,S7R,GT,447,746,1150,7,V8,Mid Engine,RWD,6-Speed Sequential,75.50,2004,ID_Saleen_S7R
+Shelby,Daytona Coupe,GT 60,290,462,1043,4.7,V8,Front Engine,RWD,4-Speed Manual,,1964,ID_Shelby_Daytona_Coupe_1964
+Toyota,GR Supra GT4 EVO,GT4,320,585,1370,3,L6 Twin Turbo,Front Engine,RWD,6-Speed Paddle,120.00,2023,ID_Toyota_Supra_GT4
+Toyota,GR Supra JP1,JP1,404,490,1020,2,L4 Turbo,Front Engine,RWD,6-Speed Paddle,,2022,ID_Toyota_GR_Supra_GT500
+Toyota,GR010 Hybrid,LMDh,499,740,1030,3.5,V6 Twin Turbo,Mid Engine,RWD,7-Speed Paddle,,2023,ID_Toyota_GR010
+Toyota,GT-One,GT1,447,650,921,3.6,V8,Mid Engine,RWD,6-Speed Sequential,100.00,1998,ID_Toyota_GT-One_TS020
+Toyota,Supra JP2,JP2,372,588,1100,5.2,V8,Front Engine,RWD,6-Speed Sequential,,2003,ID_Toyota_Supra_JGTC_2003
+TVR,Tuscan T400R,N-GT,290,420,1100,4,L6,Front Engine,RWD,6-Speed Sequential,67.50,2004,ID_TVR_TUSCAN_T400R_2002
