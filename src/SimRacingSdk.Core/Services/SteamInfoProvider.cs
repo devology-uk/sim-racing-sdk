@@ -42,6 +42,16 @@ public class SteamInfoProvider : ISteamInfoProvider
         return this.installedGamePaths.TryGetValue(gameName, out var gamePath)? gamePath: string.Empty;
     }
 
+    public string GetSteamPath()
+    {
+        if(string.IsNullOrWhiteSpace(this.steamPath))
+        {
+            this.Init();
+        }
+
+        return this.steamPath;
+    }
+
     public void Init()
     {
         try
