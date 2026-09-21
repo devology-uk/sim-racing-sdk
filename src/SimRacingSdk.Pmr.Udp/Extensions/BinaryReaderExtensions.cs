@@ -81,11 +81,14 @@ internal static class BinaryReaderExtensions
 
     internal static PmrParticipantRaceState ReadPmrParticipantRaceState(this BinaryReader reader)
     {
-        // Header (UDPTelemetryProtocol.h) and docs/packet_layout_example.txt both order
-        // isPlayer before vehicleId; the bundled SimpleUDPServer sample reads them the other
-        // way round, which does not match either documented source.
-        var isPlayer = reader.ReadByte() != 0;
+        // The header (UDPTelemetryProtocol.h) and docs/packet_layout_example.txt say isPlayer comes
+        // first, but the wire order is vehicleId then isPlayer, as the bundled SimpleUDPServer
+        // sample reads it (and pairs telemetry to participants by vehicleId). Reading the header's
+        // order shifts isPlayer into the vehicle id's top byte (a human read as 16777216), makes
+        // the low byte of a real id look like an inverted isPlayer flag, and leaves participant ids
+        // that never match telemetry ids.
         var vehicleId = reader.ReadInt32();
+        var isPlayer = reader.ReadByte() != 0;
         var vehicleName = reader.ReadPmrString();
         var driverName = reader.ReadPmrString();
         var liveryId = reader.ReadPmrString();

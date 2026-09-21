@@ -403,3 +403,4 @@ CLAUDE.md
 
 # Dry-run output from catalog import tools (AceCarCatalogImport, PmrCatalogImport)
 *.generated.cs
+/docs/
