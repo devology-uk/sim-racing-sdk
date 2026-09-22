@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L6",
+  "FuelCapacityLitres": 67.5,
+  "GameId": "ID_TVR_TUSCAN_T400R_2002",
+  "IconFileName": "TVR",
+  "Manufacturer": "TVR",
+  "Name": "Tuscan T400R",
+  "PowerKw": 290,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 420,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1100,
+  "Year": 2004
+}
