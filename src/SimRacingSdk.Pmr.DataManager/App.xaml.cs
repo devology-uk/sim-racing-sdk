@@ -9,6 +9,7 @@ using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Controls.Console;
 using SimRacingSdk.Pmr.DataManager.Services;
 using SimRacingSdk.Pmr.DataManager.Setups;
+using SimRacingSdk.Pmr.DataManager.Storage;
 using SimRacingSdk.Pmr.DataManager.Tracks;
 
 namespace SimRacingSdk.Pmr.DataManager;
@@ -58,6 +59,9 @@ public partial class App : Application
                              });
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
+        services.AddSingleton<IDataPathProvider, DataPathProvider>();
+        services.AddSingleton<ICarRepository, CarRepository>();
+        services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();

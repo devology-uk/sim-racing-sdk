@@ -6,7 +6,254 @@
              xmlns:local="clr-namespace:SimRacingSdk.Pmr.DataManager.Cars"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:CarsViewModel}">
-    <TextBlock Text="Cars"
-               FontSize="24"
-               Margin="10" />
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="0,0,15,8" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin"
+                    Value="0,0,15,8" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,0,0,8" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <RadioButton Content="By Class"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         Margin="0,0,15,0"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByClass}" />
+            <RadioButton Content="All Cars"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=AllCars}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Classes}"
+                 SelectedItem="{Binding SelectedClass, Mode=TwoWay}"
+                 Visibility="{Binding IsByClassMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding VisibleCars}"
+                      SelectedItem="{Binding SelectedCar, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Manufacturer"
+                                        Binding="{Binding Manufacturer}" />
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Class"
+                                        Binding="{Binding VehicleClass}" />
+                    <DataGridTextColumn Header="Year"
+                                        Binding="{Binding Year}" />
+                    <DataGridTextColumn Header="Power (kW)"
+                                        Binding="{Binding PowerKw}" />
+                    <DataGridTextColumn Header="Torque (Nm)"
+                                        Binding="{Binding TorqueNm}" />
+                    <DataGridTextColumn Header="Weight (kg)"
+                                        Binding="{Binding WeightKg}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Row="1"
+                      Header="Car Details"
+                      Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,10,0,15">
+                        <Button Content="New Car"
+                                Command="{Binding NewCarCommand}"
+                                Padding="10,4"
+                                Margin="0,0,10,0" />
+                        <Button Content="Save Car"
+                                Command="{Binding SaveCarCommand}"
+                                Padding="10,4" />
+                    </StackPanel>
+
+                    <Grid DataContext="{Binding Editor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="Manufacturer" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="1"
+                                 Text="{Binding Manufacturer, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="0"
+                               Grid.Column="2"
+                               Content="Name" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="3"
+                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="0"
+                               Grid.Column="4"
+                               Content="Year" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="5"
+                                 Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Vehicle Class" />
+                        <ComboBox Grid.Row="1"
+                                  Grid.Column="1"
+                                  IsEditable="True"
+                                  ItemsSource="{Binding DataContext.Classes, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  Text="{Binding VehicleClass, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="Pick an existing class or type a new one (e.g. a new DLC class)" />
+                        <Label Grid.Row="1"
+                               Grid.Column="2"
+                               Content="Author" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="3"
+                                 Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="1"
+                               Grid.Column="4"
+                               Content="Game Id" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="5"
+                                 Text="{Binding GameId, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                 ToolTip="The game's own vehicle id, e.g. ID_BMW_M_Hybrid_V8 - found in savegame1\stats.xml, not shown in-game. Leave blank until looked up." />
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="Engine Type" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="1"
+                                 Text="{Binding EngineType, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="2"
+                               Content="Displacement (L)" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="3"
+                                 Text="{Binding EngineDisplacementLitres, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="4"
+                               Content="Engine Layout" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="5"
+                                 Text="{Binding EngineLayout, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="3"
+                               Grid.Column="0"
+                               Content="Powertrain" />
+                        <TextBox Grid.Row="3"
+                                 Grid.Column="1"
+                                 Text="{Binding PowertrainLayout, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="3"
+                               Grid.Column="2"
+                               Content="Transmission" />
+                        <TextBox Grid.Row="3"
+                                 Grid.Column="3"
+                                 Grid.ColumnSpan="3"
+                                 Text="{Binding Transmission, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="4"
+                               Grid.Column="0"
+                               Content="Power (kW)" />
+                        <TextBox Grid.Row="4"
+                                 Grid.Column="1"
+                                 Text="{Binding PowerKw, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="4"
+                               Grid.Column="2"
+                               Content="Torque (Nm)" />
+                        <TextBox Grid.Row="4"
+                                 Grid.Column="3"
+                                 Text="{Binding TorqueNm, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="4"
+                               Grid.Column="4"
+                               Content="Weight (kg)" />
+                        <TextBox Grid.Row="4"
+                                 Grid.Column="5"
+                                 Text="{Binding WeightKg, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="5"
+                               Grid.Column="0"
+                               Content="Fuel Capacity (L)" />
+                        <TextBox Grid.Row="5"
+                                 Grid.Column="1"
+                                 Text="{Binding FuelCapacityLitres, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                 ToolTip="Leave blank for cars regulated by an energy allocation instead of a fuel tank (Hypercar/LMDh)" />
+                        <Label Grid.Row="5"
+                               Grid.Column="2"
+                               Content="Icon File Name" />
+                        <TextBox Grid.Row="5"
+                                 Grid.Column="3"
+                                 Text="{Binding IconFileName, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="Defaults from Manufacturer - override when a manufacturer shares one logo under a different name (e.g. Mercedes-AMG/Mercedes-Benz both use 'mercedes')" />
+                    </Grid>
+
+                    <Separator Margin="0,15,0,15" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Generate Core Provider"
+                                Command="{Binding GenerateCoreProviderCommand}"
+                                Padding="10,4"
+                                Margin="0,0,15,0"
+                                ToolTip="Regenerates SimRacingSdk.Pmr.Core's PmrCarInfoProvider.cs from every car saved here" />
+                        <TextBlock Text="{Binding GenerateStatusMessage}"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
 </UserControl>
