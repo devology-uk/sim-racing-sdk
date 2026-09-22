@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Aston_Martin_DBR9_2005",
+  "IconFileName": "Aston Martin",
+  "Manufacturer": "Aston Martin",
+  "Name": "DBR9",
+  "PowerKw": 466,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 700,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT",
+  "WeightKg": 1170,
+  "Year": 2005
+}

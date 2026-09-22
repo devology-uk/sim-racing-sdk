@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 8,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V10",
+  "FuelCapacityLitres": 67.5,
+  "GameId": "ID_Dodge_Viper_CC",
+  "IconFileName": "Dodge",
+  "Manufacturer": "Dodge",
+  "Name": "Viper Competition Coupe",
+  "PowerKw": 387,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 730,
+  "Transmission": "6-Speed Manual",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1415,
+  "Year": 2004
+}

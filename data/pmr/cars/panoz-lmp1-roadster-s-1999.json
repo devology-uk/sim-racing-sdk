@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 90,
+  "GameId": "ID_Panoz_LMP1_Roadster_S_99",
+  "IconFileName": "Panoz",
+  "Manufacturer": "Panoz",
+  "Name": "LMP1 Roadster S",
+  "PowerKw": 469,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 670,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "LMP",
+  "WeightKg": 905,
+  "Year": 1999
+}

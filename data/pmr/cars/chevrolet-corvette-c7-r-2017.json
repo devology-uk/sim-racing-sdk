@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.5,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Chevrolet_Corvette_C7R_GTE",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Corvette C7.R",
+  "PowerKw": 365,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 660,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GTE",
+  "WeightKg": 1110,
+  "Year": 2017
+}

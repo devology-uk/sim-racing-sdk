@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Cadillac_V_SeriesR",
+  "IconFileName": "Cadillac",
+  "Manufacturer": "Cadillac",
+  "Name": "V-Series.R",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 740,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2023
+}

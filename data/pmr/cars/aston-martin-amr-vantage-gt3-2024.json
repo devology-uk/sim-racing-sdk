@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 90.6,
+  "GameId": "ID_Aston_Martin_Vantage_GT3_Evo",
+  "IconFileName": "Aston Martin",
+  "Manufacturer": "Aston Martin",
+  "Name": "AMR Vantage GT3",
+  "PowerKw": 378,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 690,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT3",
+  "WeightKg": 1325,
+  "Year": 2024
+}

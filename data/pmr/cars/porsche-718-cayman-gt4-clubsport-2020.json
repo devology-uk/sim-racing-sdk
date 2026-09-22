@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": 115,
+  "GameId": "ID_Porsche_Cayman_GT4_Clubsport_2022",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "718 Cayman GT4 Clubsport",
+  "PowerKw": 320,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 420,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1420,
+  "Year": 2020
+}

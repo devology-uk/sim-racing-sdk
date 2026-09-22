@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 7,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Jaguar_XJR-9",
+  "IconFileName": "Jaguar",
+  "Manufacturer": "Jaguar",
+  "Name": "XJR-9",
+  "PowerKw": 559,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 828,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group C",
+  "WeightKg": 880,
+  "Year": 1990
+}

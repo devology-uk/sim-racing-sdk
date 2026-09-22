@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "4-Rotor",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_MAZDA_RX-7_GTO_1989",
+  "IconFileName": "Mazda",
+  "Manufacturer": "Mazda",
+  "Name": "RX-7 GTO",
+  "PowerKw": 447,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 530,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTO",
+  "WeightKg": 1020,
+  "Year": 1989
+}

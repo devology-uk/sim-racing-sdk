@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 1.8,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": 95,
+  "GameId": "ID_Alpine_A110_GT4_2020",
+  "IconFileName": "Alpine",
+  "Manufacturer": "Alpine",
+  "Name": "A110 GT4",
+  "PowerKw": 268,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 488,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1160,
+  "Year": 2020
+}

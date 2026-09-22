@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-12",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Porsche_917K_1970",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "917K",
+  "PowerKw": 387,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 490,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Sports Car 70",
+  "WeightKg": 840,
+  "Year": 1970
+}

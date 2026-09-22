@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 110,
+  "GameId": "ID_Aston_Martin_Valkyrie_LMH_2025",
+  "IconFileName": "Aston Martin",
+  "Manufacturer": "Aston Martin",
+  "Name": "Valkyrie Hypercar",
+  "PowerKw": 507,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 750,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2025
+}

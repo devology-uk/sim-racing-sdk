@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.5,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Mercury_Cougar_XR-7_GTO_1989",
+  "IconFileName": "Mercury",
+  "Manufacturer": "Mercury",
+  "Name": "Cougar XR-7 GTO",
+  "PowerKw": 503,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 660,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTO",
+  "WeightKg": 1175,
+  "Year": 1989
+}

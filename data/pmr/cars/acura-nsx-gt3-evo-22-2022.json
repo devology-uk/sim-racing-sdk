@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Twin Turbo",
+  "FuelCapacityLitres": 90.6,
+  "GameId": "ID_HONDA_NSX_GT3",
+  "IconFileName": "Acura",
+  "Manufacturer": "Acura",
+  "Name": "NSX GT3 Evo 22",
+  "PowerKw": 387,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 640,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT3",
+  "WeightKg": 1290,
+  "Year": 2022
+}

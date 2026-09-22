@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Porsche_963",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "963",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 710,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2023
+}

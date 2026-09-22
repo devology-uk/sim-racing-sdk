@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Lotus_Elise_GT1_1997",
+  "IconFileName": "Lotus",
+  "Manufacturer": "Lotus",
+  "Name": "Elise GT1",
+  "PowerKw": 428,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 625,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT1",
+  "WeightKg": 972,
+  "Year": 1997
+}

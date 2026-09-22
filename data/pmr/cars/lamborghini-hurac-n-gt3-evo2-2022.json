@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V10",
+  "FuelCapacityLitres": 90.6,
+  "GameId": "ID_Lamborghini_Huracan_GT3_Evo_2022",
+  "IconFileName": "Lamborghini",
+  "Manufacturer": "Lamborghini",
+  "Name": "Hurac\u00E1n GT3 Evo2",
+  "PowerKw": 384,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 580,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT3",
+  "WeightKg": 1280,
+  "Year": 2022
+}

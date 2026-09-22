@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Porsche_911_RSR_GTE_2020",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 RSR GTE",
+  "PowerKw": 384,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 490,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GTE",
+  "WeightKg": 1235,
+  "Year": 2020
+}

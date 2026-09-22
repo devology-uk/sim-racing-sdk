@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.6,
+  "EngineLayout": "Rear Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": 67.5,
+  "GameId": "ID_Porsche_911_GT3-RSR_2004",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 GT3-RSR (996)",
+  "PowerKw": 335,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 405,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1125,
+  "Year": 2004
+}

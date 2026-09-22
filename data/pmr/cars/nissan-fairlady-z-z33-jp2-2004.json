@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V6 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_NISSAN_350Z_GT500_2004",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "Fairlady Z (Z33) JP2",
+  "PowerKw": 346,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 706,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "JP2",
+  "WeightKg": 1080,
+  "Year": 2004
+}

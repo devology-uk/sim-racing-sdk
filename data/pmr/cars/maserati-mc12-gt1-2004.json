@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Maserati_MC12_GT1",
+  "IconFileName": "Maserati",
+  "Manufacturer": "Maserati",
+  "Name": "MC12 GT1",
+  "PowerKw": 432,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 600,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT",
+  "WeightKg": 1100,
+  "Year": 2004
+}

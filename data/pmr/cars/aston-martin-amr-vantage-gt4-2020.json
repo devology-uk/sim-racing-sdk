@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Aston_Martin_Vantage_AMR_GT4",
+  "IconFileName": "Aston Martin",
+  "Manufacturer": "Aston Martin",
+  "Name": "AMR Vantage GT4",
+  "PowerKw": 354,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 690,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1400,
+  "Year": 2020
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Chevrolet_Camaro_Z28_GTO_1989",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Camaro Z28 GTO",
+  "PowerKw": 447,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 666,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTO",
+  "WeightKg": 1225,
+  "Year": 1989
+}

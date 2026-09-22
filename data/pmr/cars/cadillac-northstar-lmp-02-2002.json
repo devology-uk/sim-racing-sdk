@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Cadillac_Northstar_LMP900",
+  "IconFileName": "Cadillac",
+  "Manufacturer": "Cadillac",
+  "Name": "Northstar LMP-02",
+  "PowerKw": 462,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 700,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "LMP",
+  "WeightKg": 916,
+  "Year": 2002
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.8,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-6 Turbo",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Porsche_962C_88",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "962C",
+  "PowerKw": 581,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 710,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group C",
+  "WeightKg": 871,
+  "Year": 1988
+}

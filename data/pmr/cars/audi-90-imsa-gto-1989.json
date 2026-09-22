@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L5 Turbo",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Audi_90_IMSA_GTO_1989",
+  "IconFileName": "Audi",
+  "Manufacturer": "Audi",
+  "Name": "90 IMSA GTO",
+  "PowerKw": 529,
+  "PowertrainLayout": "4WD",
+  "TorqueNm": 720,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTO",
+  "WeightKg": 1207,
+  "Year": 1989
+}

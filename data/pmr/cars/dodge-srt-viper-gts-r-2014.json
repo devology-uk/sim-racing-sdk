@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 8.4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V10",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Dodge_SRT_Viper_GTS-R",
+  "IconFileName": "Dodge",
+  "Manufacturer": "Dodge",
+  "Name": "SRT Viper GTS-R",
+  "PowerKw": 361,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 700,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GTE",
+  "WeightKg": 1150,
+  "Year": 2014
+}

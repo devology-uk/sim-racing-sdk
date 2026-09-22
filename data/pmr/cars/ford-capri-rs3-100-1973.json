@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V6",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_Capri_RS3100_1973",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "Capri RS3 100",
+  "PowerKw": 328,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 380,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GT 70",
+  "WeightKg": 1040,
+  "Year": 1973
+}

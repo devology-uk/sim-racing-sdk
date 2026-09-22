@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.8,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L6",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Jaguar_E-Type_Lightweight_1964",
+  "IconFileName": "Jaguar",
+  "Manufacturer": "Jaguar",
+  "Name": "E-Type Lightweight",
+  "PowerKw": 253,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 380,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GT 60",
+  "WeightKg": 1010,
+  "Year": 1964
+}

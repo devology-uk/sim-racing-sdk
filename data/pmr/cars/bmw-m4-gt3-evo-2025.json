@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L6 Twin Turbo",
+  "FuelCapacityLitres": 90.6,
+  "GameId": "ID_BMW_M4_GT3",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "M4 GT3 EVO",
+  "PowerKw": 391,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 650,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT3",
+  "WeightKg": 1360,
+  "Year": 2025
+}

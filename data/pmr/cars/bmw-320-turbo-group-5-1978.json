@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_BMW_320_Turbo_Group5",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "320 Turbo Group 5",
+  "PowerKw": 447,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 515,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group 5",
+  "WeightKg": 880,
+  "Year": 1978
+}

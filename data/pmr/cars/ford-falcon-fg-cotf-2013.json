@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_Falcon_FG_V8Supercar_2013",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "Falcon FG COTF",
+  "PowerKw": 484,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 640,
+  "Transmission": "6-Speed Manual",
+  "VehicleClass": "AUS V8",
+  "WeightKg": 1410,
+  "Year": 2013
+}

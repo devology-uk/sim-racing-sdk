@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Nissan_R89C",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "R89C",
+  "PowerKw": 588,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 784,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group C",
+  "WeightKg": 900,
+  "Year": 1989
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Lamborghini_Murcielago_R-GT_2004",
+  "IconFileName": "Lamborghini",
+  "Manufacturer": "Lamborghini",
+  "Name": "Murcielago R-GT",
+  "PowerKw": 447,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 650,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT",
+  "WeightKg": 1100,
+  "Year": 2004
+}

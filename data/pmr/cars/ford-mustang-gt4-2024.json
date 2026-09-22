@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Ford_Mustang_GT4_2024",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "Mustang GT4",
+  "PowerKw": 372,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 580,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1390,
+  "Year": 2024
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V6",
+  "FuelCapacityLitres": 67.5,
+  "GameId": "ID_Gillet_Vertigo",
+  "IconFileName": "Gillet",
+  "Manufacturer": "Gillet",
+  "Name": "Vertigo",
+  "PowerKw": 257,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 425,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 806,
+  "Year": 2004
+}

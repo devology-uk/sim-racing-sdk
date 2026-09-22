@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V10",
+  "FuelCapacityLitres": 113,
+  "GameId": "ID_Audi_R8_LMS_GT4_Evo",
+  "IconFileName": "Audi",
+  "Manufacturer": "Audi",
+  "Name": "R8 LMS GT4 Evo",
+  "PowerKw": 328,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 480,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1485,
+  "Year": 2020
+}

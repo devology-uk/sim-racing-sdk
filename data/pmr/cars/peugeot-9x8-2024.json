@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Peugeot_9X8_2024",
+  "IconFileName": "Peugeot",
+  "Manufacturer": "Peugeot",
+  "Name": "9X8",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 670,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2024
+}

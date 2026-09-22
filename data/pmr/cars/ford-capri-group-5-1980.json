@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 1.7,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_Zakspeed_Capri_Group5",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "Capri Group 5",
+  "PowerKw": 432,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 485,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group 5",
+  "WeightKg": 880,
+  "Year": 1980
+}

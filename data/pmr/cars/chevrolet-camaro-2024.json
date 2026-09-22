@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6.2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_TA2_Chevrolet_Camaro_2024",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Camaro",
+  "PowerKw": 387,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 657,
+  "Transmission": "4-Speed Manual",
+  "VehicleClass": "USV8",
+  "WeightKg": 1204,
+  "Year": 2024
+}

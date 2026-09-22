@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 7,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_GT40_MkIV_1967",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "GT40 Mk.IV",
+  "PowerKw": 395,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 640,
+  "Transmission": "4-Speed Manual",
+  "VehicleClass": "Sports Car 67",
+  "WeightKg": 1065,
+  "Year": 1967
+}

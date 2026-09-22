@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 7,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Chevrolet_Corvette_C5R",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Corvette C5.R",
+  "PowerKw": 454,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 770,
+  "Transmission": "6-Speed Manual",
+  "VehicleClass": "GT",
+  "WeightKg": 1270,
+  "Year": 2004
+}

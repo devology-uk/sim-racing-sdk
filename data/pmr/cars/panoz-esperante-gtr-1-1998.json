@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_PANOZ_ESPERANTE_GTR1",
+  "IconFileName": "Panoz",
+  "Manufacturer": "Panoz",
+  "Name": "Esperante GTR-1",
+  "PowerKw": 445,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 670,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT1",
+  "WeightKg": 960,
+  "Year": 1998
+}

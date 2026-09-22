@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Mercedes_CLK-LM_1998",
+  "IconFileName": "Mercedes",
+  "Manufacturer": "Mercedes-Benz",
+  "Name": "CLK-LM",
+  "PowerKw": 447,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 685,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT1",
+  "WeightKg": 971,
+  "Year": 1998
+}

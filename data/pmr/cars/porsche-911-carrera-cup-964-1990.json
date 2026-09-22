@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.6,
+  "EngineLayout": "Rear Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Porsche_Carrera_Cup",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 Carrera Cup (964)",
+  "PowerKw": 194,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 310,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "964 Trophy",
+  "WeightKg": 1120,
+  "Year": 1990
+}

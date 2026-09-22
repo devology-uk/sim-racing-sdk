@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Sauber_C9_1989",
+  "IconFileName": "Mercedes",
+  "Manufacturer": "Mercedes-Benz",
+  "Name": "Sauber C9",
+  "PowerKw": 611,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 922,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group C",
+  "WeightKg": 905,
+  "Year": 1989
+}

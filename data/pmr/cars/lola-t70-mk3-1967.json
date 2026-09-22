@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.9,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Lola_T70_MK3_67",
+  "IconFileName": "Lola",
+  "Manufacturer": "Lola",
+  "Name": "T70 Mk3",
+  "PowerKw": 365,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 520,
+  "Transmission": "4-Speed Manual",
+  "VehicleClass": "Sports Car 67",
+  "WeightKg": 865,
+  "Year": 1967
+}

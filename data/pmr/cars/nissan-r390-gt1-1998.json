@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Nissan_R390_GT1",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "R390 GT1",
+  "PowerKw": 478,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 706,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT1",
+  "WeightKg": 1000,
+  "Year": 1998
+}

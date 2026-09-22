@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.8,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Lamborghini_SC63_LMDh_2024",
+  "IconFileName": "Lamborghini",
+  "Manufacturer": "Lamborghini",
+  "Name": "SC63 LMDh",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 710,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2024
+}

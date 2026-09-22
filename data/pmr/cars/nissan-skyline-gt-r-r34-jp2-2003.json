@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V6 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Nissan_GT-R_R34_JGTC_2003",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "Skyline GT-R (R34) JP2",
+  "PowerKw": 356,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 735,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "JP2",
+  "WeightKg": 1080,
+  "Year": 2003
+}

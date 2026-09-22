@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.7,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 90,
+  "GameId": "ID_Mosler_MT900R",
+  "IconFileName": "Mosler",
+  "Manufacturer": "Mosler",
+  "Name": "MT900R",
+  "PowerKw": 335,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 425,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1100,
+  "Year": 2004
+}

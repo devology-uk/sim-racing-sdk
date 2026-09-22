@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Rear Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Porsche_911_RSR_1974",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 Carrera RSR 3.0",
+  "PowerKw": 246,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 315,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GT 70",
+  "WeightKg": 900,
+  "Year": 1974
+}

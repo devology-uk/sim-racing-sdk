@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Mercedes_AMG_GT4",
+  "IconFileName": "Mercedes",
+  "Manufacturer": "Mercedes-AMG",
+  "Name": "GT4",
+  "PowerKw": 350,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 580,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1390,
+  "Year": 2020
+}

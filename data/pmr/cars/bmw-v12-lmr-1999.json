@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": 90,
+  "GameId": "ID_BMW_V12_LMR",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "V12 LMR",
+  "PowerKw": 439,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 678,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "LMP",
+  "WeightKg": 914,
+  "Year": 1999
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V6",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Nissan_Z_GT4_2023",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "Z GT4",
+  "PowerKw": 328,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 600,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1460,
+  "Year": 2023
+}

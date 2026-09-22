@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Rear Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Porsche_911_GT3_Cup_2022",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 GT3 Cup (992)",
+  "PowerKw": 375,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 470,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "992 Trophy",
+  "WeightKg": 1260,
+  "Year": 2024
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Toyota_GR_Supra_GT500",
+  "IconFileName": "Toyota",
+  "Manufacturer": "Toyota",
+  "Name": "GR Supra JP1",
+  "PowerKw": 404,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 490,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "JP1",
+  "WeightKg": 1020,
+  "Year": 2022
+}

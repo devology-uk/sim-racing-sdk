@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 7,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Chevrolet_Corvette_C6R",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Corvette C6.R",
+  "PowerKw": 425,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 840,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT",
+  "WeightKg": 1100,
+  "Year": 2005
+}

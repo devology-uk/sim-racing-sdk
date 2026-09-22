@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 67.5,
+  "GameId": "ID_BMW_M3_E46",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "M3 GTR (E46)",
+  "PowerKw": 335,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 365,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1120,
+  "Year": 2004
+}

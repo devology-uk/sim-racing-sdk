@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.1,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Nissan_Skyline_KDR30",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "Skyline Super Silhouette",
+  "PowerKw": 425,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 545,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group 5",
+  "WeightKg": 1005,
+  "Year": 1983
+}

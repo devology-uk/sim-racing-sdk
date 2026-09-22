@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Marcos_Mantara_LM600_GT2_2004",
+  "IconFileName": "Marcos",
+  "Manufacturer": "Marcos",
+  "Name": "Mantara LM600",
+  "PowerKw": 357,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 650,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1150,
+  "Year": 2004
+}

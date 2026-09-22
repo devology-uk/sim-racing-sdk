@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 8,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V10",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Chrysler_Viper_GTS-R",
+  "IconFileName": "Chrysler",
+  "Manufacturer": "Chrysler",
+  "Name": "Viper GTS-R",
+  "PowerKw": 462,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 780,
+  "Transmission": "6-Speed Manual",
+  "VehicleClass": "GT",
+  "WeightKg": 1100,
+  "Year": 2003
+}

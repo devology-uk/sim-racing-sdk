@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_GTLM_GTE_2022",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "GTLM GTE",
+  "PowerKw": 387,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 645,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GTE",
+  "WeightKg": 1200,
+  "Year": 2017
+}

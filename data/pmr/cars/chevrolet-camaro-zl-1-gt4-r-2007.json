@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6.2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 87,
+  "GameId": "ID_Chevrolet_Camaro_ZL-1_GT4_2017",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Camaro ZL-1 GT4.R",
+  "PowerKw": 328,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 575,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1470,
+  "Year": 2007
+}

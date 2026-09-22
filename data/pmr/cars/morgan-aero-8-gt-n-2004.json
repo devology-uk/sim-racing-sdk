@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.6,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75.5,
+  "GameId": "ID_Morgan_Aero_8_GTN",
+  "IconFileName": "Morgan",
+  "Manufacturer": "Morgan",
+  "Name": "Aero 8 GT(N)",
+  "PowerKw": 305,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 500,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "N-GT",
+  "WeightKg": 1010,
+  "Year": 2004
+}

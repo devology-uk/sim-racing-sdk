@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.8,
+  "EngineLayout": "Rear Engine",
+  "EngineType": "Flat-6 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Porsche_935_80",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "935/80",
+  "PowerKw": 596,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 780,
+  "Transmission": "4-Speed Manual",
+  "VehicleClass": "Group 5",
+  "WeightKg": 1110,
+  "Year": 1979
+}

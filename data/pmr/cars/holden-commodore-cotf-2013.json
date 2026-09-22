@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Holden_Commodore_VF_V8Supercar_2013",
+  "IconFileName": "Holden",
+  "Manufacturer": "Holden",
+  "Name": "Commodore COTF",
+  "PowerKw": 484,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 640,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "AUS V8",
+  "WeightKg": 1410,
+  "Year": 2013
+}

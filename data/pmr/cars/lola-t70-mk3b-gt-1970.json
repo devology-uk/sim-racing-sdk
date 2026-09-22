@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Lola_T70_MK3B_1970",
+  "IconFileName": "Lola",
+  "Manufacturer": "Lola",
+  "Name": "T70 Mk3B GT",
+  "PowerKw": 335,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 485,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Sports Car 70",
+  "WeightKg": 845,
+  "Year": 1970
+}

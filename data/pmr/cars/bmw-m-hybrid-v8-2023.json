@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_BMW_M_Hybrid_V8",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "M Hybrid V8",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 700,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2023
+}

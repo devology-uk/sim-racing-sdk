@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 7,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Chaparral_2F_1967",
+  "IconFileName": "Chaparral",
+  "Manufacturer": "Chaparral",
+  "Name": "2F",
+  "PowerKw": 391,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 630,
+  "Transmission": "3-Speed Automatic",
+  "VehicleClass": "Sports Car 67",
+  "WeightKg": 795,
+  "Year": 1967
+}

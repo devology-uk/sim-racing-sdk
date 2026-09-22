@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-6",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Porsche_911_GT1_98",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "911 GT1-98",
+  "PowerKw": 432,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 630,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "GT1",
+  "WeightKg": 967,
+  "Year": 1998
+}

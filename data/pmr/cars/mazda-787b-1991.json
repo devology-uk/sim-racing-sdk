@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "4-Rotor",
+  "FuelCapacityLitres": 100,
+  "GameId": "ID_Mazda_787B_1991",
+  "IconFileName": "Mazda",
+  "Manufacturer": "Mazda",
+  "Name": "787B",
+  "PowerKw": 521,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 608,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group C",
+  "WeightKg": 830,
+  "Year": 1991
+}

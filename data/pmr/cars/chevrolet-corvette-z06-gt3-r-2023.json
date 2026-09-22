@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 5.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 90.6,
+  "GameId": "ID_Chevrolet_Corvette_Z06_GT3_2024",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Corvette Z06 GT3.R",
+  "PowerKw": 395,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 630,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT3",
+  "WeightKg": 1345,
+  "Year": 2023
+}

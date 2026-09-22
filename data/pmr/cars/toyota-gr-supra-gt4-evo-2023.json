@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Front Engine",
+  "EngineType": "L6 Twin Turbo",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Toyota_Supra_GT4",
+  "IconFileName": "Toyota",
+  "Manufacturer": "Toyota",
+  "Name": "GR Supra GT4 EVO",
+  "PowerKw": 320,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 585,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "GT4",
+  "WeightKg": 1370,
+  "Year": 2023
+}

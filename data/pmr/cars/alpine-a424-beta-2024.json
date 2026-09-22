@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Alpine_A424_2024",
+  "IconFileName": "Alpine",
+  "Manufacturer": "Alpine",
+  "Name": "A424 Beta",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 670,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMDh",
+  "WeightKg": 1030,
+  "Year": 2024
+}

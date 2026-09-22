@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Honda_NSX_JGTC_2003",
+  "IconFileName": "Honda",
+  "Manufacturer": "Honda",
+  "Name": "NSX JP2",
+  "PowerKw": 357,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 392,
+  "Transmission": "6-Speed Sequential",
+  "VehicleClass": "JP2",
+  "WeightKg": 1120,
+  "Year": 2003
+}

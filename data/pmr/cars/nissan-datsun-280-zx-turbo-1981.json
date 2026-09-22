@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.2,
+  "EngineLayout": "Front Engine",
+  "EngineType": "V8 Twin Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Nissan_280ZX_IMSA",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "Datsun 280 ZX Turbo",
+  "PowerKw": 573,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 1060,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "Group 5",
+  "WeightKg": 1167,
+  "Year": 1981
+}
