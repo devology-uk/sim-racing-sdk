@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Navigation;
-using SimRacingSdk.Pmr.DataManager.Setups;
+using SimRacingSdk.Pmr.DataManager.SetupMaps;
 using SimRacingSdk.Pmr.DataManager.Tracks;
 using System.Diagnostics;
 using System.IO;
@@ -22,13 +22,13 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private NavigationItem? selectedNavigationItem;
 
-    public MainWindowViewModel(CarsViewModel carsViewModel, TracksViewModel tracksViewModel, SetupsViewModel setupsViewModel)
+    public MainWindowViewModel(CarsViewModel carsViewModel, TracksViewModel tracksViewModel, SetupMapsViewModel setupMapsViewModel)
     {
         this.NavigationItems =
         [
             new NavigationItem { Title = "Cars", PageViewModel = carsViewModel },
             new NavigationItem { Title = "Tracks", PageViewModel = tracksViewModel },
-            new NavigationItem { Title = "Setups", PageViewModel = setupsViewModel }
+            new NavigationItem { Title = "Setup Maps", PageViewModel = setupMapsViewModel }
         ];
 
         this.SelectedNavigationItem = this.NavigationItems[0];

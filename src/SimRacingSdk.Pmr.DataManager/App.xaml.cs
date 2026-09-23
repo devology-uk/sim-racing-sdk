@@ -8,7 +8,7 @@ using SimRacingSdk.Pmr.DataManager.Abstractions;
 using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Controls.Console;
 using SimRacingSdk.Pmr.DataManager.Services;
-using SimRacingSdk.Pmr.DataManager.Setups;
+using SimRacingSdk.Pmr.DataManager.SetupMaps;
 using SimRacingSdk.Pmr.DataManager.Storage;
 using SimRacingSdk.Pmr.DataManager.Tracks;
 
@@ -64,12 +64,13 @@ public partial class App : Application
         services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
         services.AddSingleton<ITrackRepository, TrackRepository>();
         services.AddSingleton<IPmrTrackProviderGenerator, PmrTrackProviderGenerator>();
+        services.AddSingleton<ISetupMapRepository, SetupMapRepository>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();
         services.AddSingleton<CarsViewModel>();
         services.AddSingleton<TracksViewModel>();
-        services.AddSingleton<SetupsViewModel>();
+        services.AddSingleton<SetupMapsViewModel>();
 
         return services.BuildServiceProvider();
     }

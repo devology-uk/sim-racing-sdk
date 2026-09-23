@@ -1,0 +1,65 @@
+<UserControl x:Class="SimRacingSdk.Pmr.DataManager.SetupMaps.SetupMapsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimRacingSdk.Pmr.DataManager.SetupMaps"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:SetupMapsViewModel}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0"
+                  Grid.Column="0"
+                  ItemsSource="{Binding Cars}"
+                  SelectedItem="{Binding SelectedCar, Mode=TwoWay}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Manufacturer"
+                                     Binding="{Binding Manufacturer}" />
+                <DataGridTextColumn Header="Name"
+                                     Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TabControl Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    DataContext="{Binding Editor}">
+            <TabItem Header="Tyres &amp; Chassis">
+                <local:SetupFieldsView DataContext="{Binding TyresAndChassis}" />
+            </TabItem>
+            <TabItem Header="Suspension">
+                <local:SetupFieldsView DataContext="{Binding Suspension}" />
+            </TabItem>
+            <TabItem Header="Engine &amp; Drivetrain">
+                <local:SetupFieldsView DataContext="{Binding EngineAndDrivetrain}" />
+            </TabItem>
+            <TabItem Header="Pit Setup">
+                <local:SetupFieldsView DataContext="{Binding PitSetup}" />
+            </TabItem>
+            <TabItem Header="Steering Wheel">
+                <local:SetupFieldsView DataContext="{Binding SteeringWheel}" />
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Margin="10,10,0,0">
+            <Button Content="Save Setup Map"
+                    Command="{Binding SaveSetupMapCommand}"
+                    Padding="10,4" />
+        </StackPanel>
+    </Grid>
+</UserControl>

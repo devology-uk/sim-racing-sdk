@@ -7,11 +7,11 @@
         xmlns:nav="clr-namespace:SimRacingSdk.Pmr.DataManager.Navigation"
         xmlns:cars="clr-namespace:SimRacingSdk.Pmr.DataManager.Cars"
         xmlns:tracks="clr-namespace:SimRacingSdk.Pmr.DataManager.Tracks"
-        xmlns:setups="clr-namespace:SimRacingSdk.Pmr.DataManager.Setups"
+        xmlns:setupMaps="clr-namespace:SimRacingSdk.Pmr.DataManager.SetupMaps"
         mc:Ignorable="d"
         Title="Sim Racing SDK Data Manager for Project Motor Racing"
         Height="800"
-        Width="1200"
+        Width="1500"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Window.Resources>
         <DataTemplate DataType="{x:Type cars:CarsViewModel}">
@@ -20,8 +20,8 @@
         <DataTemplate DataType="{x:Type tracks:TracksViewModel}">
             <tracks:TracksView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type setups:SetupsViewModel}">
-            <setups:SetupsView />
+        <DataTemplate DataType="{x:Type setupMaps:SetupMapsViewModel}">
+            <setupMaps:SetupMapsView />
         </DataTemplate>
 
         <Style x:Key="NavListBoxItemStyle"
