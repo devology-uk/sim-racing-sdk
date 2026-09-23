@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 283,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_braselton",
+  "Latitude": 34.14667,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4088,
+      "Name": "Grand Prix",
+      "Turns": 12
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2864,
+      "Name": "Short Course",
+      "Turns": 9
+    }
+  ],
+  "Longitude": -83.81778,
+  "Name": "Michelin Raceway Road Atlanta"
+}

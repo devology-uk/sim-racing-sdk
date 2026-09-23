@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 162,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "GameId": "ID_brianza",
+  "Latitude": 45.62056,
+  "Layouts": [
+    {
+      "GridSlots": 28,
+      "LengthMeters": 5793,
+      "Name": "Grand Prix",
+      "Turns": 7
+    }
+  ],
+  "Longitude": 9.28111,
+  "Name": "Brianza"
+}

@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 770,
+  "Author": "Straight 4 Studios",
+  "Continent": "Rest of World",
+  "Country": "Australia",
+  "CountryCode": "AUS",
+  "GameId": "ID_blue_mount",
+  "Latitude": -33.43789,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 6213,
+      "Name": "Grand Prix",
+      "Turns": 23
+    }
+  ],
+  "Longitude": 149.57065,
+  "Name": "Mount Panorama Circuit"
+}

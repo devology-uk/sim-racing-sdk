@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 420,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_lexington",
+  "Latitude": 40.69417,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 3862,
+      "Name": "Chicane",
+      "Turns": 14
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 3621,
+      "Name": "No Chicane",
+      "Turns": 12
+    }
+  ],
+  "Longitude": -82.52611,
+  "Name": "Lexington"
+}

@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 802,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "GameId": "ID_sao_paulo",
+  "Latitude": -23.70361,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4309,
+      "Name": "Grand Prix",
+      "Turns": 15
+    }
+  ],
+  "Longitude": -46.69722,
+  "Name": "São Paulo"
+}

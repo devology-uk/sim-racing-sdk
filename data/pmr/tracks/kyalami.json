@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 1532,
+  "Author": "Straight 4 Studios",
+  "Continent": "Rest of World",
+  "Country": "South Africa",
+  "CountryCode": "ZAF",
+  "GameId": "ID_Kyalami",
+  "Latitude": -25.99472,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4580,
+      "Name": "Grand Prix",
+      "Turns": 12
+    }
+  ],
+  "Longitude": 28.08083,
+  "Name": "Kyalami"
+}

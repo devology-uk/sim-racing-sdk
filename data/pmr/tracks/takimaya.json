@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 94,
+  "Author": "Straight 4 Studios",
+  "Continent": "Asia",
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "GameId": "ID_takimiya",
+  "Latitude": 34.8417,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 3747,
+      "Name": "Grand Prix",
+      "Turns": 13
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 1956,
+      "Name": "Short",
+      "Turns": 7
+    }
+  ],
+  "Longitude": 136.5389,
+  "Name": "Takimaya"
+}

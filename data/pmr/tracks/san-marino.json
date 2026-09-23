@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 50,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "GameId": "ID_san_marino",
+  "Latitude": 44.34306,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4909,
+      "Name": "Grand Prix",
+      "Turns": 19
+    }
+  ],
+  "Longitude": 11.71389,
+  "Name": "San Marino"
+}

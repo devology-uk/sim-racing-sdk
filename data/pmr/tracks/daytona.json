@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 8,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_orlando",
+  "Latitude": 29.1852,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5729,
+      "Name": "Road Course",
+      "Turns": 12
+    }
+  ],
+  "Longitude": -81.0705,
+  "Name": "Daytona"
+}

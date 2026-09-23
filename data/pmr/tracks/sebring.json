@@ -1,0 +1,31 @@
+{
+  "AltitudeMeters": 20,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_jackson",
+  "Latitude": 27.45146,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5954,
+      "Name": "Grand Prix",
+      "Turns": 17
+    },
+    {
+      "GridSlots": 30,
+      "LengthMeters": 2736,
+      "Name": "Johnson Club Circuit",
+      "Turns": 13
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 3219,
+      "Name": "School Circuit",
+      "Turns": 9
+    }
+  ],
+  "Longitude": -81.36872,
+  "Name": "Sebring"
+}

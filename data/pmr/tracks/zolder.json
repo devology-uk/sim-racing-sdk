@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 52,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "GameId": "ID_Zolder",
+  "Latitude": 50.98972,
+  "Layouts": [
+    {
+      "GridSlots": 31,
+      "LengthMeters": 4010,
+      "Name": "Grand Prix",
+      "Turns": 11
+    }
+  ],
+  "Longitude": 5.31083,
+  "Name": "Zolder"
+}

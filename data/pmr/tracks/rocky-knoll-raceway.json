@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 307,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_milwaukee",
+  "Latitude": 43.7975,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 6502,
+      "Name": "Chicane",
+      "Turns": 15
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 6515,
+      "Name": "Grand Prix",
+      "Turns": 14
+    }
+  ],
+  "Longitude": -87.99389,
+  "Name": "Rocky Knoll Raceway"
+}

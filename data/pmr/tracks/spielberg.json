@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 677,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Austria",
+  "CountryCode": "AUT",
+  "GameId": "ID_spielberg",
+  "Latitude": 47.21972,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4318,
+      "Name": "Grand Prix",
+      "Turns": 7
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2336,
+      "Name": "National",
+      "Turns": 5
+    }
+  ],
+  "Longitude": 14.76472,
+  "Name": "Spielberg"
+}

@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 85,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "GameId": "ID_derby",
+  "Latitude": 52.83083,
+  "Layouts": [
+    {
+      "GridSlots": 30,
+      "LengthMeters": 4020,
+      "Name": "Grand Prix",
+      "Turns": 12
+    },
+    {
+      "GridSlots": 30,
+      "LengthMeters": 3149,
+      "Name": "National",
+      "Turns": 9
+    }
+  ],
+  "Longitude": -1.38667,
+  "Name": "Derby"
+}

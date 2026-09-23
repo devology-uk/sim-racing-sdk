@@ -1,0 +1,31 @@
+{
+  "AltitudeMeters": 153,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "GameId": "ID_northampton",
+  "Latitude": 52.073265,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5890,
+      "Name": "Grand Prix",
+      "Turns": 15
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2979,
+      "Name": "International",
+      "Turns": 7
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5890,
+      "Name": "Original Pits",
+      "Turns": 15
+    }
+  ],
+  "Longitude": -1.01452,
+  "Name": "Northampton"
+}

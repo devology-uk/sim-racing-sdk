@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 472,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "GameId": "ID_Nordschleife_full",
+  "Latitude": 50.33444,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 25378,
+      "Name": "Nordschleife 24hrs",
+      "Turns": 82
+    }
+  ],
+  "Longitude": 6.94278,
+  "Name": "Nürburgring Nordschleife 24hrs"
+}

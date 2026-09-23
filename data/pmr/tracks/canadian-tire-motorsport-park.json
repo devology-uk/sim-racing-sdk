@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 334,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "Canada",
+  "CountryCode": "CAN",
+  "GameId": "ID_CanadianTireMotorsportPark",
+  "Latitude": 44.05889,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4102,
+      "Name": "Grand Prix",
+      "Turns": 6
+    }
+  ],
+  "Longitude": -78.67722,
+  "Name": "Canadian Tire Motorsport Park"
+}

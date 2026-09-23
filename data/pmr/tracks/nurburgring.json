@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 330,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "GameId": "ID_NurburgringGP",
+  "Latitude": 50.33444,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5148,
+      "Name": "Grand Prix",
+      "Turns": 16
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 3629,
+      "Name": "Sprint",
+      "Turns": 11
+    }
+  ],
+  "Longitude": 6.94278,
+  "Name": "Nürburgring"
+}

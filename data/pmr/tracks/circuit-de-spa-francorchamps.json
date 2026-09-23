@@ -1,0 +1,19 @@
+{
+  "AltitudeMeters": 420,
+  "Author": "Straight 4 Studios",
+  "Continent": "Europe",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "GameId": "ID_SpaFrancorchamps",
+  "Latitude": 50.43722,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 7004,
+      "Name": "Grand Prix",
+      "Turns": 14
+    }
+  ],
+  "Longitude": 5.97194,
+  "Name": "Circuit de Spa-Francorchamps"
+}

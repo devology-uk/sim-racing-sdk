@@ -1,0 +1,31 @@
+{
+  "AltitudeMeters": 190,
+  "Author": "Straight 4 Studios",
+  "Continent": "Americas",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "GameId": "ID_LimeRockPark",
+  "Latitude": 41.92722,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2419,
+      "Name": "Chicanes",
+      "Turns": 8
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2462,
+      "Name": "Road Course",
+      "Turns": 6
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 2372,
+      "Name": "Sports Car",
+      "Turns": 7
+    }
+  ],
+  "Longitude": -73.41472,
+  "Name": "Lime Rock Park"
+}
