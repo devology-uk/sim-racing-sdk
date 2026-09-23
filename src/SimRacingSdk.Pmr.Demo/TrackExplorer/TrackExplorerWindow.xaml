@@ -28,15 +28,16 @@
                  MinWidth="120" />
 
         <ListBox Grid.Column="1"
-                 ItemsSource="{Binding TrackNames}"
+                 ItemsSource="{Binding Tracks}"
+                 DisplayMemberPath="Name"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Stretch"
-                 SelectedItem="{Binding SelectedTrackName, Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
                  MinWidth="200" />
 
         <ListBox Grid.Column="2"
-                 ItemsSource="{Binding Layouts}"
-                 DisplayMemberPath="LayoutName"
+                 ItemsSource="{Binding SelectedTrack.Layouts}"
+                 DisplayMemberPath="Name"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Stretch"
                  SelectedItem="{Binding SelectedLayout, Mode=TwoWay}"
@@ -45,8 +46,7 @@
         <GroupBox Grid.Column="3"
                   Header="Layout Details"
                   Margin="5"
-                  VerticalAlignment="Top"
-                  DataContext="{Binding SelectedLayout}">
+                  VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -66,11 +66,11 @@
 
                 <Image Grid.Column="0"
                        Grid.Row="0"
-                       Source="{Binding CountryCode, Converter={StaticResource FlagImageSourceConverter}}"
+                       Source="{Binding SelectedTrack.CountryCode, Converter={StaticResource FlagImageSourceConverter}}"
                        Width="64" />
                 <Label Grid.Column="1"
                        Grid.Row="0"
-                       Content="{Binding TrackName}"
+                       Content="{Binding SelectedTrack.Name}"
                        FontWeight="Bold"
                        FontSize="16"
                        VerticalAlignment="Bottom" />
@@ -81,7 +81,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="1"
-                       Content="{Binding Country}" />
+                       Content="{Binding SelectedTrack.Country}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="2"
@@ -89,7 +89,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="2"
-                       Content="{Binding LayoutName}" />
+                       Content="{Binding SelectedLayout.Name}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="3"
@@ -97,7 +97,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="3"
-                       Content="{Binding LengthMeters}" />
+                       Content="{Binding SelectedLayout.LengthMeters}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="4"
@@ -105,7 +105,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="4"
-                       Content="{Binding Turns}" />
+                       Content="{Binding SelectedLayout.Turns}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="5"
@@ -113,7 +113,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="5"
-                       Content="{Binding GridSize}" />
+                       Content="{Binding SelectedLayout.GridSize}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="6"
@@ -121,7 +121,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="6"
-                       Content="{Binding AltitudeMetersAmsl}" />
+                       Content="{Binding SelectedTrack.AltitudeMetersAmsl}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="7"
@@ -129,7 +129,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="7"
-                       Content="{Binding Latitude}" />
+                       Content="{Binding SelectedTrack.Latitude}" />
             </Grid>
         </GroupBox>
     </Grid>

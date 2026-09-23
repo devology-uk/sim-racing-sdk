@@ -62,6 +62,8 @@ public partial class App : Application
         services.AddSingleton<IDataPathProvider, DataPathProvider>();
         services.AddSingleton<ICarRepository, CarRepository>();
         services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
+        services.AddSingleton<ITrackRepository, TrackRepository>();
+        services.AddSingleton<IPmrTrackProviderGenerator, PmrTrackProviderGenerator>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();

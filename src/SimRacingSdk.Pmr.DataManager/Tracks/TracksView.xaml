@@ -6,7 +6,267 @@
              xmlns:local="clr-namespace:SimRacingSdk.Pmr.DataManager.Tracks"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:TracksViewModel}">
-    <TextBlock Text="Tracks"
-               FontSize="24"
-               Margin="10" />
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="0,0,15,8" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin"
+                    Value="0,0,15,8" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,0,0,8" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <RadioButton Content="By Continent"
+                         GroupName="TrackBrowseMode"
+                         VerticalAlignment="Center"
+                         Margin="0,0,15,0"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByContinent}" />
+            <RadioButton Content="All Tracks"
+                         GroupName="TrackBrowseMode"
+                         VerticalAlignment="Center"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=AllTracks}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Continents}"
+                 SelectedItem="{Binding SelectedContinent, Mode=TwoWay}"
+                 Visibility="{Binding IsByContinentMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding VisibleTracks}"
+                      SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Continent"
+                                        Binding="{Binding Continent}" />
+                    <DataGridTextColumn Header="Country"
+                                        Binding="{Binding Country}" />
+                    <DataGridTextColumn Header="Layouts"
+                                        Binding="{Binding Layouts.Count}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Row="1"
+                      Header="Track Details"
+                      Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,10,0,15">
+                        <Button Content="New Track"
+                                Command="{Binding NewTrackCommand}"
+                                Padding="10,4"
+                                Margin="0,0,10,0" />
+                        <Button Content="Save Track"
+                                Command="{Binding SaveTrackCommand}"
+                                Padding="10,4" />
+                    </StackPanel>
+
+                    <Grid DataContext="{Binding Editor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="160" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="Name" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="1"
+                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="0"
+                               Grid.Column="2"
+                               Content="Continent" />
+                        <ComboBox Grid.Row="0"
+                                  Grid.Column="3"
+                                  IsEditable="True"
+                                  ItemsSource="{Binding DataContext.Continents, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  Text="{Binding Continent, UpdateSourceTrigger=PropertyChanged}"
+                                  ToolTip="Pick an existing continent or type a new one" />
+                        <Label Grid.Row="0"
+                               Grid.Column="4"
+                               Content="Author" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="5"
+                                 Text="{Binding Author, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Country" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="1"
+                                 Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="1"
+                               Grid.Column="2"
+                               Content="Country Code" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="3"
+                                 Text="{Binding CountryCode, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="ISO 3166-1 alpha-3, e.g. GBR - matches the flag image file names" />
+                        <Label Grid.Row="1"
+                               Grid.Column="4"
+                               Content="Altitude (m)" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="5"
+                                 Text="{Binding AltitudeMeters, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="Latitude" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="1"
+                                 Text="{Binding Latitude, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="2"
+                               Content="Longitude" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="3"
+                                 Text="{Binding Longitude, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="4"
+                               Content="Game Id" />
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="5"
+                                 Text="{Binding GameId, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                 ToolTip="The game's own track id, e.g. ID_SpaFrancorchamps - shared by every layout. Leave blank until looked up." />
+                    </Grid>
+
+                    <Separator Margin="0,15,0,15" />
+
+                    <Label Content="Layouts" />
+                    <Grid DataContext="{Binding Editor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <ListBox ItemsSource="{Binding Layouts}"
+                                     SelectedItem="{Binding SelectedLayout, Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     Height="110" />
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,8,0,0">
+                                <Button Content="Add Layout"
+                                        Command="{Binding AddLayoutCommand}"
+                                        Padding="10,4"
+                                        Margin="0,0,10,0" />
+                                <Button Content="Remove Layout"
+                                        Command="{Binding RemoveLayoutCommand}"
+                                        Padding="10,4" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Grid Grid.Column="1"
+                              Margin="15,0,0,0"
+                              DataContext="{Binding SelectedLayout}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="160" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Content="Layout Name" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="1"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Content="Grid Slots" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="3"
+                                     Text="{Binding GridSlots, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Content="Turns" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="1"
+                                     Text="{Binding Turns, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Content="Length (m)" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="3"
+                                     Text="{Binding LengthMeters, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <Separator Margin="0,15,0,15" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Generate Core Provider"
+                                Command="{Binding GenerateCoreProviderCommand}"
+                                Padding="10,4"
+                                Margin="0,0,15,0"
+                                ToolTip="Regenerates SimRacingSdk.Pmr.Core's track model, interface and provider from every track saved here" />
+                        <TextBlock Text="{Binding GenerateStatusMessage}"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
 </UserControl>

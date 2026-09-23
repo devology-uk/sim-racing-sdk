@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SimRacingSdk.Pmr.Core.Abstractions;
 using SimRacingSdk.Pmr.Core.Models;
@@ -10,22 +10,21 @@ public partial class TrackExplorerViewModel : ObservableObject
     private readonly IPmrTrackInfoProvider trackInfoProvider;
 
     [ObservableProperty]
-    private PmrTrackInfo? selectedLayout;
+    private PmrTrackLayoutInfo? selectedLayout;
 
     [ObservableProperty]
     private string selectedContinent = string.Empty;
 
     [ObservableProperty]
-    private string selectedTrackName = string.Empty;
+    private PmrTrackInfo? selectedTrack;
 
     public TrackExplorerViewModel(IPmrTrackInfoProvider trackInfoProvider)
     {
         this.trackInfoProvider = trackInfoProvider;
     }
 
-    public ObservableCollection<PmrTrackInfo> Layouts { get; } = [];
     public ObservableCollection<string> Continents { get; } = [];
-    public ObservableCollection<string> TrackNames { get; } = [];
+    public ObservableCollection<PmrTrackInfo> Tracks { get; } = [];
 
     internal void Init()
     {
@@ -43,23 +42,17 @@ public partial class TrackExplorerViewModel : ObservableObject
 
     partial void OnSelectedContinentChanged(string value)
     {
-        this.TrackNames.Clear();
-        foreach(var trackName in this.trackInfoProvider.GetTrackNamesForContinent(value))
+        this.Tracks.Clear();
+        foreach(var track in this.trackInfoProvider.GetTrackInfosForContinent(value))
         {
-            this.TrackNames.Add(trackName);
+            this.Tracks.Add(track);
         }
 
-        this.SelectedTrackName = this.TrackNames.Count > 0 ? this.TrackNames[0] : string.Empty;
+        this.SelectedTrack = this.Tracks.FirstOrDefault();
     }
 
-    partial void OnSelectedTrackNameChanged(string value)
+    partial void OnSelectedTrackChanged(PmrTrackInfo? value)
     {
-        this.Layouts.Clear();
-        foreach(var layout in this.trackInfoProvider.GetLayoutsForTrack(value))
-        {
-            this.Layouts.Add(layout);
-        }
-
-        this.SelectedLayout = this.Layouts.Count > 0 ? this.Layouts[0] : null;
+        this.SelectedLayout = value?.Layouts.FirstOrDefault();
     }
 }
