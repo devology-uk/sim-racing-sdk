@@ -1,0 +1,231 @@
+{
+  "CarId": "lola-t70-mk3b-gt-1970",
+  "EngineAndDrivetrain": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 300,
+      "Min": 50,
+      "Name": "Preload",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 50,
+      "Unit": "Nm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 12,
+      "Min": 1,
+      "Name": "Clutches",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 1,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 90,
+      "Min": 30,
+      "Name": "Power Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 15,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 90,
+      "Min": 30,
+      "Name": "Coast Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 15,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 12,
+      "Min": 10,
+      "Name": "Final Drive",
+      "Scope": 0,
+      "Section": "Transmission",
+      "Step": 1,
+      "Unit": null
+    }
+  ],
+  "PitSetup": [],
+  "SteeringWheel": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 2,
+      "Min": 0.5,
+      "Name": "Steering Rack Rate",
+      "Scope": 0,
+      "Section": "Steering",
+      "Step": 0.1,
+      "Unit": null
+    }
+  ],
+  "Suspension": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0.5,
+      "Min": -0.2,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 0.05,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0.7,
+      "Min": 0.3,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 0.05,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 43,
+      "Min": 30,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 1,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 60,
+      "Min": 45,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 1,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 100,
+      "Min": 100,
+      "Name": "Bump Stop Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 0,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 10,
+      "Min": 10,
+      "Name": "Bump Stop Length",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 0,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 100,
+      "Min": 40,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Front)",
+      "Step": 20,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 80,
+      "Min": 20,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Rear)",
+      "Step": 10,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 45,
+      "Min": 45,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 5,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 45,
+      "Min": 35,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 5,
+      "Unit": "mm"
+    }
+  ],
+  "TyresAndChassis": [
+    {
+      "EnumValues": [
+        "hard",
+        "wet"
+      ],
+      "HasAutoOption": true,
+      "Kind": 1,
+      "Max": null,
+      "Min": null,
+      "Name": "Tyre Compound",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 1.8,
+      "Min": 1.1,
+      "Name": "Tyre Pressure",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": "bar"
+    }
+  ]
+}

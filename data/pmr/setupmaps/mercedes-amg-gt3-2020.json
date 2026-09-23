@@ -1,0 +1,315 @@
+{
+  "CarId": "mercedes-amg-gt3-2020",
+  "EngineAndDrivetrain": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 150,
+      "Min": 50,
+      "Name": "Preload",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 10,
+      "Unit": "Nm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 10,
+      "Min": 6,
+      "Name": "Clutches",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 2,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 60,
+      "Min": 60,
+      "Name": "Power Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 30,
+      "Min": 30,
+      "Name": "Coast Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 20,
+      "Min": 18,
+      "Name": "Final Drive",
+      "Scope": 0,
+      "Section": "Transmission",
+      "Step": 1,
+      "Unit": null
+    }
+  ],
+  "PitSetup": [],
+  "SteeringWheel": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 2,
+      "Min": 0.5,
+      "Name": "Steering Rack Rate",
+      "Scope": 0,
+      "Section": "Steering",
+      "Step": 0.1,
+      "Unit": null
+    }
+  ],
+  "Suspension": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": -1,
+      "Min": -3.6,
+      "Name": "Camber",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 0.1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0,
+      "Min": -3,
+      "Name": "Camber",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 0.1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0,
+      "Min": -0.5,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 0.05,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0.3,
+      "Min": -0.3,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 0.1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 390,
+      "Min": 240,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 30,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 275,
+      "Min": 150,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 25,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 30000,
+      "Min": 10000,
+      "Name": "Slow Bump",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 1000,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 30000,
+      "Min": 10000,
+      "Name": "Slow Rebound",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 1000,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 15000,
+      "Min": 5000,
+      "Name": "Fast Bump",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 500,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 15000,
+      "Min": 5000,
+      "Name": "Fast Rebound",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 500,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 1000,
+      "Min": 200,
+      "Name": "Bump Stop Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 100,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 50,
+      "Min": 0,
+      "Name": "Bump Stop Length",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 5,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 123.9,
+      "Min": 51.300000000000004,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Front)",
+      "Step": 6.6000000000000005,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 46.2,
+      "Min": 8.5,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Rear)",
+      "Step": 2.9,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 10,
+      "Min": -12,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 1,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 5,
+      "Min": -20,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 1,
+      "Unit": "mm"
+    }
+  ],
+  "TyresAndChassis": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 7,
+      "Min": -2,
+      "Name": "Rear Wing Angle",
+      "Scope": 0,
+      "Section": "Aero",
+      "Step": 1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": [
+        "hard",
+        "wet"
+      ],
+      "HasAutoOption": true,
+      "Kind": 1,
+      "Max": null,
+      "Min": null,
+      "Name": "Tyre Compound",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 2.2,
+      "Min": 1.4000000000000001,
+      "Name": "Tyre Pressure",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": "bar"
+    }
+  ]
+}

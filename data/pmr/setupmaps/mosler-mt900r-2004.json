@@ -1,0 +1,315 @@
+{
+  "CarId": "mosler-mt900r-2004",
+  "EngineAndDrivetrain": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 200,
+      "Min": 50,
+      "Name": "Preload",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 10,
+      "Unit": "Nm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 12,
+      "Min": 3,
+      "Name": "Clutches",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 1,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 90,
+      "Min": 30,
+      "Name": "Power Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 15,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 90,
+      "Min": 30,
+      "Name": "Coast Ramp Angle",
+      "Scope": 0,
+      "Section": "Differential",
+      "Step": 15,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 13,
+      "Min": 11,
+      "Name": "Final Drive",
+      "Scope": 0,
+      "Section": "Transmission",
+      "Step": 1,
+      "Unit": null
+    }
+  ],
+  "PitSetup": [],
+  "SteeringWheel": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 2,
+      "Min": 0.5,
+      "Name": "Steering Rack Rate",
+      "Scope": 0,
+      "Section": "Steering",
+      "Step": 0.1,
+      "Unit": null
+    }
+  ],
+  "Suspension": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": -1.5,
+      "Min": -2.5,
+      "Name": "Camber",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 0.1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": -1,
+      "Min": -2,
+      "Name": "Camber",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 0.1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0.2,
+      "Min": -0.2,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 0.05,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 0,
+      "Min": -0.4,
+      "Name": "Toe-in",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 0.01,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 300,
+      "Min": 150,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 10,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 275,
+      "Min": 125,
+      "Name": "Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 10,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 12000,
+      "Min": 6000,
+      "Name": "Slow Bump",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 1000,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 20000,
+      "Min": 15000,
+      "Name": "Slow Rebound",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 1000,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 5500,
+      "Min": 3500,
+      "Name": "Fast Bump",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 500,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 11000,
+      "Min": 7000,
+      "Name": "Fast Rebound",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 500,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 900,
+      "Min": 100,
+      "Name": "Bump Stop Spring Rate",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 100,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 30,
+      "Min": 0,
+      "Name": "Bump Stop Length",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers",
+      "Step": 5,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 200,
+      "Min": 100,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Front)",
+      "Step": 10,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 120,
+      "Min": 20,
+      "Name": "Anti-Roll Bar",
+      "Scope": 2,
+      "Section": "Anti-Roll Bar \u0026 3rd Spring (Rear)",
+      "Step": 10,
+      "Unit": "N/mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 30,
+      "Min": -0,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Front)",
+      "Step": 1,
+      "Unit": "mm"
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 20,
+      "Min": -20,
+      "Name": "Ride Height Adjust",
+      "Scope": 2,
+      "Section": "Springs \u0026 Dampers (Rear)",
+      "Step": 1,
+      "Unit": "mm"
+    }
+  ],
+  "TyresAndChassis": [
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 9,
+      "Min": 0,
+      "Name": "Rear Wing Angle",
+      "Scope": 0,
+      "Section": "Aero",
+      "Step": 1,
+      "Unit": "deg"
+    },
+    {
+      "EnumValues": [
+        "hard",
+        "wet"
+      ],
+      "HasAutoOption": true,
+      "Kind": 1,
+      "Max": null,
+      "Min": null,
+      "Name": "Tyre Compound",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": null
+    },
+    {
+      "EnumValues": null,
+      "HasAutoOption": false,
+      "Kind": 0,
+      "Max": 1.8,
+      "Min": 1.1,
+      "Name": "Tyre Pressure",
+      "Scope": 2,
+      "Section": "Wheels",
+      "Step": null,
+      "Unit": "bar"
+    }
+  ]
+}
