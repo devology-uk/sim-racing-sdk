@@ -36,14 +36,26 @@
                                      Binding="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                                      Width="60" />
                 <DataGridTextColumn Header="Min"
-                                     Binding="{Binding Min, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     Binding="{Binding Min, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                                      Width="70" />
                 <DataGridTextColumn Header="Max"
-                                     Binding="{Binding Max, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     Binding="{Binding Max, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                                      Width="70" />
                 <DataGridTextColumn Header="Step"
-                                     Binding="{Binding Step, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     Binding="{Binding Step, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                                      Width="70" />
+                <DataGridTextColumn Header="Raw Key"
+                                     Binding="{Binding RawKey, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     Width="150" />
+                <DataGridTextColumn Header="Raw Min"
+                                     Binding="{Binding RawMin, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     Width="90" />
+                <DataGridTextColumn Header="Raw Max"
+                                     Binding="{Binding RawMax, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     Width="90" />
+                <DataGridTextColumn Header="Raw Step"
+                                     Binding="{Binding RawStep, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     Width="90" />
                 <DataGridCheckBoxColumn Header="Auto Option"
                                          Binding="{Binding HasAutoOption}"
                                          Width="80" />

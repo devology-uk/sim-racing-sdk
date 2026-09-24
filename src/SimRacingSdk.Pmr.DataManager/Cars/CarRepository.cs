@@ -31,9 +31,8 @@ public class CarRepository : ICarRepository
             .ToList();
     }
 
-    // Always writes to {car.Id}.json, derived fresh from the car's current Manufacturer/Name -
-    // renaming either one leaves the old file behind rather than renaming it in place. Not handled
-    // yet since there's no edit UI to trigger it; deal with it when that exists.
+    // Always writes to {car.Id}.json, derived fresh from Manufacturer/Name/Year - a caller changing
+    // any of those must Delete the old id itself (see CarsViewModel.SaveCar).
     public void Save(CarInfo car)
     {
         File.WriteAllText(this.PathFor(car.Id), JsonSerializer.Serialize(car, SerializerOptions));

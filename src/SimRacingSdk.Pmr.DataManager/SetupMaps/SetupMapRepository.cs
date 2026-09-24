@@ -21,6 +21,18 @@ public class SetupMapRepository : ISetupMapRepository
         return File.Exists(path) ? JsonSerializer.Deserialize<PmrSetupMap>(File.ReadAllText(path)) : null;
     }
 
+    public void ReassignCar(string oldCarId, string newCarId)
+    {
+        var setupMap = this.FindByCarId(oldCarId);
+        if(setupMap is null)
+        {
+            return;
+        }
+
+        this.Save(setupMap with { CarId = newCarId });
+        File.Delete(this.PathFor(oldCarId));
+    }
+
     public void Save(PmrSetupMap setupMap)
     {
         File.WriteAllText(this.PathFor(setupMap.CarId), JsonSerializer.Serialize(setupMap, SerializerOptions));

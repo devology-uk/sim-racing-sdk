@@ -8,6 +8,7 @@ using SimRacingSdk.Pmr.DataManager.Abstractions;
 using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Controls.Console;
 using SimRacingSdk.Pmr.DataManager.Services;
+using SimRacingSdk.Pmr.DataManager.Session;
 using SimRacingSdk.Pmr.DataManager.SetupMaps;
 using SimRacingSdk.Pmr.DataManager.Storage;
 using SimRacingSdk.Pmr.DataManager.Tracks;
@@ -41,7 +42,7 @@ public partial class App : Application
 
         this.logger.LogInformation("Sim Racing SDK Data Manager for PMR has started.");
 
-        this.MainWindow = new MainWindow
+        this.MainWindow = new MainWindow(this.Services.GetRequiredService<ISessionStateStore>())
         {
             DataContext = this.Services.GetRequiredService<MainWindowViewModel>()
         };
@@ -60,11 +61,13 @@ public partial class App : Application
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddSingleton<IDataPathProvider, DataPathProvider>();
+        services.AddSingleton<ISessionStateStore, SessionStateStore>();
         services.AddSingleton<ICarRepository, CarRepository>();
         services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
         services.AddSingleton<ITrackRepository, TrackRepository>();
         services.AddSingleton<IPmrTrackProviderGenerator, PmrTrackProviderGenerator>();
         services.AddSingleton<ISetupMapRepository, SetupMapRepository>();
+        services.AddSingleton<IDefaultSetupFieldApplier, DefaultSetupFieldApplier>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();

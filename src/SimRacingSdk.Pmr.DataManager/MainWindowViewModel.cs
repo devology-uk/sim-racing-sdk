@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Navigation;
+using SimRacingSdk.Pmr.DataManager.Session;
 using SimRacingSdk.Pmr.DataManager.SetupMaps;
 using SimRacingSdk.Pmr.DataManager.Tracks;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace SimRacingSdk.Pmr.DataManager;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
+    private readonly ISessionStateStore sessionStateStore;
 
     [ObservableProperty]
     private object? currentPageViewModel;
@@ -22,8 +24,13 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private NavigationItem? selectedNavigationItem;
 
-    public MainWindowViewModel(CarsViewModel carsViewModel, TracksViewModel tracksViewModel, SetupMapsViewModel setupMapsViewModel)
+    public MainWindowViewModel(
+        CarsViewModel carsViewModel,
+        TracksViewModel tracksViewModel,
+        SetupMapsViewModel setupMapsViewModel,
+        ISessionStateStore sessionStateStore)
     {
+        this.sessionStateStore = sessionStateStore;
         this.NavigationItems =
         [
             new NavigationItem { Title = "Cars", PageViewModel = carsViewModel },
@@ -31,7 +38,8 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationItem { Title = "Setup Maps", PageViewModel = setupMapsViewModel }
         ];
 
-        this.SelectedNavigationItem = this.NavigationItems[0];
+        this.SelectedNavigationItem = this.NavigationItems.FirstOrDefault(item => item.Title == sessionStateStore.State.Page)
+                                      ?? this.NavigationItems[0];
     }
 
     public IReadOnlyList<NavigationItem> NavigationItems { get; }
@@ -62,5 +70,7 @@ public partial class MainWindowViewModel : ObservableObject
     partial void OnSelectedNavigationItemChanged(NavigationItem? value)
     {
         this.CurrentPageViewModel = value?.PageViewModel;
+        this.sessionStateStore.State.Page = value?.Title;
+        this.sessionStateStore.Save();
     }
 }

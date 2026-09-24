@@ -26,6 +26,18 @@ public partial class SetupFieldEditorViewModel : ObservableObject
     private string name = string.Empty;
 
     [ObservableProperty]
+    private string? rawKey;
+
+    [ObservableProperty]
+    private double? rawMax;
+
+    [ObservableProperty]
+    private double? rawMin;
+
+    [ObservableProperty]
+    private double? rawStep;
+
+    [ObservableProperty]
     private SetupFieldScope scope = SetupFieldScope.Single;
 
     [ObservableProperty]
@@ -50,6 +62,10 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             Max = field.Max,
             Min = field.Min,
             Name = field.Name,
+            RawKey = field.RawKey,
+            RawMax = field.RawMax,
+            RawMin = field.RawMin,
+            RawStep = field.RawStep,
             Scope = field.Scope,
             Section = field.Section,
             Step = field.Step,
@@ -69,6 +85,10 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             Max = this.Kind == SetupFieldKind.Numeric ? this.Max : null,
             Min = this.Kind == SetupFieldKind.Numeric ? this.Min : null,
             Name = this.Name,
+            RawKey = this.RawKey,
+            RawMax = this.RawMax,
+            RawMin = this.RawMin,
+            RawStep = this.RawStep,
             Scope = this.Scope,
             Section = this.Section,
             Step = this.Kind == SetupFieldKind.Numeric ? this.Step : null,
