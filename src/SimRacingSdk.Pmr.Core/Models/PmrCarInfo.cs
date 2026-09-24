@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 
 namespace SimRacingSdk.Pmr.Core.Models;
 
@@ -15,9 +15,7 @@ public record PmrCarInfo
 
     // Null when the game's own vdef and vset files carry no fuel-tank spec at all - seen only
     // on the Hypercar/LMDh class, which is regulated by an energy allocation rather than a
-    // simple litres figure (Mike's steer, matching LMU's Virtual Energy concept). Every other
-    // "0" in the vdef's own FuelCapacityLitres field is backed by a real value in that car's
-    // default.vset (key "ice-fuel-capacity"), which PmrCatalogImport already falls back to.
+    // simple litres figure.
     public double? FuelCapacityLitres { get; init; }
 
     // The game's own vehicle id (e.g. "ID_BMW_M_Hybrid_V8") - the prefix of a saved setup's

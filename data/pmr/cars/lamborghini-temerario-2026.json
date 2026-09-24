@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8 Turbo",
+  "FuelCapacityLitres": 80,
+  "GameId": "ID_Lamborghini_Temerario_2026",
+  "IconFileName": "Lamborghini",
+  "Manufacturer": "Lamborghini",
+  "Name": "Temerario",
+  "PowerKw": 686,
+  "PowertrainLayout": "AWD",
+  "TorqueNm": 800,
+  "Transmission": "8-Speed Paddle",
+  "VehicleClass": "Track Day",
+  "WeightKg": 1890,
+  "Year": 2026
+}

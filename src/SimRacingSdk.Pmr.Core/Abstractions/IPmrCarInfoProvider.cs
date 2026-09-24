@@ -1,4 +1,4 @@
-﻿using SimRacingSdk.Pmr.Core.Models;
+using SimRacingSdk.Pmr.Core.Models;
 
 namespace SimRacingSdk.Pmr.Core.Abstractions;
 
