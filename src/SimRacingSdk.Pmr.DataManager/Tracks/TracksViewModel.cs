@@ -1,12 +1,14 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SimRacingSdk.Pmr.DataManager.Session;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
 
 public partial class TracksViewModel : ObservableObject
 {
     private readonly IPmrTrackProviderGenerator pmrTrackProviderGenerator;
+    private readonly ISessionStateStore sessionStateStore;
     private readonly List<TrackInfo> tracks;
     private readonly ITrackRepository trackRepository;
 
@@ -17,18 +19,25 @@ public partial class TracksViewModel : ObservableObject
     private string generateStatusMessage = string.Empty;
 
     [ObservableProperty]
+    private string saveStatusMessage = string.Empty;
+
+    [ObservableProperty]
     private string? selectedContinent;
 
     [ObservableProperty]
     private TrackInfo? selectedTrack;
 
-    public TracksViewModel(ITrackRepository trackRepository, IPmrTrackProviderGenerator pmrTrackProviderGenerator)
+    public TracksViewModel(
+        ITrackRepository trackRepository,
+        IPmrTrackProviderGenerator pmrTrackProviderGenerator,
+        ISessionStateStore sessionStateStore)
     {
         this.trackRepository = trackRepository;
         this.pmrTrackProviderGenerator = pmrTrackProviderGenerator;
+        this.sessionStateStore = sessionStateStore;
         this.tracks = this.trackRepository.GetAll().ToList();
         this.RefreshContinents();
-        this.SelectedContinent = this.Continents.FirstOrDefault();
+        this.RestoreSession();
     }
 
     // Not a fixed list - derived from whatever continents are actually present in the saved
@@ -73,6 +82,7 @@ public partial class TracksViewModel : ObservableObject
         this.RefreshContinents();
         this.RefreshVisibleTracks();
         this.SelectedTrack = this.VisibleTracks.FirstOrDefault(visibleTrack => visibleTrack.Id == track.Id);
+        this.SaveStatusMessage = $"Saved {track.Name} at {DateTime.Now:HH:mm:ss}.";
     }
 
     [RelayCommand]
@@ -85,16 +95,41 @@ public partial class TracksViewModel : ObservableObject
     {
         this.OnPropertyChanged(nameof(this.IsByContinentMode));
         this.RefreshVisibleTracks();
+        this.sessionStateStore.State.TracksBrowseMode = value.ToString();
+        this.sessionStateStore.Save();
     }
 
     partial void OnSelectedContinentChanged(string? value)
     {
         this.RefreshVisibleTracks();
+        this.sessionStateStore.State.TracksContinent = value;
+        this.sessionStateStore.Save();
     }
 
     partial void OnSelectedTrackChanged(TrackInfo? value)
     {
         this.Editor.LoadFrom(value);
+        this.sessionStateStore.State.TracksTrackId = value?.Id;
+        this.sessionStateStore.Save();
+    }
+
+    // Reads every saved value up front - see CarsViewModel.RestoreSession.
+    private void RestoreSession()
+    {
+        var state = this.sessionStateStore.State;
+        var savedBrowseMode = state.TracksBrowseMode;
+        var savedContinent = state.TracksContinent;
+        var savedTrackId = state.TracksTrackId;
+
+        if(Enum.TryParse<TrackBrowseMode>(savedBrowseMode, out var browseMode))
+        {
+            this.BrowseMode = browseMode;
+        }
+
+        this.SelectedContinent = this.Continents.Contains(savedContinent ?? string.Empty)
+            ? savedContinent
+            : this.Continents.FirstOrDefault();
+        this.SelectedTrack = this.VisibleTracks.FirstOrDefault(track => track.Id == savedTrackId) ?? this.SelectedTrack;
     }
 
     private void RefreshContinents()
