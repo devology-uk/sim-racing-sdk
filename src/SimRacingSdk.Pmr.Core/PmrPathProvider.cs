@@ -27,9 +27,9 @@ public class PmrPathProvider : IPmrPathProvider
         this.UserDataFolderPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
             UserDataFolderName);
-        var savegameFolderPath = Path.Combine(this.UserDataFolderPath, SavegameFolderName);
-        this.SettingsFilePath = Path.Combine(savegameFolderPath, SettingsFileName);
-        this.DriverProfileFilePath = Path.Combine(savegameFolderPath, DriverProfileFileName);
+        this.SavegameFolderPath = Path.Combine(this.UserDataFolderPath, SavegameFolderName);
+        this.SettingsFilePath = Path.Combine(this.SavegameFolderPath, SettingsFileName);
+        this.DriverProfileFilePath = Path.Combine(this.SavegameFolderPath, DriverProfileFileName);
     }
 
     public static PmrPathProvider Instance =>
@@ -38,6 +38,7 @@ public class PmrPathProvider : IPmrPathProvider
     public string DataFolderPath { get; }
     public string DriverProfileFilePath { get; }
     public string GamePath { get; }
+    public string SavegameFolderPath { get; }
     public string SettingsFilePath { get; }
     public string TracksFolderPath { get; }
     public string UserDataFolderPath { get; }
