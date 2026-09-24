@@ -21,6 +21,7 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
     private LmuSharedMemorySession? currentSession;
     private string? lastLoggedWaitReason;
+    private double? lastRealtimeEt;
     private LmuVehicleScoring? lastPlayerScoring;
     private LmuScoringInfo? lastScoringInfo;
     private CompositeDisposable? subscriptionSink;
@@ -64,6 +65,7 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         this.subscriptionSink = null;
         this.lastScoringInfo = null;
         this.lastPlayerScoring = null;
+        this.lastRealtimeEt = null;
     }
 
     private void BeginNewSession(LmuScoringInfo scoringInfo)
@@ -71,6 +73,7 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
         this.EndCurrentSession();
 
         this.lastPlayerScoring = null;
+        this.lastRealtimeEt = null;
         this.currentSession = new LmuSharedMemorySession(scoringInfo);
         this.sessionStartedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Started: {this.currentSession}");
@@ -173,26 +176,53 @@ public class LmuSharedMemoryConnection : ILmuSharedMemoryConnection
 
     private void UpdateSession(LmuScoringInfo scoringInfo)
     {
-        if(this.lastScoringInfo is null)
+        if(this.lastScoringInfo is null || string.IsNullOrWhiteSpace(scoringInfo.TrackName))
         {
             return;
         }
 
-        var previous = this.lastScoringInfo.Value;
-
         if(this.currentSession is not null)
         {
-            if(previous.Session != scoringInfo.Session)
+            if(this.IsDifferentSession(this.lastScoringInfo.Value, scoringInfo))
             {
                 this.BeginNewSession(scoringInfo);
             }
 
+            this.RecordRealtimeEt(scoringInfo);
             return;
         }
 
         if(scoringInfo.InRealtime)
         {
             this.BeginNewSession(scoringInfo);
+            this.RecordRealtimeEt(scoringInfo);
+        }
+    }
+
+    // A session-type change alone isn't enough: LMU never repeats a type within an event, but a new event
+    // (another track, or re-running the same one) can start with the same type - Practice at Road Atlanta
+    // followed by Practice at Long Beach went undetected until the track-name check was added (2026-09-24).
+    private bool IsDifferentSession(LmuScoringInfo previous, LmuScoringInfo current)
+    {
+        return previous.Session != current.Session
+               || !string.Equals(previous.TrackName, current.TrackName, StringComparison.Ordinal)
+               || this.HasSessionClockRestarted(current);
+    }
+
+    // Only compared while driving - the clock can read 0 in menus and loading screens, which isn't a restart.
+    private bool HasSessionClockRestarted(LmuScoringInfo current)
+    {
+        const double RestartToleranceSeconds = 1;
+        return current.InRealtime
+               && this.lastRealtimeEt is { } lastEt
+               && current.CurrentEt < lastEt - RestartToleranceSeconds;
+    }
+
+    private void RecordRealtimeEt(LmuScoringInfo scoringInfo)
+    {
+        if(scoringInfo.InRealtime)
+        {
+            this.lastRealtimeEt = scoringInfo.CurrentEt;
         }
     }
 }
