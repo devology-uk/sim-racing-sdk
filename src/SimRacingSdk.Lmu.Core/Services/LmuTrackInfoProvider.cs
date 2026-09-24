@@ -240,6 +240,24 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         },
         new()
         {
+            Name = "Grand Prix of Long Beach",
+            ShortName = "Long Beach",
+            Country = "USA",
+            CountryCode = "USA",
+            Latitude = 33.765,
+            Longitude = -118.189,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 3167,
+                    Corners = 11
+                }
+            }
+        },
+        new()
+        {
             Name = "Lusail International Circuit",
             ShortName = "Lusail",
             Country = "Qatar",
@@ -259,6 +277,24 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                     Name = "Short Circuit",
                     LengthM = 3701,
                     Corners = 11
+                }
+            }
+        },
+        new()
+        {
+            Name = "Michelin Raceway Road Atlanta",
+            ShortName = "Road Atlanta",
+            Country = "USA",
+            CountryCode = "USA",
+            Latitude = 34.14667,
+            Longitude = -83.81778,
+            Layouts = new List<LmuTrackLayoutInfo>()
+            {
+                new()
+                {
+                    Name = "Default",
+                    LengthM = 4088,
+                    Corners = 12
                 }
             }
         },
