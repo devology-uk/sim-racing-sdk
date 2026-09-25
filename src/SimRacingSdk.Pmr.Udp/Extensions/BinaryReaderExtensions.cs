@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using SimRacingSdk.Pmr.Udp.Enums;
 using SimRacingSdk.Pmr.Udp.Messages;
 
@@ -310,7 +310,7 @@ internal static class BinaryReaderExtensions
         return new PmrVehicleTelemetryGeneral
         {
             CenterOfGravityMeters = reader.ReadPmrVector3(),
-            SteeringWheelAngleRadians = reader.ReadSingle(),
+            SteeringWheelAngleDegrees = reader.ReadSingle(),
             TotalMassKg = reader.ReadSingle(),
             DrivenWheelAngularVelocityRadiansPerSecond = reader.ReadSingle(),
             NonDrivenWheelAngularVelocityRadiansPerSecond = reader.ReadSingle(),

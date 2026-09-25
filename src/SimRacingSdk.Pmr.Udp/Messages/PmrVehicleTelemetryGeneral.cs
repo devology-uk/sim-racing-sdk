@@ -1,9 +1,9 @@
-﻿namespace SimRacingSdk.Pmr.Udp.Messages;
+namespace SimRacingSdk.Pmr.Udp.Messages;
 
 public record PmrVehicleTelemetryGeneral
 {
     public PmrVector3 CenterOfGravityMeters { get; init; } = new();
-    public float SteeringWheelAngleRadians { get; init; }
+    public float SteeringWheelAngleDegrees { get; init; }
     public float TotalMassKg { get; init; }
     public float DrivenWheelAngularVelocityRadiansPerSecond { get; init; }
     public float NonDrivenWheelAngularVelocityRadiansPerSecond { get; init; }
