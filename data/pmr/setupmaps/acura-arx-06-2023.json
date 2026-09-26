@@ -2,12 +2,15 @@
   "CarId": "acura-arx-06-2023",
   "EngineAndDrivetrain": [
     {
+      "Decimals": null,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 18,
       "Min": 9,
       "Name": "Final Drive",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -18,12 +21,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 1,
       "Kind": 0,
       "Max": 110,
       "Min": 5,
       "Name": "Fuel Level",
+      "Quantity": 4,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -34,12 +40,15 @@
       "Unit": "L"
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 100,
       "Min": 0,
       "Name": "Brake Bias",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -50,12 +59,15 @@
       "Unit": "%"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 100,
       "Min": 0,
       "Name": "Brake Pressure",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -66,12 +78,15 @@
       "Unit": "%"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 300,
       "Min": 50,
       "Name": "Preload",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -82,12 +97,15 @@
       "Unit": "N"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 12,
       "Min": 1,
       "Name": "Clutches",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -98,12 +116,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 85,
       "Min": 35,
       "Name": "Power Ramp Angle",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -114,12 +135,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 85,
       "Min": 35,
       "Name": "Coast Ramp Angle",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -130,12 +154,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 1,
       "Min": -1,
       "Name": "Engine Braking",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -146,12 +173,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 10,
       "Min": 0,
       "Name": "Traction Control",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -162,16 +192,19 @@
       "Unit": null
     },
     {
+      "Decimals": null,
       "EnumValues": [
         "Off",
         "Safe",
         "Full"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "Regen Mode",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -182,12 +215,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 180,
       "Min": 0,
       "Name": "Regen Limit",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -198,12 +234,15 @@
       "Unit": "kW"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 50,
       "Min": 0,
       "Name": "Deploy Limit",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -214,6 +253,7 @@
       "Unit": "kW"
     },
     {
+      "Decimals": null,
       "EnumValues": [
         "4.700:1",
         "4.273:1",
@@ -221,10 +261,12 @@
         "3.615:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "Final Drive",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -235,6 +277,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -259,10 +302,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "1st Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -273,6 +318,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -297,10 +343,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "2nd Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -311,6 +359,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -335,10 +384,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "3rd Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -349,6 +400,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -373,10 +425,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "4th Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -387,6 +441,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -411,10 +466,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "5th Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -425,6 +482,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -449,10 +507,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "6th Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -463,6 +523,7 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -487,10 +548,12 @@
         "0.812:1"
       ],
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "7th Ratio",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -503,12 +566,15 @@
   ],
   "SteeringWheel": [
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0,
       "Name": "Strength",
+      "Quantity": 0,
       "RawKey": "ffb-deep-gain",
       "RawMax": 2,
       "RawMin": 0,
@@ -519,12 +585,15 @@
       "Unit": null
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 1,
       "Min": 0,
       "Name": "Rack Feel",
+      "Quantity": 0,
       "RawKey": "ffb-base-rack",
       "RawMax": 1,
       "RawMin": 0,
@@ -535,12 +604,15 @@
       "Unit": null
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0,
       "Name": "Alignment Boost",
+      "Quantity": 0,
       "RawKey": "ffb-Mz-boost",
       "RawMax": 2,
       "RawMin": 0,
@@ -551,12 +623,15 @@
       "Unit": null
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0,
       "Name": "Load Boost",
+      "Quantity": 0,
       "RawKey": "ffb-load-boost",
       "RawMax": 2,
       "RawMin": 0,
@@ -567,12 +642,15 @@
       "Unit": null
     },
     {
+      "Decimals": 3,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 0.2,
       "Min": -0.1,
       "Name": "Friction",
+      "Quantity": 0,
       "RawKey": "ffb-friction-boost",
       "RawMax": 0.2,
       "RawMin": -0.1,
@@ -583,12 +661,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0,
       "Name": "EQ Low",
+      "Quantity": 0,
       "RawKey": "ffb-eq-level-lo",
       "RawMax": 2,
       "RawMin": 0,
@@ -599,12 +680,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0,
       "Name": "EQ Mid",
+      "Quantity": 0,
       "RawKey": "ffb-eq-level-md",
       "RawMax": 2,
       "RawMin": 0,
@@ -615,12 +699,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 4,
       "Min": 0,
       "Name": "EQ High",
+      "Quantity": 0,
       "RawKey": "ffb-eq-level-hi",
       "RawMax": 4,
       "RawMin": 0,
@@ -631,12 +718,15 @@
       "Unit": null
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 2,
       "Min": 0.5,
       "Name": "Steering Rack Rate",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -647,12 +737,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 10,
       "Min": 1,
       "Name": "Steering Stiffness",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -663,12 +756,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 10,
       "Min": 1,
       "Name": "Steering Damping",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -681,12 +777,15 @@
   ],
   "Suspension": [
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": -0.44,
       "Min": -4.45,
       "Name": "Camber",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -697,12 +796,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": -0.5,
       "Min": -4.01,
       "Name": "Camber",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -713,12 +815,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 0.5,
       "Min": -0.5,
       "Name": "Toe-in",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -729,12 +834,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 0.51,
       "Min": -4.9,
       "Name": "Toe-in",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -745,12 +853,15 @@
       "Unit": "deg"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 350,
       "Min": 10,
       "Name": "Spring Rate",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -761,12 +872,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 350,
       "Min": 50,
       "Name": "Spring Rate",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -777,12 +891,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 21,
       "Min": 1,
       "Name": "Slow Bump",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -793,12 +910,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 21,
       "Min": 1,
       "Name": "Slow Rebound",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -809,12 +929,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 21,
       "Min": 1,
       "Name": "Fast Bump",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -825,12 +948,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 21,
       "Min": 1,
       "Name": "Fast Rebound",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -841,12 +967,15 @@
       "Unit": null
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 2000,
       "Min": 50,
       "Name": "Bump Stop Spring Rate",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -857,12 +986,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 900,
       "Min": 100,
       "Name": "Bump Stop Spring Rate",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -873,12 +1005,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 1,
       "Kind": 0,
       "Max": 80,
       "Min": 0,
       "Name": "Bump Stop Length",
+      "Quantity": 3,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -889,12 +1024,15 @@
       "Unit": "mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 1,
       "Kind": 0,
       "Max": 60,
       "Min": 0,
       "Name": "Bump Stop Length",
+      "Quantity": 3,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -905,12 +1043,15 @@
       "Unit": "mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 500,
       "Min": 0,
       "Name": "Anti-Roll Bar",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -921,12 +1062,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 250,
       "Min": 0,
       "Name": "Anti-Roll Bar",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -937,12 +1081,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 0,
       "Kind": 0,
       "Max": 350,
       "Min": 0,
       "Name": "3rd Spring Rate",
+      "Quantity": 2,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -953,12 +1100,15 @@
       "Unit": "N/mm"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 6,
       "Min": 1,
       "Name": "3rd Spring Damping",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -969,12 +1119,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 3,
       "Min": 0,
       "Name": "Caster Offset",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -987,6 +1140,7 @@
   ],
   "TyresAndChassis": [
     {
+      "Decimals": null,
       "EnumValues": [
         "Softe",
         "Medium",
@@ -994,10 +1148,12 @@
         "Wet"
       ],
       "HasAutoOption": true,
+      "ImperialDecimals": null,
       "Kind": 1,
       "Max": null,
       "Min": null,
       "Name": "Tyre Compound",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -1008,12 +1164,15 @@
       "Unit": null
     },
     {
+      "Decimals": 2,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": 1,
       "Kind": 0,
       "Max": 2.2,
       "Min": 0.9,
       "Name": "Tyre Pressure",
+      "Quantity": 1,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -1024,12 +1183,15 @@
       "Unit": "bar"
     },
     {
+      "Decimals": 0,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 9,
       "Min": 1,
       "Name": "Brake Duct",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
@@ -1040,12 +1202,15 @@
       "Unit": null
     },
     {
+      "Decimals": 1,
       "EnumValues": null,
       "HasAutoOption": false,
+      "ImperialDecimals": null,
       "Kind": 0,
       "Max": 10,
       "Min": 0,
       "Name": "Rear Wing Angle",
+      "Quantity": 0,
       "RawKey": null,
       "RawMax": null,
       "RawMin": null,
