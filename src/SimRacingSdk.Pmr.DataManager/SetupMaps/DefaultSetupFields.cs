@@ -78,8 +78,10 @@ public static class DefaultSetupFields
     [
         // Not adjustable on AMC Javelin (absent from all 3 of its .vset files) - RawKey inferred
         // from the "{Corner}-toe" pattern, not directly confirmed yet.
-        Numeric("Camber", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-camber", 2),
-        Numeric("Toe-in", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-toe", 2),
+        Numeric("Camber", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-camber", 2)
+            with { DisplaySource = SetupFieldDisplaySource.GameSimulation },
+        Numeric("Toe-in", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-toe", 2)
+            with { DisplaySource = SetupFieldDisplaySource.GameSimulation },
         Numeric("Caster Offset", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", null, 1),
         Numeric("Spring Rate", "Springs & Dampers", SetupFieldScope.PerCorner, "N/mm", "{Corner}-spring-rate", 0, SetupFieldQuantity.SpringRate, 0),
         Numeric("Slow Bump", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-slow-bump", 0),

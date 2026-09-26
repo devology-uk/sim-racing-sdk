@@ -7,6 +7,8 @@ public record SetupFieldInfo
     // only set where Quantity converts; otherwise the display is the same in both.
     public int? Decimals { get; init; }
 
+    public SetupFieldDisplaySource DisplaySource { get; init; }
+
     // Exactly what the game's screen shows, in click order. The raw value for entry i is
     // RawMin + i * RawStep (0 and 1 when unset, e.g. Tyre Compound). This also covers a numeric
     // setting whose display isn't a linear scale of its raw value - e.g. Final Drive shows
