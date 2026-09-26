@@ -8,10 +8,16 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 public partial class SetupFieldEditorViewModel : ObservableObject
 {
     [ObservableProperty]
+    private int? decimals;
+
+    [ObservableProperty]
     private string enumValuesText = string.Empty;
 
     [ObservableProperty]
     private bool hasAutoOption;
+
+    [ObservableProperty]
+    private int? imperialDecimals;
 
     [ObservableProperty]
     private SetupFieldKind kind = SetupFieldKind.Numeric;
@@ -24,6 +30,9 @@ public partial class SetupFieldEditorViewModel : ObservableObject
 
     [ObservableProperty]
     private string name = string.Empty;
+
+    [ObservableProperty]
+    private SetupFieldQuantity quantity;
 
     [ObservableProperty]
     private string? rawKey;
@@ -56,12 +65,15 @@ public partial class SetupFieldEditorViewModel : ObservableObject
     {
         return new SetupFieldEditorViewModel
         {
+            Decimals = field.Decimals,
             EnumValuesText = string.Join(", ", field.EnumValues ?? []),
             HasAutoOption = field.HasAutoOption,
+            ImperialDecimals = field.ImperialDecimals,
             Kind = field.Kind,
             Max = field.Max,
             Min = field.Min,
             Name = field.Name,
+            Quantity = field.Quantity,
             RawKey = field.RawKey,
             RawMax = field.RawMax,
             RawMin = field.RawMin,
@@ -77,14 +89,17 @@ public partial class SetupFieldEditorViewModel : ObservableObject
     {
         return new SetupFieldInfo
         {
+            Decimals = this.Decimals,
             EnumValues = this.Kind == SetupFieldKind.Enum
                 ? this.EnumValuesText.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
                 : null,
             HasAutoOption = this.Kind == SetupFieldKind.Enum && this.HasAutoOption,
+            ImperialDecimals = this.Quantity == SetupFieldQuantity.None ? null : this.ImperialDecimals,
             Kind = this.Kind,
             Max = this.Kind == SetupFieldKind.Numeric ? this.Max : null,
             Min = this.Kind == SetupFieldKind.Numeric ? this.Min : null,
             Name = this.Name,
+            Quantity = this.Quantity,
             RawKey = this.RawKey,
             RawMax = this.RawMax,
             RawMin = this.RawMin,

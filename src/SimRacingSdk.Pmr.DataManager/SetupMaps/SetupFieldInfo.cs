@@ -2,6 +2,11 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 
 public record SetupFieldInfo
 {
+    // Decimal places the game shows, per Units setting - they differ per field, not just per unit
+    // (Imperial Ride Height Adjust shows 2, Bump Stop Length 1, both inches). ImperialDecimals is
+    // only set where Quantity converts; otherwise the display is the same in both.
+    public int? Decimals { get; init; }
+
     // Exactly what the game's screen shows, in click order. The raw value for entry i is
     // RawMin + i * RawStep (0 and 1 when unset, e.g. Tyre Compound). This also covers a numeric
     // setting whose display isn't a linear scale of its raw value - e.g. Final Drive shows
@@ -13,10 +18,12 @@ public record SetupFieldInfo
     // (e.g. "Auto (Medium)"), so it isn't just another entry in EnumValues.
     public required bool HasAutoOption { get; init; }
 
+    public int? ImperialDecimals { get; init; }
     public required SetupFieldKind Kind { get; init; }
     public double? Max { get; init; }
     public double? Min { get; init; }
     public required string Name { get; init; }
+    public SetupFieldQuantity Quantity { get; init; }
 
     // The actual .vset parameter name(s) this field reads/writes, found by diffing saved setups
     // (a min/step/max trio per car - see project docs). A template using "{Corner}" (PerCorner,
@@ -44,5 +51,7 @@ public record SetupFieldInfo
     public required string Section { get; init; }
 
     public double? Step { get; init; }
+
+    // The Metric label; the Imperial one follows from Quantity.
     public string? Unit { get; init; }
 }

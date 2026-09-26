@@ -35,6 +35,16 @@
                 <DataGridTextColumn Header="Unit"
                                      Binding="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                                      Width="60" />
+                <DataGridComboBoxColumn Header="Quantity"
+                                         ItemsSource="{x:Static local:SetupFieldQuantityOptions.All}"
+                                         SelectedItemBinding="{Binding Quantity}"
+                                         Width="90" />
+                <DataGridTextColumn Header="Decimals"
+                                     Binding="{Binding Decimals, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     Width="65" />
+                <DataGridTextColumn Header="Imp. Decimals"
+                                     Binding="{Binding ImperialDecimals, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     Width="85" />
                 <DataGridTextColumn Header="Min"
                                      Binding="{Binding Min, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                                      Width="70" />

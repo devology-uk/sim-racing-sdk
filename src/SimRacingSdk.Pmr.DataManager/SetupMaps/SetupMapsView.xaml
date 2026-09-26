@@ -99,8 +99,7 @@
                     Command="{Binding ApplyForceFeedbackToAllCarsCommand}"
                     Padding="10,4"
                     Margin="0,0,15,0"
-                    ToolTip="Makes every car's Force Feedback section match the standard values - touches nothing else" />
-            <TextBlock Text="{Binding StatusMessage}"
+                    ToolTip="Makes every car's Force Feedback section match the standard values - touches nothing else" />            <TextBlock Text="{Binding StatusMessage}"
                        VerticalAlignment="Center"
                        TextWrapping="Wrap" />
         </StackPanel>

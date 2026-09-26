@@ -12,7 +12,7 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 // having no backing raw key at all (same category as Camber - see the field-by-field note below),
 // and the actual gear count varies per car (4-speed here, more on others), so there's no fixed set
 // of names a shared template could sensibly offer. Add "1st Ratio"/"2nd Ratio"/etc. by hand per car
-// as needed, each with Min == Max and no RawKey.
+// as needed, each with Min == Max, Decimals 3 and no RawKey.
 //
 // RawKey confidence varies - see each field's own comment. Where a field wasn't adjustable on the
 // cars checked so far (so its raw key never appeared in any of their saved files), the key here is
@@ -32,19 +32,20 @@ public static class DefaultSetupFields
 {
     public static IReadOnlyList<SetupFieldInfo> EngineAndDrivetrain { get; } =
     [
-        Numeric("Fuel Level", "Fuel", SetupFieldScope.Single, "L", "fuelLevel"),
-        Numeric("Brake Bias", "Brakes", SetupFieldScope.Single, "%", "brake-bias"),
-        Numeric("Brake Pressure", "Brakes", SetupFieldScope.Single, "%", "brake-pressure"),
-        Numeric("Preload", "Differential", SetupFieldScope.Single, "Nm", "diff-preload"),
-        Numeric("Clutches", "Differential", SetupFieldScope.Single, null, "diff-clutches"),
-        Numeric("Power Ramp Angle", "Differential", SetupFieldScope.Single, "deg", "diff-ramp-power"),
-        Numeric("Coast Ramp Angle", "Differential", SetupFieldScope.Single, "deg", "diff-ramp-coast"),
-        Numeric("Engine Braking", "Engine/Electronics", SetupFieldScope.Single, null, null),
-        Numeric("Traction Control", "Engine/Electronics", SetupFieldScope.Single, null, "tractionControl"),
-        Numeric("ABS", "Engine/Electronics", SetupFieldScope.Single, null, "abs"),
+        Numeric("Fuel Level", "Fuel", SetupFieldScope.Single, "L", "fuelLevel", 0, SetupFieldQuantity.Volume, 1),
+        // Shown as "56.0F / 44.0R" from a raw 0-1 front fraction.
+        Numeric("Brake Bias", "Brakes", SetupFieldScope.Single, "%", "brake-bias", 1),
+        Numeric("Brake Pressure", "Brakes", SetupFieldScope.Single, "%", "brake-pressure", 0),
+        Numeric("Preload", "Differential", SetupFieldScope.Single, "N", "diff-preload", 0),
+        Numeric("Clutches", "Differential", SetupFieldScope.Single, null, "diff-clutches", 0),
+        Numeric("Power Ramp Angle", "Differential", SetupFieldScope.Single, "deg", "diff-ramp-power", 0),
+        Numeric("Coast Ramp Angle", "Differential", SetupFieldScope.Single, "deg", "diff-ramp-coast", 0),
+        Numeric("Engine Braking", "Engine/Electronics", SetupFieldScope.Single, null, null, 2),
+        Numeric("Traction Control", "Engine/Electronics", SetupFieldScope.Single, null, "tractionControl", 0),
+        Numeric("ABS", "Engine/Electronics", SetupFieldScope.Single, null, "abs", 0),
         Enum("Regen Mode", "Engine/Electronics", SetupFieldScope.Single, hasAutoOption: false, rawKey: null),
-        Numeric("Regen Limit", "Engine/Electronics", SetupFieldScope.Single, "kW", null),
-        Numeric("Deploy Limit", "Engine/Electronics", SetupFieldScope.Single, "kW", null),
+        Numeric("Regen Limit", "Engine/Electronics", SetupFieldScope.Single, "kW", null, 0),
+        Numeric("Deploy Limit", "Engine/Electronics", SetupFieldScope.Single, "kW", null, 0),
         // Displays as a ratio ("3.500:1") computed from the raw integer via a per-car
         // fixedTeeth/raw formula, not the raw value itself - see this file's header comment.
         Enum("Final Drive", "Transmission", SetupFieldScope.Single, false, "final-drive")
@@ -53,54 +54,57 @@ public static class DefaultSetupFields
     // Force Feedback is identical on every car (confirmed against the Barracuda, Javelin and Camaro
     // 1969 .vset trios), so these rows are complete and DefaultSetupFieldApplier overwrites this
     // section on every car rather than only adding what's missing. Display values equal raw values.
+    // Strength/Alignment Boost/Load Boost share one raw range, so their keys were pinned by a
+    // separate save clicking each a different number of times (Barracuda "-ffb.vset", 2026-09-26).
     public const string UniversalSection = "Force Feedback";
 
     public static IReadOnlyList<SetupFieldInfo> SteeringWheel { get; } =
     [
-        ForceFeedback("Strength", "ffb-deep-gain", 0, 2, 0.04),
-        ForceFeedback("Rack Feel", "ffb-base-rack", 0, 1, 0.02),
-        ForceFeedback("Alignment Boost", "ffb-Mz-boost", 0, 2, 0.04),
-        ForceFeedback("Load Boost", "ffb-load-boost", 0, 2, 0.04),
-        ForceFeedback("Friction", "ffb-friction-boost", -0.1, 0.2, 0.01),
-        ForceFeedback("EQ Low", "ffb-eq-level-lo", 0, 2, 0.1),
-        ForceFeedback("EQ Mid", "ffb-eq-level-md", 0, 2, 0.1),
-        ForceFeedback("EQ High", "ffb-eq-level-hi", 0, 4, 0.1),
-        Numeric("Steering Rack Rate", "Steering", SetupFieldScope.Single, null, "rack-steering-rate"),
-        Numeric("Steering Stiffness", "Steering", SetupFieldScope.Single, null, null),
-        Numeric("Steering Damping", "Steering", SetupFieldScope.Single, null, null)
+        ForceFeedback("Strength", "ffb-deep-gain", 0, 2, 0.04, 2),
+        ForceFeedback("Rack Feel", "ffb-base-rack", 0, 1, 0.02, 2),
+        ForceFeedback("Alignment Boost", "ffb-Mz-boost", 0, 2, 0.04, 2),
+        ForceFeedback("Load Boost", "ffb-load-boost", 0, 2, 0.04, 2),
+        ForceFeedback("Friction", "ffb-friction-boost", -0.1, 0.2, 0.01, 3),
+        ForceFeedback("EQ Low", "ffb-eq-level-lo", 0, 2, 0.1, 1),
+        ForceFeedback("EQ Mid", "ffb-eq-level-md", 0, 2, 0.1, 1),
+        ForceFeedback("EQ High", "ffb-eq-level-hi", 0, 4, 0.1, 1),
+        Numeric("Steering Rack Rate", "Steering", SetupFieldScope.Single, null, "rack-steering-rate", 2),
+        // Displayed as raw / 1e7 and raw / 1e5 respectively.
+        Numeric("Steering Stiffness", "Steering", SetupFieldScope.Single, null, "ffb-tierod-stiffness", 1),
+        Numeric("Steering Damping", "Steering", SetupFieldScope.Single, null, "ffb-tierod-damping", 0)
     ];
 
     public static IReadOnlyList<SetupFieldInfo> Suspension { get; } =
     [
         // Not adjustable on AMC Javelin (absent from all 3 of its .vset files) - RawKey inferred
         // from the "{Corner}-toe" pattern, not directly confirmed yet.
-        Numeric("Camber", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-camber"),
-        Numeric("Toe-in", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-toe"),
-        Numeric("Caster Offset", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", null),
-        Numeric("Spring Rate", "Springs & Dampers", SetupFieldScope.PerCorner, "N/mm", "{Corner}-spring-rate"),
-        Numeric("Slow Bump", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-slow-bump"),
-        Numeric("Slow Rebound", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-slow-rebound"),
+        Numeric("Camber", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-camber", 2),
+        Numeric("Toe-in", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", "{Corner}-toe", 2),
+        Numeric("Caster Offset", "Springs & Dampers", SetupFieldScope.PerCorner, "deg", null, 1),
+        Numeric("Spring Rate", "Springs & Dampers", SetupFieldScope.PerCorner, "N/mm", "{Corner}-spring-rate", 0, SetupFieldQuantity.SpringRate, 0),
+        Numeric("Slow Bump", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-slow-bump", 0),
+        Numeric("Slow Rebound", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-slow-rebound", 0),
         // Not adjustable on AMC Javelin - RawKey inferred from the Slow Bump/Rebound pattern.
-        Numeric("Fast Bump", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-fast-bump"),
-        Numeric("Fast Rebound", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-fast-rebound"),
-        Numeric("Bump Stop Length", "Springs & Dampers", SetupFieldScope.PerCorner, "mm", "{Corner}-bumpstop-size"),
-        Numeric("Bump Stop Spring Rate", "Springs & Dampers", SetupFieldScope.PerCorner, "N/mm", "{Corner}-bumpstop-stiffness"),
-        Numeric("Ride Height Adjust", "Springs & Dampers", SetupFieldScope.PerCorner, "mm", "{Corner}-spring-platform"),
-        Numeric("Anti-Roll Bar", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, "N/mm", "{Axle}-antirollbar"),
+        Numeric("Fast Bump", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-fast-bump", 0),
+        Numeric("Fast Rebound", "Springs & Dampers", SetupFieldScope.PerCorner, null, "{Corner}-fast-rebound", 0),
+        Numeric("Bump Stop Length", "Springs & Dampers", SetupFieldScope.PerCorner, "mm", "{Corner}-bumpstop-size", 0, SetupFieldQuantity.Length, 1),
+        Numeric("Bump Stop Spring Rate", "Springs & Dampers", SetupFieldScope.PerCorner, "N/mm", "{Corner}-bumpstop-stiffness", 0, SetupFieldQuantity.SpringRate, 0),
+        Numeric("Ride Height Adjust", "Springs & Dampers", SetupFieldScope.PerCorner, "mm", "{Corner}-spring-platform", 0, SetupFieldQuantity.Length, 2),
+        Numeric("Anti-Roll Bar", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, "N/mm", "{Axle}-antirollbar", 0, SetupFieldQuantity.SpringRate, 0),
         // Not on AMC Javelin at all (no 3rd spring); RawKey taken from the .hadron channel:name
         // seen on LMDh-class cars, which the AMC diff confirmed is how a raw key is literally named.
-        Numeric("3rd Spring Rate", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, "N/mm", "{Axle}-third_spring-rate"),
-        Numeric("3rd Spring Damping", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, null, "{Axle}-third_spring-damping")
+        Numeric("3rd Spring Rate", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, "N/mm", "{Axle}-third_spring-rate", 0, SetupFieldQuantity.SpringRate, 0),
+        Numeric("3rd Spring Damping", "Anti-Roll Bar & 3rd Spring", SetupFieldScope.FrontRear, null, "{Axle}-third_spring-damping", 0)
     ];
 
     public static IReadOnlyList<SetupFieldInfo> TyresAndChassis { get; } =
     [
         Enum("Tyre Compound", "Wheels", SetupFieldScope.PerCorner, hasAutoOption: true, rawKey: "{Corner}-tire-choice"),
-        Numeric("Tyre Pressure", "Wheels", SetupFieldScope.PerCorner, "bar", "{Corner}-tire-pressure"),
-        Numeric("Brake Duct", "Wheels", SetupFieldScope.PerCorner, null, null),
+        Numeric("Tyre Pressure", "Wheels", SetupFieldScope.PerCorner, "bar", "{Corner}-tire-pressure", 2, SetupFieldQuantity.Pressure, 1),
+        Numeric("Brake Duct", "Wheels", SetupFieldScope.PerCorner, null, null, 0),
         // Not seen directly - RawKey guessed from the .hadron channel:name convention ("R-wing-angle").
-        Numeric("Front Wing Angle", "Aero", SetupFieldScope.Single, "deg", "F-wing-angle"),
-        Numeric("Rear Wing Angle", "Aero", SetupFieldScope.Single, "deg", "R-wing-angle")
+        Numeric("Front Wing Angle", "Aero", SetupFieldScope.Single, "deg", "F-wing-angle", 1),
+        Numeric("Rear Wing Angle", "Aero", SetupFieldScope.Single, "deg", "R-wing-angle", 1)
     ];
 
     private static SetupFieldInfo Enum(string name, string section, SetupFieldScope scope, bool hasAutoOption, string? rawKey)
@@ -124,9 +128,9 @@ public static class DefaultSetupFields
         };
     }
 
-    private static SetupFieldInfo ForceFeedback(string name, string rawKey, double min, double max, double step)
+    private static SetupFieldInfo ForceFeedback(string name, string rawKey, double min, double max, double step, int decimals)
     {
-        return Numeric(name, UniversalSection, SetupFieldScope.Single, null, rawKey) with
+        return Numeric(name, UniversalSection, SetupFieldScope.Single, null, rawKey, decimals) with
         {
             Max = max,
             Min = min,
@@ -137,16 +141,27 @@ public static class DefaultSetupFields
         };
     }
 
-    private static SetupFieldInfo Numeric(string name, string section, SetupFieldScope scope, string? unit, string? rawKey)
+    private static SetupFieldInfo Numeric(
+        string name,
+        string section,
+        SetupFieldScope scope,
+        string? unit,
+        string? rawKey,
+        int decimals,
+        SetupFieldQuantity quantity = SetupFieldQuantity.None,
+        int? imperialDecimals = null)
     {
         return new SetupFieldInfo
         {
+            Decimals = decimals,
             EnumValues = null,
             HasAutoOption = false,
+            ImperialDecimals = imperialDecimals,
             Kind = SetupFieldKind.Numeric,
             Max = null,
             Min = null,
             Name = name,
+            Quantity = quantity,
             RawKey = rawKey,
             RawMax = null,
             RawMin = null,
