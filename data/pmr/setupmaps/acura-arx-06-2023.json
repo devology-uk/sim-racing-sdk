@@ -3,6 +3,7 @@
   "EngineAndDrivetrain": [
     {
       "Decimals": null,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -22,6 +23,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 1,
@@ -41,6 +43,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -60,6 +63,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -79,6 +83,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -98,6 +103,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -117,6 +123,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -136,6 +143,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -155,6 +163,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -174,6 +183,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -193,6 +203,7 @@
     },
     {
       "Decimals": null,
+      "DisplaySource": 0,
       "EnumValues": [
         "Off",
         "Safe",
@@ -216,6 +227,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -235,6 +247,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -254,6 +267,7 @@
     },
     {
       "Decimals": null,
+      "DisplaySource": 0,
       "EnumValues": [
         "4.700:1",
         "4.273:1",
@@ -278,6 +292,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -319,6 +334,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -360,6 +376,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -401,6 +418,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -442,6 +460,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -483,6 +502,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -524,6 +544,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": [
         "3.750:1",
         "3.375:1",
@@ -567,6 +588,7 @@
   "SteeringWheel": [
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -586,6 +608,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -605,6 +628,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -624,6 +648,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -643,6 +668,7 @@
     },
     {
       "Decimals": 3,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -662,6 +688,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -681,6 +708,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -700,6 +728,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -719,6 +748,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -738,6 +768,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -757,6 +788,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -778,6 +810,7 @@
   "Suspension": [
     {
       "Decimals": 2,
+      "DisplaySource": 1,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -797,6 +830,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 1,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -816,6 +850,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 1,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -835,6 +870,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 1,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -854,6 +890,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -873,6 +910,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -892,6 +930,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -911,6 +950,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -930,6 +970,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -949,6 +990,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -968,6 +1010,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -987,6 +1030,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -1006,6 +1050,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 1,
@@ -1025,6 +1070,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 1,
@@ -1044,6 +1090,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -1063,6 +1110,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -1082,6 +1130,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 0,
@@ -1101,6 +1150,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -1120,6 +1170,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -1141,6 +1192,7 @@
   "TyresAndChassis": [
     {
       "Decimals": null,
+      "DisplaySource": 0,
       "EnumValues": [
         "Softe",
         "Medium",
@@ -1165,6 +1217,7 @@
     },
     {
       "Decimals": 2,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": 1,
@@ -1184,6 +1237,7 @@
     },
     {
       "Decimals": 0,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
@@ -1203,6 +1257,7 @@
     },
     {
       "Decimals": 1,
+      "DisplaySource": 0,
       "EnumValues": null,
       "HasAutoOption": false,
       "ImperialDecimals": null,
