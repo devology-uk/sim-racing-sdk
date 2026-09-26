@@ -12,7 +12,7 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 // having no backing raw key at all (same category as Camber - see the field-by-field note below),
 // and the actual gear count varies per car (4-speed here, more on others), so there's no fixed set
 // of names a shared template could sensibly offer. Add "1st Ratio"/"2nd Ratio"/etc. by hand per car
-// as needed, each with Min == Max, Decimals 3 and no RawKey.
+// as needed, each with Min == Max, Decimals 3, DisplayFormat Ratio and no RawKey.
 //
 // RawKey confidence varies - see each field's own comment. Where a field wasn't adjustable on the
 // cars checked so far (so its raw key never appeared in any of their saved files), the key here is
@@ -33,8 +33,8 @@ public static class DefaultSetupFields
     public static IReadOnlyList<SetupFieldInfo> EngineAndDrivetrain { get; } =
     [
         Numeric("Fuel Level", "Fuel", SetupFieldScope.Single, "L", "fuelLevel", 0, SetupFieldQuantity.Volume, 1),
-        // Shown as "56.0F / 44.0R" from a raw 0-1 front fraction.
-        Numeric("Brake Bias", "Brakes", SetupFieldScope.Single, "%", "brake-bias", 1),
+        Numeric("Brake Bias", "Brakes", SetupFieldScope.Single, "%", "brake-bias", 1)
+            with { DisplayFormat = SetupFieldDisplayFormat.FrontRearSplit },
         Numeric("Brake Pressure", "Brakes", SetupFieldScope.Single, "%", "brake-pressure", 0),
         Numeric("Preload", "Differential", SetupFieldScope.Single, "N", "diff-preload", 0),
         Numeric("Clutches", "Differential", SetupFieldScope.Single, null, "diff-clutches", 0),
@@ -49,6 +49,7 @@ public static class DefaultSetupFields
         // Displays as a ratio ("3.500:1") computed from the raw integer via a per-car
         // fixedTeeth/raw formula, not the raw value itself - see this file's header comment.
         Enum("Final Drive", "Transmission", SetupFieldScope.Single, false, "final-drive")
+            with { DisplayFormat = SetupFieldDisplayFormat.Ratio }
     ];
 
     // Force Feedback is identical on every car (confirmed against the Barracuda, Javelin and Camaro

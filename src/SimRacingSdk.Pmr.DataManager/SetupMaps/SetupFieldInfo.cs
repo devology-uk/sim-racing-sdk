@@ -7,6 +7,7 @@ public record SetupFieldInfo
     // only set where Quantity converts; otherwise the display is the same in both.
     public int? Decimals { get; init; }
 
+    public SetupFieldDisplayFormat DisplayFormat { get; init; }
     public SetupFieldDisplaySource DisplaySource { get; init; }
 
     // Exactly what the game's screen shows, in click order. The raw value for entry i is

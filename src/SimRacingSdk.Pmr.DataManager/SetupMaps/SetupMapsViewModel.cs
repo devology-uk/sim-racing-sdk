@@ -11,6 +11,7 @@ public partial class SetupMapsViewModel : ObservableObject
     private readonly IDefaultSetupFieldApplier defaultSetupFieldApplier;
     private readonly ISessionStateStore sessionStateStore;
     private readonly ISetupMapRepository setupMapRepository;
+    private readonly IPmrSetupMapsGenerator setupMapsGenerator;
 
     [ObservableProperty]
     private CarInfo? copySourceCar;
@@ -28,10 +29,12 @@ public partial class SetupMapsViewModel : ObservableObject
         ICarRepository carRepository,
         ISetupMapRepository setupMapRepository,
         IDefaultSetupFieldApplier defaultSetupFieldApplier,
+        IPmrSetupMapsGenerator setupMapsGenerator,
         ISessionStateStore sessionStateStore)
     {
         this.setupMapRepository = setupMapRepository;
         this.defaultSetupFieldApplier = defaultSetupFieldApplier;
+        this.setupMapsGenerator = setupMapsGenerator;
         this.sessionStateStore = sessionStateStore;
 
         foreach(var car in carRepository.GetAll().OrderBy(car => car.Manufacturer).ThenBy(car => car.Name))
@@ -107,6 +110,14 @@ public partial class SetupMapsViewModel : ObservableObject
 
         this.Editor.LoadFrom(this.SelectedCar.Id, sourceMap);
         this.StatusMessage = $"Copied from {this.CopySourceCar.Manufacturer} {this.CopySourceCar.Name} - adjust, then Save Setup Map.";
+    }
+
+    // Writes saved maps only - save the car being edited first.
+    [RelayCommand]
+    private void GenerateSdkSetupMaps()
+    {
+        var outputPath = this.setupMapsGenerator.Generate(this.Cars);
+        this.StatusMessage = $"Generated {outputPath} at {DateTime.Now:HH:mm:ss}.";
     }
 
     // Discards any unsaved edits - used after the JSON file has been corrected outside the app.

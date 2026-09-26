@@ -68,6 +68,7 @@ public partial class App : Application
         services.AddSingleton<IPmrTrackProviderGenerator, PmrTrackProviderGenerator>();
         services.AddSingleton<ISetupMapRepository, SetupMapRepository>();
         services.AddSingleton<IDefaultSetupFieldApplier, DefaultSetupFieldApplier>();
+        services.AddSingleton<IPmrSetupMapsGenerator, PmrSetupMapsGenerator>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<ConsoleControlViewModel>();
         services.AddTransient<LogViewerViewModel>();

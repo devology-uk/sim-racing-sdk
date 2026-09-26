@@ -45,6 +45,10 @@
                 <DataGridTextColumn Header="Imp. Decimals"
                                      Binding="{Binding ImperialDecimals, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                                      Width="85" />
+                <DataGridComboBoxColumn Header="Display Format"
+                                         ItemsSource="{x:Static local:SetupFieldDisplayFormatOptions.All}"
+                                         SelectedItemBinding="{Binding DisplayFormat}"
+                                         Width="110" />
                 <DataGridComboBoxColumn Header="Display Source"
                                          ItemsSource="{x:Static local:SetupFieldDisplaySourceOptions.All}"
                                          SelectedItemBinding="{Binding DisplaySource}"

@@ -11,6 +11,9 @@ public partial class SetupFieldEditorViewModel : ObservableObject
     private int? decimals;
 
     [ObservableProperty]
+    private SetupFieldDisplayFormat displayFormat;
+
+    [ObservableProperty]
     private SetupFieldDisplaySource displaySource;
 
     [ObservableProperty]
@@ -69,6 +72,7 @@ public partial class SetupFieldEditorViewModel : ObservableObject
         return new SetupFieldEditorViewModel
         {
             Decimals = field.Decimals,
+            DisplayFormat = field.DisplayFormat,
             DisplaySource = field.DisplaySource,
             EnumValuesText = string.Join(", ", field.EnumValues ?? []),
             HasAutoOption = field.HasAutoOption,
@@ -94,6 +98,7 @@ public partial class SetupFieldEditorViewModel : ObservableObject
         return new SetupFieldInfo
         {
             Decimals = this.Decimals,
+            DisplayFormat = this.DisplayFormat,
             DisplaySource = this.DisplaySource,
             EnumValues = this.Kind == SetupFieldKind.Enum
                 ? this.EnumValuesText.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
