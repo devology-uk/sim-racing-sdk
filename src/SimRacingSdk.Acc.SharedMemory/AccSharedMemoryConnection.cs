@@ -119,7 +119,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
     {
         if(this.lastStaticData == null || !this.lastStaticData.ComparesTo(staticData))
         {
-            this.LogMessage(LoggingLevel.Debug, staticData.ToString());
+            this.LogMessage(LoggingLevel.Information, staticData.ToString());
         }
     }
 
@@ -177,7 +177,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         this.actualSectorIndex = 0;
         var accSharedMemoryLap = new AccSharedMemoryLap(staticData, graphicsData);
         this.newLapSubject.OnNext(accSharedMemoryLap);
-        this.LogMessage(LoggingLevel.Debug, accSharedMemoryLap.ToString());
+        this.LogMessage(LoggingLevel.Information, accSharedMemoryLap.ToString());
 
     }
 

@@ -114,7 +114,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     {
         if(this.lastStaticData == null || !this.lastStaticData.IsSameSession(staticData))
         {
-            this.LogMessage(LoggingLevel.Debug, staticData.ToString());
+            this.LogMessage(LoggingLevel.Information, staticData.ToString());
         }
     }
 
@@ -179,7 +179,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             this.sector1TimeMs,
             this.sector2TimeMs);
         this.newLapSubject.OnNext(aceSharedMemoryLap);
-        this.LogMessage(LoggingLevel.Debug, aceSharedMemoryLap.ToString());
+        this.LogMessage(LoggingLevel.Information, aceSharedMemoryLap.ToString());
 
         this.sector1TimeMs = null;
         this.sector2TimeMs = null;

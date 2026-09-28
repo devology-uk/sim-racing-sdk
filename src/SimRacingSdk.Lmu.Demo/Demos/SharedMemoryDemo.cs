@@ -1,6 +1,7 @@
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 using SimRacingSdk.Lmu.Demo.Abstractions;
 using SimRacingSdk.Lmu.SharedMemory.Abstractions;
 using SimRacingSdk.Lmu.SharedMemory.Models;
@@ -10,6 +11,8 @@ namespace SimRacingSdk.Lmu.Demo.Demos;
 
 public class SharedMemoryDemo : ISharedMemoryDemo
 {
+    private const int FrameLogInterval = 25;
+
     private readonly IConsoleLog consoleLog;
     private readonly ILmuSharedMemoryConnectionFactory lmuSharedMemoryConnectionFactory;
     private readonly ILogger<SharedMemoryDemo> logger;
@@ -81,9 +84,9 @@ public class SharedMemoryDemo : ISharedMemoryDemo
     private void OnNextTelemetryFrame(LmuTelemetryFrame lmuTelemetryFrame)
     {
         this.telemetryFrameCount++;
-        if(this.telemetryFrameCount % 250 == 0)
+        if(this.telemetryFrameCount % FrameLogInterval == 0)
         {
-            this.Log(lmuTelemetryFrame.ToString());
+            this.logger.LogInformation(LogValueFormatter.Format(lmuTelemetryFrame));
         }
     }
 }

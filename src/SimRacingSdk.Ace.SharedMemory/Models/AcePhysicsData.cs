@@ -32,7 +32,10 @@ public record AcePhysicsData
         this.WheelAngularSpeed = physicsPage.WheelAngularSpeed;
         this.TyreWear = physicsPage.TyreWear;
         this.TyreCoreTemperature = physicsPage.TyreCoreTemperature;
+        this.CamberRad = physicsPage.CamberRad;
         this.SuspensionTravel = physicsPage.SuspensionTravel;
+        this.RideHeight = physicsPage.RideHeight;
+        this.LocalAngularVelocity = physicsPage.LocalAngularVelocity;
         this.Drs = physicsPage.Drs;
         this.TractionControl = physicsPage.Tc;
         this.Heading = physicsPage.Heading;
@@ -83,7 +86,10 @@ public record AcePhysicsData
     public float[] WheelAngularSpeed { get; }
     public float[] TyreWear { get; }
     public float[] TyreCoreTemperature { get; }
+    public float[] CamberRad { get; }
     public float[] SuspensionTravel { get; }
+    public float[] RideHeight { get; }
+    public float[] LocalAngularVelocity { get; }
     public float Drs { get; }
     public float TractionControl { get; }
     public float Heading { get; }
@@ -133,7 +139,10 @@ public record AcePhysicsData
             + $"WheelAngularSpeed = {SharedMemoryLogFormatting.FormatArray(this.WheelAngularSpeed)}, "
             + $"TyreWear = {SharedMemoryLogFormatting.FormatArray(this.TyreWear)}, "
             + $"TyreCoreTemperature = {SharedMemoryLogFormatting.FormatArray(this.TyreCoreTemperature)}, "
-            + $"SuspensionTravel = {SharedMemoryLogFormatting.FormatArray(this.SuspensionTravel)}, Drs = {this.Drs}, "
+            + $"CamberRad = {SharedMemoryLogFormatting.FormatArray(this.CamberRad)}, "
+            + $"SuspensionTravel = {SharedMemoryLogFormatting.FormatArray(this.SuspensionTravel)}, "
+            + $"RideHeight = {SharedMemoryLogFormatting.FormatArray(this.RideHeight)}, "
+            + $"LocalAngularVelocity = {SharedMemoryLogFormatting.FormatArray(this.LocalAngularVelocity)}, Drs = {this.Drs}, "
             + $"TractionControl = {this.TractionControl}, Heading = {this.Heading}, Pitch = {this.Pitch}, "
             + $"Roll = {this.Roll}, CarDamage = {SharedMemoryLogFormatting.FormatArray(this.CarDamage)}, "
             + $"IsEmpty = {this.IsEmpty}, PitLimiterOn = {this.PitLimiterOn}, Abs = {this.Abs}, "

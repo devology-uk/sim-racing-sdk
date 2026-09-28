@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Reactive.Disposables;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Core.Messages;
+using SimRacingSdk.Core.Services;
 using SimRacingSdk.Pmr.Core.Abstractions;
 using SimRacingSdk.Pmr.Demo.Abstractions;
 using SimRacingSdk.Pmr.Udp;
@@ -19,6 +20,8 @@ namespace SimRacingSdk.Pmr.Demo.Demos;
 
 public class UdpDemo : IUdpDemo
 {
+    private const int TelemetryLogInterval = 30;
+
     private readonly IConsoleLog consoleLog;
     private readonly ILogger<UdpDemo> logger;
     private readonly IPmrLocalConfigProvider pmrLocalConfigProvider;
@@ -29,6 +32,7 @@ public class UdpDemo : IUdpDemo
     private IPmrUdpConnection? pmrUdpConnection;
     private int port = PmrUdpConnection.DefaultPort;
     private CompositeDisposable subscriptionSink = null!;
+    private int telemetryPacketCount;
 
     public UdpDemo(ILogger<UdpDemo> logger,
         IConsoleLog consoleLog,
@@ -52,6 +56,7 @@ public class UdpDemo : IUdpDemo
     public void Start()
     {
         this.Stop();
+        this.telemetryPacketCount = 0;
         this.Log($"Starting UDP Demo, listening on Host={this.host}, Port={this.port}...");
 
         // Host is where the game (or a relay tool like SimHub, for the "several apps want the
@@ -127,7 +132,11 @@ public class UdpDemo : IUdpDemo
 
     private void OnNextVehicleTelemetry(PmrVehicleTelemetry vehicleTelemetry)
     {
-        this.Log(vehicleTelemetry.ToString());
+        this.telemetryPacketCount++;
+        if(this.telemetryPacketCount % TelemetryLogInterval == 0)
+        {
+            this.logger.LogInformation(LogValueFormatter.Format(vehicleTelemetry));
+        }
     }
 
     private void PrepareUdpMessageHandling()

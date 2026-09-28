@@ -1,6 +1,8 @@
 ﻿#nullable disable
 
+using System.Text;
 using SimRacingSdk.Acc.SharedMemory.Messages;
+using SimRacingSdk.Core.Services;
 
 namespace SimRacingSdk.Acc.SharedMemory.Models;
 
@@ -25,6 +27,7 @@ public record PhysicsData
         this.BrakeBias = physicsPage.BrakeBias;
         this.BrakePressure = physicsPage.BrakePressure;
         this.BrakeTemperature = physicsPage.BrakeTemperature;
+        this.CamberRad = physicsPage.CamberRad;
         this.CarDamage = physicsPage.CarDamage;
         this.Clutch = physicsPage.Clutch;
         this.DiscLife = physicsPage.DiscLife;
@@ -45,6 +48,7 @@ public record PhysicsData
         this.Pitch = physicsPage.Pitch;
         this.PitLimiterOn = physicsPage.PitLimiterOn;
         this.RearBrakeCompound = physicsPage.RearBrakeCompound;
+        this.RideHeight = physicsPage.RideHeight;
         this.Roll = physicsPage.Roll;
         this.Rpm = physicsPage.Rpm;
         this.SlipAngle = physicsPage.SlipAngle;
@@ -63,9 +67,13 @@ public record PhysicsData
         this.TyreContactPoint = physicsPage.TyreContactPoints;
         this.TyreCoreTemperature = physicsPage.TyreCoreTemperature;
         this.TyreTemp = physicsPage.TyreTemp;
+        this.TyreTempI = physicsPage.TyreTempI;
+        this.TyreTempM = physicsPage.TyreTempM;
+        this.TyreTempO = physicsPage.TyreTempO;
         this.Velocity = physicsPage.Velocity;
         this.WaterTemp = physicsPage.WaterTemp;
         this.WheelAngularSpeed = physicsPage.WheelAngularSpeed;
+        this.WheelLoad = physicsPage.WheelLoad;
         this.WheelPressure = physicsPage.WheelPressure;
         this.WheelSlip = physicsPage.WheelSlip;
     }
@@ -80,6 +88,7 @@ public record PhysicsData
     public float BrakeBias { get; }
     public float[] BrakePressure { get; }
     public float[] BrakeTemperature { get; }
+    public float[] CamberRad { get; }
     public float[] CarDamage { get; }
     public float Clutch { get; }
     public float[] DiscLife { get; }
@@ -101,6 +110,7 @@ public record PhysicsData
     public float Pitch { get; }
     public bool PitLimiterOn { get; }
     public int RearBrakeCompound { get; }
+    public float[] RideHeight { get; }
     public float Roll { get; }
     public int Rpm { get; }
     public float[] SlipAngle { get; }
@@ -120,9 +130,19 @@ public record PhysicsData
     public AccCoordinate3d[] TyreContactPoint { get; }
     public float[] TyreCoreTemperature { get; }
     public float[] TyreTemp { get; }
+    public float[] TyreTempI { get; }
+    public float[] TyreTempM { get; }
+    public float[] TyreTempO { get; }
     public float[] Velocity { get; }
     public float WaterTemp { get; }
     public float[] WheelAngularSpeed { get; }
+    public float[] WheelLoad { get; }
     public float[] WheelPressure { get; }
     public float[] WheelSlip { get; }
+
+    protected virtual bool PrintMembers(StringBuilder builder)
+    {
+        builder.Append(LogValueFormatter.FormatMembers(this));
+        return true;
+    }
 }
