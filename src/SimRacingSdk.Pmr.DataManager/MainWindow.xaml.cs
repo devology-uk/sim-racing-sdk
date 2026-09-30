@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 using SimRacingSdk.Pmr.DataManager.Session;
@@ -8,17 +9,36 @@ public partial class MainWindow : Window
 {
     private readonly DispatcherTimer placementSaveTimer = new() { Interval = TimeSpan.FromMilliseconds(500) };
     private readonly ISessionStateStore sessionStateStore;
+    private readonly IUnsavedChangesSaver unsavedChangesSaver;
 
-    public MainWindow(ISessionStateStore sessionStateStore)
+    public MainWindow(ISessionStateStore sessionStateStore, IUnsavedChangesSaver unsavedChangesSaver)
     {
         this.sessionStateStore = sessionStateStore;
+        this.unsavedChangesSaver = unsavedChangesSaver;
         this.InitializeComponent();
         this.RestorePlacement();
 
+        this.Closing += this.OnClosing;
         this.placementSaveTimer.Tick += this.OnPlacementSaveTimerTick;
         this.LocationChanged += this.OnPlacementChanged;
         this.SizeChanged += this.OnPlacementChanged;
         this.StateChanged += this.OnPlacementChanged;
+    }
+
+    private void OnClosing(object? sender, CancelEventArgs args)
+    {
+        if(this.unsavedChangesSaver.SaveUnsavedChanges())
+        {
+            return;
+        }
+
+        var answer = MessageBox.Show(this,
+            $"{this.unsavedChangesSaver.UnsavedChangesDescription}\n\nClose anyway and lose those changes?",
+            "Unsaved changes",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning,
+            MessageBoxResult.No);
+        args.Cancel = answer != MessageBoxResult.Yes;
     }
 
     // Debounced - dragging or resizing fires these many times a second.

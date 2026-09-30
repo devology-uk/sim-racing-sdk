@@ -42,7 +42,8 @@ public partial class App : Application
 
         this.logger.LogInformation("Sim Racing SDK Data Manager for PMR has started.");
 
-        this.MainWindow = new MainWindow(this.Services.GetRequiredService<ISessionStateStore>())
+        this.MainWindow = new MainWindow(this.Services.GetRequiredService<ISessionStateStore>(),
+            this.Services.GetRequiredService<IUnsavedChangesSaver>())
         {
             DataContext = this.Services.GetRequiredService<MainWindowViewModel>()
         };
@@ -75,6 +76,7 @@ public partial class App : Application
         services.AddSingleton<CarsViewModel>();
         services.AddSingleton<TracksViewModel>();
         services.AddSingleton<SetupMapsViewModel>();
+        services.AddSingleton<IUnsavedChangesSaver>(provider => provider.GetRequiredService<SetupMapsViewModel>());
 
         return services.BuildServiceProvider();
     }

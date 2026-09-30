@@ -44,7 +44,25 @@
                                      Width="65" />
                 <DataGridTextColumn Header="Imp. Decimals"
                                      Binding="{Binding ImperialDecimals, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
-                                     Width="85" />
+                                     Width="85">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsConverted}"
+                                             Value="False">
+                                    <Setter Property="IsEnabled"
+                                            Value="False" />
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                    <Setter Property="ToolTip"
+                                            Value="Only used when Quantity converts between Metric and Imperial" />
+                                    <Setter Property="ToolTipService.ShowOnDisabled"
+                                            Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridComboBoxColumn Header="Display Format"
                                          ItemsSource="{x:Static local:SetupFieldDisplayFormatOptions.All}"
                                          SelectedItemBinding="{Binding DisplayFormat}"

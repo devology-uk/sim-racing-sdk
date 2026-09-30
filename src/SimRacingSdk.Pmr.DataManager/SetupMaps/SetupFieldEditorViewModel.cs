@@ -71,6 +71,7 @@ public partial class SetupFieldEditorViewModel : ObservableObject
     [ObservableProperty]
     private string? unit;
 
+    public bool IsConverted => this.Quantity != SetupFieldQuantity.None;
     public bool IsEnum => this.Kind == SetupFieldKind.Enum;
     public bool IsNumeric => this.Kind == SetupFieldKind.Numeric;
 
@@ -114,7 +115,7 @@ public partial class SetupFieldEditorViewModel : ObservableObject
                 ? this.EnumValuesText.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
                 : null,
             HasAutoOption = this.Kind == SetupFieldKind.Enum && this.HasAutoOption,
-            ImperialDecimals = this.Quantity == SetupFieldQuantity.None ? null : this.ImperialDecimals,
+            ImperialDecimals = this.ImperialDecimals,
             Kind = this.Kind,
             Max = this.Kind == SetupFieldKind.Numeric ? this.Max : null,
             Min = this.Kind == SetupFieldKind.Numeric ? this.Min : null,
@@ -158,6 +159,11 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             RawKey = this.EnabledWhenRawKey.Trim(),
             RawValues = ParseRawValues(this.EnabledWhenRawValuesText)
         };
+    }
+
+    partial void OnQuantityChanged(SetupFieldQuantity value)
+    {
+        this.OnPropertyChanged(nameof(this.IsConverted));
     }
 
     partial void OnKindChanged(SetupFieldKind value)

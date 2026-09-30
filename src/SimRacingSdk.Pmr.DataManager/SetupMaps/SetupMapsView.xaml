@@ -89,12 +89,12 @@
                     Command="{Binding CopyFromSourceCarCommand}"
                     Padding="10,4"
                     Margin="0,0,15,0"
-                    ToolTip="Replaces the fields shown for the selected car with the source car's map - nothing is saved until Save Setup Map" />
+                    ToolTip="Replaces the fields shown for the selected car with the source car's map - saved by the next autosave (within 10 seconds)" />
             <Button Content="Add Default Fields"
                     Command="{Binding AddDefaultFieldsToSelectedCarCommand}"
                     Padding="10,4"
                     Margin="0,0,10,0"
-                    ToolTip="Adds any missing standard field to the selected car only - for starting a new car. Nothing is saved until Save Setup Map" />
+                    ToolTip="Adds any missing standard field to the selected car only - for starting a new car. Saved by the next autosave (within 10 seconds)" />
             <Button Content="Apply Force Feedback to All Cars"
                     Command="{Binding ApplyForceFeedbackToAllCarsCommand}"
                     Padding="10,4"

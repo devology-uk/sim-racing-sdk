@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Text.Json;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SimRacingSdk.Pmr.DataManager.Cars;
@@ -6,12 +8,19 @@ using SimRacingSdk.Pmr.DataManager.Session;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 
-public partial class SetupMapsViewModel : ObservableObject
+public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
 {
+    private static readonly TimeSpan AutosaveInterval = TimeSpan.FromSeconds(10);
+
+    private readonly DispatcherTimer autosaveTimer = new() { Interval = AutosaveInterval };
     private readonly IDefaultSetupFieldApplier defaultSetupFieldApplier;
     private readonly ISessionStateStore sessionStateStore;
     private readonly ISetupMapRepository setupMapRepository;
     private readonly IPmrSetupMapsGenerator setupMapsGenerator;
+
+    // The editor car's file as it was when loaded or last saved - a difference means it was edited
+    // outside the app, and saving would silently write those edits away.
+    private string loadedFileState = string.Empty;
 
     [ObservableProperty]
     private CarInfo? copySourceCar;
@@ -43,12 +52,24 @@ public partial class SetupMapsViewModel : ObservableObject
         }
 
         this.RestoreSession();
+
+        this.autosaveTimer.Tick += this.OnAutosaveTimerTick;
+        this.autosaveTimer.Start();
     }
 
     public ObservableCollection<CarInfo> Cars { get; } = [];
     public SetupMapEditorViewModel Editor { get; } = new();
 
-    // Works on what's in the editor, not the file - nothing is written until Save Setup Map.
+    public string UnsavedChangesDescription =>
+        $"Your changes to the {this.DisplayNameFor(this.Editor.CarId)} setup map can't be saved because its file was changed "
+        + "outside the Data Manager.";
+
+    public bool SaveUnsavedChanges()
+    {
+        return !this.Editor.HasUnsavedChanges || this.WriteEditor();
+    }
+
+    // Works on what's in the editor, not the file - written by Save Setup Map or the next autosave.
     [RelayCommand]
     private void AddDefaultFieldsToSelectedCar()
     {
@@ -66,6 +87,11 @@ public partial class SetupMapsViewModel : ObservableObject
     [RelayCommand]
     private void ApplyForceFeedbackToAllCars()
     {
+        if(!this.SaveUnsavedChanges())
+        {
+            return;
+        }
+
         var carsUpdated = 0;
         var fieldsChanged = 0;
 
@@ -85,14 +111,10 @@ public partial class SetupMapsViewModel : ObservableObject
 
         this.StatusMessage = $"Updated {fieldsChanged} Force Feedback field(s) across {carsUpdated} car(s) at {DateTime.Now:HH:mm:ss}.";
 
-        if(this.SelectedCar is not null)
-        {
-            this.Editor.LoadFrom(this.SelectedCar.Id, this.setupMapRepository.FindByCarId(this.SelectedCar.Id));
-        }
+        this.LoadEditorFromFile(this.SelectedCar);
     }
 
-    // Loads the source car's fields into the editor only - nothing is written until Save, so the
-    // copy can be adjusted (or abandoned by picking another car) first.
+    // Loads the source car's fields into the editor - written by Save Setup Map or the next autosave.
     [RelayCommand]
     private void CopyFromSourceCar()
     {
@@ -129,7 +151,7 @@ public partial class SetupMapsViewModel : ObservableObject
             return;
         }
 
-        this.Editor.LoadFrom(this.SelectedCar.Id, this.setupMapRepository.FindByCarId(this.SelectedCar.Id));
+        this.LoadEditorFromFile(this.SelectedCar);
         this.StatusMessage = $"Reloaded setup map for {this.SelectedCar.Manufacturer} {this.SelectedCar.Name} at {DateTime.Now:HH:mm:ss}.";
     }
 
@@ -141,8 +163,10 @@ public partial class SetupMapsViewModel : ObservableObject
             return;
         }
 
-        this.setupMapRepository.Save(this.Editor.ToSetupMap());
-        this.StatusMessage = $"Saved setup map for {this.SelectedCar.Manufacturer} {this.SelectedCar.Name} at {DateTime.Now:HH:mm:ss}.";
+        if(this.WriteEditor())
+        {
+            this.StatusMessage = $"Saved setup map for {this.SelectedCar.Manufacturer} {this.SelectedCar.Name} at {DateTime.Now:HH:mm:ss}.";
+        }
     }
 
     private static PmrSetupMap EmptySetupMap(string carId)
@@ -157,9 +181,67 @@ public partial class SetupMapsViewModel : ObservableObject
         };
     }
 
+    private static string StateOf(PmrSetupMap? setupMap)
+    {
+        return setupMap is null ? string.Empty : JsonSerializer.Serialize(setupMap);
+    }
+
+    private string DisplayNameFor(string carId)
+    {
+        var car = this.Cars.FirstOrDefault(candidate => candidate.Id == carId);
+        return car is null ? carId : $"{car.Manufacturer} {car.Name}";
+    }
+
+    private bool IsFileChangedOutsideApp()
+    {
+        return StateOf(this.setupMapRepository.FindByCarId(this.Editor.CarId)) != this.loadedFileState;
+    }
+
+    private void LoadEditorFromFile(CarInfo? car)
+    {
+        var setupMap = car is null ? null : this.setupMapRepository.FindByCarId(car.Id);
+        this.Editor.LoadSaved(car?.Id ?? string.Empty, setupMap);
+        this.loadedFileState = StateOf(setupMap);
+    }
+
+    private void OnAutosaveTimerTick(object? sender, EventArgs args)
+    {
+        if(this.Editor.HasUnsavedChanges && this.WriteEditor())
+        {
+            this.StatusMessage = $"Autosaved setup map for {this.DisplayNameFor(this.Editor.CarId)} at {DateTime.Now:HH:mm:ss}.";
+        }
+    }
+
+    private bool WriteEditor()
+    {
+        if(this.Editor.CarId.Length == 0)
+        {
+            return true;
+        }
+
+        if(this.IsFileChangedOutsideApp())
+        {
+            this.StatusMessage = $"Not saved - the {this.DisplayNameFor(this.Editor.CarId)} setup map file was changed outside the "
+                                 + "Data Manager. Reload to pick those changes up (edits made here since are discarded).";
+            return false;
+        }
+
+        this.setupMapRepository.Save(this.Editor.ToSetupMap());
+        this.Editor.MarkSaved();
+        this.loadedFileState = StateOf(this.setupMapRepository.FindByCarId(this.Editor.CarId));
+        return true;
+    }
+
+    // A null selection comes from WPF rebuilding the page, not from the user - keep the editor as is.
     partial void OnSelectedCarChanged(CarInfo? value)
     {
-        this.Editor.LoadFrom(value?.Id ?? string.Empty, value is null ? null : this.setupMapRepository.FindByCarId(value.Id));
+        if(value is null)
+        {
+            return;
+        }
+
+        this.SaveUnsavedChanges();
+        this.LoadEditorFromFile(value);
         this.sessionStateStore.State.SetupMapsCarId = value?.Id;
         this.sessionStateStore.Save();
     }

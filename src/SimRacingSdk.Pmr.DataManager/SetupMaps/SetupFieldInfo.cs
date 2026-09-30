@@ -4,7 +4,7 @@ public record SetupFieldInfo
 {
     // Decimal places the game shows, per Units setting - they differ per field, not just per unit
     // (Imperial Ride Height Adjust shows 2, Bump Stop Length 1, both inches). ImperialDecimals is
-    // only set where Quantity converts; otherwise the display is the same in both.
+    // only used where Quantity converts; otherwise the display is the same in both.
     public int? Decimals { get; init; }
 
     public SetupFieldDisplayFormat DisplayFormat { get; init; }
