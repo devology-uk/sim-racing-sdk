@@ -9,6 +9,7 @@ public record SetupFieldInfo
 
     public SetupFieldDisplayFormat DisplayFormat { get; init; }
     public SetupFieldDisplaySource DisplaySource { get; init; }
+    public SetupFieldCondition? EnabledWhen { get; init; }
 
     // Exactly what the game's screen shows, in click order. The raw value for entry i is
     // RawMin + i * RawStep (0 and 1 when unset, e.g. Tyre Compound). This also covers a numeric

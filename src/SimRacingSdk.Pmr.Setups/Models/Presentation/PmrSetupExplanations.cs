@@ -16,4 +16,9 @@ public static class PmrSetupExplanations
         "Shown in-game only. Project Motor Racing calculates this from the car's settled suspension "
         + "(ride height, bump stops, fuel and driver weight) and doesn't save it with the setup, so it can't be "
         + "shown here. Changes between setups are still shown exactly, in clicks.";
+
+    public static string NotActiveUnless(string settingName, string activeValues)
+    {
+        return $"Not used unless {settingName} is {activeValues}. The game keeps this value in the setup but ignores it.";
+    }
 }

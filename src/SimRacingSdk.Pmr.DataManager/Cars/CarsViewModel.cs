@@ -75,6 +75,12 @@ public partial class CarsViewModel : ObservableObject
     private void SaveCar()
     {
         var car = this.Editor.ToCarInfo();
+        if(string.IsNullOrWhiteSpace(car.VehicleClass))
+        {
+            this.SaveStatusMessage = "Not saved - Vehicle Class is empty. Pick or type the class, then save again.";
+            return;
+        }
+
         var originalId = this.SelectedCar?.Id;
         this.carRepository.Save(car);
 

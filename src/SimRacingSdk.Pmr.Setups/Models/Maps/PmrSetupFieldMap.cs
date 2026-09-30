@@ -7,6 +7,7 @@ public record PmrSetupFieldMap
     public int? Decimals { get; init; }
     public PmrSetupFieldDisplayFormat DisplayFormat { get; init; }
     public PmrSetupFieldDisplaySource DisplaySource { get; init; }
+    public PmrSetupFieldCondition? EnabledWhen { get; init; }
 
     // Exactly what the screen shows, in click order; entry i is raw RawMin + i * RawStep.
     public IReadOnlyList<string>? EnumValues { get; init; }

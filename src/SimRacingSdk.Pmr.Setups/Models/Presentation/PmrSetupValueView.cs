@@ -13,6 +13,13 @@ public record PmrSetupValueView
     // A player-facing reason to show in place of DisplayText. Null when Status is Shown.
     public string? Explanation { get; init; }
 
+    // Why IsActive is false, in the player's terms. Null while active.
+    public string? InactiveReason { get; init; }
+
+    // False where the game greys the setting out because another setting disables it (e.g. Regen
+    // Limit unless Regen Mode is Full). The saved value is still shown, as the game does.
+    public bool IsActive { get; init; } = true;
+
     public required PmrSetupPosition Position { get; init; }
     public double? RawValue { get; init; }
     public required PmrSetupValueStatus Status { get; init; }

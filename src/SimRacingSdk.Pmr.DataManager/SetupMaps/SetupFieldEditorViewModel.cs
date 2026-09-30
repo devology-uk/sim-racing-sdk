@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
@@ -15,6 +16,12 @@ public partial class SetupFieldEditorViewModel : ObservableObject
 
     [ObservableProperty]
     private SetupFieldDisplaySource displaySource;
+
+    [ObservableProperty]
+    private string? enabledWhenRawKey;
+
+    [ObservableProperty]
+    private string enabledWhenRawValuesText = string.Empty;
 
     [ObservableProperty]
     private string enumValuesText = string.Empty;
@@ -74,6 +81,8 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             Decimals = field.Decimals,
             DisplayFormat = field.DisplayFormat,
             DisplaySource = field.DisplaySource,
+            EnabledWhenRawKey = field.EnabledWhen?.RawKey,
+            EnabledWhenRawValuesText = FormatRawValues(field.EnabledWhen?.RawValues ?? []),
             EnumValuesText = string.Join(", ", field.EnumValues ?? []),
             HasAutoOption = field.HasAutoOption,
             ImperialDecimals = field.ImperialDecimals,
@@ -100,7 +109,8 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             Decimals = this.Decimals,
             DisplayFormat = this.DisplayFormat,
             DisplaySource = this.DisplaySource,
-            EnumValues = this.Kind == SetupFieldKind.Enum
+            EnabledWhen = this.BuildEnabledWhen(),
+            EnumValues =this.Kind == SetupFieldKind.Enum
                 ? this.EnumValuesText.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
                 : null,
             HasAutoOption = this.Kind == SetupFieldKind.Enum && this.HasAutoOption,
@@ -118,6 +128,35 @@ public partial class SetupFieldEditorViewModel : ObservableObject
             Section = this.Section,
             Step = this.Kind == SetupFieldKind.Numeric ? this.Step : null,
             Unit = this.Unit
+        };
+    }
+
+    private static string FormatRawValues(IEnumerable<double> rawValues)
+    {
+        return string.Join(", ", rawValues.Select(rawValue => rawValue.ToString(CultureInfo.InvariantCulture)));
+    }
+
+    private static List<double> ParseRawValues(string text)
+    {
+        return text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                   .Select(value => double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var rawValue)
+                                        ? rawValue
+                                        : (double?)null)
+                   .OfType<double>()
+                   .ToList();
+    }
+
+    private SetupFieldCondition? BuildEnabledWhen()
+    {
+        if(string.IsNullOrWhiteSpace(this.EnabledWhenRawKey))
+        {
+            return null;
+        }
+
+        return new SetupFieldCondition
+        {
+            RawKey = this.EnabledWhenRawKey.Trim(),
+            RawValues = ParseRawValues(this.EnabledWhenRawValuesText)
         };
     }
 

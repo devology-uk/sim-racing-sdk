@@ -77,6 +77,12 @@
                 <DataGridCheckBoxColumn Header="Auto Option"
                                          Binding="{Binding HasAutoOption}"
                                          Width="80" />
+                <DataGridTextColumn Header="Enabled When Key"
+                                     Binding="{Binding EnabledWhenRawKey, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     Width="130" />
+                <DataGridTextColumn Header="Enabled When Raw Values"
+                                     Binding="{Binding EnabledWhenRawValuesText, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="150" />
                 <DataGridTextColumn Header="Enum Values (comma separated)"
                                      Binding="{Binding EnumValuesText, UpdateSourceTrigger=PropertyChanged}"
                                      Width="*" />

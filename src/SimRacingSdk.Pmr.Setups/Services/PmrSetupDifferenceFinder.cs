@@ -41,8 +41,10 @@ internal static class PmrSetupDifferenceFinder
                     });
     }
 
+    // A value the game ignores in both setups can't make them drive differently.
     private static bool IsChanged(PmrSetupValueView first, PmrSetupValueView second)
     {
-        return first.RawValue != second.RawValue || first.DisplayText != second.DisplayText;
+        return (first.IsActive || second.IsActive)
+               && (first.RawValue != second.RawValue || first.DisplayText != second.DisplayText);
     }
 }

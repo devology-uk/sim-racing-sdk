@@ -56,44 +56,49 @@ public class PmrSetupPresenter : IPmrSetupPresenter
         return string.Equals(first.VehicleGameId, second.VehicleGameId, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static PmrSetupFieldView PresentField(IGrouping<string, PmrSetupFieldMap> rows, PmrSetupFile setup, PmrUnitSystem unitSystem)
+    private static PmrSetupFieldView PresentField(IGrouping<string, PmrSetupFieldMap> rows, PmrSetupFile setup, PmrUnitSystem unitSystem,
+        PmrSetupFieldActivity activity)
     {
         return new PmrSetupFieldView
         {
             Name = rows.Key,
             Values = rows.SelectMany(row => PmrSetupPositions.For(row.Scope)
-                                                             .Select(position => PmrSetupValueReader.Read(row, position, setup, unitSystem)))
+                                                             .Select(position => activity.Apply(row,
+                                                                         PmrSetupValueReader.Read(row, position, setup, unitSystem))))
                          .ToList()
         };
     }
 
     // A field whose front and rear ranges differ is two map rows with the same name; they're shown
     // as one field, as on the game's screen.
-    private static PmrSetupSectionView PresentSection(IGrouping<string, PmrSetupFieldMap> section, PmrSetupFile setup, PmrUnitSystem unitSystem)
+    private static PmrSetupSectionView PresentSection(IGrouping<string, PmrSetupFieldMap> section, PmrSetupFile setup, PmrUnitSystem unitSystem,
+        PmrSetupFieldActivity activity)
     {
         return new PmrSetupSectionView
         {
             Fields = section.GroupBy(row => row.Name)
-                            .Select(rows => PresentField(rows, setup, unitSystem))
+                            .Select(rows => PresentField(rows, setup, unitSystem, activity))
                             .ToList(),
             Name = section.Key
         };
     }
 
-    private static PmrSetupTabView PresentTab(string name, IReadOnlyList<PmrSetupFieldMap> fields, PmrSetupFile setup, PmrUnitSystem unitSystem)
+    private static PmrSetupTabView PresentTab(string name, IReadOnlyList<PmrSetupFieldMap> fields, PmrSetupFile setup, PmrUnitSystem unitSystem,
+        PmrSetupFieldActivity activity)
     {
         return new PmrSetupTabView
         {
             Name = name,
             Sections = fields.GroupBy(field => field.Section)
-                             .Select(section => PresentSection(section, setup, unitSystem))
+                             .Select(section => PresentSection(section, setup, unitSystem, activity))
                              .ToList()
         };
     }
 
     private static PmrSetupView WithMap(PmrSetupFile setup, PmrSetupMap map, PmrUnitSystem unitSystem)
     {
-        var tabs = TabLayout.Select(tab => PresentTab(tab.Name, tab.Fields(map), setup, unitSystem))
+        var activity = new PmrSetupFieldActivity(map, setup);
+        var tabs = TabLayout.Select(tab => PresentTab(tab.Name, tab.Fields(map), setup, unitSystem, activity))
                             .Where(tab => tab.Sections.Count > 0)
                             .ToList();
 
