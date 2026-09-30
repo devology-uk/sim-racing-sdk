@@ -39,6 +39,21 @@ public partial class SetupFieldListViewModel : ObservableObject
         this.SelectedField = field;
     }
 
+    // Placed straight below the original, so splitting a row into Front and Rear only needs the
+    // scope and ranges changed on the copy.
+    [RelayCommand]
+    private void DuplicateField()
+    {
+        if(this.SelectedField is null)
+        {
+            return;
+        }
+
+        var duplicate = SetupFieldEditorViewModel.From(this.SelectedField.ToSetupFieldInfo());
+        this.Fields.Insert(this.SelectedFieldIndex + 1, duplicate);
+        this.SelectedField = duplicate;
+    }
+
     [RelayCommand]
     private void RemoveField()
     {
