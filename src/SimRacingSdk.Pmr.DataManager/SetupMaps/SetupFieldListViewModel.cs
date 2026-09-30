@@ -9,6 +9,8 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 public partial class SetupFieldListViewModel : ObservableObject
 {
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(MoveFieldUpCommand))]
+    [NotifyCanExecuteChangedFor(nameof(MoveFieldDownCommand))]
     private SetupFieldEditorViewModel? selectedField;
 
     public ObservableCollection<SetupFieldEditorViewModel> Fields { get; } = [];
@@ -47,5 +49,37 @@ public partial class SetupFieldListViewModel : ObservableObject
 
         this.Fields.Remove(this.SelectedField);
         this.SelectedField = this.Fields.FirstOrDefault();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanMoveFieldUp))]
+    private void MoveFieldUp()
+    {
+        this.MoveSelectedFieldBy(-1);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanMoveFieldDown))]
+    private void MoveFieldDown()
+    {
+        this.MoveSelectedFieldBy(1);
+    }
+
+    private bool CanMoveFieldUp()
+    {
+        return this.SelectedFieldIndex > 0;
+    }
+
+    private bool CanMoveFieldDown()
+    {
+        return this.SelectedFieldIndex >= 0 && this.SelectedFieldIndex < this.Fields.Count - 1;
+    }
+
+    private int SelectedFieldIndex => this.SelectedField is null ? -1 : this.Fields.IndexOf(this.SelectedField);
+
+    private void MoveSelectedFieldBy(int offset)
+    {
+        var index = this.SelectedFieldIndex;
+        this.Fields.Move(index, index + offset);
+        this.MoveFieldUpCommand.NotifyCanExecuteChanged();
+        this.MoveFieldDownCommand.NotifyCanExecuteChanged();
     }
 }
