@@ -8,6 +8,13 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 // each one gets identical Add/Remove behaviour from a single SetupFieldsView UserControl.
 public partial class SetupFieldListViewModel : ObservableObject
 {
+    private readonly IUserConfirmation userConfirmation;
+
+    public SetupFieldListViewModel(IUserConfirmation userConfirmation)
+    {
+        this.userConfirmation = userConfirmation;
+    }
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(MoveFieldUpCommand))]
     [NotifyCanExecuteChangedFor(nameof(MoveFieldDownCommand))]
@@ -57,13 +64,15 @@ public partial class SetupFieldListViewModel : ObservableObject
     [RelayCommand]
     private void RemoveField()
     {
-        if(this.SelectedField is null)
+        var field = this.SelectedField;
+        if(field is null || !this.userConfirmation.Confirm($"Remove {field.Name} ({field.Scope}, {field.Section})?", "Remove Field"))
         {
             return;
         }
 
-        this.Fields.Remove(this.SelectedField);
-        this.SelectedField = this.Fields.FirstOrDefault();
+        var index = this.Fields.IndexOf(field);
+        this.Fields.RemoveAt(index);
+        this.SelectedField = this.Fields.Count == 0 ? null : this.Fields[Math.Min(index, this.Fields.Count - 1)];
     }
 
     [RelayCommand(CanExecute = nameof(CanMoveFieldUp))]

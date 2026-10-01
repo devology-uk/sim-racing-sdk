@@ -6,12 +6,20 @@ public class SetupMapEditorViewModel
 {
     private string savedState = string.Empty;
 
+    public SetupMapEditorViewModel(IUserConfirmation userConfirmation)
+    {
+        this.EngineAndDrivetrain = new SetupFieldListViewModel(userConfirmation);
+        this.SteeringWheel = new SetupFieldListViewModel(userConfirmation);
+        this.Suspension = new SetupFieldListViewModel(userConfirmation);
+        this.TyresAndChassis = new SetupFieldListViewModel(userConfirmation);
+    }
+
     public string CarId { get; private set; } = string.Empty;
-    public SetupFieldListViewModel EngineAndDrivetrain { get; } = new();
+    public SetupFieldListViewModel EngineAndDrivetrain { get; }
     public bool HasUnsavedChanges => this.CarId.Length > 0 && this.CurrentState() != this.savedState;
-    public SetupFieldListViewModel SteeringWheel { get; } = new();
-    public SetupFieldListViewModel Suspension { get; } = new();
-    public SetupFieldListViewModel TyresAndChassis { get; } = new();
+    public SetupFieldListViewModel SteeringWheel { get; }
+    public SetupFieldListViewModel Suspension { get; }
+    public SetupFieldListViewModel TyresAndChassis { get; }
 
     // Leaves the editor showing unsaved changes - e.g. a copy from another car.
     public void LoadFrom(string carId, PmrSetupMap? setupMap)

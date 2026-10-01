@@ -63,6 +63,7 @@ public partial class App : Application
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddSingleton<IDataPathProvider, DataPathProvider>();
         services.AddSingleton<ISessionStateStore, SessionStateStore>();
+        services.AddSingleton<IUserConfirmation, MessageBoxUserConfirmation>();
         services.AddSingleton<ICarRepository, CarRepository>();
         services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
         services.AddSingleton<ITrackRepository, TrackRepository>();

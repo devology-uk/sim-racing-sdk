@@ -39,8 +39,10 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
         ISetupMapRepository setupMapRepository,
         IDefaultSetupFieldApplier defaultSetupFieldApplier,
         IPmrSetupMapsGenerator setupMapsGenerator,
-        ISessionStateStore sessionStateStore)
+        ISessionStateStore sessionStateStore,
+        IUserConfirmation userConfirmation)
     {
+        this.Editor = new SetupMapEditorViewModel(userConfirmation);
         this.setupMapRepository = setupMapRepository;
         this.defaultSetupFieldApplier = defaultSetupFieldApplier;
         this.setupMapsGenerator = setupMapsGenerator;
@@ -58,7 +60,7 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
     }
 
     public ObservableCollection<CarInfo> Cars { get; } = [];
-    public SetupMapEditorViewModel Editor { get; } = new();
+    public SetupMapEditorViewModel Editor { get; }
 
     public string UnsavedChangesDescription =>
         $"Your changes to the {this.DisplayNameFor(this.Editor.CarId)} setup map can't be saved because its file was changed "
