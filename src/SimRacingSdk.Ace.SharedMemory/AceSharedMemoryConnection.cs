@@ -22,10 +22,12 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
 
     private const float Sector1Boundary = 1f / 3f;
     private const float Sector2Boundary = 2f / 3f;
+    private const int RestartTimeJumpMs = 60000;
 
     private AceSharedMemorySession? currentSession;
     private AceFlagState? lastFlagState;
     private AceGraphicsData? lastGraphicsData;
+    private AceGraphicsData? lastLiveGraphicsData;
     private AceStaticData? lastStaticData;
     private readonly HashSet<string> observedSessionPhaseNames = new();
     private int? sector1TimeMs;
@@ -228,15 +230,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     {
         if(this.lastStaticData!.IsSameSession(staticData))
         {
-            if(this.currentSession != null
-               && graphicsData.Status == AceStatus.Live
-               && this.lastGraphicsData != null
-               && graphicsData.SessionState.TimeLeftMs > this.lastGraphicsData.SessionState.TimeLeftMs + 60000
-               && !AceSessionTypeResolver.IsInRaceFinishSequence(this.observedSessionPhaseNames))
-            {
-                this.BeginNewSession(graphicsData, staticData);
-            }
-
+            this.UpdateSameSession(graphicsData, staticData);
             return;
         }
 
@@ -255,5 +249,34 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             this.appStatusChangesSubject.OnNext(new AceAppStatusChange(this.lastGraphicsData.Status,
                 graphicsData.Status));
         }
+
+        this.lastLiveGraphicsData = graphicsData.Status == AceStatus.Live ? graphicsData : null;
+    }
+
+    private void UpdateSameSession(AceGraphicsData graphicsData, AceStaticData staticData)
+    {
+        if(graphicsData.Status != AceStatus.Live)
+        {
+            return;
+        }
+
+        if(this.currentSession == null || this.IsSessionRestart(graphicsData))
+        {
+            this.BeginNewSession(graphicsData, staticData);
+        }
+
+        this.lastLiveGraphicsData = graphicsData;
+    }
+
+    private bool IsSessionRestart(AceGraphicsData graphicsData)
+    {
+        if(this.lastLiveGraphicsData == null || AceSessionTypeResolver.IsInRaceFinishSequence(this.observedSessionPhaseNames))
+        {
+            return false;
+        }
+
+        var hasClockJumpedBack = graphicsData.SessionState.TimeLeftMs > this.lastLiveGraphicsData.SessionState.TimeLeftMs + RestartTimeJumpMs;
+        var hasLapCountReset = graphicsData.TotalLapCount < this.lastLiveGraphicsData.TotalLapCount;
+        return hasClockJumpedBack || hasLapCountReset;
     }
 }
