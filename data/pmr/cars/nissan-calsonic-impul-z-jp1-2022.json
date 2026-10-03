@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 2,
   "EngineLayout": "Front Engine",
   "EngineType": "L4 Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 100,
   "GameId": "ID_Nissan_Z_GT500",
   "IconFileName": "Nissan",
   "Manufacturer": "Nissan",

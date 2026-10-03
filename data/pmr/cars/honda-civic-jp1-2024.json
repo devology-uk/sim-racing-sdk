@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 2,
   "EngineLayout": "Front Engine",
   "EngineType": "L4 Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 100,
   "GameId": "ID_Honda_Civic_Type-R_GT500",
   "IconFileName": "Honda",
   "Manufacturer": "Honda",
