@@ -12,6 +12,6 @@ public interface IAceSharedMemoryConnection : IDisposable
     IObservable<AceSharedMemorySession> SessionStarted { get; }
     IObservable<AceTelemetryFrame> Telemetry { get; }
     IObservable<AceSharedMemorySession> SessionEnded { get; }
-    void Start(double updateIntervalMs = 100);
+    void Start(double updateIntervalMs = 50);
     void Stop();
 }
