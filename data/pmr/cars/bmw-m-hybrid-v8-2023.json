@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 4,
   "EngineLayout": "Mid Engine",
   "EngineType": "V8 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 110,
   "GameId": "ID_BMW_M_Hybrid_V8",
   "IconFileName": "BMW",
   "Manufacturer": "BMW",

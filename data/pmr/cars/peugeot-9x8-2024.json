@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 2.6,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 110,
   "GameId": "ID_Peugeot_9X8_2024",
   "IconFileName": "Peugeot",
   "Manufacturer": "Peugeot",

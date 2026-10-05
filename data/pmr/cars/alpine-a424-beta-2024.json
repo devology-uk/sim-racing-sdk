@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.4,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 110,
   "GameId": "ID_Alpine_A424_2024",
   "IconFileName": "Alpine",
   "Manufacturer": "Alpine",

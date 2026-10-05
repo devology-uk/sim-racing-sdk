@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.5,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 110,
   "GameId": "ID_Toyota_GR010",
   "IconFileName": "Toyota",
   "Manufacturer": "Toyota",

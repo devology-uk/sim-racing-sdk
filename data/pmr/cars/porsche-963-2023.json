@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 4.6,
   "EngineLayout": "Mid Engine",
   "EngineType": "V8 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 110,
   "GameId": "ID_Porsche_963",
   "IconFileName": "Porsche",
   "Manufacturer": "Porsche",
