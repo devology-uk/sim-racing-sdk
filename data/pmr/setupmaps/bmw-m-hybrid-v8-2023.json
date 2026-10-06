@@ -878,7 +878,7 @@
       "RawMin": 10000,
       "RawStep": 10000,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -900,7 +900,7 @@
       "RawMin": 50000,
       "RawStep": 10000,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -922,7 +922,7 @@
       "RawMin": 10000,
       "RawStep": 1000,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -944,7 +944,7 @@
       "RawMin": 10000,
       "RawStep": 1000,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -966,7 +966,7 @@
       "RawMin": 10000,
       "RawStep": 1000,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -988,7 +988,7 @@
       "RawMin": 10000,
       "RawStep": 1000,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -1010,7 +1010,7 @@
       "RawMin": 5000,
       "RawStep": 500,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -1032,7 +1032,7 @@
       "RawMin": 4000,
       "RawStep": 500,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -1054,7 +1054,7 @@
       "RawMin": 5000,
       "RawStep": 500,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -1076,7 +1076,7 @@
       "RawMin": 4000,
       "RawStep": 500,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -1098,7 +1098,7 @@
       "RawMin": 0,
       "RawStep": 0.005,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 5,
       "Unit": "mm"
     },
@@ -1120,7 +1120,7 @@
       "RawMin": 0,
       "RawStep": 0.005,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 5,
       "Unit": "mm"
     },
@@ -1142,7 +1142,7 @@
       "RawMin": 50000,
       "RawStep": 50000,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 50,
       "Unit": "N/mm"
     },
@@ -1164,7 +1164,7 @@
       "RawMin": 100000,
       "RawStep": 100000,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 100,
       "Unit": "N/mm"
     },
@@ -1186,7 +1186,7 @@
       "RawMin": -4,
       "RawStep": 0.1,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 0.1,
       "Unit": "deg"
     },
@@ -1208,7 +1208,7 @@
       "RawMin": -3.5,
       "RawStep": 0.1,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 0.1,
       "Unit": "deg"
     },
@@ -1230,7 +1230,7 @@
       "RawMin": -0.5,
       "RawStep": 0.05,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 0.05,
       "Unit": "deg"
     },
@@ -1252,7 +1252,7 @@
       "RawMin": -0.5,
       "RawStep": 0.1,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 0.1,
       "Unit": "deg"
     },
@@ -1274,7 +1274,7 @@
       "RawMin": -3,
       "RawStep": 0.5,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 0.5,
       "Unit": "deg"
     },
@@ -1289,14 +1289,14 @@
       "Kind": 0,
       "Max": 30,
       "Min": -30,
-      "Name": "Ride Height Adjust Front",
+      "Name": "Ride Height Adjust",
       "Quantity": 3,
       "RawKey": "{Corner}-spring-platform",
       "RawMax": 0.03,
       "RawMin": -0.03,
       "RawStep": 0.001,
       "Scope": 3,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": "mm"
     },
@@ -1311,14 +1311,14 @@
       "Kind": 0,
       "Max": 30,
       "Min": -30,
-      "Name": "Ride Height Adjust Rear",
+      "Name": "Ride Height Adjust",
       "Quantity": 3,
       "RawKey": "{Corner}-spring-platform",
       "RawMax": 0.03,
       "RawMin": -0.03,
       "RawStep": 0.001,
       "Scope": 4,
-      "Section": "Springs \u0026 Dampers",
+      "Section": "Springs & Dampers",
       "Step": 1,
       "Unit": "mm"
     },
@@ -1340,7 +1340,7 @@
       "RawMin": 0,
       "RawStep": 20000,
       "Scope": 0,
-      "Section": "Anti-Roll Bar \u0026 3rd Spring",
+      "Section": "Anti-Roll Bar & 3rd Spring",
       "Step": 20,
       "Unit": "N/mm"
     },
@@ -1362,7 +1362,7 @@
       "RawMin": 0,
       "RawStep": 10000,
       "Scope": 0,
-      "Section": "Anti-Roll Bar \u0026 3rd Spring",
+      "Section": "Anti-Roll Bar & 3rd Spring",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -1384,7 +1384,7 @@
       "RawMin": 0,
       "RawStep": 10000,
       "Scope": 1,
-      "Section": "Anti-Roll Bar \u0026 3rd Spring",
+      "Section": "Anti-Roll Bar & 3rd Spring",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -1406,7 +1406,7 @@
       "RawMin": 0,
       "RawStep": 10000,
       "Scope": 1,
-      "Section": "Anti-Roll Bar \u0026 3rd Spring",
+      "Section": "Anti-Roll Bar & 3rd Spring",
       "Step": 1,
       "Unit": null
     }
