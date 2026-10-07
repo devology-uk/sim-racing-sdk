@@ -1,5 +1,6 @@
 {
   "CarId": "ford-mustang-boss-302-1970",
+  "Validated": true,
   "EngineAndDrivetrain": [
     {
       "Decimals": 0,

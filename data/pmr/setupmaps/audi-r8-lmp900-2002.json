@@ -1,5 +1,6 @@
 {
   "CarId": "audi-r8-lmp900-2002",
+  "Validated": true,
   "EngineAndDrivetrain": [
     {
       "Decimals": 0,

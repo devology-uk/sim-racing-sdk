@@ -1,5 +1,6 @@
 {
   "CarId": "mercedes-benz-sauber-c9-1989",
+  "Validated": true,
   "EngineAndDrivetrain": [
     {
       "Decimals": 0,
@@ -715,7 +716,7 @@
       "RawMin": 150000,
       "RawStep": 10000,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -737,7 +738,7 @@
       "RawMin": 125000,
       "RawStep": 10000,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -759,7 +760,7 @@
       "RawMin": 2000,
       "RawStep": 1000,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -781,7 +782,7 @@
       "RawMin": 2000,
       "RawStep": 1000,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -803,7 +804,7 @@
       "RawMin": 8000,
       "RawStep": 1000,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -825,7 +826,7 @@
       "RawMin": 8000,
       "RawStep": 1000,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": null
     },
@@ -847,7 +848,7 @@
       "RawMin": 0,
       "RawStep": 0.005,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 5,
       "Unit": "mm"
     },
@@ -869,7 +870,7 @@
       "RawMin": 0,
       "RawStep": 0.005,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 5,
       "Unit": "mm"
     },
@@ -891,7 +892,7 @@
       "RawMin": 100000,
       "RawStep": 100000,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 100,
       "Unit": "N/mm"
     },
@@ -913,7 +914,7 @@
       "RawMin": 100000,
       "RawStep": 100000,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 100,
       "Unit": "N/mm"
     },
@@ -935,7 +936,7 @@
       "RawMin": -2,
       "RawStep": 0.1,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 0.1,
       "Unit": "deg"
     },
@@ -957,7 +958,7 @@
       "RawMin": -1.5,
       "RawStep": 0.1,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 0.1,
       "Unit": "deg"
     },
@@ -979,7 +980,7 @@
       "RawMin": -0.2,
       "RawStep": 0.05,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 0.05,
       "Unit": "deg"
     },
@@ -1001,7 +1002,7 @@
       "RawMin": 0.1,
       "RawStep": 0.05,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 0.05,
       "Unit": "deg"
     },
@@ -1023,7 +1024,7 @@
       "RawMin": 0,
       "RawStep": 0.001,
       "Scope": 3,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": "mm"
     },
@@ -1045,7 +1046,7 @@
       "RawMin": -0.02,
       "RawStep": 0.001,
       "Scope": 4,
-      "Section": "Springs & Dampers",
+      "Section": "Springs \u0026 Dampers",
       "Step": 1,
       "Unit": "mm"
     },
@@ -1067,7 +1068,7 @@
       "RawMin": 100000,
       "RawStep": 10000,
       "Scope": 0,
-      "Section": "Anti-Roll Bar & 3rd Spring",
+      "Section": "Anti-Roll Bar \u0026 3rd Spring",
       "Step": 10,
       "Unit": "N/mm"
     },
@@ -1089,7 +1090,7 @@
       "RawMin": 0,
       "RawStep": 20000,
       "Scope": 0,
-      "Section": "Anti-Roll Bar & 3rd Spring",
+      "Section": "Anti-Roll Bar \u0026 3rd Spring",
       "Step": 20,
       "Unit": "N/mm"
     }
