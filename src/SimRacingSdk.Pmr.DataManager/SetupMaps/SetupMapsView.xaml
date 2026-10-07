@@ -60,6 +60,11 @@
                     Grid.Column="1"
                     Orientation="Horizontal"
                     Margin="10,10,0,0">
+            <CheckBox Content="Validated"
+                      IsChecked="{Binding Editor.Validated, Mode=TwoWay}"
+                      VerticalAlignment="Center"
+                      Margin="0,0,15,0"
+                      ToolTip="Every row checked against the car's .vset trio - only validated maps are written by Generate SDK Setup Maps" />
             <Button Content="Save Setup Map"
                     Command="{Binding SaveSetupMapCommand}"
                     Padding="10,4"
@@ -104,7 +109,8 @@
                     Command="{Binding GenerateSdkSetupMapsCommand}"
                     Padding="10,4"
                     Margin="0,0,15,0"
-                    ToolTip="Writes every car's saved setup map into SimRacingSdk.Pmr.Setups - save any edits first" />            <TextBlock Text="{Binding StatusMessage}"
+                    ToolTip="Writes every validated car's saved setup map into SimRacingSdk.Pmr.Setups - save any edits first" />
+            <TextBlock Text="{Binding StatusMessage}"
                        VerticalAlignment="Center"
                        TextWrapping="Wrap" />
         </StackPanel>

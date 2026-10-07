@@ -27,15 +27,15 @@ public class PmrSetupPresenter : IPmrSetupPresenter
 
     public static PmrSetupPresenter Instance => singletonInstance ??= new PmrSetupPresenter(PmrSetupMapProvider.Instance);
 
-    public PmrSetupComparison Compare(PmrSetupFile first, PmrSetupFile second, PmrUnitSystem unitSystem)
+    public PmrSetupComparison Compare(PmrSetupFile first, PmrSetupFile second, PmrUnitPreferences units)
     {
         if(!IsSameCar(first.Name, second.Name))
         {
             throw new ArgumentException("Only setups for the same car can be compared.", nameof(second));
         }
 
-        var firstView = this.Present(first, unitSystem);
-        var secondView = this.Present(second, unitSystem);
+        var firstView = this.Present(first, units);
+        var secondView = this.Present(second, units);
 
         return new PmrSetupComparison
         {
@@ -45,10 +45,10 @@ public class PmrSetupPresenter : IPmrSetupPresenter
         };
     }
 
-    public PmrSetupView Present(PmrSetupFile setup, PmrUnitSystem unitSystem)
+    public PmrSetupView Present(PmrSetupFile setup, PmrUnitPreferences units)
     {
         var map = this.FindMap(setup.Name);
-        return map is null ? WithoutMap(setup, unitSystem) : WithMap(setup, map, unitSystem);
+        return map is null ? WithoutMap(setup, units) : WithMap(setup, map, units);
     }
 
     private static bool IsSameCar(PmrSetupFileName first, PmrSetupFileName second)
@@ -56,7 +56,7 @@ public class PmrSetupPresenter : IPmrSetupPresenter
         return string.Equals(first.VehicleGameId, second.VehicleGameId, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static PmrSetupFieldView PresentField(IGrouping<string, PmrSetupFieldMap> rows, PmrSetupFile setup, PmrUnitSystem unitSystem,
+    private static PmrSetupFieldView PresentField(IGrouping<string, PmrSetupFieldMap> rows, PmrSetupFile setup, PmrUnitPreferences units,
         PmrSetupFieldActivity activity)
     {
         return new PmrSetupFieldView
@@ -64,41 +64,41 @@ public class PmrSetupPresenter : IPmrSetupPresenter
             Name = rows.Key,
             Values = rows.SelectMany(row => PmrSetupPositions.For(row.Scope)
                                                              .Select(position => activity.Apply(row,
-                                                                         PmrSetupValueReader.Read(row, position, setup, unitSystem))))
+                                                                         PmrSetupValueReader.Read(row, position, setup, units))))
                          .ToList()
         };
     }
 
     // A field whose front and rear ranges differ is two map rows with the same name; they're shown
     // as one field, as on the game's screen.
-    private static PmrSetupSectionView PresentSection(IGrouping<string, PmrSetupFieldMap> section, PmrSetupFile setup, PmrUnitSystem unitSystem,
+    private static PmrSetupSectionView PresentSection(IGrouping<string, PmrSetupFieldMap> section, PmrSetupFile setup, PmrUnitPreferences units,
         PmrSetupFieldActivity activity)
     {
         return new PmrSetupSectionView
         {
             Fields = section.GroupBy(row => row.Name)
-                            .Select(rows => PresentField(rows, setup, unitSystem, activity))
+                            .Select(rows => PresentField(rows, setup, units, activity))
                             .ToList(),
             Name = section.Key
         };
     }
 
-    private static PmrSetupTabView PresentTab(string name, IReadOnlyList<PmrSetupFieldMap> fields, PmrSetupFile setup, PmrUnitSystem unitSystem,
+    private static PmrSetupTabView PresentTab(string name, IReadOnlyList<PmrSetupFieldMap> fields, PmrSetupFile setup, PmrUnitPreferences units,
         PmrSetupFieldActivity activity)
     {
         return new PmrSetupTabView
         {
             Name = name,
             Sections = fields.GroupBy(field => field.Section)
-                             .Select(section => PresentSection(section, setup, unitSystem, activity))
+                             .Select(section => PresentSection(section, setup, units, activity))
                              .ToList()
         };
     }
 
-    private static PmrSetupView WithMap(PmrSetupFile setup, PmrSetupMap map, PmrUnitSystem unitSystem)
+    private static PmrSetupView WithMap(PmrSetupFile setup, PmrSetupMap map, PmrUnitPreferences units)
     {
         var activity = new PmrSetupFieldActivity(map, setup);
-        var tabs = TabLayout.Select(tab => PresentTab(tab.Name, tab.Fields(map), setup, unitSystem, activity))
+        var tabs = TabLayout.Select(tab => PresentTab(tab.Name, tab.Fields(map), setup, units, activity))
                             .Where(tab => tab.Sections.Count > 0)
                             .ToList();
 
@@ -111,11 +111,11 @@ public class PmrSetupPresenter : IPmrSetupPresenter
                                 .SelectMany(field => field.Values)
                                 .All(value => value.Status != PmrSetupValueStatus.NotMapped),
             Tabs = tabs,
-            UnitSystem = unitSystem
+            Units = units
         };
     }
 
-    private static PmrSetupView WithoutMap(PmrSetupFile setup, PmrUnitSystem unitSystem)
+    private static PmrSetupView WithoutMap(PmrSetupFile setup, PmrUnitPreferences units)
     {
         return new PmrSetupView
         {
@@ -124,7 +124,7 @@ public class PmrSetupPresenter : IPmrSetupPresenter
             IsFullyMapped = false,
             MapExplanation = PmrSetupExplanations.NoMap,
             Tabs = [],
-            UnitSystem = unitSystem
+            Units = units
         };
     }
 

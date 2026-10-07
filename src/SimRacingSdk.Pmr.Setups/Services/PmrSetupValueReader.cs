@@ -10,7 +10,7 @@ internal static class PmrSetupValueReader
 {
     private const string AutoOption = "Auto";
 
-    public static PmrSetupValueView Read(PmrSetupFieldMap field, PmrSetupPosition position, PmrSetupFile setup, PmrUnitSystem unitSystem)
+    public static PmrSetupValueView Read(PmrSetupFieldMap field, PmrSetupPosition position, PmrSetupFile setup, PmrUnitPreferences units)
     {
         var rawValue = field.RawKey is null ? null : setup.FindValue(PmrSetupPositions.ExpandRawKey(field.RawKey, position));
         if(field.RawKey is not null && rawValue is null)
@@ -24,7 +24,7 @@ internal static class PmrSetupValueReader
             return Unavailable(position, PmrSetupValueStatus.ShownInGameOnly, PmrSetupExplanations.ShownInGameOnly, rawValue, clicks);
         }
 
-        var displayText = DisplayTextFor(field, rawValue, unitSystem);
+        var displayText = DisplayTextFor(field, rawValue, units.For(field.Quantity));
         return displayText is null
                    ? Unavailable(position, PmrSetupValueStatus.NotMapped, PmrSetupExplanations.NotMapped, rawValue, clicks)
                    : Shown(position, displayText, rawValue, clicks);

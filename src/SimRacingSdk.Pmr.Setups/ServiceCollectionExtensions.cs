@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IPmrSetupMapProvider, PmrSetupMapProvider>();
         services.TryAddSingleton<IPmrSetupPresenter, PmrSetupPresenter>();
         services.TryAddSingleton<IPmrSetupProvider, PmrSetupProvider>();
+        services.TryAddSingleton<IPmrUnitPreferencesProvider, PmrUnitPreferencesProvider>();
         return services;
     }
 }

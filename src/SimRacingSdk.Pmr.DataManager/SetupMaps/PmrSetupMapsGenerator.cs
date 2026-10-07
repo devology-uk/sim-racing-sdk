@@ -6,7 +6,7 @@ using SimRacingSdk.Pmr.DataManager.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 
-// Writes every car's setup map into SimRacingSdk.Pmr.Setups as one embedded JSON file, keyed by car
+// Writes every validated car's setup map into SimRacingSdk.Pmr.Setups as one embedded JSON file, keyed by car
 // Id and the game's vehicle id (the prefix of a saved .vset's name). Setup maps are data plus SDK
 // logic rather than a catalog, so unlike Cars/Tracks they're shipped as data, not generated code.
 public class PmrSetupMapsGenerator : IPmrSetupMapsGenerator
@@ -27,7 +27,7 @@ public class PmrSetupMapsGenerator : IPmrSetupMapsGenerator
         this.setupMapRepository = setupMapRepository;
     }
 
-    public string Generate(IEnumerable<CarInfo> cars)
+    public PmrSetupMapsGenerationResult Generate(IEnumerable<CarInfo> cars)
     {
         var catalog = new GeneratedSetupMapCatalog
         {
@@ -40,13 +40,13 @@ public class PmrSetupMapsGenerator : IPmrSetupMapsGenerator
         var outputPath = Path.Combine(this.dataPathProvider.GetRepoRoot(), "src", "SimRacingSdk.Pmr.Setups", "Data", "pmr-setup-maps.json");
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
         File.WriteAllText(outputPath, JsonSerializer.Serialize(catalog, SerializerOptions));
-        return outputPath;
+        return new PmrSetupMapsGenerationResult(outputPath, catalog.Maps.Count);
     }
 
     private GeneratedSetupMap? BuildEntry(CarInfo car)
     {
         var map = this.setupMapRepository.FindByCarId(car.Id);
-        if(map is null)
+        if(map is not { Validated: true })
         {
             return null;
         }

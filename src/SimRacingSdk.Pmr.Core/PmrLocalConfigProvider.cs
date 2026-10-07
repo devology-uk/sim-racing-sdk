@@ -13,6 +13,9 @@ public class PmrLocalConfigProvider : IPmrLocalConfigProvider
     // UI-displayed "60").
     private static readonly int[] UdpFrequencyOptionsHz = [10, 20, 30, 60];
 
+    // Metric is option 1 (confirmed); Imperial as option 2 follows the game's 1-based dropdowns, unconfirmed.
+    private const int ImperialUnitsOption = 2;
+
     private static PmrLocalConfigProvider? singletonInstance;
 
     private readonly IPmrPathProvider pmrPathProvider;
@@ -51,6 +54,10 @@ public class PmrLocalConfigProvider : IPmrLocalConfigProvider
 
         return new PmrLocalSettings
         {
+            IsImperialDistance = GetInt(parameters, "SettingsPreferencesDistanceUnits") == ImperialUnitsOption,
+            IsImperialFluid = GetInt(parameters, "SettingsPreferencesFluidUnits") == ImperialUnitsOption,
+            IsImperialPressure = GetInt(parameters, "SettingsPreferencesPressureUnits") == ImperialUnitsOption,
+            IsImperialWeight = GetInt(parameters, "SettingsPreferencesWeightUnits") == ImperialUnitsOption,
             UdpEnabled = GetInt(parameters, "SettingsPreferencesUDPEnabled") == 2,
             UdpFrequencyHz = frequencyIndex >= 1 && frequencyIndex <= UdpFrequencyOptionsHz.Length
                 ? UdpFrequencyOptionsHz[frequencyIndex - 1]

@@ -4,6 +4,7 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 
 public interface IPmrSetupMapsGenerator
 {
-    // Returns the path of the file written.
-    string Generate(IEnumerable<CarInfo> cars);
+    PmrSetupMapsGenerationResult Generate(IEnumerable<CarInfo> cars);
 }
+
+public record PmrSetupMapsGenerationResult(string OutputPath, int MapsWritten);

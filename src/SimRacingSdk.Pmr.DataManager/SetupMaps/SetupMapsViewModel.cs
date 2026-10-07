@@ -132,7 +132,7 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
             return;
         }
 
-        this.Editor.LoadFrom(this.SelectedCar.Id, sourceMap);
+        this.Editor.LoadFrom(this.SelectedCar.Id, sourceMap with { Validated = false });
         this.StatusMessage = $"Copied from {this.CopySourceCar.Manufacturer} {this.CopySourceCar.Name} - adjust, then Save Setup Map.";
     }
 
@@ -140,8 +140,8 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
     [RelayCommand]
     private void GenerateSdkSetupMaps()
     {
-        var outputPath = this.setupMapsGenerator.Generate(this.Cars);
-        this.StatusMessage = $"Generated {outputPath} at {DateTime.Now:HH:mm:ss}.";
+        var result = this.setupMapsGenerator.Generate(this.Cars);
+        this.StatusMessage = $"Generated {result.MapsWritten} validated map(s) into {result.OutputPath} at {DateTime.Now:HH:mm:ss}.";
     }
 
     // Discards any unsaved edits - used after the JSON file has been corrected outside the app.

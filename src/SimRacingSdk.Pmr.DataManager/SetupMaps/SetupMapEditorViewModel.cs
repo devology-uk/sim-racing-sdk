@@ -1,10 +1,14 @@
 using System.Text.Json;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 
-public class SetupMapEditorViewModel
+public partial class SetupMapEditorViewModel : ObservableObject
 {
     private string savedState = string.Empty;
+
+    [ObservableProperty]
+    private bool validated;
 
     public SetupMapEditorViewModel(IUserConfirmation userConfirmation)
     {
@@ -25,6 +29,7 @@ public class SetupMapEditorViewModel
     public void LoadFrom(string carId, PmrSetupMap? setupMap)
     {
         this.CarId = carId;
+        this.Validated = setupMap?.Validated ?? false;
         this.EngineAndDrivetrain.LoadFrom(setupMap?.EngineAndDrivetrain ?? []);
         this.SteeringWheel.LoadFrom(setupMap?.SteeringWheel ?? []);
         this.Suspension.LoadFrom(setupMap?.Suspension ?? []);
@@ -47,6 +52,7 @@ public class SetupMapEditorViewModel
         return new PmrSetupMap
         {
             CarId = this.CarId,
+            Validated = this.Validated,
             EngineAndDrivetrain = this.EngineAndDrivetrain.ToSetupFieldInfos(),
             SteeringWheel = this.SteeringWheel.ToSetupFieldInfos(),
             Suspension = this.Suspension.ToSetupFieldInfos(),

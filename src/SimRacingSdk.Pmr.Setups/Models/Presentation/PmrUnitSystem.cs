@@ -1,6 +1,6 @@
 namespace SimRacingSdk.Pmr.Setups.Models.Presentation;
 
-// Matches the game's own Units setting.
+// One quantity's units, as chosen in the game's Preferences (see PmrUnitPreferences).
 public enum PmrUnitSystem
 {
     Metric,

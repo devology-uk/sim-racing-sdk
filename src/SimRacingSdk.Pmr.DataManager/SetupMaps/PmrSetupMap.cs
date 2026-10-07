@@ -8,6 +8,8 @@ namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 public record PmrSetupMap
 {
     public required string CarId { get; init; }
+    // Set once every row has been checked against the car's .vset trio - only validated maps ship in the SDK.
+    public bool Validated { get; init; }
     public required List<SetupFieldInfo> EngineAndDrivetrain { get; init; } = [];
     public required List<SetupFieldInfo> SteeringWheel { get; init; } = [];
     public required List<SetupFieldInfo> Suspension { get; init; } = [];

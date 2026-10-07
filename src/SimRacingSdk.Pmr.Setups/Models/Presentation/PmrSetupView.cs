@@ -16,5 +16,5 @@ public record PmrSetupView
 
     public string? MapExplanation { get; init; }
     public required IReadOnlyList<PmrSetupTabView> Tabs { get; init; }
-    public required PmrUnitSystem UnitSystem { get; init; }
+    public required PmrUnitPreferences Units { get; init; }
 }
