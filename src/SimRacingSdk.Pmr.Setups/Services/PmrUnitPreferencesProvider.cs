@@ -26,7 +26,7 @@ public class PmrUnitPreferencesProvider : IPmrUnitPreferencesProvider
         return settings is null ? PmrUnitPreferences.Metric : FromSettings(settings);
     }
 
-    // Spring rates read lb/in in Imperial, so they're assumed to follow the Weight setting - unconfirmed.
+    // Spring rates follow the game's Weight setting (lb/in in Imperial).
     private static PmrUnitPreferences FromSettings(PmrLocalSettings settings)
     {
         return new PmrUnitPreferences

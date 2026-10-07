@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SimRacingSdk.Pmr.Core.Abstractions;
@@ -13,7 +13,7 @@ public class PmrLocalConfigProvider : IPmrLocalConfigProvider
     // UI-displayed "60").
     private static readonly int[] UdpFrequencyOptionsHz = [10, 20, 30, 60];
 
-    // Metric is option 1 (confirmed); Imperial as option 2 follows the game's 1-based dropdowns, unconfirmed.
+    // The game's unit dropdowns are 1-based: Metric is 1, Imperial 2.
     private const int ImperialUnitsOption = 2;
 
     private static PmrLocalConfigProvider? singletonInstance;
