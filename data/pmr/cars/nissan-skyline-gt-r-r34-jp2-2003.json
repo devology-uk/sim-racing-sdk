@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3,
   "EngineLayout": "Front Engine",
   "EngineType": "V6 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 100,
   "GameId": "ID_Nissan_GT-R_R34_JGTC_2003",
   "IconFileName": "Nissan",
   "Manufacturer": "Nissan",

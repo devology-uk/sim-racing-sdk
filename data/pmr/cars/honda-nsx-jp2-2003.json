@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.5,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 100,
   "GameId": "ID_Honda_NSX_JGTC_2003",
   "IconFileName": "Honda",
   "Manufacturer": "Honda",
