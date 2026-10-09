@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 4,
   "EngineLayout": "Front Engine",
   "EngineType": "V8 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 101,
   "GameId": "ID_BMW_M8_GTE",
   "IconFileName": "BMW",
   "Manufacturer": "BMW",

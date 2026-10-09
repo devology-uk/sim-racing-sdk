@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 4,
   "EngineLayout": "Mid Engine",
   "EngineType": "Flat-6",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 101,
   "GameId": "ID_Porsche_911_RSR_GTE_2020",
   "IconFileName": "Porsche",
   "Manufacturer": "Porsche",

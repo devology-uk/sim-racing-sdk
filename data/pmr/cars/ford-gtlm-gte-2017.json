@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.5,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6 Twin Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 101,
   "GameId": "ID_Ford_GTLM_GTE_2022",
   "IconFileName": "Ford",
   "Manufacturer": "Ford",
