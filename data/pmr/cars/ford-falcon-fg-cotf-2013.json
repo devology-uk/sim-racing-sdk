@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 5,
   "EngineLayout": "Front Engine",
   "EngineType": "V8",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 100,
   "GameId": "ID_Ford_Falcon_FG_V8Supercar_2013",
   "IconFileName": "Ford",
   "Manufacturer": "Ford",
