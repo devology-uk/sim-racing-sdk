@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 5.9,
   "EngineLayout": "Mid Engine",
   "EngineType": "V8",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 159,
   "GameId": "ID_Lola_T70_MK3_67",
   "IconFileName": "Lola",
   "Manufacturer": "Lola",
