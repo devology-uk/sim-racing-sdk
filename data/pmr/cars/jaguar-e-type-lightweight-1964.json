@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.8,
   "EngineLayout": "Front Engine",
   "EngineType": "L6",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 140,
   "GameId": "ID_Jaguar_E-Type_Lightweight_1964",
   "IconFileName": "Jaguar",
   "Manufacturer": "Jaguar",

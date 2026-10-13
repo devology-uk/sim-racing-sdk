@@ -1,6 +1,6 @@
 {
   "CarId": "chevrolet-camaro-au-2023",
-  "Validated": false,
+  "Validated": true,
   "EngineAndDrivetrain": [
     {
       "Decimals": 0,
