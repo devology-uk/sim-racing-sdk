@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 2.8,
   "EngineLayout": "Rear Engine",
   "EngineType": "Flat-6 Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 120,
   "GameId": "ID_Porsche_935_80",
   "IconFileName": "Porsche",
   "Manufacturer": "Porsche",

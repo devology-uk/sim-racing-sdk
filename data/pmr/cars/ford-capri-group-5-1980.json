@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 1.7,
   "EngineLayout": "Front Engine",
   "EngineType": "L4 Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 120,
   "GameId": "ID_Ford_Zakspeed_Capri_Group5",
   "IconFileName": "Ford",
   "Manufacturer": "Ford",
