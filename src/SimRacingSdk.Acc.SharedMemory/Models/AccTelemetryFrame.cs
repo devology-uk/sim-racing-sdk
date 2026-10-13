@@ -54,8 +54,10 @@ public record AccTelemetryFrame
         this.IsInvalid = !graphicsData.IsValidLap;
         this.IsPitLimiterOn = physicsData.PitLimiterOn;
         this.LapTimeMs = graphicsData.CurrentTimeMs;
+        this.LateralG = physicsData.AccG[0];
         this.LocationX = physicsData.TyreContactPoint[0].X;
         this.LocationY = physicsData.TyreContactPoint[0].Z;
+        this.LongitudinalG = physicsData.AccG[2];
         this.PadLifeFl = physicsData.PadLife[0];
         this.PadLifeFr = physicsData.PadLife[1];
         this.PadLifeRl = physicsData.PadLife[2];
@@ -77,6 +79,10 @@ public record AccTelemetryFrame
         this.SpeedKmh = physicsData.SpeedKmh;
         this.SplitTimeMs = graphicsData.SplitTimeMs;
         this.SteeringAngle = physicsData.SteerAngle;
+        this.SuspensionTravelFl = physicsData.SuspensionTravel[0];
+        this.SuspensionTravelFr = physicsData.SuspensionTravel[1];
+        this.SuspensionTravelRl = physicsData.SuspensionTravel[2];
+        this.SuspensionTravelRr = physicsData.SuspensionTravel[3];
         this.TrackId = staticData.Track;
         this.TimeStamp = DateTime.UtcNow;
         this.TractionControl = physicsData.TractionControl;
@@ -93,11 +99,13 @@ public record AccTelemetryFrame
         this.TyreTempFr = physicsData.TyreTemp[1];
         this.TyreTempRl = physicsData.TyreTemp[2];
         this.TyreTempRr = physicsData.TyreTemp[3];
+        this.VerticalG = physicsData.AccG[1];
         this.WaterTemp = physicsData.WaterTemp;
         this.WheelSlipFl = physicsData.WheelSlip[0];
         this.WheelSlipFr = physicsData.WheelSlip[1];
         this.WheelSlipRl = physicsData.WheelSlip[2];
         this.WheelSlipRr = physicsData.WheelSlip[3];
+        this.YawRate = physicsData.LocalAngularVelocity[1];
     }
 
     public float Abs { get; }
@@ -131,8 +139,10 @@ public record AccTelemetryFrame
     public bool IsInvalid { get; }
     public bool IsPitLimiterOn { get; }
     public int LapTimeMs { get; }
+    public float LateralG { get; }
     public float LocationX { get; }
     public float LocationY { get; }
+    public float LongitudinalG { get; }
     public float NormalisedCarPosition { get; }
     public float PadLifeFl { get; }
     public float PadLifeFr { get; }
@@ -154,6 +164,10 @@ public record AccTelemetryFrame
     public float SpeedKmh { get; }
     public int SplitTimeMs { get; }
     public float SteeringAngle { get; }
+    public float SuspensionTravelFl { get; }
+    public float SuspensionTravelFr { get; }
+    public float SuspensionTravelRl { get; }
+    public float SuspensionTravelRr { get; }
     public DateTime TimeStamp { get; }
     public string TrackId { get; }
     public float TractionControl { get; }
@@ -170,9 +184,11 @@ public record AccTelemetryFrame
     public float TyreTempFr { get; }
     public float TyreTempRl { get; }
     public float TyreTempRr { get; }
+    public float VerticalG { get; }
     public float WaterTemp { get; }
     public float WheelSlipFl { get; }
     public float WheelSlipFr { get; }
     public float WheelSlipRl { get; }
     public float WheelSlipRr { get; }
+    public float YawRate { get; }
 }

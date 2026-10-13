@@ -46,7 +46,7 @@ public class AccSharedMemoryConnection : IAccSharedMemoryConnection
         GC.SuppressFinalize(this);
     }
 
-    public void Start(double updateIntervalMs = 100)
+    public void Start(double updateIntervalMs = 50)
     {
         this.updateSubscription = Observable.Interval(TimeSpan.FromMilliseconds(updateIntervalMs))
                                             .Subscribe(this.OnNextUpdate);

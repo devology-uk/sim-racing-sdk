@@ -12,6 +12,6 @@ public interface IAccSharedMemoryConnection : IDisposable
     IObservable<AccSharedMemorySession> SessionStarted { get; }
     IObservable<AccTelemetryFrame> Telemetry { get; }
     IObservable<AccSharedMemorySession> SessionEnded { get; }
-    void Start(double updateIntervalMs = 100);
+    void Start(double updateIntervalMs = 50);
     void Stop();
 }
