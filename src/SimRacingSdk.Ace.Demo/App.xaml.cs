@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
 using SimRacingSdk.Ace.Demo.Abstractions;
+using SimRacingSdk.Ace.Demo.CameraProbe;
 using SimRacingSdk.Ace.Demo.CarExplorer;
 using SimRacingSdk.Ace.Demo.Controls.Console;
 using SimRacingSdk.Ace.Demo.Demos;
@@ -12,6 +13,7 @@ using SimRacingSdk.Ace.Demo.TrackExplorer;
 using SimRacingSdk.Ace.Monitor;
 using SimRacingSdk.Ace.SharedMemory;
 using SimRacingSdk.Ace.Udp;
+using SimRacingSdk.GameControl;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Wpf.Shared.Logging;
 
@@ -64,6 +66,7 @@ public partial class App : Application
         services.UseAceUdp();
         services.UseAceSharedMemory();
         services.UseAceMonitor();
+        services.UseGameControl();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -71,6 +74,7 @@ public partial class App : Application
         services.AddTransient<LogViewerViewModel>();
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
+        services.AddTransient<CameraProbeViewModel>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();
         services.AddTransient<IMonitorDemo, MonitorDemo>();

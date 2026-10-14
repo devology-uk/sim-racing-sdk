@@ -6,7 +6,7 @@ namespace SimRacingSdk.Ace.Core;
 
 public class AceGameDetector : GameDetector, IAceGameDetector
 {
-    private const string ProcessName = "AssettoCorsaEVO";
+    public const string ProcessName = "AssettoCorsaEVO";
 
     private static AceGameDetector? singletonInstance;
 

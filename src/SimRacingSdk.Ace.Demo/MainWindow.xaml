@@ -50,6 +50,9 @@
             <Button Content="Open Track Explorer"
                     Command="{Binding OpenTrackExplorerCommand}"
                     ToolTip="Open the track explorer window" />
+            <Button Content="Camera Control Probe"
+                    Command="{Binding OpenCameraProbeCommand}"
+                    ToolTip="Open a window for testing camera and car-focus control by sending keys to ACE" />
         </StackPanel>
 
         <Button Grid.Column="0"

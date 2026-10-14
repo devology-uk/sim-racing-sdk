@@ -22,6 +22,7 @@
 		<ProjectReference Include="..\SimRacingSdk.Ace.Monitor\SimRacingSdk.Ace.Monitor.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Ace.SharedMemory\SimRacingSdk.Ace.SharedMemory.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Ace.Udp\SimRacingSdk.Ace.Udp.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.GameControl\SimRacingSdk.GameControl.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj" />
 	</ItemGroup>

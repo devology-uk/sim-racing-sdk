@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SimRacingSdk.Ace.Core.Abstractions;
 using SimRacingSdk.Ace.Demo.Abstractions;
+using SimRacingSdk.Ace.Demo.CameraProbe;
 using SimRacingSdk.Ace.Demo.CarExplorer;
 using SimRacingSdk.Ace.Demo.TrackExplorer;
 using SimRacingSdk.LogViewer;
@@ -49,6 +50,19 @@ public partial class MainWindowViewModel : ObservableObject
         this.udpDemo = udpDemo;
         this.sharedMemoryDemo = sharedMemoryDemo;
         this.monitorDemo = monitorDemo;
+    }
+
+    [RelayCommand]
+    private void OpenCameraProbe()
+    {
+        var cameraProbeViewModel = App.Current.Services.GetRequiredService<CameraProbeViewModel>();
+        var cameraProbe = new CameraProbeWindow
+        {
+            DataContext = cameraProbeViewModel,
+            Owner = App.Current.MainWindow
+        };
+        cameraProbe.Show();
+        cameraProbeViewModel.Init();
     }
 
     [RelayCommand]
