@@ -122,6 +122,11 @@ public class PmrMonitor : IPmrMonitor
         this.entries.Clear();
     }
 
+    private static bool HasLapTime(PmrParticipantRaceState lapState)
+    {
+        return lapState.CurrentLapTimeSeconds > 0;
+    }
+
     private void LogMessage(LoggingLevel level, string content)
     {
         this.logMessageBroker.Log(level, content);
@@ -137,7 +142,8 @@ public class PmrMonitor : IPmrMonitor
         // collide onto one entry.
         var key = (participantRaceState.DriverName, participantRaceState.LiveryId);
         if(this.entries.TryGetValue(key, out var previousState)
-           && participantRaceState.CurrentLap > previousState.CurrentLap)
+           && participantRaceState.CurrentLap > previousState.CurrentLap
+           && HasLapTime(previousState))
         {
             this.EmitCompletedLap(previousState);
         }
