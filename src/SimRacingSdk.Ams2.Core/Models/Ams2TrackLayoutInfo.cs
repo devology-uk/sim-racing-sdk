@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 
 namespace SimRacingSdk.Ams2.Core.Models;
 
@@ -14,6 +14,8 @@ public record Ams2TrackLayoutInfo
     public int MaxGridSize { get; init; }
     public string Name { get; init; }
     public string TrackType { get; init; }
+
+    // The track variation AMS2's shared memory reports.
     public string Ams2TrackId
     {
         get => this.ams2TrackId ?? this.Name.Replace(" ", "_");

@@ -52,11 +52,9 @@ public class TracksViewModel : CatalogPageViewModel<TrackInfo, TrackEditorViewMo
     private string? FindDuplicateRawTrackName(TrackInfo entity)
     {
         var otherTracks = this.Entities.Where(track => track.Id != entity.Id && track.Id != this.SelectedItem?.Id);
-        return otherTracks.Append(entity)
-            .SelectMany(track => track.Layouts)
-            .SelectMany(layout => layout.RawTrackNames)
-            .GroupBy(rawTrackName => rawTrackName, StringComparer.InvariantCultureIgnoreCase)
-            .FirstOrDefault(group => group.Count() > 1)
-            ?.Key;
+        return DuplicateCheck.FirstClash(
+            entity.Layouts.SelectMany(layout => layout.RawTrackNames),
+            otherTracks.SelectMany(track => track.Layouts).SelectMany(layout => layout.RawTrackNames),
+            StringComparer.InvariantCultureIgnoreCase);
     }
 }

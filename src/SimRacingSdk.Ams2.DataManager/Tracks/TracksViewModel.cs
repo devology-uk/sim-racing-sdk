@@ -50,25 +50,21 @@ public class TracksViewModel : CatalogPageViewModel<TrackInfo, TrackEditorViewMo
             return "Country is empty";
         }
 
-        var tracks = this.Entities.Where(track => track.Id != entity.Id && track.Id != this.SelectedItem?.Id)
-            .Append(entity)
-            .ToList();
+        var otherTracks = this.Entities.Where(track => track.Id != entity.Id && track.Id != this.SelectedItem?.Id).ToList();
 
-        var duplicateTrackId = FirstDuplicate(tracks.SelectMany(track => track.Layouts).Select(layout => layout.EffectiveAms2TrackId));
-        if(duplicateTrackId is not null)
+        var clashingTrackId = DuplicateCheck.FirstClash(
+            entity.Layouts.Select(layout => layout.EffectiveAms2TrackId),
+            otherTracks.SelectMany(track => track.Layouts).Select(layout => layout.EffectiveAms2TrackId),
+            StringComparer.Ordinal);
+        if(clashingTrackId is not null)
         {
-            return $"the AMS2 track id \"{duplicateTrackId}\" is used by more than one layout";
+            return $"the AMS2 track id \"{clashingTrackId}\" is used by more than one layout";
         }
 
-        var duplicateLocation = FirstDuplicate(tracks.SelectMany(track => track.RawTrackLocations));
-        return duplicateLocation is null ? null : $"the raw track location \"{duplicateLocation}\" is listed on more than one track";
-    }
-
-    // AMS2 reports one id per layout and one location per track, so each must lead to exactly one entry.
-    private static string? FirstDuplicate(IEnumerable<string> values)
-    {
-        return values.GroupBy(value => value, StringComparer.InvariantCultureIgnoreCase)
-            .FirstOrDefault(group => group.Count() > 1)
-            ?.Key;
+        var clashingLocation = DuplicateCheck.FirstClash(
+            entity.RawTrackLocations,
+            otherTracks.SelectMany(track => track.RawTrackLocations),
+            StringComparer.InvariantCultureIgnoreCase);
+        return clashingLocation is null ? null : $"the raw track location \"{clashingLocation}\" is listed on more than one track";
     }
 }

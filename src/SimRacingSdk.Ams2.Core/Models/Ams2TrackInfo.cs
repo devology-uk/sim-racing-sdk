@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 
 namespace SimRacingSdk.Ams2.Core.Models;
 
@@ -11,5 +11,9 @@ public record Ams2TrackInfo
     public double Latitude { get; init; }
     public IList<Ams2TrackLayoutInfo> Layouts { get; init; }
     public double Longitude { get; init; }
+
+    // Track locations AMS2 reports that don't reduce to ShortName, e.g. "Nurburgring_2025".
+    public IReadOnlyList<string> RawTrackLocations { get; init; } = [];
+
     public string ShortName { get; init; }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using SimRacingSdk.Ams2.Core.Models;
 
 namespace SimRacingSdk.Ams2.Core.Abstractions;

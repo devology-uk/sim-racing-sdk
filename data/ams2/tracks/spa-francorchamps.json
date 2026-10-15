@@ -77,7 +77,7 @@
     },
     {
       "Ams2TrackId": "spa-francorchamps_2005",
-      "Corners": null,
+      "Corners": 24,
       "DlcPack": "Historic Track Pack Pt3",
       "Grade": "Grade 1",
       "LengthM": 6970,
