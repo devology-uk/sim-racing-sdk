@@ -1,0 +1,62 @@
+{
+  "AltitudeM": 452,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Watkins Glen International",
+  "Latitude": 42.3362,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Watkins_Glen",
+      "Corners": 18,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 5260,
+      "MaxGridSize": 48,
+      "Name": "Watkins Glen GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Watkins_Glen_GPIL",
+      "Corners": 15,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 5550,
+      "MaxGridSize": 48,
+      "Name": "Watkins Glen GP (Inner Loop)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Watkins_Glen_S",
+      "Corners": 7,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 3900,
+      "MaxGridSize": 48,
+      "Name": "Watkins Glen Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Watkins_Glen_SIL",
+      "Corners": 11,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 3940,
+      "MaxGridSize": 48,
+      "Name": "Watkins Glen Short (Inner Loop)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 3940,
+      "MaxGridSize": 20,
+      "Name": "Watkins Glen STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -76.9252,
+  "RawTrackLocations": [],
+  "ShortName": "Watkins Glen"
+}

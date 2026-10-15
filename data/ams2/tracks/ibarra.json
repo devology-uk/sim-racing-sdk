@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 2190,
+  "Country": "Ecuador",
+  "CountryCode": "ECU",
+  "FullName": "Autódromo Internacional José Tobar",
+  "Latitude": 0.3802654,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Ibarra",
+      "Corners": 18,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 4300,
+      "MaxGridSize": 30,
+      "Name": "Autódromo Yahuarcocha",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Ibarra_R",
+      "Corners": 18,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 4300,
+      "MaxGridSize": 30,
+      "Name": "Autódromo Yahuarcocha Reverse",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Ibarra_STT",
+      "Corners": 18,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 4",
+      "LengthM": 4300,
+      "MaxGridSize": 20,
+      "Name": "Autódromo Yahuarcocha STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -78.1035038,
+  "RawTrackLocations": [],
+  "ShortName": "Ibarra"
+}

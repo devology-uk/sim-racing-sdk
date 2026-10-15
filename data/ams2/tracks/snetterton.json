@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 43,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Snetterton Circuit",
+  "Latitude": 52.4648,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Snetterton2019_300",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4780,
+      "MaxGridSize": 26,
+      "Name": "Snetterton 300",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Snetterton2019_200",
+      "Corners": 8,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 3220,
+      "MaxGridSize": 26,
+      "Name": "Snetterton 200",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Snetterton2019_100",
+      "Corners": 6,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 1580,
+      "MaxGridSize": 26,
+      "Name": "Snetterton 100",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 0.9473,
+  "RawTrackLocations": [],
+  "ShortName": "Snetterton"
+}

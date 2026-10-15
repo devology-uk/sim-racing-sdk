@@ -1,0 +1,102 @@
+{
+  "AltitudeM": 180,
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "FullName": "Autodromo Nazionale Monza",
+  "Latitude": 45.620556,
+  "Layouts": [
+    {
+      "Ams2TrackId": "monza_2005",
+      "Corners": 11,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 5790,
+      "MaxGridSize": 48,
+      "Name": "Monza Historic 2005",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_2020",
+      "Corners": 11,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 5790,
+      "MaxGridSize": 48,
+      "Name": "Monza",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_2020_Junior",
+      "Corners": 4,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 2400,
+      "MaxGridSize": 32,
+      "Name": "Monza Junior",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_1991",
+      "Corners": 14,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 5800,
+      "MaxGridSize": 32,
+      "Name": "Monza Historic 1991",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_1971",
+      "Corners": 7,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 5750,
+      "MaxGridSize": 26,
+      "Name": "Monza Historic 1971",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_1971_Junior",
+      "Corners": 4,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 2400,
+      "MaxGridSize": 26,
+      "Name": "Monza Historic 1971 Junior",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_1971_10k",
+      "Corners": 16,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 10100,
+      "MaxGridSize": 26,
+      "Name": "Monza Historic 1971 10K",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_1971_10knc",
+      "Corners": 9,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 10000,
+      "MaxGridSize": 26,
+      "Name": "Monza Historic 1971 10K (no chicane)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Monza_2020_STT",
+      "Corners": 4,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 2040,
+      "MaxGridSize": 20,
+      "Name": "Monza STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 9.289444,
+  "RawTrackLocations": [],
+  "ShortName": "Monza"
+}

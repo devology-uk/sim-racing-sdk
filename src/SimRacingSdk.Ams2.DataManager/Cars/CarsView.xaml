@@ -1,0 +1,290 @@
+<UserControl x:Class="SimRacingSdk.Ams2.DataManager.Cars.CarsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimRacingSdk.Ams2.DataManager.Cars"
+             xmlns:controls="clr-namespace:SimRacingSdk.DataManager.Shared.Controls;assembly=SimRacingSdk.DataManager.Shared"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:CarsViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/SimRacingSdk.DataManager.Shared;component/Themes/EditorForm.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <RadioButton Content="By Class"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         Margin="0,0,15,0"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByGroup}" />
+            <RadioButton Content="All Cars"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Groups}"
+                 SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
+                 Visibility="{Binding IsByGroupMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="220" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      controls:ScrollSelectedIntoView.IsEnabled="True"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Manufacturer"
+                                        Binding="{Binding Manufacturer}" />
+                    <DataGridTextColumn Header="Model"
+                                        Binding="{Binding Model}" />
+                    <DataGridTextColumn Header="Class"
+                                        Binding="{Binding Class}" />
+                    <DataGridTextColumn Header="DLC Pack"
+                                        Binding="{Binding DlcPack}" />
+                    <DataGridTextColumn Header="Power (hp)"
+                                        Binding="{Binding PowerHp}" />
+                    <DataGridTextColumn Header="Weight (kg)"
+                                        Binding="{Binding WeightKg}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Row="1"
+                      Header="Car Details"
+                      Margin="0,10,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,10,0,15">
+                            <Button Content="New Car"
+                                    Command="{Binding NewCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,10,0" />
+                            <Button Content="Save Car"
+                                    Command="{Binding SaveCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0" />
+                            <TextBlock Text="{Binding SaveStatusMessage}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <Grid DataContext="{Binding Editor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="220" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Content="Model" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="1"
+                                     Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="The vehicle name AMS2's shared memory reports, without any BOP suffix" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Content="Manufacturer" />
+                            <ComboBox Grid.Row="0"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Manufacturers, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Manufacturer, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="4"
+                                   Content="Class" />
+                            <ComboBox Grid.Row="0"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Groups, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding CarClass, UpdateSourceTrigger=PropertyChanged}"
+                                      ToolTip="Pick an existing class or type a new one (e.g. a new DLC class)" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Content="DLC Pack" />
+                            <ComboBox Grid.Row="1"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.DlcPacks, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding DlcPack, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                      ToolTip="Leave blank for a base-game car" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Content="AMS2 Car Id" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="3"
+                                     Text="{Binding Ams2CarId, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                     ToolTip="Leave blank to use Model with spaces as underscores; only set it when AMS2's own id differs" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="4"
+                                   Content="Weight Distribution" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="5"
+                                     Text="{Binding WeightDistribution, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Front/rear percentages as the game shows them, e.g. 53.0/47.0" />
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Content="Engine" />
+                            <ComboBox Grid.Row="2"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Engines, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Engine, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Content="Displacement (L)" />
+                            <TextBox Grid.Row="2"
+                                     Grid.Column="3"
+                                     Text="{Binding DisplacementL, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="4"
+                                   Content="Engine Placement" />
+                            <ComboBox Grid.Row="2"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.EnginePlacements, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding EnginePlacement, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   Content="Driveline" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Drivelines, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Driveline, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Content="Transmission" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Transmissions, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Transmission, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="4"
+                                   Content="Differential" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Differentials, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Differential, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   Content="Power (hp)" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="1"
+                                     Text="{Binding PowerHp, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Content="Torque (Nm)" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="3"
+                                     Text="{Binding TorqueNm, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="4"
+                                   Content="Top Speed (km/h)" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="5"
+                                     Text="{Binding TopSpeedKph, UpdateSourceTrigger=LostFocus}" />
+
+                            <Label Grid.Row="5"
+                                   Grid.Column="0"
+                                   Content="Weight (kg)" />
+                            <TextBox Grid.Row="5"
+                                     Grid.Column="1"
+                                     Text="{Binding WeightKg, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="2"
+                                   Content="Wheelbase (m)" />
+                            <TextBox Grid.Row="5"
+                                     Grid.Column="3"
+                                     Text="{Binding WheelBaseM, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="4"
+                                   Content="Electronics" />
+                            <ComboBox Grid.Row="5"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Electronics, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Electronics, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <WrapPanel Grid.Row="6"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="6"
+                                       Margin="0,8,0,0">
+                                <CheckBox Content="Pit Speed Limiter"
+                                          IsChecked="{Binding HasPitSpeedLimiter}" />
+                                <CheckBox Content="Headlights"
+                                          IsChecked="{Binding HasHeadlights}" />
+                                <CheckBox Content="On-Board Brake Bias"
+                                          IsChecked="{Binding HasOnBoardBrakeBias}" />
+                                <CheckBox Content="On-Board Roll Bars"
+                                          IsChecked="{Binding HasOnBoardRollBars}" />
+                                <CheckBox Content="Adjustable Turbo"
+                                          IsChecked="{Binding HasAdjustableTurbo}" />
+                                <CheckBox Content="Boost Button"
+                                          IsChecked="{Binding HasBoostButton}" />
+                                <CheckBox Content="DRS"
+                                          IsChecked="{Binding HasDrs}" />
+                            </WrapPanel>
+                        </Grid>
+
+                        <Separator Margin="0,15,0,15" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Generate Core Provider"
+                                    Command="{Binding GenerateCoreProviderCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0"
+                                    ToolTip="Regenerates SimRacingSdk.Ams2.Core's car model, interface and provider from every car saved here" />
+                            <TextBlock Text="{Binding GenerateStatusMessage}"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

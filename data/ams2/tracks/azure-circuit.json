@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 1,
+  "Country": "Reiza",
+  "CountryCode": "RZA",
+  "FullName": "Azure Circuit",
+  "Latitude": 0,
+  "Layouts": [
+    {
+      "Ams2TrackId": "azure_circuit_2021",
+      "Corners": 19,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 3330,
+      "MaxGridSize": 26,
+      "Name": "Azure Circuit",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 0,
+  "RawTrackLocations": [],
+  "ShortName": "Azure Circuit"
+}

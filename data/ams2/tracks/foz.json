@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 164,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Foz do Iguaçu",
+  "Latitude": -25.5182827,
+  "Layouts": [
+    {
+      "Ams2TrackId": "foz_rx",
+      "Corners": 8,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 910,
+      "MaxGridSize": 8,
+      "Name": "Foz",
+      "TrackType": "Rallycross"
+    }
+  ],
+  "Longitude": -54.5879,
+  "RawTrackLocations": [],
+  "ShortName": "Foz"
+}

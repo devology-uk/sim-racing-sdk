@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 120,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional de Santa Cruz do Sul",
+  "Latitude": -29.8,
+  "Layouts": [
+    {
+      "Ams2TrackId": "santacruz",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 3320,
+      "MaxGridSize": 48,
+      "Name": "Santa Cruz do Sul",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -52.436667,
+  "RawTrackLocations": [],
+  "ShortName": "Santa Cruz"
+}

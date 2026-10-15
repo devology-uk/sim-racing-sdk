@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 377,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "World Wide Technology Raceway",
+  "Latitude": 38.6507585,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Gateway_OVAL",
+      "Corners": 4,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Oval",
+      "LengthM": 2010,
+      "MaxGridSize": 32,
+      "Name": "WWT Raceway Oval",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "Gateway_RC1",
+      "Corners": 10,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 2570,
+      "MaxGridSize": 32,
+      "Name": "WWT Raceway Road Course (Short)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Gateway_RC2",
+      "Corners": 14,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 3210,
+      "MaxGridSize": 32,
+      "Name": "WWT Raceway Road Course (Long)",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -90.1379298,
+  "RawTrackLocations": [],
+  "ShortName": "Gateway"
+}

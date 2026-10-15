@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 10,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Galeao Airport",
+  "Latitude": -22.802723,
+  "Layouts": [
+    {
+      "Ams2TrackId": "galeao_airport",
+      "Corners": 5,
+      "DlcPack": null,
+      "Grade": "Temporary",
+      "LengthM": 3200,
+      "MaxGridSize": 32,
+      "Name": "Galeao Airport",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -43.2501475,
+  "RawTrackLocations": [],
+  "ShortName": "Galeao Airport"
+}

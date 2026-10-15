@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 2,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Long Beach",
+  "Latitude": 33.766389,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": "Racin´ USA Expansion Pack Pt1",
+      "Grade": "Grade 3",
+      "LengthM": 3160,
+      "MaxGridSize": 48,
+      "Name": "Long Beach",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 3160,
+      "MaxGridSize": 20,
+      "Name": "Long Beach STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -118.192778,
+  "RawTrackLocations": [],
+  "ShortName": "Long Beach"
+}

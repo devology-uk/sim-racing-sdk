@@ -1,0 +1,112 @@
+{
+  "AltitudeM": 102,
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "FullName": "Hockenheimring Baden-Württemberg",
+  "Latitude": 49.3271529,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Hockenheim_GP",
+      "Corners": 17,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 4570,
+      "MaxGridSize": 48,
+      "Name": "Hockenheim",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_RX",
+      "Corners": 17,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 1120,
+      "MaxGridSize": 8,
+      "Name": "Hockenheim Rallycross",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 16,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 3690,
+      "MaxGridSize": 30,
+      "Name": "Hockenheim National",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_ShortA",
+      "Corners": 11,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 2630,
+      "MaxGridSize": 30,
+      "Name": "Hockenheim Short A",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_ShortB",
+      "Corners": 13,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 2600,
+      "MaxGridSize": 30,
+      "Name": "Hockenheim Short B",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_2001",
+      "Corners": 16,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 6820,
+      "MaxGridSize": 30,
+      "Name": "Hockenheim Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_STT",
+      "Corners": 11,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 2630,
+      "MaxGridSize": 20,
+      "Name": "Hockenheim STT",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_1988",
+      "Corners": 15,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 6790,
+      "MaxGridSize": 36,
+      "Name": "Hockenheim Historic 1988",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_1988_short",
+      "Corners": 13,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 2630,
+      "MaxGridSize": 36,
+      "Name": "Hockenheim Historic 1988 Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Hockenheim_1977",
+      "Corners": 13,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 6780,
+      "MaxGridSize": 36,
+      "Name": "Hockenheim Historic 1977",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 8.562912,
+  "RawTrackLocations": [],
+  "ShortName": "Hockenheimring"
+}

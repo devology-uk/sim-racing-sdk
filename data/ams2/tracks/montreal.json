@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 13,
+  "Country": "Canada",
+  "CountryCode": "CAN",
+  "FullName": "Circuit Gilles Villeneuve",
+  "Latitude": 45.500556,
+  "Layouts": [
+    {
+      "Ams2TrackId": "montrealmodern",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4360,
+      "MaxGridSize": 40,
+      "Name": "Montreal",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "MontrealHistoric_1991",
+      "Corners": 16,
+      "DlcPack": "Historic Track Pack Pt2",
+      "Grade": "Historic",
+      "LengthM": 4430,
+      "MaxGridSize": 40,
+      "Name": "Montreal Historic 1991",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "montrealhistoric",
+      "Corners": 16,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 4430,
+      "MaxGridSize": 40,
+      "Name": "Montreal Historic 1988",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -73.5225,
+  "RawTrackLocations": [],
+  "ShortName": "Montreal"
+}

@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 586,
+  "Country": "Argentina",
+  "CountryCode": "ARG",
+  "FullName": "Autódromo Oscar Cabalén",
+  "Latitude": -31.5777004,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Cordoba_GP",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 4060,
+      "MaxGridSize": 26,
+      "Name": "Córdoba No.4",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Cordoba",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3650,
+      "MaxGridSize": 26,
+      "Name": "Córdoba TC",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Cordoba_NATL",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2060,
+      "MaxGridSize": 26,
+      "Name": "Córdoba No.2",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -64.3674171,
+  "RawTrackLocations": [],
+  "ShortName": "Córdoba"
+}

@@ -1,0 +1,72 @@
+{
+  "AltitudeM": 660,
+  "Country": "Austria",
+  "CountryCode": "AUT",
+  "FullName": "Red Bull Ring",
+  "Latitude": 47.2228736,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Spielberg_Modern",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4310,
+      "MaxGridSize": 32,
+      "Name": "Spielberg",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 6,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2330,
+      "MaxGridSize": 32,
+      "Name": "Spielberg Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 6,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 2330,
+      "MaxGridSize": 20,
+      "Name": "Spielberg STT",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Spielberg_Vintage",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 5890,
+      "MaxGridSize": 26,
+      "Name": "Spielberg Historic 1974",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "spielberg_2001",
+      "Corners": 6,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Grade 3",
+      "LengthM": 4310,
+      "MaxGridSize": 26,
+      "Name": "Spielberg Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Spielberg_Historic",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 5910,
+      "MaxGridSize": 34,
+      "Name": "Spielberg Historic 1977",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 14.760198,
+  "RawTrackLocations": [],
+  "ShortName": "Spielberg"
+}

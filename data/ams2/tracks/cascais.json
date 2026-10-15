@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 130,
+  "Country": "Portugal",
+  "CountryCode": "PRT",
+  "FullName": "Autódromo Fernanda Pires da Silva",
+  "Latitude": 38.7491015,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4180,
+      "MaxGridSize": 48,
+      "Name": "Cascais",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 4150,
+      "MaxGridSize": 48,
+      "Name": "Cascais Alternate",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": "Historic Track Pack Pt1",
+      "Grade": "Historic",
+      "LengthM": 4350,
+      "MaxGridSize": 30,
+      "Name": "Cascais Historic 1988",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -9.3960739,
+  "RawTrackLocations": [],
+  "ShortName": "Cascais"
+}

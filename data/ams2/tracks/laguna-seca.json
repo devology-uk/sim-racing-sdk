@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 220,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "WeatherTech Raceway Laguna Seca",
+  "Latitude": 36.584167,
+  "Layouts": [
+    {
+      "Ams2TrackId": "laguna_seca_2020",
+      "Corners": 11,
+      "DlcPack": "Racin´ USA Expansion Pack Pt1",
+      "Grade": "Grade 2",
+      "LengthM": 3600,
+      "MaxGridSize": 48,
+      "Name": "Laguna Seca 2020",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -121.753611,
+  "RawTrackLocations": [],
+  "ShortName": "Laguna Seca"
+}

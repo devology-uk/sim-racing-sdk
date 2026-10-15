@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 71,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional de Tarumã",
+  "Latitude": -30.048611,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Taruma",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 3010,
+      "MaxGridSize": 32,
+      "Name": "Tarumã Internacional",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "TarumaC",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3070,
+      "MaxGridSize": 32,
+      "Name": "Tarumã Chicane",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -51.019167,
+  "RawTrackLocations": [],
+  "ShortName": "Tarumã"
+}

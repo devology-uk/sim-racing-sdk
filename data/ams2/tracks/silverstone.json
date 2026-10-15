@@ -1,0 +1,102 @@
+{
+  "AltitudeM": 154,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Silverstone Circuit",
+  "Latitude": 52.071,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Silverstone_2019",
+      "Corners": 18,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 5890,
+      "MaxGridSize": 48,
+      "Name": "Silverstone",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_Intl_2019",
+      "Corners": 9,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 2970,
+      "MaxGridSize": 32,
+      "Name": "Silverstone International",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_Natl_2019",
+      "Corners": 5,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 2630,
+      "MaxGridSize": 36,
+      "Name": "Silverstone National",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_2001",
+      "Corners": 16,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 5140,
+      "MaxGridSize": 36,
+      "Name": "Silverstone Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_Intl_2001",
+      "Corners": 10,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 3610,
+      "MaxGridSize": 36,
+      "Name": "Silverstone International Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_Natl_2001",
+      "Corners": 5,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 2630,
+      "MaxGridSize": 36,
+      "Name": "Silverstone National Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "silverstone_1991",
+      "Corners": 17,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 5220,
+      "MaxGridSize": 36,
+      "Name": "Silverstone Historic 1991",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_1975",
+      "Corners": 10,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 4710,
+      "MaxGridSize": 36,
+      "Name": "Silverstone Historic 1975",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Silverstone_1975nc",
+      "Corners": 8,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 4710,
+      "MaxGridSize": 36,
+      "Name": "Silverstone Historic 1975 (no chicane)",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -1.0147,
+  "RawTrackLocations": [],
+  "ShortName": "Silverstone"
+}

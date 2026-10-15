@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 52,
+  "Country": "France",
+  "CountryCode": "FRA",
+  "FullName": "Circuit de la Sarthe",
+  "Latitude": 47.933333,
+  "Layouts": [
+    {
+      "Ams2TrackId": "le_mans_24h",
+      "Corners": 38,
+      "DlcPack": "Circuit des 24 Heures du Mans",
+      "Grade": "Grade 2",
+      "LengthM": 13620,
+      "MaxGridSize": 60,
+      "Name": "Circuit des 24 Heures du Mans",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "le_mans_24h_2005",
+      "Corners": 38,
+      "DlcPack": "Historic Track Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 13650,
+      "MaxGridSize": 48,
+      "Name": "Circuit des 24 Heures du Mans Historic 2005",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "le_mans_bugatti",
+      "Corners": 14,
+      "DlcPack": "Circuit des 24 Heures du Mans",
+      "Grade": "Grade 2",
+      "LengthM": 4180,
+      "MaxGridSize": 32,
+      "Name": "Le Mans Circuit Bugatti",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 0.233333,
+  "RawTrackLocations": [],
+  "ShortName": "Le Mans"
+}

@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 672,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Curvelo",
+  "Latitude": -18.9011312,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Curvelo",
+      "Corners": 18,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4420,
+      "MaxGridSize": 48,
+      "Name": "Curvelo Long",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Curvelob",
+      "Corners": 18,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3330,
+      "MaxGridSize": 48,
+      "Name": "Curvelo Short",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -44.557409,
+  "RawTrackLocations": [],
+  "ShortName": "Curvelo"
+}

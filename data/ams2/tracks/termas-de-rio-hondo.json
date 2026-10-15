@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 280,
+  "Country": "Argentina",
+  "CountryCode": "ARG",
+  "FullName": "Autódromo Termas de Río Hondo",
+  "Latitude": -27.505861,
+  "Layouts": [
+    {
+      "Ams2TrackId": "termas_rio_hondo",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4800,
+      "MaxGridSize": 48,
+      "Name": "Termas de Río Hondo",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -64.914472,
+  "RawTrackLocations": [],
+  "ShortName": "Termas de Río Hondo"
+}

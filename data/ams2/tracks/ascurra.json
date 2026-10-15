@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 88,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Max Mohr Circuit",
+  "Latitude": -26.9372386,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 8,
+      "DlcPack": null,
+      "Grade": "Off-road",
+      "LengthM": 910,
+      "MaxGridSize": 16,
+      "Name": "Ascurra Dirt",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 8,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 910,
+      "MaxGridSize": 16,
+      "Name": "Ascurra RX",
+      "TrackType": "Rallycross"
+    }
+  ],
+  "Longitude": -49.3903302,
+  "RawTrackLocations": [],
+  "ShortName": "Ascurra"
+}

@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 881,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional de Curitiba",
+  "Latitude": -25.444722,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3690,
+      "MaxGridSize": 30,
+      "Name": "Curitiba",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Curitiba_outer",
+      "Corners": 6,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2600,
+      "MaxGridSize": 30,
+      "Name": "Curitiba Outer",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -49.196944,
+  "RawTrackLocations": [],
+  "ShortName": "Curitiba"
+}

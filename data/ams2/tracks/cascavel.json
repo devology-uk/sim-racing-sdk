@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 750,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Zilmar Beux de Cascavel",
+  "Latitude": -24.9819606,
+  "Layouts": [
+    {
+      "Ams2TrackId": "cascavel",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3300,
+      "MaxGridSize": 48,
+      "Name": "Cascavel",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -53.3897087,
+  "RawTrackLocations": [],
+  "ShortName": "Cascavel"
+}

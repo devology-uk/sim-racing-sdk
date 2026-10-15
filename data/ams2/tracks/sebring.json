@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 18,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Sebring International Raceway",
+  "Latitude": 27.455,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 17,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 5850,
+      "MaxGridSize": 48,
+      "Name": "Sebring",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "sebring",
+      "Corners": 9,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 3210,
+      "MaxGridSize": 32,
+      "Name": "Sebring School",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 13,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 2730,
+      "MaxGridSize": 32,
+      "Name": "Sebring Club",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 9,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 3210,
+      "MaxGridSize": 20,
+      "Name": "Sebring STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -81.35,
+  "RawTrackLocations": [],
+  "ShortName": "Sebring"
+}

@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 750,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Velo Città",
+  "Latitude": -22.288889,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Velocitta",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3320,
+      "MaxGridSize": 34,
+      "Name": "Velo Città",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VelocittaTD",
+      "Corners": 16,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3360,
+      "MaxGridSize": 34,
+      "Name": "Velo Città Track Day",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VelocittaCD",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 1720,
+      "MaxGridSize": 34,
+      "Name": "Velo Città Club Day",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -46.848333,
+  "RawTrackLocations": [],
+  "ShortName": "Velo Città"
+}

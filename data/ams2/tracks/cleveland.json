@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 199,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Grand Prix of Cleveland",
+  "Latitude": 41.5312313,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 10,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Temporary",
+      "LengthM": 3380,
+      "MaxGridSize": 32,
+      "Name": "Cleveland GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 10,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Temporary",
+      "LengthM": 3380,
+      "MaxGridSize": 20,
+      "Name": "Cleveland STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -81.6790431,
+  "RawTrackLocations": [],
+  "ShortName": "Cleveland"
+}

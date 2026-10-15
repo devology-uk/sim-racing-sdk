@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 35,
+  "Country": "Norway",
+  "CountryCode": "NOR",
+  "FullName": "Buskerud Kart Track",
+  "Latitude": 60.2446211,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Buskerud_Long",
+      "Corners": 22,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1530,
+      "MaxGridSize": 32,
+      "Name": "Buskerud Kart Long",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Buskerud_Short",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 950,
+      "MaxGridSize": 24,
+      "Name": "Buskerud Kart Short",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": 7.7015854,
+  "RawTrackLocations": [],
+  "ShortName": "Buskerud"
+}

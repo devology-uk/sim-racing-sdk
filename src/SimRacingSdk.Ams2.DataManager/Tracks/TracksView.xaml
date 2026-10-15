@@ -1,0 +1,295 @@
+<UserControl x:Class="SimRacingSdk.Ams2.DataManager.Tracks.TracksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimRacingSdk.Ams2.DataManager.Tracks"
+             xmlns:controls="clr-namespace:SimRacingSdk.DataManager.Shared.Controls;assembly=SimRacingSdk.DataManager.Shared"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:TracksViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/SimRacingSdk.DataManager.Shared;component/Themes/EditorForm.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <RadioButton Content="By Country"
+                         GroupName="TrackBrowseMode"
+                         VerticalAlignment="Center"
+                         Margin="0,0,15,0"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByGroup}" />
+            <RadioButton Content="All Tracks"
+                         GroupName="TrackBrowseMode"
+                         VerticalAlignment="Center"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Groups}"
+                 SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
+                 Visibility="{Binding IsByGroupMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      controls:ScrollSelectedIntoView.IsEnabled="True"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Short Name"
+                                        Binding="{Binding ShortName}" />
+                    <DataGridTextColumn Header="Full Name"
+                                        Binding="{Binding FullName}" />
+                    <DataGridTextColumn Header="Country"
+                                        Binding="{Binding Country}" />
+                    <DataGridTextColumn Header="Layouts"
+                                        Binding="{Binding Layouts.Count}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Row="1"
+                      Header="Track Details"
+                      Margin="0,10,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,10,0,15">
+                            <Button Content="New Track"
+                                    Command="{Binding NewCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,10,0" />
+                            <Button Content="Save Track"
+                                    Command="{Binding SaveCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0" />
+                            <TextBlock Text="{Binding SaveStatusMessage}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <Grid DataContext="{Binding Editor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="240" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Content="Short Name" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="1"
+                                     Text="{Binding ShortName, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Matched against the track location AMS2's shared memory reports, ignoring case, spaces and punctuation" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Content="Full Name" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="3"
+                                     Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="4"
+                                   Content="Altitude (m)" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="5"
+                                     Text="{Binding AltitudeM, UpdateSourceTrigger=LostFocus}" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Content="Country" />
+                            <ComboBox Grid.Row="1"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Groups, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}"
+                                      ToolTip="Pick an existing country or type a new one" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Content="Country Code" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="3"
+                                     Text="{Binding CountryCode, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="ISO 3166-1 alpha-3, e.g. GBR - matches the flag image file names" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="4"
+                                   Content="Latitude" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="5"
+                                     Text="{Binding Latitude, UpdateSourceTrigger=LostFocus}" />
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   VerticalAlignment="Top"
+                                   Content="Raw Track Locations" />
+                            <TextBox Grid.Row="2"
+                                     Grid.Column="1"
+                                     Grid.ColumnSpan="3"
+                                     Width="420"
+                                     Height="50"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     Text="{Binding RawTrackLocations, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Track locations AMS2 reports that don't reduce to Short Name, one per line, e.g. Nurburgring_2025" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="4"
+                                   VerticalAlignment="Top"
+                                   Content="Longitude" />
+                            <TextBox Grid.Row="2"
+                                     Grid.Column="5"
+                                     VerticalAlignment="Top"
+                                     Text="{Binding Longitude, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
+
+                        <Separator Margin="0,15,0,15" />
+
+                        <Label Content="Layouts" />
+                        <Grid DataContext="{Binding Editor.Layouts}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="240" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <ListBox ItemsSource="{Binding Items}"
+                                         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                         DisplayMemberPath="Name"
+                                         Height="160" />
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,8,0,0">
+                                    <Button Content="Add Layout"
+                                            Command="{Binding AddCommand}"
+                                            Padding="10,4"
+                                            Margin="0,0,10,0" />
+                                    <Button Content="Remove Layout"
+                                            Command="{Binding RemoveCommand}"
+                                            Padding="10,4" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <Grid Grid.Column="1"
+                                  Margin="15,0,0,0"
+                                  DataContext="{Binding SelectedItem}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="220" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="200" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Content="Layout Name" />
+                                <TextBox Grid.Row="0"
+                                         Grid.Column="1"
+                                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Content="AMS2 Track Id" />
+                                <TextBox Grid.Row="0"
+                                         Grid.Column="3"
+                                         Text="{Binding Ams2TrackId, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                         ToolTip="The track variation AMS2 reports, e.g. Adelaide_Modern_STT. Leave blank only if it's the layout name with spaces as underscores." />
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Content="Corners" />
+                                <TextBox Grid.Row="1"
+                                         Grid.Column="1"
+                                         Text="{Binding Corners, UpdateSourceTrigger=LostFocus}" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="2"
+                                       Content="Length (m)" />
+                                <TextBox Grid.Row="1"
+                                         Grid.Column="3"
+                                         Text="{Binding LengthM, UpdateSourceTrigger=LostFocus}" />
+
+                                <Label Grid.Row="2"
+                                       Grid.Column="0"
+                                       Content="Grade" />
+                                <ComboBox Grid.Row="2"
+                                          Grid.Column="1"
+                                          IsEditable="True"
+                                          ItemsSource="{Binding DataContext.Suggestions.Grades, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          Text="{Binding Grade, UpdateSourceTrigger=PropertyChanged}" />
+                                <Label Grid.Row="2"
+                                       Grid.Column="2"
+                                       Content="Track Type" />
+                                <ComboBox Grid.Row="2"
+                                          Grid.Column="3"
+                                          IsEditable="True"
+                                          ItemsSource="{Binding DataContext.Suggestions.TrackTypes, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          Text="{Binding TrackType, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <Label Grid.Row="3"
+                                       Grid.Column="0"
+                                       Content="Max Grid Size" />
+                                <TextBox Grid.Row="3"
+                                         Grid.Column="1"
+                                         Text="{Binding MaxGridSize, UpdateSourceTrigger=LostFocus}" />
+                                <Label Grid.Row="3"
+                                       Grid.Column="2"
+                                       Content="DLC Pack" />
+                                <ComboBox Grid.Row="3"
+                                          Grid.Column="3"
+                                          IsEditable="True"
+                                          ItemsSource="{Binding DataContext.Suggestions.DlcPacks, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          Text="{Binding DlcPack, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
+                                          ToolTip="Leave blank for a base-game layout" />
+                            </Grid>
+                        </Grid>
+
+                        <Separator Margin="0,15,0,15" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Generate Core Provider"
+                                    Command="{Binding GenerateCoreProviderCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0"
+                                    ToolTip="Regenerates SimRacingSdk.Ams2.Core's track models, interface and provider from every track saved here" />
+                            <TextBlock Text="{Binding GenerateStatusMessage}"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

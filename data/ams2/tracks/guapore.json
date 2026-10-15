@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 474,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional de Guaporé",
+  "Latitude": -28.8444262,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Guapore",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3080,
+      "MaxGridSize": 40,
+      "Name": "Guaporé",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Guapore_STT",
+      "Corners": 7,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 3080,
+      "MaxGridSize": 20,
+      "Name": "Guaporé STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -51.8542861,
+  "RawTrackLocations": [],
+  "ShortName": "Guaporé"
+}

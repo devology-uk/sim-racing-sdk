@@ -1,0 +1,62 @@
+{
+  "AltitudeM": 47,
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "FullName": "Autodromo Enzo e Dino Ferrari",
+  "Latitude": 44.3443939,
+  "Layouts": [
+    {
+      "Ams2TrackId": "imola",
+      "Corners": 19,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4900,
+      "MaxGridSize": 48,
+      "Name": "Imola",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "imola_05",
+      "Corners": 21,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Historic",
+      "LengthM": 4930,
+      "MaxGridSize": 26,
+      "Name": "Imola Historic 2005",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "imola_01",
+      "Corners": 21,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 4930,
+      "MaxGridSize": 26,
+      "Name": "Imola Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "imola_88",
+      "Corners": 21,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 5040,
+      "MaxGridSize": 26,
+      "Name": "Imola Historic 1988",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "imola_72",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 5010,
+      "MaxGridSize": 26,
+      "Name": "Imola Historic 1972",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 11.7130472,
+  "RawTrackLocations": [],
+  "ShortName": "Imola"
+}

@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 828,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Kartódromo Internacional da Granja Viana",
+  "Latitude": -23.6051739,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Granja_VianaCSP2",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 980,
+      "MaxGridSize": 28,
+      "Name": "Copa São Paulo Kart Stage 2",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Granja_VianaKGV101",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1010,
+      "MaxGridSize": 28,
+      "Name": "Granja Viana Kart 101",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Granja_VianaKGV102",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 990,
+      "MaxGridSize": 28,
+      "Name": "Granja Viana Kart 102",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Granja_VianaKGV121",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 800,
+      "MaxGridSize": 28,
+      "Name": "Granja Viana Kart 121",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": -46.8386573,
+  "RawTrackLocations": [],
+  "ShortName": "Granja Viana"
+}

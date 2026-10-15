@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 96,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Donington Park",
+  "Latitude": 52.8304,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4020,
+      "MaxGridSize": 38,
+      "Name": "Donington GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Donington_Nat",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3180,
+      "MaxGridSize": 38,
+      "Name": "Donington National",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -1.3749,
+  "RawTrackLocations": [],
+  "ShortName": "Donington"
+}

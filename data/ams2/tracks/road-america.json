@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 300,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Rod America",
+  "Latitude": 43.7975,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Road_America",
+      "Corners": 14,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 6510,
+      "MaxGridSize": 48,
+      "Name": "Road America",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Road_America_RCB",
+      "Corners": 14,
+      "DlcPack": "Racin´ USA Expansion Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 6510,
+      "MaxGridSize": 48,
+      "Name": "Road America (Bend)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Road_America_STT",
+      "Corners": 14,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 2",
+      "LengthM": 6510,
+      "MaxGridSize": 20,
+      "Name": "Road America STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -87.993889,
+  "RawTrackLocations": [],
+  "ShortName": "Road America"
+}

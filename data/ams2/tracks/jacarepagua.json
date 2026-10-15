@@ -1,0 +1,62 @@
+{
+  "AltitudeM": 30,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional Nelson Piquet",
+  "Latitude": -22.975556,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Jacarepagua2005",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 4900,
+      "MaxGridSize": 40,
+      "Name": "Jacarepaguá Historic 2005",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "jacarepagua_historic",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 5000,
+      "MaxGridSize": 40,
+      "Name": "Jacarepaguá Historic 1988",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "JacarepaguaOVAL",
+      "Corners": 4,
+      "DlcPack": null,
+      "Grade": "Oval",
+      "LengthM": 3000,
+      "MaxGridSize": 32,
+      "Name": "Jacarepaguá Historic 2005 Oval",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "JacarepaguaSCB",
+      "Corners": 8,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 3300,
+      "MaxGridSize": 40,
+      "Name": "Jacarepaguá Historic 2012 SCB",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "JacarepaguaSHORT",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 3040,
+      "MaxGridSize": 40,
+      "Name": "Jacarepaguá Historic 2012 Short",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -43.395,
+  "RawTrackLocations": [],
+  "ShortName": "Jacarepaguá"
+}

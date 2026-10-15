@@ -1,0 +1,82 @@
+{
+  "AltitudeM": 115,
+  "Country": "Spain",
+  "CountryCode": "ESP",
+  "FullName": "Circuit de Barcelona-Catalunya",
+  "Latitude": 41.5695,
+  "Layouts": [
+    {
+      "Ams2TrackId": "barcelona_rx",
+      "Corners": 9,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 1120,
+      "MaxGridSize": 8,
+      "Name": "Circuit de Barcelona-Catalunya RX",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": "Barcelona_GP",
+      "Corners": 16,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 4670,
+      "MaxGridSize": 48,
+      "Name": "Circuit de Barcelona-Catalunya GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Barcelona_GP_NC",
+      "Corners": 14,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 4650,
+      "MaxGridSize": 48,
+      "Name": "Circuit de Barcelona-Catalunya GP (no chicane)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "barcelona_1991",
+      "Corners": 14,
+      "DlcPack": "Historic Track Pack Pt2",
+      "Grade": "Historic",
+      "LengthM": 4740,
+      "MaxGridSize": 32,
+      "Name": "Circuit de Barcelona-Catalunya Historic 1991",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "barcelona_gp_2001",
+      "Corners": 13,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Historic",
+      "LengthM": 4720,
+      "MaxGridSize": 40,
+      "Name": "Circuit de Barcelona-Catalunya Historic 2001",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "barcelona_gp_1999",
+      "Corners": 13,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Historic",
+      "LengthM": 4720,
+      "MaxGridSize": 40,
+      "Name": "Circuit de Barcelona-Catalunya Historic 1999",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Barcelona_NAT_NC",
+      "Corners": 9,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 2990,
+      "MaxGridSize": 48,
+      "Name": "Circuit de Barcelona-Catalunya National",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 2.2575,
+  "RawTrackLocations": [],
+  "ShortName": "Barcelona"
+}

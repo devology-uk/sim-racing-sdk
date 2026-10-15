@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 757,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional Ayrton Senna",
+  "Latitude": -16.7191167,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Goiania",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 3820,
+      "MaxGridSize": 48,
+      "Name": "Goiânia",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "GoianiaShort",
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 1910,
+      "MaxGridSize": 36,
+      "Name": "Goiânia Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "GoianiaOuter",
+      "Corners": 5,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2590,
+      "MaxGridSize": 48,
+      "Name": "Goiânia External",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -49.1946293,
+  "RawTrackLocations": [],
+  "ShortName": "Goiânia"
+}

@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 220,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Indianapolis Motor Speedway",
+  "Latitude": 39.7903187,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Indianapolis_2022_RC",
+      "Corners": 14,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 1",
+      "LengthM": 3920,
+      "MaxGridSize": 48,
+      "Name": "Indianapolis Motor Speedway Road Course",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "indianapolis_2001_oval",
+      "Corners": 4,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Oval",
+      "LengthM": 4020,
+      "MaxGridSize": 48,
+      "Name": "Indianapolis Motor Speedway Historic 2001 Oval",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "indianapolis_2001_rc",
+      "Corners": 14,
+      "DlcPack": "Historic Track Pack Pt4",
+      "Grade": "Grade 1",
+      "LengthM": 3920,
+      "MaxGridSize": 48,
+      "Name": "Indianapolis Motor Speedway Historic 2001 Road",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Indianapolis_2022_Oval",
+      "Corners": 4,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Oval",
+      "LengthM": 4020,
+      "MaxGridSize": 48,
+      "Name": "Indianapolis Motor Speedway Oval",
+      "TrackType": "Oval"
+    }
+  ],
+  "Longitude": -86.236236,
+  "RawTrackLocations": [],
+  "ShortName": "Indianapolis"
+}

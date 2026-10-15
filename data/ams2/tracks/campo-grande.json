@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 592,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Orlando Moura",
+  "Latitude": 3.0513405,
+  "Layouts": [
+    {
+      "Ams2TrackId": "campogrande",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3430,
+      "MaxGridSize": 48,
+      "Name": "Campo Grande",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -82.0531904,
+  "RawTrackLocations": [],
+  "ShortName": "Campo Grande"
+}

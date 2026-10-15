@@ -1,0 +1,82 @@
+{
+  "AltitudeM": 10,
+  "Country": "Argentina",
+  "CountryCode": "ARG",
+  "FullName": "Autódromo Óscar y Juan Gálvez",
+  "Latitude": -34.6978258,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Buenos_Aires_6_T",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4310,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.6 S",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_6",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4250,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.6",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_7",
+      "Corners": 4,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 2600,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.7",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_8",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 3320,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.8",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_9",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 3330,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.9",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_12",
+      "Corners": 8,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 5650,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.12",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Buenos_Aires_15",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 5940,
+      "MaxGridSize": 32,
+      "Name": "Buenos Aires Circuito No.15",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -58.4714564,
+  "RawTrackLocations": [],
+  "ShortName": "Buenos Aires"
+}

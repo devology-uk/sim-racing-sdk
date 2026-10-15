@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 65,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Oulton Park",
+  "Latitude": 53.1768,
+  "Layouts": [
+    {
+      "Ams2TrackId": "OultonPark",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 4330,
+      "MaxGridSize": 28,
+      "Name": "Oulton Park International",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "OultonParkIsland",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 3630,
+      "MaxGridSize": 28,
+      "Name": "Oulton Park Island",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "OultonParkFosters",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 2660,
+      "MaxGridSize": 28,
+      "Name": "Oulton Park Fosters",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "OultonParkClassic",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 4290,
+      "MaxGridSize": 28,
+      "Name": "Oulton Park Classic",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -2.6168,
+  "RawTrackLocations": [],
+  "ShortName": "Oulton Park"
+}

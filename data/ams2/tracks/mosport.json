@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 300,
+  "Country": "Canada",
+  "CountryCode": "CAN",
+  "FullName": "Canadian Tire Motorsport Park",
+  "Latitude": 44.0512778,
+  "Layouts": [
+    {
+      "Ams2TrackId": "mosport",
+      "Corners": 10,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 3950,
+      "MaxGridSize": 48,
+      "Name": "Mosport",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -78.6797009,
+  "RawTrackLocations": [],
+  "ShortName": "Mosport"
+}

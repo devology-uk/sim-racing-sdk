@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 9,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Daytona International Speedway",
+  "Latitude": 17.3011292,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Daytona_Circuit",
+      "Corners": 12,
+      "DlcPack": "Racin´ USA Expansion Pack Pt1",
+      "Grade": "Grade 3",
+      "LengthM": 5720,
+      "MaxGridSize": 48,
+      "Name": "Daytona Sports Car Course",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 15,
+      "DlcPack": "Racin´ USA Expansion Pack Pt1",
+      "Grade": "Grade 3",
+      "LengthM": 5720,
+      "MaxGridSize": 48,
+      "Name": "Daytona Nascar Road Course",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Daytona_Speedway_Tri_Oval",
+      "Corners": 3,
+      "DlcPack": "Racin´ USA Expansion Pack Pt1",
+      "Grade": "Oval",
+      "LengthM": 4020,
+      "MaxGridSize": 48,
+      "Name": "Daytona Nascar Tri-Oval",
+      "TrackType": "Oval"
+    }
+  ],
+  "Longitude": -69.8407186,
+  "RawTrackLocations": [],
+  "ShortName": "Daytona"
+}

@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 700,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Speedland Kart Centre",
+  "Latitude": -23.5333361,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Speedland1",
+      "Corners": 29,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 960,
+      "MaxGridSize": 14,
+      "Name": "Speedland Kart 1",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Speedland2",
+      "Corners": 30,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 980,
+      "MaxGridSize": 14,
+      "Name": "Speedland Kart 2",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Speedland3",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 430,
+      "MaxGridSize": 14,
+      "Name": "Speedland Kart 2",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Speedland4",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 580,
+      "MaxGridSize": 14,
+      "Name": "Speedland Kart 4",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": -46.5863756,
+  "RawTrackLocations": [],
+  "ShortName": "Speedland"
+}

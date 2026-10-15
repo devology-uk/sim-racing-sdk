@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 277,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Michelin Raceway Road Atlanta",
+  "Latitude": 34.146667,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 12,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 4080,
+      "MaxGridSize": 48,
+      "Name": "Road Atlanta",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "road_atlanta_2005",
+      "Corners": 12,
+      "DlcPack": "Historic Track Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 4080,
+      "MaxGridSize": 48,
+      "Name": "Road Atlanta Historic 2005",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "road_atlanta_2005_short",
+      "Corners": 9,
+      "DlcPack": "Historic Track Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 2580,
+      "MaxGridSize": 48,
+      "Name": "Road Atlanta Historic 2005 Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 12,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Grade 2",
+      "LengthM": 4100,
+      "MaxGridSize": 32,
+      "Name": "Road Atlanta Moto",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -83.817778,
+  "RawTrackLocations": [],
+  "ShortName": "Road Atlanta"
+}

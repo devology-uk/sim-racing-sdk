@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 566,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Internacional Ayrton Senna",
+  "Latitude": -23.282222,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Londrina",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3020,
+      "MaxGridSize": 48,
+      "Name": "Londrina Short",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Londrina_long",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3140,
+      "MaxGridSize": 48,
+      "Name": "Londrina Long",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Londrinakart1",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1000,
+      "MaxGridSize": 28,
+      "Name": "Londrina Kart One",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Londrinakart2",
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 860,
+      "MaxGridSize": 28,
+      "Name": "Londrina Kart Two",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": -51.167222,
+  "RawTrackLocations": [],
+  "ShortName": "Londrina"
+}

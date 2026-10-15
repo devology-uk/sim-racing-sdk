@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 177,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Brands Hatch Circuit",
+  "Latitude": 51.3566,
+  "Layouts": [
+    {
+      "Ams2TrackId": "BrandsHatch_GP",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 3910,
+      "MaxGridSize": 32,
+      "Name": "Brands Hatch",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "BrandsHatch_Indy",
+      "Corners": 5,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 1940,
+      "MaxGridSize": 32,
+      "Name": "Brands Hatch Indy",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 0.2614,
+  "RawTrackLocations": [],
+  "ShortName": "Brands Hatch"
+}

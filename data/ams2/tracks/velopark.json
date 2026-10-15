@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 15,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Velopark",
+  "Latitude": -29.822778,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2270,
+      "MaxGridSize": 20,
+      "Name": "Velopark 2017 STT",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Velopark2",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2270,
+      "MaxGridSize": 34,
+      "Name": "Velopark 2017",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Velopark2_STT",
+      "Corners": 10,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 2150,
+      "MaxGridSize": 34,
+      "Name": "Velopark 2010",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -51.320833,
+  "RawTrackLocations": [],
+  "ShortName": "Velopark"
+}

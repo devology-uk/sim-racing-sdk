@@ -1,0 +1,82 @@
+{
+  "AltitudeM": 560,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Pocono Raceway",
+  "Latitude": 41.0565549,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Pocono_RC5",
+      "Corners": 9,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 3020,
+      "MaxGridSize": 32,
+      "Name": "Pocono Southeast Course 5",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Pocono_RC1",
+      "Corners": 13,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 2200,
+      "MaxGridSize": 32,
+      "Name": "Pocono East Course 1",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Pocono_RC2",
+      "Corners": 7,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 4020,
+      "MaxGridSize": 32,
+      "Name": "Pocono North/South Course 1 (no chicane)",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Pocono_RC3",
+      "Corners": 10,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 4030,
+      "MaxGridSize": 32,
+      "Name": "Pocono North/South Course 1",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Pocono_OVAL",
+      "Corners": 3,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Oval",
+      "LengthM": 4020,
+      "MaxGridSize": 48,
+      "Name": "Pocono Oval",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "Pocono_RC4",
+      "Corners": 10,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 3630,
+      "MaxGridSize": 32,
+      "Name": "Pocono North/South Course 2",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Pocono_RC6",
+      "Corners": 16,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 2200,
+      "MaxGridSize": 32,
+      "Name": "Pocono Southeast Course 1",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -75.5118204,
+  "RawTrackLocations": [],
+  "ShortName": "Pocono"
+}

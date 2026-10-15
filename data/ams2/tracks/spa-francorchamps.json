@@ -1,0 +1,92 @@
+{
+  "AltitudeM": 394,
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "FullName": "Circuit de Spa-Francorchamps",
+  "Latitude": 50.4375,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 20,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 7000,
+      "MaxGridSize": 48,
+      "Name": "Spa-Francorchamps 2022",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 20,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 7000,
+      "MaxGridSize": 48,
+      "Name": "Spa-Francorchamps 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Spa-francorchamps_2022_RX",
+      "Corners": 5,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 890,
+      "MaxGridSize": 8,
+      "Name": "Spa-Francorchamps RX",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "spa-francorchamps_1993",
+      "Corners": 23,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 6940,
+      "MaxGridSize": 30,
+      "Name": "Spa-Francorchamps Historic 1993",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Spa-francorchamps_1970",
+      "Corners": 21,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 14120,
+      "MaxGridSize": 32,
+      "Name": "Spa-Francorchamps Historic 1970",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Spa-francorchamps_1970_NC",
+      "Corners": 21,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 14120,
+      "MaxGridSize": 32,
+      "Name": "Spa-Francorchamps Historic 1970 1000KM",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "spa-francorchamps_2005_ec",
+      "Corners": 24,
+      "DlcPack": "Historic Track Pack Pt3",
+      "Grade": "Grade 1",
+      "LengthM": 6970,
+      "MaxGridSize": 48,
+      "Name": "Spa-Francorchamps Historic 2005 Endurance",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "spa-francorchamps_2005",
+      "Corners": null,
+      "DlcPack": "Historic Track Pack Pt3",
+      "Grade": "Grade 1",
+      "LengthM": 6970,
+      "MaxGridSize": 48,
+      "Name": "Spa-Francorchamps Historic 2005",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 5.9685,
+  "RawTrackLocations": [],
+  "ShortName": "Spa-Francorchamps"
+}

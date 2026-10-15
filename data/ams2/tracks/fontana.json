@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 377,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Auto Club Speedway",
+  "Latitude": 34.0867452,
+  "Layouts": [
+    {
+      "Ams2TrackId": "fontana_oval_historic",
+      "Corners": 4,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Oval",
+      "LengthM": 3210,
+      "MaxGridSize": 48,
+      "Name": "Fontan Oval Historic",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "Fontana_OVAL",
+      "Corners": 4,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Oval",
+      "LengthM": 3210,
+      "MaxGridSize": 32,
+      "Name": "Auto Club Speedway Oval",
+      "TrackType": "Oval"
+    },
+    {
+      "Ams2TrackId": "Fontana_SCC",
+      "Corners": 17,
+      "DlcPack": "Racin´ USA Expansion Pack Pt3",
+      "Grade": "Grade 2",
+      "LengthM": 4500,
+      "MaxGridSize": 30,
+      "Name": "Auto Club Speedway Sports Car Course",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -117.4953334,
+  "RawTrackLocations": [],
+  "ShortName": "Fontana"
+}

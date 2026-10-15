@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 38,
+  "Country": "Spain",
+  "CountryCode": "ESP",
+  "FullName": "Circuito de Jerez – Ángel Nieto",
+  "Latitude": 36.708333,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Jerez_Standard",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 4410,
+      "MaxGridSize": 42,
+      "Name": "Jerez Moto",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Jerez_2019",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4420,
+      "MaxGridSize": 40,
+      "Name": "Jerez Chicane",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "jerez_1988",
+      "Corners": 16,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Historic",
+      "LengthM": 4210,
+      "MaxGridSize": 32,
+      "Name": "Jerez Historic 1988",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -6.034167,
+  "RawTrackLocations": [],
+  "ShortName": "Jerez"
+}

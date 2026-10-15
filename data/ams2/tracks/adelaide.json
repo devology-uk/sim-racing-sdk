@@ -1,0 +1,42 @@
+{
+  "AltitudeM": 52,
+  "Country": "Australia",
+  "CountryCode": "AUS",
+  "FullName": "Adelaide Street Circuit",
+  "Latitude": -34.7072786,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Adelaide_Modern",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3210,
+      "MaxGridSize": 39,
+      "Name": "Adelaide",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 16,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 3780,
+      "MaxGridSize": 26,
+      "Name": "Adelaide Historic",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Adelaide_Modern_STT",
+      "Corners": 14,
+      "DlcPack": "Adrenaline Pack Pt2",
+      "Grade": "Grade 3",
+      "LengthM": 3210,
+      "MaxGridSize": 20,
+      "Name": "Adelaide STT",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 138.3438002,
+  "RawTrackLocations": [],
+  "ShortName": "Adelaide"
+}

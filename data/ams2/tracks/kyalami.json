@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 1532,
+  "Country": "South Africa",
+  "CountryCode": "ZAF",
+  "FullName": "Kyalami Grand Prix Circuit",
+  "Latitude": -25.998056,
+  "Layouts": [
+    {
+      "Ams2TrackId": "kyalami_2019",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4520,
+      "MaxGridSize": 48,
+      "Name": "Kyalami",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "kyalami_historic",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 4040,
+      "MaxGridSize": 26,
+      "Name": "Kyalami Historic 1976",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 28.068889,
+  "RawTrackLocations": [],
+  "ShortName": "Kyalami"
+}

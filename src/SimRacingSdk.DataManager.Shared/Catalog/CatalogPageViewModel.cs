@@ -65,6 +65,7 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
     protected void Initialise()
     {
         this.RefreshGroups();
+        this.OnEntitiesChanged();
         this.RestoreSession();
     }
 
@@ -75,6 +76,11 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
     protected virtual string DescribeGaps()
     {
         return string.Empty;
+    }
+
+    // E.g. to refresh the suggestion lists behind editable combo boxes.
+    protected virtual void OnEntitiesChanged()
+    {
     }
 
     protected virtual void OnItemRenamed(string originalId, string newId)
@@ -129,6 +135,7 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
         this.entities.Add(entity);
 
         this.RefreshGroups();
+        this.OnEntitiesChanged();
         this.SelectedGroup = this.GroupOf(entity);
         this.RefreshItems();
         this.SelectedItem = this.Items.FirstOrDefault(item => item.Id == entity.Id);

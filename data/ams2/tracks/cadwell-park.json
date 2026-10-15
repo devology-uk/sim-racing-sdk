@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 122,
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "FullName": "Cadwell Park Circuit",
+  "Latitude": 53.3096001,
+  "Layouts": [
+    {
+      "Ams2TrackId": "cadwellpark",
+      "Corners": 16,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3500,
+      "MaxGridSize": 26,
+      "Name": "Cadwell Park",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -0.0697802,
+  "RawTrackLocations": [],
+  "ShortName": "Cadwell Park"
+}

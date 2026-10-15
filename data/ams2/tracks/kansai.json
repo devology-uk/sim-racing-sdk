@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 47,
+  "Country": "Japan",
+  "CountryCode": "JAP",
+  "FullName": "Suzuka International Racing Course Simulation",
+  "Latitude": 34.8417,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 19,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 5810,
+      "MaxGridSize": 48,
+      "Name": "Kansai GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3460,
+      "MaxGridSize": 26,
+      "Name": "Kansai West",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2240,
+      "MaxGridSize": 48,
+      "Name": "Kansai East",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 19,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 5820,
+      "MaxGridSize": 48,
+      "Name": "Kansai Classic",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 136.5389,
+  "RawTrackLocations": [],
+  "ShortName": "Kansai"
+}

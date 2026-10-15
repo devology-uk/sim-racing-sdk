@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 780,
+  "Country": "Australia",
+  "CountryCode": "AUS",
+  "FullName": "Mount Panorama Circuit",
+  "Latitude": -33.4486,
+  "Layouts": [
+    {
+      "Ams2TrackId": "bathurst_2020",
+      "Corners": 23,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 6210,
+      "MaxGridSize": 48,
+      "Name": "Bathurst 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "bathurst_1983",
+      "Corners": 20,
+      "DlcPack": "IMSA Track Pack",
+      "Grade": "Historic",
+      "LengthM": 6170,
+      "MaxGridSize": 32,
+      "Name": "Bathurst Historic 1983",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 149.5547,
+  "RawTrackLocations": [],
+  "ShortName": "Bathurst"
+}

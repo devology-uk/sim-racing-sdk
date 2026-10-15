@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 81,
+  "Country": "Finland",
+  "CountryCode": "FIN",
+  "FullName": "Kouvola Circuit",
+  "Latitude": 60.8838619,
+  "Layouts": [
+    {
+      "Ams2TrackId": null,
+      "Corners": 11,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 1010,
+      "MaxGridSize": 8,
+      "Name": "Tykki RX",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 7,
+      "DlcPack": null,
+      "Grade": "Off-road",
+      "LengthM": 750,
+      "MaxGridSize": 16,
+      "Name": "Tykki Tarmac",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Tykki_Dirt1",
+      "Corners": 8,
+      "DlcPack": null,
+      "Grade": "Off-road",
+      "LengthM": 910,
+      "MaxGridSize": 16,
+      "Name": "Tykki Dirt 1",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": "Tykki_Dirt2",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Off-road",
+      "LengthM": 1680,
+      "MaxGridSize": 16,
+      "Name": "Tykki Dirt 2",
+      "TrackType": "Rallycross"
+    }
+  ],
+  "Longitude": 26.7913711,
+  "RawTrackLocations": [],
+  "ShortName": "Tykki"
+}

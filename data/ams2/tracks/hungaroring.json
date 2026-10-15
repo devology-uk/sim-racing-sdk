@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 200,
+  "Country": "Hungary",
+  "CountryCode": "HUN",
+  "FullName": "Hungaroring",
+  "Latitude": 47.5819196,
+  "Layouts": [
+    {
+      "Ams2TrackId": "hungaroring_gp_2025",
+      "Corners": 14,
+      "DlcPack": "Hungaroring",
+      "Grade": "Grade 1",
+      "LengthM": 4380,
+      "MaxGridSize": 48,
+      "Name": "Hungaroring GP 2025",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 19.2489391,
+  "RawTrackLocations": [],
+  "ShortName": "Hungaroring"
+}

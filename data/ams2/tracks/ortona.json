@@ -1,0 +1,52 @@
+{
+  "AltitudeM": 137,
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "FullName": "Circuito Internazionale d'Abruzzo",
+  "Latitude": 42.3056608,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Ortona",
+      "Corners": 16,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1500,
+      "MaxGridSize": 30,
+      "Name": "Ortona Kart One",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Ortona2",
+      "Corners": 20,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1550,
+      "MaxGridSize": 30,
+      "Name": "Ortona Kart TWo",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Ortona3",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1330,
+      "MaxGridSize": 30,
+      "Name": "Ortona Kart Three",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Ortona4",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 960,
+      "MaxGridSize": 30,
+      "Name": "Ortona Kart Four",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": 14.3778113,
+  "RawTrackLocations": [],
+  "ShortName": "Ortona"
+}

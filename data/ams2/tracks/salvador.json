@@ -1,0 +1,22 @@
+{
+  "AltitudeM": 68,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Circuito Ayrton Senna",
+  "Latitude": -12.9475,
+  "Layouts": [
+    {
+      "Ams2TrackId": "salvador",
+      "Corners": 10,
+      "DlcPack": null,
+      "Grade": "Temporary",
+      "LengthM": 2720,
+      "MaxGridSize": 34,
+      "Name": "Salvador Street Circuit",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -38.428056,
+  "RawTrackLocations": [],
+  "ShortName": "Salvador"
+}

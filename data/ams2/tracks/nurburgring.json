@@ -1,0 +1,164 @@
+{
+  "AltitudeM": 397,
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "FullName": "Nürburgring",
+  "Latitude": 50.335556,
+  "Layouts": [
+    {
+      "Ams2TrackId": "nordschleife_2025",
+      "Corners": 73,
+      "DlcPack": "Nürburgring 2025",
+      "Grade": "Grade 3",
+      "LengthM": 20830,
+      "MaxGridSize": 28,
+      "Name": "Nordschleife 2025",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "nordschleife_2025_tourist",
+      "Corners": 88,
+      "DlcPack": "Nürburgring 2025",
+      "Grade": "Grade 3",
+      "LengthM": 1909,
+      "MaxGridSize": 48,
+      "Name": "Nordschleife Tourist 2025",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": null,
+      "Corners": 73,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 20830,
+      "MaxGridSize": 28,
+      "Name": "Nordschleife 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_1971_Beton",
+      "Corners": 7,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 2390,
+      "MaxGridSize": 32,
+      "Name": "Betonschleife Historic 1971",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "nordschleife_2025_24hr",
+      "Corners": 88,
+      "DlcPack": "Nürburgring 2025",
+      "Grade": "Grade 3",
+      "LengthM": 25370,
+      "MaxGridSize": 48,
+      "Name": "Nordschleife 24 Hour 2025",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "nordschleife_2020_24hr",
+      "Corners": 88,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 25370,
+      "MaxGridSize": 48,
+      "Name": "Nordschleife 24 Hour 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_2020_RX",
+      "Corners": 6,
+      "DlcPack": "Adrenaline Pack Pt1",
+      "Grade": "Rallycross",
+      "LengthM": 1020,
+      "MaxGridSize": 8,
+      "Name": "Nürburgring RX",
+      "TrackType": "Rallycross"
+    },
+    {
+      "Ams2TrackId": "Nurb_GP_2025",
+      "Corners": 15,
+      "DlcPack": "Nürburgring 2025",
+      "Grade": "Grade 1",
+      "LengthM": 5140,
+      "MaxGridSize": 48,
+      "Name": "Nürburgring GP 2025",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_GP_2020",
+      "Corners": 15,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 5140,
+      "MaxGridSize": 48,
+      "Name": "Nürburgring GP 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_GP_2020_Veedol",
+      "Corners": 15,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 1",
+      "LengthM": 5130,
+      "MaxGridSize": 48,
+      "Name": "Nürburgring Veedol 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_GP_2020_Sprint",
+      "Corners": 11,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 3620,
+      "MaxGridSize": 48,
+      "Name": "Nürburgring Sprint 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_GP_2020_Sprint_S",
+      "Corners": 11,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Grade 3",
+      "LengthM": 3050,
+      "MaxGridSize": 30,
+      "Name": "Nürburgring Sprint S 2020",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_1971_Gesamt",
+      "Corners": 187,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 28260,
+      "MaxGridSize": 32,
+      "Name": "Gesamtstrecke Historic 1971",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_1971_Nords",
+      "Corners": 160,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 22830,
+      "MaxGridSize": 32,
+      "Name": "Nordschleife Historic 1971",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Nurb_1971_Suds",
+      "Corners": 27,
+      "DlcPack": "Premium Track Pack",
+      "Grade": "Historic",
+      "LengthM": 7740,
+      "MaxGridSize": 32,
+      "Name": "Südschleife Historic 1971",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": 6.9475,
+  "RawTrackLocations": [
+    "Nurburgring_2025"
+  ],
+  "ShortName": "Nürburgring"
+}

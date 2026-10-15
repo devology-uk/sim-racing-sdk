@@ -1,0 +1,102 @@
+{
+  "AltitudeM": 750,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo José Carlos Pace",
+  "Latitude": -23.7045832,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Interlagos",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 1",
+      "LengthM": 4290,
+      "MaxGridSize": 48,
+      "Name": "Interlagos GP",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_SCB",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 4290,
+      "MaxGridSize": 48,
+      "Name": "Interlagos Stock Car Brasil",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_1993",
+      "Corners": 17,
+      "DlcPack": "Historic Track Pack Pt2",
+      "Grade": "Historic",
+      "LengthM": 4320,
+      "MaxGridSize": 32,
+      "Name": "Interlagos Historic 1993",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_1991",
+      "Corners": 17,
+      "DlcPack": "Historic Track Pack Pt2",
+      "Grade": "Historic",
+      "LengthM": 4320,
+      "MaxGridSize": 32,
+      "Name": "Interlagos Historic 1991",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_Historic",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 7920,
+      "MaxGridSize": 32,
+      "Name": "Interlagos Historic 1976",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_Historic_Outer",
+      "Corners": 17,
+      "DlcPack": null,
+      "Grade": "Historic",
+      "LengthM": 3230,
+      "MaxGridSize": 32,
+      "Name": "Interlagos Historic 1978 Outer",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Interlagos_Kart1",
+      "Corners": 19,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1120,
+      "MaxGridSize": 38,
+      "Name": "Interlagos Kart One",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Interlagos_Kart2",
+      "Corners": 15,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 1120,
+      "MaxGridSize": 38,
+      "Name": "Interlagos Kart Two",
+      "TrackType": "Kart"
+    },
+    {
+      "Ams2TrackId": "Interlagos_Kart3",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Kart",
+      "LengthM": 690,
+      "MaxGridSize": 38,
+      "Name": "Interlagos Kart Three",
+      "TrackType": "Kart"
+    }
+  ],
+  "Longitude": -46.7018401,
+  "RawTrackLocations": [],
+  "ShortName": "Interlagos"
+}

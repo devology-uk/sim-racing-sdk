@@ -1,0 +1,62 @@
+{
+  "AltitudeM": 65,
+  "Country": "USA",
+  "CountryCode": "USA",
+  "FullName": "Virginia International Raceway (VIR)",
+  "Latitude": 36.561667,
+  "Layouts": [
+    {
+      "Ams2TrackId": "VirginiaFull",
+      "Corners": 18,
+      "DlcPack": null,
+      "Grade": "Grade 2",
+      "LengthM": 5260,
+      "MaxGridSize": 48,
+      "Name": "VIRginia International Raceway Full",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VirginiaGrand",
+      "Corners": 24,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 6750,
+      "MaxGridSize": 28,
+      "Name": "VIRginia International Raceway Grand",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VirginiaNorth",
+      "Corners": 14,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 3620,
+      "MaxGridSize": 48,
+      "Name": "VIRginia International Raceway North",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VirginiaSouth",
+      "Corners": 9,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2650,
+      "MaxGridSize": 26,
+      "Name": "VIRginia International Raceway South",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "VirginiaPatriot",
+      "Corners": 13,
+      "DlcPack": null,
+      "Grade": "Grade 4",
+      "LengthM": 1770,
+      "MaxGridSize": 26,
+      "Name": "VIRginia International Raceway Patriot",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -79.204722,
+  "RawTrackLocations": [],
+  "ShortName": "Virginia"
+}

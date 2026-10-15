@@ -1,0 +1,32 @@
+{
+  "AltitudeM": 1172,
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "FullName": "Autódromo Brasília BRB",
+  "Latitude": -15.7728644,
+  "Layouts": [
+    {
+      "Ams2TrackId": "Brasilia",
+      "Corners": 12,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 5470,
+      "MaxGridSize": 30,
+      "Name": "Brasília Full",
+      "TrackType": "Circuit"
+    },
+    {
+      "Ams2TrackId": "Brasilia_outer",
+      "Corners": 5,
+      "DlcPack": null,
+      "Grade": "Grade 3",
+      "LengthM": 2910,
+      "MaxGridSize": 30,
+      "Name": "Brasília Outer",
+      "TrackType": "Circuit"
+    }
+  ],
+  "Longitude": -47.9020767,
+  "RawTrackLocations": [],
+  "ShortName": "Brasília"
+}
