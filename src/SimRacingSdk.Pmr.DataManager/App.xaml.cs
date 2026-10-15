@@ -1,84 +1,41 @@
-using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Extensions.Logging;
-using SimRacingSdk.LogViewer;
-using SimRacingSdk.Pmr.DataManager.Abstractions;
+using SimRacingSdk.DataManager.Shared;
+using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Session;
 using SimRacingSdk.Pmr.DataManager.Cars;
-using SimRacingSdk.Pmr.DataManager.Controls.Console;
-using SimRacingSdk.Pmr.DataManager.Services;
 using SimRacingSdk.Pmr.DataManager.Session;
 using SimRacingSdk.Pmr.DataManager.SetupMaps;
-using SimRacingSdk.Pmr.DataManager.Storage;
 using SimRacingSdk.Pmr.DataManager.Tracks;
 
 namespace SimRacingSdk.Pmr.DataManager;
 
-public partial class App : Application
+public partial class App : DataManagerApplication
 {
-    private readonly ILogger<App> logger;
-
-    public App()
+    protected override DataManagerOptions Options { get; } = new()
     {
-        this.Services = this.ConfigureServices();
-        this.logger = this.Services.GetRequiredService<ILogger<App>>();
-    }
+        GameCode = "Pmr",
+        GameName = "Project Motor Racing"
+    };
 
-    public new static App Current => (App)Application.Current;
-
-    public IServiceProvider Services { get; }
-
-    protected override void OnExit(ExitEventArgs e)
+    protected override void ConfigureGameServices(IServiceCollection services)
     {
-        this.logger.LogInformation("Sim Racing SDK Data Manager for PMR has shutdown.");
-        LogManager.Shutdown();
-        base.OnExit(e);
-    }
+        services.AddSingleton<SessionStateStore<PmrSessionState>>();
+        services.AddSingleton<ISessionStateStore<PmrSessionState>>(provider =>
+            provider.GetRequiredService<SessionStateStore<PmrSessionState>>());
+        services.AddSingleton<ISessionStateStore>(provider =>
+            provider.GetRequiredService<SessionStateStore<PmrSessionState>>());
 
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-
-        this.logger.LogInformation("Sim Racing SDK Data Manager for PMR has started.");
-
-        this.MainWindow = new MainWindow(this.Services.GetRequiredService<ISessionStateStore>(),
-            this.Services.GetRequiredService<IUnsavedChangesSaver>())
-        {
-            DataContext = this.Services.GetRequiredService<MainWindowViewModel>()
-        };
-        this.MainWindow.Show();
-    }
-
-    private IServiceProvider ConfigureServices()
-    {
-        var services = new ServiceCollection();
-
-        services.AddLogging(builder =>
-                             {
-                                 builder.ClearProviders();
-                                 builder.AddNLog();
-                             });
-
-        services.AddSingleton<IConsoleLog, ConsoleLog>();
-        services.AddSingleton<IDataPathProvider, DataPathProvider>();
-        services.AddSingleton<ISessionStateStore, SessionStateStore>();
-        services.AddSingleton<IUserConfirmation, MessageBoxUserConfirmation>();
-        services.AddSingleton<ICarRepository, CarRepository>();
-        services.AddSingleton<IPmrCarProviderGenerator, PmrCarProviderGenerator>();
-        services.AddSingleton<ITrackRepository, TrackRepository>();
-        services.AddSingleton<IPmrTrackProviderGenerator, PmrTrackProviderGenerator>();
+        services.UseCatalogRepository<CarInfo>("cars");
+        services.AddSingleton<ICatalogGenerator<CarInfo>, PmrCarProviderGenerator>();
+        services.UseCatalogRepository<TrackInfo>("tracks");
+        services.AddSingleton<ICatalogGenerator<TrackInfo>, PmrTrackProviderGenerator>();
         services.AddSingleton<ISetupMapRepository, SetupMapRepository>();
         services.AddSingleton<IDefaultSetupFieldApplier, DefaultSetupFieldApplier>();
         services.AddSingleton<IPmrSetupMapsGenerator, PmrSetupMapsGenerator>();
-        services.AddTransient<MainWindowViewModel>();
-        services.AddTransient<ConsoleControlViewModel>();
-        services.AddTransient<LogViewerViewModel>();
-        services.AddSingleton<CarsViewModel>();
-        services.AddSingleton<TracksViewModel>();
-        services.AddSingleton<SetupMapsViewModel>();
-        services.AddSingleton<IUnsavedChangesSaver>(provider => provider.GetRequiredService<SetupMapsViewModel>());
 
-        return services.BuildServiceProvider();
+        services.UsePage<CarsViewModel>("Cars");
+        services.UsePage<TracksViewModel>("Tracks");
+        services.UsePage<SetupMapsViewModel>("Setup Maps");
+        services.AddSingleton<IUnsavedChangesSaver>(provider => provider.GetRequiredService<SetupMapsViewModel>());
     }
 }

@@ -1,0 +1,19 @@
+{
+  "Category": "GTE",
+  "Class": "GTE",
+  "DisplayName": "Chevrolet Corvette C8.R",
+  "Engine": "5.0L V8",
+  "HeightMm": 1148,
+  "LengthMm": 4630,
+  "Manufacturer": "Chevrolet",
+  "MaxFuel": 96,
+  "MaxRpm": 7400,
+  "ModelId": "Chevrolet_C8R_LM_2023",
+  "PowerBhp": 500,
+  "PowerKw": 0,
+  "ResultCarType": "Corvette C8.R GTE",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1240,
+  "WidthMm": 2053,
+  "Year": 2023
+}

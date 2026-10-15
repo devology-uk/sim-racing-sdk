@@ -1,0 +1,20 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 27.455,
+  "Layouts": [
+    {
+      "Corners": 17,
+      "LengthM": 6019,
+      "Name": "Default"
+    },
+    {
+      "Corners": 7,
+      "LengthM": 3219,
+      "Name": "School Circuit"
+    }
+  ],
+  "Longitude": -81.35,
+  "Name": "Sebring International Raceway",
+  "ShortName": "Sebring"
+}

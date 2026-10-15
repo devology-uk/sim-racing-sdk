@@ -1,0 +1,19 @@
+{
+  "Category": "LMDh",
+  "Class": "HY",
+  "DisplayName": "Genesis GMR-001",
+  "Engine": "3.2L V8 Twin Turbo",
+  "HeightMm": 1055,
+  "LengthMm": 5000,
+  "Manufacturer": "Genesis",
+  "MaxFuel": 89,
+  "MaxRpm": 8500,
+  "ModelId": null,
+  "PowerBhp": 690,
+  "PowerKw": 0,
+  "ResultCarType": "Genesis GMR-001",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2026
+}

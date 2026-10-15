@@ -1,0 +1,15 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 34.14667,
+  "Layouts": [
+    {
+      "Corners": 12,
+      "LengthM": 4088,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -83.81778,
+  "Name": "Michelin Raceway Road Atlanta",
+  "ShortName": "Road Atlanta"
+}

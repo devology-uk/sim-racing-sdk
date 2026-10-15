@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SimRacingSdk.Pmr.DataManager.SetupMaps"
-             xmlns:controls="clr-namespace:SimRacingSdk.Pmr.DataManager.Controls"
+             xmlns:controls="clr-namespace:SimRacingSdk.DataManager.Shared.Controls;assembly=SimRacingSdk.DataManager.Shared"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:SetupMapsViewModel}">
     <Grid>

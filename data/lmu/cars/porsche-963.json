@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Porsche 963",
+  "Engine": "4.6L V8 Twin Turbo",
+  "HeightMm": 1060,
+  "LengthMm": 5100,
+  "Manufacturer": "Porsche",
+  "MaxFuel": 87,
+  "MaxRpm": 8300,
+  "ModelId": "Porsche_963_2023",
+  "PowerBhp": 670,
+  "PowerKw": 500,
+  "ResultCarType": "Porsche 963",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2023
+}

@@ -1,0 +1,20 @@
+{
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "Latitude": 35.371667,
+  "Layouts": [
+    {
+      "Corners": 16,
+      "LengthM": 4563,
+      "Name": "Default"
+    },
+    {
+      "Corners": 14,
+      "LengthM": 4526,
+      "Name": "Classic Circuit"
+    }
+  ],
+  "Longitude": 138.926667,
+  "Name": "Fuji Speedway",
+  "ShortName": "Fuji"
+}

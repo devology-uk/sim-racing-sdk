@@ -1,0 +1,30 @@
+{
+  "Country": "Bahrain",
+  "CountryCode": "BHR",
+  "Latitude": 26.0325,
+  "Layouts": [
+    {
+      "Corners": 15,
+      "LengthM": 5412,
+      "Name": "Default"
+    },
+    {
+      "Corners": 24,
+      "LengthM": 6299,
+      "Name": "Endurance Circuit"
+    },
+    {
+      "Corners": 11,
+      "LengthM": 3543,
+      "Name": "Outer Circuit"
+    },
+    {
+      "Corners": 10,
+      "LengthM": 3705,
+      "Name": "Paddock Circuit"
+    }
+  ],
+  "Longitude": 50.510556,
+  "Name": "Bahrain International Circuit",
+  "ShortName": "Sakhir"
+}

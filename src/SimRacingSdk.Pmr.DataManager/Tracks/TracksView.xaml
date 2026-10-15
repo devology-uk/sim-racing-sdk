@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SimRacingSdk.Pmr.DataManager.Tracks"
-             xmlns:controls="clr-namespace:SimRacingSdk.Pmr.DataManager.Controls"
+             xmlns:controls="clr-namespace:SimRacingSdk.DataManager.Shared.Controls;assembly=SimRacingSdk.DataManager.Shared"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:TracksViewModel}">
     <UserControl.Resources>
@@ -53,18 +53,18 @@
                          GroupName="TrackBrowseMode"
                          VerticalAlignment="Center"
                          Margin="0,0,15,0"
-                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByContinent}" />
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByGroup}" />
             <RadioButton Content="All Tracks"
                          GroupName="TrackBrowseMode"
                          VerticalAlignment="Center"
-                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=AllTracks}" />
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}" />
         </StackPanel>
 
         <ListBox Grid.Row="1"
                  Grid.Column="0"
-                 ItemsSource="{Binding Continents}"
-                 SelectedItem="{Binding SelectedContinent, Mode=TwoWay}"
-                 Visibility="{Binding IsByContinentMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                 ItemsSource="{Binding Groups}"
+                 SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
+                 Visibility="{Binding IsByGroupMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <Grid Grid.Row="1"
               Grid.Column="1"
@@ -75,8 +75,8 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="0"
-                      ItemsSource="{Binding VisibleTracks}"
-                      SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                       controls:ScrollSelectedIntoView.IsEnabled="True"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
@@ -99,11 +99,11 @@
                     <StackPanel Orientation="Horizontal"
                                 Margin="0,10,0,15">
                         <Button Content="New Track"
-                                Command="{Binding NewTrackCommand}"
+                                Command="{Binding NewCommand}"
                                 Padding="10,4"
                                 Margin="0,0,10,0" />
                         <Button Content="Save Track"
-                                Command="{Binding SaveTrackCommand}"
+                                Command="{Binding SaveCommand}"
                                 Padding="10,4"
                                 Margin="0,0,15,0" />
                         <TextBlock Text="{Binding SaveStatusMessage}"
@@ -138,7 +138,7 @@
                         <ComboBox Grid.Row="0"
                                   Grid.Column="3"
                                   IsEditable="True"
-                                  ItemsSource="{Binding DataContext.Continents, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                  ItemsSource="{Binding DataContext.Groups, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   Text="{Binding Continent, UpdateSourceTrigger=PropertyChanged}"
                                   ToolTip="Pick an existing continent or type a new one" />
                         <Label Grid.Row="0"
@@ -199,25 +199,25 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <ListBox ItemsSource="{Binding Layouts}"
-                                     SelectedItem="{Binding SelectedLayout, Mode=TwoWay}"
+                            <ListBox ItemsSource="{Binding Layouts.Items}"
+                                     SelectedItem="{Binding Layouts.SelectedItem, Mode=TwoWay}"
                                      DisplayMemberPath="Name"
                                      Height="110" />
                             <StackPanel Orientation="Horizontal"
                                         Margin="0,8,0,0">
                                 <Button Content="Add Layout"
-                                        Command="{Binding AddLayoutCommand}"
+                                        Command="{Binding Layouts.AddCommand}"
                                         Padding="10,4"
                                         Margin="0,0,10,0" />
                                 <Button Content="Remove Layout"
-                                        Command="{Binding RemoveLayoutCommand}"
+                                        Command="{Binding Layouts.RemoveCommand}"
                                         Padding="10,4" />
                             </StackPanel>
                         </StackPanel>
 
                         <Grid Grid.Column="1"
                               Margin="15,0,0,0"
-                              DataContext="{Binding SelectedLayout}">
+                              DataContext="{Binding Layouts.SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="160" />

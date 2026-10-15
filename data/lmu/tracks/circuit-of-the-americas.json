@@ -1,0 +1,20 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 30.132778,
+  "Layouts": [
+    {
+      "Corners": 20,
+      "LengthM": 5513,
+      "Name": "Default"
+    },
+    {
+      "Corners": 17,
+      "LengthM": 3702,
+      "Name": "National Circuit"
+    }
+  ],
+  "Longitude": -97.641111,
+  "Name": "Circuit of the Americas",
+  "ShortName": "COTA"
+}

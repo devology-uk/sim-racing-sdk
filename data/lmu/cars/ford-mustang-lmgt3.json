@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Ford Mustang LMGT3",
+  "Engine": "5.4L V8",
+  "HeightMm": 1392,
+  "LengthMm": 4797,
+  "Manufacturer": "Ford",
+  "MaxFuel": 110,
+  "MaxRpm": 7625,
+  "ModelId": "Ford_Mustang_GT3_2024",
+  "PowerBhp": 550,
+  "PowerKw": 0,
+  "ResultCarType": "Ford Mustang LMGT3",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1329,
+  "WidthMm": 1918,
+  "Year": 2024
+}

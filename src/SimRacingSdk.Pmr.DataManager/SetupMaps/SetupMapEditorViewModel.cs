@@ -1,5 +1,6 @@
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
+using SimRacingSdk.DataManager.Shared;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 

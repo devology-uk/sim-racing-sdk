@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "BMW M4 LMGT3",
+  "Engine": "3.0L Straight Six Turbo",
+  "HeightMm": 1308,
+  "LengthMm": 5020,
+  "Manufacturer": "BMW",
+  "MaxFuel": 120,
+  "MaxRpm": 8000,
+  "ModelId": "BMW_M4_LMGT3_2023",
+  "PowerBhp": 590,
+  "PowerKw": 0,
+  "ResultCarType": "BMW M4 LMGT3",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1339,
+  "WidthMm": 2040,
+  "Year": 2023
+}

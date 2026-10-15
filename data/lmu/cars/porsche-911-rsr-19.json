@@ -1,0 +1,19 @@
+{
+  "Category": "GTE",
+  "Class": "GTE",
+  "DisplayName": "Porsche 911 RSR-19",
+  "Engine": "4.0L Flat Six",
+  "HeightMm": 1250,
+  "LengthMm": 4557,
+  "Manufacturer": "Porsche",
+  "MaxFuel": 99,
+  "MaxRpm": 7400,
+  "ModelId": "Porsche_911RSR-19_2023",
+  "PowerBhp": 510,
+  "PowerKw": 0,
+  "ResultCarType": "Porsche 911 RSR-19",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1243,
+  "WidthMm": 2042,
+  "Year": 2023
+}

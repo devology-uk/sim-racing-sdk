@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Peugeot 9X8 2024",
+  "Engine": "2.6L V6 Twin Turbo",
+  "HeightMm": 1180,
+  "LengthMm": 5000,
+  "Manufacturer": "Peugeot",
+  "MaxFuel": 90,
+  "MaxRpm": 8500,
+  "ModelId": "Peugeot_9x8_2024",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Peugeot 9X8 2024",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2080,
+  "Year": 2024
+}

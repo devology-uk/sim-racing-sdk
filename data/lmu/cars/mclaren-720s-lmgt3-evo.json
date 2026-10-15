@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "McLaren 720S LMGT3 Evo",
+  "Engine": "4.0L V8 Twin Turbo",
+  "HeightMm": 1196,
+  "LengthMm": 4543,
+  "Manufacturer": "McLaren",
+  "MaxFuel": 120,
+  "MaxRpm": 8500,
+  "ModelId": "McLaren_720sGT3Evo_2023",
+  "PowerBhp": 600,
+  "PowerKw": 0,
+  "ResultCarType": "McLaren 720S LMGT3 Evo",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1345,
+  "WidthMm": 2161,
+  "Year": 2023
+}

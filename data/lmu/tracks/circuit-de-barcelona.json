@@ -1,0 +1,15 @@
+{
+  "Country": "Spain",
+  "CountryCode": "ESP",
+  "Latitude": 41.57,
+  "Layouts": [
+    {
+      "Corners": 14,
+      "LengthM": 4657,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": 2.2578,
+  "Name": "Circuit de Barcelona",
+  "ShortName": "Barcelona"
+}

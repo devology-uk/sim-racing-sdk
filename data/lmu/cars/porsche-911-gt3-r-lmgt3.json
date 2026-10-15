@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Porsche 911 GT3 R LMGT3",
+  "Engine": "4.2L Straight Six",
+  "HeightMm": 1279,
+  "LengthMm": 4619,
+  "Manufacturer": "Porsche",
+  "MaxFuel": 117,
+  "MaxRpm": 9250,
+  "ModelId": "911GT3R_2024",
+  "PowerBhp": 565,
+  "PowerKw": 0,
+  "ResultCarType": "Porsche 911 GT3 R LMGT3",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1317,
+  "WidthMm": 2050,
+  "Year": 2024
+}

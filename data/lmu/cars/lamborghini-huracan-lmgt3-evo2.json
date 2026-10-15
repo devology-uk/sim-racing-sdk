@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Lamborghini Huracan LMGT3 Evo2",
+  "Engine": "V10 Naturally Aspirated",
+  "HeightMm": 1165,
+  "LengthMm": 4551,
+  "Manufacturer": "Lamborghini",
+  "MaxFuel": 120,
+  "MaxRpm": 8500,
+  "ModelId": "Lamborghini_Huracan_GT3_2024",
+  "PowerBhp": 640,
+  "PowerKw": 0,
+  "ResultCarType": "Lamborghini Huracan LMGT3 Evo2",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1355,
+  "WidthMm": 2221,
+  "Year": 2024
+}

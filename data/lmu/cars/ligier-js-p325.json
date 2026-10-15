@@ -1,0 +1,19 @@
+{
+  "Category": "LMP3",
+  "Class": "P3",
+  "DisplayName": "Ligier JS P325",
+  "Engine": "3.5L V6 Twin Turbo",
+  "HeightMm": 1180,
+  "LengthMm": 4605,
+  "Manufacturer": "Ligier",
+  "MaxFuel": 100,
+  "MaxRpm": 6600,
+  "ModelId": null,
+  "PowerBhp": 470,
+  "PowerKw": 0,
+  "ResultCarType": "Ligier JS P325",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 950,
+  "WidthMm": 1900,
+  "Year": 2025
+}

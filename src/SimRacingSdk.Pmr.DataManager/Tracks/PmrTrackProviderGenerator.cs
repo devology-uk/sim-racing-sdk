@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.IO;
-using SimRacingSdk.Pmr.DataManager.Storage;
+using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
 
@@ -15,7 +16,7 @@ namespace SimRacingSdk.Pmr.DataManager.Tracks;
 //
 // GameId writes empty for any track where it's still null here (FindByGameId returns null for
 // those until it's looked up and filled in).
-public class PmrTrackProviderGenerator : IPmrTrackProviderGenerator
+public class PmrTrackProviderGenerator : ICatalogGenerator<TrackInfo>
 {
     private readonly IDataPathProvider dataPathProvider;
 
@@ -24,7 +25,7 @@ public class PmrTrackProviderGenerator : IPmrTrackProviderGenerator
         this.dataPathProvider = dataPathProvider;
     }
 
-    public string Generate(IEnumerable<TrackInfo> tracks)
+    public string Generate(IReadOnlyCollection<TrackInfo> tracks)
     {
         var coreRoot = Path.Combine(this.dataPathProvider.GetRepoRoot(), "src", "SimRacingSdk.Pmr.Core");
         var trackList = tracks.ToList();

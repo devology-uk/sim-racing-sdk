@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Corvette Z06 LMGT3.R",
+  "Engine": "5.5L V8",
+  "HeightMm": 1148,
+  "LengthMm": 4630,
+  "Manufacturer": "Chevrolet",
+  "MaxFuel": 104,
+  "MaxRpm": 8600,
+  "ModelId": "Corvette_Z06GT3R_2023",
+  "PowerBhp": 600,
+  "PowerKw": 0,
+  "ResultCarType": "Chevrolet Corvette Z06 LMGT3.R",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1344,
+  "WidthMm": 2050,
+  "Year": 2023
+}

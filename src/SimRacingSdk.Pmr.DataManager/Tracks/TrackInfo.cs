@@ -1,8 +1,10 @@
 using System.Text.Json.Serialization;
+using SimRacingSdk.DataManager.Shared;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
 
-public record TrackInfo
+public record TrackInfo : ICatalogEntity
 {
     public required double AltitudeMeters { get; init; }
 
@@ -25,6 +27,9 @@ public record TrackInfo
     public required List<TrackLayoutInfo> Layouts { get; init; } = [];
     public required double Longitude { get; init; }
     public required string Name { get; init; }
+
+    [JsonIgnore]
+    public string DisplayName => this.Name;
 
     // The JSON file's name, derived from Name - Nurburgring's Nordschleife variants are their own
     // distinct tracks with their own Name here, not layouts of one track, so no extra

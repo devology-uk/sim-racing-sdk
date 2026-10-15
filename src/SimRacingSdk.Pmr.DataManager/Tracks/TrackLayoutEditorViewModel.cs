@@ -2,9 +2,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
 
-// A mutable, bindable working copy of one TrackLayoutInfo, edited inline within
-// TrackEditorViewModel's Layouts collection - mirrors why CarEditorViewModel exists (the record
-// it wraps is immutable with required init-only properties, which TwoWay bindings can't target).
 public partial class TrackLayoutEditorViewModel : ObservableObject
 {
     [ObservableProperty]

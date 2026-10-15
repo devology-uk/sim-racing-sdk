@@ -1,0 +1,35 @@
+{
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 43.2514641,
+  "Layouts": [
+    {
+      "Corners": 13,
+      "LengthM": 5770,
+      "Name": "Default"
+    },
+    {
+      "Corners": 13,
+      "LengthM": 5752,
+      "Name": "Layout 1A"
+    },
+    {
+      "Corners": 15,
+      "LengthM": 5841,
+      "Name": "Layout 1A-V2"
+    },
+    {
+      "Corners": 14,
+      "LengthM": 5227,
+      "Name": "Layout 1A-V2 Short"
+    },
+    {
+      "Corners": 8,
+      "LengthM": 3793,
+      "Name": "Layout 3A"
+    }
+  ],
+  "Longitude": 5.7907357,
+  "Name": "Paul Ricard Circuit",
+  "ShortName": "Paul Ricard"
+}

@@ -1,0 +1,19 @@
+{
+  "Category": "LMDh",
+  "Class": "HY",
+  "DisplayName": "Cadillac V-Series.R",
+  "Engine": "5.5L V8",
+  "HeightMm": 1168,
+  "LengthMm": 5100,
+  "Manufacturer": "Cadillac",
+  "MaxFuel": 88,
+  "MaxRpm": 8800,
+  "ModelId": "Cadillac_V-lmdh_2023",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Cadillac V-Series.R",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1046,
+  "WidthMm": 2000,
+  "Year": 2023
+}

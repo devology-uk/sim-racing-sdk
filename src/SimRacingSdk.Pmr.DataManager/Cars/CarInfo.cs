@@ -1,8 +1,10 @@
 using System.Text.Json.Serialization;
+using SimRacingSdk.DataManager.Shared;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Cars;
 
-public record CarInfo
+public record CarInfo : ICatalogEntity
 {
     // Which mod author/studio made the car - currently the same value ("Straight 4 Studios") for
     // every car since the game only ships its own content so far, but PMR supports mods.

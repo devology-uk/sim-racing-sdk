@@ -1,3 +1,4 @@
+using System.Net.Http;
 using SimRacingSdk.GameControl.Abstractions;
 using SimRacingSdk.Lmu.Core.Services;
 using SimRacingSdk.Lmu.Rest.Abstractions;

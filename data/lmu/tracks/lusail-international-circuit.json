@@ -1,0 +1,20 @@
+{
+  "Country": "Qatar",
+  "CountryCode": "QAT",
+  "Latitude": 25.49,
+  "Layouts": [
+    {
+      "Corners": 16,
+      "LengthM": 5400,
+      "Name": "Default"
+    },
+    {
+      "Corners": 11,
+      "LengthM": 3701,
+      "Name": "Short Circuit"
+    }
+  ],
+  "Longitude": 51.454167,
+  "Name": "Lusail International Circuit",
+  "ShortName": "Lusail"
+}

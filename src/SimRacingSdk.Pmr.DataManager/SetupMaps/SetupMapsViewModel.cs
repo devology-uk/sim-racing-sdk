@@ -3,6 +3,9 @@ using System.Text.Json;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SimRacingSdk.DataManager.Shared;
+using SimRacingSdk.DataManager.Shared.Session;
+using SimRacingSdk.DataManager.Shared.Storage;
 using SimRacingSdk.Pmr.DataManager.Cars;
 using SimRacingSdk.Pmr.DataManager.Session;
 
@@ -14,7 +17,7 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
 
     private readonly DispatcherTimer autosaveTimer = new() { Interval = AutosaveInterval };
     private readonly IDefaultSetupFieldApplier defaultSetupFieldApplier;
-    private readonly ISessionStateStore sessionStateStore;
+    private readonly ISessionStateStore<PmrSessionState> sessionStateStore;
     private readonly ISetupMapRepository setupMapRepository;
     private readonly IPmrSetupMapsGenerator setupMapsGenerator;
 
@@ -35,11 +38,11 @@ public partial class SetupMapsViewModel : ObservableObject, IUnsavedChangesSaver
     private string statusMessage = string.Empty;
 
     public SetupMapsViewModel(
-        ICarRepository carRepository,
+        IEntityRepository<CarInfo> carRepository,
         ISetupMapRepository setupMapRepository,
         IDefaultSetupFieldApplier defaultSetupFieldApplier,
         IPmrSetupMapsGenerator setupMapsGenerator,
-        ISessionStateStore sessionStateStore,
+        ISessionStateStore<PmrSessionState> sessionStateStore,
         IUserConfirmation userConfirmation)
     {
         this.Editor = new SetupMapEditorViewModel(userConfirmation);

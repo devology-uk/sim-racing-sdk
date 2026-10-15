@@ -1,0 +1,15 @@
+{
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 44.341111,
+  "Layouts": [
+    {
+      "Corners": 20,
+      "LengthM": 4909,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": 11.713333,
+  "Name": "Autodromo Enzo E Dino Ferrari",
+  "ShortName": "Imola"
+}

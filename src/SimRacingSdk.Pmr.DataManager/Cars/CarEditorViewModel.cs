@@ -1,11 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using SimRacingSdk.DataManager.Shared.Catalog;
 
 namespace SimRacingSdk.Pmr.DataManager.Cars;
 
-// A mutable, bindable working copy of a CarInfo - CarInfo itself stays an immutable record (its
-// required init-only properties can't be targeted by TwoWay bindings), so editing happens here and
-// is only turned back into a CarInfo when the user explicitly saves.
-public partial class CarEditorViewModel : ObservableObject
+public partial class CarEditorViewModel : ObservableObject, ICatalogEditor<CarInfo>
 {
     // Tracks what IconFileName was last auto-derived from Manufacturer, so typing a manufacturer
     // name keeps the icon in sync live - but the moment IconFileName no longer matches this (the
@@ -81,7 +79,12 @@ public partial class CarEditorViewModel : ObservableObject
         this.Year = car?.Year ?? DateTime.Now.Year;
     }
 
-    public CarInfo ToCarInfo()
+    public void StartInGroup(string group)
+    {
+        this.VehicleClass = group;
+    }
+
+    public CarInfo ToEntity()
     {
         return new CarInfo
         {

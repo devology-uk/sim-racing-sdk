@@ -1,0 +1,19 @@
+{
+  "Category": "LMDh",
+  "Class": "HY",
+  "DisplayName": "Alpine A424",
+  "Engine": "3.4L V6 Turbo",
+  "HeightMm": 1055,
+  "LengthMm": 5088,
+  "Manufacturer": "Alpine",
+  "MaxFuel": 89,
+  "MaxRpm": 9000,
+  "ModelId": "Alpine_A424_2024",
+  "PowerBhp": 675,
+  "PowerKw": 520,
+  "ResultCarType": "Alpine A424",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 1992,
+  "Year": 2024
+}

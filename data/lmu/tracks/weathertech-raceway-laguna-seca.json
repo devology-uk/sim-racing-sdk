@@ -1,0 +1,15 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 36.24666666666667,
+  "Layouts": [
+    {
+      "Corners": 11,
+      "LengthM": 2602,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -121.87166666666667,
+  "Name": "WeatherTech Raceway Laguna Seca",
+  "ShortName": "Laguna Seca"
+}

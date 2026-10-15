@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Vanwall Vandervell 680",
+  "Engine": "4.5L V8",
+  "HeightMm": 1168,
+  "LengthMm": 5000,
+  "Manufacturer": "Vanwall",
+  "MaxFuel": 90,
+  "MaxRpm": 8750,
+  "ModelId": "Vandervell_680_2023",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Vanwall Vandervell 680",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2023
+}

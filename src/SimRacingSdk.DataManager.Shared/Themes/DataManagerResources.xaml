@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cvt="clr-namespace:SimRacingSdk.Wpf.Shared.Converters;assembly=SimRacingSdk.Wpf.Shared">
+    <!-- Merged into each game's App.xaml. -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <cvt:BooleanToVisibilityInverseConverter x:Key="BooleanToVisibilityInverseConverter" />
+    <cvt:CarManufacturerImageSourceConverter x:Key="CarManufacturerImageSourceConverter" />
+    <cvt:FlagImageSourceConverter x:Key="FlagImageSourceConverter" />
+    <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+</ResourceDictionary>

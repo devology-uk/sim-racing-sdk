@@ -1,0 +1,19 @@
+{
+  "Category": "LMDh",
+  "Class": "HY",
+  "DisplayName": "Lamborghini SC63",
+  "Engine": "3.8L V8 Twin Turbo",
+  "HeightMm": 1170,
+  "LengthMm": 5100,
+  "Manufacturer": "Lamborghini",
+  "MaxFuel": 89,
+  "MaxRpm": 8500,
+  "ModelId": "Lamborghini_SC63_2024",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Lamborghini SC63",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2024
+}

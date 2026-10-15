@@ -1,0 +1,20 @@
+{
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 45.620556,
+  "Layouts": [
+    {
+      "Corners": 11,
+      "LengthM": 5793,
+      "Name": "Default"
+    },
+    {
+      "Corners": 10,
+      "LengthM": 5793,
+      "Name": "Curva Grande Circuit"
+    }
+  ],
+  "Longitude": 9.289444,
+  "Name": "Autodromo Nazionale Monza",
+  "ShortName": "Monza"
+}

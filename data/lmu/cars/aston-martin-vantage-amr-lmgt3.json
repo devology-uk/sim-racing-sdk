@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Aston Martin Vantage AMR LMGT3",
+  "Engine": "4.0L V8 Twin Turbo",
+  "HeightMm": 1144,
+  "LengthMm": 4616,
+  "Manufacturer": "Aston Martin",
+  "MaxFuel": 120,
+  "MaxRpm": 8000,
+  "ModelId": "Vantage_AMR_GT3Evo_2024",
+  "PowerBhp": 535,
+  "PowerKw": 0,
+  "ResultCarType": "Aston Martin Vantage AMR LMGT3",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1306,
+  "WidthMm": 2049,
+  "Year": 2024
+}

@@ -1,0 +1,19 @@
+{
+  "Category": "LMP3",
+  "Class": "P3",
+  "DisplayName": "Duqueine 09",
+  "Engine": "3.5L V6 Twin Turbo",
+  "HeightMm": 1050,
+  "LengthMm": 4643,
+  "Manufacturer": "Duqueine",
+  "MaxFuel": 100,
+  "MaxRpm": 6600,
+  "ModelId": null,
+  "PowerBhp": 470,
+  "PowerKw": 0,
+  "ResultCarType": "Duqueine 09",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 930,
+  "WidthMm": 1890,
+  "Year": 2025
+}

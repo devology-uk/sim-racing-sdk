@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Aston Martin Valkyrie",
+  "Engine": "6.5L Naturally Aspirated V12",
+  "HeightMm": 1070,
+  "LengthMm": 4500,
+  "Manufacturer": "Aston Martin",
+  "MaxFuel": 90,
+  "MaxRpm": 7500,
+  "ModelId": "Aston_Martin_Valkyrie_2025",
+  "PowerBhp": 670,
+  "PowerKw": 500,
+  "ResultCarType": "Aston Martin Valkyrie",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 1965,
+  "Year": 2025
+}

@@ -1,0 +1,15 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 33.765,
+  "Layouts": [
+    {
+      "Corners": 11,
+      "LengthM": 3167,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -118.189,
+  "Name": "Grand Prix of Long Beach",
+  "ShortName": "Long Beach"
+}

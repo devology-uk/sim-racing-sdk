@@ -2,7 +2,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using SimRacingSdk.Pmr.DataManager.Cars;
-using SimRacingSdk.Pmr.DataManager.Storage;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 

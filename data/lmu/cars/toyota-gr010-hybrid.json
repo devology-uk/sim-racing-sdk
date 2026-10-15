@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Toyota GR010-Hybrid",
+  "Engine": "3.5L V6 Twin Turbo",
+  "HeightMm": 1150,
+  "LengthMm": 4900,
+  "Manufacturer": "Toyota",
+  "MaxFuel": 90,
+  "MaxRpm": 7800,
+  "ModelId": "Toyota_GR10_2023",
+  "PowerBhp": 670,
+  "PowerKw": 500,
+  "ResultCarType": "Toyota GR010",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1062,
+  "WidthMm": 2000,
+  "Year": 2023
+}

@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Isotta Fraschini Tipo 6",
+  "Engine": "3.0L V6 Turbo",
+  "HeightMm": 1260,
+  "LengthMm": 5000,
+  "Manufacturer": "Isotta Fraschini",
+  "MaxFuel": 90,
+  "MaxRpm": 8000,
+  "ModelId": "Isotta_Tipo6_2024",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Isotta Fraschini TIPO6",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2024
+}

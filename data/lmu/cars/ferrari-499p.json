@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Ferrari 499P",
+  "Engine": "3.0L V6 Twin Turbo",
+  "HeightMm": 1055,
+  "LengthMm": 5100,
+  "Manufacturer": "Ferrari",
+  "MaxFuel": 90,
+  "MaxRpm": 8000,
+  "ModelId": "Ferrari_499P_2023",
+  "PowerBhp": 670,
+  "PowerKw": 500,
+  "ResultCarType": "Ferrari 499P",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1057,
+  "WidthMm": 2000,
+  "Year": 2023
+}

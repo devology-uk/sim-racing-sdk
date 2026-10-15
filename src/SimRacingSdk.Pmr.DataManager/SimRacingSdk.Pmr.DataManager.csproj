@@ -8,17 +8,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <!-- Referenced directly, not just through DataManager.Shared: its source generators don't flow transitively. -->
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.3" />
-    <PackageReference Include="System.Reactive" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
-    <ProjectReference Include="..\SimRacingSdk.Wpf.Shared\SimRacingSdk.Wpf.Shared.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.DataManager.Shared\SimRacingSdk.DataManager.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,8 @@
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
-using SimRacingSdk.Pmr.DataManager.Storage;
+using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Cars;
 
@@ -13,7 +14,7 @@ namespace SimRacingSdk.Pmr.DataManager.Cars;
 //
 // GameId writes empty for any car where it's still null here (FindByGameId returns null for those
 // until it's looked up in stats.xml and filled in).
-public class PmrCarProviderGenerator : IPmrCarProviderGenerator
+public class PmrCarProviderGenerator : ICatalogGenerator<CarInfo>
 {
     private readonly IDataPathProvider dataPathProvider;
 
@@ -22,7 +23,7 @@ public class PmrCarProviderGenerator : IPmrCarProviderGenerator
         this.dataPathProvider = dataPathProvider;
     }
 
-    public string Generate(IEnumerable<CarInfo> cars)
+    public string Generate(IReadOnlyCollection<CarInfo> cars)
     {
         var coreRoot = Path.Combine(this.dataPathProvider.GetRepoRoot(), "src", "SimRacingSdk.Pmr.Core");
         var carList = cars.ToList();

@@ -1,0 +1,19 @@
+{
+  "Category": "LMH",
+  "Class": "HY",
+  "DisplayName": "Peugeot 9X8",
+  "Engine": "2.6L V6 Twin Turbo",
+  "HeightMm": 1145,
+  "LengthMm": 4995,
+  "Manufacturer": "Peugeot",
+  "MaxFuel": 90,
+  "MaxRpm": 8500,
+  "ModelId": "Peugeot_9x8_2023",
+  "PowerBhp": 670,
+  "PowerKw": 520,
+  "ResultCarType": "Peugeot 9X8",
+  "Transmission": "7 Speed Sequential",
+  "WeightKg": 1030,
+  "WidthMm": 2000,
+  "Year": 2023
+}

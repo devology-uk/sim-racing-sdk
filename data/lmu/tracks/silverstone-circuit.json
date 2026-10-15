@@ -1,0 +1,25 @@
+{
+  "Country": "England",
+  "CountryCode": "GBR-ENG",
+  "Latitude": 52.0680505,
+  "Layouts": [
+    {
+      "Corners": 18,
+      "LengthM": 5891,
+      "Name": "Default"
+    },
+    {
+      "Corners": 8,
+      "LengthM": 2979,
+      "Name": "International Circuit"
+    },
+    {
+      "Corners": 6,
+      "LengthM": 2639,
+      "Name": "National Circuit"
+    }
+  ],
+  "Longitude": -1.0292908,
+  "Name": "Silverstone Circuit",
+  "ShortName": "Silverstone"
+}

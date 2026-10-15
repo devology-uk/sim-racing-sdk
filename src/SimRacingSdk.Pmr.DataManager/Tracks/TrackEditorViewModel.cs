@@ -1,13 +1,9 @@
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using SimRacingSdk.DataManager.Shared.Catalog;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
 
-// A mutable, bindable working copy of a TrackInfo - TrackInfo itself stays an immutable record (its
-// required init-only properties can't be targeted by TwoWay bindings), so editing happens here and
-// is only turned back into a TrackInfo when the user explicitly saves (mirrors CarEditorViewModel).
-public partial class TrackEditorViewModel : ObservableObject
+public partial class TrackEditorViewModel : ObservableObject, ICatalogEditor<TrackInfo>
 {
     [ObservableProperty]
     private double altitudeMeters;
@@ -36,10 +32,7 @@ public partial class TrackEditorViewModel : ObservableObject
     [ObservableProperty]
     private string name = string.Empty;
 
-    [ObservableProperty]
-    private TrackLayoutEditorViewModel? selectedLayout;
-
-    public ObservableCollection<TrackLayoutEditorViewModel> Layouts { get; } = [];
+    public EditableCollection<TrackLayoutEditorViewModel> Layouts { get; } = new();
 
     public void LoadFrom(TrackInfo? track)
     {
@@ -52,17 +45,15 @@ public partial class TrackEditorViewModel : ObservableObject
         this.Latitude = track?.Latitude ?? 0;
         this.Longitude = track?.Longitude ?? 0;
         this.Name = track?.Name ?? string.Empty;
-
-        this.Layouts.Clear();
-        foreach(var layout in track?.Layouts ?? [])
-        {
-            this.Layouts.Add(TrackLayoutEditorViewModel.From(layout));
-        }
-
-        this.SelectedLayout = this.Layouts.FirstOrDefault();
+        this.Layouts.Replace((track?.Layouts ?? []).Select(TrackLayoutEditorViewModel.From));
     }
 
-    public TrackInfo ToTrackInfo()
+    public void StartInGroup(string group)
+    {
+        this.Continent = group;
+    }
+
+    public TrackInfo ToEntity()
     {
         return new TrackInfo
         {
@@ -73,29 +64,9 @@ public partial class TrackEditorViewModel : ObservableObject
             CountryCode = this.CountryCode,
             GameId = this.GameId,
             Latitude = this.Latitude,
-            Layouts = this.Layouts.Select(layout => layout.ToTrackLayoutInfo()).ToList(),
+            Layouts = this.Layouts.Items.Select(layout => layout.ToTrackLayoutInfo()).ToList(),
             Longitude = this.Longitude,
             Name = this.Name
         };
-    }
-
-    [RelayCommand]
-    private void AddLayout()
-    {
-        var layout = new TrackLayoutEditorViewModel();
-        this.Layouts.Add(layout);
-        this.SelectedLayout = layout;
-    }
-
-    [RelayCommand]
-    private void RemoveLayout()
-    {
-        if(this.SelectedLayout is null)
-        {
-            return;
-        }
-
-        this.Layouts.Remove(this.SelectedLayout);
-        this.SelectedLayout = this.Layouts.FirstOrDefault();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SimRacingSdk.DataManager.Shared;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 

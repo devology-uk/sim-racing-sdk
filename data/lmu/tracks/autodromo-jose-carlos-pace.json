@@ -1,0 +1,15 @@
+{
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "Latitude": -23.701111,
+  "Layouts": [
+    {
+      "Corners": 15,
+      "LengthM": 4309,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -46.697222,
+  "Name": "Autódromo José Carlos Pace",
+  "ShortName": "Interlagos"
+}

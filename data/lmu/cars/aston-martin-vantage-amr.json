@@ -1,0 +1,19 @@
+{
+  "Category": "GTE",
+  "Class": "GTE",
+  "DisplayName": "Aston Martin Vantage AMR",
+  "Engine": "4.0L V8 Turbo",
+  "HeightMm": 1274,
+  "LengthMm": 4665,
+  "Manufacturer": "Aston Martin",
+  "MaxFuel": 115,
+  "MaxRpm": 7000,
+  "ModelId": "Aston_Martin_Vantage_AMR_2023",
+  "PowerBhp": 500,
+  "PowerKw": 0,
+  "ResultCarType": "Aston Martin Vantage AMR",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1245,
+  "WidthMm": 2153,
+  "Year": 2023
+}

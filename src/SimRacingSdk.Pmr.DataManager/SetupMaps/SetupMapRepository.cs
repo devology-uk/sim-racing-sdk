@@ -1,6 +1,6 @@
 using System.IO;
 using System.Text.Json;
-using SimRacingSdk.Pmr.DataManager.Storage;
+using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.SetupMaps;
 

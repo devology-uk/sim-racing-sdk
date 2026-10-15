@@ -1,0 +1,15 @@
+{
+  "Country": "USA",
+  "CountryCode": "USA",
+  "Latitude": 29.18777976891776,
+  "Layouts": [
+    {
+      "Corners": 13,
+      "LengthM": 5729,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -81.0684744190165,
+  "Name": "Daytona International Speedway",
+  "ShortName": "Daytona"
+}

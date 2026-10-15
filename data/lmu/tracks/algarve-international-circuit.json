@@ -1,0 +1,15 @@
+{
+  "Country": "Portugal",
+  "CountryCode": "PRT",
+  "Latitude": 37.231944,
+  "Layouts": [
+    {
+      "Corners": 15,
+      "LengthM": 4653,
+      "Name": "Default"
+    }
+  ],
+  "Longitude": -8.631944,
+  "Name": "Algarve International Circuit",
+  "ShortName": "Portimao"
+}

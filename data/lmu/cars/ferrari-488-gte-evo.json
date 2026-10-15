@@ -1,0 +1,19 @@
+{
+  "Category": "GTE",
+  "Class": "GTE",
+  "DisplayName": "Ferrari 488 GTE Evo",
+  "Engine": "4.0L V8 Turbo",
+  "HeightMm": 1090,
+  "LengthMm": 4614,
+  "Manufacturer": "Ferrari",
+  "MaxFuel": 90,
+  "MaxRpm": 7400,
+  "ModelId": "Ferrari_488GTE_LM_2023",
+  "PowerBhp": 500,
+  "PowerKw": 0,
+  "ResultCarType": "Ferrari 488 GTE Evo",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1245,
+  "WidthMm": 2050,
+  "Year": 2023
+}

@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Mercedes-AMG LMGT3",
+  "Engine": "6.3-litre V8 Naturally Aspirated",
+  "HeightMm": 1238,
+  "LengthMm": 4746,
+  "Manufacturer": "Mercedes",
+  "MaxFuel": 120,
+  "MaxRpm": 7250,
+  "ModelId": "Mercedes_AMGGT3Evo_2025",
+  "PowerBhp": 560,
+  "PowerKw": 0,
+  "ResultCarType": "Mercedes-AMG LMGT3",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1360,
+  "WidthMm": 2049,
+  "Year": 2025
+}

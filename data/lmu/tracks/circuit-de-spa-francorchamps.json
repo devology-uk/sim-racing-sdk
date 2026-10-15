@@ -1,0 +1,20 @@
+{
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "Latitude": 50.437222,
+  "Layouts": [
+    {
+      "Corners": 20,
+      "LengthM": 7004,
+      "Name": "Default"
+    },
+    {
+      "Corners": 20,
+      "LengthM": 7004,
+      "Name": "Endurance Circuit"
+    }
+  ],
+  "Longitude": 5.971389,
+  "Name": "Circuit de Spa-Francorchamps",
+  "ShortName": "Spa"
+}
