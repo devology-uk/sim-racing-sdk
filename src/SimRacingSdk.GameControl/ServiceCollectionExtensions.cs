@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     {
         services.TryAddSingleton<IGameWindowFinder, GameWindowFinder>();
         services.TryAddSingleton<IGameWindowActivator, GameWindowActivator>();
+        services.TryAddSingleton<IGameWindowStateReader, GameWindowStateReader>();
         services.TryAddSingleton<IKeystrokeSender, KeystrokeSender>();
         services.TryAddSingleton<IGameKeyboard, GameKeyboard>();
         return services;

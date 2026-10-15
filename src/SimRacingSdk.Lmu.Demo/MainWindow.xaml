@@ -44,6 +44,9 @@
             <Button Content="Open Track Explorer"
                     Command="{Binding OpenTrackExplorerCommand}"
                     ToolTip="Open the track explorer window" />
+            <Button Content="Open REST Explorer"
+                    Command="{Binding OpenRestExplorerCommand}"
+                    ToolTip="Open a window for calling LMU's REST API and saving every response" />
             <Button Content="Open Log Viewer"
                     Command="{Binding OpenLogViewerCommand}"
                     ToolTip="Open a window for analysing log files" />

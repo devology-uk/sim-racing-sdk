@@ -6,7 +6,7 @@ namespace SimRacingSdk.Lmu.Core.Services
 {
     public class LmuGameDetector : GameDetector, ILmuGameDetector
     {
-        private const string ProcessName = "Le Mans Ultimate"; //TODO: Update to the correct process name for LMU0
+        public const string ProcessName = "Le Mans Ultimate"; //TODO: Update to the correct process name for LMU0
         
         private static LmuGameDetector? singletonInstance;
 

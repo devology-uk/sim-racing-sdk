@@ -8,10 +8,13 @@ using SimRacingSdk.Lmu.Demo.Abstractions;
 using SimRacingSdk.Lmu.Demo.CarExplorer;
 using SimRacingSdk.Lmu.Demo.Controls.Console;
 using SimRacingSdk.Lmu.Demo.Demos;
+using SimRacingSdk.GameControl;
+using SimRacingSdk.Lmu.Demo.RestExplorer;
 using SimRacingSdk.Lmu.Demo.ResultExplorer;
 using SimRacingSdk.Lmu.Demo.Services;
 using SimRacingSdk.Lmu.Demo.TrackExplorer;
 using SimRacingSdk.Lmu.Monitor;
+using SimRacingSdk.Lmu.Rest;
 using SimRacingSdk.Lmu.SharedMemory;
 using SimRacingSdk.LogViewer;
 using SimRacingSdk.Wpf.Shared.Logging;
@@ -65,6 +68,8 @@ public partial class App : Application
         services.UseLmuSdk();
         services.UseLmuSharedMemory();
         services.UseLmuMonitor();
+        services.UseLmuRest();
+        services.UseGameControl();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -73,6 +78,8 @@ public partial class App : Application
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<ResultExplorerViewModel>();
+        services.AddTransient<RestExplorerViewModel>();
+        services.AddTransient<ApiResponsivenessWatch>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
             .CreateLogger("SimRacingSdk.Lmu.Demo.Services.SharedMemoryLog")));

@@ -19,7 +19,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SimRacingSdk.GameControl\SimRacingSdk.GameControl.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Lmu.Core\SimRacingSdk.Lmu.Core.csproj" />
+		<ProjectReference Include="..\SimRacingSdk.Lmu.Rest\SimRacingSdk.Lmu.Rest.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Lmu.Monitor\SimRacingSdk.Lmu.Monitor.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.Lmu.SharedMemory\SimRacingSdk.Lmu.SharedMemory.csproj" />
 		<ProjectReference Include="..\SimRacingSdk.LogViewer\SimRacingSdk.LogViewer.csproj" />
