@@ -1,0 +1,16 @@
+{
+  "Continent": "North America",
+  "CountryCode": "USA",
+  "Latitude": 34.146667,
+  "Layouts": [
+    {
+      "Corners": 12,
+      "LengthMeters": 4088,
+      "MaxPitSlot": 28,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": -83.817778,
+  "Name": "Road Atlanta",
+  "ShortName": "Road Atlanta"
+}

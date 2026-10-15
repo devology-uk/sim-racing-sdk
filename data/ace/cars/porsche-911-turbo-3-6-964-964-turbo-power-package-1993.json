@@ -1,0 +1,91 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 3.5,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Rear",
+  "FuelTankL": 92,
+  "Gears": 5,
+  "Manufacturer": "Porsche",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 280,
+  "ModelId": "preset_964_mech_2",
+  "Name": "911 Turbo 3.6 (964)",
+  "PerformanceRating": 12.4,
+  "PowerPs": 385,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 520,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "964 Turbo Power Package",
+  "WeightKg": 1460,
+  "Year": 1993,
+  "ZeroToOneHundredKmh": 4.8
+}

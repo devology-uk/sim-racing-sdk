@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": 54,
+  "Body": "SUV",
+  "Categories": "Road:Modern:EV",
+  "Cylinders": null,
+  "DisplacementL": null,
+  "DriveLayout": "FWD",
+  "Engine": "Electric Motor",
+  "EngineLayout": "Front",
+  "FuelTankL": null,
+  "Gears": null,
+  "Manufacturer": "Alpha Romeo",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 200,
+  "ModelId": "preset_mln_mech_1",
+  "Name": "Junior",
+  "PerformanceRating": 10.5,
+  "PowerPs": 207,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": false,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 345,
+  "TyreCompounds": [
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "",
+  "WeightKg": 1560,
+  "Year": 2024,
+  "ZeroToOneHundredKmh": 5.9
+}

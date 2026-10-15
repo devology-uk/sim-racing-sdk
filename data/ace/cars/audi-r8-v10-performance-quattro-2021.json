@@ -1,0 +1,91 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 10,
+  "DisplacementL": 5.2,
+  "DriveLayout": "AWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 83,
+  "Gears": 7,
+  "Manufacturer": "Audi",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 330,
+  "ModelId": "preset_r8v10_mech_1",
+  "Name": "R8 V10 Performance Quattro",
+  "PerformanceRating": 13.5,
+  "PowerPs": 620,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 580,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "",
+  "WeightKg": 1670,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 3.1
+}

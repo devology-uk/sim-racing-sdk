@@ -1,0 +1,91 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.8,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Mid",
+  "FuelTankL": 45,
+  "Gears": 7,
+  "Manufacturer": "Alpine",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 275,
+  "ModelId": "preset_a110s_mech_1",
+  "Name": "A110 S Aero Kit",
+  "PerformanceRating": 12,
+  "PowerPs": 300,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 340,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "",
+  "WeightKg": 1110,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 4.1
+}

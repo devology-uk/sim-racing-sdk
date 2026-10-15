@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Hatch Back",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.8,
+  "DriveLayout": "AWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Mid",
+  "FuelTankL": 90,
+  "Gears": 5,
+  "Manufacturer": "Peugeot",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 210,
+  "ModelId": "preset_t16_mech_1",
+  "Name": "205 T16",
+  "PerformanceRating": 9.8,
+  "PowerPs": 200,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 255,
+  "TyreCompounds": [
+    "Road",
+    "Eco"
+  ],
+  "Variant": "",
+  "WeightKg": 1145,
+  "Year": 1990,
+  "ZeroToOneHundredKmh": 6
+}

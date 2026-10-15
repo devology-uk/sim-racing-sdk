@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Sedan",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.6,
+  "DriveLayout": "FWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Front",
+  "FuelTankL": 34,
+  "Gears": 5,
+  "Manufacturer": "Mini",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 200,
+  "ModelId": "preset_jcs_mech_2",
+  "Name": "John Cooper S",
+  "PerformanceRating": 10.8,
+  "PowerPs": 160,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": false,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 150,
+  "TyreCompounds": [
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "MK VI B16 Tune",
+  "WeightKg": 710,
+  "Year": 1990,
+  "ZeroToOneHundredKmh": 6
+}

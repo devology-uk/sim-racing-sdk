@@ -1,0 +1,91 @@
+{
+  "BatteryKwh": null,
+  "Body": "Convertible",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 12,
+  "DisplacementL": 6.5,
+  "DriveLayout": "RWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 86,
+  "Gears": 7,
+  "Manufacturer": "Ferrari",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 340,
+  "ModelId": "preset_sp3_mech_1",
+  "Name": "Daytona SP3",
+  "PerformanceRating": 16.1,
+  "PowerPs": 840,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 697,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "",
+  "WeightKg": 1405,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 2.7
+}

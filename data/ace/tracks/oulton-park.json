@@ -1,0 +1,22 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "GBR-ENG",
+  "Latitude": 53.1768,
+  "Layouts": [
+    {
+      "Corners": 17,
+      "LengthMeters": 4333,
+      "MaxPitSlot": 16,
+      "Name": "International"
+    },
+    {
+      "Corners": 7,
+      "LengthMeters": 2552,
+      "MaxPitSlot": 16,
+      "Name": "Fosters"
+    }
+  ],
+  "Longitude": -2.6168,
+  "Name": "Oulton Park",
+  "ShortName": "Oulton Park"
+}

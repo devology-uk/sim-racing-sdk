@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 2.5,
+  "DriveLayout": "",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Front",
+  "FuelTankL": 70,
+  "Gears": 5,
+  "Manufacturer": "BMW",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 248,
+  "ModelId": "preset_m3evoiii_mech_1",
+  "Name": "M3 E30 Sporte Evo",
+  "PerformanceRating": 9.4,
+  "PowerPs": 238,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 240,
+  "TyreCompounds": [
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "",
+  "WeightKg": 1200,
+  "Year": 1990,
+  "ZeroToOneHundredKmh": 6.5
+}

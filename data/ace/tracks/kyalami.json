@@ -1,0 +1,16 @@
+{
+  "Continent": "Africa",
+  "CountryCode": "ZAF",
+  "Latitude": -25.9976,
+  "Layouts": [
+    {
+      "Corners": 16,
+      "LengthMeters": 4522,
+      "MaxPitSlot": 20,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": 28.0682,
+  "Name": "Kyalami",
+  "ShortName": "Kyalami"
+}

@@ -12,22 +12,22 @@ public partial class TrackExplorerViewModel : ObservableObject
     private readonly IAceTrackInfoProvider trackInfoProvider;
 
     [ObservableProperty]
-    private AceTrackInfo? selectedLayout = null;
-
-    [ObservableProperty]
     private string selectedContinent = string.Empty;
 
     [ObservableProperty]
-    private string selectedTrackName = string.Empty;
+    private AceTrackLayoutInfo? selectedLayout = null;
+
+    [ObservableProperty]
+    private AceTrackInfo? selectedTrack = null;
 
     public TrackExplorerViewModel(IAceTrackInfoProvider trackInfoProvider)
     {
         this.trackInfoProvider = trackInfoProvider;
     }
 
-    public ObservableCollection<AceTrackInfo> Layouts { get; } = [];
     public ObservableCollection<string> Continents { get; } = [];
-    public ObservableCollection<string> TrackNames { get; } = [];
+    public ObservableCollection<AceTrackLayoutInfo> Layouts { get; } = [];
+    public ObservableCollection<AceTrackInfo> Tracks { get; } = [];
 
     [RelayCommand]
     private void ExportCsv()
@@ -44,11 +44,15 @@ public partial class TrackExplorerViewModel : ObservableObject
 
         foreach(var aceTrackInfo in this.trackInfoProvider.GetTrackInfos())
         {
-            var trackInfo =
-                $"{aceTrackInfo.Continent},{aceTrackInfo.CountryCode},{aceTrackInfo.Track},{aceTrackInfo.ShortName},{aceTrackInfo.Layout},{aceTrackInfo.TrackLengthMeters},{aceTrackInfo.Corners},{aceTrackInfo.MaxPitSlot},{aceTrackInfo.Latitude},{aceTrackInfo.Longitude}";
-            tracksStreamWriter.WriteLine(trackInfo);
-            tracksStreamWriter.Flush();
+            foreach(var layout in aceTrackInfo.Layouts)
+            {
+                var trackInfo =
+                    $"{aceTrackInfo.Continent},{aceTrackInfo.CountryCode},{aceTrackInfo.Name},{aceTrackInfo.ShortName},{layout.Name},{layout.LengthMeters},{layout.Corners},{layout.MaxPitSlot},{aceTrackInfo.Latitude},{aceTrackInfo.Longitude}";
+                tracksStreamWriter.WriteLine(trackInfo);
+            }
         }
+
+        tracksStreamWriter.Flush();
     }
 
     public void Init()
@@ -67,23 +71,23 @@ public partial class TrackExplorerViewModel : ObservableObject
 
     partial void OnSelectedContinentChanged(string value)
     {
-        this.TrackNames.Clear();
-        foreach(var trackName in this.trackInfoProvider.GetTrackNamesForContinent(value))
+        this.Tracks.Clear();
+        foreach(var track in this.trackInfoProvider.GetTrackInfosForContinent(value).OrderBy(t => t.Name))
         {
-            this.TrackNames.Add(trackName);
+            this.Tracks.Add(track);
         }
 
-        this.SelectedTrackName = this.TrackNames.Count > 0? this.TrackNames[0]: string.Empty;
+        this.SelectedTrack = this.Tracks.FirstOrDefault();
     }
 
-    partial void OnSelectedTrackNameChanged(string value)
+    partial void OnSelectedTrackChanged(AceTrackInfo? value)
     {
         this.Layouts.Clear();
-        foreach(var layout in this.trackInfoProvider.GetLayoutsForTrack(value))
+        foreach(var layout in value?.Layouts ?? [])
         {
             this.Layouts.Add(layout);
         }
 
-        this.SelectedLayout = this.Layouts.Count > 0? this.Layouts[0]: null;
+        this.SelectedLayout = this.Layouts.FirstOrDefault();
     }
 }

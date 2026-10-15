@@ -1,0 +1,93 @@
+{
+  "BatteryKwh": null,
+  "Body": "Open Wheel",
+  "Categories": "Racing:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 1.6,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Mid",
+  "FuelTankL": 145,
+  "Gears": 8,
+  "Manufacturer": "Ferrari",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 350,
+  "ModelId": "preset_sf25_mech_1",
+  "Name": "SF-25",
+  "PerformanceRating": 43,
+  "PowerPs": 1000,
+  "RacingClass": "Formula",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": true,
+      "HasErsDeploymentMap": true,
+      "HasErsRechargeLevel": true,
+      "HasErsHeatCharging": true,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": true,
+      "HasDifferentialCoast": true,
+      "HasDifferentialPower": true
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": true,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 750,
+  "TyreCompounds": [
+    "Slick Soft",
+    "Slick Medium",
+    "Slick Hard",
+    "Intermediate",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 800,
+  "Year": 2025,
+  "ZeroToOneHundredKmh": 2
+}

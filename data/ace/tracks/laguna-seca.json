@@ -1,0 +1,16 @@
+{
+  "Continent": "North America",
+  "CountryCode": "USA",
+  "Latitude": 36.5845,
+  "Layouts": [
+    {
+      "Corners": 11,
+      "LengthMeters": 4502,
+      "MaxPitSlot": 24,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": -121.7535,
+  "Name": "Laguna Seca",
+  "ShortName": "Laguna Seca"
+}

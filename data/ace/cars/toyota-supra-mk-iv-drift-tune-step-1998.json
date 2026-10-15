@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 3,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Front",
+  "FuelTankL": 70,
+  "Gears": 6,
+  "Manufacturer": "Toyota",
+  "MaxRpm": 8000,
+  "MaxSpeedKmh": 280,
+  "ModelId": "preset_supramkiv_mech_2",
+  "Name": "Supra MK IV",
+  "PerformanceRating": 13,
+  "PowerPs": 600,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 700,
+  "TyreCompounds": [
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "Drift Tune Step",
+  "WeightKg": 1510,
+  "Year": 1998,
+  "ZeroToOneHundredKmh": 4
+}

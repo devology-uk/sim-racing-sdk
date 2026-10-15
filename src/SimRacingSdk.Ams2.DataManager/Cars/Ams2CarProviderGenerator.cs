@@ -1,6 +1,7 @@
 using System.IO;
 using SimRacingSdk.DataManager.Shared;
 using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Generation;
 using SimRacingSdk.DataManager.Shared.Storage;
 using static SimRacingSdk.DataManager.Shared.Generation.CSharpLiteral;
 
@@ -23,11 +24,11 @@ public class Ams2CarProviderGenerator : ICatalogGenerator<CarInfo>
     {
         var coreRoot = this.dataPathProvider.GetProjectFolder(this.options.CoreProjectName);
 
-        File.WriteAllText(Path.Combine(coreRoot, "Models", "Ams2CarInfo.cs"), BuildModelSource());
-        File.WriteAllText(Path.Combine(coreRoot, "Abstractions", "IAms2CarInfoProvider.cs"), BuildInterfaceSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Models", "Ams2CarInfo.cs"), BuildModelSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Abstractions", "IAms2CarInfoProvider.cs"), BuildInterfaceSource());
 
         var providerPath = Path.Combine(coreRoot, "Ams2CarInfoProvider.cs");
-        File.WriteAllText(providerPath, BuildProviderSource(entities));
+        GeneratedSource.Write(providerPath, BuildProviderSource(entities));
         return providerPath;
     }
 

@@ -1,0 +1,16 @@
+{
+  "Continent": "North America",
+  "CountryCode": "USA",
+  "Latitude": 27.455,
+  "Layouts": [
+    {
+      "Corners": 17,
+      "LengthMeters": 5954,
+      "MaxPitSlot": 45,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": -81.35,
+  "Name": "Sebring International Raceway",
+  "ShortName": "Sebring"
+}

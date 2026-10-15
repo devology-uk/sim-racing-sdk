@@ -1,0 +1,467 @@
+<UserControl x:Class="SimRacingSdk.Ace.DataManager.Cars.CarsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimRacingSdk.Ace.DataManager.Cars"
+             xmlns:controls="clr-namespace:SimRacingSdk.DataManager.Shared.Controls;assembly=SimRacingSdk.DataManager.Shared"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:CarsViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SimRacingSdk.DataManager.Shared;component/Themes/EditorForm.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="SchemaGroupStyle"
+                   TargetType="GroupBox">
+                <Setter Property="Margin"
+                        Value="0,0,10,10" />
+                <Setter Property="Padding"
+                        Value="6" />
+                <Setter Property="MinWidth"
+                        Value="190" />
+                <Setter Property="VerticalAlignment"
+                        Value="Top" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <RadioButton Content="By Category"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         Margin="0,0,15,0"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=ByGroup}" />
+            <RadioButton Content="All Cars"
+                         GroupName="CarBrowseMode"
+                         VerticalAlignment="Center"
+                         IsChecked="{Binding BrowseMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Groups}"
+                 SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"
+                 Visibility="{Binding IsByGroupMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      controls:ScrollSelectedIntoView.IsEnabled="True"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Manufacturer"
+                                        Binding="{Binding Manufacturer}" />
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Variant"
+                                        Binding="{Binding Variant}" />
+                    <DataGridTextColumn Header="Year"
+                                        Binding="{Binding Year}" />
+                    <DataGridTextColumn Header="Racing Class"
+                                        Binding="{Binding RacingClass}" />
+                    <DataGridTextColumn Header="Model Id"
+                                        Binding="{Binding ModelId}" />
+                    <DataGridTextColumn Header="Power (PS)"
+                                        Binding="{Binding PowerPs}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Row="1"
+                      Header="Car Details"
+                      Margin="0,10,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,10,0,15">
+                            <Button Content="New Car"
+                                    Command="{Binding NewCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,10,0" />
+                            <Button Content="Save Car"
+                                    Command="{Binding SaveCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0" />
+                            <TextBlock Text="{Binding SaveStatusMessage}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <Grid DataContext="{Binding Editor}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Content="Manufacturer" />
+                            <ComboBox Grid.Row="0"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Manufacturers, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                      ToolTip="Manufacturer + Name must match the car model ACE's shared memory reports" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Content="Name" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="3"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="4"
+                                   Content="Variant" />
+                            <TextBox Grid.Row="0"
+                                     Grid.Column="5"
+                                     Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Only when the same car comes in more than one form; leave blank otherwise" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Content="Year" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="1"
+                                     Text="{Binding Year, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Content="Model Id" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="3"
+                                     Text="{Binding ModelId, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="The preset id from the ACE Dedicated Server's cars.json, e.g. preset_m4gt3_mech_1" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="4"
+                                   Content="Categories" />
+                            <ComboBox Grid.Row="1"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Groups, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Categories, UpdateSourceTrigger=PropertyChanged}"
+                                      ToolTip="ACE's grouping, e.g. Road:Modern:ICE" />
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Content="Racing Class" />
+                            <ComboBox Grid.Row="2"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.RacingClasses, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding RacingClass, UpdateSourceTrigger=PropertyChanged}"
+                                      ToolTip="Leave blank for a road car" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Content="Body" />
+                            <ComboBox Grid.Row="2"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Bodies, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="4"
+                                   Content="Performance Rating" />
+                            <TextBox Grid.Row="2"
+                                     Grid.Column="5"
+                                     Text="{Binding PerformanceRating, UpdateSourceTrigger=LostFocus}" />
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   Content="Engine" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.Engines, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding Engine, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Content="Engine Layout" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="3"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.EngineLayouts, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding EngineLayout, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="4"
+                                   Content="Drive Layout" />
+                            <ComboBox Grid.Row="3"
+                                      Grid.Column="5"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding DataContext.Suggestions.DriveLayouts, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                      Text="{Binding DriveLayout, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   Content="Cylinders" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="1"
+                                     Text="{Binding Cylinders, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     ToolTip="Leave blank for an electric car" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Content="Displacement (L)" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="3"
+                                     Text="{Binding DisplacementL, UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            <Label Grid.Row="4"
+                                   Grid.Column="4"
+                                   Content="Max RPM" />
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="5"
+                                     Text="{Binding MaxRpm, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     ToolTip="Leave blank until known" />
+
+                            <Label Grid.Row="5"
+                                   Grid.Column="0"
+                                   Content="Power (PS)" />
+                            <TextBox Grid.Row="5"
+                                     Grid.Column="1"
+                                     Text="{Binding PowerPs, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="2"
+                                   Content="Torque (Nm)" />
+                            <TextBox Grid.Row="5"
+                                     Grid.Column="3"
+                                     Text="{Binding TorqueNm, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="5"
+                                   Grid.Column="4"
+                                   Content="Gears" />
+                            <TextBox Grid.Row="5"
+                                     Grid.Column="5"
+                                     Text="{Binding Gears, UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+
+                            <Label Grid.Row="6"
+                                   Grid.Column="0"
+                                   Content="Weight (kg)" />
+                            <TextBox Grid.Row="6"
+                                     Grid.Column="1"
+                                     Text="{Binding WeightKg, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="6"
+                                   Grid.Column="2"
+                                   Content="Max Speed (km/h)" />
+                            <TextBox Grid.Row="6"
+                                     Grid.Column="3"
+                                     Text="{Binding MaxSpeedKmh, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="6"
+                                   Grid.Column="4"
+                                   Content="0-100 km/h (s)" />
+                            <TextBox Grid.Row="6"
+                                     Grid.Column="5"
+                                     Text="{Binding ZeroToOneHundredKmh, UpdateSourceTrigger=LostFocus}" />
+
+                            <Label Grid.Row="7"
+                                   Grid.Column="0"
+                                   Content="Fuel Tank (L)" />
+                            <TextBox Grid.Row="7"
+                                     Grid.Column="1"
+                                     Text="{Binding FuelTankL, UpdateSourceTrigger=LostFocus, TargetNullValue=''}" />
+                            <Label Grid.Row="7"
+                                   Grid.Column="2"
+                                   Content="Battery (kWh)" />
+                            <TextBox Grid.Row="7"
+                                     Grid.Column="3"
+                                     Text="{Binding BatteryKwh, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                                     ToolTip="Leave blank unless the car is electric or hybrid" />
+                            <Label Grid.Row="7"
+                                   Grid.Column="4"
+                                   Content="Tyre Compounds" />
+                            <TextBox Grid.Row="7"
+                                     Grid.Column="5"
+                                     Text="{Binding TyreCompounds, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Comma separated, in the order the game lists them, e.g. Supercar, Road, Eco" />
+                        </Grid>
+
+                        <Label Content="Setup Controls"
+                               Margin="0,15,0,5"
+                               ToolTip="Which controls this car's setup screens show - a car's .carsetup appears without tabs in SRT until this is filled in" />
+                        <WrapPanel DataContext="{Binding Editor.SetupSchema}">
+                            <GroupBox Header="Tyres"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding Tyres.Enabled}" />
+                                    <TextBlock Text="Front"
+                                               Margin="0,4,0,4" />
+                                    <CheckBox Content="Pressure"
+                                              IsChecked="{Binding Tyres.Front.HasPressure}" />
+                                    <CheckBox Content="Camber"
+                                              IsChecked="{Binding Tyres.Front.HasCamber}" />
+                                    <CheckBox Content="Toe"
+                                              IsChecked="{Binding Tyres.Front.HasToe}" />
+                                    <CheckBox Content="Caster"
+                                              IsChecked="{Binding Tyres.Front.HasCaster}" />
+                                    <TextBlock Text="Rear"
+                                               Margin="0,4,0,4" />
+                                    <CheckBox Content="Pressure"
+                                              IsChecked="{Binding Tyres.Rear.HasPressure}" />
+                                    <CheckBox Content="Camber"
+                                              IsChecked="{Binding Tyres.Rear.HasCamber}" />
+                                    <CheckBox Content="Toe"
+                                              IsChecked="{Binding Tyres.Rear.HasToe}" />
+                                    <CheckBox Content="Caster"
+                                              IsChecked="{Binding Tyres.Rear.HasCaster}" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Electronics"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding Electronics.Enabled}" />
+                                    <CheckBox Content="Traction Control"
+                                              IsChecked="{Binding Electronics.HasTractionControl}" />
+                                    <CheckBox Content="Traction Control 2"
+                                              IsChecked="{Binding Electronics.HasTractionControl2}" />
+                                    <CheckBox Content="ABS"
+                                              IsChecked="{Binding Electronics.HasAbs}" />
+                                    <CheckBox Content="ESC"
+                                              IsChecked="{Binding Electronics.HasEsc}" />
+                                    <CheckBox Content="Turbo Boost"
+                                              IsChecked="{Binding Electronics.HasTurboBoost}" />
+                                    <CheckBox Content="Engine Map"
+                                              IsChecked="{Binding Electronics.HasEngineMap}" />
+                                    <CheckBox Content="ERS Deployment Map"
+                                              IsChecked="{Binding Electronics.HasErsDeploymentMap}" />
+                                    <CheckBox Content="ERS Recharge Level"
+                                              IsChecked="{Binding Electronics.HasErsRechargeLevel}" />
+                                    <CheckBox Content="ERS Heat Charging"
+                                              IsChecked="{Binding Electronics.HasErsHeatCharging}" />
+                                    <CheckBox Content="Telemetry Laps"
+                                              IsChecked="{Binding Electronics.HasTelemetryLaps}" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Fuel and Strategy"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding FuelAndStrategy.Enabled}" />
+                                    <CheckBox Content="Fuel"
+                                              IsChecked="{Binding FuelAndStrategy.HasFuel}" />
+                                    <TextBlock Text="Tyre Compound"
+                                               Margin="0,4,0,4" />
+                                    <ComboBox ItemsSource="{Binding DataContext.Editor.TyreCompoundModes, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                              SelectedItem="{Binding FuelAndStrategy.TyreCompoundMode}"
+                                              ToolTip="None: no control. Unified: one control for all four. FrontOnly: front axle only. FrontAndRear: separate front and rear." />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Suspension"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding Suspension.Enabled}" />
+                                    <CheckBox Content="Wheel Rate"
+                                              IsChecked="{Binding Suspension.HasWheelRate}" />
+                                    <CheckBox Content="Front Anti-Roll Bar"
+                                              IsChecked="{Binding Suspension.HasFrontAntiRollBar}" />
+                                    <CheckBox Content="Rear Anti-Roll Bar"
+                                              IsChecked="{Binding Suspension.HasRearAntiRollBar}" />
+                                    <CheckBox Content="Brake Bias"
+                                              IsChecked="{Binding Suspension.HasBrakeBias}" />
+                                    <CheckBox Content="Brake Torque Multiplier"
+                                              IsChecked="{Binding Suspension.HasBrakeTorqueMultiplier}" />
+                                    <CheckBox Content="Steer Ratio"
+                                              IsChecked="{Binding Suspension.HasSteerRatio}" />
+                                    <CheckBox Content="Bumpstop Rate"
+                                              IsChecked="{Binding Suspension.HasBumpstopRate}" />
+                                    <CheckBox Content="Bumpstop Range"
+                                              IsChecked="{Binding Suspension.HasBumpstopRange}" />
+                                    <CheckBox Content="Differential Preload"
+                                              IsChecked="{Binding Suspension.HasDifferentialPreload}" />
+                                    <CheckBox Content="Differential Coast"
+                                              IsChecked="{Binding Suspension.HasDifferentialCoast}" />
+                                    <CheckBox Content="Differential Power"
+                                              IsChecked="{Binding Suspension.HasDifferentialPower}" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Dampers"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding Dampers.Enabled}" />
+                                    <CheckBox Content="Fast Bump"
+                                              IsChecked="{Binding Dampers.HasFastBump}" />
+                                    <CheckBox Content="Fast Rebound"
+                                              IsChecked="{Binding Dampers.HasFastRebound}" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Aero"
+                                      Style="{StaticResource SchemaGroupStyle}">
+                                <StackPanel>
+                                    <CheckBox Content="Tab enabled"
+                                              FontWeight="SemiBold"
+                                              IsChecked="{Binding Aero.Enabled}" />
+                                    <CheckBox Content="Front Ride Height"
+                                              IsChecked="{Binding Aero.HasFrontRideHeight}" />
+                                    <CheckBox Content="Rear Ride Height"
+                                              IsChecked="{Binding Aero.HasRearRideHeight}" />
+                                    <CheckBox Content="Front Wing Angle"
+                                              IsChecked="{Binding Aero.HasFrontWingAngle}" />
+                                    <CheckBox Content="Rear Wing Angle"
+                                              IsChecked="{Binding Aero.HasRearWingAngle}" />
+                                </StackPanel>
+                            </GroupBox>
+                        </WrapPanel>
+
+                        <Separator Margin="0,15,0,15" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Generate Core Provider"
+                                    Command="{Binding GenerateCoreProviderCommand}"
+                                    Padding="10,4"
+                                    Margin="0,0,15,0"
+                                    ToolTip="Regenerates SimRacingSdk.Ace.Core's car model, setup schema, interface and provider from every car saved here" />
+                            <TextBlock Text="{Binding GenerateStatusMessage}"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

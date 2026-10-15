@@ -1,0 +1,34 @@
+{
+  "Continent": "North America",
+  "CountryCode": "USA",
+  "Latitude": 42.3362,
+  "Layouts": [
+    {
+      "Corners": 13,
+      "LengthMeters": 5552,
+      "MaxPitSlot": 40,
+      "Name": "GP Inner Loop"
+    },
+    {
+      "Corners": 7,
+      "LengthMeters": 3943,
+      "MaxPitSlot": 40,
+      "Name": "Short Inner Loop"
+    },
+    {
+      "Corners": 11,
+      "LengthMeters": 5435,
+      "MaxPitSlot": 40,
+      "Name": "GP"
+    },
+    {
+      "Corners": 7,
+      "LengthMeters": 3907,
+      "MaxPitSlot": 40,
+      "Name": "Short"
+    }
+  ],
+  "Longitude": -76.9252,
+  "Name": "Watkins Glen",
+  "ShortName": "Watkins Glen"
+}

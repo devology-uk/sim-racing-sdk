@@ -1,0 +1,16 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "BEL",
+  "Latitude": 50.4375,
+  "Layouts": [
+    {
+      "Corners": 19,
+      "LengthMeters": 7004,
+      "MaxPitSlot": 35,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": 5.9685,
+  "Name": "Circuit de Spa Francorchamps",
+  "ShortName": "Spa"
+}

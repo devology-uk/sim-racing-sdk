@@ -95,9 +95,7 @@ public class AceSetupProvider : IAceSetupProvider
     {
         var raw = AceRawCarSetup.Parser.ParseFrom(File.ReadAllBytes(filePath));
         var carInfo = this.carInfoProvider.GetCarInfos().FirstOrDefault(c => raw.CarPresetId.Contains(c.ModelId));
-        var trackDisplayName = this.trackInfoProvider.GetLayoutsForTrack(trackFolderName)
-                                    .FirstOrDefault()
-                                    ?.ShortName ?? trackFolderName;
+        var trackDisplayName = this.trackInfoProvider.FindByName(trackFolderName)?.ShortName ?? trackFolderName;
 
         return new AceSetupFileInfo
         {

@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Racing:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 3,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Front",
+  "FuelTankL": 120,
+  "Gears": 6,
+  "Manufacturer": "BMW",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 300,
+  "ModelId": "preset_m4gt3_mech_1",
+  "Name": "M4 GT3 Evo",
+  "PerformanceRating": 21.1,
+  "PowerPs": 590,
+  "RacingClass": "GT3",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": true
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": true,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": true,
+      "HasBumpstopRate": true,
+      "HasBumpstopRange": true,
+      "HasDifferentialPreload": true,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 700,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 1400,
+  "Year": 2025,
+  "ZeroToOneHundredKmh": 2.9
+}

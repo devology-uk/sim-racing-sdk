@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Racing:Modern:ICE",
+  "Cylinders": 10,
+  "DisplacementL": 5.2,
+  "DriveLayout": "RWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 120,
+  "Gears": 6,
+  "Manufacturer": "Lamborghini",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 310,
+  "ModelId": "preset_stevo2_mech_1",
+  "Name": "Huracan ST EVO2",
+  "PerformanceRating": 18.4,
+  "PowerPs": 620,
+  "RacingClass": "GT2:Cup",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": true
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": true,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 570,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 1250,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 2.8
+}

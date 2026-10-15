@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.IO;
 using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Generation;
 using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Tracks;
@@ -30,12 +31,12 @@ public class PmrTrackProviderGenerator : ICatalogGenerator<TrackInfo>
         var coreRoot = Path.Combine(this.dataPathProvider.GetRepoRoot(), "src", "SimRacingSdk.Pmr.Core");
         var trackList = tracks.ToList();
 
-        File.WriteAllText(Path.Combine(coreRoot, "Models", "PmrTrackInfo.cs"), BuildModelSource());
-        File.WriteAllText(Path.Combine(coreRoot, "Models", "PmrTrackLayoutInfo.cs"), BuildLayoutModelSource());
-        File.WriteAllText(Path.Combine(coreRoot, "Abstractions", "IPmrTrackInfoProvider.cs"), BuildInterfaceSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Models", "PmrTrackInfo.cs"), BuildModelSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Models", "PmrTrackLayoutInfo.cs"), BuildLayoutModelSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Abstractions", "IPmrTrackInfoProvider.cs"), BuildInterfaceSource());
 
         var providerPath = Path.Combine(coreRoot, "PmrTrackInfoProvider.cs");
-        File.WriteAllText(providerPath, BuildSource(trackList));
+        GeneratedSource.Write(providerPath, BuildSource(trackList));
         return providerPath;
     }
 

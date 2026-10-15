@@ -1,0 +1,22 @@
+{
+  "Continent": "Asia",
+  "CountryCode": "JPN",
+  "Latitude": 35.371667,
+  "Layouts": [
+    {
+      "Corners": 16,
+      "LengthMeters": 4549,
+      "MaxPitSlot": 34,
+      "Name": "GP"
+    },
+    {
+      "Corners": 14,
+      "LengthMeters": 4526,
+      "MaxPitSlot": 34,
+      "Name": "GP Short"
+    }
+  ],
+  "Longitude": 138.926667,
+  "Name": "Fuji Speedway",
+  "ShortName": "Fuji"
+}

@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Hatch Back",
+  "Categories": "Road:Vintage:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.6,
+  "DriveLayout": "FWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Front",
+  "FuelTankL": 40,
+  "Gears": 4,
+  "Manufacturer": "Volkswagen",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 180,
+  "ModelId": "preset_gtimk1_mech_1",
+  "Name": "Golf GTI Mk1",
+  "PerformanceRating": 7.4,
+  "PowerPs": 110,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": false,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 140,
+  "TyreCompounds": [
+    "Road",
+    "Eco"
+  ],
+  "Variant": "",
+  "WeightKg": 810,
+  "Year": 1978,
+  "ZeroToOneHundredKmh": 9
+}

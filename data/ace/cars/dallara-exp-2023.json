@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Cabriolet",
+  "Categories": "Track:Modern:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 2.3,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Mid",
+  "FuelTankL": 55,
+  "Gears": 6,
+  "Manufacturer": "Dallara",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 290,
+  "ModelId": "preset_dalexp_mech_1",
+  "Name": "EXP",
+  "PerformanceRating": 22.5,
+  "PowerPs": 500,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": true,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 700,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 890,
+  "Year": 2023,
+  "ZeroToOneHundredKmh": 3
+}

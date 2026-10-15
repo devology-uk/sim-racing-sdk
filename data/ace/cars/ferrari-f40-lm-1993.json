@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Racing:Youngtimer:ICE",
+  "Cylinders": 8,
+  "DisplacementL": 2.9,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Mid",
+  "FuelTankL": 120,
+  "Gears": 5,
+  "Manufacturer": "Ferrari",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 370,
+  "ModelId": "preset_f40lm_mech_1",
+  "Name": "F40 LM",
+  "PerformanceRating": 20.2,
+  "PowerPs": 900,
+  "RacingClass": "Prototype",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": true,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": true,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": true,
+      "HasDifferentialCoast": true,
+      "HasDifferentialPower": true
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": true,
+      "HasFastRebound": true
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": true,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 750,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 1140,
+  "Year": 1993,
+  "ZeroToOneHundredKmh": 3
+}

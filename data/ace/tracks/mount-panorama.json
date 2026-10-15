@@ -1,0 +1,16 @@
+{
+  "Continent": "Australia",
+  "CountryCode": "AUS",
+  "Latitude": -33.4486,
+  "Layouts": [
+    {
+      "Corners": 23,
+      "LengthMeters": 6213,
+      "MaxPitSlot": 35,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": 149.5547,
+  "Name": "Mount Panorama",
+  "ShortName": "Mount Panorama"
+}

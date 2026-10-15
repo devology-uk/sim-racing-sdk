@@ -1,0 +1,16 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "ITA",
+  "Latitude": 45.621,
+  "Layouts": [
+    {
+      "Corners": 11,
+      "LengthMeters": 5793,
+      "MaxPitSlot": 30,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": 9.286,
+  "Name": "Monza",
+  "ShortName": "Monza"
+}

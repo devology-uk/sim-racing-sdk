@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Sedan",
+  "Categories": "Road:Youngtimer:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.3,
+  "DriveLayout": "FWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Front",
+  "FuelTankL": 34,
+  "Gears": 4,
+  "Manufacturer": "Mini",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 163,
+  "ModelId": "preset_jcs_mech_1",
+  "Name": "John Cooper S",
+  "PerformanceRating": 9.5,
+  "PowerPs": 83,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": false,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": false,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 114,
+  "TyreCompounds": [
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "MK VI John Cooper S",
+  "WeightKg": 710,
+  "Year": 1990,
+  "ZeroToOneHundredKmh": 9.8
+}

@@ -1,0 +1,22 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "AUT",
+  "Latitude": 47.2228736,
+  "Layouts": [
+    {
+      "Corners": 10,
+      "LengthMeters": 4318,
+      "MaxPitSlot": 28,
+      "Name": "GP"
+    },
+    {
+      "Corners": 5,
+      "LengthMeters": 2336,
+      "MaxPitSlot": 28,
+      "Name": "National"
+    }
+  ],
+  "Longitude": 14.760198,
+  "Name": "Red Bull Ring",
+  "ShortName": "Red Bull Ring"
+}

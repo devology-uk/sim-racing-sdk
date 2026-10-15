@@ -1,0 +1,22 @@
+{
+  "Continent": "North America",
+  "CountryCode": "USA",
+  "Latitude": 30.135,
+  "Layouts": [
+    {
+      "Corners": 20,
+      "LengthMeters": 5615,
+      "MaxPitSlot": 34,
+      "Name": "GP"
+    },
+    {
+      "Corners": 19,
+      "LengthMeters": 3702,
+      "MaxPitSlot": 34,
+      "Name": "National"
+    }
+  ],
+  "Longitude": -97.6341,
+  "Name": "Circuit Of The Americas",
+  "ShortName": "COTA"
+}

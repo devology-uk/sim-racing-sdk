@@ -1,0 +1,40 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "DEU",
+  "Latitude": 50.3309,
+  "Layouts": [
+    {
+      "Corners": 170,
+      "LengthMeters": 25947,
+      "MaxPitSlot": 30,
+      "Name": "24H"
+    },
+    {
+      "Corners": 17,
+      "LengthMeters": 5148,
+      "MaxPitSlot": 30,
+      "Name": "Gp Strecke"
+    },
+    {
+      "Corners": 154,
+      "LengthMeters": 20832,
+      "MaxPitSlot": 5,
+      "Name": "Nordschleife"
+    },
+    {
+      "Corners": 11,
+      "LengthMeters": 3629,
+      "MaxPitSlot": 30,
+      "Name": "Sprint"
+    },
+    {
+      "Corners": 154,
+      "LengthMeters": 19300,
+      "MaxPitSlot": 50,
+      "Name": "Touristenfarten"
+    }
+  ],
+  "Longitude": 6.9414,
+  "Name": "Nurburgring",
+  "ShortName": "Nurburgring"
+}

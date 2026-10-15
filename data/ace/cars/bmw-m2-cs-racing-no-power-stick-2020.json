@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Racing:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 3,
+  "DriveLayout": "RWD",
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Front",
+  "FuelTankL": 120,
+  "Gears": 7,
+  "Manufacturer": "BMW",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 270,
+  "ModelId": "preset_m2csr_mech_1",
+  "Name": "M2 CS Racing",
+  "PerformanceRating": 13.1,
+  "PowerPs": 365,
+  "RacingClass": "Cup:TCX",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": true,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": true,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 550,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "No Power Stick",
+  "WeightKg": 1610,
+  "Year": 2020,
+  "ZeroToOneHundredKmh": 4.2
+}

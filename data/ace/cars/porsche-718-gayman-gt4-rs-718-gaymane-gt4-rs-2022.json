@@ -1,0 +1,91 @@
+{
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 4,
+  "DriveLayout": "RWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 64,
+  "Gears": 7,
+  "Manufacturer": "Porsche",
+  "MaxRpm": 9000,
+  "MaxSpeedKmh": 315,
+  "ModelId": "preset_718gt4rs_mech_1",
+  "Name": "718 Gayman GT4 RS",
+  "PerformanceRating": 12.7,
+  "PowerPs": 500,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "FrontAndRear"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 450,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
+  "Variant": "718 Gaymane GT4 RS",
+  "WeightKg": 1490,
+  "Year": 2022,
+  "ZeroToOneHundredKmh": 3.4
+}

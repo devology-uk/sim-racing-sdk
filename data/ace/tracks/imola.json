@@ -1,0 +1,16 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "ITA",
+  "Latitude": 44.3408,
+  "Layouts": [
+    {
+      "Corners": 22,
+      "LengthMeters": 4909,
+      "MaxPitSlot": 29,
+      "Name": "GP"
+    }
+  ],
+  "Longitude": 11.7137,
+  "Name": "Imola",
+  "ShortName": "Imola"
+}

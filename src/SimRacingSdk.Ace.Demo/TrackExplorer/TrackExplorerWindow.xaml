@@ -32,15 +32,16 @@
                  MinWidth="120" />
 
         <ListBox Grid.Column="1"
-                 ItemsSource="{Binding TrackNames}"
+                 ItemsSource="{Binding Tracks}"
+                 DisplayMemberPath="Name"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Stretch"
-                 SelectedItem="{Binding SelectedTrackName, Mode=TwoWay}"
+                 SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
                  MinWidth="180" />
 
         <ListBox Grid.Column="2"
                  ItemsSource="{Binding Layouts}"
-                 DisplayMemberPath="Layout"
+                 DisplayMemberPath="Name"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Stretch"
                  SelectedItem="{Binding SelectedLayout, Mode=TwoWay}"
@@ -49,8 +50,7 @@
         <GroupBox Grid.Column="3"
                   Header="Layout Details"
                   Margin="5"
-                  VerticalAlignment="Top"
-                  DataContext="{Binding SelectedLayout}">
+                  VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -67,11 +67,11 @@
 
                 <Image Grid.Column="0"
                        Grid.Row="0"
-                       Source="{Binding CountryCode, Converter={StaticResource FlagImageSourceConverter}}"
+                       Source="{Binding SelectedTrack.CountryCode, Converter={StaticResource FlagImageSourceConverter}}"
                        Width="64" />
                 <Label Grid.Column="1"
                        Grid.Row="0"
-                       Content="{Binding Track}"
+                       Content="{Binding SelectedTrack.Name}"
                        FontWeight="Bold"
                        FontSize="16"
                        VerticalAlignment="Bottom" />
@@ -82,7 +82,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="1"
-                       Content="{Binding ShortName}" />
+                       Content="{Binding SelectedTrack.ShortName}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="2"
@@ -90,7 +90,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="2"
-                       Content="{Binding Layout}" />
+                       Content="{Binding SelectedLayout.Name}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="3"
@@ -98,7 +98,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="3"
-                       Content="{Binding TrackLengthMeters}" />
+                       Content="{Binding SelectedLayout.LengthMeters}" />
 
                 <Label Grid.Column="0"
                        Grid.Row="4"
@@ -106,7 +106,7 @@
                        FontWeight="SemiBold" />
                 <Label Grid.Column="1"
                        Grid.Row="4"
-                       Content="{Binding MaxPitSlot}" />
+                       Content="{Binding SelectedLayout.MaxPitSlot}" />
             </Grid>
         </GroupBox>
     </Grid>

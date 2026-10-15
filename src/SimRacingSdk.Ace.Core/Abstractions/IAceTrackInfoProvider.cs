@@ -5,10 +5,11 @@ namespace SimRacingSdk.Ace.Core.Abstractions;
 
 public interface IAceTrackInfoProvider
 {
-    AceTrackInfo? FindByTrackAndLayout(string track, string layout);
+    // Name is the track name ACE's shared memory reports, which is also its setup folder name.
+    AceTrackInfo? FindByName(string name);
+    AceTrackInfo? FindByShortName(string shortName);
     ReadOnlyCollection<string> GetContinents();
-    ReadOnlyCollection<string> GetTrackNamesForContinent(string continent);
-    ReadOnlyCollection<string> GetTrackNames();
-    ReadOnlyCollection<AceTrackInfo> GetLayoutsForTrack(string track);
     ReadOnlyCollection<AceTrackInfo> GetTrackInfos();
+    ReadOnlyCollection<AceTrackInfo> GetTrackInfosForContinent(string continent);
 }
+

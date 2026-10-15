@@ -1,0 +1,87 @@
+{
+  "BatteryKwh": 52,
+  "Body": "Hatch Back",
+  "Categories": "Road:Modern:EV",
+  "Cylinders": null,
+  "DisplacementL": null,
+  "DriveLayout": "AWD",
+  "Engine": "Electric Motor",
+  "EngineLayout": "Mid",
+  "FuelTankL": null,
+  "Gears": null,
+  "Manufacturer": "Alpine",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 170,
+  "ModelId": "preset_a290b_mech_1",
+  "Name": "A290 Beta",
+  "PerformanceRating": 9.8,
+  "PowerPs": 220,
+  "RacingClass": "",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": false,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": false,
+        "HasToe": false,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": true,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": false,
+      "HasFuel": false,
+      "TyreCompoundMode": "None"
+    },
+    "Suspension": {
+      "Enabled": false,
+      "HasWheelRate": false,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
+      "HasBrakeBias": false,
+      "HasBrakeTorqueMultiplier": false,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": false,
+      "HasDifferentialCoast": false,
+      "HasDifferentialPower": false
+    },
+    "Dampers": {
+      "Enabled": false,
+      "HasFastBump": false,
+      "HasFastRebound": false
+    },
+    "Aero": {
+      "Enabled": false,
+      "HasFrontRideHeight": false,
+      "HasRearRideHeight": false,
+      "HasFrontWingAngle": false,
+      "HasRearWingAngle": false
+    }
+  },
+  "TorqueNm": 300,
+  "TyreCompounds": [],
+  "Variant": "",
+  "WeightKg": 1479,
+  "Year": 2023,
+  "ZeroToOneHundredKmh": 6.4
+}

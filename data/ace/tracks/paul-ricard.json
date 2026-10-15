@@ -1,0 +1,34 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "FRA",
+  "Latitude": 43.2529,
+  "Layouts": [
+    {
+      "Corners": 13,
+      "LengthMeters": 5770,
+      "MaxPitSlot": 34,
+      "Name": "Layout 1A-V2"
+    },
+    {
+      "Corners": 15,
+      "LengthMeters": 5842,
+      "MaxPitSlot": 34,
+      "Name": "Layout 1C-V2"
+    },
+    {
+      "Corners": 10,
+      "LengthMeters": 3793,
+      "MaxPitSlot": 34,
+      "Name": "Layout 3A"
+    },
+    {
+      "Corners": 11,
+      "LengthMeters": 3841,
+      "MaxPitSlot": 34,
+      "Name": "Layout 3C"
+    }
+  ],
+  "Longitude": 5.7912,
+  "Name": "Paul Ricard",
+  "ShortName": "Paul Ricard"
+}

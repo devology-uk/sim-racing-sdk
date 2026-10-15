@@ -1,0 +1,28 @@
+{
+  "Continent": "Asia",
+  "CountryCode": "JPN",
+  "Latitude": 34.8441,
+  "Layouts": [
+    {
+      "Corners": 18,
+      "LengthMeters": 5807,
+      "MaxPitSlot": 25,
+      "Name": "GP"
+    },
+    {
+      "Corners": 7,
+      "LengthMeters": 2243,
+      "MaxPitSlot": 25,
+      "Name": "East"
+    },
+    {
+      "Corners": 9,
+      "LengthMeters": 3466,
+      "MaxPitSlot": 10,
+      "Name": "West"
+    }
+  ],
+  "Longitude": 136.5329,
+  "Name": "Suzuka",
+  "ShortName": "Suzuka"
+}

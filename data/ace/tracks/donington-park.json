@@ -1,0 +1,22 @@
+{
+  "Continent": "Europe",
+  "CountryCode": "GBR-ENG",
+  "Latitude": 52.8304,
+  "Layouts": [
+    {
+      "Corners": 12,
+      "LengthMeters": 4020,
+      "MaxPitSlot": 19,
+      "Name": "GP"
+    },
+    {
+      "Corners": 10,
+      "LengthMeters": 3149,
+      "MaxPitSlot": 19,
+      "Name": "National"
+    }
+  ],
+  "Longitude": -1.3749,
+  "Name": "Donington Park",
+  "ShortName": "Donington"
+}

@@ -2,6 +2,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using SimRacingSdk.DataManager.Shared.Catalog;
+using SimRacingSdk.DataManager.Shared.Generation;
 using SimRacingSdk.DataManager.Shared.Storage;
 
 namespace SimRacingSdk.Pmr.DataManager.Cars;
@@ -28,11 +29,11 @@ public class PmrCarProviderGenerator : ICatalogGenerator<CarInfo>
         var coreRoot = Path.Combine(this.dataPathProvider.GetRepoRoot(), "src", "SimRacingSdk.Pmr.Core");
         var carList = cars.ToList();
 
-        File.WriteAllText(Path.Combine(coreRoot, "Models", "PmrCarInfo.cs"), BuildModelSource());
-        File.WriteAllText(Path.Combine(coreRoot, "Abstractions", "IPmrCarInfoProvider.cs"), BuildInterfaceSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Models", "PmrCarInfo.cs"), BuildModelSource());
+        GeneratedSource.Write(Path.Combine(coreRoot, "Abstractions", "IPmrCarInfoProvider.cs"), BuildInterfaceSource());
 
         var providerPath = Path.Combine(coreRoot, "PmrCarInfoProvider.cs");
-        File.WriteAllText(providerPath, BuildSource(carList));
+        GeneratedSource.Write(providerPath, BuildSource(carList));
         return providerPath;
     }
 

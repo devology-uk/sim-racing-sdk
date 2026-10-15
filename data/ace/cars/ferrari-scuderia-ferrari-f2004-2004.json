@@ -1,0 +1,90 @@
+{
+  "BatteryKwh": null,
+  "Body": "Open Wheel",
+  "Categories": "Racing:Modern:ICE",
+  "Cylinders": 10,
+  "DisplacementL": 3,
+  "DriveLayout": "RWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 150,
+  "Gears": 7,
+  "Manufacturer": "Ferrari",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 350,
+  "ModelId": "preset_f2004_mech_1",
+  "Name": "Scuderia Ferrari F2004",
+  "PerformanceRating": 41.4,
+  "PowerPs": 900,
+  "RacingClass": "Formula",
+  "SetupSchema": {
+    "Tyres": {
+      "Enabled": true,
+      "Front": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      },
+      "Rear": {
+        "HasPressure": true,
+        "HasCamber": true,
+        "HasToe": true,
+        "HasCaster": false
+      }
+    },
+    "Electronics": {
+      "Enabled": true,
+      "HasTractionControl": true,
+      "HasTractionControl2": false,
+      "HasAbs": false,
+      "HasEsc": false,
+      "HasTurboBoost": false,
+      "HasEngineMap": false,
+      "HasErsDeploymentMap": false,
+      "HasErsRechargeLevel": false,
+      "HasErsHeatCharging": false,
+      "HasTelemetryLaps": true
+    },
+    "FuelAndStrategy": {
+      "Enabled": true,
+      "HasFuel": true,
+      "TyreCompoundMode": "Unified"
+    },
+    "Suspension": {
+      "Enabled": true,
+      "HasWheelRate": true,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
+      "HasBrakeBias": true,
+      "HasBrakeTorqueMultiplier": true,
+      "HasSteerRatio": false,
+      "HasBumpstopRate": false,
+      "HasBumpstopRange": false,
+      "HasDifferentialPreload": true,
+      "HasDifferentialCoast": true,
+      "HasDifferentialPower": true
+    },
+    "Dampers": {
+      "Enabled": true,
+      "HasFastBump": true,
+      "HasFastRebound": true
+    },
+    "Aero": {
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
+      "HasFrontWingAngle": true,
+      "HasRearWingAngle": true
+    }
+  },
+  "TorqueNm": 350,
+  "TyreCompounds": [
+    "Slicks",
+    "Wet"
+  ],
+  "Variant": "",
+  "WeightKg": 605,
+  "Year": 2004,
+  "ZeroToOneHundredKmh": 2
+}
