@@ -37,6 +37,26 @@ public class TracksViewModel : CatalogPageViewModel<TrackInfo, TrackEditorViewMo
             return "Country is empty";
         }
 
-        return entity.Layouts.Any(layout => layout.Name == "Default") ? null : "it needs a layout named Default";
+        if(entity.Layouts.All(layout => layout.Name != "Default"))
+        {
+            return "it needs a layout named Default";
+        }
+
+        var duplicateRawTrackName = this.FindDuplicateRawTrackName(entity);
+        return duplicateRawTrackName is null
+            ? null
+            : $"the raw track name \"{duplicateRawTrackName}\" is listed on more than one layout";
+    }
+
+    // A raw track name must lead to exactly one layout, in this track or any other.
+    private string? FindDuplicateRawTrackName(TrackInfo entity)
+    {
+        var otherTracks = this.Entities.Where(track => track.Id != entity.Id && track.Id != this.SelectedItem?.Id);
+        return otherTracks.Append(entity)
+            .SelectMany(track => track.Layouts)
+            .SelectMany(layout => layout.RawTrackNames)
+            .GroupBy(rawTrackName => rawTrackName, StringComparer.InvariantCultureIgnoreCase)
+            .FirstOrDefault(group => group.Count() > 1)
+            ?.Key;
     }
 }

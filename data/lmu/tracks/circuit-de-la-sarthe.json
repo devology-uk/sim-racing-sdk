@@ -6,12 +6,14 @@
     {
       "Corners": 38,
       "LengthM": 13626,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 34,
       "LengthM": 13530,
-      "Name": "Mulsanne"
+      "Name": "Mulsanne",
+      "RawTrackNames": []
     }
   ],
   "Longitude": 0.233333,

@@ -6,12 +6,14 @@
     {
       "Corners": 20,
       "LengthM": 7004,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 20,
       "LengthM": 7004,
-      "Name": "Endurance Circuit"
+      "Name": "Endurance Circuit",
+      "RawTrackNames": []
     }
   ],
   "Longitude": 5.971389,

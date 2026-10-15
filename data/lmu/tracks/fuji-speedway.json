@@ -6,12 +6,16 @@
     {
       "Corners": 16,
       "LengthM": 4563,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 14,
       "LengthM": 4526,
-      "Name": "Classic Circuit"
+      "Name": "Classic Circuit",
+      "RawTrackNames": [
+        "Fuji Speedway Classic"
+      ]
     }
   ],
   "Longitude": 138.926667,

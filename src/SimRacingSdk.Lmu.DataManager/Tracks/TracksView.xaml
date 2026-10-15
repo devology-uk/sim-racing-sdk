@@ -207,6 +207,18 @@
                             <TextBox Grid.Row="1"
                                      Grid.Column="1"
                                      Text="{Binding LengthM, UpdateSourceTrigger=LostFocus}" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   VerticalAlignment="Top"
+                                   Content="Raw Track Names" />
+                            <TextBox Grid.Row="1"
+                                     Grid.Column="3"
+                                     Width="185"
+                                     Height="60"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     Text="{Binding RawTrackNames, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="The exact track names LMU reports for this layout, one per line, e.g. Bahrain Outer Circuit. Not needed for the Default layout: its venue name is matched anyway." />
                         </Grid>
                     </Grid>
 

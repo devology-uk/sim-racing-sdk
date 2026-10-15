@@ -6,12 +6,16 @@
     {
       "Corners": 17,
       "LengthM": 6019,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 7,
       "LengthM": 3219,
-      "Name": "School Circuit"
+      "Name": "School Circuit",
+      "RawTrackNames": [
+        "Sebring School Circuit"
+      ]
     }
   ],
   "Longitude": -81.35,

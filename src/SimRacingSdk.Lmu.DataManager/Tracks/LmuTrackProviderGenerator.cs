@@ -37,7 +37,8 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
         var layoutEntries = track.Layouts.Select(layout => "new() { "
                                                              + $"Corners = {layout.Corners}, "
                                                              + $"LengthM = {layout.LengthM}, "
-                                                             + $"Name = {Text(layout.Name)} "
+                                                             + $"Name = {Text(layout.Name)}, "
+                                                             + $"RawTrackNames = {TextArray(layout.RawTrackNames)} "
                                                              + "}");
 
         return "        new() { "
@@ -86,6 +87,9 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
                    public int Corners { get; init; }
                    public int LengthM { get; init; }
                    public string Name { get; init; }
+
+                   // The exact track names LMU reports for this layout, where known.
+                   public IReadOnlyList<string> RawTrackNames { get; init; } = [];
                }
 
                """;
@@ -117,7 +121,9 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
         var entryLines = tracks.OrderBy(track => track.Name).Select(BuildEntryLine);
 
         return $$"""
+                 using System.Collections.Concurrent;
                  using System.Collections.ObjectModel;
+                 using System.Text.RegularExpressions;
                  using SimRacingSdk.Lmu.Core.Abstractions;
                  using SimRacingSdk.Lmu.Core.Models;
 
@@ -125,7 +131,15 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
 
                  public class LmuTrackInfoProvider : ILmuTrackInfoProvider
                  {
+                     private const string DefaultLayoutName = "Default";
+                     private const string NotFollowedByLetterOrDigit = @"(?![\p{L}\p{N}])";
+                     private const string NotPrecededByLetterOrDigit = @"(?<![\p{L}\p{N}])";
+
                      private static LmuTrackInfoProvider? singletonInstance;
+
+                     // Shared memory asks on every frame, so each raw name is resolved once.
+                     private readonly ConcurrentDictionary<string, (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)?> resolvedRawTrackNames =
+                         new(StringComparer.InvariantCultureIgnoreCase);
 
                      private readonly List<LmuTrackInfo> tracks =
                      [
@@ -146,33 +160,9 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
 
                      public (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindTrackAndLayoutByRawTrackName(string rawTrackName)
                      {
-                         if(string.IsNullOrWhiteSpace(rawTrackName))
-                         {
-                             return null;
-                         }
-
-                         foreach(var track in this.tracks)
-                         {
-                             var layoutNameMatch = track.Layouts
-                                 .Where(layout => layout.Name != "Default")
-                                 .FirstOrDefault(layout => rawTrackName.Contains(layout.Name, StringComparison.InvariantCultureIgnoreCase));
-                             if(layoutNameMatch != null)
-                             {
-                                 return (track, layoutNameMatch);
-                             }
-                         }
-
-                         var venueTrack = this.GeTrackInfoByVenue(rawTrackName)
-                             ?? this.tracks.FirstOrDefault(t => t.ShortName.Equals(rawTrackName, StringComparison.InvariantCultureIgnoreCase))
-                             ?? this.tracks.FirstOrDefault(t => rawTrackName.Contains(t.ShortName, StringComparison.InvariantCultureIgnoreCase));
-
-                         if(venueTrack == null)
-                         {
-                             return null;
-                         }
-
-                         var layout = venueTrack.Layouts.FirstOrDefault(l => l.Name == "Default") ?? venueTrack.Layouts.FirstOrDefault();
-                         return layout == null ? null : (venueTrack, layout);
+                         return string.IsNullOrWhiteSpace(rawTrackName)
+                             ? null
+                             : this.resolvedRawTrackNames.GetOrAdd(rawTrackName.Trim(), this.ResolveRawTrackName);
                      }
 
                      public LmuTrackInfo? GeTrackInfoByVenue(string venue)
@@ -191,6 +181,85 @@ public class LmuTrackProviderGenerator : ICatalogGenerator<TrackInfo>
                          return this.tracks.Select(t => t.ShortName)
                                     .ToList()
                                     .AsReadOnly();
+                     }
+
+                     // LMU names a layout inconsistently ("Sebring School Circuit", "Bahrain Outer Circuit",
+                     // "Fuji Speedway Classic"), so the exact names it reports are captured per layout and checked
+                     // first. Anything else is resolved track first, then layout within that track, matching whole
+                     // words with the longest match winning - so "Silverstone International Circuit" can never
+                     // resolve to a "National Circuit" layout, at Silverstone or at another track.
+                     private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? ResolveRawTrackName(string rawTrackName)
+                     {
+                         return this.FindByKnownRawTrackName(rawTrackName) ?? this.FindByTrackThenLayout(rawTrackName);
+                     }
+
+                     private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindByKnownRawTrackName(string rawTrackName)
+                     {
+                         foreach(var track in this.tracks)
+                         {
+                             var layout = track.Layouts.FirstOrDefault(
+                                 l => l.RawTrackNames.Contains(rawTrackName, StringComparer.InvariantCultureIgnoreCase));
+                             if(layout != null)
+                             {
+                                 return (track, layout);
+                             }
+                         }
+
+                         return null;
+                     }
+
+                     private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindByTrackThenLayout(string rawTrackName)
+                     {
+                         var venueTrack = this.GeTrackInfoByVenue(rawTrackName);
+                         if(venueTrack != null)
+                         {
+                             return WithLayout(venueTrack, DefaultLayout(venueTrack));
+                         }
+
+                         var track = this.FindTrackNamedIn(rawTrackName);
+                         return track == null
+                             ? null
+                             : WithLayout(track, FindLayoutNamedIn(track, rawTrackName) ?? DefaultLayout(track));
+                     }
+
+                     private LmuTrackInfo? FindTrackNamedIn(string rawTrackName)
+                     {
+                         return this.tracks.Select(t => (Track: t, MatchLength: LongestNameIn(rawTrackName, t.Name, t.ShortName)))
+                                    .Where(match => match.MatchLength > 0)
+                                    .OrderByDescending(match => match.MatchLength)
+                                    .Select(match => match.Track)
+                                    .FirstOrDefault();
+                     }
+
+                     private static LmuTrackLayoutInfo? FindLayoutNamedIn(LmuTrackInfo track, string rawTrackName)
+                     {
+                         return track.Layouts.Where(l => l.Name != DefaultLayoutName && ContainsWholeWords(rawTrackName, l.Name))
+                                     .OrderByDescending(l => l.Name.Length)
+                                     .FirstOrDefault();
+                     }
+
+                     private static LmuTrackLayoutInfo? DefaultLayout(LmuTrackInfo track)
+                     {
+                         return track.Layouts.FirstOrDefault(l => l.Name == DefaultLayoutName) ?? track.Layouts.FirstOrDefault();
+                     }
+
+                     private static (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? WithLayout(LmuTrackInfo track, LmuTrackLayoutInfo? layout)
+                     {
+                         return layout == null ? null : (track, layout);
+                     }
+
+                     private static int LongestNameIn(string rawTrackName, params string[] names)
+                     {
+                         return names.Where(name => !string.IsNullOrWhiteSpace(name) && ContainsWholeWords(rawTrackName, name))
+                                     .Select(name => name.Length)
+                                     .DefaultIfEmpty(0)
+                                     .Max();
+                     }
+
+                     private static bool ContainsWholeWords(string text, string phrase)
+                     {
+                         var pattern = NotPrecededByLetterOrDigit + Regex.Escape(phrase) + NotFollowedByLetterOrDigit;
+                         return Regex.IsMatch(text, pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
                      }
                  }
 

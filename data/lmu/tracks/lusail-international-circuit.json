@@ -6,12 +6,16 @@
     {
       "Corners": 16,
       "LengthM": 5400,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 11,
       "LengthM": 3701,
-      "Name": "Short Circuit"
+      "Name": "Short Circuit",
+      "RawTrackNames": [
+        "Lusail Short Circuit"
+      ]
     }
   ],
   "Longitude": 51.454167,

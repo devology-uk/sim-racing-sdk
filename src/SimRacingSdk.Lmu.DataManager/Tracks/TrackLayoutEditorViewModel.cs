@@ -13,13 +13,18 @@ public partial class TrackLayoutEditorViewModel : ObservableObject
     [ObservableProperty]
     private string name = string.Empty;
 
+    // One raw track name per line.
+    [ObservableProperty]
+    private string rawTrackNames = string.Empty;
+
     public static TrackLayoutEditorViewModel From(TrackLayoutInfo layout)
     {
         return new TrackLayoutEditorViewModel
         {
             Corners = layout.Corners,
             LengthM = layout.LengthM,
-            Name = layout.Name
+            Name = layout.Name,
+            RawTrackNames = string.Join(Environment.NewLine, layout.RawTrackNames)
         };
     }
 
@@ -29,7 +34,10 @@ public partial class TrackLayoutEditorViewModel : ObservableObject
         {
             Corners = this.Corners,
             LengthM = this.LengthM,
-            Name = this.Name
+            Name = this.Name,
+            RawTrackNames = this.RawTrackNames.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Distinct(StringComparer.InvariantCultureIgnoreCase)
+                .ToList()
         };
     }
 }

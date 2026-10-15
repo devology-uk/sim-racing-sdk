@@ -6,7 +6,8 @@
     {
       "Corners": 20,
       "LengthM": 4909,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     }
   ],
   "Longitude": 11.713333,

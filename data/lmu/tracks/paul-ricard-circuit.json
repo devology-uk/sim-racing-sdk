@@ -6,27 +6,32 @@
     {
       "Corners": 13,
       "LengthM": 5770,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 13,
       "LengthM": 5752,
-      "Name": "Layout 1A"
+      "Name": "Layout 1A",
+      "RawTrackNames": []
     },
     {
       "Corners": 15,
       "LengthM": 5841,
-      "Name": "Layout 1A-V2"
+      "Name": "Layout 1A-V2",
+      "RawTrackNames": []
     },
     {
       "Corners": 14,
       "LengthM": 5227,
-      "Name": "Layout 1A-V2 Short"
+      "Name": "Layout 1A-V2 Short",
+      "RawTrackNames": []
     },
     {
       "Corners": 8,
       "LengthM": 3793,
-      "Name": "Layout 3A"
+      "Name": "Layout 3A",
+      "RawTrackNames": []
     }
   ],
   "Longitude": 5.7907357,

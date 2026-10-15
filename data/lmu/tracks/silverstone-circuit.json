@@ -6,17 +6,20 @@
     {
       "Corners": 18,
       "LengthM": 5891,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 8,
       "LengthM": 2979,
-      "Name": "International Circuit"
+      "Name": "International Circuit",
+      "RawTrackNames": []
     },
     {
       "Corners": 6,
       "LengthM": 2639,
-      "Name": "National Circuit"
+      "Name": "National Circuit",
+      "RawTrackNames": []
     }
   ],
   "Longitude": -1.0292908,

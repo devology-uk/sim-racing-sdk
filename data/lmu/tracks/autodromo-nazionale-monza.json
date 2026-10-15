@@ -6,12 +6,16 @@
     {
       "Corners": 11,
       "LengthM": 5793,
-      "Name": "Default"
+      "Name": "Default",
+      "RawTrackNames": []
     },
     {
       "Corners": 10,
       "LengthM": 5793,
-      "Name": "Curva Grande Circuit"
+      "Name": "Curva Grande Circuit",
+      "RawTrackNames": [
+        "Monza Curva Grande Circuit"
+      ]
     }
   ],
   "Longitude": 9.289444,
