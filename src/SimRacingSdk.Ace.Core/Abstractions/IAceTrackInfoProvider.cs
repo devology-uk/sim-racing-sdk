@@ -12,4 +12,3 @@ public interface IAceTrackInfoProvider
     ReadOnlyCollection<AceTrackInfo> GetTrackInfos();
     ReadOnlyCollection<AceTrackInfo> GetTrackInfosForContinent(string continent);
 }
-

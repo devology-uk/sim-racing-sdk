@@ -9,4 +9,3 @@ public record AceTrackLayoutInfo
     public int MaxPitSlot { get; init; }
     public string Name { get; init; }
 }
-

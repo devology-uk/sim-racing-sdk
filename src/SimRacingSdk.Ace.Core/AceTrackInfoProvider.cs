@@ -11,8 +11,8 @@ public class AceTrackInfoProvider : IAceTrackInfoProvider
     private readonly List<AceTrackInfo> tracks =
     [
         new() { Continent = "Europe", CountryCode = "GBR-ENG", Latitude = 51.3566, Layouts = [new() { Corners = 9, LengthMeters = 3916, MaxPitSlot = 32, Name = "GP" }, new() { Corners = 7, LengthMeters = 1944, MaxPitSlot = 32, Name = "Indy" }], Longitude = 0.2614, Name = "Brands Hatch", ShortName = "Brands Hatch" },
-        new() { Continent = "North America", CountryCode = "USA", Latitude = 30.135, Layouts = [new() { Corners = 20, LengthMeters = 5615, MaxPitSlot = 34, Name = "GP" }, new() { Corners = 19, LengthMeters = 3702, MaxPitSlot = 34, Name = "National" }], Longitude = -97.6341, Name = "Circuit Of The Americas", ShortName = "COTA" },
         new() { Continent = "Europe", CountryCode = "BEL", Latitude = 50.4375, Layouts = [new() { Corners = 19, LengthMeters = 7004, MaxPitSlot = 35, Name = "GP" }], Longitude = 5.9685, Name = "Circuit de Spa Francorchamps", ShortName = "Spa" },
+        new() { Continent = "North America", CountryCode = "USA", Latitude = 30.135, Layouts = [new() { Corners = 20, LengthMeters = 5615, MaxPitSlot = 34, Name = "GP" }, new() { Corners = 19, LengthMeters = 3702, MaxPitSlot = 34, Name = "National" }], Longitude = -97.6341, Name = "Circuit Of The Americas", ShortName = "COTA" },
         new() { Continent = "Europe", CountryCode = "GBR-ENG", Latitude = 52.8304, Layouts = [new() { Corners = 12, LengthMeters = 4020, MaxPitSlot = 19, Name = "GP" }, new() { Corners = 10, LengthMeters = 3149, MaxPitSlot = 19, Name = "National" }], Longitude = -1.3749, Name = "Donington Park", ShortName = "Donington" },
         new() { Continent = "Asia", CountryCode = "JPN", Latitude = 35.371667, Layouts = [new() { Corners = 16, LengthMeters = 4549, MaxPitSlot = 34, Name = "GP" }, new() { Corners = 14, LengthMeters = 4526, MaxPitSlot = 34, Name = "GP Short" }], Longitude = 138.926667, Name = "Fuji Speedway", ShortName = "Fuji" },
         new() { Continent = "Europe", CountryCode = "ITA", Latitude = 44.3408, Layouts = [new() { Corners = 22, LengthMeters = 4909, MaxPitSlot = 29, Name = "GP" }], Longitude = 11.7137, Name = "Imola", ShortName = "Imola" },
@@ -63,4 +63,3 @@ public class AceTrackInfoProvider : IAceTrackInfoProvider
                    .AsReadOnly();
     }
 }
-
