@@ -15,8 +15,6 @@ namespace SimRacingSdk.Ace.Monitor;
 
 public class AceMonitor : IAceMonitor
 {
-    private const string UnknownCarText = "Unknown";
-
     private readonly IAceCarInfoProvider aceCarInfoProvider;
     private readonly IAceSharedMemoryConnectionFactory aceSharedMemoryConnectionFactory;
     private readonly Subject<bool> isWhiteFlagActiveSubject = new();
@@ -111,7 +109,7 @@ public class AceMonitor : IAceMonitor
         var car = this.aceCarInfoProvider.FindByAceName(aceSharedMemoryLap.CarModel);
         var aceMonitorLap = new AceMonitorLap
         {
-            CarManufacturer = car?.Manufacturer ?? UnknownCarText,
+            CarManufacturer = car?.Manufacturer ?? string.Empty,
             CarModelName = aceSharedMemoryLap.CarModel,
             CompletedLaps = aceSharedMemoryLap.CompletedLaps,
             DriverName = aceSharedMemoryLap.DriverName,

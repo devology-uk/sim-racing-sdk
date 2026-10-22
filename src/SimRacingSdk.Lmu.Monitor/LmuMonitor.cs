@@ -14,8 +14,6 @@ namespace SimRacingSdk.Lmu.Monitor;
 
 public class LmuMonitor : ILmuMonitor
 {
-    private const string UnknownCarText = "Unknown";
-
     private readonly ILmuCarInfoProvider lmuCarInfoProvider;
     private readonly ILmuSharedMemoryConnectionFactory lmuSharedMemoryConnectionFactory;
     private readonly Subject<LmuMonitorLap> lapCompletedSubject = new();
@@ -96,7 +94,7 @@ public class LmuMonitor : ILmuMonitor
         var car = this.lmuCarInfoProvider.GetCarInfoByDisplayName(lmuSharedMemoryLap.VehicleModel);
         var lmuMonitorLap = new LmuMonitorLap
         {
-            CarManufacturer = car?.Manufacturer ?? UnknownCarText,
+            CarManufacturer = car?.Manufacturer ?? string.Empty,
             CompletedLaps = lmuSharedMemoryLap.CompletedLaps,
             DriverName = lmuSharedMemoryLap.DriverName,
             IsValid = lmuSharedMemoryLap.IsValid,
