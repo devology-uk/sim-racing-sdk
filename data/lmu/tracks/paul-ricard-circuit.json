@@ -7,31 +7,41 @@
       "Corners": 13,
       "LengthM": 5770,
       "Name": "Default",
-      "RawTrackNames": []
+      "RawTrackNames": [
+        "Paul Ricard - ELMS"
+      ]
     },
     {
       "Corners": 13,
       "LengthM": 5752,
       "Name": "Layout 1A",
-      "RawTrackNames": []
+      "RawTrackNames": [
+        "Paul Ricard - 1A"
+      ]
     },
     {
       "Corners": 15,
       "LengthM": 5841,
       "Name": "Layout 1A-V2",
-      "RawTrackNames": []
+      "RawTrackNames": [
+        "Paul Ricard - 1A-V2"
+      ]
     },
     {
       "Corners": 14,
       "LengthM": 5227,
       "Name": "Layout 1A-V2 Short",
-      "RawTrackNames": []
+      "RawTrackNames": [
+        "Paul Ricard - 1A-V2-Short"
+      ]
     },
     {
       "Corners": 8,
       "LengthM": 3793,
       "Name": "Layout 3A",
-      "RawTrackNames": []
+      "RawTrackNames": [
+        "Paul Ricard - 3A"
+      ]
     }
   ],
   "Longitude": 5.7907357,

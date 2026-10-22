@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using SimRacingSdk.Lmu.Core.Abstractions;
 using SimRacingSdk.Lmu.Core.Models;
 
@@ -6,430 +8,36 @@ namespace SimRacingSdk.Lmu.Core.Services;
 
 public class LmuTrackInfoProvider : ILmuTrackInfoProvider
 {
+    private const string DefaultLayoutName = "Default";
+    private const string NotFollowedByLetterOrDigit = @"(?![\p{L}\p{N}])";
+    private const string NotPrecededByLetterOrDigit = @"(?<![\p{L}\p{N}])";
+
     private static LmuTrackInfoProvider? singletonInstance;
 
-    private readonly IList<LmuTrackInfo> tracks =
+    // Shared memory asks on every frame, so each raw name is resolved once.
+    private readonly ConcurrentDictionary<string, (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)?> resolvedRawTrackNames =
+        new(StringComparer.InvariantCultureIgnoreCase);
+
+    private readonly List<LmuTrackInfo> tracks =
     [
-        new()
-        {
-            Name = "Algarve International Circuit",
-            ShortName = "Portimao",
-            Country = "Portugal",
-            CountryCode = "PRT",
-            Latitude = 37.231944,
-            Longitude = -8.631944,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4653,
-                    Corners = 15
-                }
-            }
-        },
-        new()
-        {
-            Name = "Autodromo Enzo E Dino Ferrari",
-            ShortName = "Imola",
-            Country = "Italy",
-            CountryCode = "ITA",
-            Latitude = 44.341111,
-            Longitude = 11.713333,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4909,
-                    Corners = 20
-                }
-            }
-        },
-        new()
-        {
-            Name = "Autodromo Nazionale Monza",
-            ShortName = "Monza",
-            Country = "Italy",
-            CountryCode = "ITA",
-            Latitude = 45.620556,
-            Longitude = 9.289444,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5793,
-                    Corners = 11
-                },
-                new()
-                {
-                    Name = "Curva Grande Circuit",
-                    LengthM = 5793,
-                    Corners = 10
-                }
-            }
-        },
-        new()
-        {
-            Name = "Autódromo José Carlos Pace",
-            ShortName = "Interlagos",
-            Country = "Brazil",
-            CountryCode = "BRA",
-            Latitude = -23.701111,
-            Longitude = -46.697222,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4309,
-                    Corners = 15
-                }
-            }
-        },
-        new()
-        {
-            Name = "Bahrain International Circuit",
-            ShortName = "Sakhir",
-            Country = "Bahrain",
-            CountryCode = "BHR",
-            Latitude = 26.0325,
-            Longitude = 50.510556,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5412,
-                    Corners = 15
-                },
-                new()
-                {
-                    Name = "Endurance Circuit",
-                    LengthM = 6299,
-                    Corners = 24
-                },
-                new()
-                {
-                    Name = "Outer Circuit",
-                    LengthM = 3543,
-                    Corners = 11
-                },
-                new()
-                {
-                    Name = "Paddock Circuit",
-                    LengthM = 3705,
-                    Corners = 10
-                }
-            }
-        },
-        new()
-        {
-            Name = "Circuit de Barcelona",
-            ShortName = "Barcelona",
-            Country = "Spain",
-            CountryCode = "ESP",
-            Latitude = 41.5700,
-            Longitude = 2.2578,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4657,
-                    Corners = 14
-                }
-            }
-        },
-        new()
-        {
-            Name = "Circuit de la Sarthe",
-            ShortName = "Le Mans",
-            Country = "France",
-            CountryCode = "FRA",
-            Latitude = 47.933333,
-            Longitude = 0.233333,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 13626,
-                    Corners = 38
-                },
-                new()
-                {
-                    Name = "Mulsanne",
-                    LengthM = 13530,
-                    Corners = 34
-                }
-            }
-        },
-        new()
-        {
-            Name = "Circuit de Spa-Francorchamps",
-            ShortName = "Spa",
-            Country = "Belgium",
-            CountryCode = "BEL",
-            Latitude = 50.437222,
-            Longitude = 5.971389,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 7004,
-                    Corners = 20
-                },
-                new()
-                {
-                    Name = "Endurance Circuit",
-                    LengthM = 7004,
-                    Corners = 20
-                }
-            }
-        },
-        new()
-        {
-            Name = "Circuit of the Americas",
-            ShortName = "COTA",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 30.132778,
-            Longitude = -97.641111,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5513,
-                    Corners = 20
-                },
-                new()
-                {
-                    Name = "National Circuit",
-                    LengthM = 3702,
-                    Corners = 17
-                }
-            }
-        },
-        new()
-        {
-            Name = "Fuji Speedway",
-            ShortName = "Fuji",
-            Country = "Japan",
-            CountryCode = "JPN",
-            Latitude = 35.371667,
-            Longitude = 138.926667,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4563,
-                    Corners = 16
-                },
-                new()
-                {
-                    Name = "Classic Circuit",
-                    LengthM = 4526,
-                    Corners = 14
-                }
-            }
-        },
-        new()
-        {
-            Name = "Grand Prix of Long Beach",
-            ShortName = "Long Beach",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 33.765,
-            Longitude = -118.189,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 3167,
-                    Corners = 11
-                }
-            }
-        },
-        new()
-        {
-            Name = "Lusail International Circuit",
-            ShortName = "Lusail",
-            Country = "Qatar",
-            CountryCode = "QAT",
-            Latitude = 25.49,
-            Longitude = 51.454167,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5400,
-                    Corners = 16
-                },
-                new()
-                {
-                    Name = "Short Circuit",
-                    LengthM = 3701,
-                    Corners = 11
-                }
-            }
-        },
-        new()
-        {
-            Name = "Michelin Raceway Road Atlanta",
-            ShortName = "Road Atlanta",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 34.14667,
-            Longitude = -83.81778,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 4088,
-                    Corners = 12
-                }
-            }
-        },
-        new()
-        {
-            Name = "Sebring International Raceway",
-            ShortName = "Sebring",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 27.455,
-            Longitude = -81.35,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 6019,
-                    Corners = 17
-                },
-                new()
-                {
-                    Name = "School Circuit",
-                    LengthM = 3219,
-                    Corners = 7
-                }
-            }
-        },
-        new()
-        {
-            Name = "Silverstone Circuit",
-            ShortName = "Silverstone",
-            Country = "England",
-            CountryCode = "GBR-ENG",
-            Latitude = 52.0680505,
-            Longitude = -1.0292908,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5891,
-                    Corners = 18
-                },
-                 new()
-                {
-                    Name = "International Circuit",
-                    LengthM = 2979,
-                    Corners = 8
-                },
-                 new()
-                {
-                    Name = "National Circuit",
-                    LengthM = 2639,
-                    Corners = 6
-                }
-            }
-        },
-        new()
-        {
-            Name = "Paul Ricard Circuit",
-            ShortName = "Paul Ricard",
-            Country = "France",
-            CountryCode = "FRA",
-            Latitude = 43.2514641,
-            Longitude = 5.7907357,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5770,
-                    Corners = 13
-                },
-                 new()
-                {
-                    Name = "Layout 1A",
-                    LengthM = 5752,
-                    Corners = 13
-                },
-                 new()
-                {
-                    Name = "Layout 1A-V2",
-                    LengthM = 5841,
-                    Corners = 15
-                },
-                 new()
-                {
-                    Name = "Layout 1A-V2 Short",
-                    LengthM = 5227,
-                    Corners = 14
-                },
-                 new()
-                {
-                    Name = "Layout 3A",
-                    LengthM = 3793,
-                    Corners = 8
-                }
-            }
-        },
-        new()
-        {
-            Name = "Daytona International Speedway",
-            ShortName = "Daytona",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 29.18777976891776,
-            Longitude = -81.0684744190165,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 5729,
-                    Corners = 13
-                }
-            }
-        },
-        new()
-        {
-            Name = "WeatherTech Raceway Laguna Seca",
-            ShortName = "Laguna Seca",
-            Country = "USA",
-            CountryCode = "USA",
-            Latitude = 36.24666666666667,
-            Longitude = -121.87166666666667,
-            Layouts = new List<LmuTrackLayoutInfo>()
-            {
-                new()
-                {
-                    Name = "Default",
-                    LengthM = 2602,
-                    Corners = 11
-                }
-            }
-        }
+        new() { Country = "Portugal", CountryCode = "PRT", Latitude = 37.231944, Layouts = [new() { Corners = 15, LengthM = 4653, Name = "Default", RawTrackNames = [] }], Longitude = -8.631944, Name = "Algarve International Circuit", ShortName = "Portimao" },
+        new() { Country = "Italy", CountryCode = "ITA", Latitude = 44.341111, Layouts = [new() { Corners = 20, LengthM = 4909, Name = "Default", RawTrackNames = [] }], Longitude = 11.713333, Name = "Autodromo Enzo E Dino Ferrari", ShortName = "Imola" },
+        new() { Country = "Brazil", CountryCode = "BRA", Latitude = -23.701111, Layouts = [new() { Corners = 15, LengthM = 4309, Name = "Default", RawTrackNames = [] }], Longitude = -46.697222, Name = "Autódromo José Carlos Pace", ShortName = "Interlagos" },
+        new() { Country = "Italy", CountryCode = "ITA", Latitude = 45.620556, Layouts = [new() { Corners = 11, LengthM = 5793, Name = "Default", RawTrackNames = [] }, new() { Corners = 10, LengthM = 5793, Name = "Curva Grande Circuit", RawTrackNames = ["Monza Curva Grande Circuit"] }], Longitude = 9.289444, Name = "Autodromo Nazionale Monza", ShortName = "Monza" },
+        new() { Country = "Bahrain", CountryCode = "BHR", Latitude = 26.0325, Layouts = [new() { Corners = 15, LengthM = 5412, Name = "Default", RawTrackNames = [] }, new() { Corners = 24, LengthM = 6299, Name = "Endurance Circuit", RawTrackNames = ["Bahrain Endurance Circuit"] }, new() { Corners = 11, LengthM = 3543, Name = "Outer Circuit", RawTrackNames = ["Bahrain Outer Circuit"] }, new() { Corners = 10, LengthM = 3705, Name = "Paddock Circuit", RawTrackNames = [] }], Longitude = 50.510556, Name = "Bahrain International Circuit", ShortName = "Sakhir" },
+        new() { Country = "Spain", CountryCode = "ESP", Latitude = 41.57, Layouts = [new() { Corners = 14, LengthM = 4657, Name = "Default", RawTrackNames = [] }], Longitude = 2.2578, Name = "Circuit de Barcelona", ShortName = "Barcelona" },
+        new() { Country = "France", CountryCode = "FRA", Latitude = 47.933333, Layouts = [new() { Corners = 38, LengthM = 13626, Name = "Default", RawTrackNames = [] }, new() { Corners = 34, LengthM = 13530, Name = "Mulsanne", RawTrackNames = [] }], Longitude = 0.233333, Name = "Circuit de la Sarthe", ShortName = "Le Mans" },
+        new() { Country = "Belgium", CountryCode = "BEL", Latitude = 50.437222, Layouts = [new() { Corners = 20, LengthM = 7004, Name = "Default", RawTrackNames = [] }, new() { Corners = 20, LengthM = 7004, Name = "Endurance Circuit", RawTrackNames = [] }], Longitude = 5.971389, Name = "Circuit de Spa-Francorchamps", ShortName = "Spa" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 30.132778, Layouts = [new() { Corners = 20, LengthM = 5513, Name = "Default", RawTrackNames = [] }, new() { Corners = 17, LengthM = 3702, Name = "National Circuit", RawTrackNames = [] }], Longitude = -97.641111, Name = "Circuit of the Americas", ShortName = "COTA" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 29.18777976891776, Layouts = [new() { Corners = 13, LengthM = 5729, Name = "Default", RawTrackNames = [] }], Longitude = -81.0684744190165, Name = "Daytona International Speedway", ShortName = "Daytona" },
+        new() { Country = "Japan", CountryCode = "JPN", Latitude = 35.371667, Layouts = [new() { Corners = 16, LengthM = 4563, Name = "Default", RawTrackNames = [] }, new() { Corners = 14, LengthM = 4526, Name = "Classic Circuit", RawTrackNames = ["Fuji Speedway Classic"] }], Longitude = 138.926667, Name = "Fuji Speedway", ShortName = "Fuji" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 33.765, Layouts = [new() { Corners = 11, LengthM = 3167, Name = "Default", RawTrackNames = [] }], Longitude = -118.189, Name = "Grand Prix of Long Beach", ShortName = "Long Beach" },
+        new() { Country = "Qatar", CountryCode = "QAT", Latitude = 25.49, Layouts = [new() { Corners = 16, LengthM = 5400, Name = "Default", RawTrackNames = [] }, new() { Corners = 11, LengthM = 3701, Name = "Short Circuit", RawTrackNames = ["Lusail Short Circuit"] }], Longitude = 51.454167, Name = "Lusail International Circuit", ShortName = "Lusail" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 34.14667, Layouts = [new() { Corners = 12, LengthM = 4088, Name = "Default", RawTrackNames = [] }], Longitude = -83.81778, Name = "Michelin Raceway Road Atlanta", ShortName = "Road Atlanta" },
+        new() { Country = "France", CountryCode = "FRA", Latitude = 43.2514641, Layouts = [new() { Corners = 13, LengthM = 5770, Name = "Default", RawTrackNames = ["Paul Ricard - ELMS"] }, new() { Corners = 13, LengthM = 5752, Name = "Layout 1A", RawTrackNames = ["Paul Ricard - 1A"] }, new() { Corners = 15, LengthM = 5841, Name = "Layout 1A-V2", RawTrackNames = ["Paul Ricard - 1A-V2"] }, new() { Corners = 14, LengthM = 5227, Name = "Layout 1A-V2 Short", RawTrackNames = ["Paul Ricard - 1A-V2-Short"] }, new() { Corners = 8, LengthM = 3793, Name = "Layout 3A", RawTrackNames = ["Paul Ricard - 3A"] }], Longitude = 5.7907357, Name = "Paul Ricard Circuit", ShortName = "Paul Ricard" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 27.455, Layouts = [new() { Corners = 17, LengthM = 6019, Name = "Default", RawTrackNames = [] }, new() { Corners = 7, LengthM = 3219, Name = "School Circuit", RawTrackNames = ["Sebring School Circuit"] }], Longitude = -81.35, Name = "Sebring International Raceway", ShortName = "Sebring" },
+        new() { Country = "England", CountryCode = "GBR-ENG", Latitude = 52.0680505, Layouts = [new() { Corners = 18, LengthM = 5891, Name = "Default", RawTrackNames = ["Silverstone Grand Prix Circuit - ELMS"] }, new() { Corners = 8, LengthM = 2979, Name = "International Circuit", RawTrackNames = [] }, new() { Corners = 6, LengthM = 2639, Name = "National Circuit", RawTrackNames = [] }], Longitude = -1.0292908, Name = "Silverstone Circuit", ShortName = "Silverstone" },
+        new() { Country = "USA", CountryCode = "USA", Latitude = 36.24666666666667, Layouts = [new() { Corners = 11, LengthM = 2602, Name = "Default", RawTrackNames = [] }], Longitude = -121.87166666666667, Name = "WeatherTech Raceway Laguna Seca", ShortName = "Laguna Seca" },
     ];
 
     public static LmuTrackInfoProvider Instance => singletonInstance ??= new LmuTrackInfoProvider();
@@ -446,33 +54,9 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
 
     public (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindTrackAndLayoutByRawTrackName(string rawTrackName)
     {
-        if(string.IsNullOrWhiteSpace(rawTrackName))
-        {
-            return null;
-        }
-
-        foreach(var track in this.tracks)
-        {
-            var layoutNameMatch = track.Layouts
-                .Where(layout => layout.Name != "Default")
-                .FirstOrDefault(layout => rawTrackName.Contains(layout.Name, StringComparison.InvariantCultureIgnoreCase));
-            if(layoutNameMatch != null)
-            {
-                return (track, layoutNameMatch);
-            }
-        }
-
-        var venueTrack = this.GeTrackInfoByVenue(rawTrackName)
-            ?? this.tracks.FirstOrDefault(t => t.ShortName.Equals(rawTrackName, StringComparison.InvariantCultureIgnoreCase))
-            ?? this.tracks.FirstOrDefault(t => rawTrackName.Contains(t.ShortName, StringComparison.InvariantCultureIgnoreCase));
-
-        if(venueTrack == null)
-        {
-            return null;
-        }
-
-        var layout = venueTrack.Layouts.FirstOrDefault(l => l.Name == "Default") ?? venueTrack.Layouts.FirstOrDefault();
-        return layout == null ? null : (venueTrack, layout);
+        return string.IsNullOrWhiteSpace(rawTrackName)
+            ? null
+            : this.resolvedRawTrackNames.GetOrAdd(rawTrackName.Trim(), this.ResolveRawTrackName);
     }
 
     public LmuTrackInfo? GeTrackInfoByVenue(string venue)
@@ -491,5 +75,84 @@ public class LmuTrackInfoProvider : ILmuTrackInfoProvider
         return this.tracks.Select(t => t.ShortName)
                    .ToList()
                    .AsReadOnly();
+    }
+
+    // LMU names a layout inconsistently ("Sebring School Circuit", "Bahrain Outer Circuit",
+    // "Fuji Speedway Classic"), so the exact names it reports are captured per layout and checked
+    // first. Anything else is resolved track first, then layout within that track, matching whole
+    // words with the longest match winning - so "Silverstone International Circuit" can never
+    // resolve to a "National Circuit" layout, at Silverstone or at another track.
+    private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? ResolveRawTrackName(string rawTrackName)
+    {
+        return this.FindByKnownRawTrackName(rawTrackName) ?? this.FindByTrackThenLayout(rawTrackName);
+    }
+
+    private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindByKnownRawTrackName(string rawTrackName)
+    {
+        foreach(var track in this.tracks)
+        {
+            var layout = track.Layouts.FirstOrDefault(
+                l => l.RawTrackNames.Contains(rawTrackName, StringComparer.InvariantCultureIgnoreCase));
+            if(layout != null)
+            {
+                return (track, layout);
+            }
+        }
+
+        return null;
+    }
+
+    private (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? FindByTrackThenLayout(string rawTrackName)
+    {
+        var venueTrack = this.GeTrackInfoByVenue(rawTrackName);
+        if(venueTrack != null)
+        {
+            return WithLayout(venueTrack, DefaultLayout(venueTrack));
+        }
+
+        var track = this.FindTrackNamedIn(rawTrackName);
+        return track == null
+            ? null
+            : WithLayout(track, FindLayoutNamedIn(track, rawTrackName) ?? DefaultLayout(track));
+    }
+
+    private LmuTrackInfo? FindTrackNamedIn(string rawTrackName)
+    {
+        return this.tracks.Select(t => (Track: t, MatchLength: LongestNameIn(rawTrackName, t.Name, t.ShortName)))
+                   .Where(match => match.MatchLength > 0)
+                   .OrderByDescending(match => match.MatchLength)
+                   .Select(match => match.Track)
+                   .FirstOrDefault();
+    }
+
+    private static LmuTrackLayoutInfo? FindLayoutNamedIn(LmuTrackInfo track, string rawTrackName)
+    {
+        return track.Layouts.Where(l => l.Name != DefaultLayoutName && ContainsWholeWords(rawTrackName, l.Name))
+                    .OrderByDescending(l => l.Name.Length)
+                    .FirstOrDefault();
+    }
+
+    private static LmuTrackLayoutInfo? DefaultLayout(LmuTrackInfo track)
+    {
+        return track.Layouts.FirstOrDefault(l => l.Name == DefaultLayoutName) ?? track.Layouts.FirstOrDefault();
+    }
+
+    private static (LmuTrackInfo Track, LmuTrackLayoutInfo Layout)? WithLayout(LmuTrackInfo track, LmuTrackLayoutInfo? layout)
+    {
+        return layout == null ? null : (track, layout);
+    }
+
+    private static int LongestNameIn(string rawTrackName, params string[] names)
+    {
+        return names.Where(name => !string.IsNullOrWhiteSpace(name) && ContainsWholeWords(rawTrackName, name))
+                    .Select(name => name.Length)
+                    .DefaultIfEmpty(0)
+                    .Max();
+    }
+
+    private static bool ContainsWholeWords(string text, string phrase)
+    {
+        var pattern = NotPrecededByLetterOrDigit + Regex.Escape(phrase) + NotFollowedByLetterOrDigit;
+        return Regex.IsMatch(text, pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
     }
 }

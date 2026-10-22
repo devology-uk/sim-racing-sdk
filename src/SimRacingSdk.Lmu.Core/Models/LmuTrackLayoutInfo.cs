@@ -1,4 +1,5 @@
-﻿#nullable disable
+#nullable disable
+
 namespace SimRacingSdk.Lmu.Core.Models;
 
 public record LmuTrackLayoutInfo
@@ -8,4 +9,7 @@ public record LmuTrackLayoutInfo
     public int Corners { get; init; }
     public int LengthM { get; init; }
     public string Name { get; init; }
+
+    // The exact track names LMU reports for this layout, where known.
+    public IReadOnlyList<string> RawTrackNames { get; init; } = [];
 }

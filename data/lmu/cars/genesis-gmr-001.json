@@ -8,7 +8,7 @@
   "Manufacturer": "Genesis",
   "MaxFuel": 89,
   "MaxRpm": 8500,
-  "ModelId": null,
+  "ModelId": "Genesis_GMR001_2026",
   "PowerBhp": 690,
   "PowerKw": 0,
   "ResultCarType": "Genesis GMR-001",

@@ -8,7 +8,7 @@
   "Manufacturer": "ADESS",
   "MaxFuel": 100,
   "MaxRpm": 6600,
-  "ModelId": null,
+  "ModelId": "ADESS_AD25_2026",
   "PowerBhp": 470,
   "PowerKw": 0,
   "ResultCarType": "ADESS-03",
