@@ -5,6 +5,7 @@ using System.Reactive.Subjects;
 using SimRacingSdk.Acc.Core;
 using SimRacingSdk.Acc.Core.Abstractions;
 using SimRacingSdk.Acc.Core.Enums;
+using SimRacingSdk.Acc.Core.Models;
 using SimRacingSdk.Acc.Monitor.Abstractions;
 using SimRacingSdk.Acc.Monitor.Exceptions;
 using SimRacingSdk.Acc.Monitor.Messages;
@@ -154,6 +155,16 @@ public class AccMonitor : IAccMonitor
         this.Stop();
     }
 
+    private static string ManufacturerOf(AccCarInfo? car)
+    {
+        return car?.ManufacturerTag ?? string.Empty;
+    }
+
+    private static string ModelNameOf(AccCarInfo? car, int carModelId)
+    {
+        return car?.DisplayName ?? $"ACC car {carModelId}";
+    }
+
     private void AddEntryIfNotExists(CarInfo carInfo)
     {
         var entry = this.entryList.FirstOrDefault(e => e.CarIndex == carInfo.CarIndex);
@@ -173,8 +184,8 @@ public class AccMonitor : IAccMonitor
         var eventEntry = new AccMonitorEntry
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CarLocation = CarLocation.Pitlane,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
@@ -442,8 +453,8 @@ public class AccMonitor : IAccMonitor
         var accAccident = new AccMonitorAccident
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
@@ -478,8 +489,8 @@ public class AccMonitor : IAccMonitor
         var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
@@ -515,8 +526,8 @@ public class AccMonitor : IAccMonitor
         var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
@@ -557,8 +568,8 @@ public class AccMonitor : IAccMonitor
         var accLap = new AccMonitorLap
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
@@ -594,8 +605,8 @@ public class AccMonitor : IAccMonitor
         var accPenalty = new AccMonitorPenalty
         {
             AccCarModelId = carInfo.CarModelType,
-            CarManufacturer = car!.ManufacturerTag,
-            CarModelName = car.DisplayName,
+            CarManufacturer = ManufacturerOf(car),
+            CarModelName = ModelNameOf(car, carInfo.CarModelType),
             CarCupCategory = (CupCategory)carInfo.CupCategory,
             CurrentMonitorDriver = drivers[carInfo.CurrentDriverIndex],
             CurrentDriverIndex = carInfo.CurrentDriverIndex,
