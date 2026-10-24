@@ -1,22 +1,22 @@
 {
   "BatteryKwh": null,
   "Body": "Coupe",
-  "Categories": "Road:Vintage:ICE",
-  "Cylinders": 4,
-  "DisplacementL": 1.5,
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 2.5,
   "DriveLayout": "RWD",
-  "Engine": "Naturally Aspirated",
+  "Engine": "Turbo Charged",
   "EngineLayout": "Front",
   "FuelTankL": 58,
-  "Gears": 5,
-  "Manufacturer": "Alpha Romeo",
+  "Gears": 8,
+  "Manufacturer": "Alfa Romeo",
   "MaxRpm": null,
-  "MaxSpeedKmh": 220,
-  "ModelId": "preset_sprintgta_mech_1",
-  "Name": "Giulia Sprint GTA",
-  "PerformanceRating": 7.7,
-  "PowerPs": 170,
-  "RacingClass": "Rally",
+  "MaxSpeedKmh": 300,
+  "ModelId": "preset_gtam_mech_1",
+  "Name": "Giulia GT Am",
+  "PerformanceRating": 12.8,
+  "PowerPs": 540,
+  "RacingClass": "",
   "SetupSchema": {
     "Tyres": {
       "Enabled": true,
@@ -28,17 +28,17 @@
       },
       "Rear": {
         "HasPressure": true,
-        "HasCamber": false,
-        "HasToe": false,
+        "HasCamber": true,
+        "HasToe": true,
         "HasCaster": false
       }
     },
     "Electronics": {
       "Enabled": true,
-      "HasTractionControl": false,
+      "HasTractionControl": true,
       "HasTractionControl2": false,
       "HasAbs": false,
-      "HasEsc": false,
+      "HasEsc": true,
       "HasTurboBoost": false,
       "HasEngineMap": false,
       "HasErsDeploymentMap": false,
@@ -49,14 +49,14 @@
     "FuelAndStrategy": {
       "Enabled": true,
       "HasFuel": true,
-      "TyreCompoundMode": "None"
+      "TyreCompoundMode": "FrontAndRear"
     },
     "Suspension": {
-      "Enabled": true,
+      "Enabled": false,
       "HasWheelRate": false,
       "HasFrontAntiRollBar": false,
       "HasRearAntiRollBar": false,
-      "HasBrakeBias": true,
+      "HasBrakeBias": false,
       "HasBrakeTorqueMultiplier": false,
       "HasSteerRatio": false,
       "HasBumpstopRate": false,
@@ -78,10 +78,14 @@
       "HasRearWingAngle": false
     }
   },
-  "TorqueNm": 180,
-  "TyreCompounds": [],
+  "TorqueNm": 600,
+  "TyreCompounds": [
+    "Hypercar",
+    "Supercar",
+    "Road"
+  ],
   "Variant": "",
-  "WeightKg": 760,
-  "Year": 1965,
-  "ZeroToOneHundredKmh": 8
+  "WeightKg": 1580,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 3.4
 }

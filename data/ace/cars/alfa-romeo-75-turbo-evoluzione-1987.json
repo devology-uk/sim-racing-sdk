@@ -1,21 +1,21 @@
 {
   "BatteryKwh": null,
-  "Body": "Coupe",
-  "Categories": "Road:Modern:ICE",
-  "Cylinders": 6,
-  "DisplacementL": 4,
+  "Body": "Saloon",
+  "Categories": "Road:Vintage:ICE",
+  "Cylinders": 4,
+  "DisplacementL": 1.8,
   "DriveLayout": "RWD",
-  "Engine": "Naturally Aspirated",
-  "EngineLayout": "Mid",
-  "FuelTankL": 64,
-  "Gears": 7,
-  "Manufacturer": "Porsche",
-  "MaxRpm": 9000,
-  "MaxSpeedKmh": 315,
-  "ModelId": "preset_718gt4rs_mech_1",
-  "Name": "718 Gayman GT4 RS",
-  "PerformanceRating": 12.7,
-  "PowerPs": 500,
+  "Engine": "Turbo Charged",
+  "EngineLayout": "Front",
+  "FuelTankL": 49,
+  "Gears": 5,
+  "Manufacturer": "Alfa Romeo",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 225,
+  "ModelId": "preset_75t_mech_1",
+  "Name": "75 Turbo Evoluzione",
+  "PerformanceRating": 8,
+  "PowerPs": 155,
   "RacingClass": "",
   "SetupSchema": {
     "Tyres": {
@@ -28,17 +28,17 @@
       },
       "Rear": {
         "HasPressure": true,
-        "HasCamber": true,
-        "HasToe": true,
+        "HasCamber": false,
+        "HasToe": false,
         "HasCaster": false
       }
     },
     "Electronics": {
       "Enabled": true,
-      "HasTractionControl": true,
+      "HasTractionControl": false,
       "HasTractionControl2": false,
       "HasAbs": false,
-      "HasEsc": true,
+      "HasEsc": false,
       "HasTurboBoost": false,
       "HasEngineMap": false,
       "HasErsDeploymentMap": false,
@@ -52,10 +52,10 @@
       "TyreCompoundMode": "FrontAndRear"
     },
     "Suspension": {
-      "Enabled": true,
+      "Enabled": false,
       "HasWheelRate": false,
-      "HasFrontAntiRollBar": true,
-      "HasRearAntiRollBar": true,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
       "HasBrakeBias": false,
       "HasBrakeTorqueMultiplier": false,
       "HasSteerRatio": false,
@@ -78,14 +78,13 @@
       "HasRearWingAngle": false
     }
   },
-  "TorqueNm": 450,
+  "TorqueNm": 226,
   "TyreCompounds": [
-    "Hypercar",
-    "Supercar",
-    "Road"
+    "Road",
+    "Evo"
   ],
-  "Variant": "718 Gaymane GT4 RS",
-  "WeightKg": 1490,
-  "Year": 2022,
-  "ZeroToOneHundredKmh": 3.4
+  "Variant": "",
+  "WeightKg": 1150,
+  "Year": 1987,
+  "ZeroToOneHundredKmh": 7.6
 }

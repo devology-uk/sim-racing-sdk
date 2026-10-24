@@ -1,21 +1,21 @@
 {
-  "BatteryKwh": 54,
-  "Body": "SUV",
-  "Categories": "Road:Modern:EV",
-  "Cylinders": null,
-  "DisplacementL": null,
-  "DriveLayout": "FWD",
-  "Engine": "Electric Motor",
-  "EngineLayout": "Front",
-  "FuelTankL": null,
-  "Gears": null,
-  "Manufacturer": "Alpha Romeo",
-  "MaxRpm": null,
-  "MaxSpeedKmh": 200,
-  "ModelId": "preset_mln_mech_1",
-  "Name": "Junior",
-  "PerformanceRating": 10.5,
-  "PowerPs": 207,
+  "BatteryKwh": null,
+  "Body": "Coupe",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 4,
+  "DriveLayout": "RWD",
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Rear",
+  "FuelTankL": 90,
+  "Gears": 7,
+  "Manufacturer": "Porsche",
+  "MaxRpm": 8500,
+  "MaxSpeedKmh": 296,
+  "ModelId": "preset_gt3rs_mech_2",
+  "Name": "911 GT3 RS (992)",
+  "PerformanceRating": 16.6,
+  "PowerPs": 525,
   "RacingClass": "",
   "SetupSchema": {
     "Tyres": {
@@ -48,43 +48,44 @@
     },
     "FuelAndStrategy": {
       "Enabled": true,
-      "HasFuel": false,
+      "HasFuel": true,
       "TyreCompoundMode": "FrontAndRear"
     },
     "Suspension": {
-      "Enabled": false,
+      "Enabled": true,
       "HasWheelRate": false,
-      "HasFrontAntiRollBar": false,
-      "HasRearAntiRollBar": false,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
       "HasBrakeBias": false,
       "HasBrakeTorqueMultiplier": false,
       "HasSteerRatio": false,
       "HasBumpstopRate": false,
       "HasBumpstopRange": false,
-      "HasDifferentialPreload": false,
-      "HasDifferentialCoast": false,
-      "HasDifferentialPower": false
+      "HasDifferentialPreload": true,
+      "HasDifferentialCoast": true,
+      "HasDifferentialPower": true
     },
     "Dampers": {
-      "Enabled": false,
+      "Enabled": true,
       "HasFastBump": false,
       "HasFastRebound": false
     },
     "Aero": {
-      "Enabled": false,
-      "HasFrontRideHeight": false,
-      "HasRearRideHeight": false,
+      "Enabled": true,
+      "HasFrontRideHeight": true,
+      "HasRearRideHeight": true,
       "HasFrontWingAngle": false,
       "HasRearWingAngle": false
     }
   },
-  "TorqueNm": 345,
+  "TorqueNm": 455,
   "TyreCompounds": [
+    "Hypercar",
     "Supercar",
     "Road"
   ],
-  "Variant": "",
-  "WeightKg": 1560,
-  "Year": 2024,
-  "ZeroToOneHundredKmh": 5.9
+  "Variant": "GT3 RS (992) with Weissach-package",
+  "WeightKg": 1430,
+  "Year": 2021,
+  "ZeroToOneHundredKmh": 3.2
 }

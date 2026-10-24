@@ -1,21 +1,21 @@
 {
   "BatteryKwh": null,
-  "Body": "Saloon",
-  "Categories": "Road:Vintage:ICE",
-  "Cylinders": 4,
-  "DisplacementL": 1.8,
+  "Body": "Coupe",
+  "Categories": "Road:Modern:ICE",
+  "Cylinders": 6,
+  "DisplacementL": 4,
   "DriveLayout": "RWD",
-  "Engine": "Turbo Charged",
-  "EngineLayout": "Front",
-  "FuelTankL": 49,
-  "Gears": 5,
-  "Manufacturer": "Alpha Romeo",
-  "MaxRpm": null,
-  "MaxSpeedKmh": 225,
-  "ModelId": "preset_75t_mech_1",
-  "Name": "75 Turbo Evoluzione",
-  "PerformanceRating": 8,
-  "PowerPs": 155,
+  "Engine": "Naturally Aspirated",
+  "EngineLayout": "Mid",
+  "FuelTankL": 64,
+  "Gears": 7,
+  "Manufacturer": "Porsche",
+  "MaxRpm": 9000,
+  "MaxSpeedKmh": 315,
+  "ModelId": "preset_718gt4rs_mech_2",
+  "Name": "718 Cayman GT4 RS",
+  "PerformanceRating": 12.7,
+  "PowerPs": 500,
   "RacingClass": "",
   "SetupSchema": {
     "Tyres": {
@@ -28,17 +28,17 @@
       },
       "Rear": {
         "HasPressure": true,
-        "HasCamber": false,
-        "HasToe": false,
+        "HasCamber": true,
+        "HasToe": true,
         "HasCaster": false
       }
     },
     "Electronics": {
       "Enabled": true,
-      "HasTractionControl": false,
+      "HasTractionControl": true,
       "HasTractionControl2": false,
       "HasAbs": false,
-      "HasEsc": false,
+      "HasEsc": true,
       "HasTurboBoost": false,
       "HasEngineMap": false,
       "HasErsDeploymentMap": false,
@@ -52,10 +52,10 @@
       "TyreCompoundMode": "FrontAndRear"
     },
     "Suspension": {
-      "Enabled": false,
+      "Enabled": true,
       "HasWheelRate": false,
-      "HasFrontAntiRollBar": false,
-      "HasRearAntiRollBar": false,
+      "HasFrontAntiRollBar": true,
+      "HasRearAntiRollBar": true,
       "HasBrakeBias": false,
       "HasBrakeTorqueMultiplier": false,
       "HasSteerRatio": false,
@@ -78,13 +78,14 @@
       "HasRearWingAngle": false
     }
   },
-  "TorqueNm": 226,
+  "TorqueNm": 450,
   "TyreCompounds": [
-    "Road",
-    "Evo"
+    "Hypercar",
+    "Supercar",
+    "Road"
   ],
-  "Variant": "",
-  "WeightKg": 1150,
-  "Year": 1987,
-  "ZeroToOneHundredKmh": 7.6
+  "Variant": "718 Cayman GT4 RS with Weissach-package",
+  "WeightKg": 1490,
+  "Year": 2022,
+  "ZeroToOneHundredKmh": 3.4
 }

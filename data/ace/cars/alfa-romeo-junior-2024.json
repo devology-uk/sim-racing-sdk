@@ -1,21 +1,21 @@
 {
-  "BatteryKwh": null,
-  "Body": "Coupe",
-  "Categories": "Road:Modern:ICE",
-  "Cylinders": 6,
-  "DisplacementL": 4,
-  "DriveLayout": "RWD",
-  "Engine": "Naturally Aspirated",
-  "EngineLayout": "Mid",
-  "FuelTankL": 64,
-  "Gears": 7,
-  "Manufacturer": "Porsche",
-  "MaxRpm": 9000,
-  "MaxSpeedKmh": 315,
-  "ModelId": "preset_718gt4rs_mech_2",
-  "Name": "718 Gayman GT4 RS",
-  "PerformanceRating": 12.7,
-  "PowerPs": 500,
+  "BatteryKwh": 54,
+  "Body": "SUV",
+  "Categories": "Road:Modern:EV",
+  "Cylinders": null,
+  "DisplacementL": null,
+  "DriveLayout": "FWD",
+  "Engine": "Electric Motor",
+  "EngineLayout": "Front",
+  "FuelTankL": null,
+  "Gears": null,
+  "Manufacturer": "Alfa Romeo",
+  "MaxRpm": null,
+  "MaxSpeedKmh": 200,
+  "ModelId": "preset_mln_mech_1",
+  "Name": "Junior",
+  "PerformanceRating": 10.5,
+  "PowerPs": 207,
   "RacingClass": "",
   "SetupSchema": {
     "Tyres": {
@@ -48,14 +48,14 @@
     },
     "FuelAndStrategy": {
       "Enabled": true,
-      "HasFuel": true,
+      "HasFuel": false,
       "TyreCompoundMode": "FrontAndRear"
     },
     "Suspension": {
-      "Enabled": true,
+      "Enabled": false,
       "HasWheelRate": false,
-      "HasFrontAntiRollBar": true,
-      "HasRearAntiRollBar": true,
+      "HasFrontAntiRollBar": false,
+      "HasRearAntiRollBar": false,
       "HasBrakeBias": false,
       "HasBrakeTorqueMultiplier": false,
       "HasSteerRatio": false,
@@ -78,14 +78,13 @@
       "HasRearWingAngle": false
     }
   },
-  "TorqueNm": 450,
+  "TorqueNm": 345,
   "TyreCompounds": [
-    "Hypercar",
     "Supercar",
     "Road"
   ],
-  "Variant": "718 Gaymane GT4 RS with Weissach-package",
-  "WeightKg": 1490,
-  "Year": 2022,
-  "ZeroToOneHundredKmh": 3.4
+  "Variant": "",
+  "WeightKg": 1560,
+  "Year": 2024,
+  "ZeroToOneHundredKmh": 5.9
 }
