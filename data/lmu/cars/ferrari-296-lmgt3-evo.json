@@ -1,0 +1,19 @@
+{
+  "Category": "LMGT3",
+  "Class": "GT3",
+  "DisplayName": "Ferrari 296 LMGT3 Evo",
+  "Engine": "2.9L V6 Turbo",
+  "HeightMm": 1191,
+  "LengthMm": 4565,
+  "Manufacturer": "Ferrari",
+  "MaxFuel": 120,
+  "MaxRpm": 8000,
+  "ModelId": "Ferrari_296GT3_EVO_2026",
+  "PowerBhp": 600,
+  "PowerKw": 0,
+  "ResultCarType": "Ferrari 296 LMGT3 Evo",
+  "Transmission": "6 Speed Sequential",
+  "WeightKg": 1341,
+  "WidthMm": 2050,
+  "Year": 2026
+}
