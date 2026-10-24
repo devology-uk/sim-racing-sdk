@@ -8,7 +8,7 @@
   "Manufacturer": "Ligier",
   "MaxFuel": 100,
   "MaxRpm": 6600,
-  "ModelId": null,
+  "ModelId": "Ligier_JSP325_2025",
   "PowerBhp": 470,
   "PowerKw": 0,
   "ResultCarType": "Ligier JS P325",
