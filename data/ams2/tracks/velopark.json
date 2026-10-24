@@ -6,9 +6,9 @@
   "Latitude": -29.822778,
   "Layouts": [
     {
-      "Ams2TrackId": null,
+      "Ams2TrackId": "Velopark_2017_STT",
       "Corners": 13,
-      "DlcPack": null,
+      "DlcPack": "Adrenaline Pack Pt2",
       "Grade": "Grade 3",
       "LengthM": 2270,
       "MaxGridSize": 20,
@@ -16,7 +16,7 @@
       "TrackType": "Circuit"
     },
     {
-      "Ams2TrackId": "Velopark2",
+      "Ams2TrackId": "Velopark_2017",
       "Corners": 13,
       "DlcPack": null,
       "Grade": "Grade 3",
@@ -26,9 +26,9 @@
       "TrackType": "Circuit"
     },
     {
-      "Ams2TrackId": "Velopark2_STT",
+      "Ams2TrackId": "Velopark_2010",
       "Corners": 10,
-      "DlcPack": "Adrenaline Pack Pt2",
+      "DlcPack": null,
       "Grade": "Grade 3",
       "LengthM": 2150,
       "MaxGridSize": 34,

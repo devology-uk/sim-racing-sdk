@@ -194,7 +194,7 @@ public class Ams2Monitor : IAms2Monitor
         };
 
         this.participantUpdatesSubject.OnNext(ams2MonitorParticipant);
-        this.LogMessage(LoggingLevel.Information, $"Participant Update: {ams2MonitorParticipant}");
+        this.LogMessage(LoggingLevel.Debug, $"Participant Update: {ams2MonitorParticipant}");
     }
 
     private void OnNextTelemetryFrame(Ams2TelemetryFrame ams2TelemetryFrame)

@@ -117,7 +117,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         var participants = sharedMemoryData.GetParticipants();
         foreach(var participant in participants)
         {
-            this.LogMessage(LoggingLevel.Information, $"Participant Update: {participant}");
+            this.LogMessage(LoggingLevel.Debug, $"Participant Update: {participant}");
             if(this.entries.TryGetValue(participant.Index, out var entry))
             {
                 if(participant.LapsCompleted > entry.LapsCompleted)
@@ -160,7 +160,7 @@ public class Ams2SharedMemoryConnection : IAms2SharedMemoryConnection
         }
 
         var telemetryFrame = sharedMemoryData.GetTelemetryFrame();
-        this.LogMessage(LoggingLevel.Information, $"Telemetry Frame: {telemetryFrame}");
+        this.LogMessage(LoggingLevel.Debug, $"Telemetry Frame: {telemetryFrame}");
         this.telemetrySubject.OnNext(telemetryFrame);
     }
 }

@@ -3,7 +3,7 @@
   "Country": "USA",
   "CountryCode": "USA",
   "FullName": "Daytona International Speedway",
-  "Latitude": 17.3011292,
+  "Latitude": 29.1852,
   "Layouts": [
     {
       "Ams2TrackId": "Daytona_Circuit",
@@ -36,7 +36,7 @@
       "TrackType": "Oval"
     }
   ],
-  "Longitude": -69.8407186,
+  "Longitude": -81.0705,
   "RawTrackLocations": [],
   "ShortName": "Daytona"
 }

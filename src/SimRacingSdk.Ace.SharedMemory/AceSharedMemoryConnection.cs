@@ -30,6 +30,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
     private AceGraphicsData? lastLiveGraphicsData;
     private AceStaticData? lastStaticData;
     private readonly HashSet<string> observedSessionPhaseNames = new();
+    private bool hasSessionStartedThisUpdate;
     private int? sector1TimeMs;
     private int? sector2TimeMs;
     private IDisposable? updateSubscription;
@@ -85,6 +86,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
         this.observedSessionPhaseNames.Clear();
 
         this.currentSession = new AceSharedMemorySession(staticData, graphicsData);
+        this.hasSessionStartedThisUpdate = true;
         this.sessionStartedSubject.OnNext(this.currentSession);
     }
 
@@ -135,6 +137,7 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
             return;
         }
 
+        this.hasSessionStartedThisUpdate = false;
         this.TrackSessionPhase(graphicsData);
         this.UpdateSession(graphicsData, staticData);
         this.UpdateFlagState(graphicsData);
@@ -169,9 +172,13 @@ public class AceSharedMemoryConnection : IAceSharedMemoryConnection
         this.observedSessionPhaseNames.Add(graphicsData.SessionState.PhaseName);
     }
 
+    // Loading a car starts a session while shared memory still holds the previous car's lap count and last lap,
+    // so a lap count rise on that same update is stale, not a lap (rig run 2026-10-23: every car change produced
+    // one, carrying the last car's lap time under the new car's name).
     private void UpdateActiveLap(AceGraphicsData graphicsData, AceStaticData staticData)
     {
-        if(this.lastGraphicsData == null || graphicsData.TotalLapCount <= this.lastGraphicsData.TotalLapCount)
+        if(this.lastGraphicsData == null || this.hasSessionStartedThisUpdate
+                                          || graphicsData.TotalLapCount <= this.lastGraphicsData.TotalLapCount)
         {
             return;
         }

@@ -293,7 +293,7 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextRealTimeCarUpdate(RealtimeCarUpdate realTimeCarUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, realTimeCarUpdate.ToString());
+        this.LogMessage(LoggingLevel.Debug, realTimeCarUpdate.ToString());
         this.realtimeCarUpdatesSubject.OnNext(realTimeCarUpdate);
         var eventEntry = this.entryList.FirstOrDefault(e => e.CarIndex == realTimeCarUpdate.CarIndex);
         if(eventEntry != null)
@@ -304,7 +304,7 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextRealTimeUpdate(RealtimeUpdate realtimeUpdate)
     {
-        this.LogMessage(LoggingLevel.Information, realtimeUpdate.ToString());
+        this.LogMessage(LoggingLevel.Debug, realtimeUpdate.ToString());
         this.lastRealtimeUpdate = DateTime.Now;
 
         if(!this.entryList.Any())
@@ -395,7 +395,7 @@ public class AccMonitor : IAccMonitor
 
     private void OnNextTelemetryFrame(AccTelemetryFrame telemetryFrame)
     {
-        this.LogMessage(LoggingLevel.Information, telemetryFrame.ToString());
+        this.LogMessage(LoggingLevel.Debug, telemetryFrame.ToString());
         this.telemetrySubject.OnNext(telemetryFrame);
     }
 
