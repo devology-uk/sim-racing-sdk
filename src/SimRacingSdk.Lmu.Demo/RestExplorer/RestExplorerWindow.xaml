@@ -58,13 +58,13 @@
             <Button Content="Capture All Safe Reads"
                     Command="{Binding CaptureAllSafeReadsCommand}"
                     ToolTip="Calls every read-only endpoint once and saves each response under the chosen game state" />
-            <Button Content="Start Watch"
-                    Command="{Binding StartWatchCommand}"
+            <Button Content="Start Monitor"
+                    Command="{Binding StartMonitorCommand}"
                     Margin="20,5,5,5"
-                    ToolTip="Polls the API every second and logs when it stops or starts responding, with LMU's window state" />
-            <Button Content="Stop Watch"
-                    Command="{Binding StopWatchCommand}" />
-            <Button Content="Open Capture Folder"
+                    ToolTip="Polls the API in the background, works out the game state itself and records responses and every state, window and availability change under logs\rest-monitor" />
+            <Button Content="Stop Monitor"
+                    Command="{Binding StopMonitorCommand}" />
+            <Button Content="Open Logs Folder"
                     Command="{Binding OpenCaptureFolderCommand}"
                     Margin="20,5,5,5" />
         </StackPanel>

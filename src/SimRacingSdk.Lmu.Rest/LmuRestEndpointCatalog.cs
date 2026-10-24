@@ -39,7 +39,7 @@ public class LmuRestEndpointCatalog : ILmuRestEndpointCatalog
 
         Read(CarState, "/rest/garage/tireinfo"),
         Read(CarState, "/rest/garage/brakeinfo"),
-        Read(CarState, "/rest/garage/getVehicleCondition"),
+        RealtimeRead(CarState, LmuRestPaths.VehicleCondition),
         Read(CarState, "/rest/garage/getPlayerGarageData"),
         Read(CarState, "/rest/garage/summary"),
         Read(CarState, "/rest/garage/isRefreshInProgress"),
@@ -99,11 +99,19 @@ public class LmuRestEndpointCatalog : ILmuRestEndpointCatalog
         Read(GameAndProfile, "/rest/profile/inDevMode")
     ];
 
+    public IEnumerable<LmuRestEndpoint> RealtimeReads =>
+        this.All.Where(endpoint => endpoint.Kind == LmuRestEndpointKind.RealtimeRead);
+
     public IEnumerable<LmuRestEndpoint> SafeReads => this.All.Where(endpoint => endpoint.Kind == LmuRestEndpointKind.SafeRead);
 
     private static LmuRestEndpoint Read(string group, string path)
     {
         return new LmuRestEndpoint(group, HttpMethod.Get, path, LmuRestEndpointKind.SafeRead);
+    }
+
+    private static LmuRestEndpoint RealtimeRead(string group, string path)
+    {
+        return new LmuRestEndpoint(group, HttpMethod.Get, path, LmuRestEndpointKind.RealtimeRead);
     }
 
     private static LmuRestEndpoint ParameterisedRead(string group, string path)

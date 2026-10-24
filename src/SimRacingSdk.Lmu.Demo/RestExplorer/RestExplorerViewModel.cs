@@ -34,15 +34,17 @@ public partial class RestExplorerViewModel : ObservableObject, IDisposable
         "/rest/replay/isActive"
     ];
 
-    private readonly ApiResponsivenessWatch apiResponsivenessWatch;
     private readonly IConsoleLog consoleLog;
     private readonly ILmuRestEndpointCatalog endpointCatalog;
     private readonly ILogger<RestExplorerViewModel> logger;
     private readonly ILmuRestClientFactory restClientFactory;
+    private readonly ILmuRestConnectionFactory restConnectionFactory;
+    private readonly LmuWindowStateReader windowStateReader;
 
     private RestCaptureWriter? captureWriter;
+    private string logsFolderPath = string.Empty;
+    private RestMonitorRecording? monitorRecording;
     private ILmuRestClient? restClient;
-    private CancellationTokenSource? watchCancellation;
 
     [ObservableProperty]
     private string baseAddress = LmuRestClient.DefaultBaseAddress;
@@ -53,9 +55,9 @@ public partial class RestExplorerViewModel : ObservableObject, IDisposable
     private bool isBusy;
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(StartWatchCommand))]
-    [NotifyCanExecuteChangedFor(nameof(StopWatchCommand))]
-    private bool isWatching;
+    [NotifyCanExecuteChangedFor(nameof(StartMonitorCommand))]
+    [NotifyCanExecuteChangedFor(nameof(StopMonitorCommand))]
+    private bool isMonitoring;
 
     [ObservableProperty]
     private bool isSnapshotAfterAction = true;
@@ -77,14 +79,16 @@ public partial class RestExplorerViewModel : ObservableObject, IDisposable
     public RestExplorerViewModel(ILogger<RestExplorerViewModel> logger,
         IConsoleLog consoleLog,
         ILmuRestClientFactory restClientFactory,
+        ILmuRestConnectionFactory restConnectionFactory,
         ILmuRestEndpointCatalog endpointCatalog,
-        ApiResponsivenessWatch apiResponsivenessWatch)
+        LmuWindowStateReader windowStateReader)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.restClientFactory = restClientFactory;
+        this.restConnectionFactory = restConnectionFactory;
         this.endpointCatalog = endpointCatalog;
-        this.apiResponsivenessWatch = apiResponsivenessWatch;
+        this.windowStateReader = windowStateReader;
     }
 
     public IReadOnlyList<string> CaptureStates => CaptureStateLabels;
@@ -96,16 +100,16 @@ public partial class RestExplorerViewModel : ObservableObject, IDisposable
 
     public void Init()
     {
-        var logsFolderPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "logs", "rest");
-        this.captureWriter = new RestCaptureWriter(logsFolderPath);
+        this.logsFolderPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "logs");
+        this.captureWriter = new RestCaptureWriter(Path.Combine(this.logsFolderPath, "rest"));
         this.OnPropertyChanged(nameof(this.CaptureFolderPath));
         this.Log($"REST Explorer started. Every response is saved under {this.CaptureFolderPath}");
-        this.Log("Pick the game state you're in, then Capture All Safe Reads. Repeat for each state.");
+        this.Log("Start Monitor, then go back to LMU and play: it works out the game state and records on its own.");
     }
 
     public void Dispose()
     {
-        this.watchCancellation?.Cancel();
+        this.monitorRecording?.Dispose();
         this.restClient?.Dispose();
         GC.SuppressFinalize(this);
     }
@@ -150,58 +154,69 @@ public partial class RestExplorerViewModel : ObservableObject, IDisposable
     {
         await this.RunBusy(async () =>
                            {
-                               var safeReads = this.endpointCatalog.SafeReads.ToList();
-                               this.Log($"Capturing {safeReads.Count} safe reads for state '{this.SelectedCaptureState}'...");
+                               var reads = await this.ChooseReadsForCurrentState();
+                               this.Log($"Capturing {reads.Count} reads for state '{this.SelectedCaptureState}'...");
                                var successCount = 0;
-                               foreach(var endpoint in safeReads)
+                               foreach(var endpoint in reads)
                                {
                                    var response = await this.Send(endpoint.Method, endpoint.PathTemplate);
                                    successCount += response.IsSuccess ? 1 : 0;
                                }
 
-                               this.Log($"Capture for '{this.SelectedCaptureState}' done: {successCount} of {safeReads.Count} succeeded.");
+                               this.Log($"Capture for '{this.SelectedCaptureState}' done: {successCount} of {reads.Count} succeeded.");
                            });
     }
 
-    private bool CanStartWatch()
+    private bool CanStartMonitor()
     {
-        return !this.IsWatching;
+        return !this.IsMonitoring;
     }
 
-    [RelayCommand(CanExecute = nameof(CanStartWatch))]
-    private async Task StartWatch()
+    [RelayCommand(CanExecute = nameof(CanStartMonitor))]
+    private void StartMonitor()
     {
-        this.IsWatching = true;
-        this.watchCancellation = new CancellationTokenSource();
-        this.Log($"Watching {ApiResponsivenessWatch.WatchedPath} every second. Now minimise LMU, switch away, go to the menus...");
-        try
+        this.monitorRecording = new RestMonitorRecording(this.restConnectionFactory.Create(this.BaseAddress),
+            new RestMonitorRecorder(Path.Combine(this.logsFolderPath, "rest-monitor")),
+            this.windowStateReader,
+            this.consoleLog.Write);
+        this.monitorRecording.Start();
+        this.IsMonitoring = true;
+    }
+
+    private bool CanStopMonitor()
+    {
+        return this.IsMonitoring;
+    }
+
+    [RelayCommand(CanExecute = nameof(CanStopMonitor))]
+    private void StopMonitor()
+    {
+        this.monitorRecording?.Dispose();
+        this.monitorRecording = null;
+        this.IsMonitoring = false;
+    }
+
+    private async Task<List<LmuRestEndpoint>> ChooseReadsForCurrentState()
+    {
+        var reads = this.endpointCatalog.SafeReads.ToList();
+        var sessionInfo = LmuRestJson.TryRead<LmuRestSessionInfo>(await this.Send(HttpMethod.Get, LmuRestPaths.SessionInfo));
+        if(sessionInfo?.InRealtime == true)
         {
-            await this.apiResponsivenessWatch.RunAsync(this.GetClient(), this.Log, this.watchCancellation.Token);
+            reads.AddRange(this.endpointCatalog.RealtimeReads);
+            return reads;
         }
-        finally
-        {
-            this.IsWatching = false;
-            this.Log("Watch stopped.");
-        }
-    }
 
-    private bool CanStopWatch()
-    {
-        return this.IsWatching;
-    }
-
-    [RelayCommand(CanExecute = nameof(CanStopWatch))]
-    private void StopWatch()
-    {
-        this.watchCancellation?.Cancel();
+        this.Log("Not in realtime, so skipping the reads that crash LMU outside a live session: "
+                 + string.Join(", ", this.endpointCatalog.RealtimeReads.Select(endpoint => endpoint.PathTemplate)));
+        return reads;
     }
 
     [RelayCommand]
     private void OpenCaptureFolder()
     {
-        if(Directory.Exists(this.CaptureFolderPath))
+        if(Directory.Exists(this.logsFolderPath))
         {
-            Process.Start("explorer.exe", this.CaptureFolderPath);
+            Process.Start("explorer.exe", this.logsFolderPath);
         }
     }
 

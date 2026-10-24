@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection UseLmuRest(this IServiceCollection services)
     {
         services.TryAddSingleton<ILmuRestClientFactory, LmuRestClientFactory>();
+        services.TryAddSingleton<ILmuRestConnectionFactory, LmuRestConnectionFactory>();
         services.TryAddSingleton<ILmuRestEndpointCatalog, LmuRestEndpointCatalog>();
         return services;
     }

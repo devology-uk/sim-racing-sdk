@@ -79,7 +79,7 @@ public partial class App : Application
         services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<ResultExplorerViewModel>();
         services.AddTransient<RestExplorerViewModel>();
-        services.AddTransient<ApiResponsivenessWatch>();
+        services.AddTransient<LmuWindowStateReader>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
             .CreateLogger("SimRacingSdk.Lmu.Demo.Services.SharedMemoryLog")));
