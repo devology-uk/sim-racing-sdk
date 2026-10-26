@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection UsePmrSdk(this IServiceCollection services)
     {
         services.TryAddSingleton<ISteamInfoProvider, SteamInfoProvider>();
+        services.TryAddSingleton<IConfigFileBackup, ConfigFileBackup>();
         services.TryAddSingleton<IPmrCarInfoProvider, PmrCarInfoProvider>();
         services.TryAddSingleton<IPmrGameDetector, PmrGameDetector>();
         services.TryAddSingleton<IPmrLocalConfigProvider, PmrLocalConfigProvider>();

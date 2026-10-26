@@ -12,9 +12,11 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection UseLmuSdk(this IServiceCollection services)
     {
         services.TryAddSingleton<ISteamInfoProvider, SteamInfoProvider>();
+        services.TryAddSingleton<IConfigFileBackup, ConfigFileBackup>();
         services.TryAddSingleton<ILmuCarInfoProvider, LmuCarInfoProvider>();
         services.TryAddSingleton<ILmuGameDataProvider, LmuGameDataProvider>();
         services.TryAddSingleton<ILmuGameDetector, LmuGameDetector>();
+        services.TryAddSingleton<ILmuLocalConfigProvider, LmuLocalConfigProvider>();
         services.TryAddSingleton<ILmuPathProvider, LmuPathProvider>();
         services.TryAddSingleton<ILmuTrackInfoProvider, LmuTrackInfoProvider>();
         return services;

@@ -241,6 +241,20 @@ public class SharedMemoryPage
     public bool IsPrivateSession;
     public int LaunchStage;
 
+    // AMS2 only creates the map while its Shared Memory option is set to Project CARS 2.
+    public static bool IsAvailable()
+    {
+        try
+        {
+            using var mappedFile = MemoryMappedFile.OpenExisting(SharedMemoryMap, MemoryMappedFileRights.Read);
+            return true;
+        }
+        catch(FileNotFoundException)
+        {
+            return false;
+        }
+    }
+
     public static SharedMemoryPage Read()
     {
         using var mappedFile = MemoryMappedFile.OpenExisting(SharedMemoryMap, MemoryMappedFileRights.Read);

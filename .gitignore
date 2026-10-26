@@ -404,3 +404,6 @@ CLAUDE.md
 # Dry-run output from catalog import tools (AceCarCatalogImport, PmrCatalogImport)
 *.generated.cs
 /docs/
+
+# Game files copied from Mike's rig for research (personal settings, not for a public repo)
+/research/

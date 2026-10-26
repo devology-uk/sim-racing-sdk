@@ -6,4 +6,5 @@ public interface IPmrLocalConfigProvider
 {
     PmrDriverProfile? GetDriverProfile();
     PmrLocalSettings? GetLocalSettings();
+    void EnableUdp(PmrUdpSettings settings);
 }

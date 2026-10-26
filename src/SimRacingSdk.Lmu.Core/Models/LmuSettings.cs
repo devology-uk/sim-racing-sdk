@@ -8,4 +8,7 @@ public class LmuSettings
 {
     [JsonPropertyName("DRIVER")]
     public LmuDriverSettings DriverSettings { get; set; } = new();
+
+    [JsonPropertyName("Game Options")]
+    public LmuGameOptions GameOptions { get; set; } = new();
 }

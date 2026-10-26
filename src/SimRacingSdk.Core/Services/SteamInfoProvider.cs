@@ -14,7 +14,8 @@ public class SteamInfoProvider : ISteamInfoProvider
 
     private static SteamInfoProvider? singletonInstance;
 
-    private readonly Dictionary<string, string> installedGamePaths = new();
+    // Steam folder names don't always match a game's usual capitalisation (ACE installs to "Assetto Corsa EVO").
+    private readonly Dictionary<string, string> installedGamePaths = new(StringComparer.OrdinalIgnoreCase);
     private string steamPath = null!;
 
     public static SteamInfoProvider Instance
