@@ -11,6 +11,8 @@ using SimRacingSdk.R3e.Demo.Controls.Console;
 using SimRacingSdk.R3e.Demo.Demos;
 using SimRacingSdk.R3e.Demo.Services;
 using SimRacingSdk.R3e.Demo.TrackExplorer;
+using SimRacingSdk.R3e.SharedMemory;
+using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.R3e.Demo;
 
@@ -59,6 +61,7 @@ public partial class App : Application
                              });
 
         services.UseR3eSdk();
+        services.UseR3eSharedMemory();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -67,6 +70,9 @@ public partial class App : Application
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
         services.AddTransient<IGameInfoDemo, GameInfoDemo>();
+        services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
+        services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.R3e.Demo.Services.SharedMemoryLog")));
 
         return services.BuildServiceProvider();
     }

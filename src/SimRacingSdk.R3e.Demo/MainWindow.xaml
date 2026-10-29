@@ -26,10 +26,14 @@
         <StackPanel Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    Margin="10">
+                    Margin="10"
+                    Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
             <Button Content="Game Info"
                     Command="{Binding ShowGameInfoCommand}"
                     ToolTip="Show what R3e.Core finds on this machine: install and user data paths, game options and compatibility checks" />
+            <Button Content="Shared Memory Demo"
+                    Command="{Binding StartSharedMemoryDemoCommand}"
+                    ToolTip="Start the demo of R3eSharedMemoryConnection: sessions, every car's laps and the player's telemetry" />
             <Button Content="Open Log Viewer"
                     Command="{Binding OpenLogViewerCommand}"
                     ToolTip="Open a window for analysing log files" />
@@ -44,6 +48,13 @@
                     ToolTip="Open the track explorer window" />
         </StackPanel>
 
+        <Button Grid.Row="0"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Content="Stop Demo"
+                Command="{Binding StopDemoCommand}"
+                ToolTip="Stop the running demo"
+                Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <con:ConsoleControl Grid.Row="1" />
     </Grid>
 </Window>
