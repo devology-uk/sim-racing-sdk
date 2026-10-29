@@ -29,6 +29,9 @@
                     HorizontalAlignment="Center"
                     Margin="10"
                     Visibility="{Binding IsRunningDemo, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
+            <Button Content="Game Info"
+                    Command="{Binding ShowGameInfoCommand}"
+                    ToolTip="Show what Ace.Core finds on this machine: paths, local settings and catalogs, without the game running" />
             <Button Content="UDP Demo"
                     Command="{Binding StartUdpDemoCommand}"
                     ToolTip="Start the demo of AceUdpConnection for connection to the ACE Broadcasting API" />

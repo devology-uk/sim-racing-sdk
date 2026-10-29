@@ -33,6 +33,9 @@
             <!-- <Button Content="UDP Demo" -->
             <!--         Command="{Binding StartUdpDemoCommand}" -->
             <!--         ToolTip="Start the demo of Ams2UdpConnection for connection to the AMS2 Broadcasting API" /> -->
+            <Button Content="Game Info"
+                    Command="{Binding ShowGameInfoCommand}"
+                    ToolTip="Show what Ams2.Core finds on this machine: paths, local settings and catalogs, without the game running" />
             <Button Content="Shared Memory Demo"
                     Command="{Binding StartSharedMemoryDemoCommand}"
                     ToolTip="Start the demo of Ams2SharedMemoryConnection for connecting to the AMS2 Shared Memory channels" />

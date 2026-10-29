@@ -77,6 +77,7 @@ public partial class App : Application
         services.AddTransient<LogViewerViewModel>();
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
+        services.AddTransient<IGameInfoDemo, GameInfoDemo>();
         services.AddTransient<ResultExplorerViewModel>();
         services.AddTransient<RestExplorerViewModel>();
         services.AddTransient<LmuWindowStateReader>();

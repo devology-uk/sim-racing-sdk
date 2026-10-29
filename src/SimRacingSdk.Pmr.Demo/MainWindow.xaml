@@ -41,6 +41,9 @@
                      Width="60"
                      VerticalAlignment="Center"
                      ToolTip="The port to listen for Project Motor Racing's UDP telemetry on" />
+            <Button Content="Game Info"
+                    Command="{Binding ShowGameInfoCommand}"
+                    ToolTip="Show what Pmr.Core finds on this machine: paths, local settings and catalogs, without the game running" />
             <Button Content="UDP Demo"
                     Command="{Binding StartUdpDemoCommand}"
                     ToolTip="Start the demo of PmrUdpConnection for receiving Project Motor Racing's UDP telemetry broadcast" />

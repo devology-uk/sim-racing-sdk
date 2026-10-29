@@ -74,6 +74,7 @@ public partial class App : Application
         services.AddTransient<LogViewerViewModel>();
         services.AddTransient<CarExplorerViewModel>();
         services.AddTransient<TrackExplorerViewModel>();
+        services.AddTransient<IGameInfoDemo, GameInfoDemo>();
         services.AddTransient<CameraProbeViewModel>();
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<IUdpDemo, UdpDemo>();

@@ -19,6 +19,7 @@ namespace SimRacingSdk.Lmu.Demo;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IConsoleLog consoleLog;
+    private readonly IGameInfoDemo gameInfoDemo;
     private readonly ILmuGameDetector lmuGameDetector;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
@@ -34,12 +35,14 @@ public partial class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
         IConsoleLog consoleLog,
+        IGameInfoDemo gameInfoDemo,
         ILmuGameDetector lmuGameDetector,
         ISharedMemoryDemo sharedMemoryDemo,
         IMonitorDemo monitorDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.gameInfoDemo = gameInfoDemo;
         this.lmuGameDetector = lmuGameDetector;
         this.sharedMemoryDemo = sharedMemoryDemo;
         this.monitorDemo = monitorDemo;
@@ -120,6 +123,13 @@ public partial class MainWindowViewModel : ObservableObject
         };
         trackExplorer.Show();
         trackViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private void ShowGameInfo()
+    {
+        this.consoleLog.Clear();
+        this.gameInfoDemo.Show();
     }
 
     [RelayCommand]

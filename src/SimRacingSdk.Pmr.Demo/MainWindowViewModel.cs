@@ -16,6 +16,7 @@ namespace SimRacingSdk.Pmr.Demo;
 public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IConsoleLog consoleLog;
+    private readonly IGameInfoDemo gameInfoDemo;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly IMonitorDemo monitorDemo;
     private readonly IUdpDemo udpDemo;
@@ -30,11 +31,13 @@ public partial class MainWindowViewModel : ObservableObject
     private string udpPort = PmrUdpConnection.DefaultPort.ToString();
 
     public MainWindowViewModel(IConsoleLog consoleLog,
+        IGameInfoDemo gameInfoDemo,
         IUdpDemo udpDemo,
         IMonitorDemo monitorDemo,
         IPmrLocalConfigProvider pmrLocalConfigProvider)
     {
         this.consoleLog = consoleLog;
+        this.gameInfoDemo = gameInfoDemo;
         this.udpDemo = udpDemo;
         this.monitorDemo = monitorDemo;
 
@@ -97,6 +100,13 @@ public partial class MainWindowViewModel : ObservableObject
         };
         trackExplorer.Show();
         trackExplorerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private void ShowGameInfo()
+    {
+        this.consoleLog.Clear();
+        this.gameInfoDemo.Show();
     }
 
     [RelayCommand]

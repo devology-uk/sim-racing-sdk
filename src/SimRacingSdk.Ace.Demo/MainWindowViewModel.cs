@@ -22,6 +22,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IAceCompatibilityChecker aceCompatibilityChecker;
     private readonly IAceGameDetector aceGameDetector;
     private readonly IConsoleLog consoleLog;
+    private readonly IGameInfoDemo gameInfoDemo;
     private readonly ILogger<MainWindowViewModel> logger;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ISharedMemoryDemo sharedMemoryDemo;
@@ -37,6 +38,7 @@ public partial class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
         IConsoleLog consoleLog,
+        IGameInfoDemo gameInfoDemo,
         IAceCompatibilityChecker aceCompatibilityChecker,
         IAceGameDetector aceGameDetector,
         IUdpDemo udpDemo,
@@ -45,6 +47,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.gameInfoDemo = gameInfoDemo;
         this.aceCompatibilityChecker = aceCompatibilityChecker;
         this.aceGameDetector = aceGameDetector;
         this.udpDemo = udpDemo;
@@ -113,6 +116,13 @@ public partial class MainWindowViewModel : ObservableObject
         };
         trackExplorer.Show();
         trackViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private void ShowGameInfo()
+    {
+        this.consoleLog.Clear();
+        this.gameInfoDemo.Show();
     }
 
     [RelayCommand]

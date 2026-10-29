@@ -19,6 +19,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IAms2CompatibilityChecker ams2CompatibilityChecker;
     private readonly IAms2GameDetector ams2GameDetector;
     private readonly IConsoleLog consoleLog;
+    private readonly IGameInfoDemo gameInfoDemo;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
@@ -34,6 +35,7 @@ public partial class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel(ILogger<MainWindowViewModel> logger,
         IConsoleLog consoleLog,
+        IGameInfoDemo gameInfoDemo,
         IAms2CompatibilityChecker ams2CompatibilityChecker,
         IAms2GameDetector ams2GameDetector,
         IUdpDemo udpDemo,
@@ -42,6 +44,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
+        this.gameInfoDemo = gameInfoDemo;
         this.ams2CompatibilityChecker = ams2CompatibilityChecker;
         this.ams2GameDetector = ams2GameDetector;
         this.udpDemo = udpDemo;
@@ -96,6 +99,13 @@ public partial class MainWindowViewModel : ObservableObject
         };
         trackExplorer.Show();
         trackViewerViewModel.Init();
+    }
+
+    [RelayCommand]
+    private void ShowGameInfo()
+    {
+        this.consoleLog.Clear();
+        this.gameInfoDemo.Show();
     }
 
     [RelayCommand]
