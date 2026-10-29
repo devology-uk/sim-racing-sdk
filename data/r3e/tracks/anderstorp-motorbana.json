@@ -1,0 +1,23 @@
+{
+  "GameId": 5300,
+  "Layouts": [
+    {
+      "GameId": 5301,
+      "GridSize": 32,
+      "Name": "Grand Prix",
+      "LengthKm": 4.025
+    },
+    {
+      "GameId": 6164,
+      "GridSize": 32,
+      "Name": "South",
+      "LengthKm": 2
+    }
+  ],
+  "Name": "Anderstorp Motorbana",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 57.26417,
+  "Longitude": 13.60139,
+  "NotInGameSelector": false
+}

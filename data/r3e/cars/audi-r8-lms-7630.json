@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2018",
+  "GameId": 7630,
+  "Manufacturer": "Audi",
+  "Name": "Audi R8 LMS",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 524,
+  "WeightWithDriverKg": 1380
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "FR2 Cup",
+  "GameId": 4598,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula RaceRoom 2",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 582,
+  "WeightWithDriverKg": 692
+}

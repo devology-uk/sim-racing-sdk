@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 2",
+  "GameId": 1837,
+  "Manufacturer": "RUF",
+  "Name": "RUF RT12R",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 442,
+  "WeightWithDriverKg": 1225
+}

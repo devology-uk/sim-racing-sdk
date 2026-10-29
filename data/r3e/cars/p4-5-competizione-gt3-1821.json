@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 1821,
+  "Manufacturer": "P4/5",
+  "Name": "P4-5 Competizione GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 506,
+  "WeightWithDriverKg": 1305
+}

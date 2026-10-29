@@ -1,0 +1,12 @@
+{
+  "Class": "Hypercars",
+  "GameId": 13169,
+  "Manufacturer": "Porsche",
+  "Name": "Porsche 963",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.6,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 584,
+  "WeightWithDriverKg": 1117
+}

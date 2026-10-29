@@ -1,0 +1,17 @@
+{
+  "GameId": 1849,
+  "Layouts": [
+    {
+      "GameId": 1850,
+      "GridSize": 38,
+      "Name": "Grand Prix",
+      "LengthKm": 4.909
+    }
+  ],
+  "Name": "Autódromo Internazionale Enzo e Dino Ferrari",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 44.34389,
+  "Longitude": 11.71667,
+  "NotInGameSelector": false
+}

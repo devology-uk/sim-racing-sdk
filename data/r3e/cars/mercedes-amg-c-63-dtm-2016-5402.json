@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2016",
+  "GameId": 5402,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-AMG C 63 DTM 2016",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 471,
+  "WeightWithDriverKg": 1120
+}

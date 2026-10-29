@@ -1,0 +1,12 @@
+{
+  "Class": "Alpine A110 Cup",
+  "GameId": 13394,
+  "Manufacturer": "Alpine",
+  "Name": "Alpine A110 Cup",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.8,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 276,
+  "WeightWithDriverKg": 1135
+}

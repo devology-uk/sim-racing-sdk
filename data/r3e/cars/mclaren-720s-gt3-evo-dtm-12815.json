@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2024",
+  "GameId": 12815,
+  "Manufacturer": "McLaren",
+  "Name": "McLaren 720S GT3 EVO DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 497,
+  "WeightWithDriverKg": 1395
+}

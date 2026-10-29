@@ -1,0 +1,12 @@
+{
+  "Class": "GTE",
+  "GameId": 12430,
+  "Manufacturer": "BMW",
+  "Name": "BMW M8 GTE",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 538,
+  "WeightWithDriverKg": 1335
+}

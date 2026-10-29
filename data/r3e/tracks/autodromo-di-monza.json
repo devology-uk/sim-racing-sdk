@@ -1,0 +1,23 @@
+{
+  "GameId": 1670,
+  "Layouts": [
+    {
+      "GameId": 1671,
+      "GridSize": 58,
+      "Name": "Grand Prix",
+      "LengthKm": 5.793
+    },
+    {
+      "GameId": 1672,
+      "GridSize": 58,
+      "Name": "Junior",
+      "LengthKm": 2.405
+    }
+  ],
+  "Name": "Autodromo di Monza",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 45.62056,
+  "Longitude": 9.28944,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,29 @@
+{
+  "GameId": 1692,
+  "Layouts": [
+    {
+      "GameId": 1693,
+      "GridSize": 34,
+      "Name": "Grand Prix",
+      "LengthKm": 4.574
+    },
+    {
+      "GameId": 1763,
+      "GridSize": 34,
+      "Name": "National",
+      "LengthKm": 3.692
+    },
+    {
+      "GameId": 1764,
+      "GridSize": 34,
+      "Name": "Short",
+      "LengthKm": 2.638
+    }
+  ],
+  "Name": "Hockenheimring - Modern",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 49.32778,
+  "Longitude": 8.56556,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1992",
+  "GameId": 3842,
+  "Manufacturer": "Ford",
+  "Name": "Ford Mustang GT DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 516,
+  "WeightWithDriverKg": 1240
+}

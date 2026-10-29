@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2018",
+  "GameId": 7029,
+  "Manufacturer": "Alfa Romeo",
+  "Name": "Alfa Romeo Giulietta TCR",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2.0,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 326,
+  "WeightWithDriverKg": 1285
+}

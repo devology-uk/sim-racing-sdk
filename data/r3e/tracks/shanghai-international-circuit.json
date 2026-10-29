@@ -1,0 +1,29 @@
+{
+  "GameId": 2021,
+  "Layouts": [
+    {
+      "GameId": 2027,
+      "GridSize": 48,
+      "Name": "Grand Prix",
+      "LengthKm": 5.451
+    },
+    {
+      "GameId": 4041,
+      "GridSize": 48,
+      "Name": "Intermediate (WTCC)",
+      "LengthKm": 4.603
+    },
+    {
+      "GameId": 4042,
+      "GridSize": 48,
+      "Name": "West Long",
+      "LengthKm": 3.067
+    }
+  ],
+  "Name": "Shanghai International Circuit",
+  "Country": "China",
+  "CountryCode": "CHN",
+  "Latitude": 31.33889,
+  "Longitude": 121.21972,
+  "NotInGameSelector": false
+}

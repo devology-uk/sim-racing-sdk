@@ -1,0 +1,23 @@
+{
+  "GameId": 13427,
+  "Layouts": [
+    {
+      "GameId": 13428,
+      "GridSize": 37,
+      "Name": "Grand Prix",
+      "LengthKm": 6.968
+    },
+    {
+      "GameId": 13652,
+      "GridSize": 99,
+      "Name": "Endurance",
+      "LengthKm": 6.968
+    }
+  ],
+  "Name": "Circuit de Spa-Francorchamps - 1995",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "Latitude": 50.43722,
+  "Longitude": 5.97139,
+  "NotInGameSelector": false
+}

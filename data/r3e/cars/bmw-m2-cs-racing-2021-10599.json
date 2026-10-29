@@ -1,0 +1,12 @@
+{
+  "Class": "BMW M2 Cup",
+  "GameId": 10599,
+  "Manufacturer": "BMW",
+  "Name": "BMW M2 CS Racing 2021",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 432,
+  "WeightWithDriverKg": 1620
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2026",
+  "GameId": 13597,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-AMG GT3 2020 DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 514,
+  "WeightWithDriverKg": 1418
+}

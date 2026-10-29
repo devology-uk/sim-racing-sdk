@@ -1,0 +1,12 @@
+{
+  "Class": "Praga R1",
+  "GameId": 11051,
+  "Manufacturer": "Praga",
+  "Name": "Praga R1",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 359,
+  "WeightWithDriverKg": 745
+}

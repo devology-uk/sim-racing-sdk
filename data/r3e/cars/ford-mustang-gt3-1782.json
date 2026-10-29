@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 1782,
+  "Manufacturer": "Ford",
+  "Name": "Ford Mustang GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 594,
+  "WeightWithDriverKg": 1435
+}

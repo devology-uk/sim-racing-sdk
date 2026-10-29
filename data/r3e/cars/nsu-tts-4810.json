@@ -1,0 +1,12 @@
+{
+  "Class": "Group 2",
+  "GameId": 4810,
+  "Manufacturer": "NSU",
+  "Name": "NSU TTS",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 134,
+  "WeightWithDriverKg": 735
+}

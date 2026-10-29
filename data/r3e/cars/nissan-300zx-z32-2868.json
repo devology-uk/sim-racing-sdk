@@ -1,0 +1,12 @@
+{
+  "Class": "GTO Classics",
+  "GameId": 2868,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan 300ZX Z32",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 563,
+  "WeightWithDriverKg": 1340
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "KTM X-Bow RR Cup",
+  "GameId": 5342,
+  "Manufacturer": "KTM",
+  "Name": "KTM X-Bow RR",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 346,
+  "WeightWithDriverKg": 885
+}

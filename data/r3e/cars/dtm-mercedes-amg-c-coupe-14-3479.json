@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2014",
+  "GameId": 3479,
+  "Manufacturer": "Mercedes",
+  "Name": "DTM Mercedes AMG C Coupe 14",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 471,
+  "WeightWithDriverKg": 1120
+}

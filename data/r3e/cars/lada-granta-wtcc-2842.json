@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2013",
+  "GameId": 2842,
+  "Manufacturer": "Lada",
+  "Name": "Lada Granta WTCC",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 289,
+  "WeightWithDriverKg": 1150
+}

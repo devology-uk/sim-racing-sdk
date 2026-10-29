@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2013",
+  "GameId": 2611,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Corvette Z06.R GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.2,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 563,
+  "WeightWithDriverKg": 1375
+}

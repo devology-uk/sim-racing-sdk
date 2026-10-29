@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2015",
+  "GameId": 4551,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-Benz SLS AMG GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 504,
+  "WeightWithDriverKg": 1405
+}

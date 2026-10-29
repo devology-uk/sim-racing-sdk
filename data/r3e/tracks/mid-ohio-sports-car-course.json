@@ -1,0 +1,29 @@
+{
+  "GameId": 1673,
+  "Layouts": [
+    {
+      "GameId": 1674,
+      "GridSize": 52,
+      "Name": "Full",
+      "LengthKm": 3.823
+    },
+    {
+      "GameId": 1676,
+      "GridSize": 52,
+      "Name": "Chicane",
+      "LengthKm": 3.862
+    },
+    {
+      "GameId": 1675,
+      "GridSize": 52,
+      "Name": "Short",
+      "LengthKm": 2.88
+    }
+  ],
+  "Name": "Mid-Ohio Sports Car Course",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 40.68917,
+  "Longitude": -82.63611,
+  "NotInGameSelector": false
+}

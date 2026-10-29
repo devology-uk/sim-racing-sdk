@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2018",
+  "GameId": 7643,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes AMG GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 518,
+  "WeightWithDriverKg": 1418
+}

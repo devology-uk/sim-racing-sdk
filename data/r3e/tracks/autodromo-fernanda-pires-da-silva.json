@@ -1,0 +1,23 @@
+{
+  "GameId": 2018,
+  "Layouts": [
+    {
+      "GameId": 2024,
+      "GridSize": 45,
+      "Name": "Grand Prix",
+      "LengthKm": 4.182
+    },
+    {
+      "GameId": 12318,
+      "GridSize": 34,
+      "Name": "Tanque",
+      "LengthKm": 4.182
+    }
+  ],
+  "Name": "Autódromo Fernanda Pires da Silva",
+  "Country": "Portugal",
+  "CountryCode": "PRT",
+  "Latitude": 38.75056,
+  "Longitude": -9.39417,
+  "NotInGameSelector": false
+}

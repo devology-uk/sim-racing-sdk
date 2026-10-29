@@ -1,0 +1,12 @@
+{
+  "Class": "GT2",
+  "GameId": 11991,
+  "Manufacturer": "KTM",
+  "Name": "KTM X-BOW GT2",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 497,
+  "WeightWithDriverKg": 1428
+}

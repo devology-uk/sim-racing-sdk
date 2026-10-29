@@ -1,0 +1,35 @@
+{
+  "GameId": 9320,
+  "Layouts": [
+    {
+      "GameId": 9321,
+      "GridSize": 10,
+      "Name": "Stage",
+      "LengthKm": 17.3
+    },
+    {
+      "GameId": 9360,
+      "GridSize": 39,
+      "Name": "Circuit",
+      "LengthKm": 9.999
+    },
+    {
+      "GameId": 11859,
+      "GridSize": 10,
+      "Name": "Dual Stage",
+      "LengthKm": 17.3
+    },
+    {
+      "GameId": 11861,
+      "GridSize": 10,
+      "Name": "Short Stage",
+      "LengthKm": 5.2
+    }
+  ],
+  "Name": "Genting Highlands",
+  "Country": "Malaysia",
+  "CountryCode": "MYS",
+  "Latitude": 3.42361,
+  "Longitude": 101.79333,
+  "NotInGameSelector": false
+}

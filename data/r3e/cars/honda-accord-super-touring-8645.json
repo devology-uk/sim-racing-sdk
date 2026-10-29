@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 8645,
+  "Manufacturer": "Honda",
+  "Name": "Honda Accord Super Touring",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 306,
+  "WeightWithDriverKg": 1055
+}

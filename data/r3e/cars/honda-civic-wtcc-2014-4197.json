@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2014",
+  "GameId": 4197,
+  "Manufacturer": "Honda",
+  "Name": "Honda Civic WTCC 2014",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 364,
+  "WeightWithDriverKg": 1170
+}

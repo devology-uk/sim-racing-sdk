@@ -1,0 +1,23 @@
+{
+  "GameId": 10903,
+  "Layouts": [
+    {
+      "GameId": 10904,
+      "GridSize": 35,
+      "Name": "Grand Prix",
+      "LengthKm": 4.05
+    },
+    {
+      "GameId": 11908,
+      "GridSize": 35,
+      "Name": "Classic Racing School",
+      "LengthKm": 4.05
+    }
+  ],
+  "Name": "Circuit de Charade",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 45.74722,
+  "Longitude": 3.03889,
+  "NotInGameSelector": false
+}

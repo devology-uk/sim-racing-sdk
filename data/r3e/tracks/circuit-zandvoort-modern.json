@@ -1,0 +1,23 @@
+{
+  "GameId": 10781,
+  "Layouts": [
+    {
+      "GameId": 10782,
+      "GridSize": 38,
+      "Name": "Grand Prix",
+      "LengthKm": 4.259
+    },
+    {
+      "GameId": 11090,
+      "GridSize": 38,
+      "Name": "Short",
+      "LengthKm": 2.887
+    }
+  ],
+  "Name": "Circuit Zandvoort - Modern",
+  "Country": "Netherlands",
+  "CountryCode": "NLD",
+  "Latitude": 52.38889,
+  "Longitude": 4.54083,
+  "NotInGameSelector": false
+}

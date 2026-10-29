@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2020",
+  "GameId": 8942,
+  "Manufacturer": "Chevrolet",
+  "Name": "Callaway Corvette C7 GT3-R",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.2,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 527,
+  "WeightWithDriverKg": 1375
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2025",
+  "GameId": 13160,
+  "Manufacturer": "Lamborghini",
+  "Name": "Lamborghini Huracán GT3 EVO II DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 516,
+  "WeightWithDriverKg": 1415
+}

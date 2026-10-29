@@ -7,8 +7,9 @@ namespace SimRacingSdk.R3e.Core;
 public class R3eLocalConfigProvider : IR3eLocalConfigProvider
 {
     private const string LanguageCodeKey = "GameLanguage.languageCode";
-    private const string SpeedInKphKey = "menuSpeedInKph";
-    private const string UnitSystemKey = "menuUnitSystem";
+
+    // The in-game units option writes this key; menuUnitSystem stays 0 for Metric and Imperial alike.
+    private const string MetricUnitsKey = "menuSpeedInKph";
 
     private static R3eLocalConfigProvider? singletonInstance;
     private readonly IR3eGameOptionsReader gameOptionsReader;
@@ -35,13 +36,12 @@ public class R3eLocalConfigProvider : IR3eLocalConfigProvider
         return new R3eGameOptions
         {
             LanguageCode = values.GetValueOrDefault(LanguageCodeKey) as string ?? string.Empty,
-            IsSpeedInKph = this.GetInteger(values, SpeedInKphKey) != 0,
-            UnitSystem = (R3eUnitSystem)this.GetInteger(values, UnitSystemKey)
+            UnitSystem = this.IsMetric(values) ? R3eUnitSystem.Metric : R3eUnitSystem.Imperial
         };
     }
 
-    private int GetInteger(IReadOnlyDictionary<string, object> values, string key)
+    private bool IsMetric(IReadOnlyDictionary<string, object> values)
     {
-        return values.GetValueOrDefault(key) is int value ? value : 0;
+        return values.GetValueOrDefault(MetricUnitsKey) is not 0;
     }
 }

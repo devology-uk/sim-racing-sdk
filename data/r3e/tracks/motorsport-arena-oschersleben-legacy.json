@@ -1,0 +1,35 @@
+{
+  "GameId": 2383,
+  "Layouts": [
+    {
+      "GameId": 2384,
+      "GridSize": 36,
+      "Name": "A Course",
+      "LengthKm": null
+    },
+    {
+      "GameId": 7753,
+      "GridSize": 36,
+      "Name": "B Course",
+      "LengthKm": null
+    },
+    {
+      "GameId": 7754,
+      "GridSize": 36,
+      "Name": "Motorcycle A Course",
+      "LengthKm": null
+    },
+    {
+      "GameId": 7755,
+      "GridSize": 36,
+      "Name": "Motorcycle B Course",
+      "LengthKm": null
+    }
+  ],
+  "Name": "Motorsport Arena Oschersleben - Legacy",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 52.02722,
+  "Longitude": 11.27972,
+  "NotInGameSelector": true
+}

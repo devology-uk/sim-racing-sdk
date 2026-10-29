@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2015",
+  "GameId": 4264,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-AMG C63 DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 471,
+  "WeightWithDriverKg": 1120
+}

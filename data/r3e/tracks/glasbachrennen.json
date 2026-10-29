@@ -1,0 +1,17 @@
+{
+  "GameId": 13631,
+  "Layouts": [
+    {
+      "GameId": 13632,
+      "GridSize": 1,
+      "Name": "Full Run",
+      "LengthKm": 5.5
+    }
+  ],
+  "Name": "Glasbachrennen",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 50.82736,
+  "Longitude": 10.35222,
+  "NotInGameSelector": false
+}

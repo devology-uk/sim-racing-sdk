@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 2",
+  "GameId": 1747,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Corvette C6.R ZR1",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 441,
+  "WeightWithDriverKg": 1250
+}

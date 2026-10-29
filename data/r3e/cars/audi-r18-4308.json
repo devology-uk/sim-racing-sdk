@@ -1,0 +1,12 @@
+{
+  "Class": "P1",
+  "GameId": 4308,
+  "Manufacturer": "Audi",
+  "Name": "Audi R18",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.7,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 405,
+  "WeightWithDriverKg": 935
+}

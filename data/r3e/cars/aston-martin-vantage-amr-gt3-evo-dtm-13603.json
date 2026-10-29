@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2026",
+  "GameId": 13603,
+  "Manufacturer": "Aston Martin",
+  "Name": "Aston Martin Vantage AMR GT3 EVO DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.0,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 491,
+  "WeightWithDriverKg": 1390
+}

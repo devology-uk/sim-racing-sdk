@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 2",
+  "GameId": 2410,
+  "Manufacturer": "Cadillac",
+  "Name": "Cadillac CTS-V.R",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.2,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 491,
+  "WeightWithDriverKg": 1360
+}

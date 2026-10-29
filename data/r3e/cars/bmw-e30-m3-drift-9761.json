@@ -1,0 +1,12 @@
+{
+  "Class": "Drift",
+  "GameId": 9761,
+  "Manufacturer": "BMW",
+  "Name": "BMW E30 M3 Drift",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 547,
+  "WeightWithDriverKg": 1391
+}

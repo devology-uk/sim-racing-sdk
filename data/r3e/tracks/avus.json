@@ -1,0 +1,23 @@
+{
+  "GameId": 12419,
+  "Layouts": [
+    {
+      "GameId": 12420,
+      "GridSize": 36,
+      "Name": "1998",
+      "LengthKm": 2.66
+    },
+    {
+      "GameId": 12500,
+      "GridSize": 36,
+      "Name": "1994",
+      "LengthKm": 2.639
+    }
+  ],
+  "Name": "AVUS",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 52.48,
+  "Longitude": 13.254,
+  "NotInGameSelector": false
+}

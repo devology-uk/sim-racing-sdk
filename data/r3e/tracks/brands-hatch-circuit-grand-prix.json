@@ -1,0 +1,17 @@
+{
+  "GameId": 9472,
+  "Layouts": [
+    {
+      "GameId": 9473,
+      "GridSize": 34,
+      "Name": "Grand Prix",
+      "LengthKm": 3.908
+    }
+  ],
+  "Name": "Brands Hatch Circuit - Grand Prix",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "Latitude": 51.35694,
+  "Longitude": 0.26306,
+  "NotInGameSelector": false
+}

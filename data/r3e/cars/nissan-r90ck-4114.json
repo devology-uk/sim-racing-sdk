@@ -1,0 +1,12 @@
+{
+  "Class": "Group C",
+  "GameId": 4114,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan R90CK",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 672,
+  "WeightWithDriverKg": 1033
+}

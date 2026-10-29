@@ -1,0 +1,35 @@
+{
+  "GameId": 1771,
+  "Layouts": [
+    {
+      "GameId": 1778,
+      "GridSize": 46,
+      "Name": "Grand Prix",
+      "LengthKm": 4.69
+    },
+    {
+      "GameId": 1783,
+      "GridSize": 46,
+      "Name": "Moto",
+      "LengthKm": 4.15
+    },
+    {
+      "GameId": 1784,
+      "GridSize": 46,
+      "Name": "Chicane",
+      "LengthKm": 3.88
+    },
+    {
+      "GameId": 1785,
+      "GridSize": 46,
+      "Name": "Short",
+      "LengthKm": 3.885
+    }
+  ],
+  "Name": "Autodromo Internacional do Algarve",
+  "Country": "Portugal",
+  "CountryCode": "PRT",
+  "Latitude": 37.22694,
+  "Longitude": -8.62667,
+  "NotInGameSelector": false
+}

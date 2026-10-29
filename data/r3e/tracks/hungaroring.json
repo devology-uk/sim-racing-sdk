@@ -1,0 +1,17 @@
+{
+  "GameId": 1865,
+  "Layouts": [
+    {
+      "GameId": 1866,
+      "GridSize": 48,
+      "Name": "Grand Prix",
+      "LengthKm": 4.381
+    }
+  ],
+  "Name": "Hungaroring",
+  "Country": "Hungary",
+  "CountryCode": "HUN",
+  "Latitude": 47.57889,
+  "Longitude": 19.24861,
+  "NotInGameSelector": false
+}

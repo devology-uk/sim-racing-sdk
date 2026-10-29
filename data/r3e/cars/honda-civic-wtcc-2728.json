@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2013",
+  "GameId": 2728,
+  "Manufacturer": "Honda",
+  "Name": "Honda Civic WTCC",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 294,
+  "WeightWithDriverKg": 1170
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2021",
+  "GameId": 11589,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-AMG GT3 2020",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 514,
+  "WeightWithDriverKg": 1418
+}

@@ -1,0 +1,47 @@
+{
+  "GameId": 8703,
+  "Layouts": [
+    {
+      "GameId": 8704,
+      "GridSize": 32,
+      "Name": "Grand Prix",
+      "LengthKm": 5.344
+    },
+    {
+      "GameId": 9040,
+      "GridSize": 32,
+      "Name": "Motorcycle Grand Prix",
+      "LengthKm": 5.078
+    },
+    {
+      "GameId": 9041,
+      "GridSize": 32,
+      "Name": "National",
+      "LengthKm": 2.646
+    },
+    {
+      "GameId": 9042,
+      "GridSize": 32,
+      "Name": "Motorcycle National",
+      "LengthKm": 2.379
+    },
+    {
+      "GameId": 9043,
+      "GridSize": 32,
+      "Name": "Fast Circuit",
+      "LengthKm": 4.862
+    },
+    {
+      "GameId": 9483,
+      "GridSize": 32,
+      "Name": "WTCR",
+      "LengthKm": 5.627
+    }
+  ],
+  "Name": "Motorland Aragón",
+  "Country": "Spain",
+  "CountryCode": "ESP",
+  "Latitude": 41.07861,
+  "Longitude": -0.20333,
+  "NotInGameSelector": false
+}

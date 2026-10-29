@@ -1,0 +1,23 @@
+{
+  "GameId": 6053,
+  "Layouts": [
+    {
+      "GameId": 6055,
+      "GridSize": 30,
+      "Name": "Long",
+      "LengthKm": 1.738
+    },
+    {
+      "GameId": 6056,
+      "GridSize": 30,
+      "Name": "Short",
+      "LengthKm": 1.281
+    }
+  ],
+  "Name": "Silverstone Circuit - Stowe Circuit",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "Latitude": 52.07861,
+  "Longitude": -1.01694,
+  "NotInGameSelector": false
+}

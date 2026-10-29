@@ -1,0 +1,29 @@
+{
+  "GameId": 1677,
+  "Layouts": [
+    {
+      "GameId": 1678,
+      "GridSize": 32,
+      "Name": "Grand Prix",
+      "LengthKm": 4.307
+    },
+    {
+      "GameId": 1680,
+      "GridSize": 32,
+      "Name": "National",
+      "LengthKm": 2.887
+    },
+    {
+      "GameId": 1679,
+      "GridSize": 32,
+      "Name": "Club",
+      "LengthKm": 2.51
+    }
+  ],
+  "Name": "Circuit Zandvoort - 2019",
+  "Country": "Netherlands",
+  "CountryCode": "NLD",
+  "Latitude": 52.38889,
+  "Longitude": 4.54083,
+  "NotInGameSelector": false
+}

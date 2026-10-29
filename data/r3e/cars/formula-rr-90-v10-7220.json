@@ -1,0 +1,12 @@
+{
+  "Class": "FR X-90 Cup",
+  "GameId": 7220,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula RR 90 V10",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 616,
+  "WeightWithDriverKg": 560
+}

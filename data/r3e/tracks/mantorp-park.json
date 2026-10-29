@@ -1,0 +1,23 @@
+{
+  "GameId": 6009,
+  "Layouts": [
+    {
+      "GameId": 6010,
+      "GridSize": 36,
+      "Name": "Long Circuit",
+      "LengthKm": 3.0
+    },
+    {
+      "GameId": 6167,
+      "GridSize": 36,
+      "Name": "Short Circuit",
+      "LengthKm": 2.4
+    }
+  ],
+  "Name": "Mantorp Park",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 58.37194,
+  "Longitude": 15.28278,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 9644,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes AMG GT4 2020",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 387,
+  "WeightWithDriverKg": 1545
+}

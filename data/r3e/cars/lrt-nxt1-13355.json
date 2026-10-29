@@ -1,0 +1,12 @@
+{
+  "Class": "NXT Gen Cup",
+  "GameId": 13355,
+  "Manufacturer": "Lestrup Racing Team",
+  "Name": "LRT NXT1",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 165,
+  "WeightWithDriverKg": 1233
+}

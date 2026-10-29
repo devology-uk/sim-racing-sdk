@@ -1,0 +1,41 @@
+{
+  "GameId": 7818,
+  "Layouts": [
+    {
+      "GameId": 7819,
+      "GridSize": 40,
+      "Name": "Gesamtstrecke",
+      "LengthKm": 4.274
+    },
+    {
+      "GameId": 8069,
+      "GridSize": 40,
+      "Name": "Gesamtstrecke Schikane",
+      "LengthKm": 4.3
+    },
+    {
+      "GameId": 8070,
+      "GridSize": 32,
+      "Name": "Ostschleife",
+      "LengthKm": 2.4
+    },
+    {
+      "GameId": 8071,
+      "GridSize": 32,
+      "Name": "Ostschleife Schikane",
+      "LengthKm": 2.425
+    },
+    {
+      "GameId": 8095,
+      "GridSize": 24,
+      "Name": "Westschleife",
+      "LengthKm": 1.845
+    }
+  ],
+  "Name": "Bilster Berg",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 51.79222,
+  "Longitude": 9.06689,
+  "NotInGameSelector": false
+}

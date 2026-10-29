@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2019",
+  "GameId": 7856,
+  "Manufacturer": "Hyundai",
+  "Name": "Hyundai i30 N TCR",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 329,
+  "WeightWithDriverKg": 1325
+}

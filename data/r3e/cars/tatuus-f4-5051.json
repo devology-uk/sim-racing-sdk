@@ -1,0 +1,12 @@
+{
+  "Class": "Tatuus F4 Cup",
+  "GameId": 5051,
+  "Manufacturer": "Tatuus",
+  "Name": "Tatuus F4",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.4,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 174,
+  "WeightWithDriverKg": 570
+}

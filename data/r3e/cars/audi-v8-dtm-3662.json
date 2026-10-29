@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1992",
+  "GameId": 3662,
+  "Manufacturer": "Audi",
+  "Name": "Audi V8 DTM",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": 3.6,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 461,
+  "WeightWithDriverKg": 1380
+}

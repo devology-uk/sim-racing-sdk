@@ -1,0 +1,17 @@
+{
+  "GameId": 12936,
+  "Layouts": [
+    {
+      "GameId": 12938,
+      "GridSize": 36,
+      "Name": "Full Circuit",
+      "LengthKm": 2.784
+    }
+  ],
+  "Name": "Alemannenring",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 47.75556,
+  "Longitude": 8.87361,
+  "NotInGameSelector": false
+}

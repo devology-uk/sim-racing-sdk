@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2015",
+  "GameId": 4557,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan GT-R GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 560,
+  "WeightWithDriverKg": 1400
+}

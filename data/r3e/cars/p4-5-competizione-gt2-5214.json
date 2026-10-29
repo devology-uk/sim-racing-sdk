@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 2",
+  "GameId": 5214,
+  "Manufacturer": "P4/5",
+  "Name": "P4-5 Competizione GT2",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 443,
+  "WeightWithDriverKg": 1230
+}

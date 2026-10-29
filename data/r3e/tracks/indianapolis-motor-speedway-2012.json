@@ -1,0 +1,23 @@
+{
+  "GameId": 1851,
+  "Layouts": [
+    {
+      "GameId": 1852,
+      "GridSize": 46,
+      "Name": "Grand Prix",
+      "LengthKm": 4.078
+    },
+    {
+      "GameId": 2014,
+      "GridSize": 46,
+      "Name": "Moto",
+      "LengthKm": 4.218
+    }
+  ],
+  "Name": "Indianapolis Motor Speedway - 2012",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 39.795,
+  "Longitude": -86.23472,
+  "NotInGameSelector": false
+}

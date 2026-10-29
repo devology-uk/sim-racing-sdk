@@ -1,0 +1,12 @@
+{
+  "Class": "P2",
+  "GameId": 1827,
+  "Manufacturer": "Radical",
+  "Name": "Radical SR9 AER",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 390,
+  "WeightWithDriverKg": 970
+}

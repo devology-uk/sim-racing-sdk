@@ -1,0 +1,23 @@
+{
+  "GameId": 12111,
+  "Layouts": [
+    {
+      "GameId": 12112,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 6.789
+    },
+    {
+      "GameId": 12236,
+      "GridSize": 36,
+      "Name": "Short",
+      "LengthKm": 2.638
+    }
+  ],
+  "Name": "Hockenheimring - 2001",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 49.32778,
+  "Longitude": 8.56556,
+  "NotInGameSelector": false
+}

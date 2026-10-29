@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 3754,
+  "Manufacturer": "Ford",
+  "Name": "Ford GT GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 518,
+  "WeightWithDriverKg": 1325
+}

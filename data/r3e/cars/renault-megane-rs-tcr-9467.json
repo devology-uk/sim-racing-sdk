@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2020",
+  "GameId": 9467,
+  "Manufacturer": "Renault",
+  "Name": "Renault Mégane RS TCR",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.8,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 325,
+  "WeightWithDriverKg": 1315
+}

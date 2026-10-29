@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2017",
+  "GameId": 6310,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet RML Cruze TC1 2017",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 356,
+  "WeightWithDriverKg": 1110
+}

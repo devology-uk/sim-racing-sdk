@@ -1,0 +1,29 @@
+{
+  "GameId": 2472,
+  "Layouts": [
+    {
+      "GameId": 2473,
+      "GridSize": 36,
+      "Name": "Sprint",
+      "LengthKm": 2.555
+    },
+    {
+      "GameId": 3383,
+      "GridSize": 36,
+      "Name": "Full",
+      "LengthKm": 3.955
+    },
+    {
+      "GameId": 3683,
+      "GridSize": 36,
+      "Name": "FIM",
+      "LengthKm": 3.931
+    }
+  ],
+  "Name": "Moscow Raceway",
+  "Country": "Russia",
+  "CountryCode": "RUS",
+  "Latitude": 55.99606,
+  "Longitude": 36.26836,
+  "NotInGameSelector": false
+}

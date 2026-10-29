@@ -1,0 +1,47 @@
+{
+  "GameId": 262,
+  "Layouts": [
+    {
+      "GameId": 263,
+      "GridSize": 38,
+      "Name": "Grand Prix",
+      "LengthKm": 3.793
+    },
+    {
+      "GameId": 266,
+      "GridSize": 38,
+      "Name": "Bridge",
+      "LengthKm": 3.356
+    },
+    {
+      "GameId": 264,
+      "GridSize": 38,
+      "Name": "Classic",
+      "LengthKm": 3.84
+    },
+    {
+      "GameId": 265,
+      "GridSize": 38,
+      "Name": "Classic Sprint",
+      "LengthKm": 3.628
+    },
+    {
+      "GameId": 267,
+      "GridSize": 38,
+      "Name": "National",
+      "LengthKm": 3.604
+    },
+    {
+      "GameId": 10414,
+      "GridSize": 12,
+      "Name": "Drift Area",
+      "LengthKm": 3.356
+    }
+  ],
+  "Name": "RaceRoom Raceway",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 45.5,
+  "Longitude": 6.5,
+  "NotInGameSelector": false
+}

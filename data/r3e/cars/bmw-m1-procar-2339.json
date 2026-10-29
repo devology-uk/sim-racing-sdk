@@ -1,0 +1,12 @@
+{
+  "Class": "Procar",
+  "GameId": 2339,
+  "Manufacturer": "BMW",
+  "Name": "BMW M1 Procar",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.5,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 448,
+  "WeightWithDriverKg": 1130
+}

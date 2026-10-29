@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2017",
+  "GameId": 6321,
+  "Manufacturer": "Honda",
+  "Name": "Honda Civic WTCC 2017",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 364,
+  "WeightWithDriverKg": 1170
+}

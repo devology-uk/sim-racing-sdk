@@ -1,0 +1,12 @@
+{
+  "Class": "FRJ Cup",
+  "GameId": 4865,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula RaceRoom Junior",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 120,
+  "WeightWithDriverKg": 500
+}

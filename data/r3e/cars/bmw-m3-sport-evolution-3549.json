@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1992",
+  "GameId": 3549,
+  "Manufacturer": "BMW",
+  "Name": "BMW M3 Sport Evolution",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 383,
+  "WeightWithDriverKg": 1045
+}

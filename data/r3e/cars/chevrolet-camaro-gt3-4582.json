@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2015",
+  "GameId": 4582,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Camaro GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 7.9,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 602,
+  "WeightWithDriverKg": 1375
+}

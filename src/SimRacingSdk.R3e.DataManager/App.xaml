@@ -1,0 +1,21 @@
+<shared:DataManagerApplication x:Class="SimRacingSdk.R3e.DataManager.App"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:shared="clr-namespace:SimRacingSdk.DataManager.Shared;assembly=SimRacingSdk.DataManager.Shared"
+                               xmlns:cars="clr-namespace:SimRacingSdk.R3e.DataManager.Cars"
+                               xmlns:tracks="clr-namespace:SimRacingSdk.R3e.DataManager.Tracks">
+    <shared:DataManagerApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SimRacingSdk.DataManager.Shared;component/Themes/DataManagerResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type cars:CarsViewModel}">
+                <cars:CarsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type tracks:TracksViewModel}">
+                <tracks:TracksView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </shared:DataManagerApplication.Resources>
+</shared:DataManagerApplication>

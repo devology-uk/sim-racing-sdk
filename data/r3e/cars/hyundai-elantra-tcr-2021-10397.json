@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2021",
+  "GameId": 10397,
+  "Manufacturer": "Hyundai",
+  "Name": "Hyundai Elantra TCR 2021",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 334,
+  "WeightWithDriverKg": 1365
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2013",
+  "GameId": 2413,
+  "Manufacturer": "Mercedes",
+  "Name": "DTM Mercedes AMG C-Coupé",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 471,
+  "WeightWithDriverKg": 1120
+}

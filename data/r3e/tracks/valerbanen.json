@@ -1,0 +1,17 @@
+{
+  "GameId": 9464,
+  "Layouts": [
+    {
+      "GameId": 9465,
+      "GridSize": 35,
+      "Name": "Full Circuit",
+      "LengthKm": 2.3
+    }
+  ],
+  "Name": "Vålerbanen",
+  "Country": "Norway",
+  "CountryCode": "NOR",
+  "Latitude": 60.70333,
+  "Longitude": 11.81056,
+  "NotInGameSelector": false
+}

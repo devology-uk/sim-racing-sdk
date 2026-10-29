@@ -1,0 +1,12 @@
+{
+  "Class": "Hypercars",
+  "GameId": 13137,
+  "Manufacturer": "Lamborghini",
+  "Name": "Lamborghini SC63",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 585,
+  "WeightWithDriverKg": 1117
+}

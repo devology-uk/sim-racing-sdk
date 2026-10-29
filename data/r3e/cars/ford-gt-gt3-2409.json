@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2013",
+  "GameId": 2409,
+  "Manufacturer": "Ford",
+  "Name": "Ford GT GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 518,
+  "WeightWithDriverKg": 1325
+}

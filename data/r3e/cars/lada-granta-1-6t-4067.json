@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2014",
+  "GameId": 4067,
+  "Manufacturer": "Lada",
+  "Name": "LADA Granta 1.6T",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 351,
+  "WeightWithDriverKg": 1100
+}

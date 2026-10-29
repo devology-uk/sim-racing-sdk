@@ -1,0 +1,12 @@
+{
+  "Class": "Touring Cars Cup",
+  "GameId": 8698,
+  "Manufacturer": "Lada",
+  "Name": "Lada Vesta",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 341,
+  "WeightWithDriverKg": 1345
+}

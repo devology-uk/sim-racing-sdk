@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 13049,
+  "Manufacturer": "Alfa Romeo",
+  "Name": "Alfa Romeo 156 Super Touring",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2.0,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 291,
+  "WeightWithDriverKg": 1055
+}

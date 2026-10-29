@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 2533,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes-Benz SLS AMG GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.3,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 504,
+  "WeightWithDriverKg": 1405
+}

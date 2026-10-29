@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 13398,
+  "Manufacturer": "Alpine",
+  "Name": "Alpine A110 GT4+",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.8,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 324,
+  "WeightWithDriverKg": 1255
+}

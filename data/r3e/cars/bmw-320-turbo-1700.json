@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 1700,
+  "Manufacturer": "BMW",
+  "Name": "BMW 320 Turbo",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.4,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 475,
+  "WeightWithDriverKg": 958
+}

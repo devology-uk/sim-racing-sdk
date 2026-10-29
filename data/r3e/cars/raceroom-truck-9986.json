@@ -1,0 +1,12 @@
+{
+  "Class": "Truck Racing",
+  "GameId": 9986,
+  "Manufacturer": "RaceRoom",
+  "Name": "RaceRoom Truck",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 12.4,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 1034,
+  "WeightWithDriverKg": 5300
+}

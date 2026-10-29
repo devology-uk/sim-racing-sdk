@@ -1,0 +1,12 @@
+{
+  "Class": "German Nationals",
+  "GameId": 1797,
+  "Manufacturer": "McLaren",
+  "Name": "McLaren-Mercedes SLR 722 GT",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 647,
+  "WeightWithDriverKg": 1380
+}

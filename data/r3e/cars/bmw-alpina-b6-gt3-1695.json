@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 1695,
+  "Manufacturer": "Alpina",
+  "Name": "BMW Alpina B6 GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 478,
+  "WeightWithDriverKg": 1325
+}

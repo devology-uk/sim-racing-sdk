@@ -1,0 +1,12 @@
+{
+  "Class": "P2",
+  "GameId": 2333,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Daytona Prototype",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 625,
+  "WeightWithDriverKg": 1123
+}

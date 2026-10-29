@@ -1,0 +1,12 @@
+{
+  "Class": "GT2",
+  "GameId": 8242,
+  "Manufacturer": "Porsche",
+  "Name": "Porsche 911 GT2 RS Clubsport",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 657,
+  "WeightWithDriverKg": 1475
+}

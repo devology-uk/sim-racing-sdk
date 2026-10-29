@@ -1,0 +1,12 @@
+{
+  "Class": "Drift",
+  "GameId": 10604,
+  "Manufacturer": "BMW",
+  "Name": "BMW G82 M4 Drift",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 668,
+  "WeightWithDriverKg": 1584
+}

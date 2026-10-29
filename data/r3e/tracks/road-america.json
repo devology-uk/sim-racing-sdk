@@ -1,0 +1,17 @@
+{
+  "GameId": 5275,
+  "Layouts": [
+    {
+      "GameId": 5276,
+      "GridSize": 64,
+      "Name": "Grand Prix",
+      "LengthKm": 6.514
+    }
+  ],
+  "Name": "Road America",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 43.7975,
+  "Longitude": -87.98972,
+  "NotInGameSelector": false
+}

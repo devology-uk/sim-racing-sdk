@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2018",
+  "GameId": 7005,
+  "Manufacturer": "CUPRA",
+  "Name": "CUPRA TCR",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 327,
+  "WeightWithDriverKg": 1305
+}

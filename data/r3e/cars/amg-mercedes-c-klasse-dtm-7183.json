@@ -1,0 +1,12 @@
+{
+  "Class": "C-Klasse DTM 2005",
+  "GameId": 7183,
+  "Manufacturer": "Mercedes",
+  "Name": "AMG-Mercedes C-Klasse DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 454,
+  "WeightWithDriverKg": 1150
+}

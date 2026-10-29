@@ -1,0 +1,17 @@
+{
+  "GameId": 12394,
+  "Layouts": [
+    {
+      "GameId": 12395,
+      "GridSize": 36,
+      "Name": "Full Circuit",
+      "LengthKm": 2.72
+    }
+  ],
+  "Name": "Fliegerhorst Diepholz",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 52.5855,
+  "Longitude": 8.34067,
+  "NotInGameSelector": false
+}

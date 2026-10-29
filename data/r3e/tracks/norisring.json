@@ -1,0 +1,17 @@
+{
+  "GameId": 2517,
+  "Layouts": [
+    {
+      "GameId": 2518,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 2.3
+    }
+  ],
+  "Name": "Norisring",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 49.43139,
+  "Longitude": 11.12028,
+  "NotInGameSelector": false
+}

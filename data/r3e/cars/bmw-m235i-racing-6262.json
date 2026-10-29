@@ -1,0 +1,12 @@
+{
+  "Class": "BMW M235i Racing Cup",
+  "GameId": 6262,
+  "Manufacturer": "BMW",
+  "Name": "BMW M235i Racing",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 319,
+  "WeightWithDriverKg": 1565
+}

@@ -1,0 +1,17 @@
+{
+  "GameId": 7111,
+  "Layouts": [
+    {
+      "GameId": 7112,
+      "GridSize": 32,
+      "Name": "Grand Prix",
+      "LengthKm": 4.222
+    }
+  ],
+  "Name": "Autodrom Most",
+  "Country": "Czechia",
+  "CountryCode": "CZE",
+  "Latitude": 50.5225,
+  "Longitude": 13.60056,
+  "NotInGameSelector": false
+}

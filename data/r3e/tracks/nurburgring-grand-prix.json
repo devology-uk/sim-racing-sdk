@@ -1,0 +1,41 @@
+{
+  "GameId": 1690,
+  "Layouts": [
+    {
+      "GameId": 1691,
+      "GridSize": 46,
+      "Name": "Grand Prix",
+      "LengthKm": 5.148
+    },
+    {
+      "GameId": 2010,
+      "GridSize": 46,
+      "Name": "Grand Prix Fast Chicane",
+      "LengthKm": 5.137
+    },
+    {
+      "GameId": 2011,
+      "GridSize": 46,
+      "Name": "Sprint Fast Chicane",
+      "LengthKm": 3.619
+    },
+    {
+      "GameId": 3377,
+      "GridSize": 46,
+      "Name": "Sprint",
+      "LengthKm": 3.629
+    },
+    {
+      "GameId": 9847,
+      "GridSize": 32,
+      "Name": "Müllenbachschleife",
+      "LengthKm": 1.489
+    }
+  ],
+  "Name": "Nürburgring - Grand Prix",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 50.33556,
+  "Longitude": 6.9475,
+  "NotInGameSelector": false
+}

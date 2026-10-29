@@ -1,0 +1,17 @@
+{
+  "GameId": 11904,
+  "Layouts": [
+    {
+      "GameId": 11905,
+      "GridSize": 34,
+      "Name": "Grand Prix",
+      "LengthKm": 2.76
+    }
+  ],
+  "Name": "Circuit de Pau-Ville",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 43.2925,
+  "Longitude": -0.36306,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 10744,
+  "Manufacturer": "McLaren",
+  "Name": "McLaren 570s GT4",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 401,
+  "WeightWithDriverKg": 1540
+}

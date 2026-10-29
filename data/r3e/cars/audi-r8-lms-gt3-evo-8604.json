@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 8604,
+  "Manufacturer": "Audi",
+  "Name": "Audi R8 LMS GT3 EVO",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 530,
+  "WeightWithDriverKg": 1432
+}

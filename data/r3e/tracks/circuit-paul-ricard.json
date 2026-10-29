@@ -1,0 +1,41 @@
+{
+  "GameId": 2866,
+  "Layouts": [
+    {
+      "GameId": 2867,
+      "GridSize": 44,
+      "Name": "Solution 3C",
+      "LengthKm": 3.841
+    },
+    {
+      "GameId": 4246,
+      "GridSize": 44,
+      "Name": "Solution 1A-V2",
+      "LengthKm": 5.752
+    },
+    {
+      "GameId": 4247,
+      "GridSize": 44,
+      "Name": "Solution 1C-V2",
+      "LengthKm": 5.842
+    },
+    {
+      "GameId": 4248,
+      "GridSize": 44,
+      "Name": "Solution 2A short",
+      "LengthKm": 3.523
+    },
+    {
+      "GameId": 11909,
+      "GridSize": 44,
+      "Name": "Solution 1A",
+      "LengthKm": 5.752
+    }
+  ],
+  "Name": "Circuit Paul Ricard",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 43.25056,
+  "Longitude": 5.79167,
+  "NotInGameSelector": false
+}

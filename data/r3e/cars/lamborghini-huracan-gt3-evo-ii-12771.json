@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 12771,
+  "Manufacturer": "Lamborghini",
+  "Name": "Lamborghini Huracán GT3 EVO II",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 516,
+  "WeightWithDriverKg": 1415
+}

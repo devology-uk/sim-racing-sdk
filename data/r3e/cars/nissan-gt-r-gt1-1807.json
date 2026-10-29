@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 1",
+  "GameId": 1807,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan GT-R GT1",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 583,
+  "WeightWithDriverKg": 1330
+}

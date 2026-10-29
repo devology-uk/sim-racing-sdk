@@ -1,0 +1,29 @@
+{
+  "GameId": 9942,
+  "Layouts": [
+    {
+      "GameId": 9943,
+      "GridSize": 46,
+      "Name": "Road Course",
+      "LengthKm": 3.925
+    },
+    {
+      "GameId": 9957,
+      "GridSize": 46,
+      "Name": "Historic",
+      "LengthKm": 4.078
+    },
+    {
+      "GameId": 9958,
+      "GridSize": 46,
+      "Name": "Oval",
+      "LengthKm": 4.023
+    }
+  ],
+  "Name": "Indianapolis Motor Speedway - Modern",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 39.795,
+  "Longitude": -86.23472,
+  "NotInGameSelector": false
+}

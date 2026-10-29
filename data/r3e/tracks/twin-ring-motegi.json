@@ -1,0 +1,29 @@
+{
+  "GameId": 6657,
+  "Layouts": [
+    {
+      "GameId": 6658,
+      "GridSize": 42,
+      "Name": "Road Course",
+      "LengthKm": 4.8
+    },
+    {
+      "GameId": 7026,
+      "GridSize": 42,
+      "Name": "West Course",
+      "LengthKm": 1.4
+    },
+    {
+      "GameId": 7027,
+      "GridSize": 32,
+      "Name": "East Course",
+      "LengthKm": 3.4
+    }
+  ],
+  "Name": "Twin Ring Motegi",
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "Latitude": 36.53333,
+  "Longitude": 140.22833,
+  "NotInGameSelector": false
+}

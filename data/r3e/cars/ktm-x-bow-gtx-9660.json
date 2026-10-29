@@ -1,0 +1,12 @@
+{
+  "Class": "KTM GTX",
+  "GameId": 9660,
+  "Manufacturer": "KTM",
+  "Name": "KTM X-BOW GTX",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 488,
+  "WeightWithDriverKg": 1128
+}

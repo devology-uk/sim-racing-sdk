@@ -1,0 +1,12 @@
+{
+  "Class": "GTO Classics",
+  "GameId": 2405,
+  "Manufacturer": "Audi",
+  "Name": "Audi 90 Quattro",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": 2.2,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 576,
+  "WeightWithDriverKg": 1286
+}

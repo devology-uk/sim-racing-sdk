@@ -1,0 +1,23 @@
+{
+  "GameId": 8074,
+  "Layouts": [
+    {
+      "GameId": 8075,
+      "GridSize": 30,
+      "Name": "Grand Prix",
+      "LengthKm": 3.2
+    },
+    {
+      "GameId": 8327,
+      "GridSize": 30,
+      "Name": "East circuit",
+      "LengthKm": 1.54
+    }
+  ],
+  "Name": "Zhejiang International Circuit",
+  "Country": "China",
+  "CountryCode": "CHN",
+  "Latitude": 30.03448,
+  "Longitude": 120.46604,
+  "NotInGameSelector": false
+}

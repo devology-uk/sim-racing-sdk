@@ -1,0 +1,12 @@
+{
+  "Class": "Mazda MX-5 Cup",
+  "GameId": 10914,
+  "Manufacturer": "Mazda",
+  "Name": "Mazda MX-5 CUP 2019 ND2",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 172,
+  "WeightWithDriverKg": 1095
+}

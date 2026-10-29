@@ -1,0 +1,12 @@
+{
+  "Class": "Group 2",
+  "GameId": 8498,
+  "Manufacturer": "Volkswagen",
+  "Name": "Volkswagen Scirocco Gr2",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 156,
+  "WeightWithDriverKg": 855
+}

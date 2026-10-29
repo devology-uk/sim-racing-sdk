@@ -1,0 +1,23 @@
+{
+  "GameId": 1681,
+  "Layouts": [
+    {
+      "GameId": 1682,
+      "GridSize": 1,
+      "Name": "Full Run",
+      "LengthKm": 10.3
+    },
+    {
+      "GameId": 2181,
+      "GridSize": 1,
+      "Name": "Reverse",
+      "LengthKm": 10.3
+    }
+  ],
+  "Name": "Lakeview Hillclimb",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 58.25,
+  "Longitude": 13.05,
+  "NotInGameSelector": false
+}

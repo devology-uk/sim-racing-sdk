@@ -1,0 +1,29 @@
+{
+  "GameId": 1840,
+  "Layouts": [
+    {
+      "GameId": 1841,
+      "GridSize": 46,
+      "Name": "Grand Prix",
+      "LengthKm": 5.807
+    },
+    {
+      "GameId": 2012,
+      "GridSize": 46,
+      "Name": "East Course",
+      "LengthKm": 2.243
+    },
+    {
+      "GameId": 2013,
+      "GridSize": 34,
+      "Name": "West Course",
+      "LengthKm": 3.466
+    }
+  ],
+  "Name": "Suzuka International Racing Course",
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "Latitude": 34.84306,
+  "Longitude": 136.54111,
+  "NotInGameSelector": false
+}

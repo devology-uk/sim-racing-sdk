@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2013",
+  "GameId": 2804,
+  "Manufacturer": "SEAT",
+  "Name": "SEAT León WTCC",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 284,
+  "WeightWithDriverKg": 1130
+}

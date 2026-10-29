@@ -1,0 +1,29 @@
+{
+  "GameId": 2521,
+  "Layouts": [
+    {
+      "GameId": 2556,
+      "GridSize": 52,
+      "Name": "Grand Prix Circuit",
+      "LengthKm": 4.326
+    },
+    {
+      "GameId": 5794,
+      "GridSize": 52,
+      "Name": "Südschleife National Circuit",
+      "LengthKm": 2.336
+    },
+    {
+      "GameId": 11296,
+      "GridSize": 52,
+      "Name": "Moto",
+      "LengthKm": 4.396
+    }
+  ],
+  "Name": "Red Bull Ring Spielberg",
+  "Country": "Austria",
+  "CountryCode": "AUT",
+  "Latitude": 47.21972,
+  "Longitude": 14.76472,
+  "NotInGameSelector": false
+}

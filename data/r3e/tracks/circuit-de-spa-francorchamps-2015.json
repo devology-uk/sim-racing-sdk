@@ -1,0 +1,29 @@
+{
+  "GameId": 3869,
+  "Layouts": [
+    {
+      "GameId": 3870,
+      "GridSize": 56,
+      "Name": "Grand Prix",
+      "LengthKm": null
+    },
+    {
+      "GameId": 4542,
+      "GridSize": 48,
+      "Name": "Classic",
+      "LengthKm": null
+    },
+    {
+      "GameId": 4543,
+      "GridSize": 100,
+      "Name": "Combined",
+      "LengthKm": null
+    }
+  ],
+  "Name": "Circuit de Spa-Francorchamps - 2015",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "Latitude": 50.43722,
+  "Longitude": 5.97139,
+  "NotInGameSelector": true
+}

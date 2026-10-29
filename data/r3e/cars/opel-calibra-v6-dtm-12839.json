@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1995",
+  "GameId": 12839,
+  "Manufacturer": "Opel",
+  "Name": "Opel Calibra V6 DTM",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 368,
+  "WeightWithDriverKg": 1110
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 12829,
+  "Manufacturer": "Volvo",
+  "Name": "Volvo S40 Super Touring",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 300,
+  "WeightWithDriverKg": 1065
+}

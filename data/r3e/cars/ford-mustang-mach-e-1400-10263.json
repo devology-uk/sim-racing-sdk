@@ -1,0 +1,12 @@
+{
+  "Class": "Ford Mustang Mach E",
+  "GameId": 10263,
+  "Manufacturer": "Ford",
+  "Name": "Ford Mustang Mach-E 1400",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 1053,
+  "WeightWithDriverKg": 2526
+}

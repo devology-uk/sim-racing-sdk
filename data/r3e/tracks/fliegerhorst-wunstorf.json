@@ -1,0 +1,17 @@
+{
+  "GameId": 13431,
+  "Layouts": [
+    {
+      "GameId": 13432,
+      "GridSize": 36,
+      "Name": "Full Circuit",
+      "LengthKm": 5.05
+    }
+  ],
+  "Name": "Fliegerhorst Wunstorf",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 52.45733,
+  "Longitude": 9.42717,
+  "NotInGameSelector": false
+}

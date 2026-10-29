@@ -1,0 +1,17 @@
+{
+  "GameId": 2020,
+  "Layouts": [
+    {
+      "GameId": 2026,
+      "GridSize": 40,
+      "Name": "Grand Prix",
+      "LengthKm": 4.241
+    }
+  ],
+  "Name": "Salzburgring",
+  "Country": "Austria",
+  "CountryCode": "AUT",
+  "Latitude": 47.82278,
+  "Longitude": 13.16944,
+  "NotInGameSelector": false
+}

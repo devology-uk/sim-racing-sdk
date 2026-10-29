@@ -1,0 +1,17 @@
+{
+  "GameId": 13424,
+  "Layouts": [
+    {
+      "GameId": 13425,
+      "GridSize": 36,
+      "Name": "Full Circuit",
+      "LengthKm": 3.745
+    }
+  ],
+  "Name": "Adria International Raceway - 2021",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 45.04417,
+  "Longitude": 12.1475,
+  "NotInGameSelector": false
+}

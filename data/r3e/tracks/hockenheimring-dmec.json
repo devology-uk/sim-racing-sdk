@@ -1,0 +1,17 @@
+{
+  "GameId": 10273,
+  "Layouts": [
+    {
+      "GameId": 10274,
+      "GridSize": 10,
+      "Name": "DMEC",
+      "LengthKm": null
+    }
+  ],
+  "Name": "Hockenheimring - DMEC",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 49.32778,
+  "Longitude": 8.56556,
+  "NotInGameSelector": true
+}

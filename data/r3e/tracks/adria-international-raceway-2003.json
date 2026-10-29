@@ -1,0 +1,17 @@
+{
+  "GameId": 13350,
+  "Layouts": [
+    {
+      "GameId": 13352,
+      "GridSize": 36,
+      "Name": "Full Circuit",
+      "LengthKm": 2.702
+    }
+  ],
+  "Name": "Adria International Raceway - 2003",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 45.04417,
+  "Longitude": 12.1475,
+  "NotInGameSelector": false
+}

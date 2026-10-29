@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 12556,
+  "Manufacturer": "BMW",
+  "Name": "BMW 320i E36 Super Touring",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 299,
+  "WeightWithDriverKg": 1080
+}

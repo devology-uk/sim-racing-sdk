@@ -1,0 +1,12 @@
+{
+  "Class": "FR X-17 Cup",
+  "GameId": 5821,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula Raceroom X-17",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 807,
+  "WeightWithDriverKg": 620
+}

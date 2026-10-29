@@ -1,0 +1,41 @@
+{
+  "GameId": 2467,
+  "Layouts": [
+    {
+      "GameId": 2468,
+      "GridSize": 36,
+      "Name": "DTM Short Course",
+      "LengthKm": 3.478
+    },
+    {
+      "GameId": 3291,
+      "GridSize": 36,
+      "Name": "Short Course",
+      "LengthKm": 3.41
+    },
+    {
+      "GameId": 6166,
+      "GridSize": 36,
+      "Name": "Grand Prix Course",
+      "LengthKm": 4.345
+    },
+    {
+      "GameId": 9055,
+      "GridSize": 36,
+      "Name": "DTM Grand Prix Course",
+      "LengthKm": 4.413
+    },
+    {
+      "GameId": 10328,
+      "GridSize": 36,
+      "Name": "GP Course Oval T1",
+      "LengthKm": 4.534
+    }
+  ],
+  "Name": "DEKRA Lausitzring - DEKRA Lausitzring",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 51.53333,
+  "Longitude": 13.91944,
+  "NotInGameSelector": false
+}

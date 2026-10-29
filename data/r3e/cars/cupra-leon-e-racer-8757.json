@@ -1,0 +1,12 @@
+{
+  "Class": "CUPRA Leon e-Racer",
+  "GameId": 8757,
+  "Manufacturer": "CUPRA",
+  "Name": "CUPRA Leon e-Racer",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 485,
+  "WeightWithDriverKg": 1680
+}

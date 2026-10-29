@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2013",
+  "GameId": 2924,
+  "Manufacturer": "BMW",
+  "Name": "BMW Z4 GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 519,
+  "WeightWithDriverKg": 1330
+}

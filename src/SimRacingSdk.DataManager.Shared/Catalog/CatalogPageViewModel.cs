@@ -69,6 +69,23 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
         this.RestoreSession();
     }
 
+    // For entities saved to the repository by something other than this page, e.g. an import from the game's own data.
+    protected void Reload()
+    {
+        var selectedId = this.SelectedItem?.Id;
+        this.entities.Clear();
+        this.entities.AddRange(this.repository.GetAll());
+
+        this.OnEntitiesChanged();
+        this.RefreshShownEntities(selectedId);
+    }
+
+    // For a change to what IsShown decides, e.g. a filter checkbox.
+    protected void RefreshShownEntities()
+    {
+        this.RefreshShownEntities(this.SelectedItem?.Id);
+    }
+
     protected abstract string GroupOf(TEntity entity);
     protected abstract IEnumerable<TEntity> Sort(IEnumerable<TEntity> unsorted);
 
@@ -85,6 +102,12 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
 
     protected virtual void OnItemRenamed(string originalId, string newId)
     {
+    }
+
+    // E.g. to hide entities the player can't pick in the game.
+    protected virtual bool IsShown(TEntity entity)
+    {
+        return true;
     }
 
     protected virtual string? ValidationProblem(TEntity entity)
@@ -200,9 +223,19 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
         this.OnItemRenamed(originalId, newId);
     }
 
+    private void RefreshShownEntities(string? selectedId)
+    {
+        this.RefreshGroups();
+        this.SelectedGroup = this.Groups.Contains(this.SelectedGroup ?? string.Empty)
+            ? this.SelectedGroup
+            : this.Groups.FirstOrDefault();
+        this.RefreshItems();
+        this.SelectedItem = this.Items.FirstOrDefault(item => item.Id == selectedId) ?? this.SelectedItem;
+    }
+
     private void RefreshGroups()
     {
-        var distinctGroups = this.entities.Select(this.GroupOf).Distinct().OrderBy(group => group);
+        var distinctGroups = this.entities.Where(this.IsShown).Select(this.GroupOf).Distinct().OrderBy(group => group);
 
         this.Groups.Clear();
         foreach(var group in distinctGroups)
@@ -215,9 +248,10 @@ public abstract partial class CatalogPageViewModel<TEntity, TEditor> : Observabl
     {
         this.Items.Clear();
 
+        var shownEntities = this.entities.Where(this.IsShown);
         var itemsToShow = this.IsByGroupMode
-            ? this.entities.Where(entity => this.GroupOf(entity) == this.SelectedGroup)
-            : this.entities;
+            ? shownEntities.Where(entity => this.GroupOf(entity) == this.SelectedGroup)
+            : shownEntities;
 
         foreach(var item in this.Sort(itemsToShow))
         {

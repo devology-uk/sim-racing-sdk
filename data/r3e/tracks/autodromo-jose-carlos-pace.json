@@ -1,0 +1,17 @@
+{
+  "GameId": 10462,
+  "Layouts": [
+    {
+      "GameId": 10463,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 4.309
+    }
+  ],
+  "Name": "Autódromo José Carlos Pace",
+  "Country": "Brazil",
+  "CountryCode": "BRA",
+  "Latitude": -23.70361,
+  "Longitude": -46.69972,
+  "NotInGameSelector": false
+}

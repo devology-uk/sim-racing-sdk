@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2014",
+  "GameId": 4046,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet RML Cruze TC1",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 356,
+  "WeightWithDriverKg": 1110
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2002",
+  "GameId": 13323,
+  "Manufacturer": "Opel",
+  "Name": "Opel Astra V8 Coupé",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 460,
+  "WeightWithDriverKg": 1080
+}

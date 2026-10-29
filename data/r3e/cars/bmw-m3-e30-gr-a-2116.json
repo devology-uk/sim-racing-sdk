@@ -1,0 +1,12 @@
+{
+  "Class": "Touring Classics",
+  "GameId": 2116,
+  "Manufacturer": "BMW",
+  "Name": "BMW M3 E30 Gr.A",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.3,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 284,
+  "WeightWithDriverKg": 1130
+}

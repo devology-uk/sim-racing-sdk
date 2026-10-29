@@ -1,0 +1,35 @@
+{
+  "GameId": 2812,
+  "Layouts": [
+    {
+      "GameId": 2813,
+      "GridSize": 32,
+      "Name": "Nordschleife",
+      "LengthKm": 20.83
+    },
+    {
+      "GameId": 4975,
+      "GridSize": 100,
+      "Name": "NLS",
+      "LengthKm": 24.433
+    },
+    {
+      "GameId": 5093,
+      "GridSize": 48,
+      "Name": "Tourist",
+      "LengthKm": 19.17
+    },
+    {
+      "GameId": 5095,
+      "GridSize": 100,
+      "Name": "24 Hours",
+      "LengthKm": 25.378
+    }
+  ],
+  "Name": "Nürburgring - Nordschleife",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 50.33556,
+  "Longitude": 6.9475,
+  "NotInGameSelector": false
+}

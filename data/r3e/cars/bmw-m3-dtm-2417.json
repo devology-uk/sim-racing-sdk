@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2013",
+  "GameId": 2417,
+  "Manufacturer": "BMW",
+  "Name": "BMW M3 DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 475,
+  "WeightWithDriverKg": 1120
+}

@@ -1,0 +1,17 @@
+{
+  "GameId": 1845,
+  "Layouts": [
+    {
+      "GameId": 1846,
+      "GridSize": 56,
+      "Name": "Mount Panorama",
+      "LengthKm": 6.213
+    }
+  ],
+  "Name": "Mount Panorama Circuit",
+  "Country": "Australia",
+  "CountryCode": "AUS",
+  "Latitude": -33.4475,
+  "Longitude": 149.55444,
+  "NotInGameSelector": false
+}

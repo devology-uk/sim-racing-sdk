@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 8201,
+  "Manufacturer": "Porsche",
+  "Name": "Porsche 718 Cayman GT4 Clubsport",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 376,
+  "WeightWithDriverKg": 1415
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 1",
+  "GameId": 1779,
+  "Manufacturer": "Ford",
+  "Name": "Ford GT GT1",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 552,
+  "WeightWithDriverKg": 1310
+}

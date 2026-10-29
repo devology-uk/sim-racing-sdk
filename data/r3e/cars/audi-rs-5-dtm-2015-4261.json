@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2015",
+  "GameId": 4261,
+  "Manufacturer": "Audi",
+  "Name": "Audi RS 5 DTM 2015",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 479,
+  "WeightWithDriverKg": 1120
+}

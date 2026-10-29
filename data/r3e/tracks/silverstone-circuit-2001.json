@@ -1,0 +1,29 @@
+{
+  "GameId": 12267,
+  "Layouts": [
+    {
+      "GameId": 12268,
+      "GridSize": 56,
+      "Name": "Grand Prix",
+      "LengthKm": 5.141
+    },
+    {
+      "GameId": 12389,
+      "GridSize": 56,
+      "Name": "National",
+      "LengthKm": 2.638
+    },
+    {
+      "GameId": 12390,
+      "GridSize": 56,
+      "Name": "Moto International",
+      "LengthKm": 3.619
+    }
+  ],
+  "Name": "Silverstone Circuit - 2001",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "Latitude": 52.07861,
+  "Longitude": -1.01694,
+  "NotInGameSelector": false
+}

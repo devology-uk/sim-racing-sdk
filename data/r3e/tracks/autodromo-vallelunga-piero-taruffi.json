@@ -1,0 +1,35 @@
+{
+  "GameId": 13186,
+  "Layouts": [
+    {
+      "GameId": 13187,
+      "GridSize": 37,
+      "Name": "International",
+      "LengthKm": 4.085
+    },
+    {
+      "GameId": 13338,
+      "GridSize": 37,
+      "Name": "Short",
+      "LengthKm": 1.684
+    },
+    {
+      "GameId": 13339,
+      "GridSize": 37,
+      "Name": "Chicane",
+      "LengthKm": 3.213
+    },
+    {
+      "GameId": 13340,
+      "GridSize": 37,
+      "Name": "Classic",
+      "LengthKm": 3.226
+    }
+  ],
+  "Name": "Autodromo Vallelunga Piero Taruffi",
+  "Country": "Italy",
+  "CountryCode": "ITA",
+  "Latitude": 42.15944,
+  "Longitude": 12.37,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,29 @@
+{
+  "GameId": 6340,
+  "Layouts": [
+    {
+      "GameId": 6341,
+      "GridSize": 38,
+      "Name": "Grand Prix",
+      "LengthKm": 5.543
+    },
+    {
+      "GameId": 6578,
+      "GridSize": 38,
+      "Name": "North",
+      "LengthKm": 2.706
+    },
+    {
+      "GameId": 6579,
+      "GridSize": 34,
+      "Name": "South",
+      "LengthKm": 2.609
+    }
+  ],
+  "Name": "Sepang International Circuit",
+  "Country": "Malaysia",
+  "CountryCode": "MYS",
+  "Latitude": 2.76083,
+  "Longitude": 101.73806,
+  "NotInGameSelector": false
+}

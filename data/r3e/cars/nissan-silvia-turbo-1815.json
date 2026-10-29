@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 1815,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan Silvia Turbo",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.1,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 488,
+  "WeightWithDriverKg": 1130
+}

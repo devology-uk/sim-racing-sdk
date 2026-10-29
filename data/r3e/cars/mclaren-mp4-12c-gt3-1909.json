@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 1909,
+  "Manufacturer": "McLaren",
+  "Name": "McLaren MP4-12C GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 505,
+  "WeightWithDriverKg": 1340
+}

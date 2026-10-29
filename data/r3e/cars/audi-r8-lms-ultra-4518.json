@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2015",
+  "GameId": 4518,
+  "Manufacturer": "Audi",
+  "Name": "Audi R8 LMS Ultra",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 529,
+  "WeightWithDriverKg": 1350
+}

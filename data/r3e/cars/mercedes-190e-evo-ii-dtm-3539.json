@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1992",
+  "GameId": 3539,
+  "Manufacturer": "Mercedes",
+  "Name": "Mercedes 190E Evo II DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 390,
+  "WeightWithDriverKg": 1060
+}

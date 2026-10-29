@@ -1,0 +1,12 @@
+{
+  "Class": "Porsche 944 Turbo Cup",
+  "GameId": 11561,
+  "Manufacturer": "Porsche",
+  "Name": "Porsche 944 Turbo Cup",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 240,
+  "WeightWithDriverKg": 1245
+}

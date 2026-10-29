@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2026",
+  "GameId": 13591,
+  "Manufacturer": "Ford",
+  "Name": "Ford Mustang GT3 EVO DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 526,
+  "WeightWithDriverKg": 1405
+}

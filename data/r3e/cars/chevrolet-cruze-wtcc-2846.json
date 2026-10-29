@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2013",
+  "GameId": 2846,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Cruze WTCC",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 299,
+  "WeightWithDriverKg": 1190
+}

@@ -1,0 +1,17 @@
+{
+  "GameId": 13532,
+  "Layouts": [
+    {
+      "GameId": 13533,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 3.058
+    }
+  ],
+  "Name": "WeatherTech Raceway Laguna Seca - 1987",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 36.58444,
+  "Longitude": -121.75333,
+  "NotInGameSelector": false
+}

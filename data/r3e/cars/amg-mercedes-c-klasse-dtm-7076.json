@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1995",
+  "GameId": 7076,
+  "Manufacturer": "Mercedes",
+  "Name": "AMG-Mercedes C-Klasse DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 400,
+  "WeightWithDriverKg": 1070
+}

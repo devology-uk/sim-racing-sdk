@@ -1,0 +1,12 @@
+{
+  "Class": "FR3 Cup",
+  "GameId": 5396,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula RaceRoom 3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 241,
+  "WeightWithDriverKg": 565
+}

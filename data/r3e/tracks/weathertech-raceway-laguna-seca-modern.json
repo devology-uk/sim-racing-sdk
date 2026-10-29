@@ -1,0 +1,17 @@
+{
+  "GameId": 1855,
+  "Layouts": [
+    {
+      "GameId": 1856,
+      "GridSize": 50,
+      "Name": "Grand Prix",
+      "LengthKm": 3.602
+    }
+  ],
+  "Name": "WeatherTech Raceway Laguna Seca - Modern",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 36.58444,
+  "Longitude": -121.75333,
+  "NotInGameSelector": false
+}

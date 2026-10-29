@@ -1,0 +1,12 @@
+{
+  "Class": "FR US Cup",
+  "GameId": 5348,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula RaceRoom US",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 616,
+  "WeightWithDriverKg": 800
+}

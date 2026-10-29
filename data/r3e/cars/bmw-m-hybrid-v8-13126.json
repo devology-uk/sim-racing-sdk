@@ -1,0 +1,12 @@
+{
+  "Class": "Hypercars",
+  "GameId": 13126,
+  "Manufacturer": "BMW",
+  "Name": "BMW M Hybrid V8",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 585,
+  "WeightWithDriverKg": 1117
+}

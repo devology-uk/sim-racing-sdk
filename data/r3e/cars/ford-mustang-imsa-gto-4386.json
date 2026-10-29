@@ -1,0 +1,12 @@
+{
+  "Class": "GTO Classics",
+  "GameId": 4386,
+  "Manufacturer": "Ford",
+  "Name": "Ford Mustang IMSA GTO",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 628,
+  "WeightWithDriverKg": 1237
+}

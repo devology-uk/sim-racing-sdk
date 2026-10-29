@@ -1,0 +1,17 @@
+{
+  "GameId": 3537,
+  "Layouts": [
+    {
+      "GameId": 3538,
+      "GridSize": 42,
+      "Name": "Grand Prix",
+      "LengthKm": 3.671
+    }
+  ],
+  "Name": "Sachsenring",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 50.79167,
+  "Longitude": 12.68861,
+  "NotInGameSelector": false
+}

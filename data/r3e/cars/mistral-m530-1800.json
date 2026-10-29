@@ -1,0 +1,12 @@
+{
+  "Class": "P1",
+  "GameId": 1800,
+  "Manufacturer": "RaceRoom",
+  "Name": "Mistral M530",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": null,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 511,
+  "WeightWithDriverKg": 935
+}

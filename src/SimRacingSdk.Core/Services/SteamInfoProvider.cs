@@ -5,6 +5,8 @@ namespace SimRacingSdk.Core.Services;
 
 public class SteamInfoProvider : ISteamInfoProvider
 {
+    private const string AppManifestFilePattern = "appmanifest_*.acf";
+    private const string InstallDirectoryKey = "installdir";
     private const string SteamRegistrySubKey = @"Software\Valve\Steam";
     private const string DefaultSteamPath = @"C:\Program Files (x86)\Steam";
     private const string SteamAppsFolderName = "steamapps";
@@ -122,18 +124,42 @@ public class SteamInfoProvider : ISteamInfoProvider
                     continue;
                 }
 
-                var gameFolders = Directory.GetDirectories(Path.Combine(libraryPath,
-                    SteamAppsFolderName,
-                    SteamInstallGamesRootFolderName));
-                foreach(var folder in gameFolders)
-                {
-                    var gameName = new DirectoryInfo(folder).Name;
-                    this.installedGamePaths.TryAdd(gameName, folder);
-                }
+                this.LoadInstalledGamePathsFromLibrary(libraryPath);
             }
         }
         catch(Exception)
         {
         }
+    }
+
+    // Only folders named by an app manifest count: uninstalling a game, or moving it to another
+    // library, can leave its folder behind, and a leftover in an earlier library would win.
+    private void LoadInstalledGamePathsFromLibrary(string libraryPath)
+    {
+        var steamAppsFolderPath = Path.Combine(libraryPath, SteamAppsFolderName);
+        foreach(var appManifestFilePath in Directory.EnumerateFiles(steamAppsFolderPath, AppManifestFilePattern))
+        {
+            var installFolderName = this.ReadInstallFolderName(appManifestFilePath);
+            if(string.IsNullOrWhiteSpace(installFolderName))
+            {
+                continue;
+            }
+
+            var gamePath = Path.Combine(steamAppsFolderPath, SteamInstallGamesRootFolderName, installFolderName);
+            if(Directory.Exists(gamePath))
+            {
+                this.installedGamePaths.TryAdd(installFolderName, gamePath);
+            }
+        }
+    }
+
+    private string? ReadInstallFolderName(string appManifestFilePath)
+    {
+        return File.ReadLines(appManifestFilePath)
+                   .Select(line => line.Split('"'))
+                   .Where(parts => parts.Length > 3 && parts[1]
+                                       .Equals(InstallDirectoryKey, StringComparison.OrdinalIgnoreCase))
+                   .Select(parts => parts[3])
+                   .FirstOrDefault();
     }
 }

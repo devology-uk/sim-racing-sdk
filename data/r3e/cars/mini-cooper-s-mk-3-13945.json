@@ -1,0 +1,12 @@
+{
+  "Class": "Group 2",
+  "GameId": 13945,
+  "Manufacturer": "Mini",
+  "Name": "Mini Cooper S MK.3",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.3,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 128,
+  "WeightWithDriverKg": 700
+}

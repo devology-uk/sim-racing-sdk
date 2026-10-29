@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2024",
+  "GameId": 12788,
+  "Manufacturer": "Audi",
+  "Name": "Audi R8 LMS GT3 EVO II DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 520,
+  "WeightWithDriverKg": 1432
+}

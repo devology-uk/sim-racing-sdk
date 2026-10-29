@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2015",
+  "GameId": 5152,
+  "Manufacturer": "Bentley",
+  "Name": "Bentley Continental GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 523,
+  "WeightWithDriverKg": 1395
+}

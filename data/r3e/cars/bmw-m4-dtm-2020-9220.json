@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2020",
+  "GameId": 9220,
+  "Manufacturer": "BMW",
+  "Name": "BMW M4 DTM 2020",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 562,
+  "WeightWithDriverKg": 1070
+}

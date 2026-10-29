@@ -1,0 +1,12 @@
+{
+  "Class": "Audi TT RS cup",
+  "GameId": 4299,
+  "Manufacturer": "Audi",
+  "Name": "Audi TT RS VLN",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "",
+  "NotInGameSelector": false,
+  "PowerBhp": 370,
+  "WeightWithDriverKg": 1180
+}

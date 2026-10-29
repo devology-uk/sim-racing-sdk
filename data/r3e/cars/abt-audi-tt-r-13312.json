@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2002",
+  "GameId": 13312,
+  "Manufacturer": "Audi",
+  "Name": "Abt-Audi TT-R",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 449,
+  "WeightWithDriverKg": 1080
+}

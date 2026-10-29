@@ -1,0 +1,12 @@
+{
+  "Class": "FR X-22 Cup",
+  "GameId": 10018,
+  "Manufacturer": "RaceRoom",
+  "Name": "Formula Raceroom X-22",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 747,
+  "WeightWithDriverKg": 769
+}

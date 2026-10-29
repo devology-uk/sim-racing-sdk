@@ -1,0 +1,12 @@
+{
+  "Class": "Touring Cars Cup",
+  "GameId": 8149,
+  "Manufacturer": "Opel",
+  "Name": "Opel Astra",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 327,
+  "WeightWithDriverKg": 1315
+}

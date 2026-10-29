@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 12561,
+  "Manufacturer": "Audi",
+  "Name": "Audi A4 Super Touring 1995",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 287,
+  "WeightWithDriverKg": 1120
+}

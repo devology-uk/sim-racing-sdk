@@ -1,0 +1,17 @@
+{
+  "GameId": 2122,
+  "Layouts": [
+    {
+      "GameId": 2123,
+      "GridSize": 41,
+      "Name": "Grand Prix",
+      "LengthKm": 6.115
+    }
+  ],
+  "Name": "Guia Circuit",
+  "Country": "Macao",
+  "CountryCode": "MAC",
+  "Latitude": 22.19639,
+  "Longitude": 113.55833,
+  "NotInGameSelector": false
+}

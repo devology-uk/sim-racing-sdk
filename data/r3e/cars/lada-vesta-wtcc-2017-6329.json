@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2017",
+  "GameId": 6329,
+  "Manufacturer": "Lada",
+  "Name": "Lada Vesta WTCC 2017",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 351,
+  "WeightWithDriverKg": 1100
+}

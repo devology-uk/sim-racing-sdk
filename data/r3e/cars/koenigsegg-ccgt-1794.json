@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 1",
+  "GameId": 1794,
+  "Manufacturer": "Koenigsegg",
+  "Name": "Koenigsegg CCGT",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.8,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 552,
+  "WeightWithDriverKg": 1310
+}

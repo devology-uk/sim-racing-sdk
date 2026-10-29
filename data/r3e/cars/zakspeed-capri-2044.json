@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 2044,
+  "Manufacturer": "Zakspeed",
+  "Name": "Zakspeed Capri",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.4,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 426,
+  "WeightWithDriverKg": 960
+}

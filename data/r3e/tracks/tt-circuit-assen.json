@@ -1,0 +1,29 @@
+{
+  "GameId": 9984,
+  "Layouts": [
+    {
+      "GameId": 9985,
+      "GridSize": 33,
+      "Name": "Grand Prix",
+      "LengthKm": 4.555
+    },
+    {
+      "GameId": 10351,
+      "GridSize": 33,
+      "Name": "North Course",
+      "LengthKm": 2.555
+    },
+    {
+      "GameId": 10355,
+      "GridSize": 33,
+      "Name": "Motorcycle Course",
+      "LengthKm": 4.542
+    }
+  ],
+  "Name": "TT Circuit Assen",
+  "Country": "Netherlands",
+  "CountryCode": "NLD",
+  "Latitude": 52.96167,
+  "Longitude": 6.52361,
+  "NotInGameSelector": false
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2026",
+  "GameId": 13594,
+  "Manufacturer": "Lamborghini",
+  "Name": "Lamborghini Temerario GT3 DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 496,
+  "WeightWithDriverKg": 1405
+}

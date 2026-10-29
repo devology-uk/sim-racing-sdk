@@ -1,0 +1,12 @@
+{
+  "Class": "Group 2",
+  "GameId": 13679,
+  "Manufacturer": "Abarth",
+  "Name": "Abarth 1000 TCR",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.0,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 116,
+  "WeightWithDriverKg": 663
+}

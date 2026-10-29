@@ -1,0 +1,17 @@
+{
+  "GameId": 6139,
+  "Layouts": [
+    {
+      "GameId": 6140,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 1.843
+    }
+  ],
+  "Name": "Falkenbergs Motorbana",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 56.975,
+  "Longitude": 12.56806,
+  "NotInGameSelector": false
+}

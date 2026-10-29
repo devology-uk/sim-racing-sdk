@@ -1,0 +1,12 @@
+{
+  "Class": "Zonda R Cup",
+  "GameId": 1824,
+  "Manufacturer": "Pagani",
+  "Name": "Pagani Zonda R",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6,
+  "EngineLayout": "V12",
+  "NotInGameSelector": false,
+  "PowerBhp": 649,
+  "WeightWithDriverKg": 1184
+}

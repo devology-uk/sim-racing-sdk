@@ -1,0 +1,12 @@
+{
+  "Class": "Mazda Dpi",
+  "GameId": 11342,
+  "Manufacturer": "Mazda",
+  "Name": "Mazda RT24 P DPi",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 553,
+  "WeightWithDriverKg": 1010
+}

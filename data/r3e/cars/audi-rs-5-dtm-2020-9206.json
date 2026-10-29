@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2020",
+  "GameId": 9206,
+  "Manufacturer": "Audi",
+  "Name": "Audi RS 5 DTM 2020",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 562,
+  "WeightWithDriverKg": 1070
+}

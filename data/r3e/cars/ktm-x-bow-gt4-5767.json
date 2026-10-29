@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 5767,
+  "Manufacturer": "KTM",
+  "Name": "KTM X-Bow GT4",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 313,
+  "WeightWithDriverKg": 1320
+}

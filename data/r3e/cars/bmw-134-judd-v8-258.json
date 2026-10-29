@@ -1,0 +1,12 @@
+{
+  "Class": "Hillclimb Icons",
+  "GameId": 258,
+  "Manufacturer": "BMW",
+  "Name": "BMW 134 Judd V8",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 542,
+  "WeightWithDriverKg": 870
+}

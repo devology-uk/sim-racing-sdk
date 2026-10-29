@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 4145,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Dekon Monza",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 575,
+  "WeightWithDriverKg": 1170
+}

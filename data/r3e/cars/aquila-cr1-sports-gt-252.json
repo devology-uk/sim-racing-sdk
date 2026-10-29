@@ -1,0 +1,12 @@
+{
+  "Class": "Aquila CR1 Cup",
+  "GameId": 252,
+  "Manufacturer": "Aquila",
+  "Name": "Aquila CR1 Sports GT",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.0,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 299,
+  "WeightWithDriverKg": 965
+}

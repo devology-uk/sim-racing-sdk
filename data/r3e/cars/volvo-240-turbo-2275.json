@@ -1,0 +1,12 @@
+{
+  "Class": "Touring Classics",
+  "GameId": 2275,
+  "Manufacturer": "Volvo",
+  "Name": "Volvo 240 Turbo",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.1,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 337,
+  "WeightWithDriverKg": 1145
+}

@@ -1,0 +1,17 @@
+{
+  "GameId": 6136,
+  "Layouts": [
+    {
+      "GameId": 6137,
+      "GridSize": 32,
+      "Name": "GP",
+      "LengthKm": 2.079
+    }
+  ],
+  "Name": "Knutstorp Ring",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 55.9875,
+  "Longitude": 13.11472,
+  "NotInGameSelector": false
+}

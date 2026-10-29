@@ -1,0 +1,35 @@
+{
+  "GameId": 9176,
+  "Layouts": [
+    {
+      "GameId": 9177,
+      "GridSize": 43,
+      "Name": "Short with Inner loop",
+      "LengthKm": 3.943
+    },
+    {
+      "GameId": 9324,
+      "GridSize": 43,
+      "Name": "Grand Prix with Inner Loop",
+      "LengthKm": 5.552
+    },
+    {
+      "GameId": 9343,
+      "GridSize": 43,
+      "Name": "Short Circuit",
+      "LengthKm": 3.907
+    },
+    {
+      "GameId": 9344,
+      "GridSize": 43,
+      "Name": "Grand Prix",
+      "LengthKm": 5.435
+    }
+  ],
+  "Name": "Watkins Glen International",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 42.33694,
+  "Longitude": -76.92722,
+  "NotInGameSelector": false
+}

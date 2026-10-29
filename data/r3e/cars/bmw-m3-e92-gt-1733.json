@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 2",
+  "GameId": 1733,
+  "Manufacturer": "BMW",
+  "Name": "BMW M3 E92 GT",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 447,
+  "WeightWithDriverKg": 1245
+}

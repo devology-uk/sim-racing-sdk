@@ -1,0 +1,23 @@
+{
+  "GameId": 5297,
+  "Layouts": [
+    {
+      "GameId": 5298,
+      "GridSize": 47,
+      "Name": "Grand Prix",
+      "LengthKm": 5.403
+    },
+    {
+      "GameId": 9796,
+      "GridSize": 47,
+      "Name": "Grand Prix (Short Pit Entry)",
+      "LengthKm": 5.403
+    }
+  ],
+  "Name": "CREDITAS Autodrom Brno",
+  "Country": "Czechia",
+  "CountryCode": "CZE",
+  "Latitude": 49.20306,
+  "Longitude": 16.44444,
+  "NotInGameSelector": false
+}

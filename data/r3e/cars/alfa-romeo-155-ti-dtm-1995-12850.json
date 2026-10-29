@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 1995",
+  "GameId": 12850,
+  "Manufacturer": "Alfa Romeo",
+  "Name": "Alfa Romeo 155 TI DTM 1995",
+  "Drivetrain": "AWD",
+  "EngineCapacityLitres": 2.5,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 380,
+  "WeightWithDriverKg": 1110
+}

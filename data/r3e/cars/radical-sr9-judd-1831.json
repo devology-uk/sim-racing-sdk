@@ -1,0 +1,12 @@
+{
+  "Class": "P2",
+  "GameId": 1831,
+  "Manufacturer": "Radical",
+  "Name": "Radical SR9 Judd",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 415,
+  "WeightWithDriverKg": 970
+}

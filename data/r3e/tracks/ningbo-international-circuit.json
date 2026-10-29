@@ -1,0 +1,41 @@
+{
+  "GameId": 7272,
+  "Layouts": [
+    {
+      "GameId": 7273,
+      "GridSize": 32,
+      "Name": "Full circuit",
+      "LengthKm": 4.015
+    },
+    {
+      "GameId": 8309,
+      "GridSize": 32,
+      "Name": "Full circuit no chicane",
+      "LengthKm": 3.962
+    },
+    {
+      "GameId": 8310,
+      "GridSize": 32,
+      "Name": "Intermediate circuit",
+      "LengthKm": 3.537
+    },
+    {
+      "GameId": 8311,
+      "GridSize": 32,
+      "Name": "Intermediate circuit no chicane",
+      "LengthKm": 3.505
+    },
+    {
+      "GameId": 8314,
+      "GridSize": 32,
+      "Name": "Short circuit",
+      "LengthKm": 1.862
+    }
+  ],
+  "Name": "Ningbo International Circuit",
+  "Country": "China",
+  "CountryCode": "CHN",
+  "Latitude": 29.76139,
+  "Longitude": 121.86389,
+  "NotInGameSelector": false
+}

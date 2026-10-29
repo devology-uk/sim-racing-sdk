@@ -1,0 +1,29 @@
+{
+  "GameId": 12505,
+  "Layouts": [
+    {
+      "GameId": 12506,
+      "GridSize": 36,
+      "Name": "Grand Prix",
+      "LengthKm": 3.668
+    },
+    {
+      "GameId": 12571,
+      "GridSize": 36,
+      "Name": "Alternate",
+      "LengthKm": 3.696
+    },
+    {
+      "GameId": 12572,
+      "GridSize": 36,
+      "Name": "Short",
+      "LengthKm": 2.6
+    }
+  ],
+  "Name": "Motorsport Arena Oschersleben - Motorsport Arena Oschersleben",
+  "Country": "Germany",
+  "CountryCode": "DEU",
+  "Latitude": 52.02722,
+  "Longitude": 11.27972,
+  "NotInGameSelector": false
+}

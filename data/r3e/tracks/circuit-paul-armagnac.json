@@ -1,0 +1,35 @@
+{
+  "GameId": 9657,
+  "Layouts": [
+    {
+      "GameId": 9659,
+      "GridSize": 36,
+      "Name": "Grand Prix Circuit",
+      "LengthKm": 3.636
+    },
+    {
+      "GameId": 10258,
+      "GridSize": 26,
+      "Name": "Club Circuit",
+      "LengthKm": 1.862
+    },
+    {
+      "GameId": 10392,
+      "GridSize": 36,
+      "Name": "Caupenne Circuit",
+      "LengthKm": 1.576
+    },
+    {
+      "GameId": 12573,
+      "GridSize": 36,
+      "Name": "Moto Circuit",
+      "LengthKm": 3.625
+    }
+  ],
+  "Name": "Circuit Paul Armagnac",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 43.76806,
+  "Longitude": -0.03806,
+  "NotInGameSelector": false
+}

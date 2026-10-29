@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 8593,
+  "Manufacturer": "Bentley",
+  "Name": "Bentley Continental GT3 EVO",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 526,
+  "WeightWithDriverKg": 1410
+}

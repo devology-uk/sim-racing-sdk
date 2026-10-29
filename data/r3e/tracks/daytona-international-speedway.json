@@ -1,0 +1,29 @@
+{
+  "GameId": 8366,
+  "Layouts": [
+    {
+      "GameId": 8367,
+      "GridSize": 80,
+      "Name": "Road Course",
+      "LengthKm": 5.729
+    },
+    {
+      "GameId": 8648,
+      "GridSize": 80,
+      "Name": "Speedway (Not Supported)",
+      "LengthKm": 4.023
+    },
+    {
+      "GameId": 8655,
+      "GridSize": 80,
+      "Name": "Road Course Motorcycle (2006)",
+      "LengthKm": 5.649
+    }
+  ],
+  "Name": "Daytona International Speedway",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 29.18528,
+  "Longitude": -81.07056,
+  "NotInGameSelector": false
+}

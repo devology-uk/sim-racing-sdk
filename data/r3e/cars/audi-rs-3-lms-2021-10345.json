@@ -1,0 +1,12 @@
+{
+  "Class": "WTCR 2021",
+  "GameId": 10345,
+  "Manufacturer": "Audi",
+  "Name": "Audi RS 3 LMS 2021",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 331,
+  "WeightWithDriverKg": 1385
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "ADAC GT Masters 2018",
+  "GameId": 7629,
+  "Manufacturer": "BMW",
+  "Name": "BMW M6 GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4.4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 537,
+  "WeightWithDriverKg": 1405
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 5786,
+  "Manufacturer": "McLaren",
+  "Name": "McLaren 650S GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.8,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 517,
+  "WeightWithDriverKg": 1350
+}

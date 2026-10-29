@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 1818,
+  "Manufacturer": "Nissan",
+  "Name": "Nissan Skyline 2000RS",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 2.1,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 477,
+  "WeightWithDriverKg": 1085
+}

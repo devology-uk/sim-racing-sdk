@@ -1,0 +1,12 @@
+{
+  "Class": "Audi Sport TT Cup 2015",
+  "GameId": 4681,
+  "Manufacturer": "Audi",
+  "Name": "Audi TT cup 2015",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 298,
+  "WeightWithDriverKg": 1200
+}

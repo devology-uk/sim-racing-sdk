@@ -1,0 +1,35 @@
+{
+  "GameId": 4038,
+  "Layouts": [
+    {
+      "GameId": 4039,
+      "GridSize": 52,
+      "Name": "Grand Prix",
+      "LengthKm": 5.89
+    },
+    {
+      "GameId": 5816,
+      "GridSize": 52,
+      "Name": "International",
+      "LengthKm": 2.979
+    },
+    {
+      "GameId": 5817,
+      "GridSize": 50,
+      "Name": "National",
+      "LengthKm": 2.639
+    },
+    {
+      "GameId": 5862,
+      "GridSize": 50,
+      "Name": "Historic Grand Prix",
+      "LengthKm": 5.892
+    }
+  ],
+  "Name": "Silverstone Circuit - Modern",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "Latitude": 52.07861,
+  "Longitude": -1.01694,
+  "NotInGameSelector": false
+}

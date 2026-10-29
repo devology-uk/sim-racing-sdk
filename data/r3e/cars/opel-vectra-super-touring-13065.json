@@ -1,0 +1,12 @@
+{
+  "Class": "Super Touring",
+  "GameId": 13065,
+  "Manufacturer": "Opel",
+  "Name": "Opel Vectra Super Touring",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 2,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 295,
+  "WeightWithDriverKg": 1055
+}

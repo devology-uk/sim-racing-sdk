@@ -1,0 +1,12 @@
+{
+  "Class": "DTM 2003",
+  "GameId": 7169,
+  "Manufacturer": "Mercedes",
+  "Name": "AMG-Mercedes CLK DTM",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 4,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 454,
+  "WeightWithDriverKg": 1080
+}

@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2013",
+  "GameId": 2705,
+  "Manufacturer": "BMW",
+  "Name": "BMW E90 320 TC",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 284,
+  "WeightWithDriverKg": 1170
+}

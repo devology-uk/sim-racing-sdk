@@ -1,0 +1,23 @@
+{
+  "GameId": 5924,
+  "Layouts": [
+    {
+      "GameId": 5925,
+      "GridSize": 36,
+      "Name": "Grand Prix Circuit",
+      "LengthKm": 2.53
+    },
+    {
+      "GameId": 6138,
+      "GridSize": 36,
+      "Name": "Short Circuit",
+      "LengthKm": 1.143
+    }
+  ],
+  "Name": "Gelleråsen Arena",
+  "Country": "Sweden",
+  "CountryCode": "SWE",
+  "Latitude": 59.38333,
+  "Longitude": 14.51611,
+  "NotInGameSelector": false
+}

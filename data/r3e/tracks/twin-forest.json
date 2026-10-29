@@ -1,0 +1,17 @@
+{
+  "GameId": 9838,
+  "Layouts": [
+    {
+      "GameId": 9839,
+      "GridSize": 2,
+      "Name": "Duel",
+      "LengthKm": 1.5
+    }
+  ],
+  "Name": "Twin Forest",
+  "Country": "United Kingdom",
+  "CountryCode": "GBR",
+  "Latitude": 51.1092,
+  "Longitude": -0.1872,
+  "NotInGameSelector": false
+}

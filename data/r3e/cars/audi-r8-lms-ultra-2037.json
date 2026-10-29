@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 2037,
+  "Manufacturer": "Audi",
+  "Name": "Audi R8 LMS Ultra",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 5.2,
+  "EngineLayout": "V10",
+  "NotInGameSelector": false,
+  "PowerBhp": 529,
+  "WeightWithDriverKg": 1350
+}

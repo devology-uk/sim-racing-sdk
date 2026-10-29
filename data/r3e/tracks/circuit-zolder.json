@@ -1,0 +1,17 @@
+{
+  "GameId": 1683,
+  "Layouts": [
+    {
+      "GameId": 1684,
+      "GridSize": 38,
+      "Name": "Grand Prix",
+      "LengthKm": 4.011
+    }
+  ],
+  "Name": "Circuit Zolder",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "Latitude": 50.99056,
+  "Longitude": 5.25667,
+  "NotInGameSelector": false
+}

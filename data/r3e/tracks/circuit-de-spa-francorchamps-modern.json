@@ -1,0 +1,35 @@
+{
+  "GameId": 13255,
+  "Layouts": [
+    {
+      "GameId": 13256,
+      "GridSize": 56,
+      "Name": "Grand Prix",
+      "LengthKm": 7.004
+    },
+    {
+      "GameId": 13368,
+      "GridSize": 56,
+      "Name": "Classic",
+      "LengthKm": 7.004
+    },
+    {
+      "GameId": 13369,
+      "GridSize": 100,
+      "Name": "Combined",
+      "LengthKm": 7.004
+    },
+    {
+      "GameId": 13467,
+      "GridSize": 56,
+      "Name": "Moto",
+      "LengthKm": 7.004
+    }
+  ],
+  "Name": "Circuit de Spa-Francorchamps - Modern",
+  "Country": "Belgium",
+  "CountryCode": "BEL",
+  "Latitude": 50.43722,
+  "Longitude": 5.97139,
+  "NotInGameSelector": false
+}

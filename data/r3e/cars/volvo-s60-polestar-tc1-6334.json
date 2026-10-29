@@ -1,0 +1,12 @@
+{
+  "Class": "WTCC 2017",
+  "GameId": 6334,
+  "Manufacturer": "Volvo",
+  "Name": "Volvo S60 Polestar TC1",
+  "Drivetrain": "FWD",
+  "EngineCapacityLitres": 1.6,
+  "EngineLayout": "Inline-4",
+  "NotInGameSelector": false,
+  "PowerBhp": 365,
+  "WeightWithDriverKg": 1180
+}

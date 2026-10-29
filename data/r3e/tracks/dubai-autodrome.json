@@ -1,0 +1,35 @@
+{
+  "GameId": 6586,
+  "Layouts": [
+    {
+      "GameId": 6587,
+      "GridSize": 74,
+      "Name": "Grand Prix Circuit",
+      "LengthKm": 5.39
+    },
+    {
+      "GameId": 7976,
+      "GridSize": 36,
+      "Name": "Club Circuit",
+      "LengthKm": 2.46
+    },
+    {
+      "GameId": 7977,
+      "GridSize": 36,
+      "Name": "National Circuit",
+      "LengthKm": 3.56
+    },
+    {
+      "GameId": 7978,
+      "GridSize": 36,
+      "Name": "International Circuit",
+      "LengthKm": 4.29
+    }
+  ],
+  "Name": "Dubai Autodrome",
+  "Country": "United Arab Emirates",
+  "CountryCode": "ARE",
+  "Latitude": 25.05,
+  "Longitude": 55.23889,
+  "NotInGameSelector": false
+}

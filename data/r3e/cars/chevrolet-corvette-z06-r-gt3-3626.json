@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 3",
+  "GameId": 3626,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Corvette Z06.R GT3",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6.2,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 563,
+  "WeightWithDriverKg": 1375
+}

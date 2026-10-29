@@ -1,0 +1,17 @@
+{
+  "GameId": 2029,
+  "Layouts": [
+    {
+      "GameId": 2064,
+      "GridSize": 44,
+      "Name": "Grand Prix",
+      "LengthKm": 5.922
+    }
+  ],
+  "Name": "Automotodróm Slovakia Ring",
+  "Country": "Slovakia",
+  "CountryCode": "SVK",
+  "Latitude": 48.05389,
+  "Longitude": 17.57083,
+  "NotInGameSelector": false
+}

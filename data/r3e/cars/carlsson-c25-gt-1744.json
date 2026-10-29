@@ -1,0 +1,12 @@
+{
+  "Class": "German Nationals",
+  "GameId": 1744,
+  "Manufacturer": "Carlsson",
+  "Name": "Carlsson C25 GT",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 6,
+  "EngineLayout": "V12",
+  "NotInGameSelector": false,
+  "PowerBhp": 641,
+  "WeightWithDriverKg": 1380
+}

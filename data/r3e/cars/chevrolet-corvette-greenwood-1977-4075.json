@@ -1,0 +1,12 @@
+{
+  "Class": "Group 5",
+  "GameId": 4075,
+  "Manufacturer": "Chevrolet",
+  "Name": "Chevrolet Corvette Greenwood 1977",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 7,
+  "EngineLayout": "V8",
+  "NotInGameSelector": false,
+  "PowerBhp": 664,
+  "WeightWithDriverKg": 1389
+}

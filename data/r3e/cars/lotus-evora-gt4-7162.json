@@ -1,0 +1,12 @@
+{
+  "Class": "GTR 4",
+  "GameId": 7162,
+  "Manufacturer": "Lotus Cars",
+  "Name": "Lotus Evora GT4",
+  "Drivetrain": "RWD",
+  "EngineCapacityLitres": 3.5,
+  "EngineLayout": "V6",
+  "NotInGameSelector": false,
+  "PowerBhp": 339,
+  "WeightWithDriverKg": 1335
+}

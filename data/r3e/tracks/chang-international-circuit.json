@@ -1,0 +1,23 @@
+{
+  "GameId": 4252,
+  "Layouts": [
+    {
+      "GameId": 4253,
+      "GridSize": 40,
+      "Name": "Full Circuit",
+      "LengthKm": 4.539
+    },
+    {
+      "GameId": 4944,
+      "GridSize": 25,
+      "Name": "D Circuit",
+      "LengthKm": 3.107
+    }
+  ],
+  "Name": "Chang International Circuit",
+  "Country": "Thailand",
+  "CountryCode": "THA",
+  "Latitude": 14.96,
+  "Longitude": 103.085,
+  "NotInGameSelector": false
+}

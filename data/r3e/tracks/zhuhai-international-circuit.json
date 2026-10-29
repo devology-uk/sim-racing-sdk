@@ -1,0 +1,17 @@
+{
+  "GameId": 3463,
+  "Layouts": [
+    {
+      "GameId": 3464,
+      "GridSize": 40,
+      "Name": "Grand Prix",
+      "LengthKm": 4.319
+    }
+  ],
+  "Name": "Zhuhai International Circuit",
+  "Country": "China",
+  "CountryCode": "CHN",
+  "Latitude": 22.36719,
+  "Longitude": 113.55639,
+  "NotInGameSelector": false
+}

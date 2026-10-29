@@ -1,0 +1,23 @@
+{
+  "GameId": 1705,
+  "Layouts": [
+    {
+      "GameId": 1709,
+      "GridSize": 1,
+      "Name": "Full Run",
+      "LengthKm": 10.5
+    },
+    {
+      "GameId": 2214,
+      "GridSize": 1,
+      "Name": "Reverse",
+      "LengthKm": 10.5
+    }
+  ],
+  "Name": "RaceRoom Hillclimb",
+  "Country": "France",
+  "CountryCode": "FRA",
+  "Latitude": 45.5,
+  "Longitude": 6.5,
+  "NotInGameSelector": false
+}

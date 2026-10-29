@@ -1,0 +1,35 @@
+{
+  "GameId": 1853,
+  "Layouts": [
+    {
+      "GameId": 1854,
+      "GridSize": 52,
+      "Name": "WTCC",
+      "LengthKm": 4.101
+    },
+    {
+      "GameId": 2016,
+      "GridSize": 52,
+      "Name": "Sprint",
+      "LengthKm": 3.208
+    },
+    {
+      "GameId": 3912,
+      "GridSize": 52,
+      "Name": "Long",
+      "LengthKm": 4.046
+    },
+    {
+      "GameId": 3913,
+      "GridSize": 52,
+      "Name": "IRL",
+      "LengthKm": 3.706
+    }
+  ],
+  "Name": "Sonoma Raceway",
+  "Country": "United States",
+  "CountryCode": "USA",
+  "Latitude": 38.16111,
+  "Longitude": -122.45472,
+  "NotInGameSelector": false
+}
