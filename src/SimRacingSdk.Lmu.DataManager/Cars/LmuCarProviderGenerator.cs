@@ -68,6 +68,12 @@ public class LmuCarProviderGenerator : ICatalogGenerator<CarInfo>
                    LmuCarInfo? GetCarInfoByDisplayName(string displayName);
 
                    /// <summary>
+                   ///     Shared memory's VehicleModel holds at most 29 characters, so a longer display name arrives cut off
+                   ///     (e.g. "Aston Martin Vantage AMR LMGT" for "Aston Martin Vantage AMR LMGT3").
+                   /// </summary>
+                   LmuCarInfo? FindBySharedMemoryVehicleModel(string vehicleModel);
+
+                   /// <summary>
                    ///     Sadly in some cases the CarType field in LMU result files does not match the Display Name
                    /// </summary>
                    LmuCarInfo? GetCarInfoByResultCarType(string carType);
@@ -134,6 +140,8 @@ public class LmuCarProviderGenerator : ICatalogGenerator<CarInfo>
 
                  public class LmuCarInfoProvider : ILmuCarInfoProvider
                  {
+                     private const int MaxSharedMemoryVehicleModelLength = 29;
+
                      private static LmuCarInfoProvider? singletonInstance;
 
                      private readonly List<LmuCarInfo> cars =
@@ -147,6 +155,18 @@ public class LmuCarProviderGenerator : ICatalogGenerator<CarInfo>
                      {
                          return this.cars.FirstOrDefault(
                              car => car.DisplayName.Equals(displayName, StringComparison.InvariantCultureIgnoreCase));
+                     }
+
+                     public LmuCarInfo? FindBySharedMemoryVehicleModel(string vehicleModel)
+                     {
+                         var exactMatch = this.GetCarInfoByDisplayName(vehicleModel);
+                         if(exactMatch != null || vehicleModel.Length < MaxSharedMemoryVehicleModelLength)
+                         {
+                             return exactMatch;
+                         }
+
+                         return this.cars.FirstOrDefault(
+                             car => car.DisplayName.StartsWith(vehicleModel, StringComparison.InvariantCultureIgnoreCase));
                      }
 
                      public LmuCarInfo? FindByModelId(string modelId)

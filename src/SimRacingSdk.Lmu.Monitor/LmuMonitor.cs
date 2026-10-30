@@ -91,7 +91,7 @@ public class LmuMonitor : ILmuMonitor
             return;
         }
 
-        var car = this.lmuCarInfoProvider.GetCarInfoByDisplayName(lmuSharedMemoryLap.VehicleModel);
+        var car = this.lmuCarInfoProvider.FindBySharedMemoryVehicleModel(lmuSharedMemoryLap.VehicleModel);
         var lmuMonitorLap = new LmuMonitorLap
         {
             CarManufacturer = car?.Manufacturer ?? string.Empty,
@@ -106,7 +106,7 @@ public class LmuMonitor : ILmuMonitor
             TrackName = lmuSharedMemoryLap.TrackName,
             VehicleClass = lmuSharedMemoryLap.VehicleClass,
             VehicleClassName = lmuSharedMemoryLap.VehicleClassName,
-            VehicleModel = lmuSharedMemoryLap.VehicleModel,
+            VehicleModel = car?.DisplayName ?? lmuSharedMemoryLap.VehicleModel,
             VehicleName = lmuSharedMemoryLap.VehicleName
         };
 

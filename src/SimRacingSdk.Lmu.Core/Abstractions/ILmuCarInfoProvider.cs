@@ -8,6 +8,12 @@ public interface ILmuCarInfoProvider
     LmuCarInfo? GetCarInfoByDisplayName(string displayName);
 
     /// <summary>
+    ///     Shared memory's VehicleModel holds at most 29 characters, so a longer display name arrives cut off
+    ///     (e.g. "Aston Martin Vantage AMR LMGT" for "Aston Martin Vantage AMR LMGT3").
+    /// </summary>
+    LmuCarInfo? FindBySharedMemoryVehicleModel(string vehicleModel);
+
+    /// <summary>
     ///     Sadly in some cases the CarType field in LMU result files does not match the Display Name
     /// </summary>
     LmuCarInfo? GetCarInfoByResultCarType(string carType);

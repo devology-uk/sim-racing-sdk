@@ -6,6 +6,8 @@ namespace SimRacingSdk.Lmu.Core.Services;
 
 public class LmuCarInfoProvider : ILmuCarInfoProvider
 {
+    private const int MaxSharedMemoryVehicleModelLength = 29;
+
     private static LmuCarInfoProvider? singletonInstance;
 
     private readonly List<LmuCarInfo> cars =
@@ -53,6 +55,18 @@ public class LmuCarInfoProvider : ILmuCarInfoProvider
     {
         return this.cars.FirstOrDefault(
             car => car.DisplayName.Equals(displayName, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    public LmuCarInfo? FindBySharedMemoryVehicleModel(string vehicleModel)
+    {
+        var exactMatch = this.GetCarInfoByDisplayName(vehicleModel);
+        if(exactMatch != null || vehicleModel.Length < MaxSharedMemoryVehicleModelLength)
+        {
+            return exactMatch;
+        }
+
+        return this.cars.FirstOrDefault(
+            car => car.DisplayName.StartsWith(vehicleModel, StringComparison.InvariantCultureIgnoreCase));
     }
 
     public LmuCarInfo? FindByModelId(string modelId)

@@ -60,9 +60,9 @@ public class SharedMemoryDemo : ISharedMemoryDemo
 
         this.Log("Stopping Shared Memory Demo...");
         this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
-        this.subscriptionSink?.Dispose();
         this.r3eSharedMemoryConnection?.Dispose();
         this.r3eSharedMemoryConnection = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()
