@@ -18,6 +18,20 @@ internal sealed class R3eLapTracker
         this.carStates.Clear();
     }
 
+    // The game goes to the results menu as the player crosses the line at the end of a session, so the final
+    // lap can still be waiting for its time when the session ends.
+    public IReadOnlyList<R3eSharedMemoryLap> FlushPendingLaps(Guid sessionId)
+    {
+        var pendingLaps = this.carStates.Values
+                              .Select(state => state.PendingLap)
+                              .OfType<R3ePendingLap>()
+                              .Select(pendingLap => new R3eSharedMemoryLap(pendingLap.Driver, null, pendingLap.LapValidity,
+                                  sessionId, pendingLap.IsLocalPlayer))
+                              .ToList();
+        this.Reset();
+        return pendingLaps;
+    }
+
     public IReadOnlyList<R3eSharedMemoryLap> Update(R3eShared data, Guid sessionId)
     {
         var completedLaps = new List<R3eSharedMemoryLap>();
@@ -65,7 +79,7 @@ internal sealed class R3eLapTracker
         }
 
         state.PendingLap = null;
-        return new R3eSharedMemoryLap(driver, null, pendingLap.LapValidity, sessionId, isLocalPlayer);
+        return new R3eSharedMemoryLap(pendingLap.Driver, null, pendingLap.LapValidity, sessionId, isLocalPlayer);
     }
 
     private R3eSharedMemoryLap? UpdateCar(R3eDriverData driver, Guid sessionId, bool isLocalPlayer,
@@ -85,7 +99,7 @@ internal sealed class R3eLapTracker
 
         if(driver.CompletedLaps > state.CompletedLaps)
         {
-            state.PendingLap = new R3ePendingLap(state.CurrentLapValid, nowUtc);
+            state.PendingLap = new R3ePendingLap(driver, isLocalPlayer, state.CurrentLapValid, nowUtc);
         }
 
         state.CompletedLaps = driver.CompletedLaps;

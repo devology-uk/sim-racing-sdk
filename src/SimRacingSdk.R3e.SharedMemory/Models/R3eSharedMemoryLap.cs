@@ -6,8 +6,7 @@ namespace SimRacingSdk.R3e.SharedMemory.Models;
 
 public record R3eSharedMemoryLap
 {
-    // Sector times are read as cumulative (sector 3 = lap time), which is unconfirmed: compare LapTimeMs with the
-    // player's LapTimePreviousSelf in the connection log on the rig.
+    // R3E's sector times are cumulative: sector 3 is the lap time.
     internal R3eSharedMemoryLap(R3eDriverData driver, R3eSectors? previousLapSectors, int lapValidity,
         Guid sessionId, bool isLocalPlayer)
     {

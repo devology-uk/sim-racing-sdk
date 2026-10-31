@@ -94,6 +94,11 @@ public class R3eSharedMemoryConnection : IR3eSharedMemoryConnection
             return;
         }
 
+        foreach(var lap in this.lapTracker.FlushPendingLaps(this.currentSession.SessionId))
+        {
+            this.PublishLap(lap, null);
+        }
+
         this.currentSession.IsRunning = false;
         this.sessionEndedSubject.OnNext(this.currentSession);
         this.LogMessage(LoggingLevel.Information, $"Session Ended: {this.currentSession}");
@@ -148,6 +153,7 @@ public class R3eSharedMemoryConnection : IR3eSharedMemoryConnection
         if(!IsOnTrack(data))
         {
             this.LogWaitReasonOnce("Connected to R3E shared memory, waiting for the player to be on track...");
+            this.PublishLapsFromResultsScreen(data);
             return;
         }
 
@@ -157,14 +163,33 @@ public class R3eSharedMemoryConnection : IR3eSharedMemoryConnection
         this.PublishTelemetry(data);
     }
 
+    private void PublishLap(R3eSharedMemoryLap lap, float? playerLapTimePreviousSelf)
+    {
+        this.lapsSubject.OnNext(lap);
+        var playerLapTime = lap.IsLocalPlayer && playerLapTimePreviousSelf is { } lapTime
+            ? $", LapTimePreviousSelf = {lapTime}"
+            : "";
+        this.LogMessage(LoggingLevel.Information, $"Lap Completed: {lap}{playerLapTime}");
+    }
+
     private void PublishLaps(R3eShared data)
     {
         foreach(var lap in this.lapTracker.Update(data, this.currentSession!.SessionId))
         {
-            this.lapsSubject.OnNext(lap);
-            var playerLapTime = lap.IsLocalPlayer ? $", LapTimePreviousSelf = {data.LapTimePreviousSelf}" : "";
-            this.LogMessage(LoggingLevel.Information, $"Lap Completed: {lap}{playerLapTime}");
+            this.PublishLap(lap, data.LapTimePreviousSelf);
         }
+    }
+
+    // The game shows the results menu the moment the player finishes a session, while the final laps are still
+    // rolling over, so laps are still tracked there for as long as the data belongs to the current session.
+    private void PublishLapsFromResultsScreen(R3eShared data)
+    {
+        if(this.currentSession is null || this.currentSessionKey != R3eSessionKey.From(data))
+        {
+            return;
+        }
+
+        this.PublishLaps(data);
     }
 
     private void PublishTelemetry(R3eShared data)
