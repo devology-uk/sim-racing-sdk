@@ -20,6 +20,7 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IGameInfoDemo gameInfoDemo;
     private readonly string logFolderPath = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\logs\";
     private readonly ILogger<MainWindowViewModel> logger;
+    private readonly IMonitorDemo monitorDemo;
     private readonly IR3eGameDetector r3eGameDetector;
     private readonly ISharedMemoryDemo sharedMemoryDemo;
     private readonly CompositeDisposable subscriptionSink = new();
@@ -34,13 +35,15 @@ public partial class MainWindowViewModel : ObservableObject
         IConsoleLog consoleLog,
         IGameInfoDemo gameInfoDemo,
         IR3eGameDetector r3eGameDetector,
-        ISharedMemoryDemo sharedMemoryDemo)
+        ISharedMemoryDemo sharedMemoryDemo,
+        IMonitorDemo monitorDemo)
     {
         this.logger = logger;
         this.consoleLog = consoleLog;
         this.gameInfoDemo = gameInfoDemo;
         this.r3eGameDetector = r3eGameDetector;
         this.sharedMemoryDemo = sharedMemoryDemo;
+        this.monitorDemo = monitorDemo;
     }
 
     [RelayCommand]
@@ -100,24 +103,15 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task StartMonitorDemo()
+    {
+        await this.StartDemo(this.monitorDemo);
+    }
+
+    [RelayCommand]
     private async Task StartSharedMemoryDemo()
     {
-        this.consoleLog.Clear();
-        this.StopRunningDemos();
-        this.IsRunningDemo = true;
-
-        if(!this.sharedMemoryDemo.Validate())
-        {
-            return;
-        }
-
-        await this.WaitForGame();
-        if(!this.isGameRunning)
-        {
-            return;
-        }
-
-        this.sharedMemoryDemo.Start();
+        await this.StartDemo(this.sharedMemoryDemo);
     }
 
     [RelayCommand]
@@ -138,6 +132,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             this.Log("R3E game is not running or has been shutdown.", LogLevel.Warning);
             this.isGameRunning = false;
+            this.StopRunningDemos();
         }
     }
 
@@ -145,6 +140,26 @@ public partial class MainWindowViewModel : ObservableObject
     {
         this.logger.Log(logLevel, message);
         this.consoleLog.Write(message);
+    }
+
+    private async Task StartDemo(IDemo demo)
+    {
+        this.consoleLog.Clear();
+        this.StopRunningDemos();
+        this.IsRunningDemo = true;
+
+        if(!demo.Validate())
+        {
+            return;
+        }
+
+        await this.WaitForGame();
+        if(!this.isGameRunning)
+        {
+            return;
+        }
+
+        demo.Start();
     }
 
     private void StartGameDetection()
@@ -157,6 +172,7 @@ public partial class MainWindowViewModel : ObservableObject
     private void StopRunningDemos()
     {
         this.sharedMemoryDemo.Stop();
+        this.monitorDemo.Stop();
         this.IsRunningDemo = false;
     }
 

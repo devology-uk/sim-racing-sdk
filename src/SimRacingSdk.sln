@@ -101,6 +101,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.R3e.Demo", "Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.R3e.SharedMemory", "SimRacingSdk.R3e.SharedMemory\SimRacingSdk.R3e.SharedMemory.csproj", "{3BAFAE21-40E5-495A-8C68-701C66CBD3EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimRacingSdk.R3e.Monitor", "SimRacingSdk.R3e.Monitor\SimRacingSdk.R3e.Monitor.csproj", "{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -627,6 +629,18 @@ Global
 		{3BAFAE21-40E5-495A-8C68-701C66CBD3EF}.Release|x64.Build.0 = Release|Any CPU
 		{3BAFAE21-40E5-495A-8C68-701C66CBD3EF}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BAFAE21-40E5-495A-8C68-701C66CBD3EF}.Release|x86.Build.0 = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|x64.Build.0 = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -668,6 +682,7 @@ Global
 		{521C3A65-ED61-478D-B72E-5DF95E5B1E3B} = {876352E6-037E-0F1F-9CB2-C93F3ECB6DD6}
 		{59E6ED64-185A-498A-89A7-6367544C315A} = {876352E6-037E-0F1F-9CB2-C93F3ECB6DD6}
 		{3BAFAE21-40E5-495A-8C68-701C66CBD3EF} = {876352E6-037E-0F1F-9CB2-C93F3ECB6DD6}
+		{9D8B30F3-73A8-4FDB-823E-EF0E29A66F16} = {876352E6-037E-0F1F-9CB2-C93F3ECB6DD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0301BB3B-0861-41EF-B820-D38F36DF646E}

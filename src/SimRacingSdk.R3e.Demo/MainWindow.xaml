@@ -34,6 +34,9 @@
             <Button Content="Shared Memory Demo"
                     Command="{Binding StartSharedMemoryDemoCommand}"
                     ToolTip="Start the demo of R3eSharedMemoryConnection: sessions, every car's laps and the player's telemetry" />
+            <Button Content="Monitor Demo"
+                    Command="{Binding StartMonitorDemoCommand}"
+                    ToolTip="Start the demo of R3eMonitor: sessions and laps with cars and tracks resolved through the catalogs" />
             <Button Content="Open Log Viewer"
                     Command="{Binding OpenLogViewerCommand}"
                     ToolTip="Open a window for analysing log files" />

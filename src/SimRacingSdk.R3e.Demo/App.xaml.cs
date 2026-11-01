@@ -4,14 +4,13 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
 using SimRacingSdk.LogViewer;
-using SimRacingSdk.R3e.Core;
 using SimRacingSdk.R3e.Demo.Abstractions;
 using SimRacingSdk.R3e.Demo.CarExplorer;
 using SimRacingSdk.R3e.Demo.Controls.Console;
 using SimRacingSdk.R3e.Demo.Demos;
 using SimRacingSdk.R3e.Demo.Services;
 using SimRacingSdk.R3e.Demo.TrackExplorer;
-using SimRacingSdk.R3e.SharedMemory;
+using SimRacingSdk.R3e.Monitor;
 using SimRacingSdk.Wpf.Shared.Logging;
 
 namespace SimRacingSdk.R3e.Demo;
@@ -60,8 +59,7 @@ public partial class App : Application
                                  builder.AddNLog();
                              });
 
-        services.UseR3eSdk();
-        services.UseR3eSharedMemory();
+        services.UseR3eMonitor();
 
         services.AddSingleton<IConsoleLog, ConsoleLog>();
         services.AddTransient<MainWindowViewModel>();
@@ -73,6 +71,9 @@ public partial class App : Application
         services.AddTransient<ISharedMemoryDemo, SharedMemoryDemo>();
         services.AddTransient<ISharedMemoryLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
             .CreateLogger("SimRacingSdk.R3e.Demo.Services.SharedMemoryLog")));
+        services.AddTransient<IMonitorDemo, MonitorDemo>();
+        services.AddTransient<IMonitorLog>(sp => new LogMessageSink(sp.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("SimRacingSdk.R3e.Demo.Services.MonitorLog")));
 
         return services.BuildServiceProvider();
     }
