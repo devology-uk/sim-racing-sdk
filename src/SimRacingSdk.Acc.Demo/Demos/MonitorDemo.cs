@@ -102,9 +102,9 @@ public class MonitorDemo : IMonitorDemo
 
         this.Log("Stopping ACC Monitor Demo...");
         this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
-        this.subscriptionSink?.Dispose();
         this.accMonitor?.Dispose();
         this.accMonitor = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()

@@ -61,9 +61,9 @@ public class MonitorDemo : IMonitorDemo
 
         this.Log("Stopping ACE Monitor Demo...");
         this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
-        this.subscriptionSink?.Dispose();
         this.aceMonitor?.Dispose();
         this.aceMonitor = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()

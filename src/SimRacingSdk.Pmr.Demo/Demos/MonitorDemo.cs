@@ -69,9 +69,9 @@ public class MonitorDemo : IMonitorDemo
 
         this.Log("Stopping PMR Monitor Demo...");
         this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}, Participant Updates: {this.participantUpdateCount}");
-        this.subscriptionSink?.Dispose();
         this.pmrMonitor?.Dispose();
         this.pmrMonitor = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()

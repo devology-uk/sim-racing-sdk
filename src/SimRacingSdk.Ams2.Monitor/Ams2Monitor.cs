@@ -65,9 +65,11 @@ public class Ams2Monitor : IAms2Monitor
 
     public void Stop()
     {
-        this.subscriptionSink?.Dispose();
         this.ams2SharedMemoryConnection?.Dispose();
         this.ams2SharedMemoryConnection = null;
+        this.subscriptionSink?.Dispose();
+        this.subscriptionSink = null;
+        this.EndCurrentSession();
     }
 
     protected virtual void Dispose(bool disposing)
@@ -80,7 +82,7 @@ public class Ams2Monitor : IAms2Monitor
         this.Stop();
     }
 
-    private void EndCurrentSession(Ams2GameStatus ams2GameStatus)
+    private void EndCurrentSession()
     {
         if(this.currentSession == null)
         {
@@ -93,8 +95,8 @@ public class Ams2Monitor : IAms2Monitor
 
         var completedSession = this.currentSession;
         this.currentSession = null;
-        this.sessionCompletedSubject.OnNext(completedSession);
         this.LogMessage(LoggingLevel.Information, $"Session Completed: {completedSession}");
+        this.sessionCompletedSubject.OnNext(completedSession);
     }
 
     private bool HasChangedToActiveSessionType(Ams2GameStatus ams2GameStatus)
@@ -164,14 +166,14 @@ public class Ams2Monitor : IAms2Monitor
 
         if(this.HasChangedToActiveSessionType(ams2GameStatus))
         {
-            this.EndCurrentSession(ams2GameStatus);
+            this.EndCurrentSession();
             this.StartNewSession(ams2GameStatus);
         }
 
         if(this.currentGameStatus.SessionState != Ams2SessionState.Invalid
            && ams2GameStatus.SessionState == Ams2SessionState.Invalid)
         {
-            this.EndCurrentSession(ams2GameStatus);
+            this.EndCurrentSession();
         }
 
         this.currentGameStatus = ams2GameStatus;

@@ -66,9 +66,10 @@ public class PmrMonitor : IPmrMonitor
 
     public void Stop()
     {
-        this.subscriptionSink?.Dispose();
         this.pmrUdpConnection?.Dispose();
         this.pmrUdpConnection = null;
+        this.subscriptionSink?.Dispose();
+        this.subscriptionSink = null;
         this.EndCurrentSession();
     }
 

@@ -51,9 +51,9 @@ public class MonitorDemo : IMonitorDemo
         }
 
         this.Log("Stopping Monitor Demo...");
-        this.subscriptionSink?.Dispose();
         this.ams2Monitor?.Dispose();
         this.ams2Monitor = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()

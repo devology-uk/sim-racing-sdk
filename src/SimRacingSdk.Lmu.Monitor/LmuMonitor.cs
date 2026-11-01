@@ -62,11 +62,14 @@ public class LmuMonitor : ILmuMonitor
         this.lmuSharedMemoryConnection.Start();
     }
 
+    // The connection goes first because stopping it ends the running session, and the subscriptions have to still be
+    // there to hear it.
     public void Stop()
     {
-        this.subscriptionSink?.Dispose();
         this.lmuSharedMemoryConnection?.Dispose();
         this.lmuSharedMemoryConnection = null;
+        this.subscriptionSink?.Dispose();
+        this.subscriptionSink = null;
     }
 
     protected virtual void Dispose(bool disposing)

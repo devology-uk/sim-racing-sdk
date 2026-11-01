@@ -50,9 +50,9 @@ public class MonitorDemo : IMonitorDemo
 
         this.Log("Stopping LMU Monitor Demo...");
         this.Log($"Total Telemetry Frames: {this.telemetryFrameCount}");
-        this.subscriptionSink?.Dispose();
         this.lmuMonitor?.Dispose();
         this.lmuMonitor = null;
+        this.subscriptionSink?.Dispose();
     }
 
     public bool Validate()

@@ -75,6 +75,7 @@ public class AceMonitor : IAceMonitor
         this.aceSharedMemoryConnection?.Dispose();
         this.aceSharedMemoryConnection = null;
         this.subscriptionSink?.Dispose();
+        this.subscriptionSink = null;
     }
 
     protected virtual void Dispose(bool disposing)

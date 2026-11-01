@@ -140,9 +140,10 @@ public class AccMonitor : IAccMonitor
         this.disconnectWatcherSubscription = null;
         this.EndCurrentEvent();
         this.StopUdpConnection();
-        this.sharedMemorySubscriptionSink?.Dispose();
         this.accSharedMemoryConnection?.Dispose();
         this.accSharedMemoryConnection = null;
+        this.sharedMemorySubscriptionSink?.Dispose();
+        this.sharedMemorySubscriptionSink = null;
     }
 
     protected virtual void Dispose(bool disposing)
@@ -210,7 +211,7 @@ public class AccMonitor : IAccMonitor
         }
 
         this.currentSession.IsRunning = false;
-        this.LogMessage(LoggingLevel.Information, this.currentSession.ToString());
+        this.LogMessage(LoggingLevel.Information, $"Session Completed: {this.currentSession}");
         this.sessionCompletedSubject.OnNext(this.currentSession);
         this.currentSession = null;
     }
@@ -222,6 +223,8 @@ public class AccMonitor : IAccMonitor
             return;
         }
 
+        // Consumers drop their entry data when an event ends, and a completing session still needs it.
+        this.CompleteCurrentUdpSession();
         this.currentEvent.IsRunning = false;
         this.LogMessage(LoggingLevel.Information, $"Event Ended: {this.currentEvent}");
         this.eventEndedSubject.OnNext(this.currentEvent);
@@ -253,8 +256,8 @@ public class AccMonitor : IAccMonitor
             case BroadcastingEventType.GreenFlag:
                 this.ProcessGreenFlagEvent(broadcastingEvent);
                 break;
+            // The session completes when its phase or connection ends, so cars still finishing keep their laps.
             case BroadcastingEventType.SessionOver:
-                this.ProcessSessionOverEvent(broadcastingEvent);
                 break;
             case BroadcastingEventType.PenaltyCommMsg:
                 this.ProcessPenaltyComMsgEvent(broadcastingEvent);
@@ -618,16 +621,6 @@ public class AccMonitor : IAccMonitor
         };
 
         this.penaltiesSubject.OnNext(accPenalty);
-    }
-
-    private void ProcessSessionOverEvent(BroadcastingEvent broadcastingEvent)
-    {
-        if(this.currentSession == null)
-        {
-            return;
-        }
-
-        this.sessionCompletedSubject.OnNext(this.currentSession);
     }
 
     private void ProcessWhiteFlagState(AccFlagState accFlagState)
