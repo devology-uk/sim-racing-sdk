@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SimRacingSdk.DataManager.Shared\SimRacingSdk.DataManager.Shared.csproj" />
     <ProjectReference Include="..\SimRacingSdk.R3e.Core\SimRacingSdk.R3e.Core.csproj" />
+    <ProjectReference Include="..\SimRacingSdk.R3e.Setups\SimRacingSdk.R3e.Setups.csproj" />
   </ItemGroup>
 
   <ItemGroup>

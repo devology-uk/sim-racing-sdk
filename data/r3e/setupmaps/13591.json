@@ -1,0 +1,203 @@
+{
+  "CarName": "Ford Mustang GT3 EVO DTM",
+  "Validated": true,
+  "CarGameId": 13591,
+  "Controls": [
+    {
+      "Control": "BrakeBias",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "BrakePressure",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontTyreCompound",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "RearTyreCompound",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "FrontAntiRollBar",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontToeIn",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontDownforce",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "FrontSpringRate",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontTyrePressure",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontRideHeight",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontCamber",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontSlowBump",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontSlowRebound",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontFastBump",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontFastRebound",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "FrontThirdSpringRate",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "FrontThirdSpringSlowBump",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "FrontThirdSpringSlowRebound",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "FrontThirdSpringFastBump",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "FrontThirdSpringFastRebound",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "RearAntiRollBar",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearToeIn",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearWingAngle",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearSpringRate",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearTyrePressure",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearRideHeight",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearCamber",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearSlowBump",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearSlowRebound",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearFastBump",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearFastRebound",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RearThirdSpringRate",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "RearThirdSpringSlowBump",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "RearThirdSpringSlowRebound",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "RearThirdSpringFastBump",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "RearThirdSpringFastRebound",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "AbsFront",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "AbsRear",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "TractionControlCut",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "TractionControlSlip",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "TractionControlLateral",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "RevLimit",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "EngineBrakingReduction",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "EngineMap",
+      "Availability": "Adjustable"
+    },
+    {
+      "Control": "GearRatios",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "FinalGear",
+      "Availability": "Fixed"
+    },
+    {
+      "Control": "DifferentialPower",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "DifferentialCoast",
+      "Availability": "NotFitted"
+    },
+    {
+      "Control": "DifferentialPreload",
+      "Availability": "Adjustable"
+    }
+  ]
+}

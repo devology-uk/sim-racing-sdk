@@ -3,7 +3,8 @@
                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                                xmlns:shared="clr-namespace:SimRacingSdk.DataManager.Shared;assembly=SimRacingSdk.DataManager.Shared"
                                xmlns:cars="clr-namespace:SimRacingSdk.R3e.DataManager.Cars"
-                               xmlns:tracks="clr-namespace:SimRacingSdk.R3e.DataManager.Tracks">
+                               xmlns:tracks="clr-namespace:SimRacingSdk.R3e.DataManager.Tracks"
+                               xmlns:setupMaps="clr-namespace:SimRacingSdk.R3e.DataManager.SetupMaps">
     <shared:DataManagerApplication.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +16,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type tracks:TracksViewModel}">
                 <tracks:TracksView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type setupMaps:SetupMapsViewModel}">
+                <setupMaps:SetupMapsView />
             </DataTemplate>
         </ResourceDictionary>
     </shared:DataManagerApplication.Resources>
