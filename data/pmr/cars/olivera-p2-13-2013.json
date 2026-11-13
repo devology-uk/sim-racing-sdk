@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.5,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75,
+  "GameId": "ID_Olivera_13_LMP2_2013",
+  "IconFileName": "Olivera",
+  "Manufacturer": "Olivera",
+  "Name": "P2-13",
+  "PowerKw": 336,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 580,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "LMP2",
+  "WeightKg": 900,
+  "Year": 2013
+}

@@ -1,0 +1,25 @@
+{
+  "AltitudeMeters": 550,
+  "Author": "Straight 4 Studios",
+  "Continent": "Asia",
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "GameId": "ID_fuji",
+  "Latitude": 35.37167,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4563,
+      "Name": "Grand Prix",
+      "Turns": 16
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4549,
+      "Name": "Grand Prix with Shortcut",
+      "Turns": 14
+    }
+  ],
+  "Longitude": 138.92667,
+  "Name": "Fuji Speedway"
+}

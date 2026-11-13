@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3.4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Chevrolet_Corvette_C4_GTP_1986",
+  "IconFileName": "Chevrolet",
+  "Manufacturer": "Chevrolet",
+  "Name": "Corvette C4 GTP",
+  "PowerKw": 577,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 660,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 900,
+  "Year": 1986
+}

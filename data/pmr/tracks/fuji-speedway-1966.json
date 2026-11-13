@@ -1,0 +1,37 @@
+{
+  "AltitudeMeters": 550,
+  "Author": "Straight 4 Studios",
+  "Continent": "Asia",
+  "Country": "Japan",
+  "CountryCode": "JPN",
+  "GameId": "ID_fuji_historic",
+  "Latitude": 35.37167,
+  "Layouts": [
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5945,
+      "Name": "Full",
+      "Turns": 10
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4281,
+      "Name": "Short",
+      "Turns": 6
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 5945,
+      "Name": "Full Reverse",
+      "Turns": 10
+    },
+    {
+      "GridSlots": 32,
+      "LengthMeters": 4281,
+      "Name": "Short Reverse",
+      "Turns": 6
+    }
+  ],
+  "Longitude": 138.92667,
+  "Name": "Fuji Speedway 1966"
+}

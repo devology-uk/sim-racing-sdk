@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "Flat-6 Turbo",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_Porsche_962_GTP_1988",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "962 GTP",
+  "PowerKw": 529,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 830,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 850,
+  "Year": 1988
+}

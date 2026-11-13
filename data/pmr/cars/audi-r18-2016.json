@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Turbo",
+  "FuelCapacityLitres": 101,
+  "GameId": "ID_Audi_R18_etron_LMP1_2016",
+  "IconFileName": "Audi",
+  "Manufacturer": "Audi",
+  "Name": "R18",
+  "PowerKw": 380,
+  "PowertrainLayout": "AWD",
+  "TorqueNm": 855,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "LMP1",
+  "WeightKg": 875,
+  "Year": 2016
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 3,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Nissan_GTP_ZX_Turbo_1988",
+  "IconFileName": "Nissan",
+  "Manufacturer": "Nissan",
+  "Name": "GTP ZX-Turbo",
+  "PowerKw": 626,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 780,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 953,
+  "Year": 1988
+}

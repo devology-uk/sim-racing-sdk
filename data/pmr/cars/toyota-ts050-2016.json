@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.4,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V6 Turbo",
+  "FuelCapacityLitres": 101,
+  "GameId": "ID_Toyota_TS050_LMP1_2016",
+  "IconFileName": "Toyota",
+  "Manufacturer": "Toyota",
+  "Name": "TS050",
+  "PowerKw": 367,
+  "PowertrainLayout": "AWD",
+  "TorqueNm": 500,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMP1",
+  "WeightKg": 875,
+  "Year": 2016
+}

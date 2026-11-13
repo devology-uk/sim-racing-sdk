@@ -1,6 +1,6 @@
+using System.Collections.ObjectModel;
 using SimRacingSdk.Pmr.Core.Abstractions;
 using SimRacingSdk.Pmr.Core.Models;
-using System.Collections.ObjectModel;
 
 namespace SimRacingSdk.Pmr.Core;
 
@@ -15,6 +15,8 @@ public class PmrTrackInfoProvider : IPmrTrackInfoProvider
         new() { AltitudeMetersAmsl = 420, Continent = "Europe", Country = "Belgium", CountryCode = "BEL", GameId = "ID_SpaFrancorchamps", Latitude = 50.43722, Layouts = [new() { GridSize = 32, LengthMeters = 7004, Name = "Grand Prix", Turns = 14 }], Longitude = 5.97194, Name = "Circuit de Spa-Francorchamps" },
         new() { AltitudeMetersAmsl = 8, Continent = "Americas", Country = "United States", CountryCode = "USA", GameId = "ID_orlando", Latitude = 29.1852, Layouts = [new() { GridSize = 32, LengthMeters = 5729, Name = "Road Course", Turns = 12 }], Longitude = -81.0705, Name = "Daytona" },
         new() { AltitudeMetersAmsl = 85, Continent = "Europe", Country = "United Kingdom", CountryCode = "GBR", GameId = "ID_derby", Latitude = 52.83083, Layouts = [new() { GridSize = 30, LengthMeters = 4020, Name = "Grand Prix", Turns = 12 }, new() { GridSize = 30, LengthMeters = 3149, Name = "National", Turns = 9 }], Longitude = -1.38667, Name = "Derby" },
+        new() { AltitudeMetersAmsl = 550, Continent = "Asia", Country = "Japan", CountryCode = "JPN", GameId = "ID_fuji", Latitude = 35.37167, Layouts = [new() { GridSize = 32, LengthMeters = 4563, Name = "Grand Prix", Turns = 16 }, new() { GridSize = 32, LengthMeters = 4549, Name = "Grand Prix with Shortcut", Turns = 14 }], Longitude = 138.92667, Name = "Fuji Speedway" },
+        new() { AltitudeMetersAmsl = 550, Continent = "Asia", Country = "Japan", CountryCode = "JPN", GameId = "ID_fuji_historic", Latitude = 35.37167, Layouts = [new() { GridSize = 32, LengthMeters = 5945, Name = "Full", Turns = 10 }, new() { GridSize = 32, LengthMeters = 4281, Name = "Short", Turns = 6 }, new() { GridSize = 32, LengthMeters = 5945, Name = "Full Reverse", Turns = 10 }, new() { GridSize = 32, LengthMeters = 4281, Name = "Short Reverse", Turns = 6 }], Longitude = 138.92667, Name = "Fuji Speedway 1966" },
         new() { AltitudeMetersAmsl = 1532, Continent = "Rest of World", Country = "South Africa", CountryCode = "ZAF", GameId = "ID_Kyalami", Latitude = -25.99472, Layouts = [new() { GridSize = 32, LengthMeters = 4580, Name = "Grand Prix", Turns = 12 }], Longitude = 28.08083, Name = "Kyalami" },
         new() { AltitudeMetersAmsl = 420, Continent = "Americas", Country = "United States", CountryCode = "USA", GameId = "ID_lexington", Latitude = 40.69417, Layouts = [new() { GridSize = 32, LengthMeters = 3862, Name = "Chicane", Turns = 14 }, new() { GridSize = 32, LengthMeters = 3621, Name = "No Chicane", Turns = 12 }], Longitude = -82.52611, Name = "Lexington" },
         new() { AltitudeMetersAmsl = 190, Continent = "Americas", Country = "United States", CountryCode = "USA", GameId = "ID_LimeRockPark", Latitude = 41.92722, Layouts = [new() { GridSize = 32, LengthMeters = 2419, Name = "Chicanes", Turns = 8 }, new() { GridSize = 32, LengthMeters = 2462, Name = "Road Course", Turns = 6 }, new() { GridSize = 32, LengthMeters = 2372, Name = "Sports Car", Turns = 7 }], Longitude = -73.41472, Name = "Lime Rock Park" },

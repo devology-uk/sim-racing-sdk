@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V4 Turbo",
+  "FuelCapacityLitres": 101,
+  "GameId": "ID_Porsche_919_LMP1_2016",
+  "IconFileName": "Porsche",
+  "Manufacturer": "Porsche",
+  "Name": "919 Hybrid",
+  "PowerKw": 366,
+  "PowertrainLayout": "AWD",
+  "TorqueNm": 525,
+  "Transmission": "7-Speed Paddle",
+  "VehicleClass": "LMP1",
+  "WeightKg": 875,
+  "Year": 2016
+}

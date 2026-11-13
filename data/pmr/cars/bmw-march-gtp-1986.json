@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": 120,
+  "GameId": "ID_BMW_March_GTP_1986",
+  "IconFileName": "BMW",
+  "Manufacturer": "BMW",
+  "Name": "March GTP",
+  "PowerKw": 623,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 745,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 850,
+  "Year": 1986
+}

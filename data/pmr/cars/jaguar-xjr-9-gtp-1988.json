@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 6,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V12",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Jaguar_XJR-9_IMSA_GTP_1988",
+  "IconFileName": "Jaguar",
+  "Manufacturer": "Jaguar",
+  "Name": "XJR-9 GTP",
+  "PowerKw": 499,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 660,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 850,
+  "Year": 1988
+}

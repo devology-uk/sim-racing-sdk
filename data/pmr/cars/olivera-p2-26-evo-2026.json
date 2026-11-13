@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 4.2,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "V8",
+  "FuelCapacityLitres": 75,
+  "GameId": "ID_Olivera_26_LMP2_2026",
+  "IconFileName": "Olivera",
+  "Manufacturer": "Olivera",
+  "Name": "P2-26 Evo",
+  "PowerKw": 466,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 544,
+  "Transmission": "6-Speed Paddle",
+  "VehicleClass": "LMP2 Evo",
+  "WeightKg": 895,
+  "Year": 2026
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Straight 4 Studios",
+  "EngineDisplacementLitres": 2.1,
+  "EngineLayout": "Mid Engine",
+  "EngineType": "L4 Turbo",
+  "FuelCapacityLitres": null,
+  "GameId": "ID_Ford_Probe_GTP_1986",
+  "IconFileName": "Ford",
+  "Manufacturer": "Ford",
+  "Name": "Probe GTP",
+  "PowerKw": 484,
+  "PowertrainLayout": "RWD",
+  "TorqueNm": 600,
+  "Transmission": "5-Speed Manual",
+  "VehicleClass": "GTP",
+  "WeightKg": 850,
+  "Year": 1986
+}
