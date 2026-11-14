@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 3.4,
   "EngineLayout": "Mid Engine",
   "EngineType": "V6 Turbo",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 120,
   "GameId": "ID_Chevrolet_Corvette_C4_GTP_1986",
   "IconFileName": "Chevrolet",
   "Manufacturer": "Chevrolet",

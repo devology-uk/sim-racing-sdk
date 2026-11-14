@@ -3,7 +3,7 @@
   "EngineDisplacementLitres": 6,
   "EngineLayout": "Mid Engine",
   "EngineType": "V12",
-  "FuelCapacityLitres": null,
+  "FuelCapacityLitres": 120,
   "GameId": "ID_Jaguar_XJR-9_IMSA_GTP_1988",
   "IconFileName": "Jaguar",
   "Manufacturer": "Jaguar",
