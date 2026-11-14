@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
     {
         services.UseR3eSdk();
         services.TryAddSingleton<IR3eSetupMapProvider, R3eSetupMapProvider>();
+        services.TryAddSingleton<IR3eSetupProvider, R3eSetupProvider>();
         return services;
     }
 }
