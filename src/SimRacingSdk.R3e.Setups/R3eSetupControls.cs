@@ -43,8 +43,8 @@ public static class R3eSetupControls
         const string section = "General";
         yield return Number(R3eSetupControl.BrakeBias, R3eSetupTab.General, section, "Brake Bias", Percent);
         yield return Number(R3eSetupControl.BrakePressure, R3eSetupTab.General, section, "Brake Pressure", Percent);
-        yield return Choice(R3eSetupControl.FrontTyreCompound, section, "Front Tyre Compound");
-        yield return Choice(R3eSetupControl.RearTyreCompound, section, "Rear Tyre Compound");
+        yield return Choice(R3eSetupControl.FrontTyreCompound, R3eSetupTab.General, section, "Front Tyre Compound");
+        yield return Choice(R3eSetupControl.RearTyreCompound, R3eSetupTab.General, section, "Rear Tyre Compound");
     }
 
     private static IEnumerable<R3eSetupControlDefinition> Axle(R3eSetupTab tab)
@@ -114,13 +114,13 @@ public static class R3eSetupControls
             Section = "Gearbox Ratios",
             Tab = tab
         };
-        yield return Number(R3eSetupControl.FinalGear, tab, "Gearbox Ratios", "Final Gear", string.Empty);
+        yield return Choice(R3eSetupControl.FinalGear, tab, "Gearbox Ratios", "Final Gear");
         yield return Number(R3eSetupControl.DifferentialPower, tab, "Differential", "Power", Percent);
         yield return Number(R3eSetupControl.DifferentialCoast, tab, "Differential", "Coast", Percent);
         yield return Number(R3eSetupControl.DifferentialPreload, tab, "Differential", "Preload", "Nm");
     }
 
-    private static R3eSetupControlDefinition Choice(R3eSetupControl control, string section, string name)
+    private static R3eSetupControlDefinition Choice(R3eSetupControl control, R3eSetupTab tab, string section, string name)
     {
         return new R3eSetupControlDefinition
         {
@@ -129,7 +129,7 @@ public static class R3eSetupControls
             MetricUnit = string.Empty,
             Name = name,
             Section = section,
-            Tab = R3eSetupTab.General
+            Tab = tab
         };
     }
 

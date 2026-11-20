@@ -7,6 +7,7 @@ using SimRacingSdk.R3e.DataManager.Cars;
 using SimRacingSdk.R3e.DataManager.GameData;
 using SimRacingSdk.R3e.DataManager.Session;
 using SimRacingSdk.R3e.DataManager.SetupMaps;
+using SimRacingSdk.R3e.DataManager.SetupMaps.Voice;
 using SimRacingSdk.R3e.DataManager.Tracks;
 
 namespace SimRacingSdk.R3e.DataManager;
@@ -40,6 +41,8 @@ public partial class App : DataManagerApplication
         services.AddSingleton<ISetupMapRepository, SetupMapRepository>();
         services.AddSingleton<IOwnedCarStore, OwnedCarStore>();
         services.AddSingleton<IR3eSetupMapsGenerator, R3eSetupMapsGenerator>();
+        services.AddSingleton<IVoiceListener, WindowsVoiceListener>();
+        services.AddSingleton<IVoiceSpeaker, WindowsVoiceSpeaker>();
 
         services.UsePage<CarsViewModel>("Cars");
         services.UsePage<TracksViewModel>("Tracks");

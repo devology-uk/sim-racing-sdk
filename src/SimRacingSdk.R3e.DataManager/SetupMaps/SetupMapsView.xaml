@@ -16,6 +16,15 @@
                     Value="2,1" />
             <Setter Property="VerticalAlignment"
                     Value="Center" />
+            <Setter Property="controls:SelectAllOnFocus.IsEnabled"
+                    Value="True" />
+        </Style>
+
+        <!-- Tab goes straight from one editor to the next; the cell around each one isn't a stop of its own. -->
+        <Style x:Key="EditorCell"
+               TargetType="DataGridCell">
+            <Setter Property="IsTabStop"
+                    Value="False" />
         </Style>
     </UserControl.Resources>
 
@@ -54,6 +63,11 @@
                              GroupName="CarListFilter"
                              Margin="0,0,12,0"
                              IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=MappedCars}" />
+                <RadioButton Content="Not Validated"
+                             GroupName="CarListFilter"
+                             Margin="0,0,12,0"
+                             IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=NotValidated}"
+                             ToolTip="Every car the game's selector offers, except those with a validated map" />
                 <RadioButton Content="All Cars"
                              GroupName="CarListFilter"
                              IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=AllCars}"
@@ -97,10 +111,13 @@
                    Margin="10,0,0,10"
                    LastChildFill="False">
             <TextBlock DockPanel.Dock="Left"
-                       Text="{Binding Editor.CarName}"
                        FontSize="16"
-                       FontWeight="SemiBold"
-                       VerticalAlignment="Bottom" />
+                       VerticalAlignment="Bottom">
+                <Run Text="{Binding Editor.CarName, Mode=OneWay}"
+                     FontWeight="SemiBold" />
+                <Run Text="{Binding Editor.CarClass, Mode=OneWay}"
+                     Foreground="Gray" />
+            </TextBlock>
             <CheckBox DockPanel.Dock="Right"
                       Content="Validated"
                       VerticalAlignment="Bottom"
@@ -116,7 +133,10 @@
                   IsReadOnly="True"
                   SelectionMode="Single"
                   HeadersVisibility="Column"
-                  CanUserSortColumns="False">
+                  CanUserSortColumns="False"
+                  FrozenColumnCount="2"
+                  HorizontalScrollBarVisibility="Auto"
+                  CellStyle="{StaticResource EditorCell}">
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -144,6 +164,17 @@
                                       SelectedValue="{Binding Availability, UpdateSourceTrigger=PropertyChanged}"
                                       MinWidth="110"
                                       Margin="2,1" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Gears">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Style="{StaticResource CellTextBox}"
+                                     MinWidth="45"
+                                     IsEnabled="{Binding CanHaveGearCount}"
+                                     Text="{Binding GearCountText, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="Number of forward gears" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -175,13 +206,14 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Options"
-                                        Width="*">
+                                        Width="*"
+                                        MinWidth="250">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Style="{StaticResource CellTextBox}"
                                      IsEnabled="{Binding CanHaveOptions}"
                                      Text="{Binding OptionsText, UpdateSourceTrigger=PropertyChanged}"
-                                     ToolTip="Compounds in the game's order, separated by commas, e.g. Medium, Hard" />
+                                     ToolTip="Separated by commas, in the game's order: compounds (Medium, Hard), final gear ratios (4.88, 4.56) or every gear tooth pair the gears can pick from, in the order the game steps through them (12:38, 15:36, ...)" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -189,42 +221,70 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,10,0,0"
+                    DataContext="{Binding Voice}">
+            <Button Content="{Binding ToggleLabel}"
+                    Command="{Binding ToggleListeningCommand}"
+                    HorizontalAlignment="Left"
+                    Padding="10,4"
+                    ToolTip="Speak the map from the game: say next car, then e.g. front spring 120 to 220 step 20. Every command is said back. Say help for the rest" />
+            <TextBlock Text="{Binding Status}"
+                       Margin="0,6,0,0"
+                       TextWrapping="Wrap" />
+            <TextBlock Margin="0,4,0,0"
+                       TextWrapping="Wrap">
+                <Run Text="Heard:"
+                     Foreground="Gray" />
+                <Run Text="{Binding LastHeard, Mode=OneWay}" />
+            </TextBlock>
+            <TextBlock Margin="0,2,0,0"
+                       TextWrapping="Wrap">
+                <Run Text="Said:"
+                     Foreground="Gray" />
+                <Run Text="{Binding LastReply, Mode=OneWay}" />
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
                     Grid.Column="1"
-                    Orientation="Horizontal"
                     Margin="10,10,0,0">
-            <Button Content="Save Setup Map"
-                    Command="{Binding SaveSetupMapCommand}"
-                    Padding="10,4"
-                    Margin="0,0,10,0"
-                    ToolTip="Also saved when you pick another car or close the Data Manager" />
-            <Button Content="Reload"
-                    Command="{Binding ReloadSetupMapCommand}"
-                    Padding="10,4"
-                    Margin="0,0,15,0"
-                    ToolTip="Re-reads this car's setup map from disk, discarding unsaved edits" />
-            <TextBlock Text="Copy from"
-                       VerticalAlignment="Center"
-                       Margin="0,0,5,0" />
-            <ComboBox ItemsSource="{Binding MappedCars}"
-                      SelectedItem="{Binding CopySourceCar}"
-                      DisplayMemberPath="Label"
-                      IsEditable="True"
-                      TextSearch.TextPath="Label"
-                      Width="300"
-                      Margin="0,0,5,0"
-                      ToolTip="Cars with a saved map. Start typing a name to find one" />
-            <Button Content="Copy"
-                    Command="{Binding CopyFromSourceCarCommand}"
-                    Padding="10,4"
-                    Margin="0,0,15,0"
-                    ToolTip="Replaces the rows shown with the source car's map, unvalidated - check against the game, then save" />
-            <Button Content="Generate SDK Setup Maps"
-                    Command="{Binding GenerateSdkSetupMapsCommand}"
-                    Padding="10,4"
-                    Margin="0,0,15,0"
-                    ToolTip="Writes every validated map into SimRacingSdk.R3e.Setups" />
+            <!-- The status line is on its own row: at the end of the buttons a refused save's reason was cut off. -->
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Save Setup Map"
+                        Command="{Binding SaveSetupMapCommand}"
+                        Padding="10,4"
+                        Margin="0,0,10,0"
+                        ToolTip="Also saved when you pick another car or close the Data Manager" />
+                <Button Content="Reload"
+                        Command="{Binding ReloadSetupMapCommand}"
+                        Padding="10,4"
+                        Margin="0,0,15,0"
+                        ToolTip="Re-reads this car's setup map from disk, discarding unsaved edits" />
+                <TextBlock Text="Copy from"
+                           VerticalAlignment="Center"
+                           Margin="0,0,5,0" />
+                <ComboBox ItemsSource="{Binding MappedCars}"
+                          SelectedItem="{Binding CopySourceCar}"
+                          DisplayMemberPath="Label"
+                          IsEditable="True"
+                          TextSearch.TextPath="Label"
+                          Width="300"
+                          Margin="0,0,5,0"
+                          ToolTip="Cars with a saved map. Start typing a name to find one" />
+                <Button Content="Copy"
+                        Command="{Binding CopyFromSourceCarCommand}"
+                        Padding="10,4"
+                        Margin="0,0,15,0"
+                        ToolTip="Replaces the rows shown with the source car's map, unvalidated - check against the game, then save" />
+                <Button Content="Generate SDK Setup Maps"
+                        Command="{Binding GenerateSdkSetupMapsCommand}"
+                        Padding="10,4"
+                        Margin="0,0,15,0"
+                        ToolTip="Writes every validated map into SimRacingSdk.R3e.Setups" />
+            </StackPanel>
             <TextBlock Text="{Binding StatusMessage}"
-                       VerticalAlignment="Center"
+                       Margin="0,6,0,0"
                        TextWrapping="Wrap" />
         </StackPanel>
     </Grid>

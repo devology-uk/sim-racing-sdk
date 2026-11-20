@@ -5,7 +5,7 @@ public enum R3eSetupValueKind
     // One value with a min, step and max.
     Number,
 
-    // A pick from a list, e.g. tyre compound.
+    // A pick from a list, e.g. tyre compound, or final gear, whose ratios aren't evenly spaced.
     Choice,
 
     // One value per in-car level (six for TC and ABS), each with the same min, step and max.

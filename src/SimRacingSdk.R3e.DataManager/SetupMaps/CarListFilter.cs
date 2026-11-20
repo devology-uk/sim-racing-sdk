@@ -5,5 +5,6 @@ public enum CarListFilter
     AllCars,
     OwnedCars,
     OwnedNotMapped,
-    MappedCars
+    MappedCars,
+    NotValidated
 }

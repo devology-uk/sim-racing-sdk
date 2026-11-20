@@ -11,6 +11,7 @@
   <!-- Referenced directly, not just through DataManager.Shared: its source generators don't flow transitively. -->
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="System.Speech" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>
