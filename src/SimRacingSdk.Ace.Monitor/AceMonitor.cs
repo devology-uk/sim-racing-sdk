@@ -111,7 +111,7 @@ public class AceMonitor : IAceMonitor
         var aceMonitorLap = new AceMonitorLap
         {
             CarManufacturer = car?.Manufacturer ?? string.Empty,
-            CarModelName = aceSharedMemoryLap.CarModel,
+            CarModelName = car?.AceName ?? aceSharedMemoryLap.CarModel,
             CompletedLaps = aceSharedMemoryLap.CompletedLaps,
             DriverName = aceSharedMemoryLap.DriverName,
             LastLapTimeMs = aceSharedMemoryLap.LastLapTimeMs,
